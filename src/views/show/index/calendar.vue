@@ -3,12 +3,22 @@
         <h1 class="font-bold">{{ $t("index.evCa") }}</h1>
         <div class="flex-justify-content-space-between">
             <calendar class="list" @changeDate="changeDate"></calendar>
-            <a-spin :spinning="loading" class="flex list" style=" height: 330px;    overflow-y: scroll;">
+            <a-spin
+                :spinning="loading"
+                class="flex list"
+                style=" height: 330px;    overflow-y: scroll;"
+            >
                 <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
 
                 <!-- <div class="flex list" style=" height: 330px;    overflow-y: scroll;"> -->
                 <div v-if="showList.length === 0">今天暫無展會</div>
-                <div class="flex" style="padding-top:20px;" v-else v-for="item in showList" :key="item.id">
+                <div
+                    class="flex"
+                    style="padding-top:20px;"
+                    v-else
+                    v-for="item in showList"
+                    :key="item.id"
+                >
                     <img
                         class="img"
                         :src="item.scope"
@@ -18,7 +28,7 @@
                         <div class="font-20">{{ item.nameZh }}</div>
                         <div style="color:red;">
                             {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
-                                $moment(item.endTime).format("YYYY.MM.DD")
+                            $moment(item.endTime).format("YYYY.MM.DD")
                             }}
                         </div>
                     </div>

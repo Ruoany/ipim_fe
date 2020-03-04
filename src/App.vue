@@ -6,9 +6,22 @@
 </template>
 
 <style lang="less">
+@import "./assets/css/util.css";
+::-webkit-scrollbar {
+    display: none;
+}
+html,
+body {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    color: #333;
+}
 #app {
-    // font-size: 14px;
-    min-width: 1280px;
+    width: 100%;
+    min-height: 100%;
 }
 </style>
 

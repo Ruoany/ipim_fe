@@ -4,7 +4,6 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import router from "./router";
 import store from "./store";
-import "@/assets/css/util.css";
 import VueI18n from "vue-i18n";
 import lanData from "@/assets/i18n/index";
 import moment from "moment";

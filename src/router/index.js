@@ -5,17 +5,26 @@ import personal from "./personal";
 
 Vue.use(VueRouter);
 
-const routes = [...show, ...personal];
+// const routes = [...show, ...personal];
 
 const router = new VueRouter({
     // mode: "history",
     base: process.env.BASE_URL,
-    routes
+    routes: [
+        { path: "/", redirect: "/index" },
+        {
+            path: "/",
+            meta: {
+                title: "首页"
+            },
+            component: () => import("@/views/layout/index"),
+            children: [...show, ...personal]
+        }
+    ]
 });
 
-router.beforeEach((to, from, next) => {
+router.afterEach(() => {
     scrollTo(0, 0);
-    next();
 });
 
 export default router;

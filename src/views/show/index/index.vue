@@ -8,7 +8,6 @@
         <div class="flex center">
             <div class="width-1280">
                 <calendar></calendar>
-
                 <div class="width-100 flex center">
                     <focus></focus>
                 </div>
@@ -40,7 +39,6 @@ export default {
 }
 .img-100 {
     width: 100%;
-
     height: 500px;
     object-fit: cover;
 }

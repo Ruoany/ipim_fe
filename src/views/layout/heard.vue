@@ -1,6 +1,8 @@
 <template>
-    <div class="flex center">
+    <div class="container flex">
+        <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="all">
+            <a-menu-item></a-menu-item>
             <a-sub-menu key="show">
                 <span
                     slot="title"
@@ -38,14 +40,12 @@
             </a-sub-menu>
             <a-menu-item key="finEnc">{{ $t("menu.finEnc") }}</a-menu-item>
             <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item>
-
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title" class="submenu-title-wrapper">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
                 <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
                 <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-sub-menu>
-
             <a-sub-menu style="float:right;" key="personal">
                 <span
                     slot="title"
@@ -110,14 +110,32 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.all {
-    width: 1280px;
-    height: 50px;
-    line-height: 50px;
-    // font-size:
-}
-.center {
+.container {
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: fixed;
+    z-index: 999;
     justify-content: center;
+    border-bottom: 1px solid #e6e6e6;
+    /deep/ .ant-menu {
+        background: none;
+    }
+    /deep/.ant-menu-horizontal {
+        border-bottom: transparent !important;
+    }
+    .logo {
+        width: 40px;
+        height: 50px;
+        background-image: url(../../assets/image/logo.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .all {
+        width: 1240px;
+        height: 50px;
+        line-height: 50px;
+    }
 }
 </style>

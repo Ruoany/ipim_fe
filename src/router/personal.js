@@ -1,18 +1,11 @@
-import LayOut from "@/views/layout/index";
+const parentRoute = "/personal";
 const router = [
     {
-        component: LayOut,
-        path: "/personal",
-        meta: { title: "個人中心" },
-        children: [
-            {
-                path: "index",
-                meta: {
-                    title: "機構認證"
-                },
-                component: () => import("@/views/personal/index")
-            }
-        ]
+        path: `${parentRoute}/index`,
+        meta: {
+            title: "機構認證"
+        },
+        component: () => import("@/views/personal/index")
     }
 ];
 

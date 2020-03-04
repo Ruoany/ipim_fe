@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-    baseURL: "/api", // api的base_url
+    baseURL: process.env.NODE_ENV === "production" ? "生产地址" : "/api", // api的base_url
     timeout: 50000 // 设置默认的请求超时时间
 });
 

@@ -9,7 +9,7 @@
 
                 <div style="padding-top:20px;">{{$t("show.ofWe")}}：{{place}}</div>
                 <div>{{$t("show.acAd")}}：{{website}}</div>
-                <div>{{$t("show.acTime")}}：{{startTime}}-{{endTime}}</div>
+                <div>{{$t("show.acTime")}}：{{startTime | formatTime}}--{{endTime | formatTime}}</div>
             </div>
         </div>
         <div class="end" v-if="actType==='DEPUTATION'">
@@ -34,13 +34,20 @@ export default {
         scope: { type: String, default: null },
         website: { type: String, default: null },
         actType: { type: String, default: null }
+    },
+    filters: {
+        formatTime: function(value) {
+            return value.split(" ")[0];
+        }
     }
 };
 </script>
 
 <style lang="less" scoped>
 .hei-200 {
-    padding: 70px 0;
+    padding: 70px 30px;
+    width: 1280px;
+    box-sizing: border-box;
 }
 .img {
     width: 240px;
