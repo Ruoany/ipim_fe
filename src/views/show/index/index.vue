@@ -7,8 +7,15 @@
         </a-carousel>
         <div class="flex center">
             <div class="width-1280">
-                <h1 class="font-bold">{{ $t("index.evCa") }}</h1>
+                <h1 class="font-bold title">{{ $t("index.evCa") }}</h1>
                 <calendar></calendar>
+                <div class="flex-justify-content-space-between flex-align-items-center title">
+                    <h1 class="font-bold">{{ $t("index.keAc") }}</h1>
+                    <div class="go flex-align-items-center" @click="$router.push('/show/all_index')">
+                        {{ $t("index.allAc") }}
+                        <img src="../../../assets/image/more.svg" style="margin-left:10px;" />
+                    </div>
+                </div>
                 <div class="width-100 flex center">
                     <focus></focus>
                 </div>
@@ -33,15 +40,21 @@ export default {
     width: 100%;
     min-width: 1226px;
     box-sizing: border-box;
+
     .img-100 {
         width: 100%;
         height: 500px;
         object-fit: cover;
     }
-    .font-bold {
+    .title {
+        padding: 50px 0;
+    }
+    /deep/ h1 {
         font-weight: bold;
-        padding: 50px 0 20px 35px;
         margin-bottom: 0;
+        font-size: 36px;
+        color: #666;
+        font-weight: bold;
     }
 }
 </style>

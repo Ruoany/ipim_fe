@@ -23,5 +23,9 @@ body {
     width: 100%;
     min-height: 100%;
 }
+.sp {
+    &:nth-last-child(1) {
+        margin-right: 418px;
+    }
+}
 </style>
-

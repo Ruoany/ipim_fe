@@ -118,5 +118,10 @@ export default {
             justify-content: center;
         }
     }
+    /deep/.ant-fullcalendar-column-header {
+        color: #ee1c24;
+        line-height: 32px;
+        border-bottom: 1px solid #ee1c24;
+    }
 }
 </style>
