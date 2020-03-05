@@ -2,21 +2,20 @@
     <div>
         <a-spin :spinning="loading" style="min-height:750px;padding-top:30px;">
             <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
-
-            <div class="flex wrap" style=" padding-top: 20px;">
+            <div class="content flex flex-justify-content-space-between">
                 <show-cell
                     v-for="item in showList"
                     :key="item.id"
-                    :imgUrl="item.scope"
+                    :class="showList.length % 3 === 2 ? 'sp' : ''"
+                    :img-url="item.scope"
                     :startTime="$moment(item.startTime).format('YYYY-MM-DD')"
                     :endTime="$moment(item.endTime).format('YYYY-MM-DD')"
                     :name="item.nameZh"
                     :id="item.id"
-                    class="show"
                 ></show-cell>
             </div>
         </a-spin>
-        <pagination class="show" :page.sync="listQuery.page" :total="total"></pagination>
+        <pagination :page.sync="listQuery.page" :total="total"></pagination>
     </div>
 </template>
 
@@ -66,11 +65,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.wrap {
+.content {
     flex-wrap: wrap;
+    width: 100%;
 }
-.show {
-    margin-right: 20px;
-    padding-bottom: 60px;
+/deep/ .ant-pagination {
+    margin: 30px 0;
 }
 </style>

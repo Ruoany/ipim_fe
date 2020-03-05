@@ -1,24 +1,21 @@
 <template>
     <div>
         <show-title :text="$t('index.allAc')"></show-title>
-
-        <div class="flex center padding-100">
-            <div class="width-1280">
-                <a-tabs :defaultActiveKey="null" @change="activeChange">
-                    <a-tab-pane :tab="$t('index.allAc')" :key="null">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.available')" :key="2">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.processing')" :key="3">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.over')" :key="4">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
-                </a-tabs>
-            </div>
+        <div class="width-1280 container padding-100">
+            <a-tabs :defaultActiveKey="null" @change="activeChange">
+                <a-tab-pane :tab="$t('index.allAc')" :key="null">
+                    <show-list :listQuery="listQuery"></show-list>
+                </a-tab-pane>
+                <a-tab-pane :tab="$t('show.available')" :key="2">
+                    <show-list :listQuery="listQuery"></show-list>
+                </a-tab-pane>
+                <a-tab-pane :tab="$t('show.processing')" :key="3">
+                    <show-list :listQuery="listQuery"></show-list>
+                </a-tab-pane>
+                <a-tab-pane :tab="$t('show.over')" :key="4">
+                    <show-list :listQuery="listQuery"></show-list>
+                </a-tab-pane>
+            </a-tabs>
         </div>
     </div>
 </template>
@@ -58,15 +55,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.padding-100 {
-    padding-top: 100px;
-}
-/deep/.ant-tabs-bar {
-    border: 0;
-}
-/deep/.ant-tabs-tab {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 12px 0;
+.container {
+    margin: auto;
+    padding-top: 60px;
+    /deep/.ant-tabs-bar {
+        border-color: transparent;
+    }
+    /deep/.ant-tabs-tab {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 12px 0;
+    }
 }
 </style>
