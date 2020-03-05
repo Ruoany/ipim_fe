@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="85px" height="85px" viewBox="0 0 85 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>已结束</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首頁" transform="translate(-1185.000000, -1498.000000)">
+            <g id="编组-18" transform="translate(347.000000, 1498.000000)">
+                <g id="编组-16" transform="translate(838.000000, 0.000000)">
+                    <g id="已结束">
+                        <path d="M6,0 L83.5857864,0 C84.1380712,1.56637139e-14 84.5857864,0.44771525 84.5857864,1 C84.5857864,1.26521649 84.4804296,1.5195704 84.2928932,1.70710678 L1.70710678,84.2928932 C1.31658249,84.6834175 0.683417511,84.6834175 0.292893219,84.2928932 C0.10535684,84.1053568 1.57976466e-14,83.8510029 0,83.5857864 L0,6 C-4.05812251e-16,2.6862915 2.6862915,6.08718376e-16 6,0 Z" id="矩形" fill="#999999"></path>
+                        <text transform="translate(28.000000, 29.000000) rotate(-45.000000) translate(-28.000000, -29.000000) " font-family="PingFangSC-Medium, PingFang SC" font-size="16" font-weight="400" fill="#FFFFFF">
+                            <tspan x="4" y="35">已结束</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

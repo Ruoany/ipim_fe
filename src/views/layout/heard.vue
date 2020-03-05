@@ -4,18 +4,9 @@
         <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="all">
             <a-menu-item></a-menu-item>
             <a-sub-menu key="show">
-<<<<<<< HEAD
-                <span
-                    slot="title"
-                    class="submenu-title-wrapper"
-                    @click="$router.push('/show/index')"
-                >{{ $t("menu.signUp") }}</span>
-=======
                 <span slot="title" class="submenu-title-wrapper" @click="$router.push('/show/index')">{{
                     $t("menu.signUp")
                 }}</span>
-
->>>>>>> 3a5b9973b467e9e9f7896079dec10392ba4976ec
                 <a-menu-item
                     v-for="item in showList"
                     :key="`s${item.id}`"

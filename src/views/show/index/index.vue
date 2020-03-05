@@ -1,9 +1,9 @@
 <template>
     <div class="all">
         <a-carousel autoplay>
-            <img class="img-100" src="http://watermark.lovepik.com/photo/50073/6074.jpg_wh1200.jpg" />
-            <img class="img-100" src="http://watermark.lovepik.com/photo/50073/6074.jpg_wh1200.jpg" />
-            <img class="img-100" src="http://watermark.lovepik.com/photo/50073/6074.jpg_wh1200.jpg" />
+            <img class="img-100" src="http://rrd.me/gnPsX" />
+            <img class="img-100" src="http://u6.gg/sQ5AW" />
+            <img class="img-100" src="http://u6.gg/sQ5Bt" />
         </a-carousel>
         <div class="flex center">
             <div class="width-1280">
