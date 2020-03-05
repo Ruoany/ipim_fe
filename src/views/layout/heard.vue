@@ -4,38 +4,45 @@
         <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="all">
             <a-menu-item></a-menu-item>
             <a-sub-menu key="show">
+<<<<<<< HEAD
                 <span
                     slot="title"
                     class="submenu-title-wrapper"
                     @click="$router.push('/show/index')"
                 >{{ $t("menu.signUp") }}</span>
+=======
+                <span slot="title" class="submenu-title-wrapper" @click="$router.push('/show/index')">{{
+                    $t("menu.signUp")
+                }}</span>
+
+>>>>>>> 3a5b9973b467e9e9f7896079dec10392ba4976ec
                 <a-menu-item
                     v-for="item in showList"
                     :key="`s${item.id}`"
-                    @click="$router.push({
-                        path: '/show/detail',
-                        query: { id: item.id }
-                    })"
-                >{{item.name}}</a-menu-item>
+                    @click="
+                        $router.push({
+                            path: '/show/detail',
+                            query: { id: item.id }
+                        })
+                    "
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-sub-menu key="dep">
-                <span
-                    slot="title"
-                    class="submenu-title-wrapper"
-                    @click="$router.push('/show/rep_index')"
-                >
-                    {{
-                    $t("menu.delegation")
-                    }}
+                <span slot="title" class="submenu-title-wrapper" @click="$router.push('/show/rep_index')">
+                    {{ $t("menu.delegation") }}
                 </span>
                 <a-menu-item
                     v-for="item in depList"
                     :key="`d${item.id}`"
-                    @click="$router.push({
-                        path: '/show/rep_detail',
-                        query: { id: item.id }
-                    })"
-                >{{item.name}}</a-menu-item>
+                    @click="
+                        $router.push({
+                            path: '/show/rep_detail',
+                            query: { id: item.id }
+                        })
+                    "
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-menu-item key="finEnc">{{ $t("menu.finEnc") }}</a-menu-item>
             <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item>
@@ -46,11 +53,9 @@
                 <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="personal">
-                <span
-                    slot="title"
-                    class="submenu-title-wrapper"
-                    @click="$router.push('/personal/index')"
-                >{{ $t("menu.personal") }}</span>
+                <span slot="title" class="submenu-title-wrapper" @click="$router.push('/personal/index')">{{
+                    $t("menu.personal")
+                }}</span>
                 <a-menu-item key="inIn" @click="menuChange('inIn')">{{ $t("menu.inIn") }}</a-menu-item>
                 <a-menu-item key="exEr" @click="menuChange('exEr')">{{ $t("menu.exEr") }}</a-menu-item>
                 <a-menu-item key="funding" @click="menuChange('funding')">{{ $t("menu.funding") }}</a-menu-item>
