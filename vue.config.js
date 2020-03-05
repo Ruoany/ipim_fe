@@ -9,6 +9,18 @@ module.exports = {
             chunks: ["chunk-vendors", "chunk-common", "index"]
         }
     },
+    css: {
+        loaderOptions: {
+            less: {
+                modifyVars: {
+                    "primary-color": "#EE1C24",
+                    "link-color": "#EE1C24",
+                    "border-radius-base": "2px"
+                },
+                javascriptEnabled: true
+            }
+        }
+    },
     devServer: {
         port: 8888, //端口号
         host: "0.0.0.0",

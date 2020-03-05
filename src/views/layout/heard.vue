@@ -9,7 +9,6 @@
                     class="submenu-title-wrapper"
                     @click="$router.push('/show/index')"
                 >{{ $t("menu.signUp") }}</span>
-
                 <a-menu-item
                     v-for="item in showList"
                     :key="`s${item.id}`"

@@ -1,6 +1,6 @@
 <template>
-    <a-tabs type="card" style="min-height:400px;">
-        <div class="line"></div>
+    <a-tabs style="min-height:400px;">
+        <!-- <div class="line"></div> -->
         <a-tab-pane :tab="$t('show.info')" key="1">
             <info></info>
         </a-tab-pane>
@@ -36,6 +36,7 @@ export default {
 <style lang="less" scoped>
 /deep/ .ant-tabs-bar {
     border-bottom: transparent !important;
+    margin-bottom: 0;
 }
 /deep/ .line {
     position: absolute;

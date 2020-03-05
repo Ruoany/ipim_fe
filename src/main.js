@@ -1,12 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 import Antd from "ant-design-vue";
-import "ant-design-vue/dist/antd.css";
+import "ant-design-vue/dist/antd.less";
 import router from "./router";
 import store from "./store";
 import VueI18n from "vue-i18n";
 import lanData from "@/assets/i18n/index";
 import moment from "moment";
+import "@/assets/icon/iconfont.css";
 
 Vue.use(VueI18n);
 Vue.use(Antd);
