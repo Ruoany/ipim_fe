@@ -1,24 +1,26 @@
 <template>
     <div>
-        <div class="flex center h-back">
-            <div class="width-1280 flex-justify-content-space-between">
-                <div class="font-24">
-                    澳門會展網
-                    <br />https://www.mice.gov.mo/tc/
-                </div>
+        <div class="flex center  h-back ">
+            <div class="width-1280 ">
+                <div class="flex-justify-content-space-between">
+                    <div class="font-24">
+                        澳門會展網
+                        <br />https://www.mice.gov.mo/tc/
+                    </div>
 
-                <div>
-                    <div class="flex-align-items-center p-20">
-                        <a-icon type="compass" class="icon" />
-                        <div class="font-16">{{$t("index.address")}}：澳門殺殺殺</div>
-                    </div>
-                    <div class="flex-align-items-center p-20">
-                        <a-icon type="mail" class="icon" />
-                        <div class="font-16">{{$t("index.email")}}：澳門殺殺殺</div>
-                    </div>
-                    <div class="flex-align-items-center p-20">
-                        <a-icon type="phone" class="icon" />
-                        <div class="font-16">{{$t("index.tel")}}：澳門殺殺殺</div>
+                    <div>
+                        <div class="flex-align-items-center p-20">
+                            <a-icon type="compass" class="icon" />
+                            <div class="font-16">{{ $t("index.address") }}：澳門殺殺殺</div>
+                        </div>
+                        <div class="flex-align-items-center p-20">
+                            <a-icon type="mail" class="icon" />
+                            <div class="font-16">{{ $t("index.email") }}：澳門殺殺殺</div>
+                        </div>
+                        <div class="flex-align-items-center p-20">
+                            <a-icon type="phone" class="icon" />
+                            <div class="font-16">{{ $t("index.tel") }}：澳門殺殺殺</div>
+                        </div>
                     </div>
                 </div>
             </div>
