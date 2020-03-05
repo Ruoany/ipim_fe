@@ -65,9 +65,9 @@ export default {
 }
 .img-list {
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .show {
-    margin-right: 20px;
     padding-bottom: 60px;
 }
 </style>

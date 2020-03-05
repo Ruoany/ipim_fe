@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <a-calendar :fullscreen="false" class="all" @select="calSelect" />
-    </div>
+    <a-calendar :fullscreen="false" class="all" @select="calSelect" />
 </template>
 
 <script>
@@ -35,7 +33,7 @@ export default {
 
 <style lang="less" scoped>
 .all {
-    // width: 500px;
+    width: 100%;
     height: 454px;
 }
 /deep/.ant-fullcalendar-header .ant-radio-group {
@@ -45,10 +43,13 @@ export default {
     border-radius: 50%;
 }
 /deep/.ant-fullcalendar-value {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     line-height: 50px;
-    font-size: 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     // margin: 18px 0 0 0;
 }
 /deep/.ant-fullcalendar-header {
@@ -59,7 +60,6 @@ export default {
     border: 0;
 }
 /deep/.ant-fullcalendar-date {
-    width: 80px;
     padding-top: 18px;
 }
 </style>

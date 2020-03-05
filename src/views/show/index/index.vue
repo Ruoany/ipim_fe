@@ -7,6 +7,7 @@
         </a-carousel>
         <div class="flex center">
             <div class="width-1280">
+                <h1 class="font-bold">{{ $t("index.evCa") }}</h1>
                 <calendar></calendar>
                 <div class="width-100 flex center">
                     <focus></focus>
@@ -30,16 +31,17 @@ export default {
 <style lang="less" scoped>
 .all {
     width: 100%;
-    min-width: 1280px;
+    min-width: 1226px;
     box-sizing: border-box;
-}
-.carousel {
-    height: 160px;
-    overflow: hidden;
-}
-.img-100 {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
+    .img-100 {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+    .font-bold {
+        font-weight: bold;
+        padding: 50px 0 20px 35px;
+        margin-bottom: 0;
+    }
 }
 </style>
