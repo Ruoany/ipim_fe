@@ -90,6 +90,7 @@ export default {
 .font-bold {
     font-size: 36px;
     font-weight: bold;
+    color: #333333;
 }
 .img-list {
     flex-wrap: wrap;

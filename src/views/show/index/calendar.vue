@@ -84,7 +84,9 @@ export default {
     -webkit-box-orient: vertical;
 }
 .font-bold {
+    font-size: 36px;
     font-weight: bold;
+    color: #333333;
     padding: 50px 0 20px 0;
 }
 .list {

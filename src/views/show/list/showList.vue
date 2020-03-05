@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-spin :spinning="loading" style="min-height:750px;">
+        <a-spin :spinning="loading" style="min-height:750px;padding-top:30px;">
             <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
 
             <div class="flex wrap" style=" padding-top: 20px;">

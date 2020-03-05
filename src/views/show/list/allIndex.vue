@@ -1,35 +1,38 @@
 <template>
-    <div class="flex center">
-        <div class="width-1280">
-            <h1 class="hei-100 flex-align-items-center">{{ $t("index.allAc") }}</h1>
-            <a-tabs :defaultActiveKey="null" @change="activeChange">
-                <a-tab-pane :tab="$t('index.allAc')" :key="null">
-                    <show-list :listQuery="listQuery"></show-list>
-                </a-tab-pane>
-                <a-tab-pane :tab="$t('show.available')" :key="2">
-                    <show-list :listQuery="listQuery"></show-list>
-                </a-tab-pane>
-                <a-tab-pane :tab="$t('show.processing')" :key="3">
-                    <show-list :listQuery="listQuery"></show-list>
-                </a-tab-pane>
-                <a-tab-pane :tab="$t('show.over')" :key="4">
-                    <show-list :listQuery="listQuery"></show-list>
-                </a-tab-pane>
-            </a-tabs>
+    <div>
+        <show-title :text="$t('index.allAc')"></show-title>
+
+        <div class="flex center padding-100">
+            <div class="width-1280">
+                <a-tabs :defaultActiveKey="null" @change="activeChange">
+                    <a-tab-pane :tab="$t('index.allAc')" :key="null">
+                        <show-list :listQuery="listQuery"></show-list>
+                    </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.available')" :key="2">
+                        <show-list :listQuery="listQuery"></show-list>
+                    </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.processing')" :key="3">
+                        <show-list :listQuery="listQuery"></show-list>
+                    </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.over')" :key="4">
+                        <show-list :listQuery="listQuery"></show-list>
+                    </a-tab-pane>
+                </a-tabs>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import showList from "./showList";
-
+import showTitle from "./title";
 export default {
-    components: { showList },
+    components: { showList, showTitle },
     data() {
         return {
             listQuery: {
                 page: 0,
-                pageSize: 9,
+                size: 6,
                 status: null,
                 participate: null
             }
@@ -55,8 +58,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.hei-100 {
-    height: 150px;
-    padding-top: 50px;
+.padding-100 {
+    padding-top: 100px;
+}
+/deep/.ant-tabs-bar {
+    border: 0;
+}
+/deep/.ant-tabs-tab {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 0;
 }
 </style>
