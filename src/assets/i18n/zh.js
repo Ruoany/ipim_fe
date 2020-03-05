@@ -18,7 +18,8 @@ const zhData = {
         allAc: "全部展會",
         address: "地址",
         email: "電郵",
-        tel: "電話"
+        tel: "電話",
+        fax: "傳真"
     },
     show: {
         available: "可報名的展會",

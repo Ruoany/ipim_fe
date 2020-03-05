@@ -16,7 +16,8 @@
                             query: { id: item.id }
                         })
                     "
-                >{{ item.name }}</a-menu-item>
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-sub-menu key="dep">
                 <span slot="title" class="flex center" @click="$router.push('/show/rep_index')">
@@ -32,7 +33,8 @@
                             query: { id: item.id }
                         })
                     "
-                >{{ item.name }}</a-menu-item>
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-menu-item key="finEnc">{{ $t("menu.finEnc") }}</a-menu-item>
             <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item>
@@ -44,12 +46,8 @@
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="personal">
                 <span slot="title" class="flex center" @click="$router.push('/personal/index')">
-                    {{
-                    $t("menu.personal")
-                    }}
-                    <i
-                        class="iconfont iconjiantouarrow486 selected"
-                    ></i>
+                    {{ $t("menu.personal") }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
                 <a-menu-item key="inIn" @click="menuChange('inIn')">{{ $t("menu.inIn") }}</a-menu-item>
                 <a-menu-item key="exEr" @click="menuChange('exEr')">{{ $t("menu.exEr") }}</a-menu-item>
