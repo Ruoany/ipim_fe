@@ -1,15 +1,13 @@
 <template>
-    <div>
-        <div class="all">
-            <div @click="$router.push({ path: '/show/detail', query: { id } })" style=" position: relative;">
-                <img class="img" :src="imgUrl" />
-                <img class="left-img" v-if="statusImg !== null" :src="statusImg" />
-            </div>
-            <div class="padding-13 flex-justify-content-space-between">
-                <div class="font-24">{{ name }}</div>
-                <div class="font-red">
-                    {{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}
-                </div>
+    <div class="all">
+        <div @click="$router.push({ path: '/show/detail', query: { id } })" style=" position: relative;">
+            <img class="img" :src="imgUrl" />
+            <img class="left-img" v-if="statusImg !== null" :src="statusImg" />
+        </div>
+        <div class="padding-13 flex-justify-content-space-between">
+            <div class="font-24">{{ name }}</div>
+            <div class="font-red">
+                {{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}
             </div>
         </div>
     </div>
@@ -32,40 +30,44 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.left-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 86px;
-    height: 86px;
-}
-.img {
-    width: 387px;
-    height: 240px;
-    cursor: pointer;
-    border-radius: 6px 6px 0px 0px;
-}
-.font-24 {
-    font-size: 24px;
-    // line-height: 60px;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; //行数
-    -webkit-box-orient: vertical;
-}
-.font-red {
-    color: red;
-}
+.all {
+    margin-bottom: 30px;
+    width: 390px;
+    .left-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 86px;
+        height: 86px;
+    }
+    .img {
+        width: 100%;
+        height: 240px;
+        cursor: pointer;
+        border-radius: 6px 6px 0px 0px;
+    }
+    .font-24 {
+        font-size: 24px;
+        // line-height: 60px;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; //行数
+        -webkit-box-orient: vertical;
+    }
+    .font-red {
+        color: red;
+    }
 
-.padding-13 {
-    padding: 13px 24px;
-    border-radius: 0 0 6px 6px;
-    height: 120px;
-    box-sizing: border-box;
-    flex-direction: column;
-    background: #fafafa;
-    width: 387px;
+    .padding-13 {
+        padding: 13px 24px;
+        border-radius: 0 0 6px 6px;
+        height: 120px;
+        box-sizing: border-box;
+        flex-direction: column;
+        background: #fafafa;
+        width: 100%;
+    }
 }
 </style>

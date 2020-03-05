@@ -1,27 +1,16 @@
 <template>
-    <div class="flex-align-items-center">
-        <div class="width-1280">
-            <div class="flex-justify-content-space-between flex-align-items-center title">
-                <div class="font-bold">{{ $t("index.keAc") }}</div>
-                <div class="go flex-align-items-center" @click="$router.push('/show/all_index')">
-                    {{ $t("index.allAc") }}
-                    <img src="../../../assets/image/more.svg" style="margin-left:10px;" />
-                </div>
-            </div>
-            <div class="flex img-list">
-                <show-cell
-                    v-for="item in showList"
-                    :key="item.id"
-                    class="show"
-                    :imgUrl="item.scope"
-                    :startTime="item.startTime"
-                    :endTime="item.endTime"
-                    :name="item.nameZh"
-                    :id="item.id"
-                    :statusImg="item.status | statusImgFilter"
-                ></show-cell>
-            </div>
-        </div>
+    <div class="flex img-list flex-align-items-center">
+        <show-cell
+            v-for="item in showList"
+            :key="item.id"
+            :class="showList.length % 3 === 2 ? 'sp' : ''"
+            :imgUrl="item.scope"
+            :startTime="item.startTime"
+            :endTime="item.endTime"
+            :name="item.nameZh"
+            :id="item.id"
+            :statusImg="item.status | statusImgFilter"
+        ></show-cell>
     </div>
 </template>
 
@@ -49,6 +38,7 @@ export default {
             const data = await getActiveList({ ...this.listQuery });
             if (data.code === 200) {
                 this.showList = data.data;
+                this.showList.push(data.data[0]);
             } else {
                 this.$message.error(data.message);
             }
@@ -78,25 +68,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.title {
-    // height: 210px;
-    padding: 100px 0 60px 0;
-}
 .go {
     cursor: pointer;
     color: #666666;
     font-size: 18px;
 }
-.font-bold {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333333;
-}
 .img-list {
     flex-wrap: wrap;
-}
-.show {
-    margin-right: 20px;
-    padding-bottom: 60px;
+    justify-content: space-between;
 }
 </style>
