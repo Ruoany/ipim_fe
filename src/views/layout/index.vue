@@ -22,6 +22,10 @@ export default {
 <style lang="less" scoped>
 .all {
     min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     // position: relative;
     .main {
         padding-top: 50px;
