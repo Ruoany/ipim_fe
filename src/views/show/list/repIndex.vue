@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="all">
         <show-title :text="$t('show.localOrOver')"></show-title>
 
         <div class="flex center padding-100">
@@ -41,20 +41,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.padding-100 {
-    padding-top: 100px;
-}
-.show {
-    margin-right: 20px;
-    padding-bottom: 60px;
-    padding-top: 20px;
-}
-/deep/.ant-tabs-bar {
-    border: 0;
-}
-/deep/.ant-tabs-tab {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 12px 0;
+.all {
+    .padding-100 {
+        padding-top: 100px;
+    }
+    .show {
+        margin-right: 20px;
+        padding-bottom: 60px;
+        padding-top: 20px;
+    }
+    /deep/.ant-tabs-bar {
+        border: transparent;
+    }
+    /deep/.ant-tabs-tab {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 12px 0;
+    }
 }
 </style>

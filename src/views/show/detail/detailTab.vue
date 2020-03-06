@@ -1,5 +1,5 @@
 <template>
-    <a-tabs style="min-height:400px;">
+    <a-tabs class="all">
         <!-- <div class="line"></div> -->
         <a-tab-pane :tab="$t('show.info')" key="1">
             <info></info>
@@ -34,14 +34,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/ .ant-tabs-bar {
-    border-bottom: transparent !important;
-    margin-bottom: 0;
-}
-/deep/ .line {
-    position: absolute;
-    width: 100vw;
-    height: 2px;
-    background-color: red;
+.all {
+    min-height: 400px;
+    /deep/ .ant-tabs-bar {
+        border-bottom: transparent !important;
+        margin-bottom: 0;
+    }
+    /deep/ .line {
+        position: absolute;
+        width: 100vw;
+        height: 2px;
+        background-color: red;
+    }
+    /deep/.ant-tabs-tab {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 12px 0;
+    }
 }
 </style>

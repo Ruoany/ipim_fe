@@ -8,21 +8,26 @@
 
             <!-- <div class="flex list" style=" height: 330px;    overflow-y: scroll;"> -->
             <a-empty v-if="showList.length === 0"></a-empty>
-            <div class="flex cell" v-else v-for="item in showList" :key="item.id">
-                <img
-                    class="img"
-                    :src="item.scope"
-                    @click="$router.push({ path: '/show/detail', query: { id: item.id } })"
-                />
-                <div class=" flex-column flex-justify-content-space-between">
-                    <div class="font-20">{{ item.nameZh }}</div>
-                    <div class="red-color">
-                        {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
+            <a-card
+                hoverable
+                v-else
+                v-for="item in showList"
+                :key="item.id"
+                @click="$router.push({ path: '/show/detail', query: { id: item.id } })"
+                class="cell"
+            >
+                <div class="flex">
+                    <img class="img" :src="item.scope" />
+                    <div class="flex-column flex-justify-content-space-between">
+                        <div class="font-20">{{ item.nameZh }}</div>
+                        <div class="red-color">
+                            {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
                             $moment(item.endTime).format("YYYY.MM.DD")
-                        }}
+                            }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a-card>
             <!-- </div> -->
         </a-spin>
     </div>
@@ -67,7 +72,7 @@ export default {
     .img {
         width: 157px;
         height: 98px;
-        cursor: pointer;
+
         line-height: 0;
     }
     .font-20 {
@@ -94,7 +99,8 @@ export default {
         margin-bottom: 20px;
         background: #fafafa;
         border-radius: 3px;
-        padding: 24px;
+        // padding: 24px;
+        cursor: pointer;
     }
     .flex-column {
         flex-direction: column;

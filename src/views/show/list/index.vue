@@ -46,7 +46,7 @@ export default {
     padding-top: 100px;
 }
 /deep/.ant-tabs-bar {
-    border: 0;
+    border: transparent;
 }
 /deep/.ant-tabs-tab {
     font-size: 20px;

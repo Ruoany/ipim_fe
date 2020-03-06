@@ -1,16 +1,16 @@
 <template>
-    <div class="all">
-        <div @click="$router.push({ path: '/show/detail', query: { id } })" style=" position: relative;">
+    <a-card hoverable class="all" @click="$router.push({ path: '/show/detail', query: { id } })">
+        <div style=" position: relative;" slot="cover">
             <img class="img" :src="imgUrl" />
             <img class="left-img" v-if="statusImg !== null" :src="statusImg" />
         </div>
         <div class="padding-13 flex-justify-content-space-between">
             <div class="font-24">{{ name }}</div>
-            <div class="font-red">
-                {{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}
-            </div>
+            <div
+                class="font-red"
+            >{{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}</div>
         </div>
-    </div>
+    </a-card>
 </template>
 
 <script>
@@ -33,6 +33,8 @@ export default {
 .all {
     margin-bottom: 30px;
     width: 390px;
+    background: #fafafa;
+    border-radius: 6px;
     .left-img {
         position: absolute;
         top: 0;
@@ -61,12 +63,12 @@ export default {
     }
 
     .padding-13 {
-        padding: 13px 24px;
+        // padding: 13px 0px;
         border-radius: 0 0 6px 6px;
-        height: 120px;
+        height: 100px;
         box-sizing: border-box;
         flex-direction: column;
-        background: #fafafa;
+
         width: 100%;
     }
 }

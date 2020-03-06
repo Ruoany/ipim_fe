@@ -1,11 +1,13 @@
 <template>
     <div class="flex warp">
-        <img class="img" :src="item" v-for="item in cardData" :key="item" />
+        <img class="img" :src="item.url" v-for="item in pictures" :key="item.id" />
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: { pictures: Array }
+};
 </script>
 
 <style lang="less" scoped>
