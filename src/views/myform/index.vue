@@ -2,8 +2,10 @@
     <div class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-a v-if="form === 'a'"></form-a>
-                <form-b v-if="form === 'b'"></form-b>
+                <form-aa v-if="form === 'aa'"></form-aa>
+                <form-ab v-if="form === 'ab'"></form-ab>
+                <form-ba v-if="form === 'ba'"></form-ba>
+                <form-bb v-if="form === 'bb'"></form-bb>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2"></a-tab-pane>
         </a-tabs>
@@ -11,13 +13,15 @@
 </template>
 
 <script>
-import FormA from "./a";
-import FormB from "./b";
+import FormAa from "./aa";
+import FormAb from "./ab";
+import FormBa from "./ba";
+import FormBb from "./bb";
 export default {
-    components: { FormA, FormB },
+    components: { FormAa, FormAb, FormBa, FormBb },
     data() {
         return {
-            form: "b",
+            form: "",
             tabActive: "1"
         };
     },
