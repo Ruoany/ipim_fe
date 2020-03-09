@@ -7,16 +7,27 @@
                 <form-ba v-if="form === 'ba'"></form-ba>
                 <form-bb v-if="form === 'bb'"></form-bb>
             </a-tab-pane>
-            <a-tab-pane :tab="$t('show.ab')" key="2"></a-tab-pane>
+            <a-tab-pane :tab="$t('show.ab')" key="2">
+                <div class="label-col">
+                    <ul>
+                        <li>备注信息</li>
+                        <li>备注信息</li>
+                        <li>备注信息</li>
+                        <li>备注信息</li>
+                        <li>备注信息</li>
+                    </ul>
+                    <a-button>下载相关附件</a-button>
+                </div>
+            </a-tab-pane>
         </a-tabs>
     </div>
 </template>
 
 <script>
-import FormAa from "./aa";
-import FormAb from "./ab";
-import FormBa from "./ba";
-import FormBb from "./bb";
+import FormAa from "./aa/index";
+import FormAb from "./ab/index";
+import FormBa from "./ba/index";
+import FormBb from "./bb/index";
 export default {
     components: { FormAa, FormAb, FormBa, FormBb },
     data() {
@@ -48,8 +59,8 @@ export default {
     .tabs {
         width: 100%;
     }
-    .list-content {
-        min-height: 500px;
+    .label-col {
+        height: 500px;
     }
 }
 </style>

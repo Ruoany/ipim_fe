@@ -1,7 +1,7 @@
-const fromRoute = "/myform";
+const parentRoute = "/myform";
 const router = [
     {
-        path: `${fromRoute}/index`,
+        path: `${parentRoute}/index`,
         meta: {
             title: "代表團申請表"
         },
