@@ -6,6 +6,7 @@
                 <form-ab v-if="form === 'ab'"></form-ab>
                 <form-ba v-if="form === 'ba'"></form-ba>
                 <form-bb v-if="form === 'bb'"></form-bb>
+                <form-bd v-if="form === 'bd'"></form-bd>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -29,7 +30,7 @@ import FormAb from "./ab/index";
 import FormBa from "./ba/index";
 import FormBb from "./bb/index";
 export default {
-    components: { FormAa, FormAb, FormBa, FormBb },
+    components: { FormAa, FormAb, FormBa, FormBb, FormBd },
     data() {
         return {
             form: "",
