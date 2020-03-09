@@ -1,7 +1,7 @@
 const fromRoute = "/myform";
 const router = [
     {
-        path: `${fromRoute}/delegation`,
+        path: `${fromRoute}/index`,
         meta: {
             title: "代表團申請表"
         },

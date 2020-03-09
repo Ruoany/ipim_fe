@@ -181,8 +181,8 @@
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
             <div>{{$t('general.statement1')}}</div>
             <a-radio-group v-decorator>
-                <a-radio value="a">{{$t('general.yes')}}</a-radio>
-                <a-radio value="b">{{$t('general.no')}}</a-radio>
+                <a-radio value="a">{{$t('util.yes')}}</a-radio>
+                <a-radio value="b">{{$t('util.no')}}</a-radio>
             </a-radio-group>
             <div>{{$t('general.statement3')}}</div>
             <a-textarea v-decorator :rows="4" />
@@ -190,8 +190,8 @@
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
             <div>{{$t('general.statement2')}}</div>
             <a-radio-group v-decorator>
-                <a-radio value="a">{{$t('general.yes')}}</a-radio>
-                <a-radio value="b">{{$t('general.no')}}</a-radio>
+                <a-radio value="a">{{$t('util.yes')}}</a-radio>
+                <a-radio value="b">{{$t('util.no')}}</a-radio>
             </a-radio-group>
             <div>{{$t('general.statement3')}}</div>
             <a-textarea v-decorator :rows="4" />
