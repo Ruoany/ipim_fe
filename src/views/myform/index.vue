@@ -10,13 +10,13 @@
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
                     <ul>
-                        <li>备注信息</li>
-                        <li>备注信息</li>
-                        <li>备注信息</li>
-                        <li>备注信息</li>
-                        <li>备注信息</li>
+                        <li>{{$t('general.downloadStep1')}}</li>
+                        <li>{{$t('general.downloadStep2')}}</li>
+                        <li>{{$t('general.downloadStep3')}}</li>
+                        <li>{{$t('general.downloadStep4')}}</li>
+                        <li>{{$t('general.downloadStep5')}}</li>
                     </ul>
-                    <a-button>下载相关附件</a-button>
+                    <a-button type="primary" size="large">{{$t('form.downloadDesc')}}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -61,6 +61,13 @@ export default {
     }
     .label-col {
         height: 500px;
+    }
+    ul {
+        padding: 40px 20px;
+        li {
+            list-style: none;
+            line-height: 50px;
+        }
     }
 }
 </style>

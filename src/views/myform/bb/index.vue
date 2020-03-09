@@ -1,5 +1,5 @@
 <template>
-    <a-form class="form" :form="form">
+    <a-form class="form" :form="form" @submit="handleSubmit">
         <div class="form-item-title">{{$t('general.basic')}}</div>
         <a-form-item
             :label="$t('form.communityTitle')"
@@ -256,7 +256,7 @@
             </a-checkbox>
         </a-form-item>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
-            <a-button size="large" type="primary">提交</a-button>
+            <a-button size="large" type="primary" html-type="submit">提交</a-button>
         </a-form-item>
     </a-form>
 </template>
@@ -274,6 +274,16 @@ export default {
             },
             form: this.$form.createForm(this)
         };
+    },
+    methods: {
+        handleSubmit: function(e) {
+            e.preventDefault();
+            this.$form.validate((err, values) => {
+                if (!err) {
+                    console.log("--->", values);
+                }
+            });
+        }
     }
 };
 </script>

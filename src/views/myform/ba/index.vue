@@ -1,12 +1,12 @@
 <template>
-    <a-form class="form" :form="form">
+    <a-form class="form" :form="form" @submit="handleSubmit">
         <div class="form-item-title">{{$t('general.basic')}}</div>
         <a-form-item
             :label="$t('form.communityTitle')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-input v-decorator />
+            <a-input v-decorator="name" />
         </a-form-item>
         <a-form-item
             :label="$t('form.submit')"
@@ -20,14 +20,7 @@
                     <li>{{$t('general.file3')}}</li>
                 </ul>
             </div>
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator="files" name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -35,6 +28,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
+
         <div class="form-item-title">{{$t('general.contact')}}</div>
         <a-form-item
             :label="$t('form.name')"
@@ -76,14 +70,7 @@
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -162,14 +149,7 @@
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -202,12 +182,13 @@
             </a-checkbox>
         </a-form-item>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
-            <a-button size="large" type="primary">提交</a-button>
+            <a-button size="large" type="primary" html-type="submit">提交</a-button>
         </a-form-item>
     </a-form>
 </template>
 
 <script>
+import validate from "./validate";
 export default {
     data() {
         return {
@@ -218,8 +199,19 @@ export default {
             specialLayout: {
                 wrapperCol: { span: 16, offset: 4 }
             },
-            form: this.$form.createForm(this)
+            form: this.$form.createForm(this),
+            ...validate
         };
+    },
+    methods: {
+        handleSubmit: function(e) {
+            e.preventDefault();
+            this.$form.validate((err, values) => {
+                if (!err) {
+                    console.log("--->", values);
+                }
+            });
+        }
     }
 };
 </script>

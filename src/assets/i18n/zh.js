@@ -94,7 +94,12 @@ const zhData = {
         note: "備注",
         know: "知悉並同意",
         unknow: "不同意",
-        submit: "提交申請"
+        submit: "提交申請",
+        downloadStep1: "第一步：下載空白表格",
+        downloadStep2: "第二步：打印空白表格",
+        downloadStep3: "第三步：以手寫的方式填寫表格",
+        downloadStep4: "第四步：表格蓋章",
+        downloadStep5: "第五步：把表格正本遞交給貿促局工作人員"
     },
     form: {
         nameZh: "姓名（中文）",
@@ -146,6 +151,7 @@ const zhData = {
         attach: "附隨文件",
         remark: "備註",
         download: "下載",
+        downloadDesc: "下載相關附件",
         people: "代表團人數",
         tFee: "交通費用",
         lFee: "住宿費用",
