@@ -5,7 +5,7 @@ const router = [
         meta: {
             title: "代表團申請表"
         },
-        component: () => import("@/views/myform/b.vue")
+        component: () => import("@/views/myform/index")
     }
 ];
 
