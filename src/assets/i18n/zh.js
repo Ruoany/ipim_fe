@@ -70,7 +70,8 @@ const zhData = {
         doAp: "申請所需文件",
         note: "備注",
         know: "知悉並同意",
-        unknow: "不同意"
+        unknow: "不同意",
+        submit: "提交申請"
     },
     form: {
         nameZh: "姓名（中文）",

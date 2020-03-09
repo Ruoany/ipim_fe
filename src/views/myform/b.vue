@@ -299,6 +299,9 @@
                     </p>
                 </a-upload-dragger>
             </a-form-item>
+            <a-form-item :wrapperCol="upLabel">
+                <a-button type="primary" size="large">{{$t("general.submit")}}</a-button>
+            </a-form-item>
         </a-form>
     </div>
 </template>
