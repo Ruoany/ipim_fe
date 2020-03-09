@@ -17,7 +17,7 @@ export default {
     components: { FormA, FormB },
     data() {
         return {
-            form: "",
+            form: "b",
             tabActive: "1"
         };
     },
