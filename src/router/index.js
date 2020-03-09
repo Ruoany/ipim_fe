@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import show from "./show";
 import personal from "./personal";
+import myform from "./myform";
 
 Vue.use(VueRouter);
 
@@ -18,7 +19,7 @@ const router = new VueRouter({
                 title: "首页"
             },
             component: () => import("@/views/layout/index"),
-            children: [...show, ...personal]
+            children: [...show, ...personal, ...myform]
         }
     ]
 });
