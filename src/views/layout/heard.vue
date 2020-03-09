@@ -3,41 +3,33 @@
         <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="menu-wrapper">
             <a-sub-menu key="show">
-                <span slot="title" class="flex center" @click="$router.push('/show/index')">
+                <span slot="title" class="flex center">
                     <span>{{ $t("menu.signUp") }}</span>
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    v-for="item in showList"
-                    :key="`s${item.id}`"
-                    @click="
-                        $router.push({
-                            path: '/show/detail',
-                            query: { id: item.id }
-                        })
-                    "
-                    >{{ item.name }}</a-menu-item
-                >
+                <a-menu-item @click="handleNavigate('SELF',0)">{{$t('menu.aa')}}</a-menu-item>
+                <a-menu-item @click="handleNavigate('SELF',1)">{{$t('menu.ab')}}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="dep">
-                <span slot="title" class="flex center" @click="$router.push('/show/rep_index')">
+                <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    v-for="item in depList"
-                    :key="`d${item.id}`"
-                    @click="
-                        $router.push({
-                            path: '/show/rep_detail',
-                            query: { id: item.id }
-                        })
-                    "
-                    >{{ item.name }}</a-menu-item
-                >
+                <a-menu-item @click="handleNavigate('DEPUTATION',0)">{{$t('menu.ba')}}</a-menu-item>
+                <a-menu-item @click="handleNavigate('DEPUTATION',1)">{{$t('menu.bb')}}</a-menu-item>
             </a-sub-menu>
-            <a-menu-item key="finEnc">{{ $t("menu.finEnc") }}</a-menu-item>
-            <!-- <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item> -->
+            <a-sub-menu key="finEnc">
+                <span slot="title" class="flex center">
+                    {{ $t("menu.finEnc") }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
+                </span>
+                <a-menu-item>{{$t('menu.ca')}}</a-menu-item>
+                <a-menu-item>{{$t('menu.cb')}}</a-menu-item>
+                <a-menu-item>{{$t('menu.cc')}}</a-menu-item>
+                <a-menu-item>{{$t('menu.cd')}}</a-menu-item>
+                <a-menu-item>{{$t('menu.ce')}}</a-menu-item>
+                <a-menu-item>{{$t('menu.cf')}}</a-menu-item>
+            </a-sub-menu>
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
@@ -45,7 +37,7 @@
                 <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="personal">
-                <span slot="title" class="flex center" @click="$router.push('/personal/index')">
+                <span slot="title" class="flex center">
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
@@ -60,7 +52,6 @@
 </template>
 
 <script>
-import { getReActivePage } from "@/apis/show";
 export default {
     data() {
         return {
@@ -70,38 +61,21 @@ export default {
             menuItem: "null"
         };
     },
-    watch: {
-        // "$route.query.key": function(newValue) {
-        //     if (newValue !== undefined) {
-        //         this.menuItem = newValue;
-        //     }
-        // }
-    },
-
     methods: {
         lanChange(key) {
             sessionStorage.setItem("language", key);
         },
-        async getReActivePage() {
-            const data = await getReActivePage({
-                language: sessionStorage.getItem("language")
-            });
-            if (data.code === 200) {
-                this.showList = data.data.self;
-                this.depList = data.data.deputation;
-            } else {
-                this.$message.error(data.message);
-            }
-        },
         menuChange(key) {
             this.$router.push({ path: "/personal/index", query: { key } });
+        },
+        handleNavigate: function(query, order) {
+            this.$router.push(`/show/index?part=${query}&order=${order}`);
         }
     },
     mounted() {
         if (!sessionStorage.getItem("language")) {
             sessionStorage.setItem("language", "zh");
         }
-        this.getReActivePage();
     }
 };
 </script>
