@@ -3,16 +3,14 @@
         <show-title :text="$t('show.localOrOver')"></show-title>
 
         <div class="flex center padding-100">
-            <div class="width-1280">
+            <a-spin :spinning="loading" class="width-1280">
                 <a-tabs defaultActiveKey="true" @change="activeChange">
-                    <a-tab-pane :tab="$t('show.local')" key="true">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.overseas')" key="false">
-                        <show-list :listQuery="listQuery"></show-list>
-                    </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.local')" key="true"> </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.overseas')" key="false"> </a-tab-pane>
                 </a-tabs>
-            </div>
+                <show-list :listQuery="listQuery"></show-list>
+                <pagination :page.sync="page" :total="total" :size="size"></pagination>
+            </a-spin>
         </div>
     </div>
 </template>
@@ -20,22 +18,29 @@
 <script>
 import showList from "./showList";
 import showTitle from "./title";
+import Pagination from "@/components/pagination";
 
 export default {
-    components: { showList, showTitle },
+    components: { showList, showTitle, Pagination },
     data() {
         return {
             listQuery: {
                 page: 0,
                 size: 6,
                 local: "true",
-                actType: "SELF"
+                actType: "SELF",
+                loading: false
             }
         };
     },
     methods: {
-        async activeChange(key) {
-            this.listQuery.local = key;
+        async getActivePage(status) {
+            this.loading = true;
+            const body = { size: this.size, page: this.page, status };
+            const { data } = await getActivePage(body);
+            this.list = data.content;
+            this.total = data.totalElements;
+            this.loading = false;
         }
     }
 };
