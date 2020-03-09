@@ -1,5 +1,5 @@
 <template>
-    <div class="content flex flex-justify-content-space-between">
+    <div class="show-list-content flex flex-justify-content-space-between">
         <a-empty v-if="list.length === 0" class="empty"></a-empty>
         <show-cell
             v-for="item in list"
@@ -29,9 +29,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.content {
+.show-list-content {
     flex-wrap: wrap;
     width: 100%;
+    padding: 40px 0;
 }
 /deep/ .ant-pagination {
     margin: 30px 0;

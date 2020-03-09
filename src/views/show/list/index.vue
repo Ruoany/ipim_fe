@@ -1,61 +1,113 @@
 <template>
-    <div>
-        <show-title :text="$t('show.localOrOver')"></show-title>
-
-        <div class="flex center padding-100">
-            <a-spin :spinning="loading" class="width-1280">
-                <a-tabs defaultActiveKey="true" @change="activeChange">
-                    <a-tab-pane :tab="$t('show.local')" key="true"> </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.overseas')" key="false"> </a-tab-pane>
-                </a-tabs>
-                <show-list :listQuery="listQuery"></show-list>
-                <pagination :page.sync="page" :total="total" :size="size"></pagination>
-            </a-spin>
-        </div>
+    <div class="container">
+        <show-title :text="$t(`${info.title}`)"></show-title>
+        <a-spin :spinning="loading" class="content flex center width-1280">
+            <a-tabs v-model="active" class="tabs">
+                <a-tab-pane
+                    v-for="(item,index) in info.tabs"
+                    :key="item"
+                    :tab="$t(`${info.tabs[index]}`)"
+                ></a-tab-pane>
+            </a-tabs>
+            <div class="list-content">
+                <show-list :list="list"></show-list>
+            </div>
+        </a-spin>
     </div>
 </template>
 
 <script>
 import showList from "./showList";
 import showTitle from "./title";
-import Pagination from "@/components/pagination";
+import { getActivePage } from "@/apis/show";
 
 export default {
-    components: { showList, showTitle, Pagination },
+    components: { showList, showTitle },
     data() {
         return {
-            listQuery: {
-                page: 0,
-                size: 6,
-                local: "true",
-                actType: "SELF",
-                loading: false
-            }
+            list: [],
+            loading: false,
+            active: "",
+            actType: "",
+            order: 0,
+            page: 0,
+            size: 6,
+            total: 0
         };
     },
-    methods: {
-        async getActivePage(status) {
-            this.loading = true;
-            const body = { size: this.size, page: this.page, status };
-            const { data } = await getActivePage(body);
-            this.list = data.content;
-            this.total = data.totalElements;
-            this.loading = false;
+    computed: {
+        info: {
+            get: function() {
+                const params = this.$route.query.part;
+                let o = {};
+                switch (params) {
+                    case "SELF":
+                        o = {
+                            title: "menu.signUp",
+                            tabs: ["menu.aa", "menu.ab"]
+                        };
+                        break;
+                    case "DEPUTATION":
+                        o = {
+                            title: "menu.delegation",
+                            tabs: ["menu.ba", "menu.bb"]
+                        };
+                        break;
+                }
+                this.active = o.tabs[this.order];
+                return o;
+            }
         }
+    },
+    watch: {
+        active: function(newValue) {
+            this.page = 0;
+            this.initData(newValue);
+        }
+    },
+    methods: {
+        initData: async function(query) {
+            this.loading = true;
+            const { data } = await getActivePage({
+                page: this.page,
+                size: this.size,
+                actType: this.actType
+            });
+            this.setList(data.content, data.totalElements);
+            this.loading = false;
+        },
+        setList: function(array, total) {
+            this.list = new Array().concat(array);
+            this.total = total;
+        }
+    },
+    mounted: function() {
+        this.actType = this.$route.query.part;
+        this.order = parseInt(this.$route.query.order);
     }
 };
 </script>
 
 <style lang="less" scoped>
-.padding-100 {
-    padding-top: 100px;
-}
-/deep/.ant-tabs-bar {
-    border: transparent;
-}
-/deep/.ant-tabs-tab {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 12px 0;
+.container {
+    .content {
+        padding-top: 100px;
+        margin: auto;
+        /deep/.ant-tabs-bar {
+            border: transparent;
+        }
+        /deep/.ant-tabs-tab {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0;
+        }
+        /deep/ .ant-spin-container,
+        .tabs {
+            width: 100%;
+        }
+        .list-content {
+            min-height: 500px;
+        }
+    }
 }
 </style>
