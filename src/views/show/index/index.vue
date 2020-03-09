@@ -1,5 +1,5 @@
 <template>
-    <div class="all">
+    <div class="wrapper">
         <a-carousel autoplay>
             <img class="img-100" src="http://rrd.me/gnPsX" />
             <img class="img-100" src="http://u6.gg/sQ5AW" />
@@ -36,11 +36,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.all {
+.wrapper {
     width: 100%;
     min-width: 1226px;
     box-sizing: border-box;
-
+    .go {
+        cursor: pointer;
+    }
     .img-100 {
         width: 100%;
         height: 500px;

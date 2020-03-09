@@ -1,8 +1,8 @@
 const zhData = {
     menu: {
-        signUp: "報名參加本局本地/境外之展會",
-        delegation: "參加代表團",
-        finEnc: "參展財務鼓勵",
+        signUp: "參與本局主辦之展會",
+        delegation: "參與本局組織之境外展會",
+        finEnc: "支持及鼓勵措施",
         plan: "會議及展覽資助計劃",
         lan: "語言",
         personal: "個人中心",

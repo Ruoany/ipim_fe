@@ -1,7 +1,7 @@
 <template>
     <div class="container flex">
         <div class="logo" @click="$router.push('/')"></div>
-        <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="all">
+        <a-menu :selectedKeys="[menuItem]" mode="horizontal" class="menu-wrapper">
             <a-sub-menu key="show">
                 <span slot="title" class="flex center" @click="$router.push('/show/index')">
                     <span>{{ $t("menu.signUp") }}</span>
@@ -16,7 +16,8 @@
                             query: { id: item.id }
                         })
                     "
-                >{{ item.name }}</a-menu-item>
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-sub-menu key="dep">
                 <span slot="title" class="flex center" @click="$router.push('/show/rep_index')">
@@ -32,10 +33,11 @@
                             query: { id: item.id }
                         })
                     "
-                >{{ item.name }}</a-menu-item>
+                    >{{ item.name }}</a-menu-item
+                >
             </a-sub-menu>
             <a-menu-item key="finEnc">{{ $t("menu.finEnc") }}</a-menu-item>
-            <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item>
+            <!-- <a-menu-item key="plan">{{ $t("menu.plan") }}</a-menu-item> -->
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
@@ -112,6 +114,8 @@ export default {
     z-index: 999;
     justify-content: center;
     border-bottom: 1px solid #e6e6e6;
+    left: 0;
+    top: 0;
     /deep/ .ant-menu {
         background: none;
     }
@@ -122,14 +126,15 @@ export default {
         margin-right: 30px;
         width: 40px;
         height: 50px;
+        zoom: 1;
         background-image: url(../../assets/image/logo.svg);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         cursor: pointer;
     }
-    .all {
-        width: 1240px;
+    .menu-wrapper {
+        width: calc(~"1226px - 40px");
         height: 50px;
         line-height: 50px;
     }
