@@ -367,7 +367,6 @@
     </a-form>
 </template>
 
-
 <script>
 import { upFiles } from "@/apis/files";
 export default {
@@ -390,5 +389,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
