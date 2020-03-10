@@ -1,124 +1,134 @@
 <template>
     <div class="center flex">
         <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-            <div class="form-title">{{$t("general.personal")}}</div>
-            <div class="form-text">{{$t("general.tips")}}</div>
-            <a-form-item :label="$t('form.nameZh')">
+            <div class="form-title">{{$t("formaa.aa")}}</div>
+            <div class="form-text">{{$t("formaa.ab")}}</div>
+            <a-form-item :label="$t('formaa.ac')">
                 <a-input v-decorator="email" />
             </a-form-item>
-            <a-form-item :label="$t('form.nameEn')">
-                <a-input v-decorator />
-            </a-form-item>
-            <a-form-item :label="$t('form.sex')">
+            <a-form-item :label="$t('formaa.ad')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('util.man')}}</a-radio>
-                    <a-radio :value="2">{{$t('util.woman')}}</a-radio>
+                    <a-radio :value="1">{{$t('formaa.ae')}}</a-radio>
+                    <a-radio :value="2">{{$t('formaa.af')}}</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item :label="$t('form.birth')">
+            <a-form-item :label="$t('formaa.ag')">
+                <a-date-picker style="width:100%;" />
+            </a-form-item>
+            <a-form-item :label="$t('formaa.ah')">
+                <a-input v-decorator />
+            </a-form-item>
+            <a-form-item :label="$t('formaa.ai')">
                 <a-date-picker />
             </a-form-item>
-            <a-form-item :label="$t('form.idCard')">
+            <a-form-item :label="$t('formaa.aj')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.valPeriod')">
+            <a-form-item :label="$t('formaa.ai')">
                 <a-date-picker />
             </a-form-item>
-            <a-form-item :label="$t('form.HMRP')">
+            <a-form-item :label="$t('formaa.ak')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.HMRPPeriod')">
+            <a-form-item :label="$t('formaa.ai')">
                 <a-date-picker />
             </a-form-item>
-            <a-form-item :label="$t('form.passport')">
+            <a-form-item :label="$t('formaa.al')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.pPeriod')">
+            <a-form-item :label="$t('formaa.am')">
+                <a-input v-decorator />
+            </a-form-item>
+            <a-form-item :label="$t('formaa.ai')">
                 <a-date-picker />
             </a-form-item>
-            <a-form-item :label="$t('form.othersName')">
+            <div class="form-title">{{$t('formaa.an')}}</div>
+            <a-form-item :label="$t('formaa.ac')">
+                <a-select v-decorator></a-select>
+                <a-checkbox>{{$t('formaa.ao')}}</a-checkbox>
+            </a-form-item>
+            <a-form-item :label="$t('formaa.ap')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.othersNum')">
+            <a-form-item :label="$t('formaa.aq')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.othersPeriod')">
-                <a-date-picker />
-            </a-form-item>
-            <div class="form-title">{{$t('general.contact')}}</div>
-            <div class="form-text"></div>
-            <a-form-item :label="$t('form.name')">
+            <a-form-item :label="$t('formaa.ar')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.tel')">
+            <a-form-item :label="$t('formaa.as')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.localPhone')">
+            <a-form-item :label="$t('formaa.at')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.domesticPhone')">
+            <div class="form-title">{{$t('formaa.au')}}</div>
+            <div class="form-text">{{$t('formaa.av')}}</div>
+            <a-form-item :label="$t('formaa.aw')">
+                <a-checkbox>{{$t("formaa.bu")}}</a-checkbox>
+            </a-form-item>
+            <a-form-item :label="$t('formaa.ax')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.fax')">
+            <a-form-item :label="$t('formaa.ay')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.email')">
+            <a-form-item :label="$t('formaa.az')">
                 <a-input v-decorator />
             </a-form-item>
-            <div class="form-title">{{$t('general.name')}}</div>
-            <div class="form-text">{{$t('general.more')}}</div>
-            <a-form-item :label="$t('form.association')">
+            <a-form-item :label="$t('formaa.ba')">
+                <a-checkbox>{{$t("formaa.bb")}}</a-checkbox>
+            </a-form-item>
+            <a-form-item :label="$t('formaa.bc')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.associationName')">
+            <a-form-item :label="$t('formaa.bd')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.position')">
+            <a-form-item :label="$t('formaa.ay')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.company')">
-                <a-checkbox>{{$t("general.company")}}</a-checkbox>
-            </a-form-item>
-            <a-form-item :label="$t('form.companyName')">
+            <a-form-item :label="$t('formaa.az')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.companyAddress')">
+            <a-form-item :label="$t('formaa.be')">
+                <a-checkbox>{{$t("formaa.bf")}}</a-checkbox>
+            </a-form-item>
+            <a-form-item :label="$t('formaa.bg')">
                 <a-input v-decorator />
             </a-form-item>
-            <a-form-item :label="$t('form.position')">
-                <a-input v-decorator />
-            </a-form-item>
-            <a-form-item :label="$t('form.category')">
-                <a-input v-decorator />
-            </a-form-item>
-            <a-form-item :label="$t('form.others')">
-                <a-checkbox>{{$t("general.others")}}</a-checkbox>
-            </a-form-item>
-            <a-form-item :label="$t('form.title')">
-                <a-input v-decorator />
-            </a-form-item>
-            <div class="form-title">{{$t('general.traffic')}}</div>
-            <div class="form-text"></div>
-            <a-form-item :label="$t('form.go')">
+            <div class="form-title">{{$t('formaa.bh')}}</div>
+            <a-form-item :label="$t('formaa.bi')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('util.yes')}}</a-radio>
-                    <a-radio :value="2">{{$t('util.no')}}</a-radio>
+                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
+                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item :label="$t('form.back')">
+            <a-form-item :label="$t('formaa.bl')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('util.yes')}}</a-radio>
-                    <a-radio :value="2">{{$t('util.no')}}</a-radio>
+                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
+                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item :label="$t('form.arranged')">
+            <a-form-item :label="$t('formaa.bm')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('util.yes')}}</a-radio>
-                    <a-radio :value="2">{{$t('util.no')}}</a-radio>
+                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
+                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
                 </a-radio-group>
             </a-form-item>
-            <a-form-item :label="$t('form.others')">
+            <a-form-item :label="$t('formaa.be')">
                 <a-input v-decorator />
+            </a-form-item>
+            <div class="form-title">{{$t('formaa.bn')}}</div>
+            <ul>
+                <li>{{$t('formaa.bo')}}</li>
+                <li>{{$t('formaa.bp')}}</li>
+                <li>{{$t('formaa.bq')}}</li>
+            </ul>
+            <div>{{$t('formaa.br')}}</div>
+            <div>{{$t('formaa.bs')}}</div>
+            <a-form-item>
+                <a-button type="primary" size="large">{{$t('formaa.bt')}}</a-button>
             </a-form-item>
         </a-form>
     </div>

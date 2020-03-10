@@ -1,42 +1,39 @@
 <template>
     <div class="center flex">
         <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-            <div class="form-title">{{$t("general.note")}}</div>
-            <div class="form-text"></div>
-            <a-form-item :label="$t('form.coName')">
+            <div class="form-title">{{$t("formab.aa")}}</div>
+            <div class="form-text">{{$t("formab.ab")}}</div>
+            <a-form-item :label="$t('formab.ac')">
                 <a-input />
             </a-form-item>
-
-            <a-form-item :label="$t('form.plReCode')">
+            <a-form-item :label="$t('formab.ad')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.coMoCode')">
+            <a-form-item :label="$t('formab.ae')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.exPr')">
+            <a-form-item :label="$t('formab.af')">
                 <a-input />
             </a-form-item>
-            <div class="form-title">{{$t("general.contact")}}</div>
-            <div class="form-text"></div>
-            <a-form-item :label="$t('form.name')">
+            <div class="form-title">{{$t("formab.ag")}}</div>
+            <a-form-item :label="$t('formab.ah')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.phone')">
+            <a-form-item :label="$t('formab.ai')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.fax')">
+            <a-form-item :label="$t('formab.aj')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.email')">
+            <a-form-item :label="$t('formab.ak')">
                 <a-input />
             </a-form-item>
-            <a-form-item :label="$t('form.address')">
+            <a-form-item :label="$t('formab.al')">
                 <a-input />
             </a-form-item>
-            <div class="form-title">{{$t("general.eligibility")}}</div>
-            <div class="form-text"></div>
+            <div class="form-title">{{$t("formab.am")}}</div>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text1')}}
+                <span>{{$t('formab.an')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -54,7 +51,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text2')}}
+                <span>{{$t('formab.ao')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -72,7 +69,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text3')}}
+                <span>{{$t('formab.ap')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -90,7 +87,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text4')}}
+                <span>{{$t('formab.aq')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -108,7 +105,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text5')}}
+                <span>{{$t('formab.ar')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -126,7 +123,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text6')}}
+                <span>{{$t('formab.as')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -143,10 +140,9 @@
                     </p>
                 </a-upload-dragger>
             </a-form-item>
-            <div class="form-title">{{$t("general.doAp")}}</div>
-            <div class="form-text"></div>
+            <div class="form-title">{{$t("formab.at")}}</div>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text7')}}
+                <span>{{$t('formab.au')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -164,7 +160,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t('form.text8')}}
+                <span>{{$t('formab.aw')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -181,54 +177,52 @@
                     </p>
                 </a-upload-dragger>
             </a-form-item>
-            <div class="form-title">{{$t("general.note")}}</div>
-            <div class="form-text"></div>
+            <div class="form-title">{{$t("formab.ax")}}</div>
             <a-form-item :wrapperCol="upLabel">
                 <ul>
-                    <h3 class="font-bold">{{$t("note.a")}}</h3>
-                    <li>{{$t("note.text1")}}</li>
+                    <h3 class="font-bold">{{$t("formab.ay")}}</h3>
+                    <li>{{$t("formab.az")}}</li>
                 </ul>
                 <ul>
-                    <h3 class="font-bold">{{$t("note.b")}}</h3>
-                    <li>{{$t("note.text2")}}</li>
-                    <li>{{$t("note.text3")}}</li>
-                    <li>{{$t("note.text4")}}</li>
+                    <h3 class="font-bold">{{$t("formab.ba")}}</h3>
+                    <li>{{$t("formab.bb")}}</li>
+                    <li>{{$t("formab.bc")}}</li>
+                    <li>{{$t("formab.bd")}}</li>
                 </ul>
                 <ul>
-                    <h3 class="font-bold">{{$t("note.c")}}</h3>
-                    <li>{{$t("note.text5")}}</li>
-                    <li>{{$t("note.text6")}}</li>
-                    <li>{{$t("note.text7")}}</li>
+                    <h3 class="font-bold">{{$t("formab.be")}}</h3>
+                    <li>{{$t("formab.bf")}}</li>
+                    <li>{{$t("formab.bg")}}</li>
+                    <li>{{$t("formab.bh")}}</li>
                 </ul>
                 <ul>
-                    <h3 class="font-bold">{{$t("note.d")}}</h3>
-                    <li>{{$t("note.text8")}}</li>
-                    <li>{{$t("note.text9")}}</li>
-                    <li>{{$t("note.text10")}}</li>
+                    <h3 class="font-bold">{{$t("formab.bi")}}</h3>
+                    <li>{{$t("formab.bj")}}</li>
+                    <li>{{$t("formab.bk")}}</li>
+                    <li>{{$t("formab.bl")}}</li>
                 </ul>
                 <ul>
-                    <h3 class="font-bold">{{$t("note.e")}}</h3>
-                    <li>{{$t("note.text11")}}</li>
+                    <h3 class="font-bold">{{$t("formab.bm")}}</h3>
+                    <li>{{$t("formab.bn")}}</li>
                 </ul>
                 <ul>
-                    <h3 class="font-bold">{{$t("note.f")}}</h3>
-                    <li>{{$t("note.text12")}}</li>
-                    <li>{{$t("note.text13")}}</li>
-                    <li>{{$t("note.text14")}}</li>
-                    <li>{{$t("note.text15")}}</li>
+                    <h3 class="font-bold">{{$t("formab.bo")}}</h3>
+                    <li>{{$t("formab.bp")}}</li>
+                    <li>{{$t("formab.bq")}}</li>
+                    <li>{{$t("formab.br")}}</li>
+                    <li>{{$t("formab.bs")}}</li>
                 </ul>
             </a-form-item>
-            <div class="form-title">{{$t("general.statement")}}</div>
-            <div class="form-text"></div>
+            <div class="form-title">{{$t("formab.bt")}}</div>
             <a-form-item :wrapperCol="upLabel">
-                <div>{{$t("form.text9")}}</div>
+                <div>{{$t("formab.bu")}}</div>
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t("general.know")}}</a-radio>
-                    <a-radio :value="2">{{$t("general.unknow")}}</a-radio>
+                    <a-radio :value="1">{{$t("formab.bv")}}</a-radio>
+                    <a-radio :value="2">{{$t("formab.bw")}}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t("form.text10")}}
+                <span>{{$t('formab.bx')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -246,7 +240,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t("form.text11")}}
+                <span>{{$t('formab.by')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -264,7 +258,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t("form.text12")}}
+                <span>{{$t('formab.bz')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -282,7 +276,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                {{$t("form.text13")}}
+                <span>{{$t('formab.ca')}}</span>
                 <a-upload-dragger
                     name="file"
                     :multiple="true"
@@ -300,7 +294,7 @@
                 </a-upload-dragger>
             </a-form-item>
             <a-form-item :wrapperCol="upLabel">
-                <a-button type="primary" size="large">{{$t("general.submit")}}</a-button>
+                <a-button type="primary" size="large">{{$t("formab.cb")}}</a-button>
             </a-form-item>
         </a-form>
     </div>
