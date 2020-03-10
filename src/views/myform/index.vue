@@ -29,6 +29,7 @@ import FormAa from "./aa/index";
 import FormAb from "./ab/index";
 import FormBa from "./ba/index";
 import FormBb from "./bb/index";
+import FormBd from "./bd/index"
 export default {
     components: { FormAa, FormAb, FormBa, FormBb, FormBd },
     data() {
