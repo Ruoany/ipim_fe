@@ -99,7 +99,9 @@ const zhData = {
         downloadStep2: "第二步：打印空白表格",
         downloadStep3: "第三步：以手寫的方式填寫表格",
         downloadStep4: "第四步：表格蓋章",
-        downloadStep5: "第五步：把表格正本遞交給貿促局工作人員"
+        downloadStep5: "第五步：把表格正本遞交給貿促局工作人員",
+        activeBack: "活動背景",
+        activeInfo: "活動資料-展覽"
     },
     form: {
         nameZh: "姓名（中文）",
@@ -183,7 +185,18 @@ const zhData = {
         comType: "企業類型",
         appliType: "申請者身份分類",
         url: "網址",
-        text14: "申請者及相關詳細活動資料"
+        text14: "申請者及相關詳細活動資料",
+        conPerson1: "聯絡人一",
+        conPerson2: "聯絡人二",
+        job: "職銜",
+        activeUrl: "活動網址",
+        meetingCycle: "會議的舉辦週期",
+        activeTime: "活動日期",
+        meetingAddress: "會議場地",
+        meetingTime: "預計會議舉行時數",
+        meetingAllDay: "全天會議",
+        meetingArea: "以往曾舉辦會議的國家或地區",
+        parInformation: "預計參會者資料"
     },
     util: {
         yes: "是",
