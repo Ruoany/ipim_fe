@@ -1,24 +1,30 @@
 <template>
     <div>
-        <a-form-item :label="$t('form.activeTime')">
+        <a-form-item :label="$t('formbd.activeTime')">
+            <a-range-picker />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.meetingAddress')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingAddress')">
+        <a-form-item :label="$t('formbd.meetingCycle')">
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.di") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.dj") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.dl") }}</a-radio>
+                <a-radio :value="4">{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
+            </a-radio-group>
+            <a-input :placeholder="$t('formbd.dm')"></a-input>
+        </a-form-item>
+        <a-form-item :label="$t('formbd.meetingTime')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingCycle')">
+        <a-form-item :label="$t('formbd.meetingAllDay')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingTime')">
+        <a-form-item :label="$t('formbd.meetingArea')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingAllDay')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.meetingArea')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.parInformation')" :wrapperCol="upLabel">
+        <a-form-item :label="$t('formbd.parInformation')">
             <a-input />
             <a-upload-dragger
                 name="file"
@@ -31,8 +37,8 @@
                 </p>
                 <p class="ant-upload-text">Click or drag file to this area to upload</p>
                 <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
+                    files
                 </p>
             </a-upload-dragger>
         </a-form-item>
@@ -42,12 +48,9 @@
 <script>
 export default {
     data() {
-        return {
-            upLabel: { span: 16, offset: 4 }
-        };
+        return {};
     }
 };
 </script>
 
-<style>
-</style>
+<style></style>

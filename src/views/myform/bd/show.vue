@@ -1,25 +1,22 @@
 <template>
     <div>
-        <a-form-item :label="$t('form.activeTime')">
+        <a-form-item :label="$t('formbd.activeTime')">
             <a-range-picker />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingAddress')">
+        <a-form-item :label="$t('formbd.ae')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingCycle')">
+        <a-form-item :label="$t('formbd.af')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingTime')">
+        <a-form-item :label="$t('formbd.ag')">
             <a-input />
             <a-textarea />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingAllDay')">
+        <a-form-item :label="$t('formbd.ah')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.meetingArea')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.parInformation')" :wrapperCol="upLabel">
+        <a-form-item :label="$t('formbd.al')">
             <a-input />
             <a-upload-dragger
                 name="file"
@@ -43,9 +40,7 @@
 <script>
 export default {
     data() {
-        return {
-            upLabel: { span: 16, offset: 4 }
-        };
+        return {};
     }
 };
 </script>
