@@ -2,22 +2,23 @@
     <div class="hei-200 flex-justify-content-space-between">
         <div class="flex">
             <img class="img" :src="scope" />
-            <div style="padding-left:20px;">
-                <div class="font-bold font-26">{{nameZh}}</div>
-                <div>{{nameEn}}</div>
-                <div>{{namePt}}</div>
+            <div style="padding-left:40px;">
+                <div class="font-bold font-26">{{ nameZh }}</div>
+                <div>{{ nameEn }}</div>
+                <div>{{ namePt }}</div>
 
-                <div style="padding-top:20px;">{{$t("show.ofWe")}}：{{place}}</div>
-                <div>{{$t("show.acAd")}}：{{website}}</div>
-                <div>{{$t("show.acTime")}}：{{startTime | formatTime}}--{{endTime | formatTime}}</div>
+                <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ place }}</div>
+                <div>{{ $t("show.acAd") }}：{{ website }}</div>
+                <div style="color:#EE1C24">
+                    {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
+                </div>
             </div>
         </div>
-        <div class="end" v-if="actType==='DEPUTATION'">
-            <a-button type="primary" size="large" class="btn">{{$t('show.paDe')}}</a-button>
+        <div class="end" v-if="actType === 'DEPUTATION'">
+            <a-button type="primary" size="large" class="btn">{{ $t("show.paDe") }}</a-button>
         </div>
-        <div class="end" v-if="actType==='SELF'">
-            <a-button type="primary" size="large" class="btn">{{$t('show.grEx')}}</a-button>
-            <a-button type="primary" size="large" class="btn">{{$t('show.inOv')}}</a-button>
+        <div class="end" v-if="actType === 'SELF'">
+            <a-button type="primary" size="large" class="btn">{{ $t("show.grEx") }}</a-button>
         </div>
     </div>
 </template>
@@ -37,7 +38,7 @@ export default {
     },
     filters: {
         formatTime: function(value) {
-            return value.split(" ")[0];
+            return value ? value.slice(0, 10) : null;
         }
     }
 };
@@ -45,8 +46,8 @@ export default {
 
 <style lang="less" scoped>
 .hei-200 {
-    padding: 70px 30px;
-    width: 1280px;
+    padding: 70px 0;
+    width: 100%;
     box-sizing: border-box;
 }
 .img {

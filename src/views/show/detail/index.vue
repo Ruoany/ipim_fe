@@ -1,19 +1,17 @@
 <template>
-    <div class="flex center">
-        <div class="width-1280">
-            <detail-title
-                :nameZh="activeData.nameZh"
-                :nameEn="activeData.nameEn"
-                :namePt="activeData.namePt"
-                :place="activeData.place"
-                :startTime="activeData.startTime"
-                :endTime="activeData.endTime"
-                :scope="activeData.scope"
-                :website="activeData.website"
-                actType="SELF"
-            ></detail-title>
-            <detail-Tab :cardData="activeData"></detail-Tab>
-        </div>
+    <div class="container width-1280">
+        <detail-title
+            :nameZh="activeData.nameZh"
+            :nameEn="activeData.nameEn"
+            :namePt="activeData.namePt"
+            :place="activeData.place"
+            :startTime="activeData.startTime"
+            :endTime="activeData.endTime"
+            :scope="activeData.scope"
+            :website="activeData.website"
+            actType="SELF"
+        ></detail-title>
+        <detail-Tab :card-data="activeData"></detail-Tab>
     </div>
 </template>
 
@@ -52,5 +50,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.container {
+    margin: auto !important;
+}
 </style>

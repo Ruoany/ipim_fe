@@ -1,16 +1,20 @@
 <template>
-    <div v-html="info"></div>
+    <div class="container" v-html="info"></div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            info: null
-        };
+    props: {
+        info: {
+            type: String,
+            default: ""
+        }
     }
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.container {
+    width: 100%;
+}
 </style>

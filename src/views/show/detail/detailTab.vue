@@ -1,11 +1,10 @@
 <template>
     <a-tabs class="all">
-        <!-- <div class="line"></div> -->
         <a-tab-pane :tab="$t('show.info')" key="1">
-            <info></info>
+            <info :info="cardData.content"></info>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.coPe')" key="4">
-            <co-pe :cardData="cardData.liaisons===null?[]:cardData.liaisons"></co-pe>
+            <co-pe :liaisons="cardData.liaisons === null ? [] : cardData.liaisons"></co-pe>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.organizer')" key="5">
             <organizer :organizer="cardData.organizer" :helpers="cardData.helpers"></organizer>
@@ -29,7 +28,10 @@ export default {
     props: {
         cardData: Object
     },
-    components: { coPe, organizer, shop, photo, info }
+    components: { coPe, organizer, shop, photo, info },
+    mounted: function() {
+        console.log("--->", this.cardData);
+    }
 };
 </script>
 
@@ -50,6 +52,9 @@ export default {
         font-size: 20px;
         font-weight: bold;
         padding: 12px 0;
+    }
+    /deep/.ant-tabs-tabpane {
+        padding: 40px 0;
     }
 }
 </style>
