@@ -1,33 +1,32 @@
 <template>
     <a-form class="form" :form="form" @submit="handleSubmit">
-        <div class="form-item-title">{{$t('general.basic')}}</div>
+        <div class="form-item-title">{{$t('formbb.aa')}}</div>
+        <ul>
+            <li>{{$t('formbb.ab')}}</li>
+            <li>{{$t('formbb.ac')}}</li>
+            <li>{{$t('formbb.ad')}}</li>
+        </ul>
+        <div class="form-item-title">{{$t('formbb.ae')}}</div>
         <a-form-item
-            :label="$t('form.communityTitle')"
+            :label="$t('formbb.af')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.submit')"
+            :label="$t('formbb.ag')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <div class="form-content">
                 <ul>
-                    <li>{{$t('general.file1')}}</li>
-                    <li>{{$t('general.file2')}}</li>
-                    <li>{{$t('general.file3')}}</li>
+                    <li>{{$t('formbb.ah')}}</li>
+                    <li>{{$t('formbb.ai')}}</li>
+                    <li>{{$t('formbb.aj')}}</li>
                 </ul>
             </div>
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -35,55 +34,48 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{$t('general.contact')}}</div>
+        <div class="form-item-title">{{$t('formbb.ak')}}</div>
         <a-form-item
-            :label="$t('form.name')"
+            :label="$t('formbb.al')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-select v-decorator></a-select>
         </a-form-item>
         <a-form-item
-            :label="$t('form.position')"
+            :label="$t('formbb.am')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator></a-input>
         </a-form-item>
         <a-form-item
-            :label="$t('form.tel')"
+            :label="$t('formbb.an')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator type="number"></a-input>
         </a-form-item>
         <a-form-item
-            :label="$t('form.fax')"
+            :label="$t('formbb.ao')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator type="number"></a-input>
         </a-form-item>
         <a-form-item
-            :label="$t('form.email')"
+            :label="$t('formbb.ap')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator></a-input>
         </a-form-item>
         <a-form-item
-            :label="$t('form.address')"
+            :label="$t('formbb.aq')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -91,97 +83,90 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{$t('general.exhibition')}}</div>
+        <div class="form-item-title">{{$t('formbb.ar')}}</div>
         <a-form-item
-            :label="$t('form.exhibitionCategory')"
+            :label="$t('formbb.bj')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-radio-group v-decorator>
-                <a-radio value="a">{{$t('general.exhibition1')}}</a-radio>
-                <a-radio value="b">{{$t('general.exhibition2')}}</a-radio>
+                <a-radio value="a">{{$t('formbb.bk')}}</a-radio>
+                <a-radio value="b">{{$t('formbb.bl')}}</a-radio>
             </a-radio-group>
         </a-form-item>
         <a-form-item
-            :label="$t('form.remark')"
+            :label="$t('formbb.aa')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <ul v-if="true">
-                <li>{{$t('general.remark1')}}</li>
+                <li>{{$t('formbb.bm')}}</li>
             </ul>
             <ul v-else>
-                <li>{{$t('general.remark2')}}</li>
-                <li>{{$t('general.remark3')}}</li>
-                <li>{{$t('general.remark4')}}</li>
+                <li>{{$t('formbb.bn')}}</li>
+                <li>{{$t('formbb.bo')}}</li>
+                <li>{{$t('formbb.bp')}}</li>
             </ul>
         </a-form-item>
         <a-form-item
-            :label="$t('form.exhibitionName')"
+            :label="$t('formbb.as')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.exhibitionAddress')"
+            :label="$t('formbb.at')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.exhibitionDate')"
+            :label="$t('formbb.au')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-range-picker v-decorator style="width:100%;" />
         </a-form-item>
         <a-form-item
-            :label="$t('form.exhibitionIntroduction')"
+            :label="$t('formbb.av')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-textarea v-decorator :rows="4" />
-            <div>{{$t('general.exhibitionIntroduction')}}</div>
+            <div>{{$t('formbb.aw')}}</div>
         </a-form-item>
         <a-form-item
-            :label="$t('form.exhibitionPurpose')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
-            <a-textarea v-decorator :rows="4" />
-        </a-form-item>
-        <a-form-item
-            :label="$t('form.exhibitionResult')"
+            :label="$t('formbb.ax')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
-        <div class="form-item-title">{{$t('general.applicationAttach')}}</div>
         <a-form-item
-            :label="$t('form.download')"
+            :label="$t('formbb.ay')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-button style="margin-left:20px">{{$t('general.list')}}</a-button>
-            <a-button style="margin-left:20px">{{$t('general.schedule')}}</a-button>
-            <a-button style="margin-left:20px">{{$t('general.budget')}}</a-button>
+            <a-textarea v-decorator :rows="4" />
+        </a-form-item>
+        <div class="form-item-title">{{$t('formbb.bt')}}</div>
+        <a-form-item
+            :label="$t('formbb.bu')"
+            :label-col="formatLayout.labelCol"
+            :wrapper-col="formatLayout.wrapperCol"
+        >
+            <a-button style="margin-left:20px">{{$t('formbb.bq')}}</a-button>
+            <a-button style="margin-left:20px">{{$t('formbb.br')}}</a-button>
+            <a-button style="margin-left:20px">{{$t('formbb.bs')}}</a-button>
         </a-form-item>
         <a-form-item
-            :label="$t('form.attach')"
+            :label="$t('formbb.bd')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -189,41 +174,34 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{$t('general.application')}}</div>
+        <div class="form-item-title">{{$t('formbb.az')}}</div>
         <a-form-item
-            :label="$t('form.people')"
+            :label="$t('formbb.ba')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.tFee')"
+            :label="$t('formbb.bb')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.lFee')"
+            :label="$t('formbb.bc')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
             <a-input v-decorator />
         </a-form-item>
         <a-form-item
-            :label="$t('form.attach')"
+            :label="$t('formbb.bd')"
             :label-col="formatLayout.labelCol"
             :wrapper-col="formatLayout.wrapperCol"
         >
-            <a-upload-dragger
-                v-decorator="['dragger', {
-            valuePropName: 'fileList',
-            getValueFromEvent: normFile,
-          }]"
-                name="files"
-                action="/upload.do"
-            >
+            <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
@@ -231,32 +209,32 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{$t('general.statement')}}</div>
+        <div class="form-item-title">{{$t('formbb.be')}}</div>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('general.statement1')}}</div>
+            <div>{{$t('formbb.bf')}}</div>
             <a-radio-group v-decorator>
                 <a-radio value="a">{{$t('util.yes')}}</a-radio>
                 <a-radio value="b">{{$t('util.no')}}</a-radio>
             </a-radio-group>
-            <div>{{$t('general.statement3')}}</div>
+            <div>{{$t('formbb.bi')}}</div>
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('general.statement2')}}</div>
+            <div>{{$t('formbb.bg')}}</div>
             <a-radio-group v-decorator>
                 <a-radio value="a">{{$t('util.yes')}}</a-radio>
                 <a-radio value="b">{{$t('util.no')}}</a-radio>
             </a-radio-group>
-            <div>{{$t('general.statement3')}}</div>
+            <div>{{$t('formbb.bi')}}</div>
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
             <a-checkbox v-decorator="['agreement', {valuePropName: 'checked'}]">
-                <span>{{$t('general.statement4')}}</span>
+                <span>{{$t('formbb.bh')}}</span>
             </a-checkbox>
         </a-form-item>
         <a-form-item :wrapper-col="specialLayout.wrapperCol">
-            <a-button size="large" type="primary" html-type="submit">提交</a-button>
+            <a-button size="large" type="primary" html-type="submit">{{$t('formbb.bv')}}</a-button>
         </a-form-item>
     </a-form>
 </template>
