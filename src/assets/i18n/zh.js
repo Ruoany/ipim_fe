@@ -52,7 +52,7 @@ const zhData = {
         acTime: "展會日期",
         info: "展會信息",
         coPe: "展會聯絡人",
-        organizer: "主辦協辦單位",
+        organizer: "主辦/協辦單位",
         shop: "展會商戶",
         photo: "展會相冊",
         grEx: "展團形式參展",
@@ -60,7 +60,11 @@ const zhData = {
         aa: "填寫方式一：在線填寫申請表",
         ab: "填寫方式二：下載空白表格填寫",
         sir: "先生",
-        lady: "女士"
+        lady: "女士",
+        organizers: "主辦單位",
+        helpers: "協辦單位",
+        method: "參展方式",
+        join: "參展"
     },
     util: {
         yes: "是",

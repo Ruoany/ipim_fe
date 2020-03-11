@@ -14,13 +14,13 @@
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
                     <ul>
-                        <li>{{$t('util.step1')}}</li>
-                        <li>{{$t('util.step2')}}</li>
-                        <li>{{$t('util.step3')}}</li>
-                        <li>{{$t('util.step4')}}</li>
-                        <li>{{$t('util.step5')}}</li>
+                        <li>{{ $t("util.step1") }}</li>
+                        <li>{{ $t("util.step2") }}</li>
+                        <li>{{ $t("util.step3") }}</li>
+                        <li>{{ $t("util.step4") }}</li>
+                        <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{$t('util.download')}}</a-button>
+                    <a-button type="primary" size="large">{{ $t("util.download") }}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -62,7 +62,7 @@ export default {
 
 <style lang="less" scoped>
 .form-wrapper {
-    width: 1226px;
+    width: 800px;
     margin: auto;
     padding: 50px 0;
     /deep/.ant-tabs-bar {

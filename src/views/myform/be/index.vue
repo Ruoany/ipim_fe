@@ -1,95 +1,47 @@
 <template>
     <a-form class="form" :form="form" @submit="handleSubmit">
-        <div class="form-item-title">{{$t('formbe.aa')}}</div>
-        <a-form-item
-            :label="$t('formbe.ab')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <div class="form-item-title">{{ $t("formbe.aa") }}</div>
+        <a-form-item :label="$t('formbe.ab')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ac')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ac')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ad')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ad')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ae')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ae')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{$t('formbe.af')}}</div>
-        <a-form-item
-            :label="$t('formbe.ag')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <div class="form-item-title">{{ $t("formbe.af") }}</div>
+        <a-form-item :label="$t('formbe.ag')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-select v-decorator></a-select>
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ah')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ah')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator type="number" />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ai')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ai')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.aj')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.aj')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ak')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ak')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{$t('formbe.al')}}</div>
-        <a-form-item
-            :label="$t('formbe.am')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <div class="form-item-title">{{ $t("formbe.al") }}</div>
+        <a-form-item :label="$t('formbe.am')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.an')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.an')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-range-picker v-decorator style="width:100%;" />
         </a-form-item>
-        <a-form-item
-            :label="$t('formbe.ao')"
-            :label-col="formatLayout.labelCol"
-            :wrapper-col="formatLayout.wrapperCol"
-        >
+        <a-form-item :label="$t('formbe.ao')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{$t('formbe.ap')}}</div>
+        <div class="form-item-title">{{ $t("formbe.ap") }}</div>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.aq')}}</div>
+            <div>{{ $t("formbe.aq") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -99,7 +51,7 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.ar')}}</div>
+            <div>{{ $t("formbe.ar") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -109,7 +61,7 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.as')}}</div>
+            <div>{{ $t("formbe.as") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -119,7 +71,7 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.at')}}</div>
+            <div>{{ $t("formbe.at") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -129,7 +81,7 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.au')}}</div>
+            <div>{{ $t("formbe.au") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -139,7 +91,7 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.av')}}</div>
+            <div>{{ $t("formbe.av") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -149,24 +101,24 @@
             </a-upload-dragger>
         </a-form-item>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
-            <div>{{$t('formbe.aw')}}</div>
+            <div>{{ $t("formbe.aw") }}</div>
             <a-radio-group v-decorator>
-                <a-radio value="a">{{$t('util.agree')}}</a-radio>
-                <a-radio value="b">{{$t('util.disagree')}}</a-radio>
+                <a-radio value="a">{{ $t("util.agree") }}</a-radio>
+                <a-radio value="b">{{ $t("util.disagree") }}</a-radio>
             </a-radio-group>
             <a-input v-decorator :placeholder="$t('formbe.be')" />
             <ul>
-                <li>{{$t('formbe.ax')}}</li>
-                <li>{{$t('formbe.ay')}}</li>
+                <li>{{ $t("formbe.ax") }}</li>
+                <li>{{ $t("formbe.ay") }}</li>
             </ul>
         </a-form-item>
-        <div class="form-item-title">{{$t('formbe.az')}}</div>
+        <div class="form-item-title">{{ $t("formbe.az") }}</div>
         <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
             <ul>
-                <li>{{$t('formbe.ba')}}</li>
-                <li>{{$t('formbe.bb')}}</li>
-                <li>{{$t('formbe.bc')}}</li>
-                <li>{{$t('formbe.bd')}}</li>
+                <li>{{ $t("formbe.ba") }}</li>
+                <li>{{ $t("formbe.bb") }}</li>
+                <li>{{ $t("formbe.bc") }}</li>
+                <li>{{ $t("formbe.bd") }}</li>
             </ul>
         </a-form-item>
     </a-form>
@@ -205,8 +157,19 @@ export default {
     min-height: 400px;
     .form-item-title {
         color: #333;
-        font-size: 16px;
-        line-height: 50px;
+        padding: 20px 0;
+        p {
+            line-height: 50px;
+            border-bottom: 1px solid #ee1c24;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        span {
+            display: block;
+            margin-top: -20px;
+            font-size: 14px;
+            color: #999;
+        }
     }
     .remark {
         width: 100%;

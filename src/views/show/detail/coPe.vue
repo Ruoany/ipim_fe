@@ -1,16 +1,22 @@
 <template>
     <div class="container">
-        <a-card class="sp-card">
-            <div class="sp-card-avatar">{{ "黃曉明" | formatAvatar }}</div>
+        <a-empty v-if="liaisons.length === 0" class="empty" description="暫無數據"></a-empty>
+        <a-card v-for="item in liaisons" :key="item.id" class="sp-card">
+            <div class="sp-card-avatar" :style="{ backgroundColor: colors[Math.floor(Math.random() * 10)] }">
+                {{ item.name | formatAvatar }}
+            </div>
             <div class="sp-card-content">
                 <div class="sp-card-content-title">
-                    <span>黃曉明 {{ $t("show.sir") }}</span>
+                    <span>{{ item.name }}</span
+                    ><span> {{ item.gender === "M" ? $t("show.sir") : $t("show.lady") }}</span>
                 </div>
                 <div class="sp-card-content-item">
                     <span>{{ $t("index.tel") }}:</span>
+                    <span>{{ item.tel }}</span>
                 </div>
                 <div class="sp-card-content-item">
                     <span>{{ $t("index.email") }}:</span>
+                    <span>{{ item.email }}</span>
                 </div>
             </div>
         </a-card>
@@ -20,17 +26,31 @@
 <script>
 export default {
     props: {
-        liaisons: {
-            type: Array,
-            default: () => {
-                return [];
-            }
-        }
+        liaisons: Array
+    },
+    data() {
+        return {
+            colors: [
+                "#26A69A",
+                "#FA541C",
+                "#F5222D",
+                "#FAAD14",
+                "#52C41A",
+                "#40A9FF",
+                "#597EF7",
+                "#9254DE",
+                "#F759AB",
+                "#5C6BC0"
+            ]
+        };
     },
     filters: {
         formatAvatar: function(value) {
             return value ? value.slice(0, 1) : value;
         }
+    },
+    mounted: function() {
+        console.log("--->", this.liaisons);
     }
 };
 </script>
@@ -42,9 +62,13 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    .empty {
+        min-height: 300px;
+    }
     .sp-card {
         width: 600px;
         padding: 20px;
+        margin-bottom: 28px;
         /deep/.ant-card-body {
             display: flex;
             align-items: center;
@@ -56,7 +80,6 @@ export default {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
