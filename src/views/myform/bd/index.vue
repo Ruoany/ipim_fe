@@ -1,38 +1,38 @@
 <template>
     <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-        <div class="form-title">{{$t("general.note")}}</div>
+        <div class="form-title">{{ $t("formbd.note") }}</div>
         <div class="form-text">
-            <div>{{$t('note.text16')}}</div>
-            <div>{{$t('note.text17')}}</div>
+            <div>{{ $t("formbd.text1") }}</div>
+            <div>{{ $t("formbd.text2") }}</div>
             <div>
-                {{$t('note.text18')}}
+                {{ $t("formbd.text3") }}
                 <ul>
-                    <li>{{$t('note.text19')}}</li>
-                    <li>{{$t('form.tel')}}(853)8798 9292</li>
-                    <li>{{$t('form.email')}}cesp@ipim.gov.mo</li>
+                    <li>{{ $t("formbd.text4") }}</li>
+                    <li>{{ $t("formbd.tel") }}(853)8798 9292</li>
+                    <li>{{ $t("formbd.email") }}cesp@ipim.gov.mo</li>
                 </ul>
             </div>
 
-            <div>{{$t('note.text20')}}</div>
-            <div>{{$t('note.text21')}}</div>
-            <div>{{$t('note.text22')}}</div>
+            <div>{{ $t("formbd.text5") }}</div>
+            <div>{{ $t("formbd.text6") }}</div>
+            <div>{{ $t("formbd.text7") }}</div>
         </div>
-        <div class="form-title">{{$t("general.apUnIn")}}</div>
+        <div class="form-title">{{ $t("formbd.aa") }}</div>
         <div class="form-text"></div>
-        <a-form-item :label="$t('form.officeNameZh')">
+        <a-form-item :label="$t('formbd.officeNameZh')">
             <a-input />
         </a-form-item>
 
-        <a-form-item :label="$t('form.officeNameEn')">
+        <a-form-item :label="$t('formbd.officeNameEn')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.officeBankName')">
+        <a-form-item :label="$t('formbd.officeBankName')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.comType')">
+        <a-form-item :label="$t('formbd.comType')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.appliType')">
+        <a-form-item :label="$t('formbd.appliType')">
             <a-input />
         </a-form-item>
         <a-form-item :label="$t('util.country')">
@@ -41,335 +41,114 @@
         <a-form-item :label="$t('util.city')">
             <a-input />
         </a-form-item>
-        <a-form-item :label="$t('form.address')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.tel')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.fax')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.email')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.url')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.text14')">
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
-        </a-form-item>
-        <div class="form-title">{{$t("general.contact")}}</div>
-        <div class="form-text"></div>
-
-        <a-form-item :label="$t('form.tel')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.phone')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.email')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.tel')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.phone')">
-            <a-input />
-        </a-form-item>
-        <a-form-item :label="$t('form.email')">
+        <a-form-item :label="$t('formbd.address')">
             <a-input />
         </a-form-item>
 
-        <div class="form-title">{{$t("general.eligibility")}}</div>
+        <a-form-item :label="$t('formbd.tel')">
+            <a-input />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.fax')">
+            <a-input />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.email')">
+            <a-input />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.url')">
+            <a-input />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.text14')">
+            <a-upload-dragger
+                name="file"
+                :multiple="true"
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                @change="handleChange"
+            >
+                <p class="ant-upload-drag-icon">
+                    <a-icon type="inbox" />
+                </p>
+                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                <p class="ant-upload-hint">
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
+                    files
+                </p>
+            </a-upload-dragger>
+        </a-form-item>
+        <div class="form-title">{{ $t("formbd.contact") }}</div>
         <div class="form-text"></div>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text1')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.conPerson1')">
+            <a-auto-complete @search="handleSearch">
+                <template slot="dataSource">
+                    <a-select-option v-for="email in result" :key="email">{{ email }}</a-select-option>
+                </template>
+            </a-auto-complete>
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text2')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.tel')">
+            <a-input />
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text3')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.phone')">
+            <a-input />
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text4')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.email')">
+            <a-input />
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text5')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.conPerson2')">
+            <a-auto-complete @search="handleSearch">
+                <template slot="dataSource">
+                    <a-select-option v-for="email in result" :key="email">{{ email }}</a-select-option>
+                </template>
+            </a-auto-complete>
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text6')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.tel')">
+            <a-input />
         </a-form-item>
-        <div class="form-title">{{$t("general.doAp")}}</div>
+        <a-form-item :label="$t('formbd.phone')">
+            <a-input />
+        </a-form-item>
+        <a-form-item :label="$t('formbd.email')">
+            <a-input />
+        </a-form-item>
+
+        <div class="form-title">{{ $t("formbd.ab") }}</div>
         <div class="form-text"></div>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text7')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+        <a-form-item :label="$t('formbd.officeNameZh')">
+            <a-input />
         </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t('form.text8')}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
+
+        <a-form-item :label="$t('formbd.officeNameEn')">
+            <a-input />
         </a-form-item>
-        <div class="form-title">{{$t("general.note")}}</div>
+        <a-form-item :label="$t('formbd.activeUrl')">
+            <a-input />
+        </a-form-item>
+
+        <a-form-item :label="$t('formbd.meetingCycle')">
+            <a-input />
+        </a-form-item>
+        <div class="form-title">{{ $t("formbd.ac") }}</div>
         <div class="form-text"></div>
-        <a-form-item :wrapperCol="upLabel">
-            <ul>
-                <h3 class="font-bold">{{$t("note.a")}}</h3>
-                <li>{{$t("note.text1")}}</li>
-            </ul>
-            <ul>
-                <h3 class="font-bold">{{$t("note.b")}}</h3>
-                <li>{{$t("note.text2")}}</li>
-                <li>{{$t("note.text3")}}</li>
-                <li>{{$t("note.text4")}}</li>
-            </ul>
-            <ul>
-                <h3 class="font-bold">{{$t("note.c")}}</h3>
-                <li>{{$t("note.text5")}}</li>
-                <li>{{$t("note.text6")}}</li>
-                <li>{{$t("note.text7")}}</li>
-            </ul>
-            <ul>
-                <h3 class="font-bold">{{$t("note.d")}}</h3>
-                <li>{{$t("note.text8")}}</li>
-                <li>{{$t("note.text9")}}</li>
-                <li>{{$t("note.text10")}}</li>
-            </ul>
-            <ul>
-                <h3 class="font-bold">{{$t("note.e")}}</h3>
-                <li>{{$t("note.text11")}}</li>
-            </ul>
-            <ul>
-                <h3 class="font-bold">{{$t("note.f")}}</h3>
-                <li>{{$t("note.text12")}}</li>
-                <li>{{$t("note.text13")}}</li>
-                <li>{{$t("note.text14")}}</li>
-                <li>{{$t("note.text15")}}</li>
-            </ul>
-        </a-form-item>
-        <div class="form-title">{{$t("general.statement")}}</div>
+
+        <meeting-form></meeting-form>
+        <div class="form-title">{{ $t("formbd.ad") }}</div>
         <div class="form-text"></div>
+        <show-form></show-form>
+        <div class="form-title">{{ $t("formbd.am") }}</div>
+        <div class="form-text"></div>
+        <area-form></area-form>
+
         <a-form-item :wrapperCol="upLabel">
-            <div>{{$t("form.text9")}}</div>
-            <a-radio-group @change="onChange" v-model="value">
-                <a-radio :value="1">{{$t("general.know")}}</a-radio>
-                <a-radio :value="2">{{$t("general.unknow")}}</a-radio>
-            </a-radio-group>
-        </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t("form.text10")}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
-        </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t("form.text11")}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
-        </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t("form.text12")}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
-        </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            {{$t("form.text13")}}
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                    <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
-                </p>
-            </a-upload-dragger>
-        </a-form-item>
-        <a-form-item :wrapperCol="upLabel">
-            <a-button type="primary" size="large">{{$t("general.submit")}}</a-button>
+            <a-button type="primary" size="large">{{ $t("formbd.submit") }}</a-button>
         </a-form-item>
     </a-form>
 </template>
 
 <script>
 import { upFiles } from "@/apis/files";
+import meetingForm from "./meeting";
+import areaForm from "./area";
+import showForm from "./show";
 export default {
+    components: { meetingForm, showForm, areaForm },
     data() {
         return {
             formItemLayout: {
