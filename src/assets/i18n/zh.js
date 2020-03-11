@@ -1,5 +1,10 @@
 import formaa from "./aa/zh";
 import formab from "./ab/zh";
+import formba from "./ba/zh";
+import formbb from "./bb/zh";
+import formbc from "./bc/zh";
+import formbe from "./be/zh";
+import formbf from "./bf/zh";
 
 const zhData = {
     menu: {
@@ -62,10 +67,23 @@ const zhData = {
         man: "男",
         woman: "女",
         country: "國家",
-        city: "城市"
+        city: "城市",
+        step1: "第一步：下載空白表格",
+        step2: "第二步：打印空白表格",
+        step3: "第三步：以手寫的方式填寫表格",
+        step4: "第四步：表格蓋章",
+        step5: "第五步：把表格正本遞交給貿促局工作人員",
+        download: "下載附件",
+        agree: "同意",
+        disagree: "不同意"
     },
     formaa,
-    formab
+    formab,
+    formba,
+    formbb,
+    formbc,
+    formbe,
+    formbf
 };
 
 export default zhData;

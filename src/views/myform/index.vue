@@ -8,17 +8,19 @@
                 <form-bb v-if="form === 'bb'"></form-bb>
                 <form-bc v-if="form === 'bc'"></form-bc>
                 <form-bd v-if="form === 'bd'"></form-bd>
+                <form-be v-if="form === 'be'"></form-be>
+                <form-bf v-if="form === 'bf'"></form-bf>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
                     <ul>
-                        <li>{{$t('general.downloadStep1')}}</li>
-                        <li>{{$t('general.downloadStep2')}}</li>
-                        <li>{{$t('general.downloadStep3')}}</li>
-                        <li>{{$t('general.downloadStep4')}}</li>
-                        <li>{{$t('general.downloadStep5')}}</li>
+                        <li>{{$t('util.step1')}}</li>
+                        <li>{{$t('util.step2')}}</li>
+                        <li>{{$t('util.step3')}}</li>
+                        <li>{{$t('util.step4')}}</li>
+                        <li>{{$t('util.step5')}}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{$t('form.downloadDesc')}}</a-button>
+                    <a-button type="primary" size="large">{{$t('util.download')}}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -32,8 +34,20 @@ import FormBa from "./ba/index";
 import FormBb from "./bb/index";
 import FormBc from "./bc/index";
 import FormBd from "./bd/index";
+import FormBe from "./be/index";
+import FormBf from "./bf/index";
+
 export default {
-    components: { FormAa, FormAb, FormBa, FormBb, FormBd, FormBc },
+    components: {
+        FormAa,
+        FormAb,
+        FormBa,
+        FormBb,
+        FormBd,
+        FormBc,
+        FormBe,
+        FormBf
+    },
     data() {
         return {
             form: "",
