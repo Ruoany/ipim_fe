@@ -15,6 +15,7 @@
                 :key="item.id"
                 @click="$router.push({ path: '/show/detail', query: { id: item.id } })"
                 class="cell"
+                :bordered="false"
             >
                 <div class="flex">
                     <img class="img" :src="item.scope" />
@@ -22,7 +23,7 @@
                         <div class="font-20">{{ item.nameZh }}</div>
                         <div class="red-color">
                             {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
-                            $moment(item.endTime).format("YYYY.MM.DD")
+                                $moment(item.endTime).format("YYYY.MM.DD")
                             }}
                         </div>
                     </div>

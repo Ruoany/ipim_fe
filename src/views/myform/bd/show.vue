@@ -16,6 +16,31 @@
         <a-form-item :label="$t('formbd.ah')">
             <a-input />
         </a-form-item>
+        <a-form-item :label="$t('formbd.aj')">
+            <div class="flex-justify-content-space-between">
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+            </div>
+        </a-form-item>
+        <a-form-item :label="$t('formbd.ai')">
+            <div class="flex-justify-content-space-between">
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+            </div>
+        </a-form-item>
+        <a-form-item :label="$t('formbd.ak')">
+            <div class="flex-justify-content-space-between">
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;"></a-input>
+            </div>
+        </a-form-item>
+
         <a-form-item :label="$t('formbd.al')">
             <a-input />
             <a-upload-dragger
@@ -29,8 +54,8 @@
                 </p>
                 <p class="ant-upload-text">Click or drag file to this area to upload</p>
                 <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                    band files
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
+                    files
                 </p>
             </a-upload-dragger>
         </a-form-item>
@@ -45,5 +70,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

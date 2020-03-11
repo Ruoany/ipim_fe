@@ -27,13 +27,31 @@
             <a-input />
         </a-form-item>
         <a-form-item :label="$t('formbd.officeBankName')">
-            <a-input />
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.eb") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.ec") }}</a-radio>
+
+                <a-input />
+            </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.comType')">
-            <a-input />
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.dw") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.dy") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.dz") }}</a-radio>
+                <a-radio :value="4">{{ $t("formbd.ea") }}</a-radio>
+                <a-radio>{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
+                <a-input />
+            </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.appliType')">
-            <a-input />
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.ed") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
+                <a-radio :value="4">{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
+                <a-input />
+            </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('util.country')">
             <a-input />
@@ -83,6 +101,13 @@
                 </template>
             </a-auto-complete>
         </a-form-item>
+        <a-form-item :label="$t('formbd.job')">
+            <a-auto-complete @search="handleSearch">
+                <template slot="dataSource">
+                    <a-select-option v-for="email in result" :key="email">{{ email }}</a-select-option>
+                </template>
+            </a-auto-complete>
+        </a-form-item>
         <a-form-item :label="$t('formbd.tel')">
             <a-input />
         </a-form-item>
@@ -93,6 +118,13 @@
             <a-input />
         </a-form-item>
         <a-form-item :label="$t('formbd.conPerson2')">
+            <a-auto-complete @search="handleSearch">
+                <template slot="dataSource">
+                    <a-select-option v-for="email in result" :key="email">{{ email }}</a-select-option>
+                </template>
+            </a-auto-complete>
+        </a-form-item>
+        <a-form-item :label="$t('formbd.job')">
             <a-auto-complete @search="handleSearch">
                 <template slot="dataSource">
                     <a-select-option v-for="email in result" :key="email">{{ email }}</a-select-option>
