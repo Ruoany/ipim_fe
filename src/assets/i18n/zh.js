@@ -1,7 +1,6 @@
 import formaa from "./aa/zh";
 import formab from "./ab/zh";
 import formbd from "./bd/zh";
-import note from "./bd/note";
 
 const zhData = {
     menu: {
@@ -68,8 +67,7 @@ const zhData = {
     },
     formaa,
     formab,
-    formbd,
-    note
+    formbd
 };
 
 export default zhData;
