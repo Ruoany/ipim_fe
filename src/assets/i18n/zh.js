@@ -1,15 +1,12 @@
 import formaa from "./aa/zh";
 import formab from "./ab/zh";
-<<<<<<< HEAD
 import formba from "./ba/zh";
 import formbb from "./bb/zh";
 import formbc from "./bc/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
-=======
 import formbd from "./bd/zh";
 import note from "./bd/note";
->>>>>>> a6f526430cae1a782af2483ded8ccc7010a837e3
 
 const zhData = {
     menu: {
@@ -84,16 +81,13 @@ const zhData = {
     },
     formaa,
     formab,
-<<<<<<< HEAD
     formba,
     formbb,
     formbc,
     formbe,
-    formbf
-=======
+    formbf,
     formbd,
     note
->>>>>>> a6f526430cae1a782af2483ded8ccc7010a837e3
 };
 
 export default zhData;
