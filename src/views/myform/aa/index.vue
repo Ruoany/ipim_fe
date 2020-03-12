@@ -175,13 +175,21 @@ export default {
             this.fax = o.fax;
             this.email = o.email;
         },
+        success: function() {
+            this.$message.success("申請成功");
+            this.$router.back();
+        },
         handleSubmit: function(e) {
             e.preventDefault();
             this.form.validateFields(async (err, values) => {
                 if (!err) {
                     values = init(values);
+                    values.activityId = this.activityId;
+                    values.applicantId = this.applicantId;
+                    values.institutionId = this.institutionId;
                     const { data } = await PD.create(values);
                     console.log("新建表單", data);
+                    data ? this.success() : "";
                 }
             });
         }

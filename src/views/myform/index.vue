@@ -2,8 +2,8 @@
     <div class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-aa v-if="form === 'aa'"></form-aa>
-                <form-ab v-if="form === 'ab'"></form-ab>
+                <form-aa v-if="form === '021'"></form-aa>
+                <form-ab v-if="form === '022'"></form-ab>
                 <form-ba v-if="form === 'ba'"></form-ba>
                 <form-bb v-if="form === 'bb'"></form-bb>
                 <form-bc v-if="form === 'bc'"></form-bc>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import FormMap from "@/common/map";
 import FormAa from "./aa/index";
 import FormAb from "./ab/index";
 import FormBa from "./ba/index";
@@ -51,11 +52,20 @@ export default {
     data() {
         return {
             form: "",
+            activityId: "",
             tabActive: "1"
         };
     },
+    computed: {
+        formTitle: function() {
+            const first = sessionStorage.getItem("selectedItem");
+            const last = FormMap[this.form];
+            return `${this.$t(first)} - ${this.$t(last)}`;
+        }
+    },
     mounted: function() {
         this.form = this.$route.query.form;
+        this.activityId = this.$route.query.activityId;
     }
 };
 </script>
@@ -79,7 +89,7 @@ export default {
         width: 100%;
     }
     .label-col {
-        height: 500px;
+        height: 700px;
     }
     ul {
         padding: 40px 20px;

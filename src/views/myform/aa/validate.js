@@ -3,8 +3,9 @@ const config_select = { rules: [{ required: true, message: "plese select" }] };
 
 export default {
     form: "",
-    activityId: "", //展會ID
-    applicantId: "", //申請人ID
+    activityId: 1, //展會ID
+    applicantId: 1, //申請人ID
+    institutionId: 1, //機構ID
     address: ["address", config], //地址
     arrangement: ["arrangement"], //由本局安排
     associationName: ["associationName"], //協商會名稱
@@ -22,10 +23,9 @@ export default {
     fax: "", //傳真
     goWithGroup: ["goWithGroup"], //隨團去程
     idcard: ["idcard"], //身份證號碼
-    idcardValidityDate: ["idcardValidityDate"], //身份證有效期
+    idcardValidityDate: ["IDCardValidityDate"], //身份證有效期
     associateIndustry: ["associateIndustry"], //行業類別
     companyIndustry: ["companyIndustry"], //公司行業類別
-    institutionId: "", //機構ID
     isAssociation: ["isAssociation"], //是否商協會
     isCompany: ["isCompany"], //是否是公司
     isOtherWay: ["isOtherWay"], //是否其他名義參與

@@ -1,12 +1,13 @@
 <template>
     <div class="container width-1280">
         <detail-title
-            :nameZh="activeData.nameZh"
-            :nameEn="activeData.nameEn"
-            :namePt="activeData.namePt"
+            :activity-id="activeData.id"
+            :name-zh="activeData.nameZh"
+            :name-en="activeData.nameEn"
+            :name-pt="activeData.namePt"
             :place="activeData.place"
-            :startTime="activeData.startTime"
-            :endTime="activeData.endTime"
+            :start-time="activeData.startTime"
+            :end-time="activeData.endTime"
             :scope="activeData.scope"
             :website="activeData.website"
             actType="SELF"
