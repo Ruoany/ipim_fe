@@ -160,24 +160,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.form {
-    width: 100%;
-    min-height: 400px;
-    .form-item-title {
-        color: #333;
-        padding: 20px 0;
-        p {
-            line-height: 50px;
-            border-bottom: 1px solid #ee1c24;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        span {
-            display: block;
-            margin-top: -20px;
-            font-size: 14px;
-            color: #999;
-        }
-    }
-}
+@import url("../css/form.less");
 </style>

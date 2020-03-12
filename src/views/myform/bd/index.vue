@@ -1,7 +1,9 @@
 <template>
-    <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-        <div class="form-title">{{ $t("formbd.note") }}</div>
-        <div class="form-text">
+    <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formItemLayout">
+        <div class="form-item-title">
+            <p>{{ $t("formbd.note") }}</p>
+        </div>
+        <a-form-item>
             <div>{{ $t("formbd.text1") }}</div>
             <div>{{ $t("formbd.text2") }}</div>
             <div>
@@ -16,9 +18,10 @@
             <div>{{ $t("formbd.text5") }}</div>
             <div>{{ $t("formbd.text6") }}</div>
             <div>{{ $t("formbd.text7") }}</div>
+        </a-form-item>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.aa") }}</p>
         </div>
-        <div class="form-title">{{ $t("formbd.aa") }}</div>
-        <div class="form-text"></div>
         <a-form-item :label="$t('formbd.officeNameZh')">
             <a-input />
         </a-form-item>
@@ -92,8 +95,9 @@
                 </p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-title">{{ $t("formbd.contact") }}</div>
-        <div class="form-text"></div>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.contact") }}</p>
+        </div>
         <a-form-item :label="$t('formbd.conPerson1')">
             <a-auto-complete @search="handleSearch">
                 <template slot="dataSource">
@@ -141,8 +145,9 @@
             <a-input />
         </a-form-item>
 
-        <div class="form-title">{{ $t("formbd.ab") }}</div>
-        <div class="form-text"></div>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.ab") }}</p>
+        </div>
         <a-form-item :label="$t('formbd.officeNameZh')">
             <a-input />
         </a-form-item>
@@ -157,18 +162,23 @@
         <a-form-item :label="$t('formbd.meetingCycle')">
             <a-input />
         </a-form-item>
-        <div class="form-title">{{ $t("formbd.ac") }}</div>
-        <div class="form-text"></div>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.ac") }}</p>
+        </div>
 
         <meeting-form></meeting-form>
-        <div class="form-title">{{ $t("formbd.ad") }}</div>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.ad") }}</p>
+        </div>
         <div class="form-text"></div>
         <show-form></show-form>
-        <div class="form-title">{{ $t("formbd.am") }}</div>
+        <div class="form-item-title">
+            <p>{{ $t("formbd.am") }}</p>
+        </div>
         <div class="form-text"></div>
         <area-form></area-form>
 
-        <a-form-item :wrapperCol="upLabel">
+        <a-form-item>
             <a-button type="primary" size="large">{{ $t("formbd.submit") }}</a-button>
         </a-form-item>
     </a-form>
@@ -184,10 +194,9 @@ export default {
     data() {
         return {
             formItemLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 16 }
+                labelCol: { span: 24 },
+                wrapperCol: { span: 24 }
             },
-            upLabel: { span: 16, offset: 4 },
             upFiles,
             headers: {},
             form: {}
@@ -200,4 +209,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@import url("../css/form.less");
+</style>

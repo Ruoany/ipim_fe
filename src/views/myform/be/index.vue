@@ -1,46 +1,54 @@
 <template>
-    <a-form class="form" :form="form" @submit="handleSubmit">
-        <div class="form-item-title">{{ $t("formbe.aa") }}</div>
-        <a-form-item :label="$t('formbe.ab')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+    <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
+        <div class="form-item-title">
+            <p>{{ $t("formbe.aa") }}</p>
+        </div>
+        <a-form-item :label="$t('formbe.ab')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ac')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ac')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ad')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ad')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ae')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ae')">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{ $t("formbe.af") }}</div>
-        <a-form-item :label="$t('formbe.ag')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formbe.af") }}</p>
+        </div>
+        <a-form-item :label="$t('formbe.ag')">
             <a-select v-decorator></a-select>
         </a-form-item>
-        <a-form-item :label="$t('formbe.ah')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ah')">
             <a-input v-decorator type="number" />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ai')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ai')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.aj')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.aj')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ak')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ak')">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{ $t("formbe.al") }}</div>
-        <a-form-item :label="$t('formbe.am')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formbe.al") }}</p>
+        </div>
+        <a-form-item :label="$t('formbe.am')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formbe.an')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.an')">
             <a-range-picker v-decorator style="width:100%;" />
         </a-form-item>
-        <a-form-item :label="$t('formbe.ao')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formbe.ao')">
             <a-input v-decorator />
         </a-form-item>
-        <div class="form-item-title">{{ $t("formbe.ap") }}</div>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formbe.ap") }}</p>
+        </div>
+        <a-form-item>
             <div>{{ $t("formbe.aq") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -50,7 +58,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.ar") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -60,7 +68,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.as") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -70,7 +78,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.at") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -80,7 +88,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.au") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -90,7 +98,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.av") }}</div>
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
@@ -100,7 +108,7 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item>
             <div>{{ $t("formbe.aw") }}</div>
             <a-radio-group v-decorator>
                 <a-radio value="a">{{ $t("util.agree") }}</a-radio>
@@ -112,8 +120,10 @@
                 <li>{{ $t("formbe.ay") }}</li>
             </ul>
         </a-form-item>
-        <div class="form-item-title">{{ $t("formbe.az") }}</div>
-        <a-form-item :label-col="specialLayout.labelCol" :wrapper-col="specialLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formbe.az") }}</p>
+        </div>
+        <a-form-item>
             <ul>
                 <li>{{ $t("formbe.ba") }}</li>
                 <li>{{ $t("formbe.bb") }}</li>
@@ -129,11 +139,8 @@ export default {
     data() {
         return {
             formatLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 16 }
-            },
-            specialLayout: {
-                wrapperCol: { span: 16, offset: 4 }
+                labelCol: { span: 24 },
+                wrapperCol: { span: 24 }
             },
             form: this.$form.createForm(this)
         };
@@ -152,28 +159,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.form {
+@import url("../css/form.less");
+.remark {
     width: 100%;
-    min-height: 400px;
-    .form-item-title {
-        color: #333;
-        padding: 20px 0;
-        p {
-            line-height: 50px;
-            border-bottom: 1px solid #ee1c24;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        span {
-            display: block;
-            margin-top: -20px;
-            font-size: 14px;
-            color: #999;
-        }
-    }
-    .remark {
-        width: 100%;
-        display: inline-block;
-    }
+    display: inline-block;
 }
 </style>

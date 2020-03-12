@@ -1,16 +1,22 @@
 <template>
-    <a-form class="form" :form="form" @submit="handleSubmit">
-        <div class="form-item-title">{{ $t("formba.aa") }}</div>
-        <ul>
-            <li>{{ $t("formba.ab") }}</li>
-            <li>{{ $t("formba.ac") }}</li>
-            <li>{{ $t("formba.ad") }}</li>
-        </ul>
-        <div class="form-item-title">{{ $t("formba.ae") }}</div>
-        <a-form-item :label="$t('formba.af')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+    <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
+        <div class="form-item-title">
+            <p>{{ $t("formba.aa") }}</p>
+        </div>
+        <a-form-item>
+            <ul>
+                <li>{{ $t("formba.ab") }}</li>
+                <li>{{ $t("formba.ac") }}</li>
+                <li>{{ $t("formba.ad") }}</li>
+            </ul>
+        </a-form-item>
+        <div class="form-item-title">
+            <p>{{ $t("formba.ae") }}</p>
+        </div>
+        <a-form-item :label="$t('formba.af')">
             <a-input v-decorator="name" />
         </a-form-item>
-        <a-form-item :label="$t('formba.ag')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.ag')">
             <div class="form-content">
                 <ul>
                     <li>{{ $t("formba.ah") }}</li>
@@ -27,23 +33,25 @@
             </a-upload-dragger>
         </a-form-item>
 
-        <div class="form-item-title">{{ $t("formba.ak") }}</div>
-        <a-form-item :label="$t('formba.al')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formba.ak") }}</p>
+        </div>
+        <a-form-item :label="$t('formba.al')">
             <a-select v-decorator></a-select>
         </a-form-item>
-        <a-form-item :label="$t('formba.am')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.am')">
             <a-input v-decorator></a-input>
         </a-form-item>
-        <a-form-item :label="$t('formba.an')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.an')">
             <a-input v-decorator type="number"></a-input>
         </a-form-item>
-        <a-form-item :label="$t('formba.ao')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.ao')">
             <a-input v-decorator type="number"></a-input>
         </a-form-item>
-        <a-form-item :label="$t('formba.ap')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.ap')">
             <a-input v-decorator></a-input>
         </a-form-item>
-        <a-form-item :label="$t('formba.aq')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.aq')">
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -52,37 +60,41 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{ $t("formba.ar") }}</div>
-        <a-form-item :label="$t('formba.as')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formba.ar") }}</p>
+        </div>
+        <a-form-item :label="$t('formba.as')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formba.at')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.at')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formba.au')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.au')">
             <a-range-picker v-decorator style="width:100%;" />
         </a-form-item>
-        <a-form-item :label="$t('formba.av')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.av')">
             <a-textarea v-decorator :rows="4" />
             <div>{{ $t("formba.aw") }}</div>
         </a-form-item>
-        <a-form-item :label="$t('formba.ax')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.ax')">
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
-        <a-form-item :label="$t('formba.ay')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.ay')">
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
-        <div class="form-item-title">{{ $t("formba.az") }}</div>
-        <a-form-item :label="$t('formba.ba')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formba.az") }}</p>
+        </div>
+        <a-form-item :label="$t('formba.ba')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formba.bb')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.bb')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formba.bc')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.bc')">
             <a-input v-decorator />
         </a-form-item>
-        <a-form-item :label="$t('formba.bd')" :label-col="formatLayout.labelCol" :wrapper-col="formatLayout.wrapperCol">
+        <a-form-item :label="$t('formba.bd')">
             <a-upload-dragger v-decorator name="files" action="/upload.do">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
@@ -91,8 +103,10 @@
                 <p class="ant-upload-hint">Support for a single or bulk upload.</p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-item-title">{{ $t("formba.be") }}</div>
-        <a-form-item :wrapper-col="specialLayout.wrapperCol">
+        <div class="form-item-title">
+            <p>{{ $t("formba.be") }}</p>
+        </div>
+        <a-form-item :wrapper-col="formatLayout.wrapperCol">
             <div>{{ $t("formba.bf") }}</div>
             <a-radio-group v-decorator>
                 <a-radio value="a">{{ $t("util.yes") }}</a-radio>
@@ -101,7 +115,7 @@
             <div>{{ $t("formba.bi") }}</div>
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
-        <a-form-item :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item :wrapper-col="formatLayout.wrapperCol">
             <div>{{ $t("formba.bg") }}</div>
             <a-radio-group v-decorator>
                 <a-radio value="a">{{ $t("util.yes") }}</a-radio>
@@ -110,12 +124,12 @@
             <div>{{ $t("formba.bi") }}</div>
             <a-textarea v-decorator :rows="4" />
         </a-form-item>
-        <a-form-item :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item :wrapper-col="formatLayout.wrapperCol">
             <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
                 <span>{{ $t("formba.bh") }}</span>
             </a-checkbox>
         </a-form-item>
-        <a-form-item :wrapper-col="specialLayout.wrapperCol">
+        <a-form-item :wrapper-col="formatLayout.wrapperCol">
             <a-button size="large" type="primary" html-type="submit">提交</a-button>
         </a-form-item>
     </a-form>
@@ -127,11 +141,8 @@ export default {
     data() {
         return {
             formatLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 16 }
-            },
-            specialLayout: {
-                wrapperCol: { span: 16, offset: 4 }
+                labelCol: { span: 24 },
+                wrapperCol: { span: 24 }
             },
             form: this.$form.createForm(this),
             ...validate
@@ -151,24 +162,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.form {
-    width: 100%;
-    min-height: 400px;
-    .form-item-title {
-        color: #333;
-        padding: 20px 0;
-        p {
-            line-height: 50px;
-            border-bottom: 1px solid #ee1c24;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        span {
-            display: block;
-            margin-top: -20px;
-            font-size: 14px;
-            color: #999;
-        }
-    }
-}
+@import url("../css/form.less");
 </style>
