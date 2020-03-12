@@ -1,5 +1,5 @@
 <template>
-    <a-form class="form" :form="form" @submit="handleSubmit">
+    <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formItemLayout">
         <div class="form-item-title">
             <p>{{ $t("formaa.aa") }}</p>
             <span class="span">{{ $t("formaa.ab") }}</span>
@@ -14,25 +14,25 @@
             </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formaa.ag')">
-            <a-date-picker style="width:100%;" />
+            <a-date-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formaa.ah')">
             <a-input v-decorator />
         </a-form-item>
         <a-form-item :label="$t('formaa.ai')">
-            <a-date-picker />
+            <a-date-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formaa.aj')">
             <a-input v-decorator />
         </a-form-item>
         <a-form-item :label="$t('formaa.ai')">
-            <a-date-picker />
+            <a-date-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formaa.ak')">
             <a-input v-decorator />
         </a-form-item>
         <a-form-item :label="$t('formaa.ai')">
-            <a-date-picker />
+            <a-date-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formaa.al')">
             <a-input v-decorator />
@@ -41,7 +41,7 @@
             <a-input v-decorator />
         </a-form-item>
         <a-form-item :label="$t('formaa.ai')">
-            <a-date-picker />
+            <a-date-picker class="full" />
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formaa.an") }}</p>
@@ -151,8 +151,8 @@ export default {
         return {
             form: this.$form.createForm(this),
             formItemLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 10 }
+                labelCol: { span: 24 },
+                wrapperCol: { span: 24 }
             }
         };
     }

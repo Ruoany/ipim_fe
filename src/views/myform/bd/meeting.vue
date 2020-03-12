@@ -1,7 +1,7 @@
 <template>
     <div>
         <a-form-item :label="$t('formbd.activeTime')">
-            <a-range-picker />
+            <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingAddress')">
             <a-input />
@@ -85,4 +85,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@import url("../css/form.less");
+</style>

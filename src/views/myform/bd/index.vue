@@ -33,9 +33,8 @@
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("formbd.eb") }}</a-radio>
                 <a-radio :value="2">{{ $t("formbd.ec") }}</a-radio>
-
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.comType')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -44,8 +43,8 @@
                 <a-radio :value="3">{{ $t("formbd.dz") }}</a-radio>
                 <a-radio :value="4">{{ $t("formbd.ea") }}</a-radio>
                 <a-radio>{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.appliType')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -53,8 +52,8 @@
                 <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
                 <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
                 <a-radio :value="4">{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('util.country')">
             <a-input />

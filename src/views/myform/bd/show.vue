@@ -1,7 +1,7 @@
 <template>
     <div>
         <a-form-item :label="$t('formbd.activeTime')">
-            <a-range-picker />
+            <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.ae')">
             <a-row :gutter="10">
@@ -90,5 +90,8 @@ export default {
 <style lang="less" scoped>
 .cur {
     cursor: pointer;
+}
+.full {
+    width: 100%;
 }
 </style>

@@ -32,16 +32,24 @@
             </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.ba')">
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
+            <a-row :gutter="10">
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+            </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.bf')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -178,4 +186,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.full {
+    width: 100%;
+}
+</style>
