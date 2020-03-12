@@ -4,12 +4,16 @@ import show from "./show";
 import personal from "./personal";
 import myform from "./myform";
 
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+    if (onResolve || onReject) return routerPush.call(this, location, onResolve, onReject);
+    return routerPush.call(this, location).catch(error => error);
+};
+
 Vue.use(VueRouter);
 
-// const routes = [...show, ...personal];
-
 const router = new VueRouter({
-    // mode: "history",
+    mode: "hash",
     base: process.env.BASE_URL,
     routes: [
         { path: "/", redirect: "/index" },

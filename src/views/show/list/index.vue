@@ -2,9 +2,9 @@
     <div class="container">
         <show-title :text="$t(`${info.title}`)"></show-title>
         <a-spin :spinning="loading" class="content flex center width-1280">
-            <a-tabs v-model="active" class="tabs">
+            <a-tabs v-model="active" class="tabs" @change="reflash">
                 <a-tab-pane
-                    v-for="(item,index) in info.tabs"
+                    v-for="(item, index) in info.tabs"
                     :key="item"
                     :tab="$t(`${info.tabs[index]}`)"
                 ></a-tab-pane>
@@ -63,6 +63,10 @@ export default {
         active: function(newValue) {
             this.page = 0;
             this.initData(newValue);
+        },
+        "$route.query": function(newValue) {
+            this.actType = newValue.part;
+            this.order = newValue.order;
         }
     },
     methods: {
@@ -79,6 +83,10 @@ export default {
         setList: function(array, total) {
             this.list = new Array().concat(array);
             this.total = total;
+        },
+        reflash: function(value) {
+            const idx = this.info.tabs.findIndex(item => item === value);
+            this.$router.push(`/show/index?part=${this.actType}&order=${idx}`);
         }
     },
     mounted: function() {

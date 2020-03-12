@@ -61,8 +61,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url(./css/form.less);
 .form-wrapper {
-    width: 800px;
+    width: 900px;
     margin: auto;
     padding: 50px 0;
     /deep/.ant-tabs-bar {

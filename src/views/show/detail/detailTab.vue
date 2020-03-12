@@ -1,18 +1,18 @@
 <template>
-    <a-tabs class="all">
+    <a-tabs class="all" type="card">
         <a-tab-pane :tab="$t('show.info')" key="1">
             <info :info="cardData.content"></info>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.coPe')" key="4">
-            <co-pe :liaisons="cardData.liaisons === null ? [] : cardData.liaisons"></co-pe>
+        <a-tab-pane :tab="$t('show.coPe')" key="2">
+            <co-pe :liaisons="cardData.liaisons ? cardData.liaisons : []"></co-pe>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.organizer')" key="5">
-            <organizer :organizer="cardData.organizer" :helpers="cardData.helpers"></organizer>
+        <a-tab-pane :tab="$t('show.organizer')" key="3">
+            <organizer :organizers="cardData.organizers" :helpers="cardData.helpers"></organizer>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.shop')" key="2">
-            <shop></shop>
+        <a-tab-pane :tab="$t('show.shop')" key="4" :disabled="true">
+            <shop :trades="cardData.trades"></shop>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.photo')" key="3">
+        <a-tab-pane :tab="$t('show.photo')" key="5" :disabled="true">
             <photo></photo>
         </a-tab-pane>
     </a-tabs>
@@ -28,10 +28,7 @@ export default {
     props: {
         cardData: Object
     },
-    components: { coPe, organizer, shop, photo, info },
-    mounted: function() {
-        console.log("--->", this.cardData);
-    }
+    components: { coPe, organizer, shop, photo, info }
 };
 </script>
 
@@ -39,7 +36,7 @@ export default {
 .all {
     min-height: 400px;
     /deep/ .ant-tabs-bar {
-        border-bottom: transparent !important;
+        border-bottom: 2px solid #ee1c24 !important;
         margin-bottom: 0;
     }
     /deep/ .line {
@@ -49,9 +46,18 @@ export default {
         background-color: red;
     }
     /deep/.ant-tabs-tab {
-        font-size: 20px;
-        font-weight: bold;
-        padding: 12px 0;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0px 20px !important;
+        width: 160px;
+        margin-right: 12px !important;
+        text-align: center;
+        border-color: #fafafa !important;
+    }
+    /deep/.ant-tabs-tab-active {
+        background-color: #ee1c24 !important;
+        border-bottom: transparent !important;
+        color: #fff !important;
     }
     /deep/.ant-tabs-tabpane {
         padding: 40px 0;

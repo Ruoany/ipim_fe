@@ -7,18 +7,23 @@
                 <div>{{ nameEn }}</div>
                 <div>{{ namePt }}</div>
 
-                <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ place }}</div>
-                <div>{{ $t("show.acAd") }}：{{ website }}</div>
+                <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ website }}</div>
+                <div>{{ $t("show.acAd") }}：{{ place }}</div>
                 <div style="color:#EE1C24">
                     {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
                 </div>
             </div>
         </div>
-        <div class="end" v-if="actType === 'DEPUTATION'">
-            <a-button type="primary" size="large" class="btn">{{ $t("show.paDe") }}</a-button>
-        </div>
-        <div class="end" v-if="actType === 'SELF'">
-            <a-button type="primary" size="large" class="btn">{{ $t("show.grEx") }}</a-button>
+        <div class="end">
+            <a-dropdown>
+                <a-menu slot="overlay" @click="navigateForm">
+                    <a-menu-item key="1">{{ $t("show.join") }}</a-menu-item>
+                    <a-menu-item key="2">{{ $t("show.paDe") }}</a-menu-item>
+                </a-menu>
+                <a-button type="primary" size="large" class="btn"
+                    >{{ $t("show.method") }} <a-icon type="down"
+                /></a-button>
+            </a-dropdown>
         </div>
     </div>
 </template>
@@ -39,6 +44,11 @@ export default {
     filters: {
         formatTime: function(value) {
             return value ? value.slice(0, 10) : null;
+        }
+    },
+    methods: {
+        navigateForm: function(e) {
+            console.log("click left button", e);
         }
     }
 };
