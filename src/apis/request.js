@@ -21,7 +21,6 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     response => {
         response = response.data;
-
         return response;
     },
     error => {
