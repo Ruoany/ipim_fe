@@ -1,6 +1,8 @@
 const config = { rules: [{ required: true, message: "please input" }] };
 const config_select = { rules: [{ required: true, message: "please select" }] };
-const config_upload = { rules: [{ required: true, message: "please upload file" }] };
+const config_upload = {
+    rules: [{ required: true, message: "please upload file" }]
+};
 
 export default {
     liaisonId: ["liaisonId", config_select],

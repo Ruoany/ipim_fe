@@ -1,10 +1,5 @@
 <template>
-    <a-upload-dragger
-        name="file"
-        :action="upFiles"
-        @change="handleChange"
-        v-decorator="['salesTaxFiles', { rules: [{ required: true, message: 'Please upload file' }] }]"
-    >
+    <a-upload-dragger name="file" :action="upFiles" @change="handleChange">
         <p class="ant-upload-drag-icon">
             <a-icon type="inbox" />
         </p>

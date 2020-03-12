@@ -150,7 +150,9 @@
             ></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ca')">
-            <Upload @upload="url => console.log(url)"></Upload>
+            <Upload
+                v-decorator="['salesTaxFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+            ></Upload>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" html-type="submit" size="large">{{ $t("formab.cb") }}</a-button>
