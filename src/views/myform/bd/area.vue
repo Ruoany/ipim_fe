@@ -121,13 +121,15 @@
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
+
         <a-form-item :label="$t('formbd.cl')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
-            <div>{{ $t("formbd.cn") }}<a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.co") }} <a-input style="width:500px" /></div>
+
+            <a-input :placeholder="$t('formbd.cn')" />
+            <a-input :placeholder="$t('formbd.co')" />
         </a-form-item>
         <a-form-item :label="$t('formbd.cq')">
             <a-upload-dragger
@@ -167,7 +169,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            upLabel: { span: 16, offset: 4 }
+        };
+    }
+};
 </script>
 
 <style></style>

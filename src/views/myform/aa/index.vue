@@ -1,15 +1,15 @@
 <template>
     <div class="center flex">
-        <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-            <div class="form-title">{{$t("formaa.aa")}}</div>
-            <div class="form-text">{{$t("formaa.ab")}}</div>
+        <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout" layout="vertical">
+            <div class="form-title">{{ $t("formaa.aa") }}</div>
+            <div class="form-text">{{ $t("formaa.ab") }}</div>
             <a-form-item :label="$t('formaa.ac')">
                 <a-input v-decorator="email" />
             </a-form-item>
             <a-form-item :label="$t('formaa.ad')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('formaa.ae')}}</a-radio>
-                    <a-radio :value="2">{{$t('formaa.af')}}</a-radio>
+                    <a-radio :value="1">{{ $t("formaa.ae") }}</a-radio>
+                    <a-radio :value="2">{{ $t("formaa.af") }}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :label="$t('formaa.ag')">
@@ -42,10 +42,10 @@
             <a-form-item :label="$t('formaa.ai')">
                 <a-date-picker />
             </a-form-item>
-            <div class="form-title">{{$t('formaa.an')}}</div>
+            <div class="form-title">{{ $t("formaa.an") }}</div>
             <a-form-item :label="$t('formaa.ac')">
                 <a-select v-decorator></a-select>
-                <a-checkbox>{{$t('formaa.ao')}}</a-checkbox>
+                <a-checkbox>{{ $t("formaa.ao") }}</a-checkbox>
             </a-form-item>
             <a-form-item :label="$t('formaa.ap')">
                 <a-input v-decorator />
@@ -62,10 +62,10 @@
             <a-form-item :label="$t('formaa.at')">
                 <a-input v-decorator />
             </a-form-item>
-            <div class="form-title">{{$t('formaa.au')}}</div>
-            <div class="form-text">{{$t('formaa.av')}}</div>
+            <div class="form-title">{{ $t("formaa.au") }}</div>
+            <div class="form-text">{{ $t("formaa.av") }}</div>
             <a-form-item :label="$t('formaa.aw')">
-                <a-checkbox>{{$t("formaa.bu")}}</a-checkbox>
+                <a-checkbox>{{ $t("formaa.bu") }}</a-checkbox>
             </a-form-item>
             <a-form-item :label="$t('formaa.ax')">
                 <a-input v-decorator />
@@ -77,7 +77,7 @@
                 <a-input v-decorator />
             </a-form-item>
             <a-form-item :label="$t('formaa.ba')">
-                <a-checkbox>{{$t("formaa.bb")}}</a-checkbox>
+                <a-checkbox>{{ $t("formaa.bb") }}</a-checkbox>
             </a-form-item>
             <a-form-item :label="$t('formaa.bc')">
                 <a-input v-decorator />
@@ -92,48 +92,47 @@
                 <a-input v-decorator />
             </a-form-item>
             <a-form-item :label="$t('formaa.be')">
-                <a-checkbox>{{$t("formaa.bf")}}</a-checkbox>
+                <a-checkbox>{{ $t("formaa.bf") }}</a-checkbox>
             </a-form-item>
             <a-form-item :label="$t('formaa.bg')">
                 <a-input v-decorator />
             </a-form-item>
-            <div class="form-title">{{$t('formaa.bh')}}</div>
+            <div class="form-title">{{ $t("formaa.bh") }}</div>
             <a-form-item :label="$t('formaa.bi')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
-                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
+                    <a-radio :value="1">{{ $t("formaa.bj") }}</a-radio>
+                    <a-radio :value="2">{{ $t("formaa.bk") }}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :label="$t('formaa.bl')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
-                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
+                    <a-radio :value="1">{{ $t("formaa.bj") }}</a-radio>
+                    <a-radio :value="2">{{ $t("formaa.bk") }}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :label="$t('formaa.bm')">
                 <a-radio-group @change="onChange" v-model="value">
-                    <a-radio :value="1">{{$t('formaa.bj')}}</a-radio>
-                    <a-radio :value="2">{{$t('formaa.bk')}}</a-radio>
+                    <a-radio :value="1">{{ $t("formaa.bj") }}</a-radio>
+                    <a-radio :value="2">{{ $t("formaa.bk") }}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :label="$t('formaa.be')">
                 <a-input v-decorator />
             </a-form-item>
-            <div class="form-title">{{$t('formaa.bn')}}</div>
+            <div class="form-title">{{ $t("formaa.bn") }}</div>
             <ul>
-                <li>{{$t('formaa.bo')}}</li>
-                <li>{{$t('formaa.bp')}}</li>
-                <li>{{$t('formaa.bq')}}</li>
+                <li>{{ $t("formaa.bo") }}</li>
+                <li>{{ $t("formaa.bp") }}</li>
+                <li>{{ $t("formaa.bq") }}</li>
             </ul>
-            <div>{{$t('formaa.br')}}</div>
-            <div>{{$t('formaa.bs')}}</div>
+            <div>{{ $t("formaa.br") }}</div>
+            <div>{{ $t("formaa.bs") }}</div>
             <a-form-item>
-                <a-button type="primary" size="large">{{$t('formaa.bt')}}</a-button>
+                <a-button type="primary" size="large">{{ $t("formaa.bt") }}</a-button>
             </a-form-item>
         </a-form>
     </div>
 </template>
-
 
 <script>
 export default {
@@ -148,5 +147,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

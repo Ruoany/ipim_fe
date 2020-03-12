@@ -1,6 +1,8 @@
 <template>
-    <a-form :form="form" @submit="handleSubmit" class="width-1280" v-bind="formItemLayout">
-        <div class="form-title">{{ $t("formbd.note") }}</div>
+    <a-form :form="form" @submit="handleSubmit" class="width-860" v-bind="formItemLayout" layout="vertical">
+        <div class="form-title">
+            <p>{{ $t("formbd.note") }}</p>
+        </div>
         <div class="form-text">
             <div>{{ $t("formbd.text1") }}</div>
             <div>{{ $t("formbd.text2") }}</div>
@@ -92,7 +94,9 @@
                 </p>
             </a-upload-dragger>
         </a-form-item>
-        <div class="form-title">{{ $t("formbd.contact") }}</div>
+        <div class="form-title">
+            <p>{{ $t("formbd.contact") }}</p>
+        </div>
         <div class="form-text"></div>
         <a-form-item :label="$t('formbd.conPerson1')">
             <a-auto-complete @search="handleSearch">
@@ -141,14 +145,22 @@
             <a-input />
         </a-form-item>
 
-        <div class="form-title">{{ $t("formbd.ab") }}</div>
+        <div class="form-title">
+            <p>{{ $t("formbd.ab") }}</p>
+        </div>
         <div class="form-text"></div>
         <a-form-item :label="$t('formbd.officeNameZh')">
             <a-input />
         </a-form-item>
 
-        <a-form-item :label="$t('formbd.officeNameEn')">
-            <a-input />
+        <a-form-item :label="$t('formbd.ej')">
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.ek") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.el") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.em") }}</a-radio>
+                <a-radio :value="4">{{ $t("formbd.en") }}</a-radio>
+                <a-radio :value="5">{{ $t("formbd.eo") }}</a-radio>
+            </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.activeUrl')">
             <a-input />
@@ -157,14 +169,20 @@
         <a-form-item :label="$t('formbd.meetingCycle')">
             <a-input />
         </a-form-item>
-        <div class="form-title">{{ $t("formbd.ac") }}</div>
+        <div class="form-title">
+            <p>{{ $t("formbd.ac") }}</p>
+        </div>
         <div class="form-text"></div>
 
         <meeting-form></meeting-form>
-        <div class="form-title">{{ $t("formbd.ad") }}</div>
+        <div class="form-title">
+            <p>{{ $t("formbd.ad") }}</p>
+        </div>
         <div class="form-text"></div>
         <show-form></show-form>
-        <div class="form-title">{{ $t("formbd.am") }}</div>
+        <div class="form-title">
+            <p>{{ $t("formbd.am") }}</p>
+        </div>
         <div class="form-text"></div>
         <area-form></area-form>
 
@@ -179,13 +197,14 @@ import { upFiles } from "@/apis/files";
 import meetingForm from "./meeting";
 import areaForm from "./area";
 import showForm from "./show";
+import rules from "./validate";
 export default {
     components: { meetingForm, showForm, areaForm },
     data() {
         return {
             formItemLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 16 }
+                labelCol: { span: 24 },
+                wrapperCol: { span: 24 }
             },
             upLabel: { span: 16, offset: 4 },
             upFiles,
@@ -199,5 +218,8 @@ export default {
     }
 };
 </script>
-
-<style></style>
+<style lang="less" scoped>
+.width-860 {
+    width: 800px;
+}
+</style>
