@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "ant-design-vue";
 
 const request = axios.create({
     baseURL: process.env.NODE_ENV === "production" ? "http://api-exhibition.servier.iteratech.net" : "/api", // api的base_url
@@ -24,7 +25,8 @@ request.interceptors.response.use(
         return response;
     },
     error => {
-        return Promise.reject(error);
+        message.error(error.message);
+        return error;
     }
 );
 
