@@ -1,5 +1,10 @@
 <template>
-    <a-upload-dragger name="file" :action="upFiles" @change="handleChange">
+    <a-upload-dragger
+        name="file"
+        :action="upFiles"
+        @change="handleChange"
+        v-decorator="['salesTaxFiles', { rules: [{ required: true, message: 'Please upload file' }] }]"
+    >
         <p class="ant-upload-drag-icon">
             <a-icon type="inbox" />
         </p>
@@ -19,9 +24,9 @@ export default {
     props: {},
     methods: {
         handleChange(e) {
-            let url = e.file.response.url;
-            this.$emit("fileUrl:update", url);
             console.log("e==>", e);
+            let url = e.file.response.url;
+            this.$emit("upload", url);
         }
     }
 };

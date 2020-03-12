@@ -9,28 +9,30 @@
 
                 <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ website }}</div>
                 <div>{{ $t("show.acAd") }}：{{ place }}</div>
-                <div style="color:#EE1C24">
-                    {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
-                </div>
+                <div
+                    style="color:#EE1C24"
+                >{{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}</div>
             </div>
         </div>
         <div class="end">
             <a-dropdown>
                 <a-menu slot="overlay" @click="navigateForm">
-                    <a-menu-item key="1">{{ $t("show.join") }}</a-menu-item>
-                    <a-menu-item key="2">{{ $t("show.paDe") }}</a-menu-item>
+                    <a-menu-item v-for="item in test" :key="item">{{$t(FormMap[item])}}</a-menu-item>
                 </a-menu>
-                <a-button type="primary" size="large" class="btn"
-                    >{{ $t("show.method") }} <a-icon type="down"
-                /></a-button>
+                <a-button type="primary" size="large" class="btn">
+                    {{ $t("show.method") }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
+                </a-button>
             </a-dropdown>
         </div>
     </div>
 </template>
 
 <script>
+import FormMap from "@/common/map";
 export default {
     props: {
+        activityId: { type: Number },
         nameZh: { type: String, default: null },
         nameEn: { type: String, default: null },
         namePt: { type: String, default: null },
@@ -41,6 +43,12 @@ export default {
         website: { type: String, default: null },
         actType: { type: String, default: null }
     },
+    data() {
+        return {
+            FormMap,
+            test: ["022", "021"]
+        };
+    },
     filters: {
         formatTime: function(value) {
             return value ? value.slice(0, 10) : null;
@@ -49,6 +57,9 @@ export default {
     methods: {
         navigateForm: function(e) {
             console.log("click left button", e);
+            this.$router.push(
+                `/myform/index?activityId=${this.activityId}&form=${e.key}`
+            );
         }
     }
 };

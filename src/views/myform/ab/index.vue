@@ -1,20 +1,20 @@
 <template>
-    <a-form class="form" :form="form" @submit="handleSubmit">
+    <a-form class="form" :form="form" @submit="subForm">
         <div class="form-item-title">
             <p>{{ $t("formab.aa") }}</p>
             <span>{{ $t("formab.ab") }}</span>
         </div>
         <a-form-item :label="$t('formab.ac')">
-            <a-input />
+            <a-input disabled />
         </a-form-item>
         <a-form-item :label="$t('formab.ad')">
-            <a-input />
+            <a-input disabled />
         </a-form-item>
         <a-form-item :label="$t('formab.ae')">
-            <a-input />
+            <a-input disabled />
         </a-form-item>
         <a-form-item :label="$t('formab.af')">
-            <a-input />
+            <a-input v-decorator="exhibitionProduct" />
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.ag") }}</p>
@@ -22,64 +22,63 @@
         <a-form-item :label="$t('formab.ah')">
             <a-select
                 showSearch
-                optionFilterProp="children"
-                @focus="handleFocus"
-                @blur="handleBlur"
-                @change="handleChange"
-                :filterOption="filterOption"
+                optionFilterProp="label"
+                @change="liaisonChange"
+                :filterOption="true"
+                :notFoundContent="null"
                 class="full"
-                v-decorator="name"
+                v-decorator="liaisonId"
             >
-                <a-select-option value="jack">Jack</a-select-option>
-                <a-select-option value="lucy">Lucy</a-select-option>
-                <a-select-option value="tom">Tom</a-select-option>
+                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">{{
+                    item.nameZh
+                }}</a-select-option>
             </a-select>
         </a-form-item>
         <a-form-item :label="$t('formab.ai')">
-            <a-input disabled />
+            <a-input disabled v-model="liaisonObj.phone" />
         </a-form-item>
         <a-form-item :label="$t('formab.zz')">
             <a-input disabled />
         </a-form-item>
         <a-form-item :label="$t('formab.aj')">
-            <a-input disabled />
+            <a-input disabled v-model="liaisonObj.fax" />
         </a-form-item>
 
         <a-form-item :label="$t('formab.ak')">
-            <a-input disabled />
+            <a-input disabled v-model="liaisonObj.email" />
         </a-form-item>
         <a-form-item :label="$t('formab.al')">
-            <a-input disabled />
+            <a-input disabled v-model="liaisonObj.address" />
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.am") }}</p>
         </div>
         <a-form-item :label="$t('formab.an')">
-            <Upload></Upload>
+            <Upload v-decorator="registrationOfBureauFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ao')">
-            <Upload></Upload>
+            <Upload v-decorator="macaoShareholderFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ap')">
-            <Upload></Upload>
+            <Upload v-decorator="otherFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aq')">
-            <Upload></Upload>
+            <Upload v-decorator="taxpayerFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ar')">
-            <Upload></Upload>
+            <Upload v-decorator="shareholderSamesFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.as')">
-            <Upload></Upload>
+            <Upload v-decorator="differentTaxpayerFiles"></Upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.at") }}</p>
         </div>
         <a-form-item :label="$t('formab.au')">
-            <Upload></Upload>
+            <Upload v-decorator="unitIntroductionFiles"></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aw')">
-            <Upload></Upload>
+            <Upload v-decorator="idcardFiles"></Upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.ax") }}</p>
@@ -131,23 +130,27 @@
         </a-form-item>
         <a-form-item :label="$t('formab.bx')">
             <Upload
-                v-decorator="['nickname', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                v-decorator="[
+                    'businessRegistrationFiles',
+                    { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                ]"
             ></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.by')">
             <Upload
-                v-decorator="['nickname', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                v-decorator="[
+                    'certificateBureauFiles',
+                    { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                ]"
             ></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.bz')">
             <Upload
-                v-decorator="['nickname', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                v-decorator="['salesTaxOpenFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
             ></Upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ca')">
-            <Upload
-                v-decorator="['nickname', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
-            ></Upload>
+            <Upload @upload="url => console.log(url)"></Upload>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" html-type="submit" size="large">{{ $t("formab.cb") }}</a-button>
@@ -159,6 +162,7 @@
 import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
 import rules from "./validate";
+import liaison from "@/apis/liaison";
 export default {
     components: { Upload },
     data() {
@@ -173,7 +177,16 @@ export default {
             form: this.$form.createForm(this),
             ...rules,
             reason: 1,
-            checkNick: false
+            checkNick: false,
+            liaisonList: [], //聯係人列表
+            liaisonObj: {
+                id: null,
+                nameZh: null,
+                phone: null,
+                fax: null,
+                email: null,
+                address: null
+            } //當前選中聯係人
         };
     },
     methods: {
@@ -185,8 +198,31 @@ export default {
                 this.checkNick = false;
             }
         },
-        handleSubmit(e) {},
-        handleChange() {}
+        async initData() {
+            const data = await liaison.get();
+            if (data.code === 200) {
+                this.liaisonList = data.data.content;
+            } else {
+                this.$message.error(data.message);
+            }
+            console.log("data=>", data);
+        },
+        liaisonChange(e) {
+            let data = this.liaisonList.find(item => item.id === e);
+            this.liaisonObj = data;
+            console.log("data==>", data, e);
+        },
+        async subForm(e) {
+            e.preventDefault();
+            this.form.validateFields((err, values) => {
+                console.log("val==>", values);
+                if (!err) {
+                }
+            });
+        }
+    },
+    mounted() {
+        this.initData();
     }
 };
 </script>

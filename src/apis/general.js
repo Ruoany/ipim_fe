@@ -5,10 +5,25 @@ const func = (modules, o = {}) => {
     const otherModules = o;
     return {
         ...otherModules,
-        get: params => request.get(modulesUrl, params),
+        get: params =>
+            request({
+                url: modulesUrl,
+                method: "GET",
+                params
+            }),
         one: id => request.get(`${modulesUrl}/${id}`),
-        create: data => request.post(`${modulesUrl}`, data),
-        update: data => request.put(`${modulesUrl}`, data),
+        create: data =>
+            request({
+                url: modulesUrl,
+                method: "POST",
+                data
+            }),
+        update: data =>
+            request({
+                url: modulesUrl,
+                method: "PUT",
+                data
+            }),
         delete: id => request.delete(`${modulesUrl}/${id}`)
     };
 };

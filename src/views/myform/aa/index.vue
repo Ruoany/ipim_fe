@@ -47,22 +47,28 @@
             <p>{{ $t("formaa.an") }}</p>
         </div>
         <a-form-item :label="$t('formaa.ac')">
-            <a-select v-decorator="liaisonId"></a-select>
+            <a-select v-decorator="liaisonId" @change="handleLiaisonChange">
+                <a-select-option
+                    v-for="item in liaisons"
+                    :key="item.id"
+                    :value="item.id"
+                >{{item.nameZh}}</a-select-option>
+            </a-select>
         </a-form-item>
         <a-form-item :label="$t('formaa.ap')">
-            <a-input v-decorator="phone" />
+            <a-input v-model="phone" :disabled="true" />
         </a-form-item>
         <a-form-item :label="$t('formaa.aq')">
-            <a-input v-decorator />
+            <a-input v-model="myMocauPhone" :disabled="true" />
         </a-form-item>
         <a-form-item :label="$t('formaa.ar')">
-            <a-input v-decorator />
+            <a-input v-model="myChinesePhone" :disabled="true" />
         </a-form-item>
         <a-form-item :label="$t('formaa.as')">
-            <a-input v-decorator="fax" />
+            <a-input v-model="fax" :disabled="true" />
         </a-form-item>
         <a-form-item :label="$t('formaa.at')">
-            <a-input v-decorator="email" />
+            <a-input v-model="email" :disabled="true" />
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formaa.au") }}</p>
@@ -139,38 +145,65 @@
         </a-form-item>
 
         <a-form-item>
-            <a-button type="primary" size="large">{{ $t("formaa.bt") }}</a-button>
+            <a-button type="primary" size="large" html-type="submit">{{ $t("formaa.bt") }}</a-button>
         </a-form-item>
     </a-form>
 </template>
 
 <script>
+import init from "@/common/init";
 import validate from "./validate";
 import Liaison from "@/apis/liaison";
+import PD from "@/apis/participateDelegation";
 export default {
     data() {
         return {
             ...validate,
+            liaisons: [],
             formItemLayout: {
                 labelCol: { span: 24 },
                 wrapperCol: { span: 24 }
             }
         };
     },
+    methods: {
+        handleLiaisonChange: function(value) {
+            const o = this.liaisons.find(item => item.id === value);
+            this.phone = o.tel;
+            this.myMocauPhone = o.phone;
+            this.myChinesePhone = o.phone;
+            this.fax = o.fax;
+            this.email = o.email;
+        },
+        success: function() {
+            this.$message.success("申請成功");
+            this.$router.back();
+        },
+        handleSubmit: function(e) {
+            e.preventDefault();
+            this.form.validateFields(async (err, values) => {
+                if (!err) {
+                    values = init(values);
+                    values.activityId = this.activityId;
+                    values.applicantId = this.applicantId;
+                    values.institutionId = this.institutionId;
+                    const { data } = await PD.create(values);
+                    console.log("新建表單", data);
+                    data ? this.success() : "";
+                }
+            });
+        }
+    },
     created: function() {
         this.form = this.$form.createForm(this, { name: "formaa" });
     },
     mounted: async function() {
-        const { data } = await Liaison.get();
-        console.log("--->", data);
+        const { data } = await Liaison.get({ size: 100 });
+        this.liaisons = data.content;
     }
 };
 </script>
 
-<<<<<<< HEAD
-<style></style>
-=======
 <style lang="less" scoped>
 @import url("../css/form.less");
 </style>
->>>>>>> d56bfd475d7bc58b9946e30740c4489605f8e74a

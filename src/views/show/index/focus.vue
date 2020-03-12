@@ -52,13 +52,13 @@ export default {
             let img = null;
             let that = this;
             switch (e) {
-                case 2:
+                case "NOTSTART":
                     img = unopen;
                     break;
-                case 3:
+                case "PROGRESS":
                     img = ing;
                     break;
-                case 4:
+                case "END":
                     img = over;
                     break;
             }
