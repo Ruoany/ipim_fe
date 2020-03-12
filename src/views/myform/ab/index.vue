@@ -160,7 +160,7 @@
             ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ca')">
-            <upload @upload="url => console.log(url)"></upload>
+            <upload></upload>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" html-type="submit" size="large">{{ $t("formab.cb") }}</a-button>

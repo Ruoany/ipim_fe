@@ -3,6 +3,7 @@ const config_select = { rules: [{ required: true, message: "please select" }] };
 const config_upload = { rules: [{ required: true, message: "please upload file" }] };
 
 export default {
+    form: "",
     liaisonId: ["liaisonId", config_select],
     registrationOfBureauFiles: ["registrationOfBureauFiles", config_upload],
     macaoShareholderFiles: ["macaoShareholderFiles", config_upload],
