@@ -32,16 +32,24 @@
             </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.ba')">
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.bb") }} <a-date-picker /></div>
-            <div>{{ $t("formbd.bc") }} <a-input style="width:500px" /></div>
+            <a-row :gutter="10">
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="9">
+                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                </a-col>
+                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+            </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.bf')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -121,13 +129,15 @@
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
+
         <a-form-item :label="$t('formbd.cl')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
-            <div>{{ $t("formbd.cn") }}<a-input style="width:500px" /></div>
-            <div>{{ $t("formbd.co") }} <a-input style="width:500px" /></div>
+
+            <a-input :placeholder="$t('formbd.cn')" />
+            <a-input :placeholder="$t('formbd.co')" />
         </a-form-item>
         <a-form-item :label="$t('formbd.cq')">
             <a-upload-dragger
@@ -167,7 +177,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            upLabel: { span: 16, offset: 4 }
+        };
+    }
+};
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.full {
+    width: 100%;
+}
+</style>

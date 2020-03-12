@@ -1,7 +1,7 @@
 <template>
     <div class="flex center h-back">
         <div class="width-1280">
-            <div class="flex-justify-content-space-between flex-align-items-center">
+            <div class="flex-justify-content-space-between flex-align-items-center width-1280">
                 <div class="font-24">
                     <div class="flex-align-items-center">
                         <img :src="logoImg" class="img" />
@@ -39,10 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div
-                class="font-16"
-                style="padding:0;padding-top:45px;"
-            >© copyright 2016IPIM. All rights reserved. (聲明)</div>
+            <div class="font-16" style="padding:0;padding-top:45px;">
+                © copyright 2016IPIM. All rights reserved. (聲明)
+            </div>
         </div>
     </div>
 </template>

@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         menuChange(key) {
-            this.$router.push({ path: "/personal/index", query: { key } });
+            this.$router.replace({ path: "/personal/index", query: { key } });
         }
     }
 };

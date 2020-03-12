@@ -1,43 +1,60 @@
 <template>
     <div>
         <a-form-item :label="$t('formbd.activeTime')">
-            <a-range-picker />
+            <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.ae')">
-            <a-input />
+            <a-row :gutter="10">
+                <a-col :span="11"><a-range-picker showTime style="margin-right:10px" /> </a-col>
+                <a-col :span="11">
+                    <a-input :placeholder="$t('formbd.es')" type="number" />
+                </a-col>
+                <a-col :span="1">
+                    <a-icon type="plus" class="cur" />
+                </a-col>
+                <a-col :span="1">
+                    <a-icon type="minus" class="cur" />
+                </a-col>
+            </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.af')">
             <a-input />
         </a-form-item>
         <a-form-item :label="$t('formbd.ag')">
             <a-input />
-            <a-textarea />
+            <a-textarea :placeholder="$t('formbd.ew')" :autosize="{ minRows: 4 }" />
         </a-form-item>
         <a-form-item :label="$t('formbd.ah')">
-            <a-input />
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.di") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.dj") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.dl") }}</a-radio>
+                <a-radio :value="4">{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
+            </a-radio-group>
+            <a-input :placeholder="$t('formbd.dm')"></a-input>
         </a-form-item>
         <a-form-item :label="$t('formbd.aj')">
             <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ep')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.eq')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.er')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ex')"></a-input>
             </div>
         </a-form-item>
         <a-form-item :label="$t('formbd.ai')">
             <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ep')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.eq')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.er')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ex')"></a-input>
             </div>
         </a-form-item>
         <a-form-item :label="$t('formbd.ak')">
             <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
-                <a-input style="width:24%;"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ep')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.eq')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.er')"></a-input>
+                <a-input style="width:24%;" :placeholder="$t('formbd.ex')"></a-input>
             </div>
         </a-form-item>
 
@@ -70,4 +87,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.cur {
+    cursor: pointer;
+}
+.full {
+    width: 100%;
+}
+</style>

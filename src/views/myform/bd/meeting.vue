@@ -1,7 +1,7 @@
 <template>
     <div>
         <a-form-item :label="$t('formbd.activeTime')">
-            <a-range-picker />
+            <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingAddress')">
             <a-input />
@@ -19,7 +19,11 @@
             <a-input />
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingAllDay')">
-            <a-input />
+            <a-row :gutter="10">
+                <a-col :span="6"><a-date-picker /></a-col>
+                <a-col :span="9"><a-input></a-input></a-col>
+                <a-col :span="9"><a-input></a-input></a-col>
+            </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingArea')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -81,4 +85,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+@import url("../css/form.less");
+</style>

@@ -167,6 +167,10 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
+<style></style>
+=======
 <style lang="less" scoped>
 @import url("../css/form.less");
 </style>
+>>>>>>> d56bfd475d7bc58b9946e30740c4489605f8e74a

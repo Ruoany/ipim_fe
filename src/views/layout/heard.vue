@@ -26,7 +26,9 @@
                 <a-menu-item>{{ $t("menu.ca") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cb") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cc") }}</a-menu-item>
-                <a-menu-item>{{ $t("menu.cd") }}</a-menu-item>
+                <a-menu-item @click="$router.push({ path: '/myform/index', query: { form: 'bd' } })">{{
+                    $t("menu.cd")
+                }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.ce") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cf") }}</a-menu-item>
             </a-sub-menu>

@@ -33,9 +33,8 @@
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("formbd.eb") }}</a-radio>
                 <a-radio :value="2">{{ $t("formbd.ec") }}</a-radio>
-
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.comType')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -44,8 +43,8 @@
                 <a-radio :value="3">{{ $t("formbd.dz") }}</a-radio>
                 <a-radio :value="4">{{ $t("formbd.ea") }}</a-radio>
                 <a-radio>{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.appliType')">
             <a-radio-group name="radioGroup" :defaultValue="1">
@@ -53,8 +52,8 @@
                 <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
                 <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
                 <a-radio :value="4">{{ $t("util.other") }}({{ $t("formbd.dm") }})</a-radio>
-                <a-input />
             </a-radio-group>
+            <a-input class="full" />
         </a-form-item>
         <a-form-item :label="$t('util.country')">
             <a-input />
@@ -152,8 +151,14 @@
             <a-input />
         </a-form-item>
 
-        <a-form-item :label="$t('formbd.officeNameEn')">
-            <a-input />
+        <a-form-item :label="$t('formbd.ej')">
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("formbd.ek") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.el") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.em") }}</a-radio>
+                <a-radio :value="4">{{ $t("formbd.en") }}</a-radio>
+                <a-radio :value="5">{{ $t("formbd.eo") }}</a-radio>
+            </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formbd.activeUrl')">
             <a-input />
@@ -189,6 +194,7 @@ import { upFiles } from "@/apis/files";
 import meetingForm from "./meeting";
 import areaForm from "./area";
 import showForm from "./show";
+import rules from "./validate";
 export default {
     components: { meetingForm, showForm, areaForm },
     data() {
