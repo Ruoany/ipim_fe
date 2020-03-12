@@ -29,9 +29,11 @@
                 class="full"
                 v-decorator="liaisonId"
             >
-                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">{{
+                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
+                    {{
                     item.nameZh
-                }}</a-select-option>
+                    }}
+                </a-select-option>
             </a-select>
         </a-form-item>
         <a-form-item :label="$t('formab.ai')">
@@ -54,31 +56,39 @@
             <p>{{ $t("formab.am") }}</p>
         </div>
         <a-form-item :label="$t('formab.an')">
-            <Upload v-decorator="registrationOfBureauFiles"></Upload>
+            <upload
+                v-decorator="macaoShareholderFiles"
+                decorator="macaoShareholderFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ao')">
-            <Upload v-decorator="macaoShareholderFiles"></Upload>
+            <upload
+                v-decorator="macaoShareholderFiles"
+                decorator="macaoShareholderFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ap')">
-            <Upload v-decorator="otherFiles"></Upload>
+            <upload v-decorator="otherFiles" decorator="otherFiles" @handleChange="uploadChange"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aq')">
-            <Upload v-decorator="taxpayerFiles"></Upload>
+            <upload v-decorator="taxpayerFiles"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ar')">
-            <Upload v-decorator="shareholderSamesFiles"></Upload>
+            <upload v-decorator="shareholderSamesFiles"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.as')">
-            <Upload v-decorator="differentTaxpayerFiles"></Upload>
+            <upload v-decorator="differentTaxpayerFiles"></upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.at") }}</p>
         </div>
         <a-form-item :label="$t('formab.au')">
-            <Upload v-decorator="unitIntroductionFiles"></Upload>
+            <upload v-decorator="unitIntroductionFiles"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aw')">
-            <Upload v-decorator="idcardFiles"></Upload>
+            <upload v-decorator="idcardFiles"></upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.ax") }}</p>
@@ -129,28 +139,28 @@
             </a-radio-group>
         </a-form-item>
         <a-form-item :label="$t('formab.bx')">
-            <Upload
+            <upload
                 v-decorator="[
                     'businessRegistrationFiles',
                     { rules: [{ required: checkNick, message: 'Please upload file' }] }
                 ]"
-            ></Upload>
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.by')">
-            <Upload
+            <upload
                 v-decorator="[
                     'certificateBureauFiles',
                     { rules: [{ required: checkNick, message: 'Please upload file' }] }
                 ]"
-            ></Upload>
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.bz')">
-            <Upload
+            <upload
                 v-decorator="['salesTaxOpenFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
-            ></Upload>
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ca')">
-            <Upload @upload="url => console.log(url)"></Upload>
+            <upload @upload="url => console.log(url)"></upload>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" html-type="submit" size="large">{{ $t("formab.cb") }}</a-button>
@@ -159,7 +169,6 @@
 </template>
 
 <script>
-import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
 import rules from "./validate";
 import liaison from "@/apis/liaison";
@@ -167,15 +176,12 @@ export default {
     components: { Upload },
     data() {
         return {
+            ...rules,
             formItemLayout: {
                 labelCol: { span: 4 },
                 wrapperCol: { span: 16 }
             },
             upLabel: { span: 16, offset: 4 },
-            upFiles,
-            headers: {},
-            form: this.$form.createForm(this),
-            ...rules,
             reason: 1,
             checkNick: false,
             liaisonList: [], //聯係人列表
@@ -188,6 +194,9 @@ export default {
                 address: null
             } //當前選中聯係人
         };
+    },
+    created: function() {
+        this.form = this.$form.createForm(this, { name: "formab" });
     },
     methods: {
         reasonChange(e) {
@@ -205,7 +214,6 @@ export default {
             } else {
                 this.$message.error(data.message);
             }
-            console.log("data=>", data);
         },
         liaisonChange(e) {
             let data = this.liaisonList.find(item => item.id === e);
@@ -219,6 +227,12 @@ export default {
                 if (!err) {
                 }
             });
+        },
+        uploadChange(o) {
+            console.log("輸出->", o);
+            const key = o.keys;
+            const value = o.value;
+            this.form.setFieldsValue({ [key]: value });
         }
     },
     mounted() {
