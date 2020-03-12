@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="all">
         <a-form-item :label="$t('formbd.activeTime')">
             <a-range-picker class="full" />
         </a-form-item>
@@ -20,7 +20,7 @@
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingAllDay')">
             <a-row :gutter="10">
-                <a-col :span="6"><a-date-picker /></a-col>
+                <a-col :span="6"><a-date-picker class="full"/></a-col>
                 <a-col :span="9"><a-input></a-input></a-col>
                 <a-col :span="9"><a-input></a-input></a-col>
             </a-row>
@@ -31,8 +31,8 @@
                 <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
                 <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
             </a-radio-group>
-            <a-row>
-                <a-col :span="6"> <a-date-picker /></a-col>
+            <a-row :gutter="10">
+                <a-col :span="6"> <a-date-picker class="full"/></a-col>
                 <a-col :span="18"> <a-input /></a-col>
             </a-row>
 
@@ -87,4 +87,11 @@ export default {
 
 <style lang="less" scoped>
 @import url("../css/form.less");
+.all {
+    width: 800px;
+    margin: auto;
+    /deep/.ant-row {
+        padding: 0px !important;
+    }
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="all">
         <a-form-item :label="$t('formbd.ax')">
-            <div>{{ $t("formbd.ao") }}</div>
+            <div style="font-size:10px;">({{ $t("formbd.ao") }})</div>
             <a-checkbox-group @change="onChange">
                 <a-row>
                     <a-col :span="24">
@@ -36,19 +36,13 @@
                 <a-col :span="9">
                     <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
                 </a-col>
-                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
-                <a-col :span="9">
-                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                <a-col :span="13"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="1">
+                    <a-icon type="plus" class="cur" />
                 </a-col>
-                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
-                <a-col :span="9">
-                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                <a-col :span="1">
+                    <a-icon type="minus" class="cur" />
                 </a-col>
-                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
-                <a-col :span="9">
-                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
-                </a-col>
-                <a-col :span="15"><a-input :placeholder="$t('formbd.bc')"/></a-col>
             </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.bf')">
@@ -187,7 +181,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.full {
-    width: 100%;
+@import url("../css/form.less");
+.cur {
+    cursor: pointer;
+}
+.all {
+    width: 800px;
+    margin: auto;
+    /deep/.ant-row {
+        padding: 0px !important;
+    }
 }
 </style>

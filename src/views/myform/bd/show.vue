@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="all">
         <a-form-item :label="$t('formbd.activeTime')">
             <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.ae')">
             <a-row :gutter="10">
-                <a-col :span="11"><a-range-picker showTime style="margin-right:10px" /> </a-col>
+                <a-col :span="11"><a-range-picker showTime class="full" /> </a-col>
                 <a-col :span="11">
                     <a-input :placeholder="$t('formbd.es')" type="number" />
                 </a-col>
@@ -88,10 +88,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url("../css/form.less");
+.all {
+    width: 800px;
+    margin: auto;
+    /deep/.ant-row {
+        padding: 0px !important;
+    }
+}
 .cur {
     cursor: pointer;
-}
-.full {
-    width: 100%;
 }
 </style>

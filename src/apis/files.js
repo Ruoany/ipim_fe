@@ -1,1 +1,2 @@
-export const upFiles = `${process.env.NODE_ENV}/upload1`;
+import { baseURL } from "./request";
+export const upFiles = `${baseURL}/upload1`;
