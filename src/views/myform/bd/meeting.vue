@@ -20,16 +20,21 @@
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingAllDay')">
             <a-row :gutter="10">
-                <a-col :span="6"><a-date-picker class="full"/></a-col>
-                <a-col :span="9"><a-input></a-input></a-col>
-                <a-col :span="9"><a-input></a-input></a-col>
+                <a-col :span="10"><a-date-picker class="full"/></a-col>
+                <a-col :span="14"><a-input :placeholder="formbd.ee"></a-input></a-col>
+            </a-row>
+        </a-form-item>
+        <a-form-item :label="$t('formbd.ed')">
+            <a-row :gutter="10">
+                <a-col :span="10"><a-date-picker class="full"/></a-col>
+                <a-col :span="14"><a-input :placeholder="formbd.ee"></a-input></a-col>
             </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingArea')">
             <a-radio-group name="radioGroup" :defaultValue="1">
-                <a-radio :value="1">{{ $t("formbd.ed") }}</a-radio>
-                <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
-                <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
+                <a-radio :value="1">{{ $t("formbd.eg") }}</a-radio>
+                <a-radio :value="2">{{ $t("formbd.eh") }}</a-radio>
+                <a-radio :value="3">{{ $t("formbd.ei") }}</a-radio>
             </a-radio-group>
             <a-row :gutter="10">
                 <a-col :span="6"> <a-date-picker class="full"/></a-col>

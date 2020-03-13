@@ -68,8 +68,10 @@ export default {
         },
         "$route.query": function(newValue) {
             console.log("sss=>", newValue);
-            this.actType = newValue.part;
-            this.order = newValue.order;
+            this.$nextTick(() => {
+                this.actType = newValue.part;
+                this.order = newValue.order;
+            });
         }
     },
     methods: {

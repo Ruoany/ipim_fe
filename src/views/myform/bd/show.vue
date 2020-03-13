@@ -4,16 +4,16 @@
             <a-range-picker class="full" />
         </a-form-item>
         <a-form-item :label="$t('formbd.ae')">
-            <a-row :gutter="10">
+            <a-row :gutter="10" v-for="(item, index) in openTime" :key="index">
                 <a-col :span="11"><a-range-picker showTime class="full" /> </a-col>
                 <a-col :span="11">
                     <a-input :placeholder="$t('formbd.es')" type="number" />
                 </a-col>
                 <a-col :span="1">
-                    <a-icon type="plus" class="cur" />
+                    <a-icon type="plus" class="cur" @click="addOpenTime" />
                 </a-col>
                 <a-col :span="1">
-                    <a-icon type="minus" class="cur" />
+                    <a-icon type="minus" class="cur" @click="removeOpenTime(index)" v-if="openTime.length > 1" />
                 </a-col>
             </a-row>
         </a-form-item>
@@ -82,7 +82,22 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+            openTime: [
+                {
+                    time: null,
+                    houser: null
+                }
+            ]
+        };
+    },
+    methods: {
+        addOpenTime() {
+            this.openTime = this.openTime.concat({ time: null, houser: null });
+        },
+        removeOpenTime(index) {
+            this.openTime.splice(index, 1);
+        }
     }
 };
 </script>
