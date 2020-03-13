@@ -32,7 +32,8 @@ export default {
             order: 0,
             page: 0,
             size: 6,
-            total: 0
+            total: 0,
+            types: []
         };
     },
     computed: {
@@ -62,9 +63,11 @@ export default {
     watch: {
         active: function(newValue) {
             this.page = 0;
+
             this.initData(newValue);
         },
         "$route.query": function(newValue) {
+            console.log("sss=>", newValue);
             this.actType = newValue.part;
             this.order = newValue.order;
         }
@@ -72,10 +75,12 @@ export default {
     methods: {
         initData: async function(query) {
             this.loading = true;
+
             const { data } = await getActivePage({
                 page: this.page,
                 size: this.size,
-                actType: this.actType
+                actType: this.actType,
+                types: this.types
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;

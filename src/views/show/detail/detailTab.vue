@@ -9,10 +9,10 @@
         <a-tab-pane :tab="$t('show.organizer')" key="3">
             <organizer :organizers="cardData.organizers" :helpers="cardData.helpers"></organizer>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.shop')" key="4" :disabled="true">
+        <a-tab-pane :tab="$t('show.shop')" key="4">
             <shop :trades="cardData.trades"></shop>
         </a-tab-pane>
-        <a-tab-pane :tab="$t('show.photo')" key="5" :disabled="true">
+        <a-tab-pane :tab="$t('show.photo')" key="5">
             <photo></photo>
         </a-tab-pane>
     </a-tabs>

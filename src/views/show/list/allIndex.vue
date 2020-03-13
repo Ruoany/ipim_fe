@@ -5,9 +5,9 @@
             <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
             <a-tabs v-model="status">
                 <a-tab-pane :tab="$t('index.allAc')" :key="null"></a-tab-pane>
-                <a-tab-pane :tab="$t('show.available')" key="2"></a-tab-pane>
-                <a-tab-pane :tab="$t('show.processing')" key="3"></a-tab-pane>
-                <a-tab-pane :tab="$t('show.over')" key="4"></a-tab-pane>
+                <a-tab-pane :tab="$t('show.available')" :key="1"></a-tab-pane>
+                <a-tab-pane :tab="$t('show.processing')" key="PROGRESS"></a-tab-pane>
+                <a-tab-pane :tab="$t('show.over')" key="END"></a-tab-pane>
             </a-tabs>
             <show-list :list="list"></show-list>
             <pagination :page.sync="page" :total="total" :size="size"></pagination>
@@ -30,7 +30,8 @@ export default {
             page: 0,
             size: 6,
             list: [],
-            loading: false
+            loading: false,
+            participate: null
         };
     },
     watch: {
@@ -38,7 +39,13 @@ export default {
             immediate: true,
             handler: function(newValue) {
                 this.page = 0;
-                this.getActivePage(newValue);
+                if (newValue === 1) {
+                    this.participate = true;
+                    this.getActivePage(null);
+                } else {
+                    this.participate = null;
+                    this.getActivePage(newValue);
+                }
             }
         },
         page: {
@@ -50,7 +57,7 @@ export default {
     methods: {
         async getActivePage(status) {
             this.loading = true;
-            const body = { size: this.size, page: this.page, status };
+            const body = { size: this.size, page: this.page, status, participate: this.participate };
             const { data } = await getActivePage(body);
             this.list = data.content;
             this.total = data.totalElements;

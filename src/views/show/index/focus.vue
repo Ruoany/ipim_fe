@@ -20,6 +20,7 @@ import ing from "@/assets/image/ing.svg";
 import over from "@/assets/image/over.svg";
 import showCell from "@/components/card/showCell";
 import { getActiveList } from "@/apis/show";
+
 export default {
     components: { showCell },
     data() {
@@ -35,7 +36,7 @@ export default {
     },
     methods: {
         async getActiveList() {
-            const data = await getActiveList({ ...this.listQuery });
+            const data = await getActiveList({ ...this.listQuery, manyStatus: ["PROGRESS", "END"] });
             if (data.code === 200) {
                 this.showList = data.data;
                 this.showList.push(data.data[0]);

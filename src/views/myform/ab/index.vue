@@ -5,13 +5,13 @@
             <span>{{ $t("formab.ab") }}</span>
         </div>
         <a-form-item :label="$t('formab.ac')">
-            <a-input disabled />
+            <a-input disabled v-model="company.nameZh" />
         </a-form-item>
         <a-form-item :label="$t('formab.ad')">
-            <a-input disabled />
+            <a-input disabled v-model="company.siteRegistrationCode" />
         </a-form-item>
         <a-form-item :label="$t('formab.ae')">
-            <a-input disabled />
+            <a-input disabled v-model="company.registrationNumber" />
         </a-form-item>
         <a-form-item :label="$t('formab.af')">
             <a-input v-decorator="exhibitionProduct" />
@@ -30,9 +30,7 @@
                 v-decorator="liaisonId"
             >
                 <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
-                    {{
-                    item.nameZh
-                    }}
+                    {{ item.nameZh }}
                 </a-select-option>
             </a-select>
         </a-form-item>
@@ -57,8 +55,8 @@
         </div>
         <a-form-item :label="$t('formab.an')">
             <upload
-                v-decorator="macaoShareholderFiles"
-                decorator="macaoShareholderFiles"
+                v-decorator="registrationOfBureauFiles"
+                decorator="registrationOfBureauFiles"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-item>
@@ -73,22 +71,34 @@
             <upload v-decorator="otherFiles" decorator="otherFiles" @handleChange="uploadChange"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aq')">
-            <upload v-decorator="taxpayerFiles"></upload>
+            <upload v-decorator="taxpayerFiles" decorator="taxpayerFiles" @handleChange="uploadChange"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ar')">
-            <upload v-decorator="shareholderSamesFiles"></upload>
+            <upload
+                v-decorator="shareholderSamesFiles"
+                decorator="shareholderSamesFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.as')">
-            <upload v-decorator="differentTaxpayerFiles"></upload>
+            <upload
+                v-decorator="differentTaxpayerFiles"
+                decorator="differentTaxpayerFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.at") }}</p>
         </div>
         <a-form-item :label="$t('formab.au')">
-            <upload v-decorator="unitIntroductionFiles"></upload>
+            <upload
+                v-decorator="unitIntroductionFiles"
+                decorator="unitIntroductionFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aw')">
-            <upload v-decorator="idcardFiles"></upload>
+            <upload v-decorator="idcardFiles" decorator="idcardFiles" @handleChange="uploadChange"></upload>
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.ax") }}</p>
@@ -144,6 +154,8 @@
                     'businessRegistrationFiles',
                     { rules: [{ required: checkNick, message: 'Please upload file' }] }
                 ]"
+                decorator="businessRegistrationFiles"
+                @handleChange="uploadChange"
             ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.by')">
@@ -152,15 +164,23 @@
                     'certificateBureauFiles',
                     { rules: [{ required: checkNick, message: 'Please upload file' }] }
                 ]"
+                decorator="certificateBureauFiles"
+                @handleChange="uploadChange"
             ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.bz')">
             <upload
                 v-decorator="['salesTaxOpenFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                decorator="salesTaxOpenFiles"
+                @handleChange="uploadChange"
             ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ca')">
-            <upload></upload>
+            <upload
+                v-decorator="['salesTaxFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                decorator="salesTaxFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" html-type="submit" size="large">{{ $t("formab.cb") }}</a-button>
@@ -172,6 +192,7 @@
 import Upload from "@/components/upload";
 import rules from "./validate";
 import liaison from "@/apis/liaison";
+import outShow from "@/apis/outShow";
 export default {
     components: { Upload },
     data() {
@@ -192,8 +213,59 @@ export default {
                 fax: null,
                 email: null,
                 address: null
-            } //當前選中聯係人
+            }, //當前選中聯係人
+            activityId: null,
+            applicantId: 5
         };
+    },
+    computed: {
+        company() {
+            // return JSON.parse(sessionStorage.getItem("company"));
+            return {
+                id: 97,
+                createAt: null,
+                updateAt: null,
+                name: null,
+                nameZh: "機构測試123",
+                nameEn: "test123",
+                namePt: "Ensaio Institucional",
+                logo: null,
+                dateOfEstablishment: "1901-03",
+                startTime: null,
+                endTime: null,
+                natureId: 4,
+                natureName: "未開始",
+                country: null,
+                province: null,
+                city: null,
+                street: null,
+                countryZh: "1",
+                provinceZh: "110000000000",
+                cityZh: "110100000000",
+                streetZh: "測試",
+                countryEnOrPt: null,
+                provinceEnOrPt: null,
+                cityEnOrPt: null,
+                streetEnOrPt: null,
+                email: null,
+                tel: null,
+                fax: "020-333",
+                institutionShareholderVOS: null,
+                m1Number: null,
+                registrationNumber: null,
+                taxpayerName: null,
+                taxpayerNo: null,
+                business: null,
+                registeredCapital: 20000,
+                currency: "CNY",
+                institutionIndustryVOS: null,
+                chargeName: null,
+                status: null,
+                shareholderComponents: null,
+                deal: null,
+                idnumber: null
+            };
+        }
     },
     created: function() {
         this.form = this.$form.createForm(this, { name: "formab" });
@@ -206,6 +278,12 @@ export default {
             } else {
                 this.checkNick = false;
             }
+            this.$nextTick(() => {
+                this.form.validateFields(
+                    ["businessRegistrationFiles", "certificateBureauFiles", "salesTaxOpenFiles", "salesTaxFiles"],
+                    { force: true }
+                );
+            });
         },
         async initData() {
             const data = await liaison.get();
@@ -220,22 +298,39 @@ export default {
             this.liaisonObj = data;
             console.log("data==>", data, e);
         },
-        async subForm(e) {
+        subForm(e) {
             e.preventDefault();
-            this.form.validateFields((err, values) => {
+
+            this.form.validateFields(async (err, values) => {
                 console.log("val==>", values);
+
                 if (!err) {
+                    const data = await outShow.create({
+                        ...values,
+                        institutionId: this.company.id,
+                        activityId: this.activityId,
+                        applicantId: this.applicantId
+                    });
+                    if (data.code === 200) {
+                        this.$message.success("提交申请成功");
+                        this.$router.back();
+                    } else {
+                        this.$message.error(data.message);
+                    }
                 }
             });
         },
         uploadChange(o) {
             console.log("輸出->", o);
             const key = o.keys;
-            const value = o.value;
+            const value = o.value.map(item => {
+                return item.url;
+            });
             this.form.setFieldsValue({ [key]: value });
         }
     },
     mounted() {
+        this.activityId = this.$route.query.activityId;
         this.initData();
     }
 };

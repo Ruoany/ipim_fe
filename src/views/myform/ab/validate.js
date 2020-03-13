@@ -17,5 +17,5 @@ export default {
     shareholderSamesFiles: ["shareholderSamesFiles"],
     unitIntroductionFiles: ["unitIntroductionFiles", config_upload],
     idcardFiles: ["idcardFiles", config_upload],
-    exhibitionProduct: ["idcardFiles", config]
+    exhibitionProduct: ["exhibitionProduct", config]
 };

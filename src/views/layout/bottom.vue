@@ -7,7 +7,7 @@
                         <img :src="logoImg" class="img" />
                         <div>
                             <div class="font-36">澳門會展網</div>
-                            <div class="font-16">http://www.mice.gov.mo/tc/</div>
+                            <div class="font-16">https://www.ipim.gov.mo</div>
                         </div>
                     </div>
                 </div>
@@ -17,19 +17,19 @@
                         <div class="width-30">
                             <i class="iconfont icondizhi"></i>
                         </div>
-                        <div class="font-16">{{ $t("index.address") }}：澳門殺殺殺</div>
+                        <div class="font-16">{{ $t("index.address") }}：澳门友谊大马路918号世贸中心一至四楼</div>
                     </div>
                     <div class="flex-align-items-center p-20">
                         <div class="width-30">
                             <i class="iconfont iconyouxiang"></i>
                         </div>
-                        <div class="font-16">{{ $t("index.email") }}：澳門殺殺殺</div>
+                        <div class="font-16">{{ $t("index.email") }}：ipim@ipim.gov.mo</div>
                     </div>
                     <div class="flex-align-items-center p-20">
                         <div class="width-30">
                             <i class="iconfont icondianhua"></i>
                         </div>
-                        <div class="font-16">{{ $t("index.tel") }}：澳門殺殺殺</div>
+                        <div class="font-16">{{ $t("index.tel") }}：(853) 2871 0300</div>
                     </div>
                     <div class="flex-align-items-center p-20">
                         <div class="width-30">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="font-16" style="padding:0;padding-top:45px;">
-                © copyright 2016IPIM. All rights reserved. (聲明)
+                © copyright 2020 IPIM. All rights reserved. （声明）
             </div>
         </div>
     </div>

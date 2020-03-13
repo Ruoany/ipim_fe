@@ -2,22 +2,26 @@
     <div class="hei-200 flex-justify-content-space-between">
         <div class="flex">
             <img class="img" :src="scope" />
-            <div style="padding-left:40px;">
-                <div class="font-bold font-26">{{ nameZh }}</div>
-                <div>{{ nameEn }}</div>
-                <div>{{ namePt }}</div>
+            <div style="padding-left:40px;" class="flex ju">
+                <div>
+                    <div class="font-bold font-26">{{ nameZh }}</div>
+                    <div>{{ nameEn }}</div>
+                    <div>{{ namePt }}</div>
+                </div>
 
                 <!-- <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ website }}</div> -->
-                <div>{{ $t("show.acAd") }}：{{ place }}</div>
-                <div style="color:#EE1C24">
-                    {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
+                <div>
+                    <div>{{ $t("show.acAd") }}：{{ place }}</div>
+                    <div style="color:#EE1C24">
+                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
+                    </div>
                 </div>
             </div>
         </div>
         <div class="end">
             <a-dropdown>
                 <a-menu slot="overlay" @click="navigateForm">
-                    <a-menu-item v-for="item in test" :key="item">{{ $t(FormMap[item]) }}</a-menu-item>
+                    <a-menu-item v-for="item in types" :key="item">{{ $t(FormMap[item]) }}</a-menu-item>
                 </a-menu>
                 <a-button type="primary" size="large" class="btn">
                     {{ $t("show.method") }}
@@ -41,12 +45,13 @@ export default {
         endTime: { type: String, default: null },
         scope: { type: String, default: null },
         website: { type: String, default: null },
-        actType: { type: String, default: null }
+        actType: { type: String, default: null },
+        types: { type: Array }
     },
     data() {
         return {
-            FormMap,
-            test: ["022", "021"]
+            FormMap
+            // test: ["022", "021"]
         };
     },
     filters: {
@@ -81,5 +86,9 @@ export default {
 }
 .font-26 {
     font-size: 26px;
+}
+.ju {
+    flex-direction: column;
+    justify-content: space-between;
 }
 </style>

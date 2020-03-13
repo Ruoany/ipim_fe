@@ -1,5 +1,5 @@
 <template>
-    <div class="all flex-align-items-center">{{ text }}</div>
+    <div class="all flex-align-items-center"></div>
 </template>
 
 <script>
@@ -13,7 +13,8 @@ export default {
     width: 100%;
     justify-content: center;
     height: 360px;
-    background: #f1f1f1;
+    background: url("http://www.mice.gov.mo/current/images/about_banner.jpg") no-repeat;
+    background-size: cover;
     color: #000000;
     font-size: 48px;
 }

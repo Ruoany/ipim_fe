@@ -41,7 +41,7 @@ module.exports = {
         proxy: {
             "/api": {
                 target: "http://api-exhibition.servier.iteratech.net",
-                // target: "http://192.168.3.38:8111", //联调地址
+                // target: "http://192.168.101.53:9196", //联调地址
                 pathRewrite: {
                     "^/api": ""
                 },
