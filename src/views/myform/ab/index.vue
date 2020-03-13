@@ -29,9 +29,9 @@
                 class="full"
                 v-decorator="liaisonId"
             >
-                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
-                    {{ item.nameZh }}
-                </a-select-option>
+                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">{{
+                    item.nameZh
+                }}</a-select-option>
             </a-select>
         </a-form-item>
         <a-form-item :label="$t('formab.ai')">
@@ -191,8 +191,8 @@
 <script>
 import Upload from "@/components/upload";
 import rules from "./validate";
-import liaison from "@/apis/liaison";
-import outShow from "@/apis/outShow";
+import Liaison from "@/apis/liaison";
+import PAA from "@/apis/participateAttendAbroad";
 export default {
     components: { Upload },
     data() {
@@ -286,7 +286,7 @@ export default {
             });
         },
         async initData() {
-            const data = await liaison.get();
+            const data = await Liaison.get();
             if (data.code === 200) {
                 this.liaisonList = data.data.content;
             } else {
@@ -305,7 +305,7 @@ export default {
                 console.log("val==>", values);
 
                 if (!err) {
-                    const data = await outShow.create({
+                    const data = await PAA.create({
                         ...values,
                         institutionId: this.company.id,
                         activityId: this.activityId,

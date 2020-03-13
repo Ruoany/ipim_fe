@@ -7,8 +7,12 @@
                     <span>{{ $t("menu.signUp") }}</span>
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item @click="handleNavigate('SELF', 0, 'menu.signUp')">{{ $t("menu.aa") }}</a-menu-item>
-                <a-menu-item @click="handleNavigate('SELF', 1, 'menu.signUp')">{{ $t("menu.ab") }}</a-menu-item>
+                <a-menu-item
+                    @click="handleNavigate('SELF', '011', 'menu.signUp')"
+                >{{ $t("menu.aa") }}</a-menu-item>
+                <a-menu-item
+                    @click="handleNavigate('SELF', '012', 'menu.signUp')"
+                >{{ $t("menu.ab") }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="dep">
                 <span slot="title" class="flex center">
@@ -16,10 +20,10 @@
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
                 <a-menu-item
-                    @click="handleNavigate('DEPUTATION', 0, 'menu.delegation')"
+                    @click="handleNavigate('DEPUTATION', '022', 'menu.delegation')"
                 >{{ $t("menu.ba") }}</a-menu-item>
                 <a-menu-item
-                    @click="handleNavigate('DEPUTATION', 1, 'menu.delegation')"
+                    @click="handleNavigate('DEPUTATION', '021', 'menu.delegation')"
                 >{{ $t("menu.bb") }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="finEnc">
