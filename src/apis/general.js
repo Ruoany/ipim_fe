@@ -27,7 +27,16 @@ const func = (modules, o = {}) => {
                 method: "PUT",
                 data
             }),
-        delete: id => request.delete(`${modulesUrl}/${id}`)
+        delete: id => request.delete(`${modulesUrl}/${id}`),
+        all: params =>
+            request({
+                url: `${modulesUrl}/list`,
+                method: "GET",
+                params,
+                paramsSerializer: function(params) {
+                    return qs.stringify(params, { arrayFormat: "repeat" });
+                }
+            })
     };
 };
 

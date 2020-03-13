@@ -50,7 +50,7 @@ export default {
     methods: {
         async getActiveList() {
             this.loading = true;
-            const data = await Activity.get({ dayTime: this.dayTime });
+            const data = await Activity.all({ dayTime: this.dayTime });
             if (data.code === 200) {
                 this.showList = data.data;
                 this.loading = false;

@@ -19,7 +19,8 @@ import unopen from "@/assets/image/unopen.svg";
 import ing from "@/assets/image/ing.svg";
 import over from "@/assets/image/over.svg";
 import showCell from "@/components/card/showCell";
-import { getActiveList } from "@/apis/show";
+
+import Activity from "@/apis/activity";
 
 export default {
     components: { showCell },
@@ -36,10 +37,11 @@ export default {
     },
     methods: {
         async getActiveList() {
-            const data = await getActiveList({ ...this.listQuery, manyStatus: ["PROGRESS", "END"] });
+            const data = await Activity.all({ ...this.listQuery, manyStatus: ["PROGRESS", "END"] });
+            console.log("data", data);
             if (data.code === 200) {
                 this.showList = data.data;
-                this.showList.push(data.data[0]);
+                // this.showList.push(data.data[0]);
             } else {
                 this.$message.error(data.message);
             }
