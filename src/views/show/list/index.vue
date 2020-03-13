@@ -3,11 +3,7 @@
         <show-title :text="$t(`${info.title}`)"></show-title>
         <a-spin :spinning="loading" class="content flex center width-1280">
             <a-tabs v-model="active" class="tabs" @change="reflash">
-                <a-tab-pane
-                    v-for="(item, index) in info.tabs"
-                    :key="item"
-                    :tab="$t(`${info.tabs[index]}`)"
-                ></a-tab-pane>
+                <a-tab-pane v-for="item in info.tabs" :key="item" :tab="$t(`${FromMap[item]}`)"></a-tab-pane>
             </a-tabs>
             <div class="list-content">
                 <show-list :list="list"></show-list>
@@ -19,7 +15,8 @@
 <script>
 import showList from "./showList";
 import showTitle from "./title";
-import { getActivePage } from "@/apis/show";
+import Activity from "@/apis/activity";
+import FromMap from "@/common/map";
 
 export default {
     components: { showList, showTitle },
@@ -29,11 +26,11 @@ export default {
             loading: false,
             active: "",
             actType: "",
-            order: 0,
+            order: null,
             page: 0,
             size: 6,
             total: 0,
-            types: []
+            FromMap
         };
     },
     computed: {
@@ -45,42 +42,39 @@ export default {
                     case "SELF":
                         o = {
                             title: "menu.signUp",
-                            tabs: ["menu.aa", "menu.ab"]
+                            tabs: ["011", "012"]
                         };
                         break;
                     case "DEPUTATION":
                         o = {
                             title: "menu.delegation",
-                            tabs: ["menu.ba", "menu.bb"]
+                            tabs: ["022", "021"]
                         };
                         break;
                 }
-                this.active = o.tabs[this.order];
                 return o;
             }
         }
     },
     watch: {
         active: function(newValue) {
+            console.log("新的值->>>>", newValue);
             this.page = 0;
-
             this.initData(newValue);
         },
         "$route.query": function(newValue) {
-            console.log("sss=>", newValue);
             this.actType = newValue.part;
-            this.order = newValue.order;
+            this.active = newValue.order;
         }
     },
     methods: {
         initData: async function(query) {
             this.loading = true;
-
-            const { data } = await getActivePage({
+            const { data } = await Activity.get({
                 page: this.page,
                 size: this.size,
                 actType: this.actType,
-                types: this.types
+                types: [query]
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;
@@ -90,13 +84,13 @@ export default {
             this.total = total;
         },
         reflash: function(value) {
-            const idx = this.info.tabs.findIndex(item => item === value);
+            const idx = this.info.tabs.find(item => item === value);
             this.$router.push(`/show/index?part=${this.actType}&order=${idx}`);
         }
     },
     mounted: function() {
         this.actType = this.$route.query.part;
-        this.order = parseInt(this.$route.query.order);
+        this.active = this.$route.query.order;
     }
 };
 </script>

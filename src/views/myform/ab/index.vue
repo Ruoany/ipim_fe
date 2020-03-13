@@ -29,9 +29,11 @@
                 class="full"
                 v-decorator="liaisonId"
             >
-                <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
-                    {{ item.nameZh }}
-                </a-select-option>
+                <a-select-option
+                    v-for="item in liaisonList"
+                    :key="item.id"
+                    :label="item.nameZh"
+                >{{ item.nameZh }}</a-select-option>
             </a-select>
         </a-form-item>
         <a-form-item :label="$t('formab.ai')">
@@ -71,7 +73,11 @@
             <upload v-decorator="otherFiles" decorator="otherFiles" @handleChange="uploadChange"></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.aq')">
-            <upload v-decorator="taxpayerFiles" decorator="taxpayerFiles" @handleChange="uploadChange"></upload>
+            <upload
+                v-decorator="taxpayerFiles"
+                decorator="taxpayerFiles"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-item>
         <a-form-item :label="$t('formab.ar')">
             <upload
@@ -192,7 +198,7 @@
 import Upload from "@/components/upload";
 import rules from "./validate";
 import liaison from "@/apis/liaison";
-import outShow from "@/apis/outShow";
+import outShow from "@/apis/participateAttendAroad";
 export default {
     components: { Upload },
     data() {
@@ -280,7 +286,12 @@ export default {
             }
             this.$nextTick(() => {
                 this.form.validateFields(
-                    ["businessRegistrationFiles", "certificateBureauFiles", "salesTaxOpenFiles", "salesTaxFiles"],
+                    [
+                        "businessRegistrationFiles",
+                        "certificateBureauFiles",
+                        "salesTaxOpenFiles",
+                        "salesTaxFiles"
+                    ],
                     { force: true }
                 );
             });
