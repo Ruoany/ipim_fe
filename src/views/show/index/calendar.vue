@@ -36,7 +36,8 @@
 
 <script>
 import calendar from "@/components/calendar/index";
-import { getActiveList } from "@/apis/show";
+import Activity from "@/apis/activity";
+// import { getActiveList } from "@/apis/show";
 export default {
     components: { calendar },
     data() {
@@ -49,7 +50,7 @@ export default {
     methods: {
         async getActiveList() {
             this.loading = true;
-            const data = await getActiveList({ dayTime: this.dayTime });
+            const data = await Activity.get({ dayTime: this.dayTime });
             if (data.code === 200) {
                 this.showList = data.data;
                 this.loading = false;

@@ -20,8 +20,8 @@
 <script>
 import detailTitle from "./detailTitle";
 import detailTab from "./detailTab";
+import Activity from "@/apis/activity";
 
-import { getActiveById } from "@/apis/show";
 export default {
     components: { detailTab, detailTitle },
     watch: {
@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         async getActiveById(id) {
-            const data = await getActiveById(id);
+            const data = await Activity.one(id);
             if (data.code === 200) {
                 this.activeData = data.data;
             } else {
@@ -52,5 +52,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -19,7 +19,7 @@
 import showList from "./showList";
 import showTitle from "./title";
 import Pagination from "@/components/pagination";
-import { getActivePage } from "@/apis/show";
+import Activity from "@/apis/activity";
 
 export default {
     components: { showList, showTitle, Pagination },
@@ -58,7 +58,7 @@ export default {
         async getActivePage(status) {
             this.loading = true;
             const body = { size: this.size, page: this.page, status, participate: this.participate };
-            const { data } = await getActivePage(body);
+            const { data } = await Activity.get(body);
             this.list = data.content;
             this.total = data.totalElements;
             this.loading = false;
