@@ -8,6 +8,7 @@
             <div class="list-content">
                 <show-list :list="list"></show-list>
             </div>
+            <pagination :page="page" :total="total" @handleChange="pages => (page = pages - 1)" />
         </a-spin>
     </div>
 </template>
@@ -15,11 +16,12 @@
 <script>
 import showList from "./showList";
 import showTitle from "./title";
+import Pagination from "@/components/pagination";
 import Activity from "@/apis/activity";
 import FromMap from "@/common/map";
 
 export default {
-    components: { showList, showTitle },
+    components: { showList, showTitle, Pagination },
     data() {
         return {
             list: [],
@@ -58,9 +60,11 @@ export default {
     },
     watch: {
         active: function(newValue) {
-            console.log("新的值->>>>", newValue);
             this.page = 0;
             this.initData(newValue);
+        },
+        page: function() {
+            this.initData(this.active);
         },
         "$route.query": function(newValue) {
             this.actType = newValue.part;
