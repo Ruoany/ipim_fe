@@ -1,11 +1,11 @@
 import axios from "axios";
 import { message } from "ant-design-vue";
 
-export const baseURL = process.env.NODE_ENV === "production" ? "http://api-exhibition.servier.iteratech.net" : "/api";
+// export const baseURL = process.env.NODE_ENV === "production" ? "http://api-exhibition.servier.iteratech.net" : "/api";
 // export const baseURL = process.env.NODE_ENV === "production" ? "http://192.168.101.53:9196" : "/api";
 
 const request = axios.create({
-    baseURL, // api的base_url
+    baseURL: "/api", // api的base_url
     timeout: 50000 // 设置默认的请求超时时间
 });
 
