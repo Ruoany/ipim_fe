@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         currentPageChange: function(page) {
-            this.$emit("handleChange", page);
+            this.$emit("update:page", page - 1);
         }
     }
 };

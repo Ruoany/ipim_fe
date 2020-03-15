@@ -8,7 +8,7 @@
             <div class="list-content">
                 <show-list :list="list"></show-list>
             </div>
-            <pagination :page="page" :total="total" @handleChange="pages => (page = pages - 1)" />
+            <pagination :page.sync="page" :total="total" />
         </a-spin>
     </div>
 </template>
