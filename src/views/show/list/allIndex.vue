@@ -57,7 +57,7 @@ export default {
     methods: {
         async getActivePage(status) {
             this.loading = true;
-            const body = { size: this.size, page: this.page, status, participate: this.participate };
+            const body = { size: this.size, page: this.page, showStatus: status, participate: this.participate };
             const { data } = await Activity.get(body);
             this.list = data.content;
             this.total = data.totalElements;
