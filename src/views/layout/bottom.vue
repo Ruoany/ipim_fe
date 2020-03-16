@@ -64,6 +64,7 @@ export default {
     align-items: center;
     color: #ffffff;
     width: 100%;
+    min-width: 1226px;
     .font-24 {
         // font-size: 24px;
         padding-left: 31px;

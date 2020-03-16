@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </a-card>
-            <!-- </div> -->
         </a-spin>
     </div>
 </template>

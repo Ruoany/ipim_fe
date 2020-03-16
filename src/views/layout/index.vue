@@ -23,20 +23,12 @@ export default {
 .all {
     min-height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // position: relative;
+    overflow: auto;
     .main {
         padding-top: 50px;
         width: 100%;
+        min-width: 1226px;
         min-height: 100%;
     }
-}
-.bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
 </style>
