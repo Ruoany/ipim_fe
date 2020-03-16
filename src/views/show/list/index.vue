@@ -24,6 +24,7 @@ export default {
     components: { showList, showTitle, Pagination },
     data() {
         return {
+            FromMap,
             list: [],
             loading: false,
             active: "",
@@ -31,8 +32,7 @@ export default {
             order: null,
             page: 0,
             size: 6,
-            total: 0,
-            FromMap
+            total: 0
         };
     },
     computed: {
