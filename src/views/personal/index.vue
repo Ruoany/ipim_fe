@@ -14,7 +14,9 @@
 </template>
 
 <script>
+import Info from "./info";
 export default {
+    components: { Info },
     watch: {
         $route: {
             immediate: true,
