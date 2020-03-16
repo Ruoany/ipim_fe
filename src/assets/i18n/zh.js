@@ -116,7 +116,18 @@ const zhData = {
         l: "修改聯絡人",
         m: "機構信息",
         n: "聯繫人管理",
-        x: "子賬號管理"
+        x: "子賬號管理",
+        update: "修改申請",
+        foQuestion: "填寫問卷調查",
+        lfQuestion: "查看問卷結果",
+        showPic: "展會圖片",
+        allow: "獲批",
+        noAllow: "不獲批",
+        undeal: "待審核",
+        deal: "已審核",
+        upload: "上傳圖片",
+        tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
+        submit: "提交"
     }
 };
 

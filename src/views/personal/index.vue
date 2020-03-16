@@ -47,7 +47,7 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     .personal-content {
-        padding: 20px 30px;
+        padding: 20px 40px;
         min-height: 610px;
         width: 100%;
         border-left: 1px solid #e6e6e6;
