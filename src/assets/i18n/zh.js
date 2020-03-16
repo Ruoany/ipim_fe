@@ -97,7 +97,18 @@ const zhData = {
     formbf,
     formbd,
     personal: {
-        a: "選擇以電郵 / 手機短訊接收本局消息？"
+        a: "選擇以電郵 / 手機短訊接收本局消息？",
+        update: "修改申請",
+        foQuestion: "填寫問卷調查",
+        lfQuestion: "查看問卷結果",
+        showPic: "展會圖片",
+        allow: "獲批",
+        noAllow: "不獲批",
+        undeal: "待審核",
+        deal: "已審核",
+        upload: "上傳圖片",
+        tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
+        submit: "提交"
     }
 };
 
