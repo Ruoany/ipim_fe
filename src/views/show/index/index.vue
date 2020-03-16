@@ -10,10 +10,16 @@
                 <h1 class="font-bold title">{{ $t("index.evCa") }}</h1>
                 <calendar></calendar>
                 <div class="flex-justify-content-space-between flex-align-items-center title">
-                    <h1 class="font-bold ">{{ $t("index.keAc") }}</h1>
-                    <div class="flex-align-items-center" @click="$router.push('/show/all_index')">
+                    <h1 class="font-bold">{{ $t("index.keAc") }}</h1>
+                    <div
+                        class="flex-align-items-center go"
+                        @click="$router.push('/show/all_index')"
+                    >
                         {{ $t("index.allAc") }}
-                        <img src="../../../assets/image/more.svg" style="margin-left:10px;" />
+                        <img
+                            src="../../../assets/image/more.svg"
+                            style="margin-left:10px;"
+                        />
                     </div>
                 </div>
                 <div class="width-100 flex center">
