@@ -1,9 +1,14 @@
 <template>
-    <div class="container">record</div>
+    <div class="container">
+        <cell />
+    </div>
 </template>
 
 <script>
-export default {};
+import Cell from "./components/cell";
+export default {
+    components: { Cell }
+};
 </script>
 
 <style lang="less" scoped></style>
