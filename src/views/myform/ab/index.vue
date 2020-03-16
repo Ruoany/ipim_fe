@@ -48,7 +48,7 @@
             <a-input disabled v-model="liaisonObj.email" />
         </a-form-item>
         <a-form-item :label="$t('formab.al')">
-            <a-input disabled v-model="liaisonObj.address" />
+            <a-textarea disabled v-model="liaisonObj.address" />
         </a-form-item>
         <div class="form-item-title">
             <p>{{ $t("formab.am") }}</p>
@@ -222,26 +222,26 @@ export default {
         company() {
             // return JSON.parse(sessionStorage.getItem("company"));
             return {
-                id: 97,
+                id: 96,
                 createAt: null,
                 updateAt: null,
                 name: null,
-                nameZh: "機构測試123",
-                nameEn: "test123",
+                nameZh: "機构測試1",
+                nameEn: "test",
                 namePt: "Ensaio Institucional",
                 logo: null,
-                dateOfEstablishment: "1901-03",
+                dateOfEstablishment: "2020-02",
                 startTime: null,
                 endTime: null,
-                natureId: 4,
-                natureName: "未開始",
+                natureId: 2,
+                natureName: "本地",
                 country: null,
                 province: null,
                 city: null,
                 street: null,
-                countryZh: "1",
-                provinceZh: "110000000000",
-                cityZh: "110100000000",
+                countryZh: "3",
+                provinceZh: null,
+                cityZh: "31",
                 streetZh: "測試",
                 countryEnOrPt: null,
                 provinceEnOrPt: null,
@@ -249,20 +249,39 @@ export default {
                 streetEnOrPt: null,
                 email: null,
                 tel: null,
-                fax: "020-333",
-                institutionShareholderVOS: null,
+                fax: "020-112345",
+                institutionShareholderVOS: [
+                    {
+                        id: 64,
+                        createAt: null,
+                        updateAt: null,
+                        institutionId: 96,
+                        institutionName: "機构測試1",
+                        name: null,
+                        percent: null
+                    }
+                ],
                 m1Number: null,
                 registrationNumber: null,
+                siteRegistrationCode: null,
                 taxpayerName: null,
                 taxpayerNo: null,
                 business: null,
-                registeredCapital: 20000,
-                currency: "CNY",
-                institutionIndustryVOS: null,
+                registeredCapital: 200,
+                currency: "USD",
+                institutionIndustryVOS: [
+                    {
+                        institutionId: 96,
+                        institutionName: "機构測試1",
+                        name: "",
+                        category: ""
+                    }
+                ],
                 chargeName: null,
                 status: null,
                 shareholderComponents: null,
                 deal: null,
+                tasks: null,
                 idnumber: null
             };
         }
@@ -286,9 +305,10 @@ export default {
             });
         },
         async initData() {
-            const data = await Liaison.get();
+            const data = await Liaison.getList({ institutionId: this.company.id });
+            console.log("daya==>", data);
             if (data.code === 200) {
-                this.liaisonList = data.data.content;
+                this.liaisonList = data.data;
             } else {
                 this.$message.error(data.message);
             }

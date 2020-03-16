@@ -41,6 +41,13 @@ const router = [
                 meta: {
                     key: "mine"
                 }
+            },
+            {
+                path: `${parentRoute}/con_user`,
+                component: () => import("@/views/personal/conUser"),
+                meta: {
+                    key: "info"
+                }
             }
         ]
     }

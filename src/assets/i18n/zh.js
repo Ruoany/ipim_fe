@@ -86,7 +86,12 @@ const zhData = {
         name: "姓名",
         password: "密碼",
         upPassword: "修改密碼",
-        SMS: "短訊"
+        SMS: "短訊",
+        sex: "性別",
+        aphone: "本澳流动电话",
+        bphone: "國內流動電話",
+        address: "通訊地址",
+        upData: "修改"
     },
     formaa,
     formab,
@@ -97,7 +102,21 @@ const zhData = {
     formbf,
     formbd,
     personal: {
-        a: "選擇以電郵 / 手機短訊接收本局消息？"
+        a: "選擇以電郵 / 手機短訊接收本局消息？",
+        b: "原密碼",
+        c: "新密碼",
+        d: "確認新密碼",
+        e: "職位",
+        f: "在職狀態",
+        g: "在職",
+        h: "離職",
+        i: "聯絡人管理",
+        j: "新增聯絡人",
+        k: "添加聯絡人",
+        l: "修改聯絡人",
+        m: "機構信息",
+        n: "聯繫人管理",
+        x: "子賬號管理"
     }
 };
 
