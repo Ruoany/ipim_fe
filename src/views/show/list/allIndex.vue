@@ -9,9 +9,9 @@
                 <a-tab-pane :tab="$t('show.processing')" key="PROGRESS"></a-tab-pane>
                 <a-tab-pane :tab="$t('show.over')" key="END"></a-tab-pane>
             </a-tabs>
-            <show-list :list="list"></show-list>
+            <show-list :list="list" class="list"></show-list>
             <pagination
-                :page="page"
+                :page.sync="page"
                 :total="total"
                 :size="size"
                 @handleChange="pages => (page = pages - 1)"
@@ -60,7 +60,12 @@ export default {
     methods: {
         async getActivePage(status) {
             this.loading = true;
-            const body = { size: this.size, page: this.page, showStatus: status, participate: this.participate };
+            const body = {
+                size: this.size,
+                page: this.page,
+                showStatus: status,
+                participate: this.participate
+            };
             const { data } = await Activity.get(body);
             this.list = data.content;
             this.total = data.totalElements;
@@ -84,6 +89,9 @@ export default {
         font-size: 20px;
         font-weight: bold;
         padding: 12px 0;
+    }
+    .list {
+        min-height: 500px;
     }
 }
 </style>
