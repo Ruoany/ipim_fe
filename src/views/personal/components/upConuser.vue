@@ -105,12 +105,29 @@
 <script>
 import Liaison from "@/apis/liaison";
 export default {
+    props: { id: [String, Number] },
     data() {
         return {
             form: this.$form.createForm(this, { name: "coordinated" })
         };
     },
+    watch: {
+        id: {
+            immediate: true,
+            handler(newValue) {
+                this.getLision(newValue);
+            }
+        }
+    },
     methods: {
+        async getLision(id) {
+            const data = await Liaison.one(id);
+            if (data.code === 200) {
+                this.form.setFieldsValue(data.data);
+            } else {
+                this.$message.error(data.message);
+            }
+        },
         handleSubmit(e) {
             e.preventDefault();
             this.form.validateFields(async (err, values) => {

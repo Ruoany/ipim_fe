@@ -2,7 +2,7 @@
     <div class="container">
         <div class="flex-justify-content-space-between">
             <h1>{{ $t("personal.i") }}</h1>
-            <a-button type="primary" icon="plus" @click="infoVisible = true">{{ $t("personal.j") }}</a-button>
+            <a-button type="primary" icon="plus" @click="showDrawer('add')">{{ $t("personal.j") }}</a-button>
         </div>
         <a-list class="demo-loadmore-list" :loading="loading" itemLayout="horizontal" :dataSource="liaisonList">
             <!-- <div
@@ -14,36 +14,40 @@
                 <a-button v-else @click="onLoadMore">loading more</a-button>
             </div> -->
             <a-list-item slot="renderItem" slot-scope="item">
-                <a-button slot="actions">{{ $t("util.upData") }}</a-button>
+                <a-button slot="actions" @click="showDrawer('upData', item.id)">{{ $t("util.upData") }}</a-button>
                 <a-list-item-meta>
                     <a slot="title" href="https://www.antdv.com/">{{ item.nameZh }}</a>
                 </a-list-item-meta>
             </a-list-item>
         </a-list>
         <a-drawer
-            :title="$t('personal.k')"
+            :title="title === 'add' ? $t('personal.k') : $t('personal.l')"
             :visible="infoVisible"
             @ok="handleOk"
-            :confirmLoading="confirmLoading"
             @close="handleCancel"
             width="800px"
             destroyOnClose
         >
-            <add-con-user @handleCancel="handleCancel"></add-con-user>
+            <add-con-user @handleCancel="handleCancel" v-if="title === 'add'"></add-con-user>
+            <up-con-user @handleCancel="handleCancel" v-if="title === 'upData'" :id="id"></up-con-user>
         </a-drawer>
     </div>
 </template>
 
 <script>
 import addConUser from "./components/addConUser";
+import upConUser from "./components/upConuser";
 import Liaison from "@/apis/liaison";
 export default {
+    components: { addConUser, upConUser },
     data() {
         return {
             infoVisible: false,
             confirmLoading: false,
             liaisonList: [],
-            loading: false
+            loading: false,
+            title: "add",
+            id: null
         };
     },
     computed: {
@@ -95,10 +99,13 @@ export default {
             };
         }
     },
-    components: { addConUser },
+
     methods: {
-        handleCancel() {
+        handleCancel(e) {
             this.infoVisible = false;
+            if (e === "add") {
+                this.initData();
+            }
         },
         async initData() {
             this.loading = true;
@@ -110,7 +117,13 @@ export default {
                 this.$message.error(data.message);
             }
         },
-        handleOk() {}
+        handleOk() {},
+        //展示抽屜
+        showDrawer(e, id) {
+            this.title = e;
+            this.id = id;
+            this.infoVisible = true;
+        }
     },
     mounted() {
         this.initData();
