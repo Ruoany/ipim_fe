@@ -48,9 +48,6 @@ export default {
         formatAvatar: function(value) {
             return value ? value.slice(0, 1) : value;
         }
-    },
-    mounted: function() {
-        console.log("--->", this.liaisons);
     }
 };
 </script>

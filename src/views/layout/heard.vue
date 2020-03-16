@@ -7,24 +7,20 @@
                     <span>{{ $t("menu.signUp") }}</span>
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    @click="handleNavigate('SELF', '011', 'menu.signUp')"
-                >{{ $t("menu.aa") }}</a-menu-item>
-                <a-menu-item
-                    @click="handleNavigate('SELF', '012', 'menu.signUp')"
-                >{{ $t("menu.ab") }}</a-menu-item>
+                <a-menu-item @click="handleNavigate('SELF', '011', 'menu.signUp')">{{ $t("menu.aa") }}</a-menu-item>
+                <a-menu-item @click="handleNavigate('SELF', '012', 'menu.signUp')">{{ $t("menu.ab") }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="dep">
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    @click="handleNavigate('DEPUTATION', '022', 'menu.delegation')"
-                >{{ $t("menu.ba") }}</a-menu-item>
-                <a-menu-item
-                    @click="handleNavigate('DEPUTATION', '021', 'menu.delegation')"
-                >{{ $t("menu.bb") }}</a-menu-item>
+                <a-menu-item @click="handleNavigate('DEPUTATION', '022', 'menu.delegation')">{{
+                    $t("menu.ba")
+                }}</a-menu-item>
+                <a-menu-item @click="handleNavigate('DEPUTATION', '021', 'menu.delegation')">{{
+                    $t("menu.bb")
+                }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="finEnc">
                 <span slot="title" class="flex center">
@@ -34,12 +30,8 @@
                 <a-menu-item>{{ $t("menu.ca") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cb") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cc") }}</a-menu-item>
-                <a-menu-item
-                    @click="$router.push({ path: '/myform/index', query: { form: 'bd' } })"
-                >
-                    {{
-                    $t("menu.cd")
-                    }}
+                <a-menu-item @click="$router.push({ path: '/myform/index', query: { form: 'bd' } })">
+                    {{ $t("menu.cd") }}
                 </a-menu-item>
                 <a-menu-item>{{ $t("menu.ce") }}</a-menu-item>
                 <a-menu-item>{{ $t("menu.cf") }}</a-menu-item>
@@ -55,11 +47,11 @@
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item key="inIn" @click="menuChange('inIn')">{{ $t("menu.inIn") }}</a-menu-item>
-                <a-menu-item key="exEr" @click="menuChange('exEr')">{{ $t("menu.exEr") }}</a-menu-item>
-                <a-menu-item key="funding" @click="menuChange('funding')">{{ $t("menu.funding") }}</a-menu-item>
-                <a-menu-item key="acSe" @click="menuChange('acSe')">{{ $t("menu.acSe") }}</a-menu-item>
-                <a-menu-item key="perInfo" @click="menuChange('perInfo')">{{ $t("menu.perInfo") }}</a-menu-item>
+                <a-menu-item key="inIn" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
+                <a-menu-item key="exEr" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
+                <a-menu-item key="funding" @click="personalNavigate('/funding')">{{ $t("menu.funding") }}</a-menu-item>
+                <a-menu-item key="acSe" @click="personalNavigate('/setting')">{{ $t("menu.acSe") }}</a-menu-item>
+                <a-menu-item key="perInfo" @click="personalNavigate('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
@@ -85,6 +77,10 @@ export default {
         handleNavigate: function(query, order, selected) {
             sessionStorage.setItem("selectedItem", selected);
             this.$router.push(`/show/index?part=${query}&order=${order}`);
+        },
+        personalNavigate: function(target) {
+            const url = `/personal${target}`;
+            this.$router.push(url);
         }
     },
     mounted() {
@@ -98,6 +94,7 @@ export default {
 <style lang="less" scoped>
 .container {
     width: 100%;
+    min-width: 1226px;
     background-color: rgba(255, 255, 255, 0.9);
     position: fixed;
     z-index: 999;

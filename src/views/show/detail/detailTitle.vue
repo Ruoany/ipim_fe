@@ -51,7 +51,6 @@ export default {
     data() {
         return {
             FormMap
-            // test: ["022", "021"]
         };
     },
     filters: {
@@ -61,7 +60,6 @@ export default {
     },
     methods: {
         navigateForm: function(e) {
-            console.log("click left button", e);
             this.$router.push(`/myform/index?activityId=${this.activityId}&form=${e.key}`);
         }
     }

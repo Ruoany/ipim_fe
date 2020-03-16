@@ -18,9 +18,10 @@ const router = new VueRouter({
     routes: [
         { path: "/", redirect: "/index" },
         {
-            path: "/",
+            path: "/index",
             meta: {
-                title: "首页"
+                title: "首页",
+                key: "home"
             },
             component: () => import("@/views/layout/index"),
             children: [...show, ...personal, ...myform]

@@ -33,6 +33,9 @@ export default {
     flex-wrap: wrap;
     width: 100%;
     padding: 40px 0;
+    .empty {
+        height: 500px;
+    }
 }
 /deep/ .ant-pagination {
     margin: 30px 0;

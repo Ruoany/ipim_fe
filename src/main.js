@@ -11,7 +11,6 @@ import "@/assets/icon/iconfont.css";
 
 Vue.use(VueI18n);
 Vue.use(Antd);
-Vue.use(Antd);
 
 Vue.config.productionTip = false;
 Vue.prototype.$moment = moment;
