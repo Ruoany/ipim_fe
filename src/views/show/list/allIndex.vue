@@ -10,7 +10,12 @@
                 <a-tab-pane :tab="$t('show.over')" key="END"></a-tab-pane>
             </a-tabs>
             <show-list :list="list"></show-list>
-            <pagination :page.sync="page" :total="total" :size="size"></pagination>
+            <pagination
+                :page="page"
+                :total="total"
+                :size="size"
+                @handleChange="pages => (page = pages - 1)"
+            ></pagination>
         </a-spin>
     </div>
 </template>
@@ -48,10 +53,8 @@ export default {
                 }
             }
         },
-        page: {
-            handler: function() {
-                this.getActivePage(this.status);
-            }
+        page: function() {
+            this.getActivePage(this.status);
         }
     },
     methods: {

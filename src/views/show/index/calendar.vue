@@ -5,8 +5,6 @@
         </div>
         <a-spin :spinning="loading" class="flex list spin">
             <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
-
-            <!-- <div class="flex list" style=" height: 330px;    overflow-y: scroll;"> -->
             <a-empty v-if="showList.length === 0"></a-empty>
             <a-card
                 hoverable
@@ -37,7 +35,6 @@
 <script>
 import calendar from "@/components/calendar/index";
 import Activity from "@/apis/activity";
-// import { getActiveList } from "@/apis/show";
 export default {
     components: { calendar },
     data() {
@@ -54,8 +51,6 @@ export default {
             if (data.code === 200) {
                 this.showList = data.data;
                 this.loading = false;
-            } else {
-                this.$message.error(data.message);
             }
         },
         changeDate(date) {
