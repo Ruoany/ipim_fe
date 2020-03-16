@@ -81,7 +81,12 @@ const zhData = {
         step5: "第五步：把表格正本遞交給貿促局工作人員",
         download: "下載附件",
         agree: "同意",
-        disagree: "不同意"
+        disagree: "不同意",
+        save: "保存",
+        name: "姓名",
+        password: "密碼",
+        upPassword: "修改密碼",
+        SMS: "短訊"
     },
     formaa,
     formab,
@@ -90,7 +95,10 @@ const zhData = {
     formbc,
     formbe,
     formbf,
-    formbd
+    formbd,
+    personal: {
+        a: "選擇以電郵 / 手機短訊接收本局消息？"
+    }
 };
 
 export default zhData;
