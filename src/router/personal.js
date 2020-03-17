@@ -50,6 +50,13 @@ const router = [
                 }
             },
             {
+                path: `${parentRoute}/sub_account`,
+                component: () => import("@/views/personal/subAccount"),
+                meta: {
+                    key: "info"
+                }
+            },
+            {
                 path: `${parentRoute}/con_user`,
                 component: () => import("@/views/personal/conUser"),
                 meta: {
