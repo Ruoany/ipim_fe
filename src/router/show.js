@@ -1,47 +1,36 @@
 const parentRoute = "/show";
 const router = [
     {
-        path: "/index",
+        path: `${parentRoute}/host`,
         meta: {
-            title: "展會",
+            title: "主辦展會",
+            key: "host"
+        },
+        component: () => import("@/views/show/host/index")
+    },
+    {
+        path: `${parentRoute}/overseas`,
+        meta: {
+            title: "境外之展會",
+            key: "overseas"
+        },
+        component: () => import("@/views/show/overseas/index")
+    },
+    {
+        path: `${parentRoute}/all`,
+        meta: {
+            title: "全部展會",
             key: "show"
         },
-        component: () => import("@/views/show/index/index")
-    },
-    {
-        path: `${parentRoute}/index`,
-        meta: {
-            title: "展會"
-        },
-        component: () => import("@/views/show/list/index")
-    },
-    {
-        path: `${parentRoute}/rep_index`,
-        meta: {
-            title: "代表團展會"
-        },
-        component: () => import("@/views/show/list/repIndex")
-    },
-    {
-        path: `${parentRoute}/all_index`,
-        meta: {
-            title: "全部展會"
-        },
-        component: () => import("@/views/show/list/allIndex")
+        component: () => import("@/views/show/all/index")
     },
     {
         path: `${parentRoute}/detail`,
         meta: {
-            title: "展會詳情"
+            title: "展會詳情",
+            key: "show"
         },
         component: () => import("@/views/show/detail/index")
-    },
-    {
-        path: `${parentRoute}/rep_detail`,
-        meta: {
-            title: "代表團詳情"
-        },
-        component: () => import("@/views/show/detail/repIndex")
     }
 ];
 

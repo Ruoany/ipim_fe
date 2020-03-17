@@ -1,9 +1,10 @@
 <template>
     <div class="container">
-        <show-title :text="$t(`${info.title}`)"></show-title>
+        <show-title></show-title>
         <a-spin :spinning="loading" class="content flex center width-1280">
-            <a-tabs v-model="active" class="tabs" @change="reflash">
-                <a-tab-pane v-for="item in info.tabs" :key="item" :tab="$t(`${FromMap[item]}`)"></a-tab-pane>
+            <a-tabs v-model="active" class="tabs">
+                <a-tab-pane key="022" :tab="$t('menu.ba')"></a-tab-pane>
+                <a-tab-pane key="021" :tab="$t('menu.bb')"></a-tab-pane>
             </a-tabs>
             <div class="list-content">
                 <show-list :list="list"></show-list>
@@ -38,29 +39,6 @@ export default {
             size: 6,
             total: 0
         };
-    },
-    computed: {
-        info: {
-            get: function() {
-                const params = this.$route.query.part;
-                let o = {};
-                switch (params) {
-                    case "SELF":
-                        o = {
-                            title: "menu.signUp",
-                            tabs: ["011", "012"]
-                        };
-                        break;
-                    case "DEPUTATION":
-                        o = {
-                            title: "menu.delegation",
-                            tabs: ["022", "021"]
-                        };
-                        break;
-                }
-                return o;
-            }
-        }
     },
     watch: {
         active: function(newValue) {
@@ -109,7 +87,7 @@ export default {
 <style lang="less" scoped>
 .container {
     .content {
-        padding-top: 100px;
+        padding-top: 30px;
         margin: auto;
         /deep/.ant-tabs-bar {
             border: transparent;

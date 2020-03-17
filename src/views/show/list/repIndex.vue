@@ -5,8 +5,8 @@
         <div class="flex center padding-100">
             <div class="width-1280">
                 <a-tabs defaultActiveKey="true" @change="activeChange">
-                    <a-tab-pane :tab="$t('show.local')" key="true"> </a-tab-pane>
-                    <a-tab-pane :tab="$t('show.overseas')" key="false"> </a-tab-pane>
+                    <a-tab-pane :tab="$t('show.local')" key="true"></a-tab-pane>
+                    <a-tab-pane :tab="$t('show.overseas')" key="false"></a-tab-pane>
                 </a-tabs>
                 <show-list :listQuery="listQuery"></show-list>
                 <pagination :page.sync="page" :total="total" :size="size"></pagination>
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import showList from "./showList";
-import showTitle from "./title";
+import showList from "../components/showList";
+import showTitle from "../components/title";
 import Pagination from "@/components/pagination";
 export default {
     components: { showList, showTitle, Pagination },

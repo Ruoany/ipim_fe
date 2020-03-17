@@ -3,7 +3,7 @@ const router = [
     {
         path: `${parentRoute}/index`,
         meta: {
-            title: "機構認證"
+            title: "個人中心"
         },
         component: () => import("@/views/personal/index"),
         children: [
@@ -11,21 +11,24 @@ const router = [
                 path: `${parentRoute}/info`,
                 component: () => import("@/views/personal/info"),
                 meta: {
-                    key: "info"
+                    key: "info",
+                    title: "機構信息"
                 }
             },
             {
                 path: `${parentRoute}/record`,
                 component: () => import("@/views/personal/record"),
                 meta: {
-                    key: "record"
+                    key: "record",
+                    title: "參會/參團紀錄"
                 }
             },
             {
                 path: `${parentRoute}/funding`,
                 component: () => import("@/views/personal/funding"),
                 meta: {
-                    key: "funding"
+                    key: "funding",
+                    title: "資助與財務鼓勵"
                 }
             },
             {
@@ -39,7 +42,8 @@ const router = [
                 path: `${parentRoute}/mine`,
                 component: () => import("@/views/personal/mine"),
                 meta: {
-                    key: "mine"
+                    key: "mine",
+                    title: "個人信息"
                 }
             },
             {
