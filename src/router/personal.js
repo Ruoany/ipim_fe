@@ -43,6 +43,13 @@ const router = [
                 }
             },
             {
+                path: `${parentRoute}/mechanism`,
+                component: () => import("@/views/personal/mechanism"),
+                meta: {
+                    key: "info"
+                }
+            },
+            {
                 path: `${parentRoute}/con_user`,
                 component: () => import("@/views/personal/conUser"),
                 meta: {
