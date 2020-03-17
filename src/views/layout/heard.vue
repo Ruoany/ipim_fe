@@ -47,11 +47,12 @@
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item key="inIn" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
+                <a-menu-item key="perInfo" @click="personalNavigate('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
+
                 <a-menu-item key="exEr" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
                 <a-menu-item key="funding" @click="personalNavigate('/funding')">{{ $t("menu.funding") }}</a-menu-item>
-                <a-menu-item key="acSe" @click="personalNavigate('/setting')">{{ $t("menu.acSe") }}</a-menu-item>
-                <a-menu-item key="perInfo" @click="personalNavigate('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
+                <!-- <a-menu-item key="acSe" @click="personalNavigate('/setting')">{{ $t("menu.acSe") }}</a-menu-item> -->
+                <a-menu-item key="inIn" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
