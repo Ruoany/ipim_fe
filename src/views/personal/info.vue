@@ -1,8 +1,8 @@
 <template>
     <div class="flex">
-        <a-card hoverable class="card">
+        <a-card hoverable class="card" @click="$router.push('/personal/mechanism')">
             <a-icon type="bars" style="font-size:40px;" />
-            <a-card-meta :description="$t('personal.m')" />
+            <a-card-meta :description="$t('personal.s')" />
         </a-card>
 
         <a-card hoverable @click="$router.push('/personal/con_user')" class="card">
@@ -23,7 +23,7 @@ export default {};
 
 <style lang="less" scoped>
 .card {
-    width: 120px;
+    width: 140px;
     margin-right: 20px;
     text-align: center;
     line-height: 30px;

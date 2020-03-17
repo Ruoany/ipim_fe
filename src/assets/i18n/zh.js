@@ -117,6 +117,7 @@ const zhData = {
         m: "機構信息",
         n: "聯繫人管理",
         x: "子賬號管理",
+        s: "機構信息管理",
         update: "修改申請",
         foQuestion: "填寫問卷調查",
         lfQuestion: "查看問卷結果",
