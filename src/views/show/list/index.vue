@@ -8,11 +8,7 @@
             <div class="list-content">
                 <show-list :list="list"></show-list>
             </div>
-            <pagination
-                :page.sync="page"
-                :total="total"
-                @handleChange="pages => (page = pages - 1)"
-            />
+            <pagination :page.sync="page" :total="total" @handleChange="pages => (page = pages - 1)" />
         </a-spin>
     </div>
 </template>
@@ -99,6 +95,9 @@ export default {
     mounted: function() {
         this.actType = this.$route.query.part;
         this.active = this.$route.query.order;
+        setTimeout(() => {
+            this.loading = false;
+        }, 5000);
     }
 };
 </script>

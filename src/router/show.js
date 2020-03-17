@@ -3,7 +3,8 @@ const router = [
     {
         path: "/index",
         meta: {
-            title: "展會"
+            title: "展會",
+            key: "show"
         },
         component: () => import("@/views/show/index/index")
     },
