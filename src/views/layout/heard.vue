@@ -2,47 +2,36 @@
     <div class="container flex">
         <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="menuItem" mode="horizontal" class="menu-wrapper">
-            <a-sub-menu key="show">
-                <span slot="title" class="flex center">
-                    <span>{{ $t("menu.signUp") }}</span>
-                    <i class="iconfont iconjiantouarrow486 selected"></i>
-                </span>
-                <a-menu-item
-                    @click="handleNavigate('SELF', '011', 'menu.signUp')"
-                >{{ $t("menu.aa") }}</a-menu-item>
-                <a-menu-item
-                    @click="handleNavigate('SELF', '012', 'menu.signUp')"
-                >{{ $t("menu.ab") }}</a-menu-item>
-            </a-sub-menu>
-            <a-sub-menu key="dep">
+            <a-menu-item key="host" @click="handleNavigate('/show/host')">{{ $t("menu.signUp") }}</a-menu-item>
+            <a-sub-menu key="overseas">
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item @click="handleNavigate('DEPUTATION', '022', 'menu.delegation')">
+                <a-menu-item @click="handleNavigate('/show/overseas','022')">
                     {{
                     $t("menu.ba")
                     }}
                 </a-menu-item>
-                <a-menu-item @click="handleNavigate('DEPUTATION', '021', 'menu.delegation')">
+                <a-menu-item @click="handleNavigate('/show/overseas','021')">
                     {{
                     $t("menu.bb")
                     }}
                 </a-menu-item>
             </a-sub-menu>
-            <a-sub-menu key="finEnc">
+            <a-sub-menu key="show7">
                 <span slot="title" class="flex center">
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item>{{ $t("menu.ca") }}</a-menu-item>
-                <a-menu-item>{{ $t("menu.cb") }}</a-menu-item>
-                <a-menu-item>{{ $t("menu.cc") }}</a-menu-item>
+                <a-menu-item key="show8">{{ $t("menu.ca") }}</a-menu-item>
+                <a-menu-item key="show9">{{ $t("menu.cb") }}</a-menu-item>
+                <a-menu-item key="show10">{{ $t("menu.cc") }}</a-menu-item>
                 <a-menu-item
                     @click="$router.push({ path: '/myform/index', query: { form: 'bd' } })"
                 >{{ $t("menu.cd") }}</a-menu-item>
-                <a-menu-item>{{ $t("menu.ce") }}</a-menu-item>
-                <a-menu-item>{{ $t("menu.cf") }}</a-menu-item>
+                <a-menu-item key="show11">{{ $t("menu.ce") }}</a-menu-item>
+                <a-menu-item key="show12">{{ $t("menu.cf") }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
@@ -55,16 +44,13 @@
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    key="perInfo"
-                    @click="personalNavigate('/mine')"
-                >{{ $t("menu.perInfo") }}</a-menu-item>
-                <a-menu-item key="exEr" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
+                <a-menu-item key="mine" @click="personalNavigate('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
+                <a-menu-item key="record" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
                 <a-menu-item
                     key="funding"
                     @click="personalNavigate('/funding')"
                 >{{ $t("menu.funding") }}</a-menu-item>
-                <a-menu-item key="inIn" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
+                <a-menu-item key="info" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
@@ -77,14 +63,14 @@ export default {
             current: null,
             showList: [],
             depList: [],
-            menuItem: "null"
+            menuItem: []
         };
     },
     watch: {
         $route: {
             immediate: true,
             handler: function(newValue) {
-                this.menuItem = newValue.meta.key;
+                this.menuItem = [newValue.meta.key];
             }
         }
     },
@@ -95,9 +81,12 @@ export default {
         menuChange(key) {
             this.$router.push({ path: "/personal/index", query: { key } });
         },
-        handleNavigate: function(query, order, selected) {
-            sessionStorage.setItem("selectedItem", selected);
-            this.$router.push(`/show/index?part=${query}&order=${order}`);
+        handleNavigate: function(url, order) {
+            if (order) {
+                this.$router.push(`${url}?order=${order}`);
+            } else {
+                this.$router.push(url);
+            }
         },
         personalNavigate: function(target) {
             const url = `/personal${target}`;

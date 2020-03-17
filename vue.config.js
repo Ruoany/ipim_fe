@@ -16,7 +16,7 @@ module.exports = {
             entry: "src/main.js",
             template: "public/index.html",
             filename: "index.html",
-            title: "澳门贸促局",
+            title: "澳門貿促局",
             chunks: ["chunk-vendors", "chunk-common", "index"]
         }
     },

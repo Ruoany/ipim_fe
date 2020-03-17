@@ -16,15 +16,30 @@ const router = new VueRouter({
     mode: "hash",
     base: process.env.BASE_URL,
     routes: [
-        { path: "/", redirect: "/index" },
         {
-            path: "/index",
+            path: "/",
             meta: {
                 title: "首页",
                 key: "home"
             },
             component: () => import("@/views/layout/index"),
-            children: [...show, ...personal, ...myform]
+            children: [
+                {
+                    path: "/",
+                    redirect: "/index"
+                },
+                {
+                    path: "/index",
+                    component: () => import("@/views/home/index"),
+                    meta: {
+                        title: "首頁",
+                        key: "home"
+                    }
+                },
+                ...show,
+                ...personal,
+                ...myform
+            ]
         }
     ]
 });

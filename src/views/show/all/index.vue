@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import showList from "./showList";
-import showTitle from "./title";
+import showList from "../components/showList";
+import showTitle from "../components/title";
 import Pagination from "@/components/pagination";
 import Activity from "@/apis/activity";
 
