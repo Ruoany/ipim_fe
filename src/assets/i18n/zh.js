@@ -27,7 +27,7 @@ const zhData = {
         personal: "個人中心",
         perInfo: "個人信息",
         inIn: "機構信息",
-        exEr: "參展記錄",
+        exEr: "參會/參團記錄",
         funding: "資助與財務鼓勵",
         acSe: "賬號設置"
     },

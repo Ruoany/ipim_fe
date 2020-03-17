@@ -108,7 +108,8 @@ export default {
     props: { id: [String, Number] },
     data() {
         return {
-            form: this.$form.createForm(this, { name: "coordinated" })
+            form: this.$form.createForm(this, { name: "coordinated" }),
+            listData: {}
         };
     },
     watch: {
@@ -124,6 +125,7 @@ export default {
             const data = await Liaison.one(id);
             if (data.code === 200) {
                 this.form.setFieldsValue(data.data);
+                this.listData = data.data;
             } else {
                 this.$message.error(data.message);
             }
@@ -132,9 +134,9 @@ export default {
             e.preventDefault();
             this.form.validateFields(async (err, values) => {
                 if (!err) {
-                    const data = await Liaison.create({ ...values, institutionId: 96 });
+                    const data = await Liaison.update({ ...this.listData, ...values });
                     if (data.code === 200) {
-                        this.$message.success("添加成功");
+                        this.$message.success("修改成功");
                         this.$emit("handleCancel", "add");
                     } else {
                         this.$message.error(data.message);

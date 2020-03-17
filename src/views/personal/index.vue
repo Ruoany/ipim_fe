@@ -1,11 +1,11 @@
 <template>
     <div class="personal-container">
         <a-menu :selectedKeys="[menuItem]" style="width: 206px;min-height:610px" mode="inline">
-            <a-menu-item key="info" @click="navigateTo('/info')">{{ $t("menu.inIn") }}</a-menu-item>
+            <a-menu-item key="mine" @click="navigateTo('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
             <a-menu-item key="record" @click="navigateTo('/record')">{{ $t("menu.exEr") }}</a-menu-item>
             <a-menu-item key="funding" @click="navigateTo('/funding')">{{ $t("menu.funding") }}</a-menu-item>
-            <a-menu-item key="setting" @click="navigateTo('/setting')">{{ $t("menu.acSe") }}</a-menu-item>
-            <a-menu-item key="mine" @click="navigateTo('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
+            <!-- <a-menu-item key="setting" @click="navigateTo('/setting')">{{ $t("menu.acSe") }}</a-menu-item> -->
+            <a-menu-item key="info" @click="navigateTo('/info')">{{ $t("menu.inIn") }}</a-menu-item>
         </a-menu>
         <div class="personal-content">
             <router-view></router-view>
