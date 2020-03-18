@@ -92,7 +92,9 @@ const zhData = {
         aphone: "本澳流动电话",
         bphone: "國內流動電話",
         address: "通訊地址",
-        upData: "修改"
+        upData: "修改",
+        nameZh: "姓名（中文）",
+        nameEnAndPt: "姓名（英/葡文）"
     },
     formaa,
     formab,
@@ -132,6 +134,7 @@ const zhData = {
         af: "綁定子賬號",
         ag: "請輸入員工個人信息的ID號",
         ah: "認證本機構",
+        ai: "職位（英/葡文）",
         logo: "機構LOGO",
         meName: "機構名稱",
         update: "修改申請",
@@ -146,6 +149,9 @@ const zhData = {
         tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
         submit: "提交",
         userId: "用戶ID"
+    },
+    report: {
+        aa: "填寫方式一：在綫填寫展會報告"
     }
 };
 
