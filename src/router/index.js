@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import show from "./show";
 import personal from "./personal";
 import myform from "./myform";
+import report from "./report";
 
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location, onResolve, onReject) {
@@ -38,7 +39,8 @@ const router = new VueRouter({
                 },
                 ...show,
                 ...personal,
-                ...myform
+                ...myform,
+                ...report
             ]
         }
     ]

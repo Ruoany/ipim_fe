@@ -15,7 +15,11 @@ request.interceptors.request.use(
         config.headers = {
             // Authorization: sessionStorage.getItem("token")
             Authorization:
+<<<<<<< HEAD
+                "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJbXCLnrqHnkIblkZhcIl0iLCJleHAiOjE1ODQ1ODEwNDd9.F4y8aBeTIC4QwmfgccyxWPnouOMSE3yeD7wGJCS-kRDdSqWv_TwfAYADMe6zHlkkzCFB3Dj73NkjaIm1qs6Tkw"
+=======
                 "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiYXV0aG9yaXRpZXMiOiJbXCLnrqHnkIblkZhcIl0iLCJleHAiOjE1ODQ1ODE3NTN9.cBGsLPddDZh5wTPICS4uFqBShvUsTqen9qbtED1SeIdMMMnP02laSZluWTLYwbNwwzMtLun19C9HKg7kEmFwxA"
+>>>>>>> ece88d3b6b6c3f84677f11f3da0ed0e150ae09af
         };
         return config;
     },

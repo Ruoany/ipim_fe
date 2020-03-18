@@ -1,10 +1,15 @@
 <template>
     <a-form :form="form" @submit="handleSubmit" style="width:100%;" layout="vertical">
         <a-form-item :label="$t('util.name')">
-            <a-input v-decorator="['nameZh', { rules: [{ required: true, message: 'Please input' }] }]" />
+            <a-input v-decorator="['nameZh', { rules: [{validator:nameVal }] }]" />
+        </a-form-item>
+        <a-form-item :label="$t('util.nameEnAndPt')">
+            <a-input v-decorator="['nameEnOrPt', { rules: [{validator:nameVal }] }]" />
         </a-form-item>
         <a-form-item :label="$t('util.sex')">
-            <a-radio-group v-decorator="['gender', { rules: [{ required: true, message: 'Please select' }] }]">
+            <a-radio-group
+                v-decorator="['gender', { rules: [{ required: true, message: 'Please select' }] }]"
+            >
                 <a-radio value="M">{{ $t("util.man") }}</a-radio>
                 <a-radio value="F">{{ $t("util.woman") }}</a-radio>
             </a-radio-group>
@@ -14,7 +19,17 @@
                 v-decorator="[
                     'titleNameZh',
                     {
-                        rules: [{ required: true, message: 'Please input' }]
+                        rules: [{validator:titleNameVal }]
+                    }
+                ]"
+            />
+        </a-form-item>
+        <a-form-item :label="$t('personal.ai')">
+            <a-input
+                v-decorator="[
+                    'titleNameEnOrPt',
+                    {
+                        rules: [{validator:titleNameVal }]
                     }
                 ]"
             />
@@ -94,9 +109,7 @@
                 textAlign: 'right'
             }"
         >
-            <a-button :style="{ marginRight: '8px' }" @click="onClose">
-                Cancel
-            </a-button>
+            <a-button :style="{ marginRight: '8px' }" @click="onClose">Cancel</a-button>
             <a-button type="primary" html-type="submit">ok</a-button>
         </div>
     </a-form>
@@ -112,6 +125,7 @@ export default {
             listData: {}
         };
     },
+
     watch: {
         id: {
             immediate: true,
@@ -121,6 +135,36 @@ export default {
         }
     },
     methods: {
+        titleNameVal(rule, value, callback) {
+            let titleNameZh =
+                this.form.getFieldValue("titleNameZh") == ""
+                    ? null
+                    : this.form.getFieldValue("titleNameZh");
+            let titleNameEnOrPt =
+                this.form.getFieldValue("titleNameEnOrPt") == ""
+                    ? null
+                    : this.form.getFieldValue("titleNameEnOrPt");
+            if (titleNameEnOrPt == null && titleNameZh == null) {
+                callback("Fill in at least one of two items");
+            } else {
+                callback();
+            }
+        },
+        nameVal(rule, value, callback) {
+            let nameZh =
+                this.form.getFieldValue("nameZh") == ""
+                    ? null
+                    : this.form.getFieldValue("nameZh");
+            let nameEnOrPt =
+                this.form.getFieldValue("nameEnOrPt") == ""
+                    ? null
+                    : this.form.getFieldValue("nameEnOrPt");
+            if (nameEnOrPt == null && nameZh == null) {
+                callback("Fill in at least one of two items");
+            } else {
+                callback();
+            }
+        },
         async getLision(id) {
             const data = await Liaison.one(id);
             if (data.code === 200) {
@@ -134,7 +178,10 @@ export default {
             e.preventDefault();
             this.form.validateFields(async (err, values) => {
                 if (!err) {
-                    const data = await Liaison.update({ ...this.listData, ...values });
+                    const data = await Liaison.update({
+                        ...this.listData,
+                        ...values
+                    });
                     if (data.code === 200) {
                         this.$message.success("修改成功");
                         this.$emit("handleCancel", "add");
