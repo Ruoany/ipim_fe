@@ -11,6 +11,12 @@ const func = (modules, o = {}) => {
                 method: "GET",
                 params,
                 paramsSerializer: function(params) {
+                    for (let key in params) {
+                        if (params[key] == null) {
+                            delete params[key];
+                        }
+                    }
+
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });
@@ -46,6 +52,11 @@ const func = (modules, o = {}) => {
                 method: "GET",
                 params,
                 paramsSerializer: function(params) {
+                    for (let key in params) {
+                        if (params[key] == null) {
+                            delete params[key];
+                        }
+                    }
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });

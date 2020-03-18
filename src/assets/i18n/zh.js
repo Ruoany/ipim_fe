@@ -164,6 +164,9 @@ const zhData = {
         submit: "提交",
         userId: "用戶ID"
     },
+    report: {
+        aa: "填寫方式一：在綫填寫展會報告"
+    },
     reportba
 };
 
