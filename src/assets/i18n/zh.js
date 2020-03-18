@@ -7,15 +7,12 @@ import formbe from "./be/zh";
 import formbf from "./bf/zh";
 import formbd from "./bd/zh";
 import miecf from "./MIECF/zh";
-<<<<<<< HEAD
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
 import reportba from "./ba/zh_re";
-=======
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
->>>>>>> 5dcb282800eb562bc1fc92d0644da6a0ca7b66fe
 
 const zhData = {
     menu: {
@@ -117,14 +114,11 @@ const zhData = {
     formbf,
     formbd,
     miecf,
-<<<<<<< HEAD
     mif,
     plpex,
-=======
     iiicf,
     mfe,
     gmbpf,
->>>>>>> 5dcb282800eb562bc1fc92d0644da6a0ca7b66fe
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
         b: "原密碼",
