@@ -48,17 +48,6 @@
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <a-form-item :label="$t('miecf.ao')">
-                    <a-radio-group v-decorator>
-                        <a-radio :value="1">{{ $t("miecf.ap") }}</a-radio>
-                        <a-radio :value="2">{{ $t("miecf.aq") }}</a-radio>
-                        <a-radio :value="3">{{ $t("miecf.ar") }}</a-radio>
-                        <a-radio :value="4">{{ $t("miecf.as") }}</a-radio>
-                        <a-radio :value="5">{{ $t("miecf.at") }}</a-radio>
-                        <a-radio :value="6">{{ $t("miecf.au") }}</a-radio>
-                    </a-radio-group>
-                    <a-input class="inline-input" v-decorator />
-                </a-form-item>
                 <a-form-item :label="$t('miecf.av')">
                     <a-radio-group v-decorator>
                         <a-radio :value="1">{{ $t("miecf.aw") }}</a-radio>
@@ -84,23 +73,6 @@
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('miecf.bc')">
-                    <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('miecf.dl')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('miecf.dm')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('miecf.dn')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('miecf.do')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('miecf.dp')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('miecf.dq')}}</a-checkbox>
-                        <a-checkbox :value="7">{{$t('miecf.dr')}}</a-checkbox>
-                        <a-checkbox :value="8">{{$t('miecf.ds')}}</a-checkbox>
-                        <a-checkbox :value="9">{{$t('miecf.dt')}}</a-checkbox>
-                        <a-checkbox :value="10">{{$t('miecf.du')}}</a-checkbox>
-                        <a-checkbox :value="11">{{$t('miecf.dv')}}</a-checkbox>
-                        <a-checkbox :value="12">{{$t('miecf.dw')}}</a-checkbox>
-                        <a-input class="inline-input" v-decorator placeholder="others" />
-                    </a-checkbox-group>
-                </a-form-item>
                 <a-form-item :label="$t('miecf.bj')">
                     <a-checkbox-group v-decorator>
                         <a-checkbox :value="1">{{$t('miecf.bk')}}</a-checkbox>
