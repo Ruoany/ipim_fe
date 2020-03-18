@@ -163,17 +163,14 @@
 
             <area-form v-show="step===5"></area-form>
             <a-form-item>
-                <a-button type="primary" @click="step--" v-if="step >0">上一步</a-button>
                 <a-button
                     type="primary"
-                    style="margin-left:12px"
-                    @click="step++"
-                    v-if="step < 5"
-                >下一步</a-button>
-            </a-form-item>
-
-            <a-form-item v-show="step===5">
-                <a-button type="primary" size="large">{{ $t("formbd.submit") }}</a-button>
+                    @click="step--"
+                    v-show="step >0"
+                    style="margin-right:12px"
+                >上一步</a-button>
+                <a-button type="primary" @click="step++" v-show="step < 5">下一步</a-button>
+                <a-button v-show="step===5" type="primary">{{ $t("formbd.submit") }}</a-button>
             </a-form-item>
         </a-form>
     </div>

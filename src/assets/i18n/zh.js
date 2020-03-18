@@ -68,7 +68,8 @@ const zhData = {
         organizers: "主辦單位",
         helpers: "協辦單位",
         method: "參展方式",
-        join: "參展"
+        join: "參展",
+        write: "填寫申請表"
     },
     util: {
         yes: "是",

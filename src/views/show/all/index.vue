@@ -11,7 +11,7 @@
             </a-tabs>
             <show-list :list="list" class="list"></show-list>
             <pagination
-                :page.sync="page"
+                :page="page"
                 :total="total"
                 :size="size"
                 @handleChange="pages => (page = pages - 1)"

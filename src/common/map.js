@@ -1,10 +1,10 @@
 export default {
-    MIECF: "",
-    IIICF: "",
-    MFE: "",
-    GMBPF: "",
-    MIF: "",
-    PLPEX: "",
-    PARTICIPATE: "show.ba",
-    MISSION: "show.bb"
+    MIECF: "show.write",
+    IIICF: "show.write",
+    MFE: "show.write",
+    GMBPF: "show.write",
+    MIF: "show.write",
+    PLPEX: "show.write",
+    PARTICIPATE: "menu.ba",
+    MISSION: "menu.bb"
 };

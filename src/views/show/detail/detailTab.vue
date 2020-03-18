@@ -39,12 +39,6 @@ export default {
         border-bottom: 2px solid #ee1c24 !important;
         margin-bottom: 0;
     }
-    /deep/ .line {
-        position: absolute;
-        width: 100vw;
-        height: 2px;
-        background-color: red;
-    }
     /deep/.ant-tabs-tab {
         font-size: 16px;
         font-weight: 500;
@@ -61,6 +55,9 @@ export default {
     }
     /deep/.ant-tabs-tabpane {
         padding: 40px 0;
+    }
+    /deep/ .ant-tabs-nav-container {
+        margin-bottom: 0 !important;
     }
 }
 </style>
