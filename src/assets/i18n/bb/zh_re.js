@@ -34,5 +34,6 @@ export default {
     bf: "社團資料",
     bg: "備註",
     bh: "有",
-    bi: "沒有"
+    bi: "沒有",
+    bj: "展會資料"
 };
