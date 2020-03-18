@@ -93,13 +93,10 @@ const zhData = {
         bphone: "國內流動電話",
         address: "通訊地址",
         upData: "修改",
-<<<<<<< HEAD
         nameZh: "姓名（中文）",
-        nameEnAndPt: "姓名（英/葡文）"
-=======
+        nameEnAndPt: "姓名（英/葡文）",
         companyName: "企業名稱",
         liaisonName: "聯絡人名稱"
->>>>>>> ece88d3b6b6c3f84677f11f3da0ed0e150ae09af
     },
     formaa,
     formab,
