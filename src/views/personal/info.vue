@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <a-card hoverable class="card" @click="$router.push('/personal/mechanism')">
+        <a-card hoverable @click="$router.push('/personal/mechanism')" class="card">
             <a-icon type="bars" style="font-size:40px;" />
             <a-card-meta :description="$t('personal.s')" />
         </a-card>
@@ -10,7 +10,7 @@
             <a-card-meta :description="$t('personal.n')" />
         </a-card>
 
-        <a-card hoverable class="card">
+        <a-card hoverable class="card" @click="$router.push('/personal/sub_account')">
             <a-icon type="solution" style="font-size:40px;" />
             <a-card-meta :description="$t('personal.x')" />
         </a-card>

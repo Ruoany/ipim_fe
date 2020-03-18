@@ -21,17 +21,17 @@
         <a-form-item :label="$t('formbd.meetingAllDay')">
             <a-row :gutter="10">
                 <a-col :span="10"><a-date-picker class="full"/></a-col>
-                <a-col :span="14"><a-input :placeholder="formbd.ee"></a-input></a-col>
+                <a-col :span="14"><a-input :placeholder="$t('formbd.ee')"></a-input></a-col>
             </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.ed')">
             <a-row :gutter="10">
                 <a-col :span="10"><a-date-picker class="full"/></a-col>
-                <a-col :span="14"><a-input :placeholder="formbd.ee"></a-input></a-col>
+                <a-col :span="14"><a-input :placeholder="$t('formbd.ee')"></a-input></a-col>
             </a-row>
         </a-form-item>
         <a-form-item :label="$t('formbd.meetingArea')">
-            <a-radio-group name="radioGroup" :defaultValue="1">
+            <a-radio-group name="radioGroup">
                 <a-radio :value="1">{{ $t("formbd.eg") }}</a-radio>
                 <a-radio :value="2">{{ $t("formbd.eh") }}</a-radio>
                 <a-radio :value="3">{{ $t("formbd.ei") }}</a-radio>
@@ -41,12 +41,7 @@
                 <a-col :span="18"> <a-input /></a-col>
             </a-row>
 
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
+            <a-upload-dragger name="file" :multiple="true">
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
