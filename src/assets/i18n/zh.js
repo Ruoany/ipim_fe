@@ -129,6 +129,7 @@ const zhData = {
         ae: "新增子賬號",
         af: "綁定子賬號",
         ag: "請輸入員工個人信息的ID號",
+        ah: "認證本機構",
         logo: "機構LOGO",
         meName: "機構名稱",
         update: "修改申請",

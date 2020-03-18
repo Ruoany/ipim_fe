@@ -10,6 +10,12 @@
                     :action="upFiles"
                     :beforeUpload="beforeUpload"
                     @change="handleChange"
+                    v-decorator="[
+                        'logo',
+                        {
+                            rules: [{ required: true, message: 'Please upload' }]
+                        }
+                    ]"
                 >
                     <img v-if="imageUrl" :src="imageUrl" alt="avatar" class="img" />
                     <div v-else>
@@ -18,36 +24,86 @@
                 </a-upload>
             </a-form-item>
             <a-form-item :label="$t('personal.meName')">
-                <a-input></a-input>
+                <a-input
+                    v-decorator="[
+                        'nameZh',
+                        {
+                            rules: [{ required: true, message: 'Please input' }]
+                        }
+                    ]"
+                ></a-input>
             </a-form-item>
             <a-form-item :label="$t('personal.w')">
-                <a-input></a-input>
+                <a-input
+                    v-decorator="[
+                        'siteRegistrationCode',
+                        {
+                            rules: [{ required: true, message: 'Please input' }]
+                        }
+                    ]"
+                ></a-input>
             </a-form-item>
             <a-form-item :label="$t('personal.u')">
-                <a-input></a-input>
+                <a-input
+                    v-decorator="[
+                        'registrationNumber',
+                        {
+                            rules: [{ required: true, message: 'Please input' }]
+                        }
+                    ]"
+                ></a-input>
             </a-form-item>
             <a-form-item :label="$t('personal.y')">
-                <a-input></a-input>
+                <a-input
+                    v-decorator="[
+                        'taxpayerNo',
+                        {
+                            rules: [{ required: true, message: 'Please input' }]
+                        }
+                    ]"
+                ></a-input>
             </a-form-item>
             <a-form-item :label="$t('personal.z')">
-                <a-date-picker @change="onChange" style="width:100%;" />
+                <a-date-picker
+                    @change="onChange"
+                    style="width:100%;"
+                    v-decorator="[
+                        'dateOfEstablishment',
+                        {
+                            rules: [{ required: true, message: 'Please select' }]
+                        }
+                    ]"
+                />
             </a-form-item>
             <a-form-item :label="$t('personal.aa')">
-                <a-textarea></a-textarea>
+                <a-textarea
+                    v-decorator="[
+                        'taxpayerNo',
+                        {
+                            rules: [{ required: true, message: 'Please input' }]
+                        }
+                    ]"
+                ></a-textarea>
             </a-form-item>
             <a-form-item :label="$t('personal.ab')">
-                <a-radio-group name="radioGroup" :defaultValue="1">
-                    <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
-                    <a-radio :value="2">{{ $t("util.no") }}</a-radio>
+                <a-radio-group
+                    v-decorator="[
+                        'deal',
+                        {
+                            rules: [{ required: true, message: 'Please select' }]
+                        }
+                    ]"
+                >
+                    <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
+                    <a-radio :value="false">{{ $t("util.no") }}</a-radio>
                 </a-radio-group>
             </a-form-item>
             <a-form-item :label="$t('personal.ac')">
                 <a-textarea></a-textarea>
             </a-form-item>
             <a-form-item>
-                <a-button :style="{ marginRight: '8px' }" @click="$router.back()">
-                    Cancel
-                </a-button>
+                <a-button type="primary" :style="{ marginRight: '8px' }">{{ $t("personal.ah") }}</a-button>
+                <a-button :style="{ marginRight: '8px' }" @click="$router.back()">Cancel</a-button>
                 <a-button type="primary" html-type="submit">ok</a-button>
             </a-form-item>
         </a-form>
@@ -63,7 +119,8 @@ export default {
             form: this.$form.createForm(this, { name: "coordinated" }),
             loading: false,
             imageUrl: "",
-            upFiles
+            upFiles,
+            current: 1
         };
     },
     methods: {
