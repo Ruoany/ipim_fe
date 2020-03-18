@@ -7,6 +7,9 @@ import formbe from "./be/zh";
 import formbf from "./bf/zh";
 import formbd from "./bd/zh";
 import miecf from "./MIECF/zh";
+import mif from "./MIF/zh";
+import plpex from "./PLPEX/zh";
+import reportba from "./ba/zh_re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -112,6 +115,8 @@ const zhData = {
     formbf,
     formbd,
     miecf,
+    mif,
+    plpex,
     iiicf,
     mfe,
     gmbpf,
@@ -160,9 +165,7 @@ const zhData = {
         submit: "提交",
         userId: "用戶ID"
     },
-    report: {
-        aa: "填寫方式一：在綫填寫展會報告"
-    }
+    reportba
 };
 
 export default zhData;

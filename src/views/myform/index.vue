@@ -12,6 +12,8 @@
                 <form-bf v-if="form === 'bf'"></form-bf>
                 <form-miecf v-if="form === 'MIECF'"></form-miecf>
                 <form-iiicf v-if="form === 'IIICF'"></form-iiicf>
+                <form-mif v-if="form==='MIF'"></form-mif>
+                <form-plpex v-if="form ==='PLPEX'"></form-plpex>
                 <form-mfe v-if="form === 'MFE'"></form-mfe>
                 <form-gmbpf v-if="form === 'GMBPF'"></form-gmbpf>
             </a-tab-pane>
@@ -43,6 +45,8 @@ import FormBe from "./be/index";
 import FormBf from "./bf/index";
 import FormMiecf from "./MIECF/index";
 import FormIiicf from "./IIICF/index";
+import FormMif from "./MIF/index";
+import FormPlpex from "./PLPEX/index";
 import FormMfe from "./MFE/index";
 import FormGmbpf from "./GMBPF/index";
 
@@ -58,6 +62,8 @@ export default {
         FormBf,
         FormMiecf,
         FormIiicf,
+        FormMif,
+        FormPlpex,
         FormMfe,
         FormGmbpf
     },
