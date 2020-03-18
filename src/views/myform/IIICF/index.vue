@@ -1,110 +1,110 @@
 <template>
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('miecf.aa')" />
-            <a-step :title="$t('miecf.af')" />
-            <a-step :title="$t('miecf.an')" />
-            <a-step :title="$t('miecf.bb')" />
-            <a-step :title="$t('miecf.cf')" />
-            <a-step :title="$t('miecf.ck')" />
-            <a-step :title="$t('miecf.dc')" />
+            <a-step :title="$t('iiicf.aa')" />
+            <a-step :title="$t('iiicf.af')" />
+            <a-step :title="$t('iiicf.an')" />
+            <a-step :title="$t('iiicf.bb')" />
+            <a-step :title="$t('iiicf.cf')" />
+            <a-step :title="$t('iiicf.ck')" />
+            <a-step :title="$t('iiicf.dc')" />
         </a-steps>
         <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
             <div v-show="stepCurrent === 0">
-                <a-form-item :label="$t('miecf.ab')">
+                <a-form-item :label="$t('iiicf.ab')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ac')">
+                <a-form-item :label="$t('iiicf.ac')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ad')">
+                <a-form-item :label="$t('iiicf.ad')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ae')">
+                <a-form-item :label="$t('iiicf.ae')">
                     <a-input v-decorator />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 1">
-                <a-form-item :label="$t('miecf.ag')">
+                <a-form-item :label="$t('iiicf.ag')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ai')">
+                <a-form-item :label="$t('iiicf.ai')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.aj')">
+                <a-form-item :label="$t('iiicf.aj')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ak')">
+                <a-form-item :label="$t('iiicf.ak')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.al')">
+                <a-form-item :label="$t('iiicf.al')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.am')">
+                <a-form-item :label="$t('iiicf.am')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.an')">
+                <a-form-item :label="$t('iiicf.an')">
                     <a-input v-decorator />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <a-form-item :label="$t('miecf.av')">
+                <a-form-item :label="$t('iiicf.av')">
                     <a-radio-group v-decorator>
-                        <a-radio :value="1">{{ $t("miecf.aw") }}</a-radio>
-                        <a-radio :value="6">{{ $t("miecf.au") }}</a-radio>
+                        <a-radio :value="1">{{ $t("iiicf.aw") }}</a-radio>
+                        <a-radio :value="6">{{ $t("iiicf.au") }}</a-radio>
                     </a-radio-group>
                     <a-input class="inline-input" v-decorator />
                 </a-form-item>
                 <a-form-item>
                     <span slot="label">
-                        <span>{{ $t("miecf.ax") }}</span>
-                        <span style="color:#ccc">({{ $t("miecf.ay") }})</span>
+                        <span>{{ $t("iiicf.ax") }}</span>
+                        <span style="color:#ccc">({{ $t("iiicf.ay") }})</span>
                     </span>
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.az')">
+                <a-form-item :label="$t('iiicf.az')">
                     <a-radio-group v-decorator>
                         <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                         <a-radio :value="6">{{ $t("util.no") }}</a-radio>
                     </a-radio-group>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ba')">
+                <a-form-item :label="$t('iiicf.ba')">
                     <a-date-picker class="full" />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('miecf.bj')">
+                <a-form-item :label="$t('iiicf.bj')">
                     <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('miecf.bk')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('miecf.bl')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('miecf.bm')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('miecf.bn')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('miecf.bo')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('miecf.bp')}}</a-checkbox>
+                        <a-checkbox :value="1">{{$t('iiicf.bk')}}</a-checkbox>
+                        <a-checkbox :value="2">{{$t('iiicf.bl')}}</a-checkbox>
+                        <a-checkbox :value="3">{{$t('iiicf.bm')}}</a-checkbox>
+                        <a-checkbox :value="4">{{$t('iiicf.bn')}}</a-checkbox>
+                        <a-checkbox :value="5">{{$t('iiicf.bo')}}</a-checkbox>
+                        <a-checkbox :value="6">{{$t('iiicf.bp')}}</a-checkbox>
                         <a-input class="inline-input" v-decorator placeholder="others" />
                     </a-checkbox-group>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.br')">
+                <a-form-item :label="$t('iiicf.br')">
                     <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('miecf.bs')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('miecf.bt')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('miecf.bu')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('miecf.bv')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('miecf.bw')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('miecf.bx')}}</a-checkbox>
-                        <a-checkbox :value="7">{{$t('miecf.by')}}</a-checkbox>
-                        <a-checkbox :value="8">{{$t('miecf.bz')}}</a-checkbox>
-                        <a-checkbox :value="9">{{$t('miecf.ca')}}</a-checkbox>
-                        <a-checkbox :value="10">{{$t('miecf.cb')}}</a-checkbox>
-                        <a-checkbox :value="11">{{$t('miecf.cc')}}</a-checkbox>
+                        <a-checkbox :value="1">{{$t('iiicf.bs')}}</a-checkbox>
+                        <a-checkbox :value="2">{{$t('iiicf.bt')}}</a-checkbox>
+                        <a-checkbox :value="3">{{$t('iiicf.bu')}}</a-checkbox>
+                        <a-checkbox :value="4">{{$t('iiicf.bv')}}</a-checkbox>
+                        <a-checkbox :value="5">{{$t('iiicf.bw')}}</a-checkbox>
+                        <a-checkbox :value="6">{{$t('iiicf.bx')}}</a-checkbox>
+                        <a-checkbox :value="7">{{$t('iiicf.by')}}</a-checkbox>
+                        <a-checkbox :value="8">{{$t('iiicf.bz')}}</a-checkbox>
+                        <a-checkbox :value="9">{{$t('iiicf.ca')}}</a-checkbox>
+                        <a-checkbox :value="10">{{$t('iiicf.cb')}}</a-checkbox>
+                        <a-checkbox :value="11">{{$t('iiicf.cc')}}</a-checkbox>
                     </a-checkbox-group>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.cd')">
+                <a-form-item :label="$t('iiicf.cd')">
                     <upload />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 4">
-                <a-form-item :label="$t('miecf.cg')">
+                <a-form-item :label="$t('iiicf.cg')">
                     <div v-decorator="company">
                         <div class="company-item" v-for="(item,index) in companyArray" :key="index">
                             <company
@@ -133,64 +133,64 @@
                         </div>
                     </div>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.ch')">
+                <a-form-item :label="$t('iiicf.ch')">
                     <upload />
                 </a-form-item>
-                <a-form-item :label="$t('miecf.cj')">
+                <a-form-item :label="$t('iiicf.cj')">
                     <upload />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 5">
-                <a-form-item :label="$t('miecf.ck')">
+                <a-form-item :label="$t('iiicf.ck')">
                     <ul>
-                        <li>{{$t('miecf.cl')}}</li>
-                        <li>{{$t('miecf.cm')}}</li>
-                        <li>{{$t('miecf.cn')}}</li>
+                        <li>{{$t('iiicf.cl')}}</li>
+                        <li>{{$t('iiicf.cm')}}</li>
+                        <li>{{$t('iiicf.cn')}}</li>
                     </ul>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.co')">
+                <a-form-item :label="$t('iiicf.co')">
                     <ul>
-                        <li>{{$t('miecf.cp')}}</li>
-                        <li>{{$t('miecf.cq')}}</li>
-                        <li>{{$t('miecf.cr')}}</li>
+                        <li>{{$t('iiicf.cp')}}</li>
+                        <li>{{$t('iiicf.cq')}}</li>
+                        <li>{{$t('iiicf.cr')}}</li>
                     </ul>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.cs')">
+                <a-form-item :label="$t('iiicf.cs')">
                     <ul>
-                        <li>{{$t('miecf.ct')}}</li>
-                        <li>{{$t('miecf.cu')}}</li>
-                        <li>{{$t('miecf.cv')}}</li>
+                        <li>{{$t('iiicf.ct')}}</li>
+                        <li>{{$t('iiicf.cu')}}</li>
+                        <li>{{$t('iiicf.cv')}}</li>
                     </ul>
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 6">
-                <a-form-item :label="$t('miecf.cw')">
+                <a-form-item :label="$t('iiicf.cw')">
                     <ul>
-                        <li>{{$t('miecf.cx')}}</li>
-                        <li>{{$t('miecf.cy')}}</li>
-                        <li>{{$t('miecf.cz')}}</li>
+                        <li>{{$t('iiicf.cx')}}</li>
+                        <li>{{$t('iiicf.cy')}}</li>
+                        <li>{{$t('iiicf.cz')}}</li>
                     </ul>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.da')">
+                <a-form-item :label="$t('iiicf.da')">
                     <ul>
-                        <li>{{$t('miecf.db')}}</li>
+                        <li>{{$t('iiicf.db')}}</li>
                     </ul>
                 </a-form-item>
-                <a-form-item :label="$t('miecf.dc')">
+                <a-form-item :label="$t('iiicf.dc')">
                     <ul>
-                        <li>{{$t('miecf.dd')}}</li>
-                        <li>{{$t('miecf.de')}}</li>
-                        <li>{{$t('miecf.df')}}</li>
-                        <li>{{$t('miecf.dg')}}</li>
-                        <li>{{$t('miecf.dh')}}</li>
-                        <li>{{$t('miecf.di')}}</li>
+                        <li>{{$t('iiicf.dd')}}</li>
+                        <li>{{$t('iiicf.de')}}</li>
+                        <li>{{$t('iiicf.df')}}</li>
+                        <li>{{$t('iiicf.dg')}}</li>
+                        <li>{{$t('iiicf.dh')}}</li>
+                        <li>{{$t('iiicf.di')}}</li>
                     </ul>
                 </a-form-item>
             </div>
             <a-form-item>
                 <a-button type="primary" @click="stepCurrent--" style="margin-right:12px">上一步</a-button>
                 <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++">下一步</a-button>
-                <a-button v-else type="primary" html-type="submit">{{ $t("miecf.dk") }}</a-button>
+                <a-button v-else type="primary" html-type="submit">{{ $t("iiicf.dk") }}</a-button>
             </a-form-item>
         </a-form>
     </div>
@@ -240,7 +240,7 @@ export default {
         }
     },
     created: function() {
-        this.form = this.$form.createForm(this, { name: "MIECF" });
+        this.form = this.$form.createForm(this, { name: "IIICF" });
     },
     mounted: function() {
         this.companyArray = this.form.getFieldValue("company");

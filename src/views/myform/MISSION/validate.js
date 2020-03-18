@@ -26,9 +26,9 @@ export default {
     idcardValidityDate: ["IDCardValidityDate"], //身份證有效期
     associateIndustry: ["associateIndustry"], //行業類別
     companyIndustry: ["companyIndustry"], //公司行業類別
-    isAssociation: ["isAssociation"], //是否商協會
-    isCompany: ["isCompany"], //是否是公司
-    isOtherWay: ["isOtherWay"], //是否其他名義參與
+    isAssociation: ["isAssociation", { valuePropName: "checked", initialValue: false }], //是否商協會
+    isCompany: ["isCompany", { valuePropName: "checked", initialValue: false }], //是否是公司
+    isOtherWay: ["isOtherWay", { valuePropName: "checked", initialValue: false }], //是否其他名義參與
     liaisonId: ["liaisonId", config_select], //聯絡人ID,
     liaisonName: ["liaisonName"], //聯絡人名稱
     otherArrangement: ["otherArrangement"], //其他交通和住宿情况
