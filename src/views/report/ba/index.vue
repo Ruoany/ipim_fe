@@ -44,18 +44,21 @@
                 <a-form-item :label="$t('formba.al')">
                     <a-select v-decorator></a-select>
                 </a-form-item>
-                <!-- <a-form-item :label="$t('formba.am')">
+                <a-form-item :label="$t('util.aphone')">
                     <a-input v-decorator></a-input>
-                </a-form-item>-->
-                <a-form-item :label="$t('formba.an')">
+                </a-form-item>
+                <a-form-item :label="$t('util.bphone')">
+                    <a-input v-decorator></a-input>
+                </a-form-item>
+                <a-form-item :label="$t('index.email')">
                     <a-input v-decorator type="number"></a-input>
                 </a-form-item>
-                <a-form-item :label="$t('formba.ao')">
+                <!-- <a-form-item :label="$t('formba.ao')">
                     <a-input v-decorator type="number"></a-input>
                 </a-form-item>
                 <a-form-item :label="$t('formba.ap')">
                     <a-input v-decorator></a-input>
-                </a-form-item>
+                </a-form-item>-->
                 <!-- <a-form-item :label="$t('formba.aq')">
                     <a-upload-dragger v-decorator name="files" action="/upload.do">
                         <p class="ant-upload-drag-icon">

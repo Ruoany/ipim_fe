@@ -12,6 +12,8 @@
                 <form-bf v-if="form === 'bf'"></form-bf>
                 <form-miecf v-if="form === 'MIECF'"></form-miecf>
                 <form-iiicf v-if="form === 'IIICF'"></form-iiicf>
+                <form-mif v-if="form==='MIF'"></form-mif>
+                <form-plpex v-if="form ==='PLPEX'"></form-plpex>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -41,6 +43,8 @@ import FormBe from "./be/index";
 import FormBf from "./bf/index";
 import FormMiecf from "./MIECF/index";
 import FormIiicf from "./IIICF/index";
+import FormMif from "./MIF/index";
+import FormPlpex from "./PLPEX/index";
 
 export default {
     components: {
@@ -53,7 +57,9 @@ export default {
         FormBe,
         FormBf,
         FormMiecf,
-        FormIiicf
+        FormIiicf,
+        FormMif,
+        FormPlpex
     },
     data() {
         return {

@@ -7,6 +7,9 @@ import formbe from "./be/zh";
 import formbf from "./bf/zh";
 import formbd from "./bd/zh";
 import miecf from "./MIECF/zh";
+import mif from "./MIF/zh";
+import plpex from "./PLPEX/zh";
+import reportba from "./ba/zh_re";
 
 const zhData = {
     menu: {
@@ -107,6 +110,8 @@ const zhData = {
     formbf,
     formbd,
     miecf,
+    mif,
+    plpex,
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
         b: "原密碼",
@@ -152,9 +157,7 @@ const zhData = {
         submit: "提交",
         userId: "用戶ID"
     },
-    report: {
-        aa: "填寫方式一：在綫填寫展會報告"
-    }
+    reportba
 };
 
 export default zhData;
