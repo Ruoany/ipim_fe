@@ -92,7 +92,9 @@ const zhData = {
         aphone: "本澳流动电话",
         bphone: "國內流動電話",
         address: "通訊地址",
-        upData: "修改"
+        upData: "修改",
+        companyName: "企業名稱",
+        liaisonName: "聯絡人名稱"
     },
     formaa,
     formab,
