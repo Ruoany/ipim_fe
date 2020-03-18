@@ -28,35 +28,24 @@ export default {
             FromMap,
             list: [],
             loading: false,
-            active: "",
-            actType: "",
-            order: null,
+            activityScope: "LOCAL",
             page: 0,
             size: 6,
             total: 0
         };
     },
     watch: {
-        active: function(newValue) {
-            this.page = 0;
-            this.initData(newValue);
-        },
         page: function() {
-            this.initData(this.active);
-        },
-        "$route.query": function(newValue) {
-            this.actType = newValue.part;
-            this.active = newValue.order;
+            this.initData();
         }
     },
     methods: {
-        initData: async function(query) {
+        initData: async function() {
             this.loading = true;
             const { data } = await Activity.get({
                 page: this.page,
                 size: this.size,
-                actType: this.actType,
-                types: [query]
+                activityScope: this.activityScope
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;
@@ -64,15 +53,10 @@ export default {
         setList: function(array, total) {
             this.list = new Array().concat(array);
             this.total = total;
-        },
-        reflash: function(value) {
-            const idx = this.info.tabs.find(item => item === value);
-            this.$router.push(`/show/index?part=${this.actType}&order=${idx}`);
         }
     },
     mounted: function() {
-        this.actType = this.$route.query.part;
-        this.active = this.$route.query.order;
+        this.initData();
         setTimeout(() => {
             this.loading = false;
         }, 5000);

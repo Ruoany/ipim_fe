@@ -20,7 +20,6 @@ request.interceptors.request.use(
         return config;
     },
     error => {
-        console.log(error);
         return Promise.reject(error);
     }
 );
@@ -30,8 +29,11 @@ request.interceptors.response.use(
         return response;
     },
     error => {
-        message.error(error.message);
-        return error;
+        const {
+            response: { data }
+        } = error;
+        message.error(data.message);
+        return false;
     }
 );
 

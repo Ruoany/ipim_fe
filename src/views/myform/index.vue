@@ -2,14 +2,15 @@
     <div class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-aa v-if="form === '021'"></form-aa>
-                <form-ab v-if="form === '022'"></form-ab>
+                <form-aa v-if="form === 'MISSION'"></form-aa>
+                <form-ab v-if="form === 'PARTICIPATE'"></form-ab>
                 <form-ba v-if="form === 'ba'"></form-ba>
                 <form-bb v-if="form === 'bb'"></form-bb>
                 <form-bc v-if="form === 'bc'"></form-bc>
                 <form-bd v-if="form === 'bd'"></form-bd>
                 <form-be v-if="form === 'be'"></form-be>
                 <form-bf v-if="form === 'bf'"></form-bf>
+                <form-miecf v-if="form === 'MIECF'"></form-miecf>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -37,6 +38,7 @@ import FormBc from "./bc/index";
 import FormBd from "./bd/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
+import FormMiecf from "./MIECF/index";
 
 export default {
     components: {
@@ -47,7 +49,8 @@ export default {
         FormBd,
         FormBc,
         FormBe,
-        FormBf
+        FormBf,
+        FormMiecf
     },
     data() {
         return {
@@ -73,7 +76,7 @@ export default {
 <style lang="less" scoped>
 @import url(./css/form.less);
 .form-wrapper {
-    width: 900px;
+    width: 1100px;
     margin: auto;
     padding: 50px 0;
     /deep/.ant-tabs-bar {

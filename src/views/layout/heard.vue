@@ -3,17 +3,20 @@
         <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="menuItem" mode="horizontal" class="menu-wrapper">
             <a-menu-item key="host" @click="handleNavigate('/show/host')">{{ $t("menu.signUp") }}</a-menu-item>
-            <a-sub-menu key="overseas">
+            <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item @click="handleNavigate('/show/overseas','022')">
+                <a-menu-item
+                    key="overseas1"
+                    @click="handleNavigate('/show/overseas','PARTICIPATE')"
+                >
                     {{
                     $t("menu.ba")
                     }}
                 </a-menu-item>
-                <a-menu-item @click="handleNavigate('/show/overseas','021')">
+                <a-menu-item key="overseas2" @click="handleNavigate('/show/overseas','MISSION')">
                     {{
                     $t("menu.bb")
                     }}
@@ -70,6 +73,15 @@ export default {
         $route: {
             immediate: true,
             handler: function(newValue) {
+                const { query } = newValue;
+                if (query.order === "PARTICIPATE") {
+                    this.menuItem = ["overseas1"];
+                    return;
+                }
+                if (query.order === "MISSION") {
+                    this.menuItem = ["overseas2"];
+                    return;
+                }
                 this.menuItem = [newValue.meta.key];
             }
         }

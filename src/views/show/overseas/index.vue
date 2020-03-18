@@ -2,9 +2,9 @@
     <div class="container">
         <show-title></show-title>
         <a-spin :spinning="loading" class="content flex center width-1280">
-            <a-tabs v-model="active" class="tabs">
-                <a-tab-pane key="022" :tab="$t('menu.ba')"></a-tab-pane>
-                <a-tab-pane key="021" :tab="$t('menu.bb')"></a-tab-pane>
+            <a-tabs v-model="active" class="tabs" @change="reflash">
+                <a-tab-pane key="PARTICIPATE" :tab="$t('menu.ba')"></a-tab-pane>
+                <a-tab-pane key="MISSION" :tab="$t('menu.bb')"></a-tab-pane>
             </a-tabs>
             <div class="list-content">
                 <show-list :list="list"></show-list>
@@ -70,8 +70,7 @@ export default {
             this.total = total;
         },
         reflash: function(value) {
-            const idx = this.info.tabs.find(item => item === value);
-            this.$router.push(`/show/index?part=${this.actType}&order=${idx}`);
+            this.$router.push(`/show/overseas?order=${value}`);
         }
     },
     mounted: function() {
