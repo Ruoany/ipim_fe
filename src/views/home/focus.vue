@@ -9,7 +9,7 @@
             :endTime="item.endTime"
             :name="item.nameZh"
             :id="item.id"
-            :statusImg="item.status | statusImgFilter"
+            :statusImg="item.showStatus | statusImgFilter"
         ></show-cell>
     </div>
 </template>
@@ -37,14 +37,11 @@ export default {
     },
     methods: {
         async getActiveList() {
-            const data = await Activity.all({ ...this.listQuery, manyStatus: ["PROGRESS", "END"] });
-            console.log("data", data);
-            if (data.code === 200) {
-                this.showList = data.data;
-                // this.showList.push(data.data[0]);
-            } else {
-                this.$message.error(data.message);
-            }
+            const data = await Activity.all({
+                ...this.listQuery,
+                manyStatus: ["PROGRESS", "END"]
+            });
+            data.code === 200 ? (this.showList = data.data) : "";
         }
     },
     mounted() {
@@ -52,7 +49,7 @@ export default {
     },
     filters: {
         statusImgFilter(e) {
-            let img = null;
+            let img;
             let that = this;
             switch (e) {
                 case "NOTSTART":

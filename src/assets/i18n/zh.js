@@ -6,6 +6,7 @@ import formbc from "./bc/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
 import formbd from "./bd/zh";
+import miecf from "./MIECF/zh";
 
 const zhData = {
     menu: {
@@ -101,6 +102,7 @@ const zhData = {
     formbe,
     formbf,
     formbd,
+    miecf,
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
         b: "原密碼",

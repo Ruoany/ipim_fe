@@ -8,13 +8,11 @@
                     <div>{{ nameEn }}</div>
                     <div>{{ namePt }}</div>
                 </div>
-
-                <!-- <div style="padding-top:20px;">{{ $t("show.ofWe") }}：{{ website }}</div> -->
                 <div>
                     <div>{{ $t("show.acAd") }}：{{ place }}</div>
-                    <div style="color:#EE1C24">
-                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
-                    </div>
+                    <div
+                        style="color:#EE1C24"
+                    >{{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}</div>
                 </div>
             </div>
         </div>
@@ -60,7 +58,9 @@ export default {
     },
     methods: {
         navigateForm: function(e) {
-            this.$router.push(`/myform/index?activityId=${this.activityId}&form=${e.key}`);
+            this.$router.push(
+                `/myform/index?activityId=${this.activityId}&form=${e.key}`
+            );
         }
     }
 };
