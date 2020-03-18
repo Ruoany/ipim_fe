@@ -11,6 +11,7 @@
                 <form-be v-if="form === 'be'"></form-be>
                 <form-bf v-if="form === 'bf'"></form-bf>
                 <form-miecf v-if="form === 'MIECF'"></form-miecf>
+                <form-iiicf v-if="form === 'IIICF'"></form-iiicf>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -39,6 +40,7 @@ import FormBd from "./bd/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
 import FormMiecf from "./MIECF/index";
+import FormIiicf from "./IIICF/index";
 
 export default {
     components: {
@@ -50,7 +52,8 @@ export default {
         FormBc,
         FormBe,
         FormBf,
-        FormMiecf
+        FormMiecf,
+        FormIiicf
     },
     data() {
         return {
