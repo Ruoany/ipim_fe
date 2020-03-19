@@ -27,7 +27,13 @@
 </template>
 
 <script>
-export default {};
+import Institution from "@/apis/institution";
+export default {
+    data() {
+        return {};
+    },
+    methods: {}
+};
 </script>
 
 <style lang="less" scoped>

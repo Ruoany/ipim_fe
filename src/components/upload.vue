@@ -4,9 +4,9 @@
             <a-icon type="inbox" />
         </p>
         <p class="ant-upload-text">Click or drag file to this area to upload</p>
-        <p
-            class="ant-upload-hint"
-        >Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+        <p class="ant-upload-hint">
+            Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+        </p>
     </a-upload-dragger>
 </template>
 
@@ -20,9 +20,13 @@ export default {
     methods: {
         handleChange(e) {
             const { file, fileList } = e;
+
             if (file.status === "done") {
-                const value = fileList.map(item => item.response.data);
+                const value = fileList.map(item => {
+                    return { ...item.response.data, oriname: item.name, uid: item.uid };
+                });
                 this.list = value;
+
                 this.$emit("handleChange", { keys: this.decorator, value });
             }
         },
@@ -36,4 +40,3 @@ export default {
     }
 };
 </script>
-
