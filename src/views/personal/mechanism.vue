@@ -101,6 +101,55 @@
             <a-form-item :label="$t('personal.ac')">
                 <a-textarea></a-textarea>
             </a-form-item>
+            <a-form-item :label="$t('personal.aj')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.ak')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.al')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.am')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.an')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.ao')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
+            <a-form-item :label="$t('personal.ap')">
+                <upload
+                    v-decorator="unitIntroductionFiles"
+                    decorator="unitIntroductionFiles"
+                    @handleChange="uploadChange"
+                ></upload>
+            </a-form-item>
             <a-form-item>
                 <a-button type="primary" :style="{ marginRight: '8px' }">{{ $t("personal.ah") }}</a-button>
                 <a-button :style="{ marginRight: '8px' }" @click="$router.back()">Cancel</a-button>
@@ -113,7 +162,9 @@
 <script>
 import Liaison from "@/apis/liaison";
 import { upFiles } from "@/apis/files";
+import Upload from "@/components/upload";
 export default {
+    components: { Upload },
     data() {
         return {
             form: this.$form.createForm(this, { name: "coordinated" }),
