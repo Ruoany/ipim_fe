@@ -70,12 +70,14 @@
                     @click="personalNavigate('/funding')"
                 >{{ $t("menu.funding") }}</a-menu-item>
                 <a-menu-item key="info" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
+                <a-menu-item key="token" @click="getToken">獲取token</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
 </template>
 
 <script>
+import { Login } from "@/apis/login";
 export default {
     data() {
         return {
@@ -146,6 +148,9 @@ export default {
         },
         formNavigate: function(path, form) {
             this.$router.push({ path, query: { form } });
+        },
+        getToken: function() {
+            Login();
         }
     },
     mounted() {
