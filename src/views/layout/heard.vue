@@ -22,19 +22,35 @@
                     }}
                 </a-menu-item>
             </a-sub-menu>
-            <a-sub-menu key="show7">
+            <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item key="show8">{{ $t("menu.ca") }}</a-menu-item>
-                <a-menu-item key="show9">{{ $t("menu.cb") }}</a-menu-item>
-                <a-menu-item key="show10">{{ $t("menu.cc") }}</a-menu-item>
                 <a-menu-item
-                    @click="$router.push({ path: '/myform/index', query: { form: 'bd' } })"
+                    key="special1"
+                    @click="formNavigate('/myform/special','ba')"
+                >{{ $t("menu.ca") }}</a-menu-item>
+                <a-menu-item
+                    key="special2"
+                    @click="formNavigate('/myform/special','bb')"
+                >{{ $t("menu.cb") }}</a-menu-item>
+                <a-menu-item
+                    key="special3"
+                    @click="formNavigate('/myform/special','bc')"
+                >{{ $t("menu.cc") }}</a-menu-item>
+                <a-menu-item
+                    key="special4"
+                    @click="formNavigate('/myform/special','bd')"
                 >{{ $t("menu.cd") }}</a-menu-item>
-                <a-menu-item key="show11">{{ $t("menu.ce") }}</a-menu-item>
-                <a-menu-item key="show12">{{ $t("menu.cf") }}</a-menu-item>
+                <a-menu-item
+                    key="special5"
+                    @click="formNavigate('/myform/special','be')"
+                >{{ $t("menu.ce") }}</a-menu-item>
+                <a-menu-item
+                    key="special6"
+                    @click="formNavigate('/myform/special','bf')"
+                >{{ $t("menu.cf") }}</a-menu-item>
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
@@ -82,6 +98,30 @@ export default {
                     this.menuItem = ["overseas2"];
                     return;
                 }
+                if (query.form === "ba") {
+                    this.menuItem = ["special1"];
+                    return;
+                }
+                if (query.form === "bb") {
+                    this.menuItem = ["special2"];
+                    return;
+                }
+                if (query.form === "bc") {
+                    this.menuItem = ["special3"];
+                    return;
+                }
+                if (query.form === "bd") {
+                    this.menuItem = ["special4"];
+                    return;
+                }
+                if (query.form === "be") {
+                    this.menuItem = ["special5"];
+                    return;
+                }
+                if (query.form === "bf") {
+                    this.menuItem = ["special6"];
+                    return;
+                }
                 this.menuItem = [newValue.meta.key];
             }
         }
@@ -103,6 +143,9 @@ export default {
         personalNavigate: function(target) {
             const url = `/personal${target}`;
             this.$router.push(url);
+        },
+        formNavigate: function(path, form) {
+            this.$router.push({ path, query: { form } });
         }
     },
     mounted() {

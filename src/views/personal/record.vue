@@ -1,14 +1,19 @@
 <template>
     <a-spin :spinning="loading" class="container">
         <a-tabs v-model="status">
-            <a-tab-pane :tab="$t('personal.undeal')" key="nodeal"> </a-tab-pane>
-            <a-tab-pane :tab="$t('personal.deal')" key="deal"> </a-tab-pane>
+            <a-tab-pane :tab="$t('personal.undeal')" key="nodeal"></a-tab-pane>
+            <a-tab-pane :tab="$t('personal.deal')" key="deal"></a-tab-pane>
         </a-tabs>
         <div class="list-content">
-            <a-empty v-if="list.length === 0" class="empty"></a-empty>
+            <a-empty v-if="list.length !== 0" class="empty"></a-empty>
             <cell v-for="item in list" :key="item.id" />
         </div>
-        <pagination :page="page" :size="size" :total="total" @handleChange="current => (page = current - 1)" />
+        <pagination
+            :page="page"
+            :size="size"
+            :total="total"
+            @handleChange="current => (page = current - 1)"
+        />
     </a-spin>
 </template>
 
@@ -39,7 +44,11 @@ export default {
     methods: {
         initData: function() {
             this.loading = true;
-            const body = { page: this.page, size: this.size, status: this.status };
+            const body = {
+                page: this.page,
+                size: this.size,
+                status: this.status
+            };
             setTimeout(() => {
                 this.loading = false;
             }, 1000);

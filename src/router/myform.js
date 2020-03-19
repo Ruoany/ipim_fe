@@ -3,10 +3,18 @@ const router = [
     {
         path: `${parentRoute}/index`,
         meta: {
-            title: "代表團申請表",
+            title: "申請表",
             key: "myform"
         },
         component: () => import("@/views/myform/index")
+    },
+    {
+        path: `${parentRoute}/special`,
+        meta: {
+            title: "支持申請表",
+            key: "special"
+        },
+        component: () => import("@/views/myform/special")
     }
 ];
 

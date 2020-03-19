@@ -1,8 +1,9 @@
 <template>
     <a-pagination
-        :current="currentPage"
+        v-model="currentPage"
+        showLessItems
         :total="total"
-        :page-size="size"
+        :pageSize="size"
         @change="currentPageChange"
         style="padding-bottom:60px;"
     />
@@ -16,8 +17,11 @@ export default {
     },
     computed: {
         currentPage: {
-            get() {
+            get: function() {
                 return this.page + 1;
+            },
+            set: function(value) {
+                this.$emit("update:page", value - 1);
             }
         }
     },
