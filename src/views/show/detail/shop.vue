@@ -8,10 +8,26 @@
             />
             <div class="sp-card-content">
                 <div class="sp-card-content-title">
-                    <span>澳門製造有限公司</span>
+                    <span>四川省生態環境廳</span>
                 </div>
                 <div class="sp-card-content-item">
                     <span>{{ $t("index.email") }}:</span>
+                    <span>9764002@qq.com</span>
+                </div>
+            </div>
+        </a-card>
+        <a-card v-for="item in trades" :key="item.id" class="sp-card">
+            <img
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583908268484&di=b4ba2c516f369fe632b336565f8ddce8&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20190928%2F19%2F1569669753-jnlcKyEuMZ.jpg"
+                class="sp-card-avatar"
+            />
+            <div class="sp-card-content">
+                <div class="sp-card-content-title">
+                    <span>中國檢驗認證集團澳門有限公司</span>
+                </div>
+                <div class="sp-card-content-item">
+                    <span>{{ $t("index.email") }}:</span>
+                    <span>hsj@ccicmacau.com</span>
                 </div>
             </div>
         </a-card>
