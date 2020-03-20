@@ -7,8 +7,8 @@
             </div>
             <div class="sp-card-content">
                 <div class="sp-card-content-title">
-                    <span>{{ item.name }}</span
-                    ><span> {{ item.gender === "M" ? $t("show.sir") : $t("show.lady") }}</span>
+                    <span>{{ item.name }}</span>
+                    <!-- <span> {{ item.gender === "M" ? $t("show.sir") : $t("show.lady") }}</span> -->
                 </div>
                 <div class="sp-card-content-item">
                     <span>{{ $t("index.tel") }}:</span>
