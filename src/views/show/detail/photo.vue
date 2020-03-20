@@ -31,7 +31,7 @@ export default {
 
     methods: {
         showImg() {
-            const viewer = this.$refs.img.$el.$viewer;
+            // const viewer = this.$refs.img.$el.$viewer;
             console.log("vie==>", this.$refs.img);
             // viewer.show();
         }

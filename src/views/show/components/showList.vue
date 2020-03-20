@@ -10,12 +10,16 @@
             :endTime="$moment(item.endTime).format('YYYY-MM-DD')"
             :name="item.nameZh"
             :id="item.id"
+            :statusImg="item.showStatus | statusImgFilter"
         ></show-cell>
     </div>
 </template>
 
 <script>
 import showCell from "@/components/card/showCell";
+import unopen from "@/assets/image/unopen.svg";
+import ing from "@/assets/image/ing.svg";
+import over from "@/assets/image/over.svg";
 
 export default {
     props: {
@@ -24,7 +28,32 @@ export default {
             default: []
         }
     },
-    components: { showCell }
+    components: { showCell },
+    data() {
+        return {
+            unopen,
+            ing,
+            over
+        };
+    },
+    filters: {
+        statusImgFilter(e) {
+            let img;
+            let that = this;
+            switch (e) {
+                case "NOTSTART":
+                    img = unopen;
+                    break;
+                case "PROGRESS":
+                    img = ing;
+                    break;
+                case "END":
+                    img = over;
+                    break;
+            }
+            return img;
+        }
+    }
 };
 </script>
 

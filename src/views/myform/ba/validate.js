@@ -10,5 +10,6 @@ export default {
     phone: ["phone", config],
     fax: ["fax", config],
     email: ["email", config],
-    contactAddress: ["contactAddress", config]
+    contactAddress: ["contactAddress", config],
+    liaisonId: ["liaisonId", config_select]
 };

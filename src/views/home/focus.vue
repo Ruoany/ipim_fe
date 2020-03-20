@@ -39,7 +39,7 @@ export default {
         async getActiveList() {
             const data = await Activity.all({
                 ...this.listQuery,
-                manyStatus: ["PROGRESS", "END"]
+                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             });
             data.code === 200 ? (this.showList = data.data) : "";
         }

@@ -35,7 +35,7 @@
                         v-decorator="liaisonId"
                     >
                         <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
-                            {{ item.nameZh }}
+                            {{ item.nameZh }} {{ item.nameEnOrPt }}
                         </a-select-option>
                     </a-select>
                 </a-form-item>
