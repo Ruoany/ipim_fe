@@ -1,16 +1,14 @@
 <template>
     <div class="cell-container flex">
         <div class="ad">
-            <div class="tag" :class="status"></div>
+            <div class="tag" :class="activityStatus"></div>
             <img
                 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583908268484&di=b4ba2c516f369fe632b336565f8ddce8&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20190928%2F19%2F1569669753-jnlcKyEuMZ.jpg"
             />
         </div>
         <div class="content flex">
             <div class="info">
-                <div class="title" :title="title">
-                    {{ title }}
-                </div>
+                <div class="title" :title="title">{{ title }}</div>
                 <div class="address" :title="address">
                     <span>{{ $t("show.acAd") }}：</span>
                     <span>{{ address }}</span>
@@ -21,14 +19,22 @@
                 </div>
             </div>
             <div class="status">
-                <div class="top" :class="isAllow ? 'allow' : 'noallow'">
-                    {{ isAllow ? $t("personal.allow") : $t("personal.noAllow") }}
-                </div>
+                <div class="top" :class="status">{{ $t(formatStatus) }}</div>
                 <div class="button-wrapper">
-                    <a-button v-if="isOver" type="primary">{{ $t("personal.update") }}</a-button>
-                    <a-button v-if="!isOver" type="primary">{{ $t("personal.foQuestion") }}</a-button>
-                    <a-button v-if="isPut" type="primary">{{ $t("personal.lfQuestion") }}</a-button>
-                    <a-button v-if="!isPut" type="primary">{{ $t("personal.showPic") }}</a-button>
+                    <a-button
+                        v-if="status === 'rejected'"
+                        type="primary"
+                        @click="FormNavigate"
+                    >{{ $t("personal.update") }}</a-button>
+                    <a-button
+                        v-if="status === 'passed'"
+                        type="primary"
+                    >{{ $t("personal.question") }}</a-button>
+                    <a-button
+                        v-if="status === 'passed'"
+                        type="primary"
+                        @click="PictureNavigate"
+                    >{{ $t("personal.showPic") }}</a-button>
                 </div>
             </div>
         </div>
@@ -38,18 +44,52 @@
 <script>
 export default {
     props: {
-        title: { type: String, default: "這是題目" },
-        address: { type: String, default: "這是地址" },
-        date: { type: String, default: "2020-03-16" },
-        status: { type: String, default: "default" },
-        isAllow: { type: Boolean, default: false }
+        activityId: { type: [String, Number], required: true },
+        formId: { type: [String, Number], required: true },
+        status: { type: String, required: true },
+        activityStatus: { type: String, required: true },
+        form: { type: String, required: true },
+        liaisonId: { type: Number, required: true },
+        institutionId: { type: Number, required: true },
+        title: { type: String, default: "無題目" },
+        address: { type: String, default: "無地址" },
+        date: { type: String, default: "1970-01-01" }
     },
-    data() {
-        return {
-            isBeing: false,
-            isOver: true,
-            isPut: false
-        };
+    computed: {
+        formatStatus: function() {
+            switch (this.status) {
+                case "approving":
+                    return "personal.approving";
+                    break;
+                case "passed":
+                    return "personal.passed";
+                    break;
+                case "rejected":
+                    return "personal.rejected";
+                    break;
+                case "finish":
+                    return "personal.finish";
+                    break;
+            }
+        }
+    },
+    methods: {
+        FormNavigate: function() {
+            this.$store.dispatch("setFormId", this.formId);
+            const query = {
+                activityId: this.activityId,
+                form: this.form
+            };
+            this.$router.push({ path: "/myform/index", query });
+        },
+        PictureNavigate: function() {
+            const query = {
+                activityId: this.activityId,
+                liaisonId: this.liaisonId,
+                institutionId: this.institutionId
+            };
+            this.$router.push({ path: "/personal/picture", query });
+        }
     }
 };
 </script>
@@ -125,10 +165,13 @@ export default {
             flex-direction: column;
             justify-content: space-between;
             text-align: right;
-            .allow {
+            .approving {
+                color: #666;
+            }
+            .passed {
                 color: #1fa211;
             }
-            .noallow {
+            .rejected {
                 color: #db0f0f;
             }
             .top {

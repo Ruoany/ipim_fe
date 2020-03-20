@@ -1,5 +1,5 @@
 <template>
-    <div class="container width-1280">
+    <a-spin :spinning="loading" class="container width-1280">
         <detail-title
             :activity-id="activeData.id"
             :name-zh="activeData.nameZh"
@@ -14,7 +14,7 @@
             actType="SELF"
         ></detail-title>
         <detail-Tab :card-data="activeData"></detail-Tab>
-    </div>
+    </a-spin>
 </template>
 
 <script>
@@ -32,17 +32,20 @@ export default {
     data() {
         return {
             id: null,
+            loading: false,
             activeData: {}
         };
     },
     methods: {
         async getActiveById(id) {
+            this.loading = true;
             const data = await Activity.one(id);
             if (data.code === 200) {
                 this.activeData = data.data;
             } else {
                 this.$message.error(data.message);
             }
+            this.loading = false;
         }
     },
     mounted() {

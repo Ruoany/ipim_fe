@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import Liaisons from "@/apis/liaison";
 import FormMap from "@/common/map";
 import FormMission from "./MISSION/index";
 import FormParticipate from "./PARTICIPATE/index";
@@ -63,9 +64,16 @@ export default {
             return `${this.$t(first)} - ${this.$t(last)}`;
         }
     },
+    methods: {
+        setLiaisons: async function() {
+            const { data } = await Liaisons.get({ size: 100 });
+            this.$store.dispatch("setLiaisons", data.content);
+        }
+    },
     mounted: function() {
         this.form = this.$route.query.form;
         this.activityId = this.$route.query.activityId;
+        this.setLiaisons();
     }
 };
 </script>

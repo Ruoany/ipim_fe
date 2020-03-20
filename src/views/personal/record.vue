@@ -1,33 +1,42 @@
 <template>
     <a-spin :spinning="loading" class="container">
         <a-tabs v-model="status">
-            <a-tab-pane :tab="$t('personal.undeal')" key="nodeal"></a-tab-pane>
-            <a-tab-pane :tab="$t('personal.deal')" key="deal"></a-tab-pane>
+            <a-tab-pane :tab="$t('personal.undeal')" key="approving"></a-tab-pane>
+            <a-tab-pane :tab="$t('personal.deal')" key="unapproved"></a-tab-pane>
         </a-tabs>
         <div class="list-content">
-            <a-empty v-if="list.length !== 0" class="empty"></a-empty>
-            <cell v-for="item in list" :key="item.id" />
+            <a-empty v-if="list.length === 0" class="empty"></a-empty>
+            <cell
+                v-for="item in list"
+                :key="item.id"
+                :activity-id="item.activity.id"
+                :form-id="item.id"
+                :liaison-id="item.liaisonId"
+                :institution-id="item.institution.id"
+                :form="item.type"
+                :status="item.status"
+                :activity-status="item.activity.showStatus"
+                :title="item.activity.nameZh"
+                :address="item.activity.place"
+                :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+            />
         </div>
-        <pagination
-            :page="page"
-            :size="size"
-            :total="total"
-            @handleChange="current => (page = current - 1)"
-        />
+        <pagination :page.sync="page" :size="size" :total="total" />
     </a-spin>
 </template>
 
 <script>
 import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
+import Participate from "@/apis/participate";
 export default {
     components: { Cell, Pagination },
     data() {
         return {
             loading: false,
-            status: "nodeal",
+            status: "approving",
             page: 0,
-            size: 6,
+            size: 10,
             total: 1,
             list: []
         };
@@ -42,17 +51,22 @@ export default {
         }
     },
     methods: {
-        initData: function() {
+        initData: async function() {
             this.loading = true;
-            const body = {
+            const {
+                data: { content, totalElements }
+            } = await Participate.get({
                 page: this.page,
                 size: this.size,
-                status: this.status
-            };
-            setTimeout(() => {
-                this.loading = false;
-            }, 1000);
+                approved: this.status === "unapproved"
+            });
+            this.list = content;
+            this.total = totalElements;
+            this.loading = false;
         }
+    },
+    mounted: function() {
+        this.initData();
     }
 };
 </script>

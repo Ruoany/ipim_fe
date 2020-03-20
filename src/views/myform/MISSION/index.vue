@@ -54,7 +54,7 @@
                 <a-form-item :label="$t('formaa.ac')">
                     <a-select v-decorator="liaisonId" @change="handleLiaisonChange">
                         <a-select-option
-                            v-for="item in liaisons"
+                            v-for="item in $store.state.myform.liaisons"
                             :key="item.id"
                             :value="item.id"
                         >{{item.nameZh}}</a-select-option>
@@ -166,14 +166,12 @@
 <script>
 import init from "@/common/init";
 import validate from "./validate";
-import Liaison from "@/apis/liaison";
 import PD from "@/apis/participateDelegation";
 export default {
     data() {
         return {
             ...validate,
             stepCurrent: 0,
-            liaisons: [],
             formItemLayout: {
                 labelCol: { span: 24 },
                 wrapperCol: { span: 24 }
@@ -211,10 +209,6 @@ export default {
     },
     created: function() {
         this.form = this.$form.createForm(this, { name: "MISSION" });
-    },
-    mounted: async function() {
-        const { data } = await Liaison.get({ size: 100 });
-        this.liaisons = data.content;
     }
 };
 </script>

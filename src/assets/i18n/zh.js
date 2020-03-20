@@ -160,18 +160,19 @@ const zhData = {
         logo: "機構LOGO",
         meName: "機構名稱",
         update: "修改申請",
-        foQuestion: "填寫問卷調查",
-        lfQuestion: "查看問卷結果",
+        question: "問卷調查",
         showPic: "展會圖片",
-        allow: "獲批",
-        noAllow: "不獲批",
         undeal: "待審核",
         deal: "已審核",
         upload: "上傳圖片",
         tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
         submit: "提交",
         userId: "用戶ID",
-        meType: "機構性質"
+        meType: "機構性質",
+        approving: "待審批",
+        passed: "獲批",
+        rejected: "不獲批",
+        finish: "完成"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"

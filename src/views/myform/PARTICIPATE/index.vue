@@ -35,7 +35,7 @@
                         v-decorator="liaisonId"
                     >
                         <a-select-option
-                            v-for="item in liaisonList"
+                            v-for="item in $store.state.myform.liaisons"
                             :key="item.id"
                             :label="item.nameZh"
                         >
@@ -223,7 +223,6 @@
 <script>
 import Upload from "@/components/upload";
 import rules from "./validate";
-import Liaison from "@/apis/liaison";
 import PAA from "@/apis/participateAttendAbroad";
 export default {
     components: { Upload },
@@ -340,17 +339,6 @@ export default {
                     { force: true }
                 );
             });
-        },
-        async initData() {
-            const data = await Liaison.getList({
-                institutionId: this.company.id
-            });
-            console.log("daya==>", data);
-            if (data.code === 200) {
-                this.liaisonList = data.data;
-            } else {
-                this.$message.error(data.message);
-            }
         },
         liaisonChange(e) {
             let data = this.liaisonList.find(item => item.id === e);
