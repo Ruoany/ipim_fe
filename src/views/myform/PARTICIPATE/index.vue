@@ -34,22 +34,16 @@
                         class="full"
                         v-decorator="liaisonId"
                     >
-                        <a-select-option
-                            v-for="item in liaisonList"
-                            :key="item.id"
-                            :label="item.nameZh"
-                        >
-                            {{
-                            item.nameZh
-                            }}
+                        <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
+                            {{ item.nameZh }}
                         </a-select-option>
                     </a-select>
                 </a-form-item>
                 <a-form-item :label="$t('formab.ai')">
-                    <a-input disabled v-model="liaisonObj.phone" />
+                    <a-input disabled v-model="liaisonObj.abroadPhone" />
                 </a-form-item>
                 <a-form-item :label="$t('formab.zz')">
-                    <a-input disabled />
+                    <a-input disabled v-model="liaisonObj.phone" />
                 </a-form-item>
                 <a-form-item :label="$t('formab.aj')">
                     <a-input disabled v-model="liaisonObj.fax" />
@@ -78,18 +72,10 @@
                     ></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.ap')">
-                    <upload
-                        v-decorator="otherFiles"
-                        decorator="otherFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload v-decorator="otherFiles" decorator="otherFiles" @handleChange="uploadChange"></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.aq')">
-                    <upload
-                        v-decorator="taxpayerFiles"
-                        decorator="taxpayerFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload v-decorator="taxpayerFiles" decorator="taxpayerFiles" @handleChange="uploadChange"></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.ar')">
                     <upload
@@ -115,11 +101,7 @@
                     ></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.aw')">
-                    <upload
-                        v-decorator="idcardFiles"
-                        decorator="idcardFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload v-decorator="idcardFiles" decorator="idcardFiles" @handleChange="uploadChange"></upload>
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 4">
@@ -170,9 +152,9 @@
                 <a-form-item :label="$t('formab.bx')">
                     <upload
                         v-decorator="[
-                    'businessRegistrationFiles',
-                    { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                ]"
+                            'businessRegistrationFiles',
+                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                        ]"
                         decorator="businessRegistrationFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -180,41 +162,40 @@
                 <a-form-item :label="$t('formab.by')">
                     <upload
                         v-decorator="[
-                    'certificateBureauFiles',
-                    { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                ]"
+                            'certificateBureauFiles',
+                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                        ]"
                         decorator="certificateBureauFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.bz')">
                     <upload
-                        v-decorator="['salesTaxOpenFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                        v-decorator="[
+                            'salesTaxOpenFiles',
+                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                        ]"
                         decorator="salesTaxOpenFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-item>
                 <a-form-item :label="$t('formab.ca')">
                     <upload
-                        v-decorator="['salesTaxFiles', { rules: [{ required: checkNick, message: 'Please upload file' }] }]"
+                        v-decorator="[
+                            'salesTaxFiles',
+                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
+                        ]"
                         decorator="salesTaxFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-item>
             </div>
             <a-form-item>
-                <a-button
-                    v-show="stepCurrent > 0"
-                    type="primary"
-                    @click="stepCurrent--"
-                    style="margin-right:12px"
-                >上一步</a-button>
+                <a-button v-show="stepCurrent > 0" type="primary" @click="stepCurrent--" style="margin-right:12px"
+                    >上一步</a-button
+                >
                 <a-button v-show="stepCurrent < 5" type="primary" @click="stepCurrent++">下一步</a-button>
-                <a-button
-                    v-show="stepCurrent === 5"
-                    type="primary"
-                    html-type="submit"
-                >{{ $t("formab.cb") }}</a-button>
+                <a-button v-show="stepCurrent === 5" type="primary" html-type="submit">{{ $t("formab.cb") }}</a-button>
             </a-form-item>
         </a-form>
     </div>
@@ -331,12 +312,7 @@ export default {
             }
             this.$nextTick(() => {
                 this.form.validateFields(
-                    [
-                        "businessRegistrationFiles",
-                        "certificateBureauFiles",
-                        "salesTaxOpenFiles",
-                        "salesTaxFiles"
-                    ],
+                    ["businessRegistrationFiles", "certificateBureauFiles", "salesTaxOpenFiles", "salesTaxFiles"],
                     { force: true }
                 );
             });

@@ -10,6 +10,7 @@ import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
 import reportba from "./ba/zh_re";
+import reportbb from "./bb/zh_re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -139,7 +140,7 @@ const zhData = {
         s: "機構信息管理",
         w: "場地登記編號（營業稅檔案）",
         u: "商業登記編號",
-        y: "納稅人編號及名稱",
+        y: "納稅人編號",
         z: "成立日期",
         aa: "業務",
         ab: "是否同意讀取澳門特別行政區政府財政局和商業及動產登記局資料庫內涉及本申請之相關稅務及商業登記資料？",
@@ -157,8 +158,19 @@ const zhData = {
         an: "團體設立之澳門政府公報副本",
         ao: "身份證明局發出之登記證明書副本",
         ap: "法人代表之身份證副本",
+        aq: "暫不認證本機構",
+        ar: "機構性質",
+        ax: "大學/研究機構",
+        at: "政府機構",
+        au: "企業",
+        av: "商/協會",
+        aw: "其他",
+        ay: "納稅人名稱",
+
         logo: "機構LOGO",
-        meName: "機構名稱",
+        meNameZh: "機構名稱（中文）",
+        meNameEn: "機構名稱（英文）",
+        meNamePt: "機構名稱（葡文）",
         update: "修改申請",
         foQuestion: "填寫問卷調查",
         lfQuestion: "查看問卷結果",
@@ -176,7 +188,8 @@ const zhData = {
     report: {
         aa: "填寫方式一：在綫填寫展會報告"
     },
-    reportba
+    reportba,
+    reportbb
 };
 
 export default zhData;
