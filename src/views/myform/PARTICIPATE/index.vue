@@ -34,19 +34,8 @@
                         class="full"
                         v-decorator="liaisonId"
                     >
-<<<<<<< HEAD
-                        <a-select-option
-                            v-for="item in $store.state.myform.liaisons"
-                            :key="item.id"
-                            :label="item.nameZh"
-                        >
-                            {{
-                            item.nameZh
-                            }}
-=======
                         <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
-                            {{ item.nameZh }} {{ item.nameEnOrPt }}
->>>>>>> 45a7c39f44829c8cd2403a7edc5d93cd20c13602
+                            {{ item.nameZh }}/{{ item.nameEnOrPt }}
                         </a-select-option>
                     </a-select>
                 </a-form-item>
