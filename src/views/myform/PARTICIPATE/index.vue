@@ -358,9 +358,10 @@ export default {
         uploadChange(o) {
             console.log("輸出->", o);
             const key = o.keys;
-            const value = o.value.map(item => {
-                return item.url;
-            });
+            // const value = o.value.map(item => {
+            //     return item.url;
+            // });
+            const value = o.value;
             this.form.setFieldsValue({ [key]: value });
         }
     },
