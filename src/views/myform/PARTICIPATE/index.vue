@@ -347,7 +347,7 @@ export default {
                         applicantId: this.applicantId
                     });
                     if (data.code === 200) {
-                        this.$message.success("提交申请成功");
+                        this.$message.success("申請成功");
                         this.$router.back();
                     } else {
                         this.$message.error(data.message);
