@@ -20,7 +20,7 @@
             </div>
             <div v-show="stepCurrent === 1">
                 <a-form-item :label="$t('formba.af')">
-                    <a-input v-decorator="name" />
+                    <a-input v-decorator="communityName" />
                 </a-form-item>
                 <a-form-item :label="$t('formba.ag')">
                     <div class="form-content">
@@ -30,13 +30,11 @@
                             <li>{{ $t("formba.aj") }}</li>
                         </ul>
                     </div>
-                    <a-upload-dragger v-decorator="files" name="files" action="/upload.do">
-                        <p class="ant-upload-drag-icon">
-                            <a-icon type="inbox" />
-                        </p>
-                        <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p class="ant-upload-hint">Support for a single or bulk upload.</p>
-                    </a-upload-dragger>
+                    <upload
+                        v-decorator="['communityFiles', { rules: [{ required: true, message: 'Please upload file' }] }]"
+                        decorator="communityFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 2">
@@ -50,7 +48,11 @@
                         class="full"
                         v-decorator="liaisonId"
                     >
-                        <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
+                        <a-select-option
+                            v-for="item in liaisonList"
+                            :key="item.id"
+                            :label="`${item.nameZh}${item.nameEnOrPt}`"
+                        >
                             {{ item.nameZh }} {{ item.nameEnOrPt }}
                         </a-select-option>
                     </a-select>
@@ -73,17 +75,28 @@
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-item :label="$t('formba.as')">
-                    <a-input v-decorator />
+                    <a-select
+                        showSearch
+                        optionFilterProp="label"
+                        @change="activityChange"
+                        :filterOption="true"
+                        :notFoundContent="null"
+                        class="full"
+                        v-decorator="activityId"
+                    >
+                        <a-select-option v-for="item in activityList" :key="item.id" :label="item.nameZh">
+                            {{ item.nameZh }} {{ item.nameEnOrPt }}
+                        </a-select-option>
+                    </a-select>
                 </a-form-item>
                 <a-form-item :label="$t('formba.at')">
-                    <a-input v-decorator />
+                    <a-input v-decorator disabled />
                 </a-form-item>
                 <a-form-item :label="$t('formba.au')">
-                    <a-range-picker v-decorator style="width:100%;" />
+                    <a-range-picker v-decorator style="width:100%;" disabled />
                 </a-form-item>
                 <a-form-item :label="$t('formba.av')">
-                    <a-textarea v-decorator :rows="4" />
-                    <div>{{ $t("formba.aw") }}</div>
+                    <a-textarea v-decorator :rows="4" :placeholder="$t('formba.aw')" />
                 </a-form-item>
                 <a-form-item :label="$t('formba.ax')">
                     <a-textarea v-decorator :rows="4" />
@@ -151,7 +164,10 @@
 <script>
 import validate from "./validate";
 import Liaison from "@/apis/liaison";
+import Activity from "@/apis/activity";
+import Upload from "@/components/upload";
 export default {
+    components: { Upload },
     data() {
         return {
             ...validate,
@@ -170,7 +186,8 @@ export default {
                 address: null
             }, //當前選中聯係人
             activityId: null,
-            applicantId: 5
+            applicantId: 5,
+            activityList: []
         };
     },
     computed: {
@@ -241,7 +258,9 @@ export default {
             };
         },
         titleName() {
-            return `${this.liaisonObj.titleNameZh} ${this.liaisonObj.titleNameEnOrPt}`;
+            return `${this.liaisonObj.titleNameZh === undefined ? "" : this.liaisonObj.titleNameZh} ${
+                this.liaisonObj.titleNameEnOrPt === undefined ? "" : this.liaisonObj.titleNameEnOrPt
+            }`;
         }
     },
     methods: {
@@ -263,12 +282,29 @@ export default {
             } else {
                 this.$message.error(data.message);
             }
+            this.getActiveList();
         },
         //選擇聯絡人
         liaisonChange(e) {
             let data = this.liaisonList.find(item => item.id === e);
             this.liaisonObj = data;
             console.log("data==>", data, e);
+        },
+        //上傳的文件
+        uploadChange(o) {
+            console.log("輸出->", o);
+            const key = o.keys;
+            // const value = o.value.map(item => {
+            //     return item.url;
+            // });
+            const value = o.value;
+            this.form.setFieldsValue({ [key]: value });
+        },
+        async getActiveList() {
+            const { data } = await Activity.all({
+                participate: true
+            });
+            this.activityList = data;
         }
     },
     created: function() {

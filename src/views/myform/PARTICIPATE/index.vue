@@ -34,7 +34,11 @@
                         class="full"
                         v-decorator="liaisonId"
                     >
-                        <a-select-option v-for="item in liaisonList" :key="item.id" :label="item.nameZh">
+                        <a-select-option
+                            v-for="item in liaisonList"
+                            :key="item.id"
+                            :label="`${item.nameZh}${item.nameEnOrPt}`"
+                        >
                             {{ item.nameZh }} {{ item.nameEnOrPt }}
                         </a-select-option>
                     </a-select>

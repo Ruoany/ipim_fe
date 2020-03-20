@@ -3,7 +3,7 @@ const config_select = { rules: [{ required: true, message: "plese select" }] };
 
 export default {
     form: {},
-    name: ["name", config],
+    communityName: ["communityName", config],
     files: ["files", config_select],
     contactName: ["contactName", config],
     contactPosition: ["contactPosition", config],
