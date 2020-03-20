@@ -36,7 +36,7 @@ export default {
             loading: false,
             status: "approving",
             page: 0,
-            size: 10,
+            size: 5,
             total: 1,
             list: []
         };
