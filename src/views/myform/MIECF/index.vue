@@ -245,6 +245,16 @@ export default {
         };
     },
     methods: {
+        initData: function() {
+            console.log("獲取表單ID", this.$store.state.myform.formId);
+        },
+        beforeunloadHandler: function(e) {
+            e = e || window.event;
+            if (e) {
+                e.returnValue = "刷新頁面將會導致數據丟失";
+            }
+            return "刷新頁面將會導致數據丟失";
+        },
         operaCompany: function(type, index) {
             if (type) {
                 const body = {
@@ -269,9 +279,21 @@ export default {
     },
     created: function() {
         this.form = this.$form.createForm(this, { name: "MIECF" });
+        if (this.$store.state.myform.formId) {
+            window.addEventListener("beforeunload", e =>
+                this.beforeunloadHandler(e)
+            );
+            this.initData();
+        }
     },
     mounted: function() {
         this.companyArray = this.form.getFieldValue("company");
+    },
+    destroyed: function() {
+        this.$store.dispatch("removeFormId");
+        window.removeEventListener("beforeunload", e =>
+            this.beforeunloadHandler(e)
+        );
     }
 };
 </script>

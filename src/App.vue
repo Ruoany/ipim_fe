@@ -5,6 +5,14 @@
     </div>
 </template>
 
+<script>
+export default {
+    mounted: function() {
+        console.log("歡迎來到澳門貿促局");
+    }
+};
+</script>
+
 <style lang="less">
 @import "./assets/css/util.css";
 ::-webkit-scrollbar {

@@ -5,10 +5,7 @@
 <script>
 export default {
     props: {
-        info: {
-            type: String,
-            default: ""
-        }
+        info: String
     }
 };
 </script>
@@ -16,5 +13,8 @@ export default {
 <style lang="less" scoped>
 .container {
     width: 100%;
+    /deep/ img {
+        width: 100%;
+    }
 }
 </style>
