@@ -10,6 +10,7 @@
                 :endTime="activeData.endTime"
                 :scope="activeData.scope"
                 :website="activeData.website"
+                :participate="activeData.participate"
                 actType="DEPUTATION"
             ></detail-title>
             <detail-Tab :cardData="activeData"></detail-Tab>

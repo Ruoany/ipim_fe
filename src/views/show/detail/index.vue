@@ -11,6 +11,7 @@
             :scope="activeData.scope"
             :website="activeData.website"
             :types="activeData.types"
+            :participate="activeData.participate"
             actType="SELF"
         ></detail-title>
         <detail-Tab :card-data="activeData"></detail-Tab>

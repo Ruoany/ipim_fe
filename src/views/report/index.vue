@@ -2,7 +2,8 @@
     <div class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('report.aa')" key="1" style="padding:30px 0;">
-                <report-ba v-if="reportType = 'ba'"></report-ba>
+                <report-ba v-if="reportType === 'ba'"></report-ba>
+                <report-bb v-if="reportType === 'bb'"></report-bb>
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -10,8 +11,9 @@
 
 <script>
 import reportBa from "./ba/index";
+import reportBb from "./bb/index";
 export default {
-    components: { reportBa },
+    components: { reportBa, reportBb },
     data() {
         return {
             reportType: null,
