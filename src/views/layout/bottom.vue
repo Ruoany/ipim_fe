@@ -1,47 +1,34 @@
 <template>
-    <div class="flex center h-back">
-        <div class="width-1280">
-            <div class="flex-justify-content-space-between flex-align-items-center width-1280">
-                <div class="font-24">
-                    <div class="flex-align-items-center">
-                        <img :src="logoImg" class="img" />
-                        <div>
-                            <div class="font-36">澳門會展網</div>
-                            <div class="font-16">https://www.ipim.gov.mo</div>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="h-back">
+        <div class="h-back-content width-1280">
+            <div class="h-back-left">
+                <img :src="logoImg" class="img" />
                 <div>
-                    <div class="flex-align-items-center p-20">
-                        <div class="width-30">
-                            <i class="iconfont icondizhi"></i>
-                        </div>
-                        <div class="font-16">{{ $t("index.address") }}：澳门友谊大马路918号世贸中心一至四楼</div>
-                    </div>
-                    <div class="flex-align-items-center p-20">
-                        <div class="width-30">
-                            <i class="iconfont iconyouxiang"></i>
-                        </div>
-                        <div class="font-16">{{ $t("index.email") }}：ipim@ipim.gov.mo</div>
-                    </div>
-                    <div class="flex-align-items-center p-20">
-                        <div class="width-30">
-                            <i class="iconfont icondianhua"></i>
-                        </div>
-                        <div class="font-16">{{ $t("index.tel") }}：(853) 2871 0300</div>
-                    </div>
-                    <div class="flex-align-items-center p-20">
-                        <div class="width-30">
-                            <i class="iconfont iconchuanzhen"></i>
-                        </div>
-                        <div class="font-16">{{ $t("index.fax") }}：(853) 2859 0309</div>
-                    </div>
+                    <div class="font-36">澳門會展網</div>
+                    <div class="font-16">https://www.ipim.gov.mo</div>
                 </div>
             </div>
-            <div class="font-16" style="padding:0;padding-top:45px;">
-                © copyright 2020 IPIM. All rights reserved. （声明）
+            <div class="h-back-right">
+                <div>
+                    <i class="iconfont icondizhi"></i>
+                    <span>{{ $t("index.address") }}：澳门友谊大马路918号世贸中心一至四楼</span>
+                </div>
+                <div>
+                    <i class="iconfont iconyouxiang" style="font-size:18px"></i>
+                    <span>{{ $t("index.email") }}：ipim@ipim.gov.mo</span>
+                </div>
+                <div>
+                    <i class="iconfont icondianhua"></i>
+                    <span>{{ $t("index.tel") }}：(853) 2871 0300</span>
+                </div>
+                <div>
+                    <i class="iconfont iconchuanzhen"></i>
+                    <span>{{ $t("index.fax") }}：(853) 2859 0309</span>
+                </div>
             </div>
+        </div>
+        <div class="footer-bottom">
+            © copyright 2020 IPIM. All rights reserved. （声明）
         </div>
     </div>
 </template>
@@ -60,49 +47,58 @@ export default {
 <style lang="less" scoped>
 .h-back {
     background: #000000;
-    height: 312px;
+    width: 100%;
     align-items: center;
     color: #ffffff;
-    width: 100%;
-    min-width: 1226px;
-    .font-24 {
-        // font-size: 24px;
-        padding-left: 31px;
-        // font-weight: bold;
+    .h-back-content {
+        padding: 20px 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .h-back-left {
+            display: flex;
+            align-items: center;
+        }
+        .h-back-right {
+            font-weight: bold;
+            i {
+                font-size: 20px;
+            }
+            & > div {
+                width: 350px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                i {
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                span {
+                    width: 310px;
+                }
+            }
+        }
     }
-    .icon {
-        font-size: 29px;
-        color: red;
+    .footer-bottom {
+        width: 100%;
+        min-width: 1226px;
+        text-align: center;
+        font-size: 12px;
     }
-    .font-16 {
-        font-size: 16px;
-        padding: 0 0 0 10px;
-        font-weight: lighter;
-    }
-    .p-20 {
-        // padding: 5px 0;
-        line-height: 40px;
+    .img {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
     }
     .font-36 {
         font-size: 36px;
-        font-weight: bold;
-        padding: 0 0 0 10px;
     }
-}
-.img {
-    width: 60px;
-    height: 60px;
-}
-// .b-back {
-//     background: #3e3e3e;
-//     height: 100px;
-//     color: #ffffff;
-//     .font-center {
-//         text-align: center;
-//     }
-// }
-.width-30 {
-    width: 20px;
-    text-align: center;
+    .font-16 {
+        font-size: 16px;
+    }
 }
 </style>

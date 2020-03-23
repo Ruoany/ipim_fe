@@ -8,12 +8,7 @@
             <a-empty v-if="list.length === 0" class="empty"></a-empty>
             <cell v-for="item in list" :key="item.id" />
         </div>
-        <pagination
-            :page="page"
-            :size="size"
-            :total="total"
-            @handleChange="current => (page = current - 1)"
-        />
+        <pagination :page.sync="page" :size="size" :total="total" />
     </a-spin>
 </template>
 

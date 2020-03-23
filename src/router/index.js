@@ -42,6 +42,14 @@ const router = new VueRouter({
                 ...myform,
                 ...report
             ]
+        },
+        {
+            path: "/login",
+            meta: {
+                title: "登錄",
+                key: "login"
+            },
+            component: () => import("@/views/login/index")
         }
     ]
 });
