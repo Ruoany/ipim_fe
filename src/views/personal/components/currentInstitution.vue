@@ -13,8 +13,10 @@
         ></div>
         <div class="content">
             <div class="top">
-                <div class="name">澳門來來超市</div>
-                <div class="status">委任證</div>
+                <div class="name">{{ info.nameZh }}</div>
+                <div class="status" :class="info.status">
+                    {{ info.status | formatStutas }}
+                </div>
             </div>
             <div class="bottom">
                 <div
@@ -35,6 +37,11 @@
                     <a-icon type="solution" style="font-size:25px;" />
                     <span>{{ $t("personal.x") }}</span>
                 </div>
+                <div class="right-button">
+                    <a-button @click="handleNavigate('/personal/attest')">{{
+                        $t("personal.certify")
+                    }}</a-button>
+                </div>
             </div>
         </div>
     </div>
@@ -43,6 +50,24 @@
 <script>
 export default {
     props: { info: Object },
+    filters: {
+        formatStutas: function(value) {
+            switch (value) {
+                case "approving":
+                    return "審核中";
+                    break;
+                case "passed":
+                    return "已認證";
+                    break;
+                case "rejected":
+                    return "認證失敗";
+                    break;
+                default:
+                    return "未認證";
+                    break;
+            }
+        }
+    },
     methods: {
         handleNavigate: function(url) {
             this.$router.push(`${url}?institutionId=${this.info.id}`);
@@ -67,6 +92,7 @@ export default {
         background-repeat: no-repeat;
     }
     .content {
+        width: 740px;
         padding-left: 20px;
         height: 140px;
         display: flex;
@@ -82,6 +108,9 @@ export default {
             .status {
                 font-size: 15px;
                 line-height: 40px;
+            }
+            .certified {
+                color: #db0f0f;
             }
         }
         .bottom {
@@ -104,6 +133,11 @@ export default {
                     padding-left: 0;
                     border-left: none;
                 }
+            }
+            .right-button {
+                width: 290px;
+                border: none;
+                text-align: right;
             }
         }
     }

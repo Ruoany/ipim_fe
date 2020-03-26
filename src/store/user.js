@@ -6,7 +6,10 @@ export default {
     getters: {
         info: state => state.info,
         currentUser: state => state.info.id,
-        institutionList: state => state.info.institutions,
+        institutionList: function(state) {
+            const arr = state.info.institutions.filter(item => item.id !== state.institution.id);
+            return arr;
+        },
         currentInstitution: state => state.institution
     },
     mutations: {

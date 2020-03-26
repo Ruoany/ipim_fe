@@ -99,11 +99,11 @@
                 key="institution"
             >
                 <span slot="title" class="flex center">
-                    {{ currentInstitution.name }}
+                    {{ currentInstitution.nameZh }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
                 <a-menu-item v-for="item in institutionList" :key="item.id">{{
-                    item.name
+                    item.nameZh
                 }}</a-menu-item>
             </a-sub-menu>
         </a-menu>

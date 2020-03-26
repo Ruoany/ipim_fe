@@ -185,7 +185,8 @@ const zhData = {
         passed: "獲批",
         rejected: "不獲批",
         finish: "完成",
-        others: "添加機構"
+        others: "添加機構",
+        certify: "認證機構"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"

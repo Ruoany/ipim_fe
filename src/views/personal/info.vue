@@ -4,6 +4,11 @@
             v-if="currentInstitution"
             :info="currentInstitution"
         ></current-institution>
+        <others-institution
+            v-for="item in institutionList"
+            :key="item.id"
+            :info="item"
+        ></others-institution>
         <div class="others">
             <a-button
                 type="primary"
@@ -17,9 +22,10 @@
 <script>
 import { mapGetters } from "vuex";
 import CurrentInstitution from "./components/currentInstitution";
+import OthersInstitution from "./components/othersInstitution";
 import Institution from "@/apis/institution";
 export default {
-    components: { CurrentInstitution },
+    components: { CurrentInstitution, OthersInstitution },
     data() {
         return {};
     },

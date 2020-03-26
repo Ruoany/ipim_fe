@@ -12,10 +12,8 @@
             "
         ></div>
         <div class="content">
-            <div class="top">
-                <div class="name">{{ info.name }}</div>
-                <div class="status">{{ info.status }}</div>
-            </div>
+            <div class="name">{{ info.nameZh }}</div>
+            <div class="status">{{ info.status | formatStutas }}</div>
             <div class="bottom">
                 <a-button>設為當前機構</a-button>
             </div>
@@ -26,6 +24,24 @@
 <script>
 export default {
     props: { info: Object },
+    filters: {
+        formatStutas: function(value) {
+            switch (value) {
+                case "approving":
+                    return "審核中";
+                    break;
+                case "approving":
+                    return "審核中";
+                    break;
+                case "approving":
+                    return "審核中";
+                    break;
+                default:
+                    return "未認證";
+                    break;
+            }
+        }
+    },
     methods: {
         handleNavigate: function(url) {
             this.$router.push(`${url}?institutionId=${this.info.id}`);
@@ -42,6 +58,9 @@ export default {
     border: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
+    margin-top: 20px;
+    background: #e6e6e6;
+    position: relative;
     .logo {
         width: 80px;
         height: 80px;
@@ -56,38 +75,19 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-        .top {
-            font-size: 30px;
+
+        .name {
+            font-size: 24px;
             font-weight: bold;
-            .name {
-                width: 100%;
-            }
-            .status {
-                font-size: 15px;
-                line-height: 40px;
-            }
+            width: 100%;
+        }
+        .status {
+            font-size: 15px;
+            line-height: 40px;
         }
         .bottom {
-            display: flex;
-            align-items: center;
-            .item {
-                width: 150px;
-                display: flex;
-                align-items: center;
-                border-left: 1px solid #e6e6e6;
-                padding-left: 20px;
-                cursor: pointer;
-                span {
-                    margin-left: 5px;
-                }
-                &:hover {
-                    color: lightcoral;
-                }
-                &:nth-child(1) {
-                    padding-left: 0;
-                    border-left: none;
-                }
-            }
+            position: absolute;
+            right: 24px;
         }
     }
 }
