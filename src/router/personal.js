@@ -73,6 +73,13 @@ const router = [
                 meta: {
                     key: "record"
                 }
+            },
+            {
+                path: `${parentRoute}/attest`,
+                component: () => import("@/views/personal/attest"),
+                meta: {
+                    key: "info"
+                }
             }
         ]
     }

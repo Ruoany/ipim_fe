@@ -16,14 +16,14 @@ Vue.use(Antd);
 Vue.config.productionTip = false;
 Vue.prototype.$moment = moment;
 
-router.beforeEach(async (to, from, next) => {
-    if (!store.getters.info) {
-        const { data } = await User.current();
-        console.log("獲取用戶信息", data);
-        await store.dispatch("setInfo", data);
-    }
-    next();
-});
+// router.beforeEach(async (to, from, next) => {
+//     if (!store.getters.info) {
+//         const { data } = await User.current();
+//         console.log("獲取用戶信息", data);
+//         await store.dispatch("setInfo", data);
+//     }
+//     next();
+// });
 
 const i18n = new VueI18n({
     locale: "zh",

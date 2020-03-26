@@ -1,62 +1,10 @@
 <template>
-    <div>
-        <h1>{{ $t("personal.s") }}</h1>
-        <a-form-model :ref="institution" :model="form" style="width:100%;">
-            <a-form-model-item :label="$t('personal.logo')">
-                <a-upload
-                    name="file"
-                    listType="picture-card"
-                    :showUploadList="false"
-                    :action="upFiles"
-                    :beforeUpload="beforeUpload"
-                    @change="imgChange"
-                    v-model="form.logo"
-                >
-                    <img v-if="imageUrl" :src="imageUrl" alt="avatar" class="img" />
-                    <div v-else>
-                        <a-icon :type="loading ? 'loading' : 'plus'" />
-                    </div>
-                </a-upload>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.meNameZh')">
-                <a-input v-model="form.nameZh"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.meNameEn')">
-                <a-input v-model="form.nameEn"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.meNamePt')">
-                <a-input v-model="form.namePt"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.w')">
-                <a-input v-model="form.siteRegistrationCode"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.u')">
-                <a-input v-model="form.registrationNumber"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.y')">
-                <a-input v-model="form.taxpayerNo"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.ay')">
-                <a-input v-model="form.taxpayerName"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.z')">
-                <a-date-picker @change="dateChange" class="full" v-model="form.dateOfEstablishment" />
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.aa')">
-                <a-textarea v-model="form.business"></a-textarea>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.ab')">
-                <a-radio-group v-model="form.deal">
-                    <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
-                    <a-radio :value="false">{{ $t("util.no") }}</a-radio>
-                </a-radio-group>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.ac')">
-                <a-textarea v-model="form.shareholderComponents"></a-textarea>
-            </a-form-model-item>
-            <div v-if="Certification">
+    <div class="container">
+        <h1>{{ $t("personal.az") }}</h1>
+        <a-form-model>
+            <div>
                 <a-form-model-item :label="$t('personal.ar')">
-                    <a-select style="width: 100%" @change="natureChange" v-model="form.nature">
+                    <a-select style="width: 100%" v-model="nature">
                         <a-select-option value="UNIVERSITY">{{ $t("personal.ax") }}</a-select-option>
                         <a-select-option value="GOVERNMENT_ORGANS">{{ $t("personal.at") }}</a-select-option>
                         <a-select-option value="ENTERPRISE">{{ $t("personal.au") }}</a-select-option>
@@ -149,85 +97,45 @@
                     ></upload>
                 </a-form-model-item>
             </div>
-            <a-form-model-item>
-                <a-button type="primary" :style="{ marginRight: '8px' }" @click="Certification = !Certification">{{
-                    !Certification ? $t("personal.ah") : $t("personal.aq")
-                }}</a-button>
+            <a-form-model-item :model="formData">
                 <a-button :style="{ marginRight: '8px' }" @click="$router.back()">Cancel</a-button>
                 <a-button type="primary" html-type="submit">ok</a-button>
             </a-form-model-item>
         </a-form-model>
+        <a-descriptions bordered :title="$t('personal.m')" :column="1">
+            <a-descriptions-item :label="$t('personal.logo')"><img :src="form.logo" class="img"/></a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameZh')">{{ form.nameZh }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameEn')">{{ form.nameEn }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNamePt')">{{ form.namePt }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.w')">{{ form.siteRegistrationCode }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.u')">{{ form.registrationNumber }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.y')">{{ form.taxpayerNo }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.ay')">{{ form.taxpayerName }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.z')">{{ form.dateOfEstablishment }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.aa')">{{ form.business }}</a-descriptions-item>
+
+            <a-descriptions-item :label="$t('personal.ac')">{{ form.shareholderComponents }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.ab')">
+                {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
+            </a-descriptions-item>
+        </a-descriptions>
     </div>
 </template>
 
 <script>
-import Liaison from "@/apis/liaison";
-import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
 import Institution from "@/apis/institution";
 export default {
     components: { Upload },
-
     data() {
         return {
-            form: this.$form.createForm(this, { name: "coordinated" }),
-            loading: false,
-            imageUrl: "",
-            upFiles,
-            current: 1,
-            Certification: false,
-            nature: null
+            nature: null,
+            formData: {},
+            form: {},
+            id: null
         };
     },
     methods: {
-        handleSubmit(e) {
-            e.preventDefault();
-            this.form.validateFields(async (err, values) => {
-                if (!err) {
-                    console.log(values);
-
-                    const data = await Institution.create({
-                        ...values,
-                        logo: this.imageUrl
-                    });
-                    if (data.code === 200) {
-                        this.$message.success("操作成功");
-                        this.$router.replace("/personal/info");
-                    } else {
-                        this.$message.error(data.message);
-                    }
-                }
-            });
-        },
-
-        beforeUpload(file) {
-            console.log("file==>", file);
-            const isJPG = file.type === "image/jpeg";
-            if (!isJPG) {
-                this.$message.error("You can only upload JPG file!");
-            }
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            if (!isLt2M) {
-                this.$message.error("Image must smaller than 2MB!");
-            }
-            if (isJPG && isLt2M) {
-                this.loading = true;
-            }
-            return isJPG && isLt2M;
-        },
-        imgChange(info) {
-            console.log("info=>", info);
-            if (info.file.status === "done") {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.imageUrl = data.data.url;
-                } else {
-                    this.$message.error(data.message);
-                }
-                this.loading = false;
-            }
-        },
-
         uploadChange(file) {
             console.log("file==>sssssss", file);
             // let value = file.va;
@@ -235,18 +143,18 @@ export default {
 
             this.form.setFieldsValue({ [keyK]: file.value });
         },
-        //機構性質
-        natureChange(e) {
-            console.log(e);
-            this.form.setFieldsValue({ ["nature"]: e });
-            this.nature = e;
-        },
-        //
-        dateChange(e) {
-            this.form.setFieldsValue({
-                dateOfEstablishment: e.format("YYYY-MM-DD")
-            });
+        async initData() {
+            const data = await Institution.one(this.id);
+            if (data.code === 200) {
+                this.form = data.data;
+            } else {
+                this.$message.error(data.message);
+            }
         }
+    },
+    mounted() {
+        this.id = this.$route.query.institutionId;
+        this.initData();
     }
 };
 </script>
@@ -255,5 +163,9 @@ export default {
 .img {
     width: 150px;
     height: 150px;
+}
+/deep/.ant-descriptions-item-label {
+    white-space: pre-wrap !important;
+    width: 300px;
 }
 </style>
