@@ -20,11 +20,11 @@ const func = (modules, o = {}) => {
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });
-            return Promise.resolve(result);
+            return result;
         },
         one: async id => {
             const result = await request.get(`${modulesUrl}/${id}`);
-            return Promise.resolve(result);
+            return result;
         },
         create: async data => {
             const result = await request({
@@ -32,7 +32,7 @@ const func = (modules, o = {}) => {
                 method: "POST",
                 data
             });
-            return Promise.resolve(result);
+            return result;
         },
         update: async data => {
             const result = await request({
@@ -40,11 +40,11 @@ const func = (modules, o = {}) => {
                 method: "PUT",
                 data
             });
-            return Promise.resolve(result);
+            return result;
         },
         delete: async id => {
             const result = await request.delete(`${modulesUrl}/${id}`);
-            return Promise.resolve(result);
+            return result;
         },
         all: async params => {
             const result = await request({
@@ -60,7 +60,7 @@ const func = (modules, o = {}) => {
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });
-            return Promise.resolve(result);
+            return result;
         }
     };
 };

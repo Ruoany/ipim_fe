@@ -48,7 +48,7 @@ export default {
     align-items: flex-start;
     .personal-content {
         padding: 20px 40px;
-        min-height: 610px;
+        min-height: 742px;
         width: 100%;
         border-left: 1px solid #e6e6e6;
     }

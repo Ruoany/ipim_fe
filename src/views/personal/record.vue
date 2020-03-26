@@ -1,8 +1,14 @@
 <template>
     <a-spin :spinning="loading" class="container">
         <a-tabs v-model="status">
-            <a-tab-pane :tab="$t('personal.undeal')" key="approving"></a-tab-pane>
-            <a-tab-pane :tab="$t('personal.deal')" key="unapproved"></a-tab-pane>
+            <a-tab-pane
+                :tab="$t('personal.undeal')"
+                key="approving"
+            ></a-tab-pane>
+            <a-tab-pane
+                :tab="$t('personal.deal')"
+                key="unapproved"
+            ></a-tab-pane>
         </a-tabs>
         <div class="list-content">
             <a-empty v-if="list.length === 0" class="empty"></a-empty>
@@ -26,6 +32,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Participate from "@/apis/participate";
@@ -40,6 +47,9 @@ export default {
             total: 1,
             list: []
         };
+    },
+    computed: {
+        ...mapGetters(["currentUser"])
     },
     watch: {
         status: function() {
@@ -56,6 +66,7 @@ export default {
             const {
                 data: { content, totalElements }
             } = await Participate.get({
+                applicantId: this.currentUser,
                 page: this.page,
                 size: this.size,
                 approved: this.status === "unapproved"

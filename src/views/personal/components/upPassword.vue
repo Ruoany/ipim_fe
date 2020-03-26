@@ -1,46 +1,41 @@
 <template>
-    <a-form :form="form" @submit="handleSubmit" style="width:100%;" layout="vertical">
-        <a-form-item :label="$t('personal.b')">
-            <a-input v-decorator="['name', { rules: [{ required: true, message: 'Please input' }] }]" />
-        </a-form-item>
-        <a-form-item :label="$t('personal.c')">
-            <a-input v-decorator="['password', { rules: [{ required: true, message: 'Please input' }] }]" />
-        </a-form-item>
-        <a-form-item :label="$t('personal.d')">
-            <a-input
-                v-decorator="[
-                    'rePassword',
-                    {
-                        rules: [
-                            { required: true, message: 'Please input' },
-                            {
-                                validator: rePasswordVal
-                            }
-                        ]
-                    }
-                ]"
-            />
-        </a-form-item>
-    </a-form>
+    <a-form-model ref="pwd" :model="form" :rules="rules" style="width:100%;">
+        <a-form-model-item prop="old" :label="$t('personal.b')">
+            <a-input type="password" v-model="form.old" />
+        </a-form-model-item>
+        <a-form-model-item prop="pwd" :label="$t('personal.c')">
+            <a-input type="password" v-model="form.pwd" />
+        </a-form-model-item>
+        <a-form-model-item prop="confirm" :label="$t('personal.d')">
+            <a-input type="password" v-model="form.confirm" />
+        </a-form-model-item>
+    </a-form-model>
 </template>
 
 <script>
 export default {
     data() {
-        return {
-            form: this.$form.createForm(this, { name: "coordinated" })
-        };
-    },
-    methods: {
-        rePasswordVal(rule, value, callback) {
-            const form = this.form;
-            if (value && value !== form.getFieldValue("password")) {
+        const config = { required: true, message: "Please input" };
+        const confirmValid = (rule, value, callback) => {
+            if (value && value !== this.form.pwd) {
                 callback("Two passwords that you enter is inconsistent!");
-            } else {
-                callback();
+                return;
             }
-        },
-        handleSubmit() {}
+            callback();
+        };
+        return {
+            rules: {
+                old: [config],
+                pwd: [config],
+                confirm: [{ validator: confirmValid, trigger: "blur" }]
+            },
+            form: {
+                id: this.$store.getters.currentUser,
+                old: "",
+                pwd: "",
+                confirm: ""
+            }
+        };
     }
 };
 </script>

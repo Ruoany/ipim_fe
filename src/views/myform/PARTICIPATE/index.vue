@@ -8,108 +8,132 @@
             <a-step :title="$t('formab.ax')" />
             <a-step :title="$t('formab.bt')" />
         </a-steps>
-        <a-form class="form" :form="form" @submit="subForm">
+        <a-form-model
+            ref="PARTICIPATE"
+            class="form"
+            :model="form"
+            :rules="rules"
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+        >
             <div v-show="stepCurrent === 0">
-                <a-form-item :label="$t('formab.ac')">
-                    <a-input disabled v-model="company.nameZh" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.ad')">
-                    <a-input disabled v-model="company.siteRegistrationCode" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.ae')">
-                    <a-input disabled v-model="company.registrationNumber" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.af')">
-                    <a-input v-decorator="exhibitionProduct" />
-                </a-form-item>
+                <a-form-model-item :label="$t('formab.ac')">
+                    <a-input disabled v-model="selectedInstitution.nameZh" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ad')">
+                    <a-input
+                        disabled
+                        v-model="selectedInstitution.siteRegistrationCode"
+                    />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ae')">
+                    <a-input
+                        disabled
+                        v-model="selectedInstitution.registrationNumber"
+                    />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.af')">
+                    <a-input v-model="form.exhibitionProduct" />
+                </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 1">
-                <a-form-item :label="$t('formab.ah')">
+                <a-form-model-item prop="liaisonId" :label="$t('formab.ah')">
                     <a-select
                         showSearch
                         optionFilterProp="label"
-                        @change="liaisonChange"
                         :filterOption="true"
                         :notFoundContent="null"
                         class="full"
-                        v-decorator="liaisonId"
+                        v-model="form.liaisonId"
                     >
                         <a-select-option
                             v-for="item in liaisonList"
                             :key="item.id"
                             :label="`${item.nameZh}${item.nameEnOrPt}`"
+                            >{{ item.nameZh }}
+                            {{ item.nameEnOrPt }}</a-select-option
                         >
-                            {{ item.nameZh }} {{ item.nameEnOrPt }}
-                        </a-select-option>
                     </a-select>
-                </a-form-item>
-                <a-form-item :label="$t('formab.ai')">
-                    <a-input disabled v-model="liaisonObj.abroadPhone" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.zz')">
-                    <a-input disabled v-model="liaisonObj.phone" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.aj')">
-                    <a-input disabled v-model="liaisonObj.fax" />
-                </a-form-item>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ai')">
+                    <a-input disabled v-model="selectedLiaison.abroadPhone" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.zz')">
+                    <a-input disabled v-model="selectedLiaison.phone" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aj')">
+                    <a-input disabled v-model="selectedLiaison.fax" />
+                </a-form-model-item>
 
-                <a-form-item :label="$t('formab.ak')">
-                    <a-input disabled v-model="liaisonObj.email" />
-                </a-form-item>
-                <a-form-item :label="$t('formab.al')">
-                    <a-textarea disabled v-model="liaisonObj.address" />
-                </a-form-item>
+                <a-form-model-item :label="$t('formab.ak')">
+                    <a-input disabled v-model="selectedLiaison.email" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.al')">
+                    <a-textarea disabled v-model="selectedLiaison.address" />
+                </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <a-form-item :label="$t('formab.an')">
+                <a-form-model-item :label="$t('formab.an')">
                     <upload
-                        v-decorator="registrationOfBureauFiles"
+                        :value.sync="form.registrationOfBureauFiles"
                         decorator="registrationOfBureauFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.ao')">
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ao')">
                     <upload
-                        v-decorator="macaoShareholderFiles"
+                        v-model="form.macaoShareholderFiles"
                         decorator="macaoShareholderFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.ap')">
-                    <upload v-decorator="otherFiles" decorator="otherFiles" @handleChange="uploadChange"></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.aq')">
-                    <upload v-decorator="taxpayerFiles" decorator="taxpayerFiles" @handleChange="uploadChange"></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.ar')">
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ap')">
                     <upload
-                        v-decorator="shareholderSamesFiles"
+                        v-model="form.otherFiles"
+                        decorator="otherFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aq')">
+                    <upload
+                        v-model="form.taxpayerFiles"
+                        decorator="taxpayerFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ar')">
+                    <upload
+                        v-model="form.shareholderSamesFiles"
                         decorator="shareholderSamesFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.as')">
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.as')">
                     <upload
-                        v-decorator="differentTaxpayerFiles"
+                        v-model="form.differentTaxpayerFiles"
                         decorator="differentTaxpayerFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
+                </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('formab.au')">
+                <a-form-model-item :label="$t('formab.au')">
                     <upload
-                        v-decorator="unitIntroductionFiles"
+                        v-model="form.unitIntroductionFiles"
                         decorator="unitIntroductionFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.aw')">
-                    <upload v-decorator="idcardFiles" decorator="idcardFiles" @handleChange="uploadChange"></upload>
-                </a-form-item>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aw')">
+                    <upload
+                        v-model="form.idcardFiles"
+                        decorator="idcardFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
-                <a-form-item>
+                <a-form-model-item>
                     <ul>
                         <h3 class="font-bold">{{ $t("formab.ay") }}</h3>
                         <li>{{ $t("formab.az") }}</li>
@@ -143,222 +167,176 @@
                         <li>{{ $t("formab.br") }}</li>
                         <li>{{ $t("formab.bs") }}</li>
                     </ul>
-                </a-form-item>
+                </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 5">
-                <a-form-item>
+                <a-form-model-item>
                     <div>{{ $t("formab.bu") }}</div>
-                    <a-radio-group @change="reasonChange" v-model="reason">
-                        <a-radio :value="1">{{ $t("formab.bv") }}</a-radio>
-                        <a-radio :value="2">{{ $t("formab.bw") }}</a-radio>
+                    <a-radio-group v-model="form.know">
+                        <a-radio :value="true">{{ $t("formab.bv") }}</a-radio>
+                        <a-radio :value="false">{{ $t("formab.bw") }}</a-radio>
                     </a-radio-group>
-                </a-form-item>
-                <a-form-item :label="$t('formab.bx')">
+                </a-form-model-item>
+                <a-form-model-item
+                    :label="$t('formab.bx')"
+                    :rules="{
+                        required: !form.know,
+                        message: 'please upload file',
+                        tigger: 'blur'
+                    }"
+                >
                     <upload
-                        v-decorator="[
-                            'businessRegistrationFiles',
-                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                        ]"
+                        v-model="form.businessRegistrationFiles"
                         decorator="businessRegistrationFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.by')">
+                </a-form-model-item>
+                <a-form-model-item
+                    :label="$t('formab.by')"
+                    :rules="{
+                        required: !form.know,
+                        message: 'please upload file',
+                        tigger: 'blur'
+                    }"
+                >
                     <upload
-                        v-decorator="[
-                            'certificateBureauFiles',
-                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                        ]"
+                        v-model="form.certificateBureauFiles"
                         decorator="certificateBureauFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.bz')">
+                </a-form-model-item>
+                <a-form-model-item
+                    :label="$t('formab.bz')"
+                    :rules="{
+                        required: !form.know,
+                        message: 'please upload file',
+                        tigger: 'blur'
+                    }"
+                >
                     <upload
-                        v-decorator="[
-                            'salesTaxOpenFiles',
-                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                        ]"
+                        v-model="form.salesTaxOpenFiles"
                         decorator="salesTaxOpenFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
-                <a-form-item :label="$t('formab.ca')">
+                </a-form-model-item>
+                <a-form-model-item
+                    :label="$t('formab.ca')"
+                    :rules="{
+                        required: !form.know,
+                        message: 'please upload file',
+                        tigger: 'blur'
+                    }"
+                >
                     <upload
-                        v-decorator="[
-                            'salesTaxFiles',
-                            { rules: [{ required: checkNick, message: 'Please upload file' }] }
-                        ]"
+                        v-model="form.salesTaxFiles"
                         decorator="salesTaxFiles"
                         @handleChange="uploadChange"
                     ></upload>
-                </a-form-item>
+                </a-form-model-item>
             </div>
-            <a-form-item>
-                <a-button v-show="stepCurrent > 0" type="primary" @click="stepCurrent--" style="margin-right:12px"
+            <a-form-model-item>
+                <a-button
+                    v-show="stepCurrent > 0"
+                    type="primary"
+                    @click="stepCurrent--"
+                    style="margin-right:12px"
                     >上一步</a-button
                 >
-                <a-button v-show="stepCurrent < 5" type="primary" @click="stepCurrent++">下一步</a-button>
-                <a-button v-show="stepCurrent === 5" type="primary" html-type="submit">{{ $t("formab.cb") }}</a-button>
-            </a-form-item>
-        </a-form>
+                <a-button
+                    v-show="stepCurrent < 5"
+                    type="primary"
+                    @click="stepCurrent++"
+                    >下一步</a-button
+                >
+                <a-button
+                    v-show="stepCurrent === 5"
+                    type="primary"
+                    @click="subForm"
+                    >{{ $t("formaa.bt") }}</a-button
+                >
+            </a-form-model-item>
+        </a-form-model>
     </div>
 </template>
 
 <script>
 import Upload from "@/components/upload";
-import rules from "./validate";
+import validate from "./validate";
 import PAA from "@/apis/participateAttendAbroad";
 export default {
     components: { Upload },
     data() {
         return {
-            ...rules,
-            stepCurrent: 0,
-            formItemLayout: {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 16 }
-            },
-            upLabel: { span: 16, offset: 4 },
-            reason: 1,
-            checkNick: false,
-            liaisonList: [], //聯係人列表
-            liaisonObj: {
-                id: null,
-                nameZh: null,
-                phone: null,
-                fax: null,
-                email: null,
-                address: null
-            }, //當前選中聯係人
-            activityId: null,
-            applicantId: 5
+            ...validate
         };
     },
     computed: {
-        company() {
-            // return JSON.parse(sessionStorage.getItem("company"));
-            return {
-                id: 96,
-                createAt: null,
-                updateAt: null,
-                name: null,
-                nameZh: "機构測試1",
-                nameEn: "test",
-                namePt: "Ensaio Institucional",
-                logo: null,
-                dateOfEstablishment: "2020-02",
-                startTime: null,
-                endTime: null,
-                natureId: 2,
-                natureName: "本地",
-                country: null,
-                province: null,
-                city: null,
-                street: null,
-                countryZh: "3",
-                provinceZh: null,
-                cityZh: "31",
-                streetZh: "測試",
-                countryEnOrPt: null,
-                provinceEnOrPt: null,
-                cityEnOrPt: null,
-                streetEnOrPt: null,
-                email: null,
-                tel: null,
-                fax: "020-112345",
-                institutionShareholderVOS: [
-                    {
-                        id: 64,
-                        createAt: null,
-                        updateAt: null,
-                        institutionId: 96,
-                        institutionName: "機构測試1",
-                        name: null,
-                        percent: null
-                    }
-                ],
-                m1Number: null,
-                registrationNumber: null,
-                siteRegistrationCode: null,
-                taxpayerName: null,
-                taxpayerNo: null,
-                business: null,
-                registeredCapital: 200,
-                currency: "USD",
-                institutionIndustryVOS: [
-                    {
-                        institutionId: 96,
-                        institutionName: "機构測試1",
-                        name: "",
-                        category: ""
-                    }
-                ],
-                chargeName: null,
-                status: null,
-                shareholderComponents: null,
-                deal: null,
-                tasks: null,
-                idnumber: null
-            };
+        formId: function() {
+            return this.$store.getters.currentForm;
+        },
+        liaisonList: function() {
+            return this.$store.getters.liaisonList;
+        },
+        selectedLiaison: function() {
+            if (!this.form.liaisonId)
+                return {
+                    abroadPhone: "",
+                    phone: "",
+                    fax: "",
+                    email: "",
+                    address: ""
+                };
+            const data = this.liaisonList.find(
+                item => item.id === this.form.liaisonId
+            );
+            return data;
+        },
+        selectedInstitution: function() {
+            if (!this.form.institutionId)
+                return {
+                    nameZh: "",
+                    siteRegistrationCode: "",
+                    registrationNumber: ""
+                };
+            return this.form.institution;
         }
     },
-    created: function() {
-        this.form = this.$form.createForm(this, { name: "PARTICIPATE" });
-    },
     methods: {
-        reasonChange(e) {
-            if (e.target.value === 2) {
-                this.checkNick = true;
-            } else {
-                this.checkNick = false;
+        initData: async function() {
+            if (this.formId) {
+                const { data } = await PAA.one(this.formId);
+                this.form = data;
             }
-            this.$nextTick(() => {
-                this.form.validateFields(
-                    ["businessRegistrationFiles", "certificateBureauFiles", "salesTaxOpenFiles", "salesTaxFiles"],
-                    { force: true }
-                );
-            });
         },
-        liaisonChange(e) {
-            let data = this.liaisonList.find(item => item.id === e);
-            this.liaisonObj = data;
-            console.log("data==>", data, e);
+        onSuccess: function() {
+            this.$message.success("申請成功");
+            this.$router.back();
         },
-        subForm(e) {
-            e.preventDefault();
-
-            this.form.validateFields(async (err, values) => {
-                console.log("val==>", values);
-
-                if (!err) {
-                    const data = await PAA.create({
-                        ...values,
-                        institutionId: this.company.id,
-                        activityId: this.activityId,
-                        applicantId: this.applicantId
-                    });
-                    if (data.code === 200) {
-                        this.$message.success("申請成功");
-                        this.$router.back();
+        subForm() {
+            this.$refs.PARTICIPATE.validate(async valid => {
+                if (valid) {
+                    if (this.formId) {
+                        const { data } = await PAA.update(this.form);
+                        data ? this.onSuccess() : "";
                     } else {
-                        this.$message.error(data.message);
+                        const { data } = await PAA.create({
+                            ...this.form,
+                            institutionId: 1,
+                            activityId: this.activityId,
+                            applicantId: this.applicantId
+                        });
+                        data ? this.onSuccess() : "";
                     }
                 }
             });
         },
         uploadChange(o) {
-            console.log("輸出->", o);
-            const key = o.keys;
-            // const value = o.value.map(item => {
-            //     return item.url;
-            // });
-            const value = o.value;
-            this.form.setFieldsValue({ [key]: value });
+            console.log("djdshfjkds", o);
+            this.form[o.item] = o.arr;
         }
     },
     mounted() {
-        this.activityId = this.$route.query.activityId;
+        this.form.activityId = this.$route.query.activityId;
         this.initData();
     }
 };

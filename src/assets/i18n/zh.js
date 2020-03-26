@@ -184,13 +184,37 @@ const zhData = {
         approving: "待審批",
         passed: "獲批",
         rejected: "不獲批",
-        finish: "完成"
+        finish: "完成",
+        others: "添加機構"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"
     },
     reportba,
-    reportbb
+    reportbb,
+    login: {
+        title: "管理員登錄",
+        account: "帳號",
+        password: "密碼",
+        confirm: "確認密碼",
+        login: "登錄",
+        register: "註冊",
+        have: "已有帳號？去",
+        nohave: "沒有帳號？請先",
+        forget: "忘記密碼",
+        name: "姓名",
+        phone: "電話",
+        checkbox: "選擇以電郵/手機短訊接收本局消息",
+        email: "電郵",
+        message: "短訊",
+        tips:
+            "本人確定並同意澳門貿易投資促進局（“貿促局”）可將有關收集之商業資料（不涉及個人資料部分）編入其全部或任何“貿促局”資料庫內作為直接推廣、商業配對或本澳會展業界聯絡之用",
+        register: "註冊",
+        reset: "重置密碼",
+        newPwd: "新密碼",
+        code: "驗證碼",
+        getCode: "獲取驗證碼"
+    }
 };
 
 export default zhData;

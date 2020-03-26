@@ -2,7 +2,9 @@
     <div class="container flex">
         <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="menuItem" mode="horizontal" class="menu-wrapper">
-            <a-menu-item key="host" @click="handleNavigate('/show/host')">{{ $t("menu.signUp") }}</a-menu-item>
+            <a-menu-item key="host" @click="handleNavigate('/show/host')">{{
+                $t("menu.signUp")
+            }}</a-menu-item>
             <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
@@ -10,16 +12,15 @@
                 </span>
                 <a-menu-item
                     key="overseas1"
-                    @click="handleNavigate('/show/overseas','PARTICIPATE')"
+                    @click="handleNavigate('/show/overseas', 'PARTICIPATE')"
                 >
-                    {{
-                    $t("menu.ba")
-                    }}
+                    {{ $t("menu.ba") }}
                 </a-menu-item>
-                <a-menu-item key="overseas2" @click="handleNavigate('/show/overseas','MISSION')">
-                    {{
-                    $t("menu.bb")
-                    }}
+                <a-menu-item
+                    key="overseas2"
+                    @click="handleNavigate('/show/overseas', 'MISSION')"
+                >
+                    {{ $t("menu.bb") }}
                 </a-menu-item>
             </a-sub-menu>
             <a-sub-menu>
@@ -29,55 +30,88 @@
                 </span>
                 <a-menu-item
                     key="special1"
-                    @click="formNavigate('/myform/special','ba')"
-                >{{ $t("menu.ca") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'ba')"
+                    >{{ $t("menu.ca") }}</a-menu-item
+                >
                 <a-menu-item
                     key="special2"
-                    @click="formNavigate('/myform/special','bb')"
-                >{{ $t("menu.cb") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'bb')"
+                    >{{ $t("menu.cb") }}</a-menu-item
+                >
                 <a-menu-item
                     key="special3"
-                    @click="formNavigate('/myform/special','bc')"
-                >{{ $t("menu.cc") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'bc')"
+                    >{{ $t("menu.cc") }}</a-menu-item
+                >
                 <a-menu-item
                     key="special4"
-                    @click="formNavigate('/myform/special','bd')"
-                >{{ $t("menu.cd") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'bd')"
+                    >{{ $t("menu.cd") }}</a-menu-item
+                >
                 <a-menu-item
                     key="special5"
-                    @click="formNavigate('/myform/special','be')"
-                >{{ $t("menu.ce") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'be')"
+                    >{{ $t("menu.ce") }}</a-menu-item
+                >
                 <a-menu-item
                     key="special6"
-                    @click="formNavigate('/myform/special','bf')"
-                >{{ $t("menu.cf") }}</a-menu-item>
+                    @click="formNavigate('/myform/special', 'bf')"
+                    >{{ $t("menu.cf") }}</a-menu-item
+                >
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
-                <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
-                <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
-                <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
+                <a-menu-item key="zh" @click="lanChange('zh')"
+                    >中文</a-menu-item
+                >
+                <a-menu-item key="en" @click="lanChange('en')"
+                    >English</a-menu-item
+                >
+                <a-menu-item key="pt" @click="lanChange('pt')"
+                    >Português</a-menu-item
+                >
             </a-sub-menu>
             <a-sub-menu style="float:right;" key="personal">
                 <span slot="title" class="flex center">
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item key="mine" @click="personalNavigate('/mine')">{{ $t("menu.perInfo") }}</a-menu-item>
-                <a-menu-item key="record" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
+                <a-menu-item key="mine" @click="personalNavigate('/mine')">{{
+                    $t("menu.perInfo")
+                }}</a-menu-item>
+                <a-menu-item
+                    key="record"
+                    @click="personalNavigate('/record')"
+                    >{{ $t("menu.exEr") }}</a-menu-item
+                >
                 <a-menu-item
                     key="funding"
                     @click="personalNavigate('/funding')"
-                >{{ $t("menu.funding") }}</a-menu-item>
-                <a-menu-item key="info" @click="personalNavigate('/info')">{{ $t("menu.inIn") }}</a-menu-item>
-                <a-menu-item key="token" @click="getToken">獲取token</a-menu-item>
+                    >{{ $t("menu.funding") }}</a-menu-item
+                >
+                <a-menu-item key="info" @click="personalNavigate('/info')">{{
+                    $t("menu.inIn")
+                }}</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu
+                v-if="currentInstitution"
+                style="float:right;"
+                key="institution"
+            >
+                <span slot="title" class="flex center">
+                    {{ currentInstitution.name }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
+                </span>
+                <a-menu-item v-for="item in institutionList" :key="item.id">{{
+                    item.name
+                }}</a-menu-item>
             </a-sub-menu>
         </a-menu>
     </div>
 </template>
 
 <script>
-import { Login } from "@/apis/login";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -86,6 +120,9 @@ export default {
             depList: [],
             menuItem: []
         };
+    },
+    computed: {
+        ...mapGetters(["institutionList", "currentInstitution"])
     },
     watch: {
         $route: {
@@ -148,9 +185,6 @@ export default {
         },
         formNavigate: function(path, form) {
             this.$router.push({ path, query: { form } });
-        },
-        getToken: function() {
-            Login();
         }
     },
     mounted() {

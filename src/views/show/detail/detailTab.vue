@@ -34,7 +34,7 @@ export default {
 
 <style lang="less" scoped>
 .all {
-    min-height: 400px;
+    min-height: 450px;
     /deep/ .ant-tabs-bar {
         border-bottom: 2px solid #ee1c24 !important;
         margin-bottom: 0;

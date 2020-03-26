@@ -18,9 +18,16 @@
             </a-upload>
         </div>
         <div class="button-wrapper">
-            <a-button type="primary" size="large" @click="handleSubmit">{{ $t("personal.submit") }}</a-button>
+            <a-button type="primary" size="large" @click="handleSubmit">{{
+                $t("personal.submit")
+            }}</a-button>
         </div>
-        <a-modal :visible="modal" title="Prewview" :footer="null" @cancel="modal = false">
+        <a-modal
+            :visible="modal"
+            title="Prewview"
+            :footer="null"
+            @cancel="modal = false"
+        >
             <img alt="example" style="width: 100%" :src="selectedUrl" />
         </a-modal>
     </div>

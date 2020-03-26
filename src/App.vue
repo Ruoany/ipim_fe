@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    mounted: function() {
+    mounted: async function() {
         console.log("歡迎來到澳門貿促局");
     }
 };
@@ -42,5 +42,43 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.login-bg {
+    background: -moz-linear-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
+    background: -webkit-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
+    background: -webkit-linear-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
+    background: -o-linear-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
+    background: -ms-linear-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
+    background: linear-gradient(
+        to bottom,
+        #000000 49%,
+        #ee1c24 1%,
+        #ffffff 50%
+    );
 }
 </style>

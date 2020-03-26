@@ -1,13 +1,15 @@
 <template>
-    <div class="form-wrapper">
+    <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
                 <form-mission v-if="form === 'MISSION'"></form-mission>
-                <form-participate v-if="form === 'PARTICIPATE'"></form-participate>
+                <form-participate
+                    v-if="form === 'PARTICIPATE'"
+                ></form-participate>
                 <form-miecf v-if="form === 'MIECF'"></form-miecf>
                 <form-iiicf v-if="form === 'IIICF'"></form-iiicf>
-                <form-mif v-if="form==='MIF'"></form-mif>
-                <form-plpex v-if="form ==='PLPEX'"></form-plpex>
+                <form-mif v-if="form === 'MIF'"></form-mif>
+                <form-plpex v-if="form === 'PLPEX'"></form-plpex>
                 <form-mfe v-if="form === 'MFE'"></form-mfe>
                 <form-gmbpf v-if="form === 'GMBPF'"></form-gmbpf>
             </a-tab-pane>
@@ -20,15 +22,16 @@
                         <li>{{ $t("util.step4") }}</li>
                         <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{ $t("util.download") }}</a-button>
+                    <a-button type="primary" size="large">{{
+                        $t("util.download")
+                    }}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
-    </div>
+    </a-spin>
 </template>
 
 <script>
-import Liaisons from "@/apis/liaison";
 import FormMap from "@/common/map";
 import FormMission from "./MISSION/index";
 import FormParticipate from "./PARTICIPATE/index";
@@ -54,26 +57,21 @@ export default {
         return {
             form: "",
             activityId: "",
-            tabActive: "1"
+            tabActive: "1",
+            loading: false
         };
     },
-    computed: {
-        formTitle: function() {
-            const first = sessionStorage.getItem("selectedItem");
-            const last = FormMap[this.form];
-            return `${this.$t(first)} - ${this.$t(last)}`;
-        }
-    },
     methods: {
-        setLiaisons: async function() {
-            const { data } = await Liaisons.get({ size: 100 });
-            this.$store.dispatch("setLiaisons", data.content);
+        initData: async function() {
+            this.loading = true;
+            await this.$store.dispatch("setLiaisons", { size: 1000 });
+            this.form = this.$route.query.form;
+            this.activityId = this.$route.query.activityId;
+            this.loading = false;
         }
     },
     mounted: function() {
-        this.form = this.$route.query.form;
-        this.activityId = this.$route.query.activityId;
-        this.setLiaisons();
+        this.initData();
     }
 };
 </script>

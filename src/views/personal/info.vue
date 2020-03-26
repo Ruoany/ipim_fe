@@ -1,36 +1,30 @@
 <template>
     <div>
-        <div class="title flex">
-            <img class="img" />
-            <div class="name">
-                <h1>澳门来来超市</h1>
-                <h3>ssssdjflsfljl1</h3>
-            </div>
-        </div>
-        <div class="flex">
-            <a-card hoverable @click="$router.push('/personal/mechanism')" class="card">
-                <a-icon type="bars" style="font-size:40px;" />
-                <a-card-meta :description="$t('personal.s')" />
-            </a-card>
-
-            <a-card hoverable @click="$router.push('/personal/con_user')" class="card">
-                <a-icon type="team" style="font-size:40px;" />
-                <a-card-meta :description="$t('personal.n')" />
-            </a-card>
-
-            <a-card hoverable class="card" @click="$router.push('/personal/sub_account')">
-                <a-icon type="solution" style="font-size:40px;" />
-                <a-card-meta :description="$t('personal.x')" />
-            </a-card>
+        <current-institution
+            v-if="currentInstitution"
+            :info="currentInstitution"
+        ></current-institution>
+        <div class="others">
+            <a-button
+                type="primary"
+                @click="$router.push('/personal/mechanism')"
+                >{{ $t("personal.others") }}</a-button
+            >
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import CurrentInstitution from "./components/currentInstitution";
 import Institution from "@/apis/institution";
 export default {
+    components: { CurrentInstitution },
     data() {
         return {};
+    },
+    computed: {
+        ...mapGetters(["institutionList", "currentInstitution"])
     },
     methods: {}
 };
@@ -55,5 +49,8 @@ export default {
     .name {
         padding-left: 20px;
     }
+}
+.others {
+    padding: 20px 0;
 }
 </style>

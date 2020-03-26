@@ -18,23 +18,51 @@
             </a-menu>
         </a-dropdown>
         <div class="content-wrapper">
-            <div class="title">{{ $t("login.title") }}</div>
-            <a-form-model ref="login" class="form" :model="form" :rules="rules">
+            <div class="title">{{ $t("login.reset") }}</div>
+            <a-form-model ref="reset" class="form" :model="form" :rules="rules">
                 <a-form-model-item prop="username">
                     <a-input
                         v-model="form.username"
-                        size="large"
                         :placeholder="$t('login.account')"
+                        size="large"
                     >
                         <a-icon slot="prefix" type="user" />
                     </a-input>
+                </a-form-model-item>
+                <a-form-model-item prop="code">
+                    <a-row>
+                        <a-col :span="14">
+                            <a-input
+                                v-model="form.code"
+                                :placeholder="$t('login.code')"
+                                size="large"
+                            >
+                                <a-icon slot="prefix" type="code" />
+                            </a-input>
+                        </a-col>
+                        <a-col :span="8" :offset="2">
+                            <a-button block @click="getCode" size="large">{{
+                                $t("login.getCode")
+                            }}</a-button>
+                        </a-col>
+                    </a-row>
                 </a-form-model-item>
                 <a-form-model-item prop="password">
                     <a-input
                         v-model="form.password"
                         type="password"
                         size="large"
-                        :placeholder="$t('login.password')"
+                        :placeholder="$t('login.newPwd')"
+                    >
+                        <a-icon slot="prefix" type="lock" />
+                    </a-input>
+                </a-form-model-item>
+                <a-form-model-item prop="confirm">
+                    <a-input
+                        v-model="form.confirm"
+                        type="password"
+                        size="large"
+                        :placeholder="$t('login.confirm')"
                     >
                         <a-icon slot="prefix" type="lock" />
                     </a-input>
@@ -42,23 +70,11 @@
                 <a-form-model-item>
                     <a-button
                         block
-                        :loading="loading"
                         type="primary"
                         size="large"
                         @click="handleSubmit"
                         >{{ $t("login.login") }}</a-button
                     >
-                    <div class="register-wrapper">
-                        <span href="#">
-                            {{ $t("login.nohave") }}
-                            <router-link to="/register" replace>{{
-                                $t("login.register")
-                            }}</router-link>
-                        </span>
-                        <router-link to="/reset" replace>{{
-                            $t("login.forget")
-                        }}</router-link>
-                    </div>
                 </a-form-model-item>
             </a-form-model>
         </div>
@@ -66,33 +82,61 @@
 </template>
 
 <script>
-import { Login } from "@/apis/login";
-import User from "@/apis/user";
 export default {
     data() {
         return {
-            loading: false,
             rules: {
                 username: [
                     {
                         required: true,
-                        message: "Please input the email address"
+                        message: "Please input the email address",
+                        trigger: "blur"
                     },
                     {
                         type: "email",
-                        message: "Email format is incorrect"
+                        message: "Email format is incorrect",
+                        trigger: "blur"
+                    }
+                ],
+                code: [
+                    {
+                        required: true,
+                        message: "Please input the code",
+                        trigger: "blur"
+                    },
+                    {
+                        pattern: /\d{6}/,
+                        message: "Please enter 6 digits",
+                        trigger: "blur"
                     }
                 ],
                 password: [
                     {
                         required: true,
-                        message: "Please input the passwrod"
+                        message: "Please input the passwrod",
+                        trigger: "blur"
+                    }
+                ],
+                confirm: [
+                    {
+                        validator: (rule, value, callback) => {
+                            if (value !== this.form.password) {
+                                callback(
+                                    "Confirm that the password does not match the password"
+                                );
+                            } else {
+                                callback();
+                            }
+                        },
+                        trigger: "blur"
                     }
                 ]
             },
             form: {
                 username: "",
-                password: ""
+                code: "",
+                password: "",
+                confirm: ""
             }
         };
     },
@@ -100,24 +144,17 @@ export default {
         lanChange(key) {
             sessionStorage.setItem("language", key);
         },
-        getUserInfo: async function() {
-            await this.$store.dispatch("setInfo");
-            this.$router.push("/");
+        getCode: function() {
+            this.$refs.reset.validateField(["username"], async valid => {
+                if (valid) {
+                    console.log("上述四", this.form.username);
+                }
+            });
         },
         handleSubmit: function() {
-            this.$refs.login.validate(async valid => {
+            this.$refs.reset.validate(async valid => {
                 if (valid) {
-                    this.loading = true;
-                    const result = await Login(this.form);
-                    const { code, message, data } = JSON.parse(result);
-                    if (code !== 200) {
-                        this.loading = false;
-                        this.$message.error(message);
-                        return;
-                    }
-                    sessionStorage.setItem("token", data.token);
-                    sessionStorage.setItem("current", data.id);
-                    this.getUserInfo();
+                    console.log("全部", this.form);
                 }
             });
         }
@@ -134,17 +171,18 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
     .login-dropdown-wrapper {
         position: absolute;
         font-size: 24px;
         color: #fff;
         top: 40px;
     }
-    .login-dropdown {
-        right: 60px;
-    }
     .home {
         left: 60px;
+    }
+    .login-dropdown {
+        right: 60px;
     }
     .content-wrapper {
         width: 700px;

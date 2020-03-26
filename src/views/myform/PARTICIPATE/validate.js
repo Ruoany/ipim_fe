@@ -1,21 +1,39 @@
-const config = { rules: [{ required: true, message: "please input" }] };
-const config_select = { rules: [{ required: true, message: "please select" }] };
-const config_upload = { rules: [{ required: true, message: "please upload file" }] };
+const config = { required: true, message: "please input" };
+const config_select = { required: true, message: "please select" };
+const conig_upload = { required: true, message: "please upload file" };
 
 export default {
-    form: "",
-    liaisonId: ["liaisonId", config_select],
-    registrationOfBureauFiles: ["registrationOfBureauFiles", config_upload],
-    macaoShareholderFiles: ["macaoShareholderFiles", config_upload],
-    taxpayerFiles: ["taxpayerFiles"],
-    shareholderSamesFiles: ["shareholderSamesFiles", config_upload],
-    salesTaxFiles: ["salesTaxFiles", config_upload],
-    differentTaxpayerFiles: ["differentTaxpayerFiles"],
-    businessRegistrationFiles: ["businessRegistrationFiles", config_upload],
-    certificateBureauFiles: ["certificateBureauFiles", config_upload],
-    otherFiles: ["otherFiles"],
-    shareholderSamesFiles: ["shareholderSamesFiles"],
-    unitIntroductionFiles: ["unitIntroductionFiles", config_upload],
-    idcardFiles: ["idcardFiles", config_upload],
-    exhibitionProduct: ["exhibitionProduct", config]
+    form: {
+        activityId: null,
+        applicantId: null,
+        businessRegistrationFiles: [],
+        certificateBureauFiles: [],
+        certs: [],
+        differentTaxpayerFiles: [],
+        exhibitionProduct: "",
+        idcardFiles: [],
+        institutionId: 0,
+        institutionName: "",
+        know: true,
+        liaisonId: null,
+        macaoShareholderFiles: [],
+        otherFiles: [],
+        registrationOfBureauFiles: [],
+        salesTaxFiles: [],
+        salesTaxOpenFiles: [],
+        shareholderSamesFiles: [],
+        siteRegistration: "",
+        taxpayerFiles: [],
+        unitIntroductionFiles: []
+    },
+    rules: {
+        liaisonId: [config_select]
+    },
+    stepCurrent: 0,
+    labelCol: { span: 24 },
+    wrapperCol: { span: 24 },
+    upLabel: { span: 16, offset: 4 },
+    reason: false,
+    checkNick: false,
+    applicantId: 5
 };

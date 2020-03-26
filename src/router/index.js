@@ -50,6 +50,22 @@ const router = new VueRouter({
                 key: "login"
             },
             component: () => import("@/views/login/index")
+        },
+        {
+            path: "/register",
+            meta: {
+                title: "註冊",
+                key: "register"
+            },
+            component: () => import("@/views/register/index")
+        },
+        {
+            path: "/reset",
+            meta: {
+                title: "重置密碼",
+                key: "reset"
+            },
+            component: () => import("@/views/reset/index")
         }
     ]
 });
