@@ -101,7 +101,8 @@ export default {
             sessionStorage.setItem("language", key);
         },
         getUserInfo: async function() {
-            await this.$store.dispatch("setInfo");
+            const { data } = await User.current();
+            await this.$store.dispatch("setInfo", data);
             this.$router.push("/");
         },
         handleSubmit: function() {
