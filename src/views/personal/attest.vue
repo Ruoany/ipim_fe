@@ -1,0 +1,171 @@
+<template>
+    <div class="container">
+        <h1>{{ $t("personal.az") }}</h1>
+        <a-form-model>
+            <div>
+                <a-form-model-item :label="$t('personal.ar')">
+                    <a-select style="width: 100%" v-model="nature">
+                        <a-select-option value="UNIVERSITY">{{ $t("personal.ax") }}</a-select-option>
+                        <a-select-option value="GOVERNMENT_ORGANS">{{ $t("personal.at") }}</a-select-option>
+                        <a-select-option value="ENTERPRISE">{{ $t("personal.au") }}</a-select-option>
+                        <a-select-option value="BUSINESS_OR_ASSOCIATION">{{ $t("personal.av") }}</a-select-option>
+                        <a-select-option value="OTHER">{{ $t("personal.aw") }}</a-select-option>
+                    </a-select>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.aj')" v-if="nature === 'ENTERPRISE'">
+                    <upload
+                        v-decorator="[
+                            'businessRegistrationFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="businessRegistrationFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.ak')" v-if="nature === 'ENTERPRISE'">
+                    <upload
+                        v-decorator="[
+                            'salesTaxOpenFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="salesTaxOpenFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.al')" v-if="nature === 'ENTERPRISE'">
+                    <upload
+                        v-decorator="[
+                            'salesTaxFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="salesTaxFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.am')" v-if="nature === 'ENTERPRISE'">
+                    <upload
+                        v-decorator="[
+                            'shareholderSamesFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="shareholderSamesFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.an')" v-if="nature === 'BUSINESS_OR_ASSOCIATION'">
+                    <upload
+                        v-decorator="[
+                            'groupEstablishmentFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="groupEstablishmentFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.ao')" v-if="nature === 'BUSINESS_OR_ASSOCIATION'">
+                    <upload
+                        v-decorator="[
+                            'identificationBureauFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="identificationBureauFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('personal.ap')" v-if="nature === 'BUSINESS_OR_ASSOCIATION'">
+                    <upload
+                        v-decorator="[
+                            'legalPersonFiles',
+                            {
+                                rules: [{ required: true, message: 'Please upload' }]
+                            }
+                        ]"
+                        decorator="legalPersonFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-form-model-item>
+            </div>
+            <a-form-model-item :model="formData">
+                <a-button :style="{ marginRight: '8px' }" @click="$router.back()">Cancel</a-button>
+                <a-button type="primary" html-type="submit">ok</a-button>
+            </a-form-model-item>
+        </a-form-model>
+        <a-descriptions bordered :title="$t('personal.m')" :column="1">
+            <a-descriptions-item :label="$t('personal.logo')"><img :src="form.logo" class="img"/></a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameZh')">{{ form.nameZh }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameEn')">{{ form.nameEn }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNamePt')">{{ form.namePt }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.w')">{{ form.siteRegistrationCode }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.u')">{{ form.registrationNumber }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.y')">{{ form.taxpayerNo }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.ay')">{{ form.taxpayerName }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.z')">{{ form.dateOfEstablishment }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.aa')">{{ form.business }}</a-descriptions-item>
+
+            <a-descriptions-item :label="$t('personal.ac')">{{ form.shareholderComponents }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.ab')">
+                {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
+            </a-descriptions-item>
+        </a-descriptions>
+    </div>
+</template>
+
+<script>
+import Upload from "@/components/upload";
+import Institution from "@/apis/institution";
+export default {
+    components: { Upload },
+    data() {
+        return {
+            nature: null,
+            formData: {},
+            form: {},
+            id: null
+        };
+    },
+    methods: {
+        uploadChange(file) {
+            console.log("file==>sssssss", file);
+            // let value = file.va;
+            let keyK = file.keys;
+
+            this.form.setFieldsValue({ [keyK]: file.value });
+        },
+        async initData() {
+            const data = await Institution.one(this.id);
+            if (data.code === 200) {
+                this.form = data.data;
+            } else {
+                this.$message.error(data.message);
+            }
+        }
+    },
+    mounted() {
+        this.id = this.$route.query.institutionId;
+        this.initData();
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.img {
+    width: 150px;
+    height: 150px;
+}
+/deep/.ant-descriptions-item-label {
+    white-space: pre-wrap !important;
+    width: 300px;
+}
+</style>

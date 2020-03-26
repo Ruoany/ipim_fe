@@ -18,8 +18,12 @@ Vue.prototype.$moment = moment;
 
 router.beforeEach(async (to, from, next) => {
     if (!store.getters.info) {
-        const { data } = await User.current();
+        const { data, code } = await User.current();
         console.log("獲取用戶信息", data);
+        if (code !== 200) {
+            next();
+            return;
+        }
         await store.dispatch("setInfo", data);
     }
     next();

@@ -166,6 +166,7 @@ const zhData = {
         av: "商/協會",
         aw: "其他",
         ay: "納稅人名稱",
+        az: "機構認證",
 
         logo: "機構LOGO",
         meNameZh: "機構名稱（中文）",
