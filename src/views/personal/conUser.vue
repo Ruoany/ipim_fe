@@ -19,8 +19,14 @@
                     <a slot="title" href="https://www.antdv.com/">{{ item.nameZh }}</a>
                 </a-list-item-meta>
             </a-list-item>
-            <pagination :page.sync="page" :total="total" @handleChange="pages => (page = pages - 1)" :size="size" />
         </a-list>
+        <pagination
+            :page.sync="page"
+            :total="total"
+            @handleChange="pages => (page = pages - 1)"
+            :size="size"
+            style="padding:50px 0 20px 0;"
+        />
         <a-drawer
             :title="title === 'add' ? $t('personal.k') : $t('personal.l')"
             :visible="infoVisible"

@@ -30,7 +30,7 @@ export default {
     components: { showList, showTitle, Pagination },
     data() {
         return {
-            status: null,
+            status: ["NOTSTART", "PROGRESS", "END", "CANCEL"],
             total: 0,
             page: 0,
             size: 6,
@@ -46,7 +46,7 @@ export default {
                 this.page = 0;
                 if (newValue === 1) {
                     this.participate = true;
-                    this.getActivePage(null);
+                    this.getActivePage(["NOTSTART", "PROGRESS", "END", "CANCEL"]);
                 } else {
                     this.participate = null;
                     this.getActivePage(newValue);
@@ -63,7 +63,7 @@ export default {
             const body = {
                 size: this.size,
                 page: this.page,
-                showStatus: status,
+                manyStatus: status,
                 participate: this.participate
             };
             const { data } = await Activity.get(body);

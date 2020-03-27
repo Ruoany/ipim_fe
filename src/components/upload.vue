@@ -1,18 +1,11 @@
 <template>
-    <a-upload-dragger
-        name="file"
-        :fileList="list"
-        :action="upFiles"
-        :remove="handleRemove"
-        @change="handleChange"
-    >
+    <a-upload-dragger name="file" :fileList="list" :action="upFiles" :remove="handleRemove" @change="handleChange">
         <p class="ant-upload-drag-icon">
             <a-icon type="inbox" />
         </p>
         <p class="ant-upload-text">Click or drag file to this area to upload</p>
         <p class="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from
-            uploading company data or other band files
+            Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
         </p>
     </a-upload-dragger>
 </template>
@@ -42,7 +35,6 @@ export default {
     },
     methods: {
         handleChange({ fileList }) {
-            console.log("ff=>", fileList);
             const arr = fileList.map(item => {
                 if (item.response) {
                     return {

@@ -27,7 +27,7 @@ export default {
             rules: {
                 old: [config],
                 pwd: [config],
-                confirm: [{ validator: confirmValid, trigger: "blur" }]
+                confirm: [{ required: true, validator: confirmValid, trigger: "blur" }]
             },
             form: {
                 id: this.$store.getters.currentUser,

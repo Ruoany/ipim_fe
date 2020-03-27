@@ -8,11 +8,7 @@
             <div class="list-content">
                 <show-list :list="list"></show-list>
             </div>
-            <pagination
-                :page.sync="page"
-                :total="total"
-                @handleChange="pages => (page = pages - 1)"
-            />
+            <pagination :page.sync="page" :total="total" @handleChange="pages => (page = pages - 1)" />
         </a-spin>
     </div>
 </template>
@@ -82,7 +78,8 @@ export default {
                 page: this.page,
                 size: this.size,
                 actType: this.actType,
-                types: [query]
+                types: [query],
+                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;
