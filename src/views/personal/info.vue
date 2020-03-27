@@ -1,15 +1,16 @@
 <template>
     <div>
         <current-institution v-if="currentInstitution" :info="currentInstitution"></current-institution>
+        <a-button class="others" block @click="$router.push('/personal/mechanism')">
+            <a-icon type="plus"></a-icon>
+            <span>{{ $t("personal.others") }}</span>
+        </a-button>
         <others-institution
             v-for="item in institutionList"
             :key="item.id"
             :info="item"
             @change="changeCurrentInstitution"
         ></others-institution>
-        <div class="others">
-            <a-button type="primary" @click="$router.push('/personal/mechanism')">{{ $t("personal.others") }}</a-button>
-        </div>
     </div>
 </template>
 
@@ -37,6 +38,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+/deep/button {
+    width: 120px;
+}
 .card {
     width: 140px;
     margin-right: 20px;
@@ -57,6 +61,12 @@ export default {
     }
 }
 .others {
-    padding: 20px 0;
+    margin-top: 20px;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    background: #f7f8fa;
+    text-align: center;
+    border: none;
 }
 </style>

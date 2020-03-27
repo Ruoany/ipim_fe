@@ -34,6 +34,8 @@
                     <a-button
                         @click="handleNavigate('/personal/attest')"
                         v-if="info.status === null || info.status === rejected"
+                        ghost
+                        type="danger"
                         >{{ $t("personal.certify") }}</a-button
                     >
                 </div>
@@ -79,13 +81,14 @@ export default {
 <style lang="less" scoped>
 .current-institution-container {
     position: relative;
-    padding: 20px 40px;
+    padding: 20px 24px 20px 40px;
     height: 200px;
     box-sizing: border-box;
-    border: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
-    border-radius: 6px;
+    background: #f7f8fa;
+    border: 1px solid #e6e6e6;
+
     .logo {
         width: 140px;
         height: 140px;
@@ -130,7 +133,7 @@ export default {
                     margin-left: 5px;
                 }
                 &:hover {
-                    color: lightcoral;
+                    color: #ed1c24;
                 }
                 &:nth-child(1) {
                     padding-left: 0;
@@ -138,7 +141,7 @@ export default {
                 }
             }
             .right-button {
-                width: 290px;
+                width: 295px;
                 border: none;
                 text-align: right;
             }
