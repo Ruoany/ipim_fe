@@ -36,6 +36,7 @@ export default {
     },
     methods: {
         handleChange({ fileList }) {
+            console.log("ff=>", fileList);
             const arr = fileList.map(item => {
                 if (item.response) {
                     return {
