@@ -18,6 +18,7 @@
 import unopen from "@/assets/image/unopen.svg";
 import ing from "@/assets/image/ing.svg";
 import over from "@/assets/image/over.svg";
+import cancel from "@/assets/image/cancel.svg";
 import showCell from "@/components/card/showCell";
 
 import Activity from "@/apis/activity";
@@ -32,7 +33,8 @@ export default {
             showList: [],
             unopen,
             ing,
-            over
+            over,
+            cancel
         };
     },
     methods: {
@@ -60,6 +62,9 @@ export default {
                     break;
                 case "END":
                     img = over;
+                    break;
+                case "CANCEL":
+                    img = cancel;
                     break;
             }
             return img;

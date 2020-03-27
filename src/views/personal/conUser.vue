@@ -28,7 +28,11 @@
             width="800px"
             destroyOnClose
         >
-            <add-con-user @handleCancel="handleCancel" v-if="title === 'add'"></add-con-user>
+            <add-con-user
+                @handleCancel="handleCancel"
+                v-if="title === 'add'"
+                :institutionId="institutionId"
+            ></add-con-user>
             <up-con-user @handleCancel="handleCancel" v-if="title === 'upData'" :id="id"></up-con-user>
         </a-drawer>
     </div>
@@ -47,57 +51,9 @@ export default {
             liaisonList: [],
             loading: false,
             title: "add",
-            id: null
+            id: null,
+            institutionId: null
         };
-    },
-    computed: {
-        company() {
-            // return JSON.parse(sessionStorage.getItem("company"));
-            return {
-                id: 97,
-                createAt: null,
-                updateAt: null,
-                name: null,
-                nameZh: "機构測試123",
-                nameEn: "test123",
-                namePt: "Ensaio Institucional",
-                logo: null,
-                dateOfEstablishment: "1901-03",
-                startTime: null,
-                endTime: null,
-                natureId: 4,
-                natureName: "未開始",
-                country: null,
-                province: null,
-                city: null,
-                street: null,
-                countryZh: "1",
-                provinceZh: "110000000000",
-                cityZh: "110100000000",
-                streetZh: "測試",
-                countryEnOrPt: null,
-                provinceEnOrPt: null,
-                cityEnOrPt: null,
-                streetEnOrPt: null,
-                email: null,
-                tel: null,
-                fax: "020-333",
-                institutionShareholderVOS: null,
-                m1Number: null,
-                registrationNumber: null,
-                taxpayerName: null,
-                taxpayerNo: null,
-                business: null,
-                registeredCapital: 20000,
-                currency: "CNY",
-                institutionIndustryVOS: null,
-                chargeName: null,
-                status: null,
-                shareholderComponents: null,
-                deal: null,
-                idnumber: null
-            };
-        }
     },
 
     methods: {
@@ -109,7 +65,7 @@ export default {
         },
         async initData() {
             this.loading = true;
-            const data = await Liaison.get({ institutionId: this.company.id });
+            const data = await Liaison.get({ institutionId: this.institutionId });
             if (data.code === 200) {
                 this.liaisonList = data.data.content;
                 this.loading = false;
@@ -126,6 +82,7 @@ export default {
         }
     },
     mounted() {
+        this.institutionId = this.$route.query.institutionId;
         this.initData();
     }
 };

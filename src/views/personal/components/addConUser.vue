@@ -1,15 +1,13 @@
 <template>
     <a-form :form="form" @submit="handleSubmit" style="width:100%;" layout="vertical">
         <a-form-item :label="$t('util.nameZh')">
-            <a-input v-decorator="['nameZh', { rules:  [{validator:nameVal }] }]" />
+            <a-input v-decorator="['nameZh', { rules: [{ validator: nameVal }] }]" />
         </a-form-item>
         <a-form-item :label="$t('util.nameEnAndPt')">
-            <a-input v-decorator="['nameEnOrPt', { rules: [{validator:nameVal }] }]" />
+            <a-input v-decorator="['nameEnOrPt', { rules: [{ validator: nameVal }] }]" />
         </a-form-item>
         <a-form-item :label="$t('util.sex')">
-            <a-radio-group
-                v-decorator="['gender', { rules: [{ required: true, message: 'Please select' }] }]"
-            >
+            <a-radio-group v-decorator="['gender', { rules: [{ required: true, message: 'Please select' }] }]">
                 <a-radio value="M">{{ $t("util.man") }}</a-radio>
                 <a-radio value="F">{{ $t("util.woman") }}</a-radio>
             </a-radio-group>
@@ -19,7 +17,7 @@
                 v-decorator="[
                     'titleNameZh',
                     {
-                        rules: [{validator:titleNameVal }]
+                        rules: [{ validator: titleNameVal }]
                     }
                 ]"
             />
@@ -29,7 +27,7 @@
                 v-decorator="[
                     'titleNameEnOrPt',
                     {
-                        rules: [{validator:titleNameVal }]
+                        rules: [{ validator: titleNameVal }]
                     }
                 ]"
             />
@@ -118,6 +116,7 @@
 <script>
 import Liaison from "@/apis/liaison";
 export default {
+    props: { institutionId: [Number, String] },
     data() {
         return {
             form: this.$form.createForm(this, { name: "coordinated" })
@@ -126,13 +125,9 @@ export default {
     methods: {
         titleNameVal(rule, value, callback) {
             let titleNameZh =
-                this.form.getFieldValue("titleNameZh") == ""
-                    ? null
-                    : this.form.getFieldValue("titleNameZh");
+                this.form.getFieldValue("titleNameZh") == "" ? null : this.form.getFieldValue("titleNameZh");
             let titleNameEnOrPt =
-                this.form.getFieldValue("titleNameEnOrPt") == ""
-                    ? null
-                    : this.form.getFieldValue("titleNameEnOrPt");
+                this.form.getFieldValue("titleNameEnOrPt") == "" ? null : this.form.getFieldValue("titleNameEnOrPt");
             if (titleNameEnOrPt == null && titleNameZh == null) {
                 callback("Fill in at least one of two items");
             } else {
@@ -140,14 +135,8 @@ export default {
             }
         },
         nameVal(rule, value, callback) {
-            let nameZh =
-                this.form.getFieldValue("nameZh") == ""
-                    ? null
-                    : this.form.getFieldValue("nameZh");
-            let nameEnOrPt =
-                this.form.getFieldValue("nameEnOrPt") == ""
-                    ? null
-                    : this.form.getFieldValue("nameEnOrPt");
+            let nameZh = this.form.getFieldValue("nameZh") == "" ? null : this.form.getFieldValue("nameZh");
+            let nameEnOrPt = this.form.getFieldValue("nameEnOrPt") == "" ? null : this.form.getFieldValue("nameEnOrPt");
             if (nameEnOrPt == null && nameZh == null) {
                 callback("Fill in at least one of two items");
             } else {
@@ -160,7 +149,7 @@ export default {
                 if (!err) {
                     const data = await Liaison.create({
                         ...values,
-                        institutionId: 96
+                        institutionId: this.institutionId
                     });
                     if (data.code === 200) {
                         this.$message.success("添加成功");

@@ -20,6 +20,7 @@ import showCell from "@/components/card/showCell";
 import unopen from "@/assets/image/unopen.svg";
 import ing from "@/assets/image/ing.svg";
 import over from "@/assets/image/over.svg";
+import cancel from "@/assets/image/cancel.svg";
 
 export default {
     props: {
@@ -33,7 +34,8 @@ export default {
         return {
             unopen,
             ing,
-            over
+            over,
+            cancel
         };
     },
     filters: {
@@ -49,6 +51,9 @@ export default {
                     break;
                 case "END":
                     img = over;
+                    break;
+                case "CANCEL":
+                    img = cancel;
                     break;
             }
             return img;
