@@ -108,9 +108,12 @@
                     {{ currentInstitution.nameZh }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item v-for="item in institutionList" :key="item.id">{{
-                    item.nameZh
-                }}</a-menu-item>
+                <a-menu-item
+                    v-for="item in institutionList"
+                    :key="item.id"
+                    @click="changeCurrentInstitution(item.id)"
+                    >{{ item.nameZh }}</a-menu-item
+                >
             </a-sub-menu>
         </a-menu>
     </div>
@@ -191,6 +194,11 @@ export default {
         },
         formNavigate: function(path, form) {
             this.$router.push({ path, query: { form } });
+        },
+        changeCurrentInstitution: function(id) {
+            const o = this.institutionList.find(item => item.id === id);
+            sessionStorage.setItem("institution", id);
+            this.$store.dispatch("setCurrentInstitution", o);
         }
     },
     mounted() {
