@@ -21,6 +21,9 @@ export default {
         },
         SET_CURRENT_INSTITUTION: function(state, value) {
             state.institution = state.info.institutions ? value : undefined;
+        },
+        REMOVE_CURRENT_INSTITUTION: function(state) {
+            state.institution = undefined;
         }
     },
     actions: {
@@ -46,6 +49,12 @@ export default {
         setCurrentInstitution: function({ commit }, payload) {
             return new Promise(async resolve => {
                 commit("SET_CURRENT_INSTITUTION", payload);
+                resolve();
+            });
+        },
+        removeCurrentInstitution: function({ commit }) {
+            return new Promise(async resolve => {
+                commit("REMOVE_CURRENT_INSTITUTION");
                 resolve();
             });
         }

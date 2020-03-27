@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import Liaison from "@/apis/liaison";
 import FormMap from "@/common/map";
 import FormMission from "./MISSION/index";
 import FormParticipate from "./PARTICIPATE/index";
@@ -53,6 +55,9 @@ export default {
         FormMfe,
         FormGmbpf
     },
+    computed: {
+        ...mapGetters(["liaisonList", "currentInstitution"])
+    },
     data() {
         return {
             form: "",
@@ -64,14 +69,18 @@ export default {
     methods: {
         initData: async function() {
             this.loading = true;
-            await this.$store.dispatch("setLiaisons", { size: 1000 });
-            this.form = this.$route.query.form;
-            this.activityId = this.$route.query.activityId;
+            const { data } = await Liaison.get({
+                size: 1000,
+                institutionId: this.currentInstitution.id
+            });
+            await this.$store.dispatch("setLiaisons", data.content);
             this.loading = false;
         }
     },
     mounted: function() {
-        this.initData();
+        this.form = this.$route.query.form;
+        this.activityId = this.$route.query.activityId;
+        if (this.liaisonList.length === 0) this.initData();
     }
 };
 </script>

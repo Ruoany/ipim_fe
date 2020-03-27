@@ -199,6 +199,7 @@ export default {
             const o = this.institutionList.find(item => item.id === id);
             sessionStorage.setItem("institution", id);
             this.$store.dispatch("setCurrentInstitution", o);
+            this.$router.replace("/");
         }
     },
     mounted() {

@@ -58,9 +58,6 @@ export default {
             const arr = this.list.filter(item => item.uid !== uid);
             this.$emit("handleChange", { keys: this.decorator, value: arr });
         }
-    },
-    mounted: function() {
-        console.log("--->", this.list);
     }
 };
 </script>

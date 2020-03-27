@@ -214,6 +214,7 @@ export default {
                 this.$message.error(message);
                 return;
             }
+            await this.$store.dispatch("removeCurrentInstitution");
             this.onSuccess();
         }
     },

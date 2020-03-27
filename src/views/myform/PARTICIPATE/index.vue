@@ -18,18 +18,18 @@
         >
             <div v-show="stepCurrent === 0">
                 <a-form-model-item :label="$t('formab.ac')">
-                    <a-input disabled v-model="selectedInstitution.nameZh" />
+                    <a-input disabled v-model="currentInstitution.nameZh" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ad')">
                     <a-input
                         disabled
-                        v-model="selectedInstitution.siteRegistrationCode"
+                        v-model="currentInstitution.siteRegistrationCode"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ae')">
                     <a-input
                         disabled
-                        v-model="selectedInstitution.registrationNumber"
+                        v-model="currentInstitution.registrationNumber"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.af')">
@@ -82,35 +82,35 @@
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ao')">
                     <upload
-                        v-model="form.macaoShareholderFiles"
+                        :value.sync="form.macaoShareholderFiles"
                         decorator="macaoShareholderFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ap')">
                     <upload
-                        v-model="form.otherFiles"
+                        :value.sync="form.otherFiles"
                         decorator="otherFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.aq')">
                     <upload
-                        v-model="form.taxpayerFiles"
+                        :value.sync="form.taxpayerFiles"
                         decorator="taxpayerFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ar')">
                     <upload
-                        v-model="form.shareholderSamesFiles"
+                        :value.sync="form.shareholderSamesFiles"
                         decorator="shareholderSamesFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.as')">
                     <upload
-                        v-model="form.differentTaxpayerFiles"
+                        :value.sync="form.differentTaxpayerFiles"
                         decorator="differentTaxpayerFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -119,14 +119,14 @@
             <div v-show="stepCurrent === 3">
                 <a-form-model-item :label="$t('formab.au')">
                     <upload
-                        v-model="form.unitIntroductionFiles"
+                        :value.sync="form.unitIntroductionFiles"
                         decorator="unitIntroductionFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.aw')">
                     <upload
-                        v-model="form.idcardFiles"
+                        :value.sync="form.idcardFiles"
                         decorator="idcardFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -186,7 +186,7 @@
                     }"
                 >
                     <upload
-                        v-model="form.businessRegistrationFiles"
+                        :value.sync="form.businessRegistrationFiles"
                         decorator="businessRegistrationFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -200,7 +200,7 @@
                     }"
                 >
                     <upload
-                        v-model="form.certificateBureauFiles"
+                        :value.sync="form.certificateBureauFiles"
                         decorator="certificateBureauFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -214,7 +214,7 @@
                     }"
                 >
                     <upload
-                        v-model="form.salesTaxOpenFiles"
+                        :value.sync="form.salesTaxOpenFiles"
                         decorator="salesTaxOpenFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -228,7 +228,7 @@
                     }"
                 >
                     <upload
-                        v-model="form.salesTaxFiles"
+                        :value.sync="form.salesTaxFiles"
                         decorator="salesTaxFiles"
                         @handleChange="uploadChange"
                     ></upload>
@@ -263,6 +263,7 @@
 import Upload from "@/components/upload";
 import validate from "./validate";
 import PAA from "@/apis/participateAttendAbroad";
+import { mapGetters } from "vuex";
 export default {
     components: { Upload },
     data() {
@@ -271,12 +272,12 @@ export default {
         };
     },
     computed: {
-        formId: function() {
-            return this.$store.getters.currentForm;
-        },
-        liaisonList: function() {
-            return this.$store.getters.liaisonList;
-        },
+        ...mapGetters([
+            "currentForm",
+            "liaisonList",
+            "currentUser",
+            "currentInstitution"
+        ]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -290,21 +291,12 @@ export default {
                 item => item.id === this.form.liaisonId
             );
             return data;
-        },
-        selectedInstitution: function() {
-            if (!this.form.institutionId)
-                return {
-                    nameZh: "",
-                    siteRegistrationCode: "",
-                    registrationNumber: ""
-                };
-            return this.form.institution;
         }
     },
     methods: {
         initData: async function() {
-            if (this.formId) {
-                const { data } = await PAA.one(this.formId);
+            if (this.currentForm) {
+                const { data } = await PAA.one(this.currentForm);
                 this.form = data;
             }
         },
@@ -315,23 +307,17 @@ export default {
         subForm() {
             this.$refs.PARTICIPATE.validate(async valid => {
                 if (valid) {
-                    if (this.formId) {
-                        const { data } = await PAA.update(this.form);
-                        data ? this.onSuccess() : "";
-                    } else {
-                        const { data } = await PAA.create({
-                            ...this.form,
-                            institutionId: 1,
-                            activityId: this.activityId,
-                            applicantId: this.applicantId
-                        });
-                        data ? this.onSuccess() : "";
-                    }
+                    const { data } = await PAA.create({
+                        ...this.form,
+                        institutionId: this.currentInstitution.id,
+                        activityId: this.activityId,
+                        applicantId: this.currentUser
+                    });
+                    data ? this.onSuccess() : "";
                 }
             });
         },
         uploadChange(o) {
-            console.log("djdshfjkds", o);
             this.form[o.item] = o.arr;
         }
     },

@@ -3,13 +3,11 @@ import Liaisons from "@/apis/liaison";
 export default {
     state: {
         formId: null,
-        liaisons: [],
-        mission: {}
+        liaisons: []
     },
     getters: {
         currentForm: state => state.formId,
-        liaisonList: state => state.liaisons,
-        MISSION: state => state.mission
+        liaisonList: state => state.liaisons
     },
     mutations: {
         SET_FORM_ID: function(state, value) {
@@ -19,8 +17,7 @@ export default {
             state.formId = null;
         },
         SET_LIAISONS: async function(state, value) {
-            const { data } = await Liaisons.get(value);
-            state.liaisons = data.content;
+            state.liaisons = value;
         }
     },
     actions: {
@@ -32,12 +29,8 @@ export default {
         },
         setLiaisons: function({ state, commit }, payload) {
             return new Promise(resolve => {
-                if (state.liaisons.length === 0) {
-                    commit("SET_LIAISONS", payload);
-                    resolve();
-                } else {
-                    resolve();
-                }
+                commit("SET_LIAISONS", payload);
+                resolve();
             });
         }
     }

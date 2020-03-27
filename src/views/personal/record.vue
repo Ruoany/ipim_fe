@@ -16,6 +16,7 @@
                 v-for="item in list"
                 :key="item.id"
                 :activity-id="item.activity.id"
+                :scope="item.activity.scope"
                 :form-id="item.id"
                 :liaison-id="item.liaisonId"
                 :institution-id="item.institution.id"
@@ -49,7 +50,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentUser"])
+        ...mapGetters(["currentInstitution"])
     },
     watch: {
         status: function() {
@@ -66,7 +67,7 @@ export default {
             const {
                 data: { content, totalElements }
             } = await Participate.get({
-                applicantId: this.currentUser,
+                institutionId: this.currentInstitution.id,
                 page: this.page,
                 size: this.size,
                 approved: this.status === "unapproved"

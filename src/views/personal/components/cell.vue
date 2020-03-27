@@ -2,9 +2,7 @@
     <div class="cell-container flex">
         <div class="ad">
             <div class="tag" :class="activityStatus"></div>
-            <img
-                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583908268484&di=b4ba2c516f369fe632b336565f8ddce8&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20190928%2F19%2F1569669753-jnlcKyEuMZ.jpg"
-            />
+            <img :src="scope" />
         </div>
         <div class="content flex">
             <div class="info">
@@ -25,16 +23,17 @@
                         v-if="status === 'rejected'"
                         type="primary"
                         @click="FormNavigate"
-                    >{{ $t("personal.update") }}</a-button>
-                    <a-button
-                        v-if="status === 'passed'"
-                        type="primary"
-                    >{{ $t("personal.question") }}</a-button>
+                        >{{ $t("personal.update") }}</a-button
+                    >
+                    <a-button v-if="status === 'passed'" type="primary">{{
+                        $t("personal.question")
+                    }}</a-button>
                     <a-button
                         v-if="status === 'passed'"
                         type="primary"
                         @click="PictureNavigate"
-                    >{{ $t("personal.showPic") }}</a-button>
+                        >{{ $t("personal.showPic") }}</a-button
+                    >
                 </div>
             </div>
         </div>
@@ -45,6 +44,7 @@
 export default {
     props: {
         activityId: { type: [String, Number], required: true },
+        scope: { type: String, required: true },
         formId: { type: [String, Number], required: true },
         status: { type: String, required: true },
         activityStatus: { type: String, required: true },

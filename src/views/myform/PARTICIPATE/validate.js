@@ -3,6 +3,7 @@ const config_select = { required: true, message: "please select" };
 const conig_upload = { required: true, message: "please upload file" };
 
 export default {
+    selectedInstitution: {},
     form: {
         activityId: null,
         applicantId: null,

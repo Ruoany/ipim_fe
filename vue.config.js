@@ -16,7 +16,7 @@ module.exports = {
             entry: "src/main.js",
             template: "public/index.html",
             filename: "index.html",
-            title: "澳門貿促局",
+            title: "澳門貿易投資促進局活動項目網上申請系統",
             chunks: ["chunk-vendors", "chunk-common", "index"]
         }
     },
