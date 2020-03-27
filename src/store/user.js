@@ -48,6 +48,7 @@ export default {
         },
         setCurrentInstitution: function({ commit }, payload) {
             return new Promise(async resolve => {
+                commit("REMOVE_LIAISONS");
                 commit("SET_CURRENT_INSTITUTION", payload);
                 resolve();
             });

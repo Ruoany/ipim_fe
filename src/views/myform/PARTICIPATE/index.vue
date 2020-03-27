@@ -39,16 +39,15 @@
             <div v-show="stepCurrent === 1">
                 <a-form-model-item prop="liaisonId" :label="$t('formab.ah')">
                     <a-select
+                        v-model="form.liaisonId"
                         showSearch
                         optionFilterProp="label"
                         :filterOption="true"
-                        :notFoundContent="null"
-                        class="full"
-                        v-model="form.liaisonId"
                     >
                         <a-select-option
                             v-for="item in liaisonList"
                             :key="item.id"
+                            :value="item.id"
                             :label="`${item.nameZh}${item.nameEnOrPt}`"
                             >{{ item.nameZh }}
                             {{ item.nameEnOrPt }}</a-select-option
@@ -307,12 +306,13 @@ export default {
         subForm() {
             this.$refs.PARTICIPATE.validate(async valid => {
                 if (valid) {
-                    const { data } = await PAA.create({
-                        ...this.form,
-                        institutionId: this.currentInstitution.id,
-                        activityId: this.activityId,
-                        applicantId: this.currentUser
-                    });
+                    if (!this.currentForm)
+                        this.form = {
+                            ...this.form,
+                            institutionId: this.currentInstitution.id,
+                            applicantId: this.currentUser
+                        };
+                    const { data } = await PAA.create(this.form);
                     data ? this.onSuccess() : "";
                 }
             });
@@ -322,6 +322,7 @@ export default {
         }
     },
     mounted() {
+        console.log("--->", this.currentUser, this.currentForm);
         this.form.activityId = this.$route.query.activityId;
         this.initData();
     }

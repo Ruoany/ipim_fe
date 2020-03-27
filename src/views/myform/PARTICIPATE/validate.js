@@ -6,7 +6,6 @@ export default {
     selectedInstitution: {},
     form: {
         activityId: null,
-        applicantId: null,
         businessRegistrationFiles: [],
         certificateBureauFiles: [],
         certs: [],
@@ -22,7 +21,6 @@ export default {
         salesTaxFiles: [],
         salesTaxOpenFiles: [],
         shareholderSamesFiles: [],
-        siteRegistration: "",
         taxpayerFiles: [],
         unitIntroductionFiles: []
     },

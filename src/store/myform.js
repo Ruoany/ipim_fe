@@ -16,8 +16,11 @@ export default {
         REMOVE_FORM_ID: function(state) {
             state.formId = null;
         },
-        SET_LIAISONS: async function(state, value) {
+        SET_LIAISONS: function(state, value) {
             state.liaisons = value;
+        },
+        REMOVE_LIAISONS: function(state) {
+            state.liaisons = [];
         }
     },
     actions: {
@@ -27,9 +30,15 @@ export default {
         removeFormId: function({ commit }) {
             commit("REMOVE_FORM_ID");
         },
-        setLiaisons: function({ state, commit }, payload) {
+        setLiaisons: function({ commit }, payload) {
             return new Promise(resolve => {
                 commit("SET_LIAISONS", payload);
+                resolve();
+            });
+        },
+        removeLiaisons: function({ commit }) {
+            return new Promise(resolve => {
+                commit("REMOVE_LIAISONS");
                 resolve();
             });
         }

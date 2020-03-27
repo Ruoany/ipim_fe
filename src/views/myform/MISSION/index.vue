@@ -74,13 +74,20 @@
             <div v-show="stepCurrent === 1">
                 <p>{{ $t("formaa.an") }}</p>
                 <a-form-model-item prop="liaisonId" :label="$t('formaa.ac')">
-                    <a-select v-model="form.liaisonId">
+                    <a-select
+                        v-model="form.liaisonId"
+                        showSearch
+                        optionFilterProp="label"
+                        :filterOption="true"
+                    >
                         <a-select-option
                             v-for="item in liaisonList"
                             :key="item.id"
                             :value="item.id"
+                            :label="`${item.nameZh}${item.nameEnOrPt}`"
                         >
                             {{ item.nameZh }}
+                            {{ item.nameEnOrPt }}
                         </a-select-option>
                     </a-select>
                 </a-form-model-item>
@@ -213,6 +220,7 @@
 import { formatMoment, formatString } from "@/common/format";
 import validate from "./validate";
 import PD from "@/apis/participateDelegation";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -220,12 +228,18 @@ export default {
         };
     },
     computed: {
-        formId: function() {
-            return this.$store.getters.currentForm;
-        },
-        liaisonList: function() {
-            return this.$store.getters.liaisonList;
-        },
+        // formId: function() {
+        //     return this.$store.getters.currentForm;
+        // },
+        // liaisonList: function() {
+        //     return this.$store.getters.liaisonList;
+        // },
+        ...mapGetters([
+            "currentForm",
+            "liaisonList",
+            "currentUser",
+            "currentInstitution"
+        ]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -244,8 +258,8 @@ export default {
     },
     methods: {
         initData: async function() {
-            if (this.formId) {
-                const { data } = await PD.one(this.formId);
+            if (this.currentForm) {
+                const { data } = await PD.one(this.currentForm);
                 this.form = formatMoment(data);
             }
         },
@@ -261,13 +275,14 @@ export default {
             this.form = formatString(this.form);
             this.$refs.MISSION.validate(async valid => {
                 if (valid) {
-                    if (this.formId) {
-                        const { data } = await PD.update(this.form);
-                        data ? this.success() : "";
-                    } else {
-                        const { data } = await PD.create(this.form);
-                        data ? this.success() : "";
-                    }
+                    if (!this.currentForm)
+                        this.form = {
+                            ...this.form,
+                            institutionId: this.currentInstitution.id,
+                            applicantId: this.currentUser
+                        };
+                    const { data } = await PD.create(this.form);
+                    data ? this.success() : "";
                 } else {
                     this.$message.error("表單存在不符合情況，請檢查");
                 }
