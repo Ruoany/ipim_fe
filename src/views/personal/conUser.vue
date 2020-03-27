@@ -12,14 +12,6 @@
             itemLayout="horizontal"
             :dataSource="liaisonList"
         >
-            <!-- <div
-                v-if="showLoadingMore"
-                slot="loadMore"
-                :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-            >
-                <a-spin v-if="loadingMore" />
-                <a-button v-else @click="onLoadMore">loading more</a-button>
-            </div> -->
             <a-list-item slot="renderItem" slot-scope="item">
                 <a-button
                     slot="actions"
@@ -27,9 +19,7 @@
                     >{{ $t("util.upData") }}</a-button
                 >
                 <a-list-item-meta>
-                    <a slot="title" href="https://www.antdv.com/">{{
-                        item.nameZh
-                    }}</a>
+                    <span slot="title">{{ item.nameZh }}</span>
                 </a-list-item-meta>
             </a-list-item>
         </a-list>
