@@ -72,6 +72,16 @@
                 ]"
             />
         </a-form-item>
+        <a-form-item :label="$t('index.fax')">
+            <a-input
+                v-decorator="[
+                    'fax',
+                    {
+                        rules: [{}]
+                    }
+                ]"
+            />
+        </a-form-item>
         <a-form-item :label="$t('util.address')">
             <a-textarea
                 v-decorator="[
@@ -97,9 +107,6 @@
         </a-form-item>
         <div
             :style="{
-                position: 'absolute',
-                left: 0,
-                bottom: 0,
                 width: '100%',
                 borderTop: '1px solid #e9e9e9',
                 padding: '10px 16px',
