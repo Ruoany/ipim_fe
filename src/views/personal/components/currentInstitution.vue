@@ -6,7 +6,7 @@
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
                     : {
-                          backgroundImage: 'url(../../../assets/image/nologo.png)'
+                          backgroundImage: `url(${defaultImage})`
                       }
             "
         ></div>
@@ -18,7 +18,16 @@
                 </div>
             </div>
             <div class="bottom">
-                <div class="item" @click="handleNavigate('/personal/mechanism')">
+                <div
+                    class="item"
+                    :class="info.status === 'approving' ? 'item-disbaled' : ''"
+                    :title="
+                        info.status === 'approving'
+                            ? '認證中的機構不允許修改資料'
+                            : ''
+                    "
+                    @click="handleNavigate('/personal/mechanism')"
+                >
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
                 </div>
@@ -26,14 +35,19 @@
                     <a-icon type="team" style="font-size:25px;" />
                     <span>{{ $t("personal.n") }}</span>
                 </div>
-                <div class="item" @click="handleNavigate('/personal/sub_account')">
+                <div
+                    class="item"
+                    @click="handleNavigate('/personal/sub_account')"
+                >
                     <a-icon type="solution" style="font-size:25px;" />
                     <span>{{ $t("personal.x") }}</span>
                 </div>
                 <div class="right-button">
                     <a-button
                         @click="handleNavigate('/personal/attest')"
-                        v-if="info.status === null || info.status === rejected"
+                        v-if="
+                            info.status === null || info.status === 'rejected'
+                        "
                         ghost
                         type="danger"
                         >{{ $t("personal.certify") }}</a-button
@@ -46,6 +60,7 @@
 </template>
 
 <script>
+import defaultImage from "@/assets/image/nologo.jpg";
 import now_me from "@/assets/image/now_me.svg";
 export default {
     props: { info: Object },
@@ -68,7 +83,7 @@ export default {
         }
     },
     data() {
-        return { now_me };
+        return { now_me, defaultImage };
     },
     methods: {
         handleNavigate: function(url) {
@@ -138,6 +153,13 @@ export default {
                 &:nth-child(1) {
                     padding-left: 0;
                     border-left: none;
+                }
+            }
+            .item-disbaled {
+                color: #ccc;
+                cursor: not-allowed;
+                &:hover {
+                    color: #ccc;
                 }
             }
             .right-button {

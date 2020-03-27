@@ -2,9 +2,16 @@
     <div class="container">
         <div class="flex-justify-content-space-between">
             <h1>{{ $t("personal.i") }}</h1>
-            <a-button type="primary" icon="plus" @click="showDrawer('add')">{{ $t("personal.j") }}</a-button>
+            <a-button type="primary" icon="plus" @click="showDrawer('add')">{{
+                $t("personal.j")
+            }}</a-button>
         </div>
-        <a-list class="demo-loadmore-list" :loading="loading" itemLayout="horizontal" :dataSource="liaisonList">
+        <a-list
+            class="demo-loadmore-list"
+            :loading="loading"
+            itemLayout="horizontal"
+            :dataSource="liaisonList"
+        >
             <!-- <div
                 v-if="showLoadingMore"
                 slot="loadMore"
@@ -14,9 +21,15 @@
                 <a-button v-else @click="onLoadMore">loading more</a-button>
             </div> -->
             <a-list-item slot="renderItem" slot-scope="item">
-                <a-button slot="actions" @click="showDrawer('upData', item.id)">{{ $t("util.upData") }}</a-button>
+                <a-button
+                    slot="actions"
+                    @click="showDrawer('upData', item.id)"
+                    >{{ $t("util.upData") }}</a-button
+                >
                 <a-list-item-meta>
-                    <a slot="title" href="https://www.antdv.com/">{{ item.nameZh }}</a>
+                    <a slot="title" href="https://www.antdv.com/">{{
+                        item.nameZh
+                    }}</a>
                 </a-list-item-meta>
             </a-list-item>
         </a-list>
@@ -40,7 +53,11 @@
                 v-if="title === 'add'"
                 :institutionId="institutionId"
             ></add-con-user>
-            <up-con-user @handleCancel="handleCancel" v-if="title === 'upData'" :id="id"></up-con-user>
+            <up-con-user
+                @handleCancel="handleCancel"
+                v-if="title === 'upData'"
+                :id="id"
+            ></up-con-user>
         </a-drawer>
     </div>
 </template>
@@ -84,7 +101,11 @@ export default {
         },
         async initData() {
             this.loading = true;
-            const data = await Liaison.get({ institutionId: this.institutionId, page: this.page, size: this.size });
+            const data = await Liaison.get({
+                institutionId: this.institutionId,
+                page: this.page,
+                size: this.size
+            });
             if (data.code === 200) {
                 this.liaisonList = data.data.content;
                 this.loading = false;
@@ -108,4 +129,10 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.container {
+    h4 {
+        margin: 0;
+    }
+}
+</style>

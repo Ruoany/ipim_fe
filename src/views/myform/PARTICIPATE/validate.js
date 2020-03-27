@@ -14,7 +14,6 @@ export default {
         exhibitionProduct: "",
         idcardFiles: [],
         institutionId: 0,
-        institutionName: "",
         know: true,
         liaisonId: null,
         macaoShareholderFiles: [],

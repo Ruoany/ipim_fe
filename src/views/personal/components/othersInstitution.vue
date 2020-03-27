@@ -6,8 +6,7 @@
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
                     : {
-                          backgroundImage:
-                              'url(../../../assets/image/nologo.png)'
+                          backgroundImage: `url(${defaultImage})`
                       }
             "
         ></div>
@@ -22,19 +21,23 @@
 </template>
 
 <script>
+import defaultImage from "@/assets/image/nologo.jpg";
 export default {
     props: { info: Object },
+    data() {
+        return { defaultImage };
+    },
     filters: {
         formatStutas: function(value) {
             switch (value) {
                 case "approving":
                     return "審核中";
                     break;
-                case "approving":
-                    return "審核中";
+                case "passed":
+                    return "已認證";
                     break;
-                case "approving":
-                    return "審核中";
+                case "rejected":
+                    return "認證失敗";
                     break;
                 default:
                     return "未認證";
