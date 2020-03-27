@@ -27,9 +27,8 @@
                 prop="businessRegistrationFiles"
             >
                 <upload
-                    v-model="formData.businessRegistrationFiles"
+                    :value.sync="formData.businessRegistrationFiles"
                     decorator="businessRegistrationFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -38,9 +37,8 @@
                 prop="salesTaxOpenFiles"
             >
                 <upload
-                    v-model="formData.salesTaxOpenFiles"
+                    :value.sync="formData.salesTaxOpenFiles"
                     decorator="salesTaxOpenFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -49,9 +47,8 @@
                 prop="salesTaxFiles"
             >
                 <upload
-                    v-model="formData.salesTaxFiles"
+                    :value.sync="formData.salesTaxFiles"
                     decorator="salesTaxFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -60,9 +57,8 @@
                 prop="shareholderSamesFiles"
             >
                 <upload
-                    v-model="formData.shareholderSamesFiles"
+                    :value.sync="formData.shareholderSamesFiles"
                     decorator="shareholderSamesFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -71,9 +67,8 @@
                 prop="groupEstablishmentFiles"
             >
                 <upload
-                    v-model="formData.groupEstablishmentFiles"
+                    :value.sync="formData.groupEstablishmentFiles"
                     decorator="groupEstablishmentFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -82,9 +77,8 @@
                 prop="identificationBureauFiles"
             >
                 <upload
-                    v-model="formData.identificationBureauFiles"
+                    :value.sync="formData.identificationBureauFiles"
                     decorator="identificationBureauFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
@@ -93,9 +87,8 @@
                 prop="legalPersonFiles"
             >
                 <upload
-                    v-model="formData.legalPersonFiles"
+                    :value.sync="formData.legalPersonFiles"
                     decorator="legalPersonFiles"
-                    @handleChange="uploadChange"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item :model="formData">
