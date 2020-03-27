@@ -6,7 +6,8 @@
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
                     : {
-                          backgroundImage: 'url(../../../assets/image/nologo.png)'
+                          backgroundImage:
+                              'url(../../../assets/image/nologo.png)'
                       }
             "
         ></div>
@@ -57,13 +58,11 @@ export default {
     padding: 20px 40px;
     height: 120px;
     box-sizing: border-box;
-    border: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
     margin-top: 20px;
-    background: #e6e6e6;
+    background: #f7f8fa;
     position: relative;
-    border-radius: 6px;
     .logo {
         width: 80px;
         height: 80px;
@@ -92,6 +91,9 @@ export default {
             position: absolute;
             right: 24px;
         }
+    }
+    /deep/.ant-btn {
+        background: none;
     }
 }
 </style>
