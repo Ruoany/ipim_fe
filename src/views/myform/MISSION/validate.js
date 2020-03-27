@@ -11,7 +11,6 @@ export default {
         nameZh: "",
         gender: "M",
         birthDate: null,
-        IDCardValidityDate: null,
         exitNumber: "",
         exitValidityDate: null,
         passportNumber: "",
