@@ -148,6 +148,7 @@ export default {
             await this.$store.dispatch("removeCurrentInstitution");
             const { data: user } = await User.current();
             await this.$store.dispatch("setInfo", user);
+            this.$message.success("Successful operation");
             this.$router.replace("/personal/info");
         }
     },
