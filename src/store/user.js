@@ -6,7 +6,7 @@ export default {
     getters: {
         info: state => state.info,
         currentUser: state => (state.info ? state.info.id : null),
-        institutionList: function(state) {
+        institutionList: state => {
             const arr = state.info.institutions.filter(item => item.id !== state.institution.id);
             return arr;
         },
@@ -28,10 +28,10 @@ export default {
             return new Promise(async resolve => {
                 commit("SET_INFO_DATA", payload);
                 if (!state.institution) {
-                    const sId = parseInt(sessionStorage.getItem("institution"));
+                    const sId = sessionStorage.getItem("institution");
                     const value = sId
-                        ? state.info.institutions.find(item => item.id === sId)
-                        : state.info.institutions[0];
+                        ? payload.institutions.find(item => item.id === parseInt(sId))
+                        : payload.institutions[0];
                     commit("SET_CURRENT_INSTITUTION", value);
                 }
                 resolve();
