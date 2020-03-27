@@ -19,6 +19,7 @@
                     <a slot="title" href="https://www.antdv.com/">{{ item.nameZh }}</a>
                 </a-list-item-meta>
             </a-list-item>
+            <pagination :page.sync="page" :total="total" @handleChange="pages => (page = pages - 1)" :size="size" />
         </a-list>
         <a-drawer
             :title="title === 'add' ? $t('personal.k') : $t('personal.l')"
@@ -42,8 +43,9 @@
 import addConUser from "./components/addConUser";
 import upConUser from "./components/upConuser";
 import Liaison from "@/apis/liaison";
+import Pagination from "@/components/pagination";
 export default {
-    components: { addConUser, upConUser },
+    components: { addConUser, upConUser, Pagination },
     data() {
         return {
             infoVisible: false,
@@ -52,23 +54,35 @@ export default {
             loading: false,
             title: "add",
             id: null,
-            institutionId: null
+            institutionId: null,
+            page: 0,
+            size: 10,
+            total: 0
         };
+    },
+    watch: {
+        page: function() {
+            this.initData();
+        }
     },
 
     methods: {
         handleCancel(e) {
             this.infoVisible = false;
             if (e === "add") {
+                this.page = 0;
+                this.initData();
+            } else if (e === "upData") {
                 this.initData();
             }
         },
         async initData() {
             this.loading = true;
-            const data = await Liaison.get({ institutionId: this.institutionId });
+            const data = await Liaison.get({ institutionId: this.institutionId, page: this.page, size: this.size });
             if (data.code === 200) {
                 this.liaisonList = data.data.content;
                 this.loading = false;
+                this.total = data.data.totalElements;
             } else {
                 this.$message.error(data.message);
             }

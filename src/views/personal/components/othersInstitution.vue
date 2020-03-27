@@ -6,8 +6,7 @@
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
                     : {
-                          backgroundImage:
-                              'url(../../../assets/image/nologo.png)'
+                          backgroundImage: 'url(../../../assets/image/nologo.png)'
                       }
             "
         ></div>
@@ -64,6 +63,7 @@ export default {
     margin-top: 20px;
     background: #e6e6e6;
     position: relative;
+    border-radius: 6px;
     .logo {
         width: 80px;
         height: 80px;

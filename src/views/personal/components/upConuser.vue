@@ -177,7 +177,7 @@ export default {
                     });
                     if (data.code === 200) {
                         this.$message.success("修改成功");
-                        this.$emit("handleCancel", "add");
+                        this.$emit("handleCancel", "upData");
                     } else {
                         this.$message.error(data.message);
                     }
