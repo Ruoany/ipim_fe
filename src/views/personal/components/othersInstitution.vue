@@ -15,7 +15,7 @@
             <div class="name">{{ info.nameZh }}</div>
             <div class="status">{{ info.status | formatStutas }}</div>
             <div class="bottom">
-                <a-button>設為當前機構</a-button>
+                <a-button @click="handleChange">設為當前機構</a-button>
             </div>
         </div>
     </div>
@@ -45,6 +45,9 @@ export default {
     methods: {
         handleNavigate: function(url) {
             this.$router.push(`${url}?institutionId=${this.info.id}`);
+        },
+        handleChange: function() {
+            this.$emit("change", this.info.id);
         }
     }
 };

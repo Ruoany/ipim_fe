@@ -8,6 +8,7 @@
             v-for="item in institutionList"
             :key="item.id"
             :info="item"
+            @change="changeCurrentInstitution"
         ></others-institution>
         <div class="others">
             <a-button
@@ -32,7 +33,13 @@ export default {
     computed: {
         ...mapGetters(["institutionList", "currentInstitution"])
     },
-    methods: {}
+    methods: {
+        changeCurrentInstitution: function(id) {
+            const o = this.institutionList.find(item => item.id === id);
+            sessionStorage.setItem("institution", id);
+            this.$store.dispatch("setCurrentInstitution", o);
+        }
+    }
 };
 </script>
 

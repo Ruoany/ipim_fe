@@ -20,7 +20,7 @@ export default {
             state.info = undefined;
         },
         SET_CURRENT_INSTITUTION: function(state, value) {
-            state.institution = state.info.institutions ? state.info.institutions[value] : undefined;
+            state.institution = state.info.institutions ? value : undefined;
         }
     },
     actions: {
@@ -28,7 +28,11 @@ export default {
             return new Promise(async resolve => {
                 commit("SET_INFO_DATA", payload);
                 if (!state.institution) {
-                    commit("SET_CURRENT_INSTITUTION", 0);
+                    const sId = parseInt(sessionStorage.getItem("institution"));
+                    const value = sId
+                        ? state.info.institutions.find(item => item.id === sId)
+                        : state.info.institutions[0];
+                    commit("SET_CURRENT_INSTITUTION", value);
                 }
                 resolve();
             });
