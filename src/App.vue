@@ -13,7 +13,6 @@ export default {
             Authorization: false
         };
     },
-    beforeCreate: async function() {},
     mounted: async function() {
         const isLogin = sessionStorage.getItem("login");
         if (isLogin) {

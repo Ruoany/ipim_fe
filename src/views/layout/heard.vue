@@ -71,7 +71,13 @@
                     >Português</a-menu-item
                 >
             </a-sub-menu>
-            <a-sub-menu style="float:right;" key="personal">
+            <a-menu-item
+                v-if="!currentUser"
+                style="float:right;"
+                @click="$router.push('/login')"
+                >{{ $t("login.login") }}</a-menu-item
+            >
+            <a-sub-menu v-else style="float:right;" key="personal">
                 <span slot="title" class="flex center">
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
@@ -122,7 +128,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["institutionList", "currentInstitution"])
+        ...mapGetters(["currentUser", "institutionList", "currentInstitution"])
     },
     watch: {
         $route: {
