@@ -228,12 +228,6 @@ export default {
         };
     },
     computed: {
-        // formId: function() {
-        //     return this.$store.getters.currentForm;
-        // },
-        // liaisonList: function() {
-        //     return this.$store.getters.liaisonList;
-        // },
         ...mapGetters([
             "currentForm",
             "liaisonList",
@@ -276,11 +270,11 @@ export default {
             this.$refs.MISSION.validate(async valid => {
                 if (valid) {
                     if (!this.currentForm)
-                        this.form = {
+                        this.form = formatString({
                             ...this.form,
                             institutionId: this.currentInstitution.id,
                             applicantId: this.currentUser
-                        };
+                        });
                     const { data } = await PD.create(this.form);
                     data ? this.success() : "";
                 } else {
