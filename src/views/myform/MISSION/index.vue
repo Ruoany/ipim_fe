@@ -32,11 +32,11 @@
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formaa.ah')">
-                    <a-input v-model="form.idcard" />
+                    <a-input v-model="form.idCard" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formaa.ai')">
                     <a-date-picker
-                        v-model="form.idcardValidityDate"
+                        v-model="form.idCardValidityDate"
                         class="full"
                     />
                 </a-form-model-item>
