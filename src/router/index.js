@@ -34,7 +34,8 @@ const router = new VueRouter({
                     component: () => import("@/views/home/index"),
                     meta: {
                         title: "首頁",
-                        key: "home"
+                        key: "home",
+                        case: "index"
                     }
                 },
                 ...show,

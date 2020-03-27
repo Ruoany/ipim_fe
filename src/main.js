@@ -16,18 +16,35 @@ Vue.use(Antd);
 Vue.config.productionTip = false;
 Vue.prototype.$moment = moment;
 
-// router.beforeEach(async (to, from, next) => {
-//     if (!store.getters.info) {
-//         const data = await User.current();
-//         console.log("獲取用戶信息", data);
-//         if (!data) {
-//             next("/login");
-//             return;
-//         }
-//         await store.dispatch("setInfo", data);
-//     }
-//     next();
-// });
+router.beforeEach(async (to, from, next) => {
+    // const { meta } = to;
+    // const { data } = await User.current();
+    // const isValue = store.getters.info;
+    // if(meta === 'index'){
+    //     data?await store.dispatch('setInfo',data):await store.dispatch('setInfo',{});
+
+    // }
+    // if (meta.case === "personal" || meta.case === "form") {
+    //     if (!store.getters.info) {
+
+    //         console.log("獲取用戶信息", data);
+    //         if (data) {
+    //             await store.dispatch("setInfo", data);
+    //             next();
+    //             return;
+    //         }
+    //         next("/login");
+    //     }
+    // }
+    // if (!store.getters.info) {
+    // if (data) {
+    //     await store.dispatch("setInfo", data);
+    //     next();
+    //     return;
+    // }
+    // }
+    next();
+});
 
 const i18n = new VueI18n({
     locale: "zh",

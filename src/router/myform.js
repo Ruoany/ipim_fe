@@ -4,7 +4,8 @@ const router = [
         path: `${parentRoute}/index`,
         meta: {
             title: "申請表",
-            key: "myform"
+            key: "myform",
+            case: "form"
         },
         component: () => import("@/views/myform/index")
     },
@@ -12,7 +13,8 @@ const router = [
         path: `${parentRoute}/special`,
         meta: {
             title: "支持申請表",
-            key: "special"
+            key: "special",
+            case: "form"
         },
         component: () => import("@/views/myform/special")
     }

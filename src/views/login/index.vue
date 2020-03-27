@@ -118,6 +118,7 @@ export default {
                     }
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("current", data.id);
+                    sessionStorage.setItem("login", true);
                     this.getUserInfo();
                 }
             });

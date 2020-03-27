@@ -1,14 +1,27 @@
 <template>
     <div id="app">
-        <router-view />
+        <router-view v-if="Authorization" />
         <a-back-top />
     </div>
 </template>
 
 <script>
+import User from "@/apis/user";
 export default {
+    data() {
+        return {
+            Authorization: false
+        };
+    },
+    beforeCreate: async function() {},
     mounted: async function() {
-        console.log("歡迎來到澳門貿促局");
+        const isLogin = sessionStorage.getItem("login");
+        if (isLogin) {
+            const { data } = await User.current();
+            console.log("獲取用戶信息", data);
+            await this.$store.dispatch("setInfo", data ? data : undefined);
+        }
+        this.Authorization = true;
     }
 };
 </script>

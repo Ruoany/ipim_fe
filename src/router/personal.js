@@ -12,7 +12,8 @@ const router = [
                 component: () => import("@/views/personal/info"),
                 meta: {
                     key: "info",
-                    title: "機構信息"
+                    title: "機構信息",
+                    case: "personal"
                 }
             },
             {
@@ -20,7 +21,8 @@ const router = [
                 component: () => import("@/views/personal/record"),
                 meta: {
                     key: "record",
-                    title: "參會/參團紀錄"
+                    title: "參會/參團紀錄",
+                    case: "personal"
                 }
             },
             {
@@ -28,14 +30,16 @@ const router = [
                 component: () => import("@/views/personal/funding"),
                 meta: {
                     key: "funding",
-                    title: "資助與財務鼓勵"
+                    title: "資助與財務鼓勵",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/setting`,
                 component: () => import("@/views/personal/setting"),
                 meta: {
-                    key: "setting"
+                    key: "setting",
+                    case: "personal"
                 }
             },
             {
@@ -43,42 +47,48 @@ const router = [
                 component: () => import("@/views/personal/mine"),
                 meta: {
                     key: "mine",
-                    title: "個人信息"
+                    title: "個人信息",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/mechanism`,
                 component: () => import("@/views/personal/mechanism"),
                 meta: {
-                    key: "info"
+                    key: "info",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/sub_account`,
                 component: () => import("@/views/personal/subAccount"),
                 meta: {
-                    key: "info"
+                    key: "info",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/con_user`,
                 component: () => import("@/views/personal/conUser"),
                 meta: {
-                    key: "info"
+                    key: "info",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/picture`,
                 component: () => import("@/views/personal/picture"),
                 meta: {
-                    key: "record"
+                    key: "record",
+                    case: "personal"
                 }
             },
             {
                 path: `${parentRoute}/attest`,
                 component: () => import("@/views/personal/attest"),
                 meta: {
-                    key: "info"
+                    key: "info",
+                    case: "personal"
                 }
             }
         ]

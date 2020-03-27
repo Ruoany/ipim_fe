@@ -5,7 +5,7 @@ export default {
     },
     getters: {
         info: state => state.info,
-        currentUser: state => state.info.id,
+        currentUser: state => (state.info ? state.info.id : null),
         institutionList: function(state) {
             const arr = state.info.institutions.filter(item => item.id !== state.institution.id);
             return arr;
@@ -20,7 +20,7 @@ export default {
             state.info = undefined;
         },
         SET_CURRENT_INSTITUTION: function(state, value) {
-            state.institution = state.info.institutions[value];
+            state.institution = state.info.institutions ? state.info.institutions[value] : undefined;
         }
     },
     actions: {
