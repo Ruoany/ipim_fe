@@ -31,7 +31,11 @@
                     <span>{{ $t("personal.x") }}</span>
                 </div>
                 <div class="right-button">
-                    <a-button @click="handleNavigate('/personal/attest')">{{ $t("personal.certify") }}</a-button>
+                    <a-button
+                        @click="handleNavigate('/personal/attest')"
+                        v-if="info.status === null || info.status === rejected"
+                        >{{ $t("personal.certify") }}</a-button
+                    >
                 </div>
             </div>
         </div>
@@ -142,7 +146,6 @@ export default {
     }
 }
 .img {
-    transform: rotate(90deg);
     position: absolute;
     top: 0;
     right: 0;

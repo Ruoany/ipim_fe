@@ -1,9 +1,6 @@
 <template>
     <div>
-        <current-institution
-            v-if="currentInstitution"
-            :info="currentInstitution"
-        ></current-institution>
+        <current-institution v-if="currentInstitution" :info="currentInstitution"></current-institution>
         <others-institution
             v-for="item in institutionList"
             :key="item.id"
@@ -11,11 +8,7 @@
             @change="changeCurrentInstitution"
         ></others-institution>
         <div class="others">
-            <a-button
-                type="primary"
-                @click="$router.push('/personal/mechanism')"
-                >{{ $t("personal.others") }}</a-button
-            >
+            <a-button type="primary" @click="$router.push('/personal/mechanism')">{{ $t("personal.others") }}</a-button>
         </div>
     </div>
 </template>
