@@ -6,8 +6,7 @@
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
                     : {
-                          backgroundImage:
-                              'url(../../../assets/image/nologo.png)'
+                          backgroundImage: 'url(../../../assets/image/nologo.png)'
                       }
             "
         ></div>
@@ -19,10 +18,7 @@
                 </div>
             </div>
             <div class="bottom">
-                <div
-                    class="item"
-                    @click="handleNavigate('/personal/mechanism')"
-                >
+                <div class="item" @click="handleNavigate('/personal/mechanism')">
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
                 </div>
@@ -30,24 +26,21 @@
                     <a-icon type="team" style="font-size:25px;" />
                     <span>{{ $t("personal.n") }}</span>
                 </div>
-                <div
-                    class="item"
-                    @click="handleNavigate('/personal/sub_account')"
-                >
+                <div class="item" @click="handleNavigate('/personal/sub_account')">
                     <a-icon type="solution" style="font-size:25px;" />
                     <span>{{ $t("personal.x") }}</span>
                 </div>
                 <div class="right-button">
-                    <a-button @click="handleNavigate('/personal/attest')">{{
-                        $t("personal.certify")
-                    }}</a-button>
+                    <a-button @click="handleNavigate('/personal/attest')">{{ $t("personal.certify") }}</a-button>
                 </div>
             </div>
         </div>
+        <img :src="now_me" class="img" />
     </div>
 </template>
 
 <script>
+import now_me from "@/assets/image/now_me.svg";
 export default {
     props: { info: Object },
     filters: {
@@ -68,6 +61,9 @@ export default {
             }
         }
     },
+    data() {
+        return { now_me };
+    },
     methods: {
         handleNavigate: function(url) {
             this.$router.push(`${url}?institutionId=${this.info.id}`);
@@ -78,12 +74,14 @@ export default {
 
 <style lang="less" scoped>
 .current-institution-container {
+    position: relative;
     padding: 20px 40px;
     height: 200px;
     box-sizing: border-box;
     border: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
+    border-radius: 6px;
     .logo {
         width: 140px;
         height: 140px;
@@ -99,6 +97,7 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
+
         .top {
             font-size: 30px;
             font-weight: bold;
@@ -141,5 +140,11 @@ export default {
             }
         }
     }
+}
+.img {
+    transform: rotate(90deg);
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 </style>
