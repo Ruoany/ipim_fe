@@ -322,7 +322,6 @@ export default {
         }
     },
     mounted() {
-        console.log("--->", this.currentUser, this.currentForm);
         this.form.activityId = this.$route.query.activityId;
         this.initData();
     }
