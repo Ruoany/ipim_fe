@@ -33,8 +33,8 @@ export default {
         backWithGroup: true,
         arrangement: true,
         otherArrangement: "",
-        idcard: "",
-        idcardValidityDate: null
+        idCard: "",
+        idCardValidityDate: null
     },
     formInfo: {}, //表單詳細
     activityId: 1, //展會ID
