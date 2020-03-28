@@ -37,7 +37,8 @@ const zhData = {
         inIn: "機構信息",
         exEr: "參會/參團記錄",
         funding: "資助與財務鼓勵",
-        acSe: "賬號設置"
+        acSe: "賬號設置",
+        logout: "退出登錄"
     },
     index: {
         evCa: "展會日曆",

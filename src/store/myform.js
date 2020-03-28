@@ -1,5 +1,3 @@
-import Liaisons from "@/apis/liaison";
-
 export default {
     state: {
         formId: null,

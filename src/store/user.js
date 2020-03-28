@@ -58,6 +58,13 @@ export default {
                 commit("REMOVE_CURRENT_INSTITUTION");
                 resolve();
             });
+        },
+        clear: function({ commit }) {
+            return new Promise(async resolve => {
+                commit("REMOVE_INFO_DATA");
+                commit("REMOVE_CURRENT_INSTITUTION");
+                resolve();
+            });
         }
     }
 };
