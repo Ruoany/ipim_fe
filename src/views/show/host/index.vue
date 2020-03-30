@@ -24,13 +24,17 @@ export default {
             FromMap,
             list: [],
             loading: false,
-            activityScope: "LOCAL",
+            types: "",
             page: 0,
             size: 6,
             total: 0
         };
     },
     watch: {
+        "$route.query": function(newValue) {
+            this.types = newValue.order;
+            this.initData();
+        },
         page: function() {
             this.initData();
         }
@@ -41,7 +45,7 @@ export default {
             const { data } = await Activity.get({
                 page: this.page,
                 size: this.size,
-                activityScope: this.activityScope
+                types: this.types
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;
@@ -52,6 +56,7 @@ export default {
         }
     },
     mounted: function() {
+        this.types = this.$route.query.order;
         this.initData();
         setTimeout(() => {
             this.loading = false;

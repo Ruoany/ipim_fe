@@ -5,8 +5,8 @@ const func = (modules, o = {}) => {
     const otherModules = o;
     return {
         ...otherModules,
-        get: async params => {
-            const result = await request({
+        get: params => {
+            return request({
                 url: modulesUrl,
                 method: "GET",
                 params,
@@ -20,34 +20,29 @@ const func = (modules, o = {}) => {
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });
-            return result;
         },
-        one: async id => {
-            const result = await request.get(`${modulesUrl}/${id}`);
-            return result;
+        one: id => {
+            return request.get(`${modulesUrl}/${id}`);
         },
-        create: async data => {
-            const result = await request({
+        create: data => {
+            return request({
                 url: modulesUrl,
                 method: "POST",
                 data
             });
-            return result;
         },
-        update: async data => {
-            const result = await request({
+        update: data => {
+            return request({
                 url: modulesUrl,
                 method: "PUT",
                 data
             });
-            return result;
         },
-        delete: async id => {
-            const result = await request.delete(`${modulesUrl}/${id}`);
-            return result;
+        delete: id => {
+            return request.delete(`${modulesUrl}/${id}`);
         },
-        all: async params => {
-            const result = await request({
+        all: params => {
+            return request({
                 url: `${modulesUrl}/list`,
                 method: "GET",
                 params,
@@ -60,7 +55,6 @@ const func = (modules, o = {}) => {
                     return qs.stringify(params, { arrayFormat: "repeat" });
                 }
             });
-            return result;
         }
     };
 };

@@ -37,7 +37,13 @@ const zhData = {
         inIn: "機構信息",
         exEr: "參會/參團記錄",
         funding: "資助與財務鼓勵",
-        acSe: "賬號設置"
+        acSe: "賬號設置",
+        miecf: "澳門國際環保合作發展論壇及展覽",
+        iiicf: "國際基礎設施投資與建設高峰論壇",
+        mfe: "澳門國際品牌連鎖加盟展",
+        gmbpf: "粵澳名優商品展",
+        mif: "澳門國際貿易投資展覽會",
+        plpex: "葡語國家產品及服務展"
     },
     index: {
         evCa: "展會日曆",
@@ -73,7 +79,8 @@ const zhData = {
         helpers: "協辦單位",
         method: "參展方式",
         join: "參展",
-        write: "填寫申請表"
+        write: "填寫申請表",
+        deadline: "截止報名"
     },
     util: {
         yes: "是",
