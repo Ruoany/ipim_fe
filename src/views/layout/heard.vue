@@ -49,15 +49,13 @@
                 <a-menu-item
                     key="overseas1"
                     @click="handleNavigate('/show/overseas', 'PARTICIPATE')"
+                    >{{ $t("menu.ba") }}</a-menu-item
                 >
-                    {{ $t("menu.ba") }}
-                </a-menu-item>
                 <a-menu-item
                     key="overseas2"
                     @click="handleNavigate('/show/overseas', 'MISSION')"
+                    >{{ $t("menu.bb") }}</a-menu-item
                 >
-                    {{ $t("menu.bb") }}
-                </a-menu-item>
             </a-sub-menu>
             <!-- <a-sub-menu>
                 <span slot="title" class="flex center">
@@ -67,28 +65,23 @@
                 <a-menu-item
                     key="special1"
                     @click="formNavigate('/myform/special', 'ba')"
-                    >{{ $t("menu.ca") }}</a-menu-item
-                >
+                >{{ $t("menu.ca") }}</a-menu-item>
                 <a-menu-item
                     key="special2"
                     @click="formNavigate('/myform/special', 'bb')"
-                    >{{ $t("menu.cb") }}</a-menu-item
-                >
+                >{{ $t("menu.cb") }}</a-menu-item>
                 <a-menu-item
                     key="special3"
                     @click="formNavigate('/myform/special', 'bc')"
-                    >{{ $t("menu.cc") }}</a-menu-item
-                >
+                >{{ $t("menu.cc") }}</a-menu-item>
                 <a-menu-item
                     key="special4"
                     @click="formNavigate('/myform/special', 'bd')"
-                    >{{ $t("menu.cd") }}</a-menu-item
-                >
+                >{{ $t("menu.cd") }}</a-menu-item>
                 <a-menu-item
                     key="special5"
                     @click="formNavigate('/myform/special', 'be')"
-                    >{{ $t("menu.ce") }}</a-menu-item
-                >
+                >{{ $t("menu.ce") }}</a-menu-item>
                 <a-menu-item
                     key="special6"
                     @click="formNavigate('/myform/special', 'bf')"
@@ -118,9 +111,9 @@
                     {{ $t("menu.personal") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item key="mine" @click="personalNavigate('/mine')">{{
-                    $t("menu.perInfo")
-                }}</a-menu-item>
+                <a-menu-item key="mine" @click="personalNavigate('/mine')">
+                    {{ $t("menu.perInfo") }}
+                </a-menu-item>
                 <a-menu-item
                     key="record"
                     @click="personalNavigate('/record')"
@@ -131,9 +124,12 @@
                     @click="personalNavigate('/funding')"
                     >{{ $t("menu.funding") }}</a-menu-item
                 >
-                <a-menu-item key="info" @click="personalNavigate('/info')">{{
-                    $t("menu.inIn")
-                }}</a-menu-item>
+                <a-menu-item key="info" @click="personalNavigate('/info')">
+                    {{ $t("menu.inIn") }}
+                </a-menu-item>
+                <a-menu-item key="logout" @click="logout">
+                    {{ $t("menu.logout") }}
+                </a-menu-item>
             </a-sub-menu>
             <a-sub-menu
                 v-if="currentInstitution"
@@ -227,6 +223,11 @@ export default {
             const o = this.institutionList.find(item => item.id === id);
             sessionStorage.setItem("institution", id);
             this.$store.dispatch("setCurrentInstitution", o);
+            this.$router.replace("/");
+        },
+        logout: function() {
+            sessionStorage.clear();
+            this.$store.dispatch("clear");
             this.$router.replace("/");
         }
     },
