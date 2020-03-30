@@ -46,7 +46,8 @@
                     <a-button
                         @click="handleNavigate('/personal/attest')"
                         v-if="
-                            info.status === null || info.status === 'rejected'
+                            info.status === 'uncertified' ||
+                                info.status === 'rejected'
                         "
                         ghost
                         type="danger"

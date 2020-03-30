@@ -11,20 +11,32 @@
                 <div>
                     <div>{{ $t("show.acAd") }}：{{ place }}</div>
                     <div style="color:#EE1C24">
-                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
+                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{
+                            endTime | formatTime
+                        }}
                     </div>
                 </div>
             </div>
         </div>
         <div class="end">
-            <a-dropdown v-show="participate">
+            <a-dropdown :disabled="!participate">
                 <a-menu slot="overlay" @click="navigateForm">
-                    <a-menu-item v-for="item in types" :key="item">{{ $t(FormMap[item]) }}</a-menu-item>
+                    <a-menu-item v-for="item in types" :key="item">{{
+                        $t(FormMap[item])
+                    }}</a-menu-item>
                 </a-menu>
-                <a-button type="primary" size="large" class="btn">
+                <a-button
+                    v-if="participate"
+                    type="primary"
+                    size="large"
+                    class="btn"
+                >
                     {{ $t("show.method") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </a-button>
+                <a-button v-else size="large">{{
+                    $t("show.deadline")
+                }}</a-button>
             </a-dropdown>
         </div>
     </div>
@@ -59,7 +71,9 @@ export default {
     },
     methods: {
         navigateForm: function(e) {
-            this.$router.push(`/myform/index?activityId=${this.activityId}&form=${e.key}`);
+            this.$router.push(
+                `/myform/index?activityId=${this.activityId}&form=${e.key}`
+            );
         }
     }
 };

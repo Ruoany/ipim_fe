@@ -2,9 +2,45 @@
     <div class="container flex">
         <div class="logo" @click="$router.push('/')"></div>
         <a-menu :selectedKeys="menuItem" mode="horizontal" class="menu-wrapper">
-            <a-menu-item key="host" @click="handleNavigate('/show/host')">{{
+            <a-sub-menu>
+                <span slot="title" class="flex center">
+                    {{ $t("menu.signUp") }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
+                </span>
+                <a-menu-item
+                    key="miecf"
+                    @click="handleNavigate('/show/host', 'MIECF')"
+                    >{{ $t("menu.miecf") }}</a-menu-item
+                >
+                <a-menu-item
+                    key="iiicf"
+                    @click="handleNavigate('/show/host', 'IIICF')"
+                    >{{ $t("menu.iiicf") }}</a-menu-item
+                >
+                <a-menu-item
+                    key="mfe"
+                    @click="handleNavigate('/show/host', 'MFE')"
+                    >{{ $t("menu.mfe") }}</a-menu-item
+                >
+                <a-menu-item
+                    key="gmbpf"
+                    @click="handleNavigate('/show/host', 'GMBPF')"
+                    >{{ $t("menu.gmbpf") }}</a-menu-item
+                >
+                <a-menu-item
+                    key="mif"
+                    @click="handleNavigate('/show/host', 'MIF')"
+                    >{{ $t("menu.mif") }}</a-menu-item
+                >
+                <a-menu-item
+                    key="plpex"
+                    @click="handleNavigate('/show/host', 'PLPEX')"
+                    >{{ $t("menu.plpex") }}</a-menu-item
+                >
+            </a-sub-menu>
+            <!-- <a-menu-item key="host" @click="handleNavigate('/show/host')">{{
                 $t("menu.signUp")
-            }}</a-menu-item>
+            }}</a-menu-item> -->
             <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
@@ -23,7 +59,7 @@
                     {{ $t("menu.bb") }}
                 </a-menu-item>
             </a-sub-menu>
-            <a-sub-menu>
+            <!-- <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
@@ -58,7 +94,7 @@
                     @click="formNavigate('/myform/special', 'bf')"
                     >{{ $t("menu.cf") }}</a-menu-item
                 >
-            </a-sub-menu>
+            </a-sub-menu> -->
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')"
@@ -137,40 +173,36 @@ export default {
         $route: {
             immediate: true,
             handler: function(newValue) {
-                const { query } = newValue;
-                if (query.order === "PARTICIPATE") {
-                    this.menuItem = ["overseas1"];
-                    return;
+                const { query, meta } = newValue;
+                switch (query.order) {
+                    case "PARTICIPATE":
+                        this.menuItem = ["overseas1"];
+                        break;
+                    case "MISSION":
+                        this.menuItem = ["overseas2"];
+                        break;
+                    case "MIECF":
+                        this.menuItem = ["miecf"];
+                        break;
+                    case "IIICF":
+                        this.menuItem = ["iiicf"];
+                        break;
+                    case "MFE":
+                        this.menuItem = ["mfe"];
+                        break;
+                    case "GMBPF":
+                        this.menuItem = ["gmbpf"];
+                        break;
+                    case "MIF":
+                        this.menuItem = ["mif"];
+                        break;
+                    case "PLPEX":
+                        this.menuItem = ["plpex"];
+                        break;
+                    default:
+                        this.menuItem = [meta.key];
+                        break;
                 }
-                if (query.order === "MISSION") {
-                    this.menuItem = ["overseas2"];
-                    return;
-                }
-                if (query.form === "ba") {
-                    this.menuItem = ["special1"];
-                    return;
-                }
-                if (query.form === "bb") {
-                    this.menuItem = ["special2"];
-                    return;
-                }
-                if (query.form === "bc") {
-                    this.menuItem = ["special3"];
-                    return;
-                }
-                if (query.form === "bd") {
-                    this.menuItem = ["special4"];
-                    return;
-                }
-                if (query.form === "be") {
-                    this.menuItem = ["special5"];
-                    return;
-                }
-                if (query.form === "bf") {
-                    this.menuItem = ["special6"];
-                    return;
-                }
-                this.menuItem = [newValue.meta.key];
             }
         }
     },
@@ -182,11 +214,7 @@ export default {
             this.$router.push({ path: "/personal/index", query: { key } });
         },
         handleNavigate: function(url, order) {
-            if (order) {
-                this.$router.push(`${url}?order=${order}`);
-            } else {
-                this.$router.push(url);
-            }
+            this.$router.push(`${url}?order=${order}`);
         },
         personalNavigate: function(target) {
             const url = `/personal${target}`;
