@@ -43,7 +43,8 @@ const zhData = {
         mfe: "澳門國際品牌連鎖加盟展",
         gmbpf: "粵澳名優商品展",
         mif: "澳門國際貿易投資展覽會",
-        plpex: "葡語國家產品及服務展"
+        plpex: "葡語國家產品及服務展",
+        logout: "退出登錄"
     },
     index: {
         evCa: "展會日曆",
