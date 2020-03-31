@@ -128,11 +128,7 @@
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('miecf.ba')">
-                    <a-date-picker
-                        class="full"
-                        mode="year"
-                        v-model="form.attendHistoryYear"
-                    />
+                    <a-input v-model="form.attendHistoryYear" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 3">
@@ -183,12 +179,11 @@
                     </a-checkbox-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('miecf.cd')">
-                    <upload :value="form.paymentRecordFiles" />
+                    <upload :value.sync="form.paymentRecordFiles" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
                 <a-form-model-item
-                    prop="groups"
                     :label="$t('miecf.cg')"
                     :required="form.method === 'GROUP_EXHIBITION'"
                 >
@@ -223,10 +218,10 @@
                     </div>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('miecf.ch')">
-                    <upload :value="form.letterFiles" />
+                    <upload :value.sync="form.letterFiles" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('miecf.cj')">
-                    <upload :value="form.applicantUnitFiles" />
+                    <upload :value.sync="form.applicantUnitFiles" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 5">

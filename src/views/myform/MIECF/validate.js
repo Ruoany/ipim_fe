@@ -47,23 +47,17 @@ export default {
         liaisonId: [config_select],
         method: [config_select],
         preference: [config_select],
-        area: [config],
-        attendHistoryExhibition: [config_select],
-        exhibitionProducts: [config_select],
-        groups: [
+        area: [
+            config,
             {
                 validator: (rule, value, callback) => {
-                    value.map(item => {
-                        Object.keys(item).map(val => {
-                            if (!item[val]) {
-                                callback("Please Input");
-                            }
-                        });
-                    });
+                    if (value > 450) callback("面積不能大於450");
                     callback();
                 }
             }
         ],
+        attendHistoryExhibition: [config_select],
+        exhibitionProducts: [config_select],
         businessMatchings: [config_select],
         targetMarkets: [config_select]
     },
@@ -72,6 +66,7 @@ export default {
         applicantUnitFiles: [],
         area: "",
         attendHistoryExhibition: true,
+        attendHistoryYear: "",
         businessMatchings: [],
         exhibitionProducts: [],
         groups: [

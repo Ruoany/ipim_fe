@@ -110,7 +110,6 @@ const zhData = {
         upData: "修改",
         nameZh: "姓名（中文）",
         nameEnAndPt: "姓名（英/葡文）",
-
         companyName: "企業名稱",
         liaisonName: "聯絡人名稱"
     },
