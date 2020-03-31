@@ -32,7 +32,8 @@ export default {
 }
 html,
 body {
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-family: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei,
+        Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
     width: 100%;
     height: 100%;
     padding: 0;
