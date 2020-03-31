@@ -7,8 +7,11 @@ export default {
         info: state => state.info,
         currentUser: state => (state.info ? state.info.id : null),
         institutionList: state => {
-            const arr = state.info.institutions.filter(item => item.id !== state.institution.id);
-            return arr;
+            if (state.info) {
+                const arr = state.info.institutions.filter(item => item.id !== state.institution.id);
+                return arr;
+            }
+            return [];
         },
         currentInstitution: state => state.institution
     },

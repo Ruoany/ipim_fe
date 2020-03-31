@@ -23,6 +23,7 @@
             }}</a-button>
         </div>
         <a-modal
+            width="900px"
             :visible="modal"
             title="Prewview"
             :footer="null"
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { upFiles } from "@/apis/files";
 import ApproveImage from "@/apis/approveImage";
 import ApplyPicture from "@/apis/applyPicture";
@@ -47,10 +49,21 @@ export default {
             modal: false
         };
     },
+    computed: {
+        ...mapGetters(["currentUser"])
+    },
     methods: {
         initData: async function() {
-            const { data } = await ApproveImage.get(this.query);
-            this.images = data.content;
+            const { data } = await ApproveImage.all(this.query);
+            if (data.length !== 0) {
+                this.images = data.map((item, index) => {
+                    return {
+                        uid: item.id,
+                        name: `A${index}`,
+                        url: item.url
+                    };
+                });
+            }
         },
         beforeUpload: function(file) {
             const isJPG =
@@ -74,11 +87,10 @@ export default {
         handleSubmit: async function() {
             const body = {
                 ...this.query,
-                applicantId: 1,
+                applicantId: this.currentUser,
                 images: this.images.map(item => {
                     return {
-                        uid: item.uid,
-                        ...item.response.data
+                        url: item.response ? item.response.data.url : item.url
                     };
                 })
             };

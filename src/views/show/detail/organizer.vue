@@ -1,10 +1,14 @@
 <template>
     <div class="container">
-        <div class="organizer-title">{{ $t("show.organizers") }}</div>
+        <div v-show="organizers" class="organizer-title">
+            {{ $t("show.organizers") }}
+        </div>
         <ul>
             <li v-for="item in organizers" :key="item.id">{{ item.name }}</li>
         </ul>
-        <div class="organizer-title">{{ $t("show.helpers") }}</div>
+        <div v-show="helpers" class="organizer-title">
+            {{ $t("show.helpers") }}
+        </div>
         <ul>
             <li v-for="item in helpers" :key="item.id">{{ item.name }}</li>
         </ul>

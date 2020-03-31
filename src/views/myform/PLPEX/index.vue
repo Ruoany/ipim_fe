@@ -9,137 +9,217 @@
             <a-step :title="$t('plpex.ck')" />
             <a-step :title="$t('plpex.dc')" />
         </a-steps>
-        <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
-            <div v-show="stepCurrent === 0">
-                <a-form-item :label="$t('plpex.ab')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ac')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ad')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ae')">
-                    <a-input v-decorator />
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 1">
-                <a-form-item :label="$t('plpex.ag')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ai')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.aj')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ak')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.al')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.am')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.an')">
-                    <a-input v-decorator />
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 2">
-                <a-form-item :label="$t('plpex.ao')">
-                    <a-radio-group v-decorator>
-                        <a-radio :value="1">{{ $t("plpex.ap") }}</a-radio>
-                        <a-radio :value="2">{{ $t("plpex.aq") }}</a-radio>
-
-                        <a-radio :value="6">{{ $t("plpex.au") }}</a-radio>
-                    </a-radio-group>
-                    <a-input class="inline-input" v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.av')">
-                    <a-radio-group v-decorator>
-                        <a-radio :value="1">{{ $t("plpex.aw") }}</a-radio>
-                        <a-radio :value="6">{{ $t("plpex.au") }}</a-radio>
-                    </a-radio-group>
-                    <a-input class="inline-input" v-decorator />
-                </a-form-item>
-                <a-form-item>
-                    <span slot="label">
-                        <span>{{ $t("plpex.ax") }}</span>
-                        <span style="color:#ccc">({{ $t("plpex.ay") }})</span>
-                    </span>
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.az')">
-                    <a-radio-group v-decorator>
-                        <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
-                        <a-radio :value="6">{{ $t("util.no") }}</a-radio>
-                    </a-radio-group>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ba')">
-                    <a-date-picker class="full" />
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('plpex.bc')">
-                    <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('plpex.dl')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('plpex.dm')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('plpex.dn')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('plpex.do')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('plpex.dp')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('plpex.dq')}}</a-checkbox>
-                        <a-checkbox :value="7">{{$t('plpex.dr')}}</a-checkbox>
-                        <a-checkbox :value="8">{{$t('plpex.ds')}}</a-checkbox>
-                        <a-checkbox :value="9">{{$t('plpex.dt')}}</a-checkbox>
-                        <a-checkbox :value="10">{{$t('plpex.du')}}</a-checkbox>
-                        <a-checkbox :value="11">{{$t('plpex.dv')}}</a-checkbox>
-                        <a-checkbox :value="12">{{$t('plpex.dw')}}</a-checkbox>
-                        <a-checkbox :value="13">{{$t('plpex.dy')}}</a-checkbox>
-                        <a-checkbox :value="14">{{$t('plpex.dz')}}</a-checkbox>
-                        <a-checkbox :value="15">{{$t('plpex.ea')}}</a-checkbox>
-                        <a-input class="inline-input" v-decorator placeholder="others" />
-                    </a-checkbox-group>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.bj')">
-                    <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('plpex.bk')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('plpex.bl')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('plpex.bm')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('plpex.bn')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('plpex.bo')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('plpex.bp')}}</a-checkbox>
-                        <a-input class="inline-input" v-decorator placeholder="others" />
-                    </a-checkbox-group>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.br')">
-                    <a-checkbox-group v-decorator>
-                        <a-checkbox :value="1">{{$t('plpex.bs')}}</a-checkbox>
-                        <a-checkbox :value="2">{{$t('plpex.bt')}}</a-checkbox>
-                        <a-checkbox :value="3">{{$t('plpex.bu')}}</a-checkbox>
-                        <a-checkbox :value="4">{{$t('plpex.bv')}}</a-checkbox>
-                        <a-checkbox :value="5">{{$t('plpex.bw')}}</a-checkbox>
-                        <a-checkbox :value="6">{{$t('plpex.bx')}}</a-checkbox>
-                        <a-checkbox :value="7">{{$t('plpex.by')}}</a-checkbox>
-                        <a-checkbox :value="8">{{$t('plpex.bz')}}</a-checkbox>
-                        <a-checkbox :value="9">{{$t('plpex.ca')}}</a-checkbox>
-                        <a-checkbox :value="10">{{$t('plpex.cb')}}</a-checkbox>
-                        <a-checkbox :value="11">{{$t('plpex.cc')}}</a-checkbox>
-                    </a-checkbox-group>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.cd')">
-                    <upload />
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 4">
-                <a-form-item :label="$t('plpex.cg')">
-                    <div v-decorator="company">
-                        <div class="company-item" v-for="(item,index) in companyArray" :key="index">
+        <a-spin :spinning="loading" class="form">
+            <a-form-model
+                class="form"
+                ref="plpex"
+                :model="form"
+                :rules="rules"
+                v-bind="formatLayout"
+            >
+                <div v-show="stepCurrent === 0">
+                    <a-form-model-item :label="$t('plpex.ab')" :required="true">
+                        <a-input
+                            v-model="selectedActivity.activityName"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ac')" :required="true">
+                        <a-input
+                            v-model="selectedActivity.activityDate"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ad')" :required="true">
+                        <a-input
+                            v-model="selectedActivity.activityPlace"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ae')" :required="true">
+                        <a-input
+                            v-model="selectedActivity.activityExpiry"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 1">
+                    <a-form-model-item :label="$t('plpex.ag')" :required="true">
+                        <a-input
+                            v-model="currentInstitution.nameZh"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item prop="liaisonId" :label="$t('plpex.ai')">
+                        <a-select
+                            v-model="form.liaisonId"
+                            showSearch
+                            optionFilterProp="label"
+                            :filterOption="true"
+                        >
+                            <a-select-option
+                                v-for="item in liaisonList"
+                                :key="item.id"
+                                :value="item.id"
+                                :label="`${item.nameZh}${item.nameEnOrPt}`"
+                                >{{ item.nameZh }}
+                                {{ item.nameEnOrPt }}</a-select-option
+                            >
+                        </a-select>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.aj')">
+                        <a-input
+                            v-model="selectedLiaison.phone"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ak')">
+                        <a-input
+                            v-model="selectedLiaison.fax"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.al')">
+                        <a-input
+                            v-model="selectedLiaison.email"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.am')">
+                        <a-input
+                            v-model="selectedLiaison.address"
+                            :disabled="true"
+                        />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 2">
+                    <a-form-model-item prop="method" :label="$t('plpex.ao')">
+                        <a-radio-group v-model="form.method">
+                            <a-radio
+                                v-for="item in methods"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-radio
+                            >
+                            <a-radio value="OTHER">{{
+                                $t("plpex.au")
+                            }}</a-radio>
+                        </a-radio-group>
+                        <a-input
+                            class="inline-input"
+                            v-model="form.otherExhibitMethod"
+                            :disabled="form.method !== 'OTHER'"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="preference"
+                        :label="$t('plpex.av')"
+                    >
+                        <a-radio-group v-model="form.preference">
+                            <a-radio style="line-height:30px" value="BARELY">{{
+                                $t("plpex.aw")
+                            }}</a-radio>
+                            <a-radio
+                                style="line-height:30px"
+                                value="STANDARD_BOOTH"
+                                >{{ $t("plpex.eb") }}</a-radio
+                            >
+                        </a-radio-group>
+                    </a-form-model-item>
+                    <a-form-model-item prop="area">
+                        <span slot="label">
+                            <span>{{ $t("plpex.ax") }}</span>
+                            <span style="color:#ccc"
+                                >({{ $t("plpex.ay") }})</span
+                            >
+                        </span>
+                        <a-input v-model="form.area" />
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="attendHistoryExhibition"
+                        :label="$t('plpex.az')"
+                    >
+                        <a-radio-group v-model="form.attendHistoryExhibition">
+                            <a-radio :value="true">{{
+                                $t("util.yes")
+                            }}</a-radio>
+                            <a-radio :value="false">{{
+                                $t("util.no")
+                            }}</a-radio>
+                        </a-radio-group>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ba')">
+                        <a-input v-model="form.attendHistoryYear" />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 3">
+                    <a-form-model-item
+                        prop="exhibitionProducts"
+                        :label="$t('plpex.bc')"
+                    >
+                        <a-checkbox-group v-model="form.exhibitionProducts">
+                            <a-checkbox
+                                v-for="item in exhibitionProducts"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherProductSpecify"
+                                placeholder="others"
+                            />
+                        </a-checkbox-group>
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="businessMatchings"
+                        :label="$t('plpex.bj')"
+                    >
+                        <a-checkbox-group v-model="form.businessMatchings">
+                            <a-checkbox
+                                v-for="item in businessMatchings"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherMatchingSpecify"
+                                placeholder="others"
+                            />
+                        </a-checkbox-group>
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="targetMarkets"
+                        :label="$t('plpex.br')"
+                    >
+                        <a-checkbox-group v-model="form.targetMarkets">
+                            <a-checkbox
+                                v-for="item in targetMarkets"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                        </a-checkbox-group>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.cd')">
+                        <upload :value.sync="form.paymentRecordFiles" />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 4">
+                    <a-form-model-item
+                        :label="$t('plpex.cg')"
+                        :required="form.method === 'GROUP_EXHIBITION'"
+                    >
+                        <div
+                            class="company-item"
+                            v-for="(item, index) in form.groups"
+                            :key="index"
+                        >
                             <company
-                                :name.sync="item.name"
+                                :name.sync="item.enterpriseName"
                                 :liaison-name.sync="item.liaisonName"
-                                :phone.sync="item.phone"
+                                :phone.sync="item.liaisonTel"
                                 :email.sync="item.email"
                             />
                             <div class="button-wrapper">
@@ -156,148 +236,268 @@
                                     title="減少一項"
                                     shape="circle"
                                     icon="minus"
-                                    @click="operaCompany(false,index)"
+                                    @click="operaCompany(false, index)"
                                 ></a-button>
                             </div>
                         </div>
-                    </div>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.ch')">
-                    <upload />
-                </a-form-item>
-                <a-form-item :label="$t('plpex.cj')">
-                    <upload />
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 5">
-                <a-form-item :label="$t('plpex.ck')">
-                    <ul>
-                        <li>{{$t('plpex.cl')}}</li>
-                        <li>{{$t('plpex.cm')}}</li>
-                        <li>{{$t('plpex.cn')}}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.co')">
-                    <ul>
-                        <li>{{$t('plpex.cp')}}</li>
-                        <li>{{$t('plpex.cq')}}</li>
-                        <li>{{$t('plpex.cr')}}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.cs')">
-                    <ul>
-                        <li>{{$t('plpex.ct')}}</li>
-                        <li>{{$t('plpex.cu')}}</li>
-                        <li>{{$t('plpex.cv')}}</li>
-                    </ul>
-                </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 6">
-                <a-form-item :label="$t('plpex.cw')">
-                    <ul>
-                        <li>{{$t('plpex.cx')}}</li>
-                        <li>{{$t('plpex.cy')}}</li>
-                        <li>{{$t('plpex.cz')}}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.da')">
-                    <ul>
-                        <li>{{$t('plpex.db')}}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('plpex.dc')">
-                    <ul>
-                        <li>{{$t('plpex.dd')}}</li>
-                        <li>{{$t('plpex.de')}}</li>
-                        <li>{{$t('plpex.df')}}</li>
-                        <li>{{$t('plpex.dg')}}</li>
-                        <li>{{$t('plpex.dh')}}</li>
-                        <li>{{$t('plpex.di')}}</li>
-                    </ul>
-                </a-form-item>
-            </div>
-            <a-form-item>
-                <a-button type="primary" @click="stepCurrent--" style="margin-right:12px">上一步</a-button>
-                <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++">下一步</a-button>
-                <a-button v-else type="primary" html-type="submit">{{ $t("plpex.dk") }}</a-button>
-            </a-form-item>
-        </a-form>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ch')">
+                        <upload :value.sync="form.letterFiles" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.cj')">
+                        <upload :value.sync="form.applicantUnitFiles" />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 5">
+                    <a-form-model-item :label="$t('plpex.ck')">
+                        <ul>
+                            <li>{{ $t("plpex.cl") }}</li>
+                            <li>{{ $t("plpex.cm") }}</li>
+                            <li>{{ $t("plpex.cn") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.co')">
+                        <ul>
+                            <li>{{ $t("plpex.cp") }}</li>
+                            <li>{{ $t("plpex.cq") }}</li>
+                            <li>{{ $t("plpex.cr") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.cs')">
+                        <ul>
+                            <li>{{ $t("plpex.ct") }}</li>
+                            <li>{{ $t("plpex.cu") }}</li>
+                            <li>{{ $t("plpex.cv") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 6">
+                    <a-form-model-item :label="$t('plpex.cw')">
+                        <ul>
+                            <li>{{ $t("plpex.cx") }}</li>
+                            <li>{{ $t("plpex.cy") }}</li>
+                            <li>{{ $t("plpex.cz") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.da')">
+                        <ul>
+                            <li>{{ $t("plpex.db") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.dc')">
+                        <ul>
+                            <li>{{ $t("plpex.dd") }}</li>
+                            <li>{{ $t("plpex.de") }}</li>
+                            <li>{{ $t("plpex.df") }}</li>
+                            <li>{{ $t("plpex.dg") }}</li>
+                            <li>{{ $t("plpex.dh") }}</li>
+                            <li>{{ $t("plpex.di") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                </div>
+                <a-form-model-item>
+                    <a-button
+                        type="primary"
+                        @click="stepCurrent--"
+                        style="margin-right:12px"
+                        >上一步</a-button
+                    >
+                    <a-button
+                        v-if="stepCurrent < 6"
+                        type="primary"
+                        @click="stepCurrent++"
+                        >下一步</a-button
+                    >
+                    <a-button v-else type="primary" @click="handleSubmit">{{
+                        $t("plpex.dk")
+                    }}</a-button>
+                </a-form-model-item>
+            </a-form-model>
+        </a-spin>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Upload from "@/components/upload";
 import Company from "../components/company";
 import validate from "./validate";
+import Activity from "@/apis/activity";
+import PPLPEX from "@/apis/participatePlpex";
 export default {
     components: { Upload, Company },
     data() {
         return {
             ...validate,
-            stepCurrent: 0,
-            formatLayout: {
-                labelCol: { span: 24 },
-                wrapperCol: { span: 24 }
-            },
-            specialLayout: {
-                wrapperCol: { span: 16, offset: 4 }
-            },
-            companyArray: []
+            form: {
+                activityId: null,
+                applicantUnitFiles: [],
+                area: "",
+                attendHistoryExhibition: true,
+                attendHistoryYear: "",
+                businessMatchings: [],
+                exhibitionProducts: [],
+                groups: [
+                    {
+                        email: "",
+                        enterpriseName: "",
+                        liaisonName: "",
+                        liaisonTel: ""
+                    }
+                ],
+                letterFiles: [],
+                liaisonId: null,
+                method: "GENERAL_EXHIBITION",
+                otherAsiaAreaSpecify: "",
+                otherCountriesSpecify: "",
+                otherExhibitMethod: "",
+                otherMatchingSpecify: "",
+                otherProductSpecify: "",
+                paymentRecordFiles: [],
+                preference: "BARELY",
+                remarks: "",
+                targetMarkets: []
+            }
         };
     },
+    computed: {
+        ...mapGetters([
+            "currentInstitution",
+            "liaisonList",
+            "currentForm",
+            "currentUser"
+        ]),
+        selectedLiaison: function() {
+            if (!this.form.liaisonId)
+                return {
+                    abroadPhone: "",
+                    tel: "",
+                    phone: "",
+                    fax: "",
+                    email: "",
+                    address: ""
+                };
+            const data = this.liaisonList.find(
+                item => item.id === this.form.liaisonId
+            );
+            return data;
+        }
+    },
     methods: {
+        initData: async function() {
+            this.loading = true;
+            if (this.currentForm) {
+                const { data } = PPLPEX.one(this.currentForm);
+                this.form = data;
+                this.selectedActivity = {
+                    activityName: data.activity.nameZh,
+                    activityDate: `${data.activity.startTime} - ${data.activity.endTime}`,
+                    activityPlace: data.activity.place,
+                    activityExpiry: data.activity.expiryTime
+                };
+            } else {
+                this.form.activityId = this.$route.query.activityId;
+                const { data } = await Activity.one(
+                    this.$route.query.activityId
+                );
+                this.selectedActivity = {
+                    activityName: data.nameZh,
+                    activityDate: `${data.startTime} - ${data.endTime}`,
+                    activityPlace: data.place,
+                    activityExpiry: data.expiryTime
+                };
+            }
+            this.loading = false;
+        },
         operaCompany: function(type, index) {
             if (type) {
                 const body = {
-                    name: "",
+                    email: "",
+                    enterpriseName: "",
                     liaisonName: "",
-                    phone: "",
-                    email: ""
+                    liaisonTel: ""
                 };
-                this.companyArray.push(body);
+                this.form.groups.push(body);
             } else {
-                this.companyArray.splice(index, 1);
+                this.form.groups.splice(index, 1);
             }
         },
-        handleSubmit: function(e) {
-            e.preventDefault();
-            this.form.validateFields((err, values) => {
-                if (!err) {
-                    console.log("--->", values);
+        onSuccess: function() {
+            this.$message.success("申請成功");
+            this.$router.back();
+        },
+        handleSubmit: function() {
+            this.$refs.plpex.validate(async valid => {
+                if (valid) {
+                    if (!this.currentForm)
+                        this.form = {
+                            ...this.form,
+                            institutionId: this.currentInstitution.id,
+                            applicantId: this.currentUser
+                        };
+                    const { data } = await PPLPEX.create(this.form);
+                    data ? this.onSuccess() : "";
+                } else {
+                    this.$message.error(
+                        "表單存在必填項為空或者不合法字符，請檢查"
+                    );
                 }
             });
+        },
+        beforeunloadHandler: function(e) {
+            e = e || window.event;
+            if (e) {
+                e.returnValue = "刷新頁面將會導致數據丟失";
+            }
+            return "刷新頁面將會導致數據丟失";
         }
     },
     created: function() {
-        this.form = this.$form.createForm(this, { name: "plpex" });
+        if (this.currentForm) {
+            window.addEventListener("beforeunload", e =>
+                this.beforeunloadHandler(e)
+            );
+        }
     },
     mounted: function() {
-        this.companyArray = this.form.getFieldValue("company");
+        this.initData();
+    },
+    destroyed: function() {
+        if (this.currentForm) {
+            this.$store.dispatch("removeFormId");
+        }
+        window.removeEventListener("beforeunload", e =>
+            this.beforeunloadHandler(e)
+        );
     }
 };
 </script>
 
 <style lang="less" scoped>
 @import url("../css/form.less");
-
-.remark {
-    width: 100%;
-    display: inline-block;
-}
-.company-item {
-    width: 100%;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .button-wrapper {
-        width: 80px;
-        margin-left: 20px;
+.form-container {
+    .remark {
+        width: 100%;
+        display: inline-block;
     }
-}
-/deep/ .ant-checkbox-wrapper {
-    min-width: 150px;
-    height: 40px;
-    margin-left: 0;
+    .company-item {
+        width: 100%;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .button-wrapper {
+            width: 80px;
+            margin-left: 20px;
+        }
+    }
+    /deep/ .ant-checkbox-wrapper {
+        min-width: 150px;
+        height: 40px;
+        margin-left: 0;
+    }
+    /deep/.ant-form-item-control {
+        line-height: 30px;
+    }
 }
 </style>

@@ -123,6 +123,10 @@ export default {
                 }
             });
         }
+    },
+    mounted: function() {
+        sessionStorage.clear();
+        this.$store.dispatch("clear");
     }
 };
 </script>

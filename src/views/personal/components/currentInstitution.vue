@@ -19,14 +19,17 @@
             </div>
             <div class="bottom">
                 <div
+                    v-if="info.status !== 'approving'"
                     class="item"
-                    :class="info.status === 'approving' ? 'item-disbaled' : ''"
-                    :title="
-                        info.status === 'approving'
-                            ? '認證中的機構不允許修改資料'
-                            : ''
-                    "
                     @click="handleNavigate('/personal/mechanism')"
+                >
+                    <a-icon type="bars" style="font-size:25px;" />
+                    <span>{{ $t("personal.s") }}</span>
+                </div>
+                <div
+                    v-else
+                    class="item item-disabled"
+                    title="認證中的機構不允許修改資料"
                 >
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
@@ -156,7 +159,7 @@ export default {
                     border-left: none;
                 }
             }
-            .item-disbaled {
+            .item-disabled {
                 color: #ccc;
                 cursor: not-allowed;
                 &:hover {

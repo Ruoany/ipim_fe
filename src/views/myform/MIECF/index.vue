@@ -409,13 +409,6 @@ export default {
             }
             this.loading = false;
         },
-        beforeunloadHandler: function(e) {
-            e = e || window.event;
-            if (e) {
-                e.returnValue = "刷新頁面將會導致數據丟失";
-            }
-            return "刷新頁面將會導致數據丟失";
-        },
         operaCompany: function(type, index) {
             if (type) {
                 const body = {
@@ -450,6 +443,13 @@ export default {
                     );
                 }
             });
+        },
+        beforeunloadHandler: function(e) {
+            e = e || window.event;
+            if (e) {
+                e.returnValue = "刷新頁面將會導致數據丟失";
+            }
+            return "刷新頁面將會導致數據丟失";
         }
     },
     created: function() {
@@ -463,7 +463,9 @@ export default {
         this.initData();
     },
     destroyed: function() {
-        this.$store.dispatch("removeFormId");
+        if (this.currentForm) {
+            this.$store.dispatch("removeFormId");
+        }
         window.removeEventListener("beforeunload", e =>
             this.beforeunloadHandler(e)
         );

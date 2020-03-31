@@ -45,7 +45,8 @@ export default {
             const { data } = await Activity.get({
                 page: this.page,
                 size: this.size,
-                types: this.types
+                types: this.types,
+                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             });
             this.setList(data.content, data.totalElements);
             this.loading = false;

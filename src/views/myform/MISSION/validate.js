@@ -2,40 +2,6 @@ const config = { required: true, message: "plese input" };
 const config_select = { required: true, message: "plese select" };
 
 export default {
-    form: {
-        activityId: "",
-        institutionId: "",
-        applicantId: "",
-        liaisonId: "",
-        certs: [],
-        nameZh: "",
-        gender: "M",
-        birthDate: null,
-        exitNumber: "",
-        exitValidityDate: null,
-        passportNumber: "",
-        passportValidityDate: null,
-        otherCertificateName: "",
-        otherIDNumber: "",
-        otherValidityDate: null,
-        isAssociation: false,
-        associationName: "",
-        associationPosition: "",
-        associateIndustry: "",
-        isCompany: false,
-        companyName: "",
-        companyAddress: "",
-        companyPosition: "",
-        companyIndustry: "",
-        isOtherWay: false,
-        otherWayName: "",
-        goWithGroup: true,
-        backWithGroup: true,
-        arrangement: true,
-        otherArrangement: "",
-        idCard: "",
-        idCardValidityDate: null
-    },
     formInfo: {}, //表單詳細
     activityId: 1, //展會ID
     applicantId: 1, //申請人ID

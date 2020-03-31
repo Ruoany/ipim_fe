@@ -1,51 +1,65 @@
-const config = { rules: [{ required: true, message: "plese input" }] };
-const config_select = { rules: [{ required: true, message: "plese select" }] };
+const config = { required: true, message: "plese input" };
+const config_select = { required: true, message: "plese select" };
 const methods = [
-    { value: "GENERAL_EXHIBITION", label: "miecf.ap" },
-    { value: "GROUP_EXHIBITION", label: "miecf.aq" },
-    { value: "SME_PARTICIPATION", label: "miecf.ar" },
-    { value: "DISTINGUISHED_EXHIBITOR", label: "miecf.as" },
-    { value: "AREA", label: "miecf.at" }
+    { value: "GENERAL_EXHIBITION", label: "mfe.ap" },
+    { value: "GROUP_EXHIBITION", label: "mfe.aq" },
+    { value: "SME_PARTICIPATION", label: "mfe.ar" },
+    { value: "DISTINGUISHED_EXHIBITOR", label: "mfe.as" }
 ];
 const exhibitionProducts = [
-    { value: "ENERGY_EFFICIENCY", label: "miecf.dl" },
-    { value: "RENEWABLE_ENERGY", label: "miecf.dm" },
-    { value: "GREEN_BUILDING", label: "miecf.dn" },
-    { value: "GREEN_TRANSPORTATION", label: "miecf.do" },
-    { value: "WASTE_MANAGEMENT_SOLUTIONS", label: "miecf.dp" },
-    { value: "WATER", label: "miecf.dr" },
-    { value: "AIR_QUALITY", label: "miecf.ds" },
-    { value: "ENVIRONMENTAL_PRODUCTS_AND_SERVICES", label: "miecf.dt" },
-    { value: "SOIL_REMEDIATION", label: "miecf.du" },
-    { value: "ENVIRONMENTAL_MONITORING", label: "miecf.dv" },
-    { value: "ECO_CITY_INTEGRATION_PLAN", label: "miecf.dw" }
+    { value: "FASHIONABLE_COSTUME", label: "mfe.dl" },
+    { value: "CATERING", label: "mfe.dm" },
+    { value: "BRAND_AGENCY", label: "mfe.dn" },
+    { value: "SERVICE_INDUSTRY", label: "mfe.do" },
+    { value: "RETAIL", label: "mfe.dp" },
+    { value: "LEISURE_INDUSTRY", label: "mfe.dq" },
+    { value: "BRAND_CONSULTING_AND_DESIGN", label: "mfe.dr" },
+    { value: "EQUIPMENT_AND_TECHNOLOGY", label: "mfe.ds" }
 ];
 const businessMatchings = [
-    { value: "GOVERNMENT_PUBLIC", label: "miecf.bk" },
-    { value: "HOTEL", label: "miecf.bl" },
-    { value: "BUILDING", label: "miecf.bm" },
-    { value: "GENERAL_OFFICE", label: "miecf.bn" },
-    { value: "EDUCATION", label: "miecf.bo" },
-    { value: "CONSTRUCTION", label: "miecf.bp" }
+    { value: "GOVERNMENT_PUBLIC", label: "mfe.bk" },
+    { value: "HOTEL", label: "mfe.bl" },
+    { value: "BUILDING", label: "mfe.bm" },
+    { value: "GENERAL_OFFICE", label: "mfe.bn" },
+    { value: "EDUCATION", label: "mfe.bo" },
+    { value: "CONSTRUCTION", label: "mfe.bp" }
 ];
 const targetMarkets = [
-    { value: "MACAO", label: "miecf.bs" },
-    { value: "HONGKONG", label: "miecf.bt" },
-    { value: "GREATER_BAY_AREA", label: "miecf.bu" },
-    { value: "MAINLAND_CHINA", label: "miecf.bv" },
-    { value: "PORTUGUESE_SPEAKING_COUNTRIES_REGIONS", label: "miecf.bw" },
-    { value: "SOUTHEAS_ASIA_REGION", label: "miecf.bx" },
-    { value: "INDIA_AND_MIDDLE_EASE_AREA", label: "miecf.by" },
-    { value: "OTHER_ASIA_AREA", label: "miecf.bz" },
-    { value: "EUROPE", label: "miecf.ca" },
-    { value: "OTHER_COUNTRIES", label: "miecf.cb" },
-    { value: "WORLDWIDE_COVERAGE", label: "miecf.cc" }
+    { value: "MACAO", label: "mfe.bs" },
+    { value: "HONGKONG", label: "mfe.bt" },
+    { value: "GREATER_BAY_AREA", label: "mfe.bu" },
+    { value: "MAINLAND_CHINA", label: "mfe.bv" },
+    { value: "PORTUGUESE_SPEAKING_COUNTRIES_REGIONS", label: "mfe.bw" },
+    { value: "SOUTHEAS_ASIA_REGION", label: "mfe.bx" },
+    { value: "INDIA_AND_MIDDLE_EASE_AREA", label: "mfe.by" },
+    { value: "OTHER_ASIA_AREA", label: "mfe.bz" },
+    { value: "EUROPE", label: "mfe.ca" },
+    { value: "OTHER_COUNTRIES", label: "mfe.cb" },
+    { value: "WORLDWIDE_COVERAGE", label: "mfe.cc" }
 ];
 
 export default {
     loading: false,
     stepCurrent: 0,
-    rules: {},
+    rules: {
+        liaisonId: [config_select],
+        method: [config_select],
+        preference: [config_select],
+        area: [
+            config,
+            {
+                validator: (rule, value, callback) => {
+                    if (value > 450) callback("面積不能大於450");
+                    callback();
+                }
+            }
+        ],
+        attendHistoryExhibition: [config_select],
+        exhibitionProducts: [config_select],
+        businessMatchings: [config_select],
+        targetMarkets: [config_select]
+    },
+    selectedActivity: {},
     formatLayout: {
         labelCol: { span: 24 },
         wrapperCol: { span: 24 }
