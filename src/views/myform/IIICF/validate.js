@@ -23,6 +23,7 @@ const targetMarkets = [
 ];
 
 export default {
+    loading: false,
     stepCurrent: 0,
     rules: {
         liaisonId: [config_select],

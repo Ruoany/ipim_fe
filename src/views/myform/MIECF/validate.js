@@ -42,6 +42,7 @@ const targetMarkets = [
     { value: "WORLDWIDE_COVERAGE", label: "miecf.cc" }
 ];
 export default {
+    loading: false,
     stepCurrent: 0,
     rules: {
         liaisonId: [config_select],

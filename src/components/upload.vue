@@ -43,15 +43,19 @@ export default {
     methods: {
         handleChange({ fileList }) {
             const arr = fileList.map(item => {
-                if (item.response) {
+                if (item.status === "done") {
                     return {
                         uid: item.uid,
+                        name: item.response ? item.response.oriname : item.uid,
                         ...item.response.data
                     };
                 }
-                return item;
+                return {
+                    ...item,
+                    url:
+                        "http://api-exhibition.servier.iteratech.net/upload/2020/03/31/a04816b91d2d45bfb7e3f4a1771b9fb8.xlw"
+                };
             });
-
             this.$emit("update:value", arr);
         },
         handleRemove({ uid }) {
