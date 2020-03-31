@@ -61,35 +61,6 @@ export default {
         businessMatchings: [config_select],
         targetMarkets: [config_select]
     },
-    form: {
-        activityId: null,
-        applicantUnitFiles: [],
-        area: "",
-        attendHistoryExhibition: true,
-        attendHistoryYear: "",
-        businessMatchings: [],
-        exhibitionProducts: [],
-        groups: [
-            {
-                email: "",
-                enterpriseName: "",
-                liaisonName: "",
-                liaisonTel: ""
-            }
-        ],
-        letterFiles: [],
-        liaisonId: null,
-        method: "GENERAL_EXHIBITION",
-        otherAsiaAreaSpecify: "",
-        otherCountriesSpecify: "",
-        otherExhibitMethod: "",
-        otherMatchingSpecify: "",
-        otherProductSpecify: "",
-        paymentRecordFiles: [],
-        preference: "BARELY",
-        remarks: "",
-        targetMarkets: []
-    },
     selectedActivity: {},
     formatLayout: {
         labelCol: { span: 24 },

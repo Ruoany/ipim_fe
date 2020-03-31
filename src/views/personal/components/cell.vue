@@ -2,7 +2,11 @@
     <div class="cell-container flex">
         <div class="ad">
             <div class="tag" :class="activityStatus"></div>
-            <img :src="scope" />
+            <img
+                style="cursor:pointer;"
+                :src="scope"
+                @click="$router.push(`/show/detail?id=${activityId}`)"
+            />
         </div>
         <div class="content flex">
             <div class="info">

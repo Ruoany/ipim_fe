@@ -224,7 +224,41 @@ import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            ...validate
+            ...validate,
+            form: {
+                activityId: "",
+                institutionId: "",
+                applicantId: "",
+                liaisonId: "",
+                certs: [],
+                nameZh: "",
+                gender: "M",
+                birthDate: null,
+                exitNumber: "",
+                exitValidityDate: null,
+                passportNumber: "",
+                passportValidityDate: null,
+                otherCertificateName: "",
+                otherIDNumber: "",
+                otherValidityDate: null,
+                isAssociation: false,
+                associationName: "",
+                associationPosition: "",
+                associateIndustry: "",
+                isCompany: false,
+                companyName: "",
+                companyAddress: "",
+                companyPosition: "",
+                companyIndustry: "",
+                isOtherWay: false,
+                otherWayName: "",
+                goWithGroup: true,
+                backWithGroup: true,
+                arrangement: true,
+                otherArrangement: "",
+                idCard: "",
+                idCardValidityDate: null
+            }
         };
     },
     computed: {

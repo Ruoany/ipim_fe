@@ -267,7 +267,27 @@ export default {
     components: { Upload },
     data() {
         return {
-            ...validate
+            ...validate,
+            form: {
+                activityId: null,
+                businessRegistrationFiles: [],
+                certificateBureauFiles: [],
+                certs: [],
+                differentTaxpayerFiles: [],
+                exhibitionProduct: "",
+                idcardFiles: [],
+                institutionId: 0,
+                know: true,
+                liaisonId: null,
+                macaoShareholderFiles: [],
+                otherFiles: [],
+                registrationOfBureauFiles: [],
+                salesTaxFiles: [],
+                salesTaxOpenFiles: [],
+                shareholderSamesFiles: [],
+                taxpayerFiles: [],
+                unitIntroductionFiles: []
+            }
         };
     },
     computed: {

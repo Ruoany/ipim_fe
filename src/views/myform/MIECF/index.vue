@@ -303,7 +303,36 @@ export default {
     components: { Upload, Company },
     data() {
         return {
-            ...validate
+            ...validate,
+            form: {
+                activityId: null,
+                applicantUnitFiles: [],
+                area: "",
+                attendHistoryExhibition: true,
+                attendHistoryYear: "",
+                businessMatchings: [],
+                exhibitionProducts: [],
+                groups: [
+                    {
+                        email: "",
+                        enterpriseName: "",
+                        liaisonName: "",
+                        liaisonTel: ""
+                    }
+                ],
+                letterFiles: [],
+                liaisonId: null,
+                method: "GENERAL_EXHIBITION",
+                otherAsiaAreaSpecify: "",
+                otherCountriesSpecify: "",
+                otherExhibitMethod: "",
+                otherMatchingSpecify: "",
+                otherProductSpecify: "",
+                paymentRecordFiles: [],
+                preference: "BARELY",
+                remarks: "",
+                targetMarkets: []
+            }
         };
     },
     computed: {

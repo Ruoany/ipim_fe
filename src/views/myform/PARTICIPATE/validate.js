@@ -4,26 +4,6 @@ const conig_upload = { required: true, message: "please upload file" };
 
 export default {
     selectedInstitution: {},
-    form: {
-        activityId: null,
-        businessRegistrationFiles: [],
-        certificateBureauFiles: [],
-        certs: [],
-        differentTaxpayerFiles: [],
-        exhibitionProduct: "",
-        idcardFiles: [],
-        institutionId: 0,
-        know: true,
-        liaisonId: null,
-        macaoShareholderFiles: [],
-        otherFiles: [],
-        registrationOfBureauFiles: [],
-        salesTaxFiles: [],
-        salesTaxOpenFiles: [],
-        shareholderSamesFiles: [],
-        taxpayerFiles: [],
-        unitIntroductionFiles: []
-    },
     rules: {
         liaisonId: [config_select]
     },

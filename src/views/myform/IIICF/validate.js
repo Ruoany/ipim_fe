@@ -27,37 +27,18 @@ export default {
     rules: {
         liaisonId: [config_select],
         preference: [config_select],
-        area: [config],
+        area: [
+            config,
+            {
+                validator: (rule, value, callback) => {
+                    if (value > 450) callback("面積不能大於450");
+                    callback();
+                }
+            }
+        ],
         attendHistoryExhibition: [config_select],
         businessMatchings: [config_select],
         targetMarkets: [config_select]
-    },
-    form: {
-        activityId: null,
-        applicantUnitFiles: [],
-        area: "",
-        attendHistoryExhibition: true,
-        attendHistoryYear: "",
-        businessMatchings: [],
-        groups: [
-            {
-                email: "",
-                enterpriseName: "",
-                liaisonName: "",
-                liaisonTel: ""
-            }
-        ],
-        letterFiles: [],
-        liaisonId: null,
-        otherAsiaAreaSpecify: "",
-        otherCountriesSpecify: "",
-        otherExhibitMethod: "",
-        otherMatchingSpecify: "",
-        otherProductSpecify: "",
-        paymentRecordFiles: [],
-        preference: "BARELY",
-        remarks: "",
-        targetMarkets: []
     },
     selectedActivity: {},
     formatLayout: {

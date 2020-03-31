@@ -145,7 +145,7 @@
                     </a-checkbox-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('iiicf.cd')">
-                    <upload :value="form.paymentRecordFiles" />
+                    <upload :value.sync="form.paymentRecordFiles" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
@@ -181,10 +181,10 @@
                     </div>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('iiicf.ch')">
-                    <upload :value="form.letterFiles" />
+                    <upload :value.sync="form.letterFiles" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('iiicf.cj')">
-                    <upload :value="form.applicantUnitFiles" />
+                    <upload :value.sync="form.applicantUnitFiles" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 5">
@@ -266,7 +266,34 @@ export default {
     components: { Upload, Company },
     data() {
         return {
-            ...validate
+            ...validate,
+            form: {
+                activityId: null,
+                applicantUnitFiles: [],
+                area: "",
+                attendHistoryExhibition: true,
+                attendHistoryYear: "",
+                businessMatchings: [],
+                groups: [
+                    {
+                        email: "",
+                        enterpriseName: "",
+                        liaisonName: "",
+                        liaisonTel: ""
+                    }
+                ],
+                letterFiles: [],
+                liaisonId: null,
+                otherAsiaAreaSpecify: "",
+                otherCountriesSpecify: "",
+                otherExhibitMethod: "",
+                otherMatchingSpecify: "",
+                otherProductSpecify: "",
+                paymentRecordFiles: [],
+                preference: "BARELY",
+                remarks: "",
+                targetMarkets: []
+            }
         };
     },
     computed: {
