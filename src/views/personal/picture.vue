@@ -2,7 +2,8 @@
     <div class="container">
         <div class="title">{{ $t("personal.upload") }}</div>
         <div class="sub-title">{{ $t("personal.tips1") }}</div>
-        <div class="picture-list-content">
+        <a-empty v-if="!flag" description="圖片審批中" class="empty"></a-empty>
+        <div v-show="flag" class="picture-list-content">
             <a-upload
                 :action="upFiles"
                 listType="picture-card"
@@ -17,7 +18,7 @@
                 </div>
             </a-upload>
         </div>
-        <div class="button-wrapper">
+        <div v-show="flag" class="button-wrapper">
             <a-button type="primary" size="large" @click="handleSubmit">{{
                 $t("personal.submit")
             }}</a-button>
@@ -46,7 +47,8 @@ export default {
             query: {},
             images: [],
             selectedUrl: "",
-            modal: false
+            modal: false,
+            flag: false
         };
     },
     computed: {
@@ -54,15 +56,23 @@ export default {
     },
     methods: {
         initData: async function() {
-            const { data } = await ApproveImage.all(this.query);
-            if (data.length !== 0) {
-                this.images = data.map((item, index) => {
-                    return {
-                        uid: item.id,
-                        name: `A${index}`,
-                        url: item.url
-                    };
-                });
+            const { data: apply } = await ApplyPicture.all({
+                ...this.query,
+                status: "approving"
+            });
+            console.log("--->", apply);
+            this.flag = apply.length === 0;
+            if (this.flag) {
+                const { data } = await ApproveImage.all(this.query);
+                if (data.length !== 0) {
+                    this.images = data.map((item, index) => {
+                        return {
+                            uid: item.id,
+                            name: `A${index}`,
+                            url: item.url
+                        };
+                    });
+                }
             }
         },
         beforeUpload: function(file) {
@@ -128,6 +138,9 @@ export default {
     /deep/.ant-upload-list-picture-card-container {
         width: 200px;
         height: 200px;
+    }
+    .empty {
+        height: 500px;
     }
 }
 </style>

@@ -29,11 +29,13 @@
                         @click="FormNavigate"
                         >{{ $t("personal.update") }}</a-button
                     >
-                    <a-button v-if="status === 'passed'" type="primary">{{
-                        $t("personal.question")
-                    }}</a-button>
                     <a-button
-                        v-if="status === 'passed'"
+                        v-if="status === 'passed' && activityStatus === 'END'"
+                        type="primary"
+                        >{{ $t("personal.question") }}</a-button
+                    >
+                    <a-button
+                        v-if="status === 'passed' && activityStatus === 'END'"
                         type="primary"
                         @click="PictureNavigate"
                         >{{ $t("personal.showPic") }}</a-button

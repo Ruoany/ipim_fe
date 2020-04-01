@@ -9,7 +9,7 @@
             <div class="list-content">
                 <show-list :list="list"></show-list>
             </div>
-            <pagination :page.sync="page" :total="total" @handleChange="pages => (page = pages - 1)" />
+            <pagination :page.sync="page" :size="size" :total="total" />
         </a-spin>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default {
             order: null,
             page: 0,
             size: 6,
-            total: 0
+            total: 1
         };
     },
     watch: {
@@ -52,19 +52,18 @@ export default {
     methods: {
         initData: async function(query) {
             this.loading = true;
-            const { data } = await Activity.get({
+            const {
+                data: { content, totalElements }
+            } = await Activity.get({
                 page: this.page,
                 size: this.size,
                 actType: this.actType,
                 types: [query],
                 manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             });
-            this.setList(data.content, data.totalElements);
+            this.list = content;
+            this.total = totalElements;
             this.loading = false;
-        },
-        setList: function(array, total) {
-            this.list = new Array().concat(array);
-            this.total = total;
         },
         reflash: function(value) {
             this.$router.push(`/show/overseas?order=${value}`);
@@ -73,9 +72,6 @@ export default {
     mounted: function() {
         this.actType = this.$route.query.part;
         this.active = this.$route.query.order;
-        setTimeout(() => {
-            this.loading = false;
-        }, 5000);
     }
 };
 </script>

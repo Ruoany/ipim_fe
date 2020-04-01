@@ -27,7 +27,7 @@ export default {
             types: "",
             page: 0,
             size: 6,
-            total: 0
+            total: 1
         };
     },
     watch: {
