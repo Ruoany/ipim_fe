@@ -154,6 +154,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+    inject: ["reload"],
     data() {
         return {
             current: null,
@@ -223,7 +224,7 @@ export default {
             const o = this.institutionList.find(item => item.id === id);
             sessionStorage.setItem("institution", id);
             this.$store.dispatch("setCurrentInstitution", o);
-            this.$router.replace("/");
+            this.reload();
         },
         logout: function() {
             sessionStorage.clear();

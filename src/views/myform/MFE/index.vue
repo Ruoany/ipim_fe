@@ -289,6 +289,7 @@ export default {
     data() {
         return {
             ...validate,
+            formId: undefined,
             form: {
                 activityId: null,
                 applicantUnitFiles: [],
@@ -321,12 +322,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters([
-            "currentInstitution",
-            "liaisonList",
-            "currentForm",
-            "currentUser"
-        ]),
+        ...mapGetters(["currentInstitution", "liaisonList", "currentUser"]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -346,8 +342,8 @@ export default {
     methods: {
         initData: async function() {
             this.loading = true;
-            if (this.currentForm) {
-                const { data } = PMFE.one(this.currentForm);
+            if (this.formId) {
+                const { data } = PMFE.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
                     activityName: data.activity.nameZh,
@@ -389,7 +385,7 @@ export default {
         handleSubmit: function() {
             this.$refs.mfe.validate(async valid => {
                 if (valid) {
-                    if (!this.currentForm)
+                    if (!this.formId)
                         this.form = {
                             ...this.form,
                             institutionId: this.currentInstitution.id,
@@ -403,32 +399,11 @@ export default {
                     );
                 }
             });
-        },
-        beforeunloadHandler: function(e) {
-            e = e || window.event;
-            if (e) {
-                e.returnValue = "刷新頁面將會導致數據丟失";
-            }
-            return "刷新頁面將會導致數據丟失";
-        }
-    },
-    created: function() {
-        if (this.currentForm) {
-            window.addEventListener("beforeunload", e =>
-                this.beforeunloadHandler(e)
-            );
         }
     },
     mounted: function() {
+        this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
-    },
-    destroyed: function() {
-        if (this.currentForm) {
-            this.$store.dispatch("removeFormId");
-        }
-        window.removeEventListener("beforeunload", e =>
-            this.beforeunloadHandler(e)
-        );
     }
 };
 </script>

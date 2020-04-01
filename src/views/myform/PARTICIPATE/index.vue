@@ -75,60 +75,30 @@
                 <a-form-model-item :label="$t('formab.an')">
                     <upload
                         :value.sync="form.registrationOfBureauFiles"
-                        decorator="registrationOfBureauFiles"
-                        @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ao')">
-                    <upload
-                        :value.sync="form.macaoShareholderFiles"
-                        decorator="macaoShareholderFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.macaoShareholderFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ap')">
-                    <upload
-                        :value.sync="form.otherFiles"
-                        decorator="otherFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.otherFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.aq')">
-                    <upload
-                        :value.sync="form.taxpayerFiles"
-                        decorator="taxpayerFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.taxpayerFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.ar')">
-                    <upload
-                        :value.sync="form.shareholderSamesFiles"
-                        decorator="shareholderSamesFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.shareholderSamesFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.as')">
-                    <upload
-                        :value.sync="form.differentTaxpayerFiles"
-                        decorator="differentTaxpayerFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.differentTaxpayerFiles"></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-model-item :label="$t('formab.au')">
-                    <upload
-                        :value.sync="form.unitIntroductionFiles"
-                        decorator="unitIntroductionFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.unitIntroductionFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formab.aw')">
-                    <upload
-                        :value.sync="form.idcardFiles"
-                        decorator="idcardFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.idcardFiles"></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
@@ -186,8 +156,6 @@
                 >
                     <upload
                         :value.sync="form.businessRegistrationFiles"
-                        decorator="businessRegistrationFiles"
-                        @handleChange="uploadChange"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item
@@ -198,11 +166,7 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload
-                        :value.sync="form.certificateBureauFiles"
-                        decorator="certificateBureauFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.certificateBureauFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('formab.bz')"
@@ -212,11 +176,7 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload
-                        :value.sync="form.salesTaxOpenFiles"
-                        decorator="salesTaxOpenFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.salesTaxOpenFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('formab.ca')"
@@ -226,11 +186,7 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload
-                        :value.sync="form.salesTaxFiles"
-                        decorator="salesTaxFiles"
-                        @handleChange="uploadChange"
-                    ></upload>
+                    <upload :value.sync="form.salesTaxFiles"></upload>
                 </a-form-model-item>
             </div>
             <a-form-model-item>
@@ -268,6 +224,7 @@ export default {
     data() {
         return {
             ...validate,
+            formId: undefined,
             form: {
                 activityId: null,
                 businessRegistrationFiles: [],
@@ -291,12 +248,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters([
-            "currentForm",
-            "liaisonList",
-            "currentUser",
-            "currentInstitution"
-        ]),
+        ...mapGetters(["liaisonList", "currentUser", "currentInstitution"]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -314,8 +266,8 @@ export default {
     },
     methods: {
         initData: async function() {
-            if (this.currentForm) {
-                const { data } = await PAA.one(this.currentForm);
+            if (this.formId) {
+                const { data } = await PAA.one(this.formId);
                 this.form = data;
             }
         },
@@ -326,7 +278,7 @@ export default {
         subForm() {
             this.$refs.PARTICIPATE.validate(async valid => {
                 if (valid) {
-                    if (!this.currentForm)
+                    if (!this.formId)
                         this.form = {
                             ...this.form,
                             institutionId: this.currentInstitution.id,
@@ -336,13 +288,11 @@ export default {
                     data ? this.onSuccess() : "";
                 }
             });
-        },
-        uploadChange(o) {
-            this.form[o.item] = o.arr;
         }
     },
     mounted() {
         this.form.activityId = this.$route.query.activityId;
+        this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
     }
 };

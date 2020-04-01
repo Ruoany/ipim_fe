@@ -4,16 +4,21 @@
             <info :info="cardData.content"></info>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.coPe')" key="2">
-            <co-pe :liaisons="cardData.liaisons ? cardData.liaisons : []"></co-pe>
+            <co-pe
+                :liaisons="cardData.liaisons ? cardData.liaisons : []"
+            ></co-pe>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.organizer')" key="3">
-            <organizer :organizers="cardData.organizers" :helpers="cardData.helpers"></organizer>
+            <organizer
+                :organizers="cardData.organizers"
+                :helpers="cardData.helpers"
+            ></organizer>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.shop')" key="4">
-            <shop :trades="cardData.trades"></shop>
+            <shop :institutions="cardData.institutions"></shop>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.photo')" key="5">
-            <photo></photo>
+            <photo :pictures="cardData.pictures"></photo>
         </a-tab-pane>
     </a-tabs>
 </template>

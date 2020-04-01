@@ -6,6 +6,7 @@ import store from "./store";
 import VueI18n from "vue-i18n";
 import lanData from "@/assets/i18n/index";
 import moment from "moment";
+import Crypto from "@/common/crypto";
 import "ant-design-vue/dist/antd.less";
 import "@/assets/icon/iconfont.css";
 
@@ -14,6 +15,7 @@ Vue.use(Antd);
 
 Vue.config.productionTip = false;
 Vue.prototype.$moment = moment;
+Vue.prototype.$crypto = Crypto;
 
 router.beforeEach((to, from, next) => {
     const { meta } = to;

@@ -1,28 +1,14 @@
 <template>
     <div class="container">
-        <a-empty v-if="!trades" class="empty" description="暫無數據"></a-empty>
-        <a-card v-for="item in trades" :key="item.id" class="sp-card">
-            <img src="../../../assets/image/nologo.jpg" class="sp-card-avatar" />
-            <div class="sp-card-content">
-                <div class="sp-card-content-title">
-                    <span>四川省生態環境廳</span>
-                </div>
-                <div class="sp-card-content-item">
-                    <span>{{ $t("index.email") }}:</span>
-                    <span>9764002@qq.com</span>
-                </div>
-            </div>
-        </a-card>
-        <a-card v-for="item in trades" :key="item.id" class="sp-card">
-            <img src="../../../assets/image/nologo.jpg" class="sp-card-avatar" />
-            <div class="sp-card-content">
-                <div class="sp-card-content-title">
-                    <span>中國檢驗認證集團澳門有限公司</span>
-                </div>
-                <div class="sp-card-content-item">
-                    <span>{{ $t("index.email") }}:</span>
-                    <span>hsj@ccicmacau.com</span>
-                </div>
+        <a-empty
+            v-if="institutions.length === 0"
+            class="empty"
+            description="暫無數據"
+        ></a-empty>
+        <a-card v-for="item in institutions" :key="item.id" class="sp-card">
+            <img :src="item.logo" class="sp-card-avatar" />
+            <div class="sp-card-content sp-card-content-title">
+                <span>{{ item.nameZh }}</span>
             </div>
         </a-card>
     </div>
@@ -31,7 +17,7 @@
 <script>
 export default {
     props: {
-        trades: {
+        institutions: {
             type: Array,
             default: () => {
                 return [];
@@ -78,15 +64,9 @@ export default {
         }
         .sp-card-content {
             width: 350px;
-            .sp-card-content-title {
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-            }
-            .sp-card-content-item {
-                font-size: 16px;
-                color: #999;
-            }
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
         }
     }
 }

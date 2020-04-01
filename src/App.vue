@@ -8,6 +8,16 @@
 <script>
 import User from "@/apis/user";
 export default {
+    provide: function() {
+        return {
+            reload: () => {
+                this.Authorization = false;
+                this.$nextTick(() => {
+                    this.Authorization = true;
+                });
+            }
+        };
+    },
     data() {
         return {
             Authorization: false

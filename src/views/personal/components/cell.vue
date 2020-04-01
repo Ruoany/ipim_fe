@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import Crypto from "@/common/crypto";
 export default {
     props: {
         activityId: { type: [String, Number], required: true },
@@ -81,10 +82,10 @@ export default {
     },
     methods: {
         FormNavigate: function() {
-            this.$store.dispatch("setFormId", this.formId);
             const query = {
                 activityId: this.activityId,
-                form: this.form
+                form: this.form,
+                d: escape(this.$crypto.encryption(this.formId))
             };
             this.$router.push({ path: "/myform/index", query });
         },

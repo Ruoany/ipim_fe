@@ -19,9 +19,13 @@
             </a-upload>
         </div>
         <div v-show="flag" class="button-wrapper">
-            <a-button type="primary" size="large" @click="handleSubmit">{{
-                $t("personal.submit")
-            }}</a-button>
+            <a-button
+                type="primary"
+                size="large"
+                :disabled="images.length === 0"
+                @click="handleSubmit"
+                >{{ $t("personal.submit") }}</a-button
+            >
         </div>
         <a-modal
             width="900px"
@@ -60,7 +64,6 @@ export default {
                 ...this.query,
                 status: "approving"
             });
-            console.log("--->", apply);
             this.flag = apply.length === 0;
             if (this.flag) {
                 const { data } = await ApproveImage.all(this.query);

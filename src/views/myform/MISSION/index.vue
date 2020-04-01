@@ -225,6 +225,7 @@ export default {
     data() {
         return {
             ...validate,
+            formId: undefined,
             form: {
                 activityId: "",
                 institutionId: "",
@@ -262,12 +263,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters([
-            "currentForm",
-            "liaisonList",
-            "currentUser",
-            "currentInstitution"
-        ]),
+        ...mapGetters(["liaisonList", "currentUser", "currentInstitution"]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -286,8 +282,8 @@ export default {
     },
     methods: {
         initData: async function() {
-            if (this.currentForm) {
-                const { data } = await PD.one(this.currentForm);
+            if (this.formId) {
+                const { data } = await PD.one(this.formId);
                 this.form = formatMoment(data);
             }
         },
@@ -303,7 +299,7 @@ export default {
             this.form = formatString(this.form);
             this.$refs.MISSION.validate(async valid => {
                 if (valid) {
-                    if (!this.currentForm)
+                    if (!this.formId)
                         this.form = formatString({
                             ...this.form,
                             institutionId: this.currentInstitution.id,
@@ -319,6 +315,7 @@ export default {
     },
     mounted: function() {
         this.form.activityId = this.$route.query.activityId;
+        this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
     }
 };
