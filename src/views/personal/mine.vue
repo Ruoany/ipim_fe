@@ -1,11 +1,18 @@
 <template>
     <div class="container">
-        <a-form-model ref="info" :model="info" :rules="rules" style="width:100%;">
+        <a-form-model
+            ref="info"
+            :model="info"
+            :rules="rules"
+            style="width:100%;"
+        >
             <a-form-model-item prop="name" :label="$t('util.name')">
                 <a-input v-model="info.name" />
             </a-form-model-item>
             <a-form-model-item :label="$t('util.password')">
-                <a-button type="primary" @click="upPasswordVisible = true">{{ $t("util.upPassword") }}</a-button>
+                <a-button type="primary" @click="upPasswordVisible = true">{{
+                    $t("util.upPassword")
+                }}</a-button>
             </a-form-model-item>
 
             <a-form-model-item prop="phone" :label="$t('index.tel')">
@@ -16,12 +23,16 @@
             </a-form-model-item>
             <a-form-model-item prop="receives" :label="$t('personal.a')">
                 <a-checkbox-group v-model="info.receives">
-                    <a-checkbox value="EMAIL">{{ $t("index.email") }}</a-checkbox>
+                    <a-checkbox value="EMAIL">{{
+                        $t("index.email")
+                    }}</a-checkbox>
                     <a-checkbox value="SMS">{{ $t("util.SMS") }}</a-checkbox>
                 </a-checkbox-group>
             </a-form-model-item>
             <a-form-model-item>
-                <a-button type="primary" @click="handleSubmit">{{ $t("util.save") }}</a-button>
+                <a-button type="primary" @click="handleSubmit">{{
+                    $t("util.save")
+                }}</a-button>
             </a-form-model-item>
         </a-form-model>
         <a-modal
@@ -76,7 +87,9 @@ export default {
                     {
                         validator: (rule, value, callback) => {
                             if (value !== this.form.pwd) {
-                                callback("Confirm that the password does not match the password");
+                                callback(
+                                    "Confirm that the password does not match the password"
+                                );
                             } else {
                                 callback();
                             }
@@ -132,7 +145,8 @@ export default {
                         this.$message.error(message);
                         return;
                     }
-                    this.$store.dispatch("setInfo", data);
+                    const { data: current } = await User.current();
+                    this.$store.dispatch("setInfo", current);
                     this.onSuccess("修改成功");
                 }
             });
@@ -142,7 +156,6 @@ export default {
             $refs.pwd.validate(async valid => {
                 if (valid) {
                     const { code, message } = await User.reset(form);
-                    console.log("---->", code);
                     if (code !== 200) {
                         this.$message.error(message);
                         return;

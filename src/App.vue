@@ -34,7 +34,7 @@ export default {
                 }
             }
             this.Authorization = true;
-        }, 1000);
+        });
     }
 };
 </script>

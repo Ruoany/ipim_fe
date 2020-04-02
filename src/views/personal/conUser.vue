@@ -23,13 +23,7 @@
                 </a-list-item-meta>
             </a-list-item>
         </a-list>
-        <pagination
-            :page.sync="page"
-            :total="total"
-            @handleChange="pages => (page = pages - 1)"
-            :size="size"
-            style="padding:50px 0 20px 0;"
-        />
+        <pagination :page.sync="page" :total="total" :size="size" />
         <a-drawer
             :title="title === 'add' ? $t('personal.k') : $t('personal.l')"
             :visible="infoVisible"
@@ -70,7 +64,7 @@ export default {
             institutionId: null,
             page: 0,
             size: 10,
-            total: 0
+            total: 1
         };
     },
     watch: {

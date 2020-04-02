@@ -12,7 +12,9 @@
         ></div>
         <div class="content">
             <div class="name">{{ info.nameZh }}</div>
-            <div class="status">{{ info.status | formatStutas }}</div>
+            <div class="status" :class="info.status">
+                {{ info.status | formatStutas }}
+            </div>
             <div class="bottom">
                 <a-button @click="handleChange">設為當前機構</a-button>
             </div>
@@ -80,7 +82,15 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-
+        .certified {
+            color: #db0f0f;
+        }
+        .approving {
+            color: #faad14;
+        }
+        .passed {
+            color: #52c41a;
+        }
         .name {
             font-size: 24px;
             font-weight: bold;
