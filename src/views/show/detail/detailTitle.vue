@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import FormMap from "@/common/map";
 export default {
     props: {
@@ -64,6 +65,9 @@ export default {
             FormMap
         };
     },
+    computed: {
+        ...mapGetters(["currentInstitution"])
+    },
     filters: {
         formatTime: function(value) {
             return value ? value.slice(0, 10) : null;
@@ -71,9 +75,30 @@ export default {
     },
     methods: {
         navigateForm: function(e) {
-            this.$router.push(
-                `/myform/index?activityId=${this.activityId}&form=${e.key}`
-            );
+            //判斷用戶是否登錄以及完善至少一個機構信息
+            if (!this.currentInstitution && sessionStorage.getItem("login")) {
+                this.$confirm({
+                    title: null,
+                    content:
+                        "請先完善機構信息和聯絡人信息方可參展展會，是否要去往完善？",
+                    okText: "完善信息",
+                    cancelText: "取消",
+                    onOk: () => {
+                        this.$router.push("/personal/info");
+                    },
+                    onCancel: () => {
+                        return;
+                    }
+                });
+                return;
+            }
+            this.$router.push({
+                path: "/myform/index",
+                query: {
+                    a: escape(this.$crypto.encryption(this.activityId)),
+                    form: e.key
+                }
+            });
         }
     }
 };

@@ -137,6 +137,12 @@ export default {
             .certified {
                 color: #db0f0f;
             }
+            .approving {
+                color: #faad14;
+            }
+            .passed {
+                color: #52c41a;
+            }
         }
         .bottom {
             display: flex;

@@ -14,7 +14,11 @@ export default {
 .container {
     width: 100%;
     /deep/ img {
-        width: 100%;
+        max-width: 100%;
+    }
+    /deep/ iframe {
+        width: 800px;
+        height: 500px;
     }
 }
 </style>

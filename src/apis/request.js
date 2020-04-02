@@ -33,6 +33,7 @@ request.interceptors.response.use(
         } = error;
         message.error(data.message);
         if (data.code === 401) {
+            sessionStorage.removeItem("login");
             router.push("/login");
         }
         return false;

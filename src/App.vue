@@ -23,14 +23,18 @@ export default {
             Authorization: false
         };
     },
-    mounted: async function() {
-        const isLogin = sessionStorage.getItem("login");
-        if (isLogin) {
-            const { data } = await User.current();
-            console.log("獲取用戶信息", data);
-            await this.$store.dispatch("setInfo", data ? data : undefined);
-        }
-        this.Authorization = true;
+    mounted: function() {
+        this.$nextTick(async () => {
+            const isLogin = sessionStorage.getItem("login");
+            if (isLogin) {
+                const { data } = await User.current();
+                if (data) {
+                    console.log("獲取用戶信息", data);
+                    await this.$store.dispatch("setInfo", data);
+                }
+            }
+            this.Authorization = true;
+        }, 1000);
     }
 };
 </script>

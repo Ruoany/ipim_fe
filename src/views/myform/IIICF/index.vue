@@ -352,10 +352,10 @@ export default {
                     activityExpiry: data.activity.expiryTime
                 };
             } else {
-                this.form.activityId = this.$route.query.activityId;
-                const { data } = await Activity.one(
-                    this.$route.query.activityId
+                this.form.activityId = this.$crypto.decryption(
+                    unescape(this.$route.query.a)
                 );
+                const { data } = await Activity.one(this.form.activityId);
                 this.selectedActivity = {
                     activityName: data.nameZh,
                     activityDate: `${data.startTime} - ${data.endTime}`,

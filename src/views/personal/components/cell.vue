@@ -83,8 +83,8 @@ export default {
     methods: {
         FormNavigate: function() {
             const query = {
-                activityId: this.activityId,
                 form: this.form,
+                a: escape(this.$crypto.encryption(this.activityId)),
                 d: escape(this.$crypto.encryption(this.formId))
             };
             this.$router.push({ path: "/myform/index", query });

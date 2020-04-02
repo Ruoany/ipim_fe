@@ -61,7 +61,6 @@ export default {
     data() {
         return {
             form: "",
-            activityId: "",
             tabActive: "1",
             loading: false
         };
@@ -79,7 +78,6 @@ export default {
     },
     mounted: function() {
         this.form = this.$route.query.form;
-        this.activityId = this.$route.query.activityId;
         if (this.liaisonList.length === 0) this.initData();
     }
 };

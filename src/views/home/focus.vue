@@ -20,7 +20,6 @@ import ing from "@/assets/image/ing.svg";
 import over from "@/assets/image/over.svg";
 import cancel from "@/assets/image/cancel.svg";
 import showCell from "@/components/card/showCell";
-
 import Activity from "@/apis/activity";
 
 export default {
@@ -28,7 +27,9 @@ export default {
     data() {
         return {
             listQuery: {
-                momentous: true
+                momentous: true,
+                sort: "publishTime,asc",
+                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             },
             showList: [],
             unopen,
@@ -37,38 +38,32 @@ export default {
             cancel
         };
     },
+    filters: {
+        statusImgFilter(e) {
+            switch (e) {
+                case "NOTSTART":
+                    return unopen;
+                    break;
+                case "PROGRESS":
+                    return ing;
+                    break;
+                case "END":
+                    return over;
+                    break;
+                case "CANCEL":
+                    return cancel;
+                    break;
+            }
+        }
+    },
     methods: {
         async getActiveList() {
-            const data = await Activity.all({
-                ...this.listQuery,
-                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
-            });
+            const data = await Activity.all(this.listQuery);
             data.code === 200 ? (this.showList = data.data) : "";
         }
     },
     mounted() {
         this.getActiveList();
-    },
-    filters: {
-        statusImgFilter(e) {
-            let img;
-            let that = this;
-            switch (e) {
-                case "NOTSTART":
-                    img = unopen;
-                    break;
-                case "PROGRESS":
-                    img = ing;
-                    break;
-                case "END":
-                    img = over;
-                    break;
-                case "CANCEL":
-                    img = cancel;
-                    break;
-            }
-            return img;
-        }
     }
 };
 </script>

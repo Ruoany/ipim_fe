@@ -222,6 +222,13 @@ export default {
         },
         changeCurrentInstitution: function(id) {
             const o = this.institutionList.find(item => item.id === id);
+            const d = this.$route.query.d
+                ? this.$crypto.decryption(unescape(this.$route.query.d))
+                : undefined;
+            if (d) {
+                this.$message.error("修改表單期間不允許切換機構");
+                return;
+            }
             sessionStorage.setItem("institution", id);
             this.$store.dispatch("setCurrentInstitution", o);
             this.reload();

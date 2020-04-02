@@ -38,9 +38,6 @@ module.exports = {
         https: false,
         disableHostCheck: true,
         open: true,
-        externals: {
-            crypto: "Crypto"
-        },
         proxy: {
             "/api": {
                 target: "http://api-exhibition.servier.iteratech.net",

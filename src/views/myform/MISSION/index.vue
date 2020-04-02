@@ -314,7 +314,9 @@ export default {
         }
     },
     mounted: function() {
-        this.form.activityId = this.$route.query.activityId;
+        this.form.activityId = this.$crypto.decryption(
+            unescape(this.$route.query.a)
+        );
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
     }

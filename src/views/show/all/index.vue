@@ -2,19 +2,26 @@
     <div class="container">
         <show-title :text="$t('index.allAc')"></show-title>
         <a-spin :spinning="loading" class="width-1280 content">
-            <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
+            <a-icon
+                slot="indicator"
+                type="loading"
+                style="font-size: 24px"
+                spin
+            />
             <a-tabs v-model="status">
                 <a-tab-pane :tab="$t('index.allAc')" :key="null"></a-tab-pane>
                 <a-tab-pane :tab="$t('show.available')" :key="1"></a-tab-pane>
-                <a-tab-pane :tab="$t('show.processing')" key="PROGRESS"></a-tab-pane>
+                <a-tab-pane
+                    :tab="$t('show.processing')"
+                    key="PROGRESS"
+                ></a-tab-pane>
                 <a-tab-pane :tab="$t('show.over')" key="END"></a-tab-pane>
             </a-tabs>
             <show-list :list="list" class="list"></show-list>
             <pagination
-                :page="page"
+                :page.sync="page"
                 :total="total"
                 :size="size"
-                @handleChange="pages => (page = pages - 1)"
             ></pagination>
         </a-spin>
     </div>
@@ -31,7 +38,7 @@ export default {
     data() {
         return {
             status: null,
-            total: 0,
+            total: 1,
             page: 0,
             size: 6,
             list: [],
@@ -59,7 +66,10 @@ export default {
     },
     methods: {
         async getActivePage(status) {
-            status = status === null ? ["NOTSTART", "PROGRESS", "END", "CANCEL"] : status;
+            status =
+                status === null
+                    ? ["NOTSTART", "PROGRESS", "END", "CANCEL"]
+                    : status;
             this.loading = true;
             const body = {
                 size: this.size,

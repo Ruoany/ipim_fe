@@ -10,56 +10,100 @@
             <a-step :title="$t('gmbpf.dc')" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
-            <a-form-model class="form" ref="gmbpf" :model="form" :rules="rules" v-bind="formatLayout">
+            <a-form-model
+                class="form"
+                ref="gmbpf"
+                :model="form"
+                :rules="rules"
+                v-bind="formatLayout"
+            >
                 <div v-show="stepCurrent === 0">
                     <a-form-model-item :label="$t('gmbpf.ab')" :required="true">
-                        <a-input v-model="selectedActivity.activityName" :disabled="true" />
+                        <a-input
+                            v-model="selectedActivity.activityName"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.ac')" :required="true">
-                        <a-input v-model="selectedActivity.activityDate" :disabled="true" />
+                        <a-input
+                            v-model="selectedActivity.activityDate"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.ad')" :required="true">
-                        <a-input v-model="selectedActivity.activityPlace" :disabled="true" />
+                        <a-input
+                            v-model="selectedActivity.activityPlace"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.ae')" :required="true">
-                        <a-input v-model="selectedActivity.activityExpiry" :disabled="true" />
+                        <a-input
+                            v-model="selectedActivity.activityExpiry"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 1">
                     <a-form-model-item :label="$t('gmbpf.ag')" :required="true">
-                        <a-input v-model="currentInstitution.nameZh" :disabled="true" />
+                        <a-input
+                            v-model="currentInstitution.nameZh"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item prop="liaisonId" :label="$t('gmbpf.ai')">
-                        <a-select v-model="form.liaisonId" showSearch optionFilterProp="label" :filterOption="true">
+                        <a-select
+                            v-model="form.liaisonId"
+                            showSearch
+                            optionFilterProp="label"
+                            :filterOption="true"
+                        >
                             <a-select-option
                                 v-for="item in liaisonList"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }} {{ item.nameEnOrPt }}</a-select-option
+                                >{{ item.nameZh }}
+                                {{ item.nameEnOrPt }}</a-select-option
                             >
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.aj')">
-                        <a-input v-model="selectedLiaison.phone" :disabled="true" />
+                        <a-input
+                            v-model="selectedLiaison.phone"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.ak')">
-                        <a-input v-model="selectedLiaison.fax" :disabled="true" />
+                        <a-input
+                            v-model="selectedLiaison.fax"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.al')">
-                        <a-input v-model="selectedLiaison.email" :disabled="true" />
+                        <a-input
+                            v-model="selectedLiaison.email"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.am')">
-                        <a-input v-model="selectedLiaison.address" :disabled="true" />
+                        <a-input
+                            v-model="selectedLiaison.address"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
                     <a-form-model-item prop="method" :label="$t('gmbpf.ao')">
                         <a-radio-group v-model="form.method">
-                            <a-radio v-for="item in methods" :key="item.value" :value="item.value">{{
-                                $t(item.label)
+                            <a-radio
+                                v-for="item in methods"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-radio
+                            >
+                            <a-radio value="OTHER">{{
+                                $t("gmbpf.au")
                             }}</a-radio>
-                            <a-radio value="OTHER">{{ $t("gmbpf.au") }}</a-radio>
                         </a-radio-group>
                         <a-input
                             class="inline-input"
@@ -67,23 +111,41 @@
                             :disabled="form.method !== 'OTHER'"
                         />
                     </a-form-model-item>
-                    <a-form-model-item prop="preference" :label="$t('gmbpf.av')">
+                    <a-form-model-item
+                        prop="preference"
+                        :label="$t('gmbpf.av')"
+                    >
                         <a-radio-group v-model="form.preference">
-                            <a-radio style="line-height:30px" value="BARELY">{{ $t("gmbpf.aw") }}</a-radio>
-                            <a-radio style="line-height:30px" value="STANDARD_BOOTH">{{ $t("gmbpf.dx") }}</a-radio>
+                            <a-radio style="line-height:30px" value="BARELY">{{
+                                $t("gmbpf.aw")
+                            }}</a-radio>
+                            <a-radio
+                                style="line-height:30px"
+                                value="STANDARD_BOOTH"
+                                >{{ $t("gmbpf.dx") }}</a-radio
+                            >
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item prop="area">
                         <span slot="label">
                             <span>{{ $t("gmbpf.ax") }}</span>
-                            <span style="color:#ccc">({{ $t("gmbpf.ay") }})</span>
+                            <span style="color:#ccc"
+                                >({{ $t("gmbpf.ay") }})</span
+                            >
                         </span>
                         <a-input v-model="form.area" />
                     </a-form-model-item>
-                    <a-form-model-item prop="attendHistoryExhibition" :label="$t('gmbpf.az')">
+                    <a-form-model-item
+                        prop="attendHistoryExhibition"
+                        :label="$t('gmbpf.az')"
+                    >
                         <a-radio-group v-model="form.attendHistoryExhibition">
-                            <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
-                            <a-radio :value="false">{{ $t("util.no") }}</a-radio>
+                            <a-radio :value="true">{{
+                                $t("util.yes")
+                            }}</a-radio>
+                            <a-radio :value="false">{{
+                                $t("util.no")
+                            }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.ba')">
@@ -91,27 +153,53 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
-                    <a-form-model-item prop="exhibitionProducts" :label="$t('gmbpf.bc')">
+                    <a-form-model-item
+                        prop="exhibitionProducts"
+                        :label="$t('gmbpf.bc')"
+                    >
                         <a-checkbox-group v-model="form.exhibitionProducts">
-                            <a-checkbox v-for="item in exhibitionProducts" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
-                            <a-input class="inline-input" v-model="form.otherProductSpecify" placeholder="others" />
+                            <a-checkbox
+                                v-for="item in exhibitionProducts"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherProductSpecify"
+                                placeholder="others"
+                            />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="businessMatchings" :label="$t('gmbpf.bj')">
+                    <a-form-model-item
+                        prop="businessMatchings"
+                        :label="$t('gmbpf.bj')"
+                    >
                         <a-checkbox-group v-model="form.businessMatchings">
-                            <a-checkbox v-for="item in businessMatchings" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
-                            <a-input class="inline-input" v-model="form.otherMatchingSpecify" placeholder="others" />
+                            <a-checkbox
+                                v-for="item in businessMatchings"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherMatchingSpecify"
+                                placeholder="others"
+                            />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="targetMarkets" :label="$t('gmbpf.br')">
+                    <a-form-model-item
+                        prop="targetMarkets"
+                        :label="$t('gmbpf.br')"
+                    >
                         <a-checkbox-group v-model="form.targetMarkets">
-                            <a-checkbox v-for="item in targetMarkets" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
+                            <a-checkbox
+                                v-for="item in targetMarkets"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
                         </a-checkbox-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('gmbpf.cd')">
@@ -119,8 +207,15 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 4">
-                    <a-form-model-item :label="$t('gmbpf.cg')" :required="form.method === 'GROUP_EXHIBITION'">
-                        <div class="company-item" v-for="(item, index) in form.groups" :key="index">
+                    <a-form-model-item
+                        :label="$t('gmbpf.cg')"
+                        :required="form.method === 'GROUP_EXHIBITION'"
+                    >
+                        <div
+                            class="company-item"
+                            v-for="(item, index) in form.groups"
+                            :key="index"
+                        >
                             <company
                                 :name.sync="item.enterpriseName"
                                 :liaison-name.sync="item.liaisonName"
@@ -201,9 +296,21 @@
                     </a-form-model-item>
                 </div>
                 <a-form-model-item>
-                    <a-button type="primary" @click="stepCurrent--" style="margin-right:12px">上一步</a-button>
-                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++">下一步</a-button>
-                    <a-button v-else type="primary" @click="handleSubmit">{{ $t("gmbpf.dk") }}</a-button>
+                    <a-button
+                        type="primary"
+                        @click="stepCurrent--"
+                        style="margin-right:12px"
+                        >上一步</a-button
+                    >
+                    <a-button
+                        v-if="stepCurrent < 6"
+                        type="primary"
+                        @click="stepCurrent++"
+                        >下一步</a-button
+                    >
+                    <a-button v-else type="primary" @click="handleSubmit">{{
+                        $t("gmbpf.dk")
+                    }}</a-button>
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -222,6 +329,7 @@ export default {
     data() {
         return {
             ...validate,
+            formId: "",
             form: {
                 activityId: null,
                 applicantUnitFiles: [],
@@ -254,7 +362,12 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution", "liaisonList", "currentForm", "currentUser"]),
+        ...mapGetters([
+            "currentInstitution",
+            "liaisonList",
+            "currentForm",
+            "currentUser"
+        ]),
         selectedLiaison: function() {
             if (!this.form.liaisonId)
                 return {
@@ -265,15 +378,17 @@ export default {
                     email: "",
                     address: ""
                 };
-            const data = this.liaisonList.find(item => item.id === this.form.liaisonId);
+            const data = this.liaisonList.find(
+                item => item.id === this.form.liaisonId
+            );
             return data;
         }
     },
     methods: {
         initData: async function() {
             this.loading = true;
-            if (this.currentForm) {
-                const { data } = GMBPF.one(this.currentForm);
+            if (this.formId) {
+                const { data } = GMBPF.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
                     activityName: data.activity.nameZh,
@@ -282,8 +397,10 @@ export default {
                     activityExpiry: data.activity.expiryTime
                 };
             } else {
-                this.form.activityId = this.$route.query.activityId;
-                const { data } = await Activity.one(this.$route.query.activityId);
+                this.form.activityId = this.$crypto.decryption(
+                    unescape(this.$route.query.a)
+                );
+                const { data } = await Activity.one(this.form.activityId);
                 this.selectedActivity = {
                     activityName: data.nameZh,
                     activityDate: `${data.startTime} - ${data.endTime}`,
@@ -292,13 +409,6 @@ export default {
                 };
             }
             this.loading = false;
-        },
-        beforeunloadHandler: function(e) {
-            e = e || window.event;
-            if (e) {
-                e.returnValue = "刷新頁面將會導致數據丟失";
-            }
-            return "刷新頁面將會導致數據丟失";
         },
         operaCompany: function(type, index) {
             if (type) {
@@ -320,7 +430,7 @@ export default {
         handleSubmit: function() {
             this.$refs.gmbpf.validate(async valid => {
                 if (valid) {
-                    if (!this.currentForm)
+                    if (!this.formId)
                         this.form = {
                             ...this.form,
                             institutionId: this.currentInstitution.id,
@@ -329,22 +439,16 @@ export default {
                     const { data } = await GMBPF.create(this.form);
                     data ? this.onSuccess() : "";
                 } else {
-                    this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
+                    this.$message.error(
+                        "表單存在必填項為空或者不合法字符，請檢查"
+                    );
                 }
             });
         }
     },
-    created: function() {
-        if (this.currentForm) {
-            window.addEventListener("beforeunload", e => this.beforeunloadHandler(e));
-        }
-    },
     mounted: function() {
+        this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
-    },
-    destroyed: function() {
-        this.$store.dispatch("removeFormId");
-        window.removeEventListener("beforeunload", e => this.beforeunloadHandler(e));
     }
 };
 </script>
