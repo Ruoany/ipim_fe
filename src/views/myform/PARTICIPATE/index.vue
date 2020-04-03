@@ -205,6 +205,7 @@
                 >
                 <a-button
                     v-show="stepCurrent === 5"
+                    :class="isSubmit ? 'none' : ''"
                     type="primary"
                     @click="subForm"
                     >{{ $t("formaa.bt") }}</a-button
@@ -262,6 +263,13 @@ export default {
                 item => item.id === this.form.liaisonId
             );
             return data;
+        },
+        isSubmit: function() {
+            if (!this.form.status) {
+                return false;
+            } else {
+                return this.form.status !== "rejected";
+            }
         }
     },
     methods: {
@@ -302,4 +310,7 @@ export default {
 
 <style lang="less" scoped>
 @import url("../css/form.less");
+.none {
+    display: none;
+}
 </style>

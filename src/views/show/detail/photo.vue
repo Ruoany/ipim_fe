@@ -1,11 +1,9 @@
 <template>
-    <div class="flex warp" v-viewer ref="img">
-        <a-row type="flex" :gutter="10">
-            <a-col :span="4" v-for="item in images" :key="item">
-                <img class="img" :src="item" @click="showImg" />
-            </a-col>
-        </a-row>
-    </div>
+    <a-row ref="img" type="flex" :gutter="10" v-viewer>
+        <a-col :span="4" v-for="item in images" :key="item">
+            <img class="img" :src="item" @click="showImg" />
+        </a-col>
+    </a-row>
 </template>
 
 <script>
@@ -41,6 +39,7 @@ export default {
     margin-bottom: 10px;
 }
 .warp {
+    width: 100%;
     flex-wrap: wrap;
 }
 </style>

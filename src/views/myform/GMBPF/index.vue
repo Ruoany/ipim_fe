@@ -299,9 +299,13 @@
                         @click="stepCurrent++"
                         >下一步</a-button
                     >
-                    <a-button v-else type="primary" @click="handleSubmit">{{
-                        $t("gmbpf.dk")
-                    }}</a-button>
+                    <a-button
+                        v-else
+                        :class="isSubmit ? 'none' : ''"
+                        type="primary"
+                        @click="handleSubmit"
+                        >{{ $t("gmbpf.dk") }}</a-button
+                    >
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -372,6 +376,13 @@ export default {
                 item => item.id === this.form.liaisonId
             );
             return data;
+        },
+        isSubmit: function() {
+            if (!this.form.status) {
+                return false;
+            } else {
+                return this.form.status !== "rejected";
+            }
         }
     },
     methods: {
@@ -468,6 +479,9 @@ export default {
     }
     /deep/.ant-form-item-control {
         line-height: 30px;
+    }
+    .none {
+        display: none;
     }
 }
 </style>
