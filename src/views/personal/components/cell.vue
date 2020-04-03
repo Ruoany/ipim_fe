@@ -64,7 +64,7 @@ export default {
         address: { type: String, default: "無地址" },
         date: { type: String, default: "1970-01-01" },
         applyPictureId: { type: [Number, Object] },
-        applyPictureStatus: { type: [Number, Object] },
+        applyPictureStatus: { type: [String, Object] },
         questionnaireAnswerId: { type: [Number, Object] }
     },
     computed: {
