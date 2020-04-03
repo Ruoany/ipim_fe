@@ -1,6 +1,5 @@
 <template>
-    <a-spin v-if="loading"></a-spin>
-    <div v-else class="form-wrapper">
+    <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
                 <form-mission v-if="form === 'MISSION'"></form-mission>
@@ -29,7 +28,7 @@
                 </div>
             </a-tab-pane>
         </a-tabs>
-    </div>
+    </a-spin>
 </template>
 
 <script>
