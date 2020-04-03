@@ -18,35 +18,35 @@
                 v-bind="formatLayout"
             >
                 <div v-show="stepCurrent === 0">
-                    <a-form-model-item :label="$t('mif.ab')" :required="true">
+                    <a-form-model-item :label="$t('mif.ab')" required>
                         <a-input
-                            v-model="selectedActivity.activityName"
+                            :value="selectedActivity.activityName"
                             :disabled="true"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ac')" :required="true">
+                    <a-form-model-item :label="$t('mif.ac')" required>
                         <a-input
-                            v-model="selectedActivity.activityDate"
+                            :value="selectedActivity.activityDate"
                             :disabled="true"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ad')" :required="true">
+                    <a-form-model-item :label="$t('mif.ad')" required>
                         <a-input
-                            v-model="selectedActivity.activityPlace"
+                            :value="selectedActivity.activityPlace"
                             :disabled="true"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ae')" :required="true">
+                    <a-form-model-item :label="$t('mif.ae')" required>
                         <a-input
-                            v-model="selectedActivity.activityExpiry"
+                            :value="selectedActivity.activityExpiry"
                             :disabled="true"
                         />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 1">
-                    <a-form-model-item :label="$t('mif.ag')" :required="true">
+                    <a-form-model-item :label="$t('mif.ag')" required>
                         <a-input
-                            v-model="currentInstitution.nameZh"
+                            :value="currentInstitution.nameZh"
                             :disabled="true"
                         />
                     </a-form-model-item>
@@ -69,27 +69,21 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.aj')">
                         <a-input
-                            v-model="selectedLiaison.phone"
-                            :disabled="true"
+                            v-model="selectedLiaison.abroadPhone"
+                            disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ak')">
-                        <a-input
-                            v-model="selectedLiaison.fax"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('mif.dy')">
+                        <a-input :value="selectedLiaison.phone" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.al')">
-                        <a-input
-                            v-model="selectedLiaison.email"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('mif.ak')" required>
+                        <a-input :value="selectedLiaison.fax" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.am')">
-                        <a-input
-                            v-model="selectedLiaison.address"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('mif.al')" required>
+                        <a-input :value="selectedLiaison.email" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.am')" required>
+                        <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
@@ -360,7 +354,6 @@ export default {
             if (!this.form.liaisonId)
                 return {
                     abroadPhone: "",
-                    tel: "",
                     phone: "",
                     fax: "",
                     email: "",

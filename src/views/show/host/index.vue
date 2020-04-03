@@ -69,7 +69,7 @@ export default {
 <style lang="less" scoped>
 .container {
     .content {
-        padding-top: 30px;
+        padding-top: 70px;
         margin: auto;
         /deep/.ant-tabs-bar {
             border: transparent;

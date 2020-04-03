@@ -73,8 +73,16 @@
                         type="primary"
                         size="large"
                         @click="handleSubmit"
-                        >{{ $t("login.login") }}</a-button
+                        >{{ $t("login.set") }}</a-button
                     >
+                    <div class="register-wrapper">
+                        <span>
+                            {{ $t("login.return") }}
+                            <router-link to="/login" replace>{{
+                                $t("login.login")
+                            }}</router-link>
+                        </span>
+                    </div>
                 </a-form-model-item>
             </a-form-model>
         </div>
@@ -146,7 +154,8 @@ export default {
         },
         getCode: function() {
             this.$refs.reset.validateField(["username"], async valid => {
-                if (valid) {
+                console.log("aaaa", valid);
+                if (!valid) {
                     console.log("上述四", this.form.username);
                 }
             });

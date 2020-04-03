@@ -5,7 +5,7 @@
         :total="total"
         :pageSize="size"
         @change="currentPageChange"
-        style="padding-bottom:60px;"
+        style="padding:30px 0;"
     />
 </template>
 <script>

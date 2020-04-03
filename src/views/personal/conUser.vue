@@ -2,9 +2,12 @@
     <div class="container">
         <div class="flex-justify-content-space-between">
             <h1>{{ $t("personal.i") }}</h1>
-            <a-button type="primary" icon="plus" @click="showDrawer('add')">{{
-                $t("personal.j")
-            }}</a-button>
+            <a-button
+                type="primary"
+                icon="plus"
+                @click="showDrawer('add', null)"
+                >{{ $t("personal.j") }}</a-button
+            >
         </div>
         <a-list
             class="demo-loadmore-list"
@@ -13,53 +16,48 @@
             :dataSource="liaisonList"
         >
             <a-list-item slot="renderItem" slot-scope="item">
-                <a-button
-                    slot="actions"
-                    @click="showDrawer('upData', item.id)"
-                    >{{ $t("util.upData") }}</a-button
-                >
                 <a-list-item-meta>
                     <span slot="title">{{ item.nameZh }}</span>
                 </a-list-item-meta>
+                <a-button
+                    type="link"
+                    slot="actions"
+                    @click="showDrawer('update', item.id)"
+                    >{{ $t("util.upData") }}</a-button
+                >
             </a-list-item>
         </a-list>
         <pagination :page.sync="page" :total="total" :size="size" />
         <a-drawer
-            :title="title === 'add' ? $t('personal.k') : $t('personal.l')"
+            :title="type === 'add' ? $t('personal.k') : $t('personal.l')"
             :visible="infoVisible"
-            @ok="handleOk"
-            @close="handleCancel"
+            @close="infoVisible = false"
             width="800px"
             destroyOnClose
         >
             <add-con-user
-                @handleCancel="handleCancel"
-                v-if="title === 'add'"
-                :institutionId="institutionId"
+                :visible.sync="infoVisible"
+                :selected-id="id"
+                :institution-id="institutionId"
+                @submit="onSuccess"
             ></add-con-user>
-            <up-con-user
-                @handleCancel="handleCancel"
-                v-if="title === 'upData'"
-                :id="id"
-            ></up-con-user>
         </a-drawer>
     </div>
 </template>
 
 <script>
 import addConUser from "./components/addConUser";
-import upConUser from "./components/upConuser";
 import Liaison from "@/apis/liaison";
 import Pagination from "@/components/pagination";
 export default {
-    components: { addConUser, upConUser, Pagination },
+    components: { addConUser, Pagination },
     data() {
         return {
             infoVisible: false,
             confirmLoading: false,
             liaisonList: [],
             loading: false,
-            title: "add",
+            type: "add",
             id: null,
             institutionId: null,
             page: 0,
@@ -72,16 +70,13 @@ export default {
             this.initData();
         }
     },
-
     methods: {
-        handleCancel(e) {
+        onSuccess(e) {
             this.infoVisible = false;
             if (e === "add") {
                 this.page = 0;
-                this.initData();
-            } else if (e === "upData") {
-                this.initData();
             }
+            this.initData();
         },
         async initData() {
             this.loading = true;
@@ -98,10 +93,9 @@ export default {
                 this.$message.error(data.message);
             }
         },
-        handleOk() {},
         //展示抽屜
-        showDrawer(e, id) {
-            this.title = e;
+        showDrawer(type, id) {
+            this.type = type;
             this.id = id;
             this.infoVisible = true;
         }

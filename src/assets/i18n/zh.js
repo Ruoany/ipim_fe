@@ -222,7 +222,9 @@ const zhData = {
         reset: "重置密碼",
         newPwd: "新密碼",
         code: "驗證碼",
-        getCode: "獲取驗證碼"
+        getCode: "獲取驗證碼",
+        set: "確認重置",
+        return: "返回"
     }
 };
 

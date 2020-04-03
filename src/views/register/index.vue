@@ -99,7 +99,7 @@
                         >{{ $t("login.register") }}</a-button
                     >
                     <div class="register-wrapper">
-                        <span href="#">
+                        <span>
                             {{ $t("login.have") }}
                             <router-link to="/login" replace>{{
                                 $t("login.login")

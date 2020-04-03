@@ -18,37 +18,34 @@
                 v-bind="formatLayout"
             >
                 <div v-show="stepCurrent === 0">
-                    <a-form-model-item :label="$t('iiicf.ab')" :required="true">
+                    <a-form-model-item :label="$t('iiicf.ab')" required>
                         <a-input
-                            v-model="selectedActivity.activityName"
-                            :disabled="true"
+                            :value="selectedActivity.activityName"
+                            disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ac')" :required="true">
+                    <a-form-model-item :label="$t('iiicf.ac')" required>
                         <a-input
-                            v-model="selectedActivity.activityDate"
-                            :disabled="true"
+                            :value="selectedActivity.activityDate"
+                            disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ad')" :required="true">
+                    <a-form-model-item :label="$t('iiicf.ad')" required>
                         <a-input
-                            v-model="selectedActivity.activityPlace"
-                            :disabled="true"
+                            :value="selectedActivity.activityPlace"
+                            disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ae')" :required="true">
+                    <a-form-model-item :label="$t('iiicf.ae')" required>
                         <a-input
-                            v-model="selectedActivity.activityExpiry"
-                            :disabled="true"
+                            :value="selectedActivity.activityExpiry"
+                            disabled
                         />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 1">
-                    <a-form-model-item :label="$t('iiicf.ag')" :required="true">
-                        <a-input
-                            v-model="currentInstitution.nameZh"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('iiicf.ag')" required>
+                        <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
                     <a-form-model-item prop="liaisonId" :label="$t('iiicf.ai')">
                         <a-select
@@ -69,27 +66,21 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.aj')">
                         <a-input
-                            v-model="selectedLiaison.phone"
-                            :disabled="true"
+                            :value="selectedLiaison.abroadPhone"
+                            disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ak')">
-                        <a-input
-                            v-model="selectedLiaison.fax"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('iiicf.dm')">
+                        <a-input :value="selectedLiaison.phone" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.al')">
-                        <a-input
-                            v-model="selectedLiaison.email"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('iiicf.ak')" required>
+                        <a-input :value="selectedLiaison.fax" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.am')">
-                        <a-input
-                            v-model="selectedLiaison.address"
-                            :disabled="true"
-                        />
+                    <a-form-model-item :label="$t('iiicf.al')" required>
+                        <a-input :value="selectedLiaison.email" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.am')" required>
+                        <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
@@ -326,7 +317,6 @@ export default {
             if (!this.form.liaisonId)
                 return {
                     abroadPhone: "",
-                    tel: "",
                     phone: "",
                     fax: "",
                     email: "",

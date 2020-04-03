@@ -1,21 +1,14 @@
 <template>
-    <div class="all flex-align-items-center"></div>
+    <div class="title-container"></div>
 </template>
 
-<script>
-export default {
-    props: { text: String }
-};
-</script>
-
 <style lang="less" scoped>
-.all {
+.title-container {
     width: 100%;
-    justify-content: center;
     height: 360px;
-    background: url("http://www.mice.gov.mo/current/images/about_banner.jpg") no-repeat;
+    background-image: url("http://api-exhibition.servier.iteratech.net/upload/2020/04/02/bb96211fe718455fa6e6f6f36d785366.svg");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
-    color: #000000;
-    font-size: 48px;
 }
 </style>

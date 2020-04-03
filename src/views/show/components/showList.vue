@@ -66,7 +66,6 @@ export default {
 .show-list-content {
     flex-wrap: wrap;
     width: 100%;
-    padding: 40px 0;
     .empty {
         height: 500px;
     }

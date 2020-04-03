@@ -32,6 +32,7 @@
                     <a-button
                         v-if="status === 'passed' && activityStatus === 'END'"
                         type="primary"
+                        @click="QuestionNavigate"
                         >{{ $t("personal.question") }}</a-button
                     >
                     <a-button
@@ -96,6 +97,13 @@ export default {
                 institutionId: this.institutionId
             };
             this.$router.push({ path: "/personal/picture", query });
+        },
+        QuestionNavigate: function() {
+            const query = {
+                activityId: this.activityId,
+                institutionId: this.institutionId
+            };
+            this.$router.push({ path: "/personal/question", query });
         }
     }
 };

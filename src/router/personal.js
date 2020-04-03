@@ -90,6 +90,14 @@ const router = [
                     key: "info",
                     case: "personal"
                 }
+            },
+            {
+                path: `${parentRoute}/question`,
+                component: () => import("@/views/personal/question"),
+                meta: {
+                    key: "record",
+                    case: "personal"
+                }
             }
         ]
     }
