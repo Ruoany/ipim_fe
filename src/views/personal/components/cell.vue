@@ -92,6 +92,7 @@ export default {
         },
         PictureNavigate: function() {
             const query = {
+                formId: this.formId,
                 activityId: this.activityId,
                 liaisonId: this.liaisonId,
                 institutionId: this.institutionId
@@ -100,6 +101,7 @@ export default {
         },
         QuestionNavigate: function() {
             const query = {
+                formId: this.formId,
                 activityId: this.activityId,
                 institutionId: this.institutionId
             };

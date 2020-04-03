@@ -363,7 +363,7 @@ export default {
         initData: async function() {
             this.loading = true;
             if (this.formId) {
-                const { data } = PMFE.one(this.formId);
+                const { data } = await PMFE.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
                     activityName: data.activity.nameZh,

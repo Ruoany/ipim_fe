@@ -378,7 +378,7 @@ export default {
         initData: async function() {
             this.loading = true;
             if (this.formId) {
-                const { data } = GMBPF.one(this.formId);
+                const { data } = await GMBPF.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
                     activityName: data.activity.nameZh,

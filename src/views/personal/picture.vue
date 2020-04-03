@@ -2,8 +2,7 @@
     <div class="container">
         <div class="title">{{ $t("personal.upload") }}</div>
         <div class="sub-title">{{ $t("personal.tips1") }}</div>
-        <a-empty v-if="!flag" description="圖片審批中" class="empty"></a-empty>
-        <div v-show="flag" class="picture-list-content">
+        <div class="picture-list-content">
             <a-upload
                 :action="upFiles"
                 listType="picture-card"
@@ -18,7 +17,7 @@
                 </div>
             </a-upload>
         </div>
-        <div v-show="flag" class="button-wrapper">
+        <div class="button-wrapper">
             <a-button
                 type="primary"
                 size="large"
@@ -51,8 +50,7 @@ export default {
             query: {},
             images: [],
             selectedUrl: "",
-            modal: false,
-            flag: false
+            modal: false
         };
     },
     computed: {
@@ -60,22 +58,15 @@ export default {
     },
     methods: {
         initData: async function() {
-            const { data: apply } = await ApplyPicture.all({
-                ...this.query,
-                status: "approving"
-            });
-            this.flag = apply.length === 0;
-            if (this.flag) {
-                const { data } = await ApproveImage.all(this.query);
-                if (data.length !== 0) {
-                    this.images = data.map((item, index) => {
-                        return {
-                            uid: item.id,
-                            name: `A${index}`,
-                            url: item.url
-                        };
-                    });
-                }
+            const { data } = await ApproveImage.all(this.query);
+            if (data.length !== 0) {
+                this.images = data.map((item, index) => {
+                    return {
+                        uid: item.id,
+                        name: `A${index}`,
+                        url: item.url
+                    };
+                });
             }
         },
         beforeUpload: function(file) {

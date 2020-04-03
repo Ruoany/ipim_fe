@@ -5,7 +5,7 @@
             <div
                 v-for="item in q"
                 :key="item.id"
-                :class="value === item.id ? 'item-active' : 'item'"
+                :class="init === item.id ? 'item-active' : 'item'"
                 @click="handleRadio(item.id)"
             >
                 {{ item.item }}
@@ -15,14 +15,14 @@
             <div
                 v-for="item in q"
                 :key="item.id"
-                :class="value.includes(item.id) ? 'item-active' : 'item'"
+                :class="init.includes(item.id) ? 'item-active' : 'item'"
                 @click="handleCheckbox(item.id)"
             >
                 {{ item.item }}
             </div>
         </div>
         <div v-if="type === 'FILL'">
-            <a-input v-model="value" size="large" style="width:500px"></a-input>
+            <a-input v-model="init" size="large" style="width:500px"></a-input>
         </div>
     </div>
 </template>
@@ -35,39 +35,26 @@ export default {
         q: Array,
         idx: Number
     },
-    computed: {
-        value: {
-            get: function() {
-                switch (this.type) {
-                    case "RADIO":
-                        return null;
-                        break;
-                    case "CHECKBOX":
-                        return [];
-                        break;
-                    default:
-                        return "";
-                        break;
-                }
-            },
-            set: function(value) {
-                return value;
-            }
-        }
+    data() {
+        return {
+            init: null
+        };
     },
     methods: {
         handleRadio: function(value) {
-            console.log("--->", value);
-            this.value = value;
+            this.init = value;
         },
         handleCheckbox: function(value) {
-            const isHave = this.value.includes(value);
+            const isHave = this.init.includes(value);
             if (isHave) {
-                this.value = this.value.filter(item => item !== value);
+                this.init = this.init.filter(item => item !== value);
             } else {
-                this.value = this.value.concat([value]);
+                this.init = this.init.concat([value]);
             }
         }
+    },
+    created: function() {
+        this.init = this.type === "CHECKBOX" ? [] : "";
     }
 };
 </script>
@@ -80,20 +67,22 @@ export default {
         height: 40px;
         border-radius: 4px;
         border: 1px solid #d9d9d9;
-        margin-top: 8px;
+        margin-bottom: 8px;
         line-height: 40px;
         padding: 0 10px;
+        cursor: pointer;
     }
     .item-active {
         width: 500px;
         height: 40px;
         border-radius: 4px;
         border: 1px solid #ee1c24;
-        margin-top: 8px;
+        margin-bottom: 8px;
         background: #ee1c24;
         color: #fff;
         line-height: 40px;
         padding: 0 10px;
+        cursor: pointer;
     }
     .question-cell-title {
         line-height: 50px;
