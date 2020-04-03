@@ -38,8 +38,9 @@
                     <a-button
                         v-if="status === 'passed' && activityStatus === 'END'"
                         type="primary"
+                        :disabled="applyPictureStatus === 'approving'"
                         @click="PictureNavigate"
-                        >{{ $t("personal.showPic") }}</a-button
+                        >{{ $t(formatPictrue) }}</a-button
                     >
                 </div>
             </div>
@@ -61,7 +62,10 @@ export default {
         institutionId: { type: Number, required: true },
         title: { type: String, default: "無題目" },
         address: { type: String, default: "無地址" },
-        date: { type: String, default: "1970-01-01" }
+        date: { type: String, default: "1970-01-01" },
+        applyPictureId: { type: [Number, Object] },
+        applyPictureStatus: { type: [Number, Object] },
+        questionnaireAnswerId: { type: [Number, Object] }
     },
     computed: {
         formatStatus: function() {
@@ -79,6 +83,19 @@ export default {
                     return "personal.finish";
                     break;
             }
+        },
+        formatPictrue: function() {
+            switch (this.applyPictureStatus) {
+                case "approving":
+                    return "personal.uploading";
+                    break;
+                case "passed":
+                    return "personal.showPic";
+                    break;
+                default:
+                    return "personal.uploadPic";
+                    break;
+            }
         }
     },
     methods: {
@@ -92,12 +109,17 @@ export default {
         },
         PictureNavigate: function() {
             const query = {
-                formId: this.formId,
+                participateId: this.formId,
                 activityId: this.activityId,
                 liaisonId: this.liaisonId,
                 institutionId: this.institutionId
             };
-            this.$router.push({ path: "/personal/picture", query });
+            this.$router.push({
+                path: "/personal/picture",
+                query: this.applyPictureId
+                    ? { ...query, applyPictureId: this.applyPictureId }
+                    : query
+            });
         },
         QuestionNavigate: function() {
             const query = {

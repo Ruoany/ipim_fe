@@ -181,10 +181,12 @@ const zhData = {
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
         question: "問卷調查",
-        showPic: "展會圖片",
+        uploadPic: "上傳展會圖片",
+        uploading: "圖片審批中",
+        showPic: "查看展會圖片",
         undeal: "待審核",
         deal: "已審核",
-        upload: "上傳圖片",
+        upload: "展會圖片",
         tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
         submit: "提交",
         userId: "用戶ID",
@@ -194,7 +196,8 @@ const zhData = {
         rejected: "不獲批",
         finish: "完成",
         others: "添加機構",
-        certify: "認證機構"
+        certify: "認證機構",
+        upErr: "您所上傳的圖片不獲批，請重新提交"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"

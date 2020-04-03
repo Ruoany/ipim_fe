@@ -26,6 +26,9 @@
                 :title="item.activity.nameZh"
                 :address="item.activity.place"
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+                :apply-picture-id="item.applyPictureId"
+                :apply-picture-status="item.applyPictureStatus"
+                :questionnaire-answer-id="item.questionnaireAnswerId"
             />
         </div>
         <pagination :page.sync="page" :size="size" :total="total" />
@@ -64,16 +67,14 @@ export default {
     methods: {
         initData: async function() {
             this.loading = true;
-            const {
-                data: { content, totalElements }
-            } = await Participate.get({
+            const { data } = await Participate.get({
                 institutionId: this.currentInstitution.id,
                 page: this.page,
                 size: this.size,
                 approved: this.status === "unapproved"
             });
-            this.list = content;
-            this.total = totalElements;
+            this.list = data ? data.content : [];
+            this.total = data ? data.totalElements : 0;
             this.loading = false;
         }
     },

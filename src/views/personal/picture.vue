@@ -2,6 +2,9 @@
     <div class="container">
         <div class="title">{{ $t("personal.upload") }}</div>
         <div class="sub-title">{{ $t("personal.tips1") }}</div>
+        <div v-show="status === 'rejected'" class="error-title">
+            {{ $t("personal.upErr") }}
+        </div>
         <div class="picture-list-content">
             <a-upload
                 :action="upFiles"
@@ -11,13 +14,13 @@
                 @preview="handlePreview"
                 @change="handleChange"
             >
-                <div v-if="images.length < 4">
+                <div v-if="status !== 'passed' && images.length < 4">
                     <a-icon type="plus" />
                     <div class="ant-upload-text">Upload</div>
                 </div>
             </a-upload>
         </div>
-        <div class="button-wrapper">
+        <div v-if="status !== 'passed'" class="button-wrapper">
             <a-button
                 type="primary"
                 size="large"
@@ -50,7 +53,8 @@ export default {
             query: {},
             images: [],
             selectedUrl: "",
-            modal: false
+            modal: false,
+            status: ""
         };
     },
     computed: {
@@ -58,9 +62,10 @@ export default {
     },
     methods: {
         initData: async function() {
-            const { data } = await ApproveImage.all(this.query);
-            if (data.length !== 0) {
-                this.images = data.map((item, index) => {
+            const { data } = await ApplyPicture.one(this.query.applyPictureId);
+            this.status = data ? data.status : null;
+            if (this.status === "passed") {
+                this.images = data.images.map((item, index) => {
                     return {
                         uid: item.id,
                         name: `A${index}`,
@@ -108,7 +113,7 @@ export default {
     },
     mounted: function() {
         this.query = this.$route.query;
-        this.initData();
+        if (this.query.applyPictureId) this.initData();
     }
 };
 </script>
@@ -126,6 +131,9 @@ export default {
         & > span {
             display: inline-block;
         }
+    }
+    .error-title {
+        color: #db0f0f;
     }
     /deep/.ant-upload.ant-upload-select-picture-card,
     /deep/ .ant-upload-list-picture-card .ant-upload-list-item,
