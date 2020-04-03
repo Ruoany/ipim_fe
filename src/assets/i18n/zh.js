@@ -198,7 +198,7 @@ const zhData = {
         rejected: "不獲批",
         finish: "完成",
         others: "添加機構",
-        certify: "認證機構",
+        certify: "認證本機構",
         upErr: "您所上傳的圖片不獲批，請重新提交"
     },
     report: {

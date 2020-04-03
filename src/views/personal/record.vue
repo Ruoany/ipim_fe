@@ -92,6 +92,9 @@ export default {
     /deep/.ant-tabs-nav .ant-tabs-tab {
         font-size: 18px;
     }
+    /deep/.ant-btn-sm {
+        font-size: 12px;
+    }
     .list-content {
         min-height: 300px;
         padding-bottom: 30px;
