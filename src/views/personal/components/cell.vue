@@ -23,20 +23,14 @@
             <div class="status">
                 <div class="top" :class="status">{{ $t(formatStatus) }}</div>
                 <div class="button-wrapper">
-                    <a-button
-                        type="primary"
-                        size="small"
-                        @click="FormNavigate"
-                        >{{
-                            status === "rejected"
-                                ? $t("personal.update")
-                                : $t("personal.showForm")
-                        }}</a-button
-                    >
+                    <a-button type="primary" @click="FormNavigate">{{
+                        status === "rejected"
+                            ? $t("personal.update")
+                            : $t("personal.showForm")
+                    }}</a-button>
                     <a-button
                         v-if="status === 'passed' && activityStatus === 'END'"
                         type="primary"
-                        size="small"
                         @click="QuestionNavigate"
                         >{{
                             questionnaireAnswerId
@@ -47,7 +41,6 @@
                     <a-button
                         v-if="status === 'passed' && activityStatus === 'END'"
                         type="primary"
-                        size="small"
                         :disabled="applyPictureStatus === 'approving'"
                         @click="PictureNavigate"
                         >{{ $t(formatPictrue) }}</a-button
