@@ -15,10 +15,16 @@
             ></organizer>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.shop')" key="4">
-            <shop :institutions="cardData.institutions"></shop>
+            <shop
+                :institutions="
+                    cardData.institutions ? cardData.institutions : []
+                "
+            ></shop>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.photo')" key="5">
-            <photo :pictures="cardData.pictures"></photo>
+            <photo
+                :pictures="cardData.pictures ? cardData.pictures : []"
+            ></photo>
         </a-tab-pane>
     </a-tabs>
 </template>

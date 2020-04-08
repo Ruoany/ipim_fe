@@ -1,21 +1,29 @@
 <template>
     <div class="container">
-        <a-empty v-if="liaisons.length === 0" class="empty" description="暫無數據"></a-empty>
+        <a-empty
+            v-if="liaisons.length === 0"
+            class="empty"
+            description="暫無數據"
+        ></a-empty>
         <a-card v-for="item in liaisons" :key="item.id" class="sp-card">
-            <div class="sp-card-avatar" :style="{ backgroundColor: colors[Math.floor(Math.random() * 10)] }">
+            <div
+                class="sp-card-avatar"
+                :style="{
+                    backgroundColor: colors[Math.floor(Math.random() * 10)]
+                }"
+            >
                 {{ item.name | formatAvatar }}
             </div>
             <div class="sp-card-content">
                 <div class="sp-card-content-title">
                     <span>{{ item.name }}</span>
-                    <!-- <span> {{ item.gender === "M" ? $t("show.sir") : $t("show.lady") }}</span> -->
                 </div>
                 <div class="sp-card-content-item">
-                    <span>{{ $t("index.tel") }}:</span>
+                    <span>{{ $t("index.tel") }}：</span>
                     <span>{{ item.tel }}</span>
                 </div>
                 <div class="sp-card-content-item">
-                    <span>{{ $t("index.email") }}:</span>
+                    <span>{{ $t("index.email") }}：</span>
                     <span>{{ item.email }}</span>
                 </div>
             </div>
@@ -61,6 +69,7 @@ export default {
     justify-content: space-between;
     .empty {
         min-height: 300px;
+        margin: 0;
     }
     .sp-card {
         width: 600px;

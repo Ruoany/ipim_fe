@@ -1,17 +1,30 @@
 <template>
     <div class="all flex-justify-content-space-between">
         <div style="width:600px;">
-            <calendar class="list" @changeDate="changeDate"></calendar>
+            <calendar
+                class="list"
+                @changeDate="date => (dayTime = date)"
+            ></calendar>
         </div>
         <a-spin :spinning="loading" class="flex list spin">
-            <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
+            <a-icon
+                slot="indicator"
+                type="loading"
+                style="font-size: 24px"
+                spin
+            />
             <a-empty v-if="showList.length === 0"></a-empty>
             <a-card
                 hoverable
                 v-else
                 v-for="item in showList"
                 :key="item.id"
-                @click="$router.push({ path: '/show/detail', query: { id: item.id } })"
+                @click="
+                    $router.push({
+                        path: '/show/detail',
+                        query: { id: item.id }
+                    })
+                "
                 class="cell"
                 :bordered="false"
             >
@@ -20,9 +33,9 @@
                     <div class="flex-column flex-justify-content-space-between">
                         <div class="font-20">{{ item.nameZh }}</div>
                         <div class="red-color">
-                            {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
-                                $moment(item.endTime).format("YYYY.MM.DD")
-                            }}
+                            {{
+                                $moment(item.startTime).format("YYYY.MM.DD")
+                            }}-{{ $moment(item.endTime).format("YYYY.MM.DD") }}
                         </div>
                     </div>
                 </div>
@@ -39,26 +52,32 @@ export default {
     data() {
         return {
             showList: [],
-            dayTime: this.$moment().format("YYYY-MM-DD"),
             loading: true
         };
     },
-    methods: {
-        async getActiveList() {
-            this.loading = true;
-            const data = await Activity.all({ dayTime: this.dayTime });
-            if (data.code === 200) {
-                this.showList = data.data;
-                this.loading = false;
+    computed: {
+        dayTime: {
+            get() {
+                return this.$moment().format("YYYY-MM-DD");
+            },
+            set(value) {
+                this.getActiveList(value);
+                return value;
             }
-        },
-        changeDate(date) {
-            this.dayTime = date;
-            this.getActiveList();
+        }
+    },
+    methods: {
+        async getActiveList(dayTime) {
+            this.loading = true;
+            const { data, code } = await Activity.all({
+                dayTime
+            });
+            this.showList = data ? data : [];
+            this.loading = false;
         }
     },
     mounted() {
-        this.getActiveList();
+        this.getActiveList(this.dayTime);
     }
 };
 </script>

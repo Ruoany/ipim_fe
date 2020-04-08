@@ -1,5 +1,12 @@
+import Vue from "vue";
+import VueI18n from "vue-i18n";
 import zh from "./zh";
 
-const lanData = { zh };
+Vue.use(VueI18n);
 
-export default lanData;
+const i18n = new VueI18n({
+    locale: "zh",
+    messages: { zh },
+});
+
+export default i18n;

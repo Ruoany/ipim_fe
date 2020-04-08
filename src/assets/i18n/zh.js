@@ -1,5 +1,5 @@
-import formaa from "./aa/zh";
-import formab from "./ab/zh";
+import mission from "./MISSION/zh";
+import participate from "./PARTICIPATE/zh";
 import formba from "./ba/zh";
 import formbb from "./bb/zh";
 import formbc from "./bc/zh";
@@ -114,8 +114,8 @@ const zhData = {
         companyName: "企業名稱",
         liaisonName: "聯絡人名稱",
     },
-    formaa,
-    formab,
+    mission,
+    participate,
     formba,
     formbb,
     formbc,
@@ -179,7 +179,7 @@ const zhData = {
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
-        showForm: "申請紀錄",
+        showForm: "已填申請表",
         question: "調查問卷",
         writeQuestion: "填寫問卷",
         showQuestion: "查看問卷",
