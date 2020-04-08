@@ -22,9 +22,12 @@
                         <li>{{ $t("util.step4") }}</li>
                         <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{
-                        $t("util.download")
-                    }}</a-button>
+                    <a-button
+                        type="primary"
+                        size="large"
+                        @click="downloadExcel"
+                        >{{ $t("util.download") }}</a-button
+                    >
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -43,6 +46,14 @@ import FormMif from "./MIF/index";
 import FormPlpex from "./PLPEX/index";
 import FormMfe from "./MFE/index";
 import FormGmbpf from "./GMBPF/index";
+import PM from "@/apis/participateMiecf";
+import PI from "@/apis/participateIiicf";
+import PMF from "@/apis/participateMfe";
+import PG from "@/apis/participateGmbpf";
+import PMI from "@/apis/participateMif";
+import PP from "@/apis/participatePlpex";
+import PD from "@/apis/participateDelegation";
+import PAA from "@/apis/participateAttendAbroad";
 
 export default {
     components: {
@@ -74,6 +85,44 @@ export default {
             });
             await this.$store.dispatch("setLiaisons", data.content);
             this.loading = false;
+        },
+        downloadExcel: async function() {
+            let result = {};
+            switch (this.form) {
+                case "MIECF":
+                    result = await PM.download();
+                    break;
+                case "IIICF":
+                    result = await PI.download();
+                    break;
+                case "MFE":
+                    result = await PMF.download();
+                    break;
+                case "GMBPF":
+                    result = await PG.download();
+                    break;
+                case "MIF":
+                    result = await PMI.download();
+                    break;
+                case "PLPEX":
+                    result = await PP.download();
+                    break;
+                case "PARTICIPATE":
+                    result = await PD.download();
+                    break;
+                case "MISSION":
+                    result = await PAA.download();
+                    break;
+            }
+            const blob = new Blob([result], {
+                type:
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            });
+            const a = document.createElement("a");
+            a.download = this.form;
+            a.target = "blank";
+            a.href = URL.createObjectURL(blob);
+            a.click();
         }
     },
     mounted: function() {

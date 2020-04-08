@@ -2,15 +2,16 @@
     <div class="container">
         <div class="title">{{ $t("personal.question") }}</div>
         <question-cell
-            v-for="item in question.questions"
+            v-for="(item, index) in question.questions"
             :key="item.sequence"
-            ref="question"
+            :value.sync="answers[index]"
             :type="item.type"
             :title="item.title"
             :q="item.questionItems"
             :idx="item.sequence"
         ></question-cell>
         <a-button
+            v-show="!this.$route.query.questionnaireAnswerId"
             type="primary"
             size="large"
             style="margin-top:30px"
@@ -30,10 +31,17 @@ export default {
     data() {
         return {
             query: {},
-            question: {}
+            question: {},
+            answers: []
         };
     },
     methods: {
+        Transform: function(o) {
+            Object.keys(o).map(item => {
+                o[item] = this.$crypto.decryption(unescape(o[item]));
+            });
+            return o;
+        },
         initData: async function() {
             const {
                 data: { content }
@@ -42,8 +50,7 @@ export default {
         },
         validator: function() {
             const promise = new Promise(resolve => {
-                const arr = this.$refs.question.map(item => item.init);
-                for (let item of arr) {
+                for (let item of this.answers) {
                     if (Array.isArray(item)) {
                         if (item.length === 0) {
                             this.$message.error({
@@ -61,22 +68,39 @@ export default {
                         resolve(false);
                     }
                 }
-                resolve(arr);
+                resolve(true);
             });
             return promise;
         },
         handleSubmit: async function() {
             const result = await this.validator();
-            const body = {
-                ...this.query,
-                questionnaireId: this.question.id,
-                answers: result
-            };
-            console.log("--->", body);
+            if (result) {
+                const body = {
+                    ...this.query,
+                    questionnaireId: this.question.id,
+                    answers: this.answers.map((item, index) => {
+                        const isText = typeof item === "string";
+                        return isText
+                            ? {
+                                  answer: item,
+                                  questionId: this.question.questions[index].id
+                              }
+                            : {
+                                  items: Array.isArray(item)
+                                      ? item.map(val => {
+                                            return { id: val };
+                                        })
+                                      : [{ id: item }],
+                                  questionId: this.question.questions[index].id
+                              };
+                    })
+                };
+                console.log("--->", body);
+            }
         }
     },
     mounted: function() {
-        this.query = this.$route.query;
+        this.query = this.Transform(this.$route.query);
         this.initData();
     }
 };

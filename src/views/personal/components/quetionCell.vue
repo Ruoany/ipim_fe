@@ -1,12 +1,15 @@
 <template>
     <div class="question-cell-container">
-        <div class="question-cell-title">{{ idx }}.{{ title }}</div>
+        <div class="question-cell-title">
+            {{ idx }}.{{ title
+            }}<span style="color:#ccc">（{{ formatQuestion }}）</span>
+        </div>
         <div v-if="type === 'RADIO'">
             <div
                 v-for="item in q"
                 :key="item.id"
                 :class="init === item.id ? 'item-active' : 'item'"
-                @click="handleRadio(item.id)"
+                @click="() => (disabled ? '' : handleRadio(item.id))"
             >
                 {{ item.item }}
             </div>
@@ -16,13 +19,19 @@
                 v-for="item in q"
                 :key="item.id"
                 :class="init.includes(item.id) ? 'item-active' : 'item'"
-                @click="handleCheckbox(item.id)"
+                @click="() => (disabled ? '' : handleCheckbox(item.id))"
             >
                 {{ item.item }}
             </div>
         </div>
         <div v-if="type === 'FILL'">
-            <a-input v-model="init" size="large" style="width:500px"></a-input>
+            <div v-if="disabled" class="disabled">{{ init }}</div>
+            <a-input
+                v-else
+                v-model="init"
+                size="large"
+                style="width:500px"
+            ></a-input>
         </div>
     </div>
 </template>
@@ -33,12 +42,34 @@ export default {
         type: String,
         title: String,
         q: Array,
-        idx: Number
+        idx: Number,
+        value: [String, Number, Object, Array]
     },
     data() {
         return {
+            disabled: false,
             init: null
         };
+    },
+    computed: {
+        formatQuestion: function() {
+            switch (this.type) {
+                case "RADIO":
+                    return "單選題";
+                    break;
+                case "CHECKBOX":
+                    return "多選題";
+                    break;
+                case "FILL":
+                    return "填空題";
+                    break;
+            }
+        }
+    },
+    watch: {
+        init: function(newValue) {
+            this.$emit("update:value", newValue);
+        }
     },
     methods: {
         handleRadio: function(value) {
@@ -54,7 +85,13 @@ export default {
         }
     },
     created: function() {
-        this.init = this.type === "CHECKBOX" ? [] : "";
+        if (this.value) {
+            this.init = this.value;
+            this.disabled = true;
+        } else {
+            this.init = this.type === "CHECKBOX" ? [] : "";
+            this.disabled = false;
+        }
     }
 };
 </script>
@@ -87,6 +124,14 @@ export default {
     .question-cell-title {
         line-height: 50px;
         font-size: 18px;
+    }
+    .disabled {
+        width: 500px;
+        padding: 6px 11px;
+        font-size: 16px;
+        color: #333;
+        border: 1px solid #d9d9d9;
+        border-radius: 2px;
     }
 }
 </style>

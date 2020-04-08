@@ -35,7 +35,7 @@
                         >{{
                             questionnaireAnswerId
                                 ? $t("personal.showQuestion")
-                                : $t("personal.question")
+                                : $t("personal.writeQuestion")
                         }}</a-button
                     >
                     <a-button
@@ -82,8 +82,8 @@ export default {
                 case "rejected":
                     return "personal.rejected";
                     break;
-                case "finish":
-                    return "personal.finish";
+                case "withdraw":
+                    return "personal.withdraw";
                     break;
             }
         },
@@ -102,34 +102,52 @@ export default {
         }
     },
     methods: {
+        Transform: function(o) {
+            Object.keys(o).map(item => {
+                o[item] = escape(this.$crypto.encryption(o[item]));
+            });
+            return o;
+        },
         FormNavigate: function() {
             const query = {
                 form: this.form,
-                a: escape(this.$crypto.encryption(this.activityId)),
-                d: escape(this.$crypto.encryption(this.formId))
-            };
-            this.$router.push({ path: "/myform/index", query });
-        },
-        PictureNavigate: function() {
-            const query = {
-                participateId: this.formId,
-                activityId: this.activityId,
-                liaisonId: this.liaisonId,
-                institutionId: this.institutionId
+                ...this.Transform({ a: this.activityId, d: this.formId })
             };
             this.$router.push({
-                path: "/personal/picture",
-                query: this.applyPictureId
-                    ? { ...query, applyPictureId: this.applyPictureId }
-                    : query
+                path: "/myform/index",
+                query
             });
         },
+        PictureNavigate: function() {
+            const query = this.applyPictureId
+                ? this.Transform({
+                      participateId: this.formId,
+                      activityId: this.activityId,
+                      liaisonId: this.liaisonId,
+                      institutionId: this.institutionId,
+                      applyPictureId: this.applyPictureId
+                  })
+                : this.Transform({
+                      participateId: this.formId,
+                      activityId: this.activityId,
+                      liaisonId: this.liaisonId,
+                      institutionId: this.institutionId
+                  });
+            this.$router.push({ path: "/personal/picture", query });
+        },
         QuestionNavigate: function() {
-            const query = {
-                formId: this.formId,
-                activityId: this.activityId,
-                institutionId: this.institutionId
-            };
+            const query = this.questionnaireAnswerId
+                ? this.Transform({
+                      formId: this.formId,
+                      activityId: this.activityId,
+                      institutionId: this.institutionId,
+                      questionnaireAnswerId: this.questionnaireAnswerId
+                  })
+                : this.Transform({
+                      formId: this.formId,
+                      activityId: this.activityId,
+                      institutionId: this.institutionId
+                  });
             this.$router.push({ path: "/personal/question", query });
         }
     }
@@ -213,7 +231,8 @@ export default {
             .passed {
                 color: #1fa211;
             }
-            .rejected {
+            .rejected,
+            .withdraw {
                 color: #db0f0f;
             }
             .top {

@@ -44,7 +44,7 @@ const zhData = {
         gmbpf: "粵澳名優商品展",
         mif: "澳門國際貿易投資展覽會",
         plpex: "葡語國家產品及服務展",
-        logout: "退出登錄"
+        logout: "退出登錄",
     },
     index: {
         evCa: "展會日曆",
@@ -53,7 +53,7 @@ const zhData = {
         address: "地址",
         email: "電郵",
         tel: "電話",
-        fax: "傳真"
+        fax: "傳真",
     },
     show: {
         available: "可報名的展會",
@@ -81,7 +81,7 @@ const zhData = {
         method: "參展方式",
         join: "參展",
         write: "填寫申請表",
-        deadline: "截止報名"
+        deadline: "截止報名",
     },
     util: {
         yes: "是",
@@ -112,7 +112,7 @@ const zhData = {
         nameZh: "姓名（中文）",
         nameEnAndPt: "姓名（英/葡文）",
         companyName: "企業名稱",
-        liaisonName: "聯絡人名稱"
+        liaisonName: "聯絡人名稱",
     },
     formaa,
     formab,
@@ -174,18 +174,18 @@ const zhData = {
         aw: "其他",
         ay: "納稅人名稱",
         az: "機構認證",
-
         logo: "機構LOGO",
         meNameZh: "機構名稱（中文）",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
         showForm: "申請紀錄",
-        question: "填寫問卷",
+        question: "調查問卷",
+        writeQuestion: "填寫問卷",
         showQuestion: "查看問卷",
-        uploadPic: "上傳展會圖片",
+        uploadPic: "上傳圖片",
         uploading: "圖片審批中",
-        showPic: "查看展會圖片",
+        showPic: "查看圖片",
         undeal: "待審核",
         deal: "已審核",
         upload: "展會圖片",
@@ -196,13 +196,13 @@ const zhData = {
         approving: "待審批",
         passed: "獲批",
         rejected: "不獲批",
-        finish: "完成",
+        withdraw: "已取消",
         others: "添加機構",
         certify: "認證本機構",
-        upErr: "您所上傳的圖片不獲批，請重新提交"
+        upErr: "您所上傳的圖片不獲批，請重新提交",
     },
     report: {
-        aa: "填寫方式一：在綫填寫展會報告"
+        aa: "填寫方式一：在綫填寫展會報告",
     },
     reportba,
     reportbb,
@@ -229,8 +229,8 @@ const zhData = {
         code: "驗證碼",
         getCode: "獲取驗證碼",
         set: "確認重置",
-        return: "返回"
-    }
+        return: "返回",
+    },
 };
 
 export default zhData;

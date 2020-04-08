@@ -61,6 +61,12 @@ export default {
         ...mapGetters(["currentUser"])
     },
     methods: {
+        Transform: function(o) {
+            Object.keys(o).map(item => {
+                o[item] = this.$crypto.decryption(unescape(o[item]));
+            });
+            return o;
+        },
         initData: async function() {
             const { data } = await ApplyPicture.one(this.query.applyPictureId);
             this.status = data ? data.status : null;
@@ -112,7 +118,7 @@ export default {
         }
     },
     mounted: function() {
-        this.query = this.$route.query;
+        this.query = this.Transform(this.$route.query);
         if (this.query.applyPictureId) this.initData();
     }
 };

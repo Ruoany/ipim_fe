@@ -5,9 +5,7 @@
             :style="
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
-                    : {
-                          backgroundImage: `url(${defaultImage})`
-                      }
+                    : { backgroundImage: `url(${defaultImage})` }
             "
         ></div>
         <div class="content">
@@ -71,7 +69,7 @@ export default {
     .logo {
         width: 80px;
         height: 80px;
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
@@ -82,7 +80,7 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
-        .certified {
+        .rejected {
             color: #db0f0f;
         }
         .approving {

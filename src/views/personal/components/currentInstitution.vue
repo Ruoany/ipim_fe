@@ -5,9 +5,7 @@
             :style="
                 info.logo
                     ? { backgroundImage: `url(${info.logo})` }
-                    : {
-                          backgroundImage: `url(${defaultImage})`
-                      }
+                    : { backgroundImage: `url(${defaultImage})` }
             "
         ></div>
         <div class="content">
@@ -111,7 +109,7 @@ export default {
     .logo {
         width: 140px;
         height: 140px;
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
@@ -134,7 +132,7 @@ export default {
                 font-size: 15px;
                 line-height: 40px;
             }
-            .certified {
+            .rejected {
                 color: #db0f0f;
             }
             .approving {
