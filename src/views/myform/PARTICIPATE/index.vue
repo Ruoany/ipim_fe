@@ -1,11 +1,11 @@
 <template>
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
+            <a-step :title="$t('formab.ax')" />
             <a-step :title="$t('formab.aa')" />
             <a-step :title="$t('formab.ag')" />
             <a-step :title="$t('formab.am')" />
             <a-step :title="$t('formab.at')" />
-            <a-step :title="$t('formab.ax')" />
             <a-step :title="$t('formab.bt')" />
         </a-steps>
         <a-form-model
@@ -17,91 +17,6 @@
             :wrapper-col="wrapperCol"
         >
             <div v-show="stepCurrent === 0">
-                <a-form-model-item :label="$t('formab.ac')">
-                    <a-input disabled v-model="currentInstitution.nameZh" />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ad')">
-                    <a-input
-                        disabled
-                        v-model="currentInstitution.siteRegistrationCode"
-                    />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ae')">
-                    <a-input
-                        disabled
-                        v-model="currentInstitution.registrationNumber"
-                    />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.af')">
-                    <a-input v-model="form.exhibitionProduct" />
-                </a-form-model-item>
-            </div>
-            <div v-show="stepCurrent === 1">
-                <a-form-model-item prop="liaisonId" :label="$t('formab.ah')">
-                    <a-select
-                        v-model="form.liaisonId"
-                        showSearch
-                        optionFilterProp="label"
-                        :filterOption="true"
-                    >
-                        <a-select-option
-                            v-for="item in liaisonList"
-                            :key="item.id"
-                            :value="item.id"
-                            :label="`${item.nameZh}${item.nameEnOrPt}`"
-                            >{{ item.nameZh }}
-                            {{ item.nameEnOrPt }}</a-select-option
-                        >
-                    </a-select>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ai')">
-                    <a-input disabled v-model="selectedLiaison.abroadPhone" />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.zz')">
-                    <a-input disabled v-model="selectedLiaison.phone" />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aj')">
-                    <a-input disabled v-model="selectedLiaison.fax" />
-                </a-form-model-item>
-
-                <a-form-model-item :label="$t('formab.ak')">
-                    <a-input disabled v-model="selectedLiaison.email" />
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.al')">
-                    <a-textarea disabled v-model="selectedLiaison.address" />
-                </a-form-model-item>
-            </div>
-            <div v-show="stepCurrent === 2">
-                <a-form-model-item :label="$t('formab.an')">
-                    <upload
-                        :value.sync="form.registrationOfBureauFiles"
-                    ></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ao')">
-                    <upload :value.sync="form.macaoShareholderFiles"></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ap')">
-                    <upload :value.sync="form.otherFiles"></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aq')">
-                    <upload :value.sync="form.taxpayerFiles"></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ar')">
-                    <upload :value.sync="form.shareholderSamesFiles"></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.as')">
-                    <upload :value.sync="form.differentTaxpayerFiles"></upload>
-                </a-form-model-item>
-            </div>
-            <div v-show="stepCurrent === 3">
-                <a-form-model-item :label="$t('formab.au')">
-                    <upload :value.sync="form.unitIntroductionFiles"></upload>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aw')">
-                    <upload :value.sync="form.idcardFiles"></upload>
-                </a-form-model-item>
-            </div>
-            <div v-show="stepCurrent === 4">
                 <a-form-model-item>
                     <ul>
                         <h3 class="font-bold">{{ $t("formab.ay") }}</h3>
@@ -138,6 +53,78 @@
                     </ul>
                 </a-form-model-item>
             </div>
+            <div v-show="stepCurrent === 1">
+                <a-form-model-item :label="$t('formab.ac')">
+                    <a-input disabled v-model="currentInstitution.nameZh" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ad')">
+                    <a-input disabled v-model="currentInstitution.siteRegistrationCode" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ae')">
+                    <a-input disabled v-model="currentInstitution.registrationNumber" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.af')">
+                    <a-input v-model="form.exhibitionProduct" />
+                </a-form-model-item>
+            </div>
+            <div v-show="stepCurrent === 2">
+                <a-form-model-item prop="liaisonId" :label="$t('formab.ah')">
+                    <a-select v-model="form.liaisonId" showSearch optionFilterProp="label" :filterOption="true">
+                        <a-select-option
+                            v-for="item in liaisonList"
+                            :key="item.id"
+                            :value="item.id"
+                            :label="`${item.nameZh}${item.nameEnOrPt}`"
+                            >{{ item.nameZh }} {{ item.nameEnOrPt }}</a-select-option
+                        >
+                    </a-select>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ai')">
+                    <a-input disabled v-model="selectedLiaison.abroadPhone" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.zz')">
+                    <a-input disabled v-model="selectedLiaison.phone" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aj')">
+                    <a-input disabled v-model="selectedLiaison.fax" />
+                </a-form-model-item>
+
+                <a-form-model-item :label="$t('formab.ak')">
+                    <a-input disabled v-model="selectedLiaison.email" />
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.al')">
+                    <a-textarea disabled v-model="selectedLiaison.address" />
+                </a-form-model-item>
+            </div>
+            <div v-show="stepCurrent === 3">
+                <a-form-model-item :label="$t('formab.an')">
+                    <upload :value.sync="form.registrationOfBureauFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ao')">
+                    <upload :value.sync="form.macaoShareholderFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ap')">
+                    <upload :value.sync="form.otherFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aq')">
+                    <upload :value.sync="form.taxpayerFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.ar')">
+                    <upload :value.sync="form.shareholderSamesFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.as')">
+                    <upload :value.sync="form.differentTaxpayerFiles"></upload>
+                </a-form-model-item>
+            </div>
+            <div v-show="stepCurrent === 4">
+                <a-form-model-item :label="$t('formab.au')">
+                    <upload :value.sync="form.unitIntroductionFiles"></upload>
+                </a-form-model-item>
+                <a-form-model-item :label="$t('formab.aw')">
+                    <upload :value.sync="form.idcardFiles"></upload>
+                </a-form-model-item>
+            </div>
+
             <div v-show="stepCurrent === 5">
                 <a-form-model-item>
                     <div>{{ $t("formab.bu") }}</div>
@@ -154,9 +141,7 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload
-                        :value.sync="form.businessRegistrationFiles"
-                    ></upload>
+                    <upload :value.sync="form.businessRegistrationFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('formab.by')"
@@ -190,26 +175,13 @@
                 </a-form-model-item>
             </div>
             <a-form-model-item>
-                <a-button
-                    v-show="stepCurrent > 0"
-                    type="primary"
-                    @click="stepCurrent--"
-                    style="margin-right:12px"
+                <a-button v-show="stepCurrent > 0" type="primary" @click="stepCurrent--" style="margin-right:12px"
                     >上一步</a-button
                 >
-                <a-button
-                    v-show="stepCurrent < 5"
-                    type="primary"
-                    @click="stepCurrent++"
-                    >下一步</a-button
-                >
-                <a-button
-                    v-show="stepCurrent === 5"
-                    :class="isSubmit ? 'none' : ''"
-                    type="primary"
-                    @click="subForm"
-                    >{{ $t("formaa.bt") }}</a-button
-                >
+                <a-button v-show="stepCurrent < 5" type="primary" @click="stepCurrent++">下一步</a-button>
+                <a-button v-show="stepCurrent === 5" :class="isSubmit ? 'none' : ''" type="primary" @click="subForm">{{
+                    $t("formaa.bt")
+                }}</a-button>
             </a-form-model-item>
         </a-form-model>
     </div>
@@ -259,9 +231,7 @@ export default {
                     email: "",
                     address: ""
                 };
-            const data = this.liaisonList.find(
-                item => item.id === this.form.liaisonId
-            );
+            const data = this.liaisonList.find(item => item.id === this.form.liaisonId);
             return data;
         },
         isSubmit: function() {
@@ -299,9 +269,7 @@ export default {
         }
     },
     mounted() {
-        this.form.activityId = this.$crypto.decryption(
-            unescape(this.$route.query.a)
-        );
+        this.form.activityId = this.$crypto.decryption(unescape(this.$route.query.a));
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
     }

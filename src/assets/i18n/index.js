@@ -1,5 +1,6 @@
 import zh from "./zh";
+import en from "./en";
 
-const lanData = { zh };
+const lanData = { zh, en };
 
 export default lanData;

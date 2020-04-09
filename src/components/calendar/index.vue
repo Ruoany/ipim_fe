@@ -25,9 +25,7 @@ export default {
             console.log("date==>", this.$moment(date).format("YYYY-MM-DD"));
         }
     },
-    mounted() {
-        // this.$moment.locale("en");
-    }
+    mounted() {}
 };
 </script>
 

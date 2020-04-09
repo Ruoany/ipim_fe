@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
 });
 
 const i18n = new VueI18n({
-    locale: "zh",
+    locale: sessionStorage.getItem("language") ? sessionStorage.getItem("language") : "zh",
     messages: lanData
 });
 

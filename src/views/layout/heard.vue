@@ -7,36 +7,20 @@
                     {{ $t("menu.signUp") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    key="miecf"
-                    @click="handleNavigate('/show/host', 'MIECF')"
-                    >{{ $t("menu.miecf") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="iiicf"
-                    @click="handleNavigate('/show/host', 'IIICF')"
-                    >{{ $t("menu.iiicf") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="mfe"
-                    @click="handleNavigate('/show/host', 'MFE')"
-                    >{{ $t("menu.mfe") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="gmbpf"
-                    @click="handleNavigate('/show/host', 'GMBPF')"
-                    >{{ $t("menu.gmbpf") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="mif"
-                    @click="handleNavigate('/show/host', 'MIF')"
-                    >{{ $t("menu.mif") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="plpex"
-                    @click="handleNavigate('/show/host', 'PLPEX')"
-                    >{{ $t("menu.plpex") }}</a-menu-item
-                >
+                <a-menu-item key="miecf" @click="handleNavigate('/show/host', 'MIECF')">{{
+                    $t("menu.miecf")
+                }}</a-menu-item>
+                <a-menu-item key="iiicf" @click="handleNavigate('/show/host', 'IIICF')">{{
+                    $t("menu.iiicf")
+                }}</a-menu-item>
+                <a-menu-item key="mfe" @click="handleNavigate('/show/host', 'MFE')">{{ $t("menu.mfe") }}</a-menu-item>
+                <a-menu-item key="gmbpf" @click="handleNavigate('/show/host', 'GMBPF')">{{
+                    $t("menu.gmbpf")
+                }}</a-menu-item>
+                <a-menu-item key="mif" @click="handleNavigate('/show/host', 'MIF')">{{ $t("menu.mif") }}</a-menu-item>
+                <a-menu-item key="plpex" @click="handleNavigate('/show/host', 'PLPEX')">{{
+                    $t("menu.plpex")
+                }}</a-menu-item>
             </a-sub-menu>
             <!-- <a-menu-item key="host" @click="handleNavigate('/show/host')">{{
                 $t("menu.signUp")
@@ -46,16 +30,12 @@
                     {{ $t("menu.delegation") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
-                <a-menu-item
-                    key="overseas1"
-                    @click="handleNavigate('/show/overseas', 'PARTICIPATE')"
-                    >{{ $t("menu.ba") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="overseas2"
-                    @click="handleNavigate('/show/overseas', 'MISSION')"
-                    >{{ $t("menu.bb") }}</a-menu-item
-                >
+                <a-menu-item key="overseas1" @click="handleNavigate('/show/overseas', 'PARTICIPATE')">{{
+                    $t("menu.ba")
+                }}</a-menu-item>
+                <a-menu-item key="overseas2" @click="handleNavigate('/show/overseas', 'MISSION')">{{
+                    $t("menu.bb")
+                }}</a-menu-item>
             </a-sub-menu>
             <!-- <a-sub-menu>
                 <span slot="title" class="flex center">
@@ -90,22 +70,13 @@
             </a-sub-menu> -->
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
-                <a-menu-item key="zh" @click="lanChange('zh')"
-                    >中文</a-menu-item
-                >
-                <a-menu-item key="en" @click="lanChange('en')"
-                    >English</a-menu-item
-                >
-                <a-menu-item key="pt" @click="lanChange('pt')"
-                    >Português</a-menu-item
-                >
+                <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
+                <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
+                <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-sub-menu>
-            <a-menu-item
-                v-if="!currentUser"
-                style="float:right;"
-                @click="$router.push('/login')"
-                >{{ $t("login.login") }}</a-menu-item
-            >
+            <a-menu-item v-if="!currentUser" style="float:right;" @click="$router.push('/login')">{{
+                $t("login.login")
+            }}</a-menu-item>
             <a-sub-menu v-else style="float:right;" key="personal">
                 <span slot="title" class="flex center">
                     {{ $t("menu.personal") }}
@@ -114,16 +85,8 @@
                 <a-menu-item key="mine" @click="personalNavigate('/mine')">
                     {{ $t("menu.perInfo") }}
                 </a-menu-item>
-                <a-menu-item
-                    key="record"
-                    @click="personalNavigate('/record')"
-                    >{{ $t("menu.exEr") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="funding"
-                    @click="personalNavigate('/funding')"
-                    >{{ $t("menu.funding") }}</a-menu-item
-                >
+                <a-menu-item key="record" @click="personalNavigate('/record')">{{ $t("menu.exEr") }}</a-menu-item>
+                <a-menu-item key="funding" @click="personalNavigate('/funding')">{{ $t("menu.funding") }}</a-menu-item>
                 <a-menu-item key="info" @click="personalNavigate('/info')">
                     {{ $t("menu.inIn") }}
                 </a-menu-item>
@@ -131,11 +94,7 @@
                     {{ $t("menu.logout") }}
                 </a-menu-item>
             </a-sub-menu>
-            <a-sub-menu
-                v-if="currentInstitution"
-                style="float:right;"
-                key="institution"
-            >
+            <a-sub-menu v-if="currentInstitution" style="float:right;" key="institution">
                 <span slot="title" class="flex center">
                     {{ currentInstitution.nameZh }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
@@ -206,6 +165,7 @@ export default {
     methods: {
         lanChange(key) {
             sessionStorage.setItem("language", key);
+            // this.$i18n.locale = key;
         },
         menuChange(key) {
             this.$router.push({ path: "/personal/index", query: { key } });
@@ -222,9 +182,7 @@ export default {
         },
         changeCurrentInstitution: function(id) {
             const o = this.institutionList.find(item => item.id === id);
-            const d = this.$route.query.d
-                ? this.$crypto.decryption(unescape(this.$route.query.d))
-                : undefined;
+            const d = this.$route.query.d ? this.$crypto.decryption(unescape(this.$route.query.d)) : undefined;
             if (d) {
                 this.$message.error("修改表單期間不允許切換機構");
                 return;
