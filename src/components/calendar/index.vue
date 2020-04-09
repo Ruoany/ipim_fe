@@ -1,31 +1,34 @@
 <template>
-    <a-calendar :fullscreen="false" class="all" @select="calSelect" />
+    <a-calendar :fullscreen="false" class="all" @select="calSelect">
+        <!-- :disabledDate="computedBadge" -->
+        <!-- <template slot="dateCellRender" slot-scope="value">
+            <div class="badge" :class="computedBadge(value)"></div>
+        </template> -->
+    </a-calendar>
 </template>
 
 <script>
-// import "moment/locale/zh-cn";
-// import "moment/locale/zh-cn";
 export default {
-    data() {
-        return {};
+    props: {
+        dateSource: {
+            type: Array,
+            default: () => {
+                return ["2020-03-29", "2020-04-05", "2020-04-15"];
+            }
+        }
     },
     methods: {
-        //不可選日期
-        // disDateFun(e) {
-        //     if (this.$moment().format("YYYY-MM-DD") === this.$moment(e).format("YYYY-MM-DD")) {
-        //         return false;
-        //     } else {
-        //         return true;
-        //     }
-        // },
         //點擊選擇日期
         calSelect(date) {
             let upDate = this.$moment(date).format("YYYY-MM-DD");
             this.$emit("changeDate", upDate);
-            console.log("date==>", this.$moment(date).format("YYYY-MM-DD"));
         }
-    },
-    mounted() {}
+        //判斷當天是否有展會
+        // computedBadge(date) {
+        //     const dateStr = this.$moment(date).format("YYYY-MM-DD");
+        //     return !this.dateSource.includes(dateStr);
+        // }
+    }
 };
 </script>
 
@@ -33,6 +36,16 @@ export default {
 .all {
     width: 100%;
     height: 454px;
+    .badge {
+        line-height: 30px;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        margin: auto;
+    }
+    .isHas {
+        background: red;
+    }
 }
 /deep/.ant-fullcalendar-header .ant-radio-group {
     display: none;

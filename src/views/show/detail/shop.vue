@@ -6,7 +6,14 @@
             description="暫無數據"
         ></a-empty>
         <a-card v-for="item in institutions" :key="item.id" class="sp-card">
-            <img :src="item.logo" class="sp-card-avatar" />
+            <div
+                class="sp-card-avatar"
+                :style="
+                    item.logo
+                        ? `backgroundImage:url(${item.logo})`
+                        : `backgroundImage:url(${defaultImage})`
+                "
+            ></div>
             <div class="sp-card-content sp-card-content-title">
                 <span>{{ item.nameZh }}</span>
             </div>
@@ -15,14 +22,13 @@
 </template>
 
 <script>
+import defaultImage from "@/assets/image/nologo.jpg";
 export default {
-    props: {
-        institutions: {
-            type: Array,
-            default: () => {
-                return [];
-            }
-        }
+    props: { institutions: Array },
+    data() {
+        return {
+            defaultImage
+        };
     },
     filters: {
         formatAvatar: function(value) {
@@ -41,6 +47,7 @@ export default {
     justify-content: space-between;
     .empty {
         min-height: 300px;
+        margin: 0;
     }
     .sp-card {
         width: 600px;
@@ -57,10 +64,10 @@ export default {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 1px solid #e9e9e9;
         }
         .sp-card-content {
             width: 350px;

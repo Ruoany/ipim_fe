@@ -15,21 +15,77 @@
             <cell
                 v-for="item in list"
                 :key="item.id"
-                :activity-id="item.activity.id"
                 :scope="item.activity.scope"
-                :form-id="item.id"
-                :liaison-id="item.liaisonId"
-                :institution-id="item.institution.id"
-                :form="item.type"
                 :status="item.status"
                 :activity-status="item.activity.showStatus"
                 :title="item.activity.nameZh"
                 :address="item.activity.place"
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
-                :apply-picture-id="item.applyPictureId"
-                :apply-picture-status="item.applyPictureStatus"
-                :questionnaire-answer-id="item.questionnaireAnswerId"
-            />
+                @handleClick="
+                    $router.push(`/show/detail?id=${item.activity.id}`)
+                "
+            >
+                <a-tag slot="status" :color="item.status | formatStatus">{{
+                    item.status | statusTextFilter
+                }}</a-tag>
+                <div slot="action" class="button-wrapper">
+                    <a-button
+                        type="link"
+                        @click="
+                            FormNavigate(item.type, {
+                                a: item.activityId,
+                                d: item.id
+                            })
+                        "
+                        >{{
+                            item.status === "rejected"
+                                ? $t("personal.update")
+                                : $t("personal.showForm")
+                        }}</a-button
+                    >
+                    <a-button
+                        v-if="
+                            item.status === 'passed' &&
+                                item.activity.showStatus === 'END'
+                        "
+                        type="link"
+                        @click="
+                            NavigateTo('/personal/question', {
+                                participateId: item.id,
+                                activityId: item.activity.id,
+                                institutionId: item.institution.id,
+                                questionnaireAnswerId:
+                                    item.questionnaireAnswerId
+                            })
+                        "
+                        >{{
+                            item.questionnaireAnswerId
+                                ? $t("personal.showQuestion")
+                                : $t("personal.writeQuestion")
+                        }}</a-button
+                    >
+                    <a-button
+                        v-if="
+                            item.status === 'passed' &&
+                                item.activity.showStatus === 'END'
+                        "
+                        type="link"
+                        :disabled="item.applyPictureStatus === 'approving'"
+                        @click="
+                            NavigateTo('/personal/picture', {
+                                participateId: item.id,
+                                activityId: item.activity.id,
+                                liaisonId: item.liaisonId,
+                                institutionId: item.institution.id,
+                                applyPictureId: item.applyPictureId
+                            })
+                        "
+                        >{{
+                            item.applyPictureStatus | pictureTextFilter
+                        }}</a-button
+                    >
+                </div>
+            </cell>
         </div>
         <pagination :page.sync="page" :size="size" :total="total" />
     </a-spin>
@@ -40,6 +96,7 @@ import { mapGetters } from "vuex";
 import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Participate from "@/apis/participate";
+import i18n from "@/assets/i18n/index";
 export default {
     components: { Cell, Pagination },
     data() {
@@ -64,6 +121,53 @@ export default {
             this.initData();
         }
     },
+    filters: {
+        formatStatus: function(value) {
+            switch (value) {
+                case "approving":
+                    return "blue";
+                    break;
+                case "passed":
+                    return "green";
+                    break;
+                case "rejected":
+                    return "orange";
+                    break;
+                case "withdraw":
+                    return "red";
+                    break;
+            }
+        },
+        statusTextFilter: function(value) {
+            switch (value) {
+                case "approving":
+                    return i18n.t("personal.approving");
+                    break;
+                case "passed":
+                    return i18n.t("personal.passed");
+                    break;
+                case "rejected":
+                    return i18n.t("personal.rejected");
+                    break;
+                case "withdraw":
+                    return i18n.t("personal.withdraw");
+                    break;
+            }
+        },
+        pictureTextFilter: function(value) {
+            switch (value) {
+                case "approving":
+                    return i18n.t("personal.uploading");
+                    break;
+                case "passed":
+                    return i18n.t("personal.showPic");
+                    break;
+                default:
+                    return i18n.t("personal.uploadPic");
+                    break;
+            }
+        }
+    },
     methods: {
         initData: async function() {
             this.loading = true;
@@ -76,6 +180,30 @@ export default {
             this.list = data ? data.content : [];
             this.total = data ? data.totalElements : 0;
             this.loading = false;
+        },
+        Transform: function(o) {
+            Object.keys(o).map(item => {
+                if (o[item]) {
+                    o[item] = escape(this.$crypto.encryption(o[item]));
+                } else {
+                    delete o[item];
+                }
+            });
+            return o;
+        },
+        FormNavigate: function(form, o) {
+            const query = {
+                form,
+                ...this.Transform(o)
+            };
+            this.$router.push({
+                path: "/myform/index",
+                query
+            });
+        },
+        NavigateTo: function(path, o) {
+            const query = this.Transform(o);
+            this.$router.push({ path, query });
         }
     },
     mounted: function() {

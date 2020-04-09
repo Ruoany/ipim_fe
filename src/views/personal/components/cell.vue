@@ -3,9 +3,9 @@
         <div class="ad">
             <div class="tag" :class="activityStatus"></div>
             <img
-                style="cursor:pointer;"
+                style="cursor:pointer;border-radius:6px;"
                 :src="scope"
-                @click="$router.push(`/show/detail?id=${activityId}`)"
+                @click="$emit('handleClick')"
             />
         </div>
         <div class="content flex">
@@ -21,31 +21,10 @@
                 </div>
             </div>
             <div class="status">
-                <div class="top" :class="status">{{ $t(formatStatus) }}</div>
-                <div class="button-wrapper">
-                    <a-button type="primary" @click="FormNavigate">{{
-                        status === "rejected"
-                            ? $t("personal.update")
-                            : $t("personal.showForm")
-                    }}</a-button>
-                    <a-button
-                        v-if="status === 'passed' && activityStatus === 'END'"
-                        type="primary"
-                        @click="QuestionNavigate"
-                        >{{
-                            questionnaireAnswerId
-                                ? $t("personal.showQuestion")
-                                : $t("personal.writeQuestion")
-                        }}</a-button
-                    >
-                    <a-button
-                        v-if="status === 'passed' && activityStatus === 'END'"
-                        type="primary"
-                        :disabled="applyPictureStatus === 'approving'"
-                        @click="PictureNavigate"
-                        >{{ $t(formatPictrue) }}</a-button
-                    >
+                <div class="top">
+                    <slot name="status"></slot>
                 </div>
+                <slot name="action"></slot>
             </div>
         </div>
     </div>
@@ -55,101 +34,12 @@
 import Crypto from "@/common/crypto";
 export default {
     props: {
-        activityId: { type: [String, Number], required: true },
         scope: { type: String, required: true },
-        formId: { type: [String, Number], required: true },
         status: { type: String, required: true },
         activityStatus: { type: String, required: true },
-        form: { type: String, required: true },
-        liaisonId: { type: Number, required: true },
-        institutionId: { type: Number, required: true },
         title: { type: String, default: "無題目" },
         address: { type: String, default: "無地址" },
-        date: { type: String, default: "1970-01-01" },
-        applyPictureId: { type: [Number, Object] },
-        applyPictureStatus: { type: [String, Object] },
-        questionnaireAnswerId: { type: [Number, Object] }
-    },
-    computed: {
-        formatStatus: function() {
-            switch (this.status) {
-                case "approving":
-                    return "personal.approving";
-                    break;
-                case "passed":
-                    return "personal.passed";
-                    break;
-                case "rejected":
-                    return "personal.rejected";
-                    break;
-                case "withdraw":
-                    return "personal.withdraw";
-                    break;
-            }
-        },
-        formatPictrue: function() {
-            switch (this.applyPictureStatus) {
-                case "approving":
-                    return "personal.uploading";
-                    break;
-                case "passed":
-                    return "personal.showPic";
-                    break;
-                default:
-                    return "personal.uploadPic";
-                    break;
-            }
-        }
-    },
-    methods: {
-        Transform: function(o) {
-            Object.keys(o).map(item => {
-                o[item] = escape(this.$crypto.encryption(o[item]));
-            });
-            return o;
-        },
-        FormNavigate: function() {
-            const query = {
-                form: this.form,
-                ...this.Transform({ a: this.activityId, d: this.formId })
-            };
-            this.$router.push({
-                path: "/myform/index",
-                query
-            });
-        },
-        PictureNavigate: function() {
-            const query = this.applyPictureId
-                ? this.Transform({
-                      participateId: this.formId,
-                      activityId: this.activityId,
-                      liaisonId: this.liaisonId,
-                      institutionId: this.institutionId,
-                      applyPictureId: this.applyPictureId
-                  })
-                : this.Transform({
-                      participateId: this.formId,
-                      activityId: this.activityId,
-                      liaisonId: this.liaisonId,
-                      institutionId: this.institutionId
-                  });
-            this.$router.push({ path: "/personal/picture", query });
-        },
-        QuestionNavigate: function() {
-            const query = this.questionnaireAnswerId
-                ? this.Transform({
-                      formId: this.formId,
-                      activityId: this.activityId,
-                      institutionId: this.institutionId,
-                      questionnaireAnswerId: this.questionnaireAnswerId
-                  })
-                : this.Transform({
-                      formId: this.formId,
-                      activityId: this.activityId,
-                      institutionId: this.institutionId
-                  });
-            this.$router.push({ path: "/personal/question", query });
-        }
+        date: { type: String, default: "1970-01-01" }
     }
 };
 </script>
@@ -225,25 +115,35 @@ export default {
             flex-direction: column;
             justify-content: space-between;
             text-align: right;
-            .approving {
-                color: #666;
-            }
-            .passed {
-                color: #1fa211;
-            }
-            .rejected,
-            .withdraw {
-                color: #db0f0f;
-            }
             .top {
                 line-height: 32px;
                 height: 64px;
                 font-size: 16px;
+                .ant-tag {
+                    margin-right: 0;
+                    font-size: 16px;
+                    padding: 4px 12px;
+                    width: 80px;
+                    text-align: center;
+                }
             }
             .button-wrapper {
                 width: 100%;
-                button {
-                    margin-left: 10px;
+                .ant-btn {
+                    padding: 0;
+                    :before {
+                        content: "|";
+                        color: #d9d9d9;
+                        padding: 0 8px;
+                    }
+                }
+                button:nth-child(1),
+                div:nth-child(1) {
+                    :before {
+                        content: "" !important;
+                        color: #d9d9d9;
+                        padding: 0 8px;
+                    }
                 }
             }
         }

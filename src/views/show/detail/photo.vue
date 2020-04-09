@@ -1,5 +1,10 @@
 <template>
-    <a-row ref="img" type="flex" :gutter="10" v-viewer>
+    <a-empty
+        v-if="pictures.length === 0"
+        class="empty"
+        description="暫無數據"
+    ></a-empty>
+    <a-row v-else ref="img" type="flex" :gutter="10" v-viewer>
         <a-col :span="4" v-for="item in images" :key="item">
             <img class="img" :src="item" @click="showImg" />
         </a-col>
@@ -41,5 +46,9 @@ export default {
 .warp {
     width: 100%;
     flex-wrap: wrap;
+}
+.empty {
+    min-height: 300px;
+    margin: 0;
 }
 </style>

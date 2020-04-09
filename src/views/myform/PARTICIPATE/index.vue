@@ -63,7 +63,7 @@
                 <a-form-model-item :label="$t('formab.ae')">
                     <a-input disabled v-model="currentInstitution.registrationNumber" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.af')">
+                <a-form-model-item :label="$t('participate.af')">
                     <a-input v-model="form.exhibitionProduct" />
                 </a-form-model-item>
             </div>
@@ -79,20 +79,20 @@
                         >
                     </a-select>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ai')">
+                <a-form-model-item :label="$t('participate.ai')">
                     <a-input disabled v-model="selectedLiaison.abroadPhone" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.zz')">
+                <a-form-model-item :label="$t('participate.zz')">
                     <a-input disabled v-model="selectedLiaison.phone" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aj')">
+                <a-form-model-item :label="$t('participate.aj')">
                     <a-input disabled v-model="selectedLiaison.fax" />
                 </a-form-model-item>
 
-                <a-form-model-item :label="$t('formab.ak')">
+                <a-form-model-item :label="$t('participate.ak')">
                     <a-input disabled v-model="selectedLiaison.email" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.al')">
+                <a-form-model-item :label="$t('participate.al')">
                     <a-textarea disabled v-model="selectedLiaison.address" />
                 </a-form-model-item>
             </div>
@@ -100,19 +100,19 @@
                 <a-form-model-item :label="$t('formab.an')">
                     <upload :value.sync="form.registrationOfBureauFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ao')">
+                <a-form-model-item :label="$t('participate.ao')">
                     <upload :value.sync="form.macaoShareholderFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ap')">
+                <a-form-model-item :label="$t('participate.ap')">
                     <upload :value.sync="form.otherFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aq')">
+                <a-form-model-item :label="$t('participate.aq')">
                     <upload :value.sync="form.taxpayerFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.ar')">
+                <a-form-model-item :label="$t('participate.ar')">
                     <upload :value.sync="form.shareholderSamesFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.as')">
+                <a-form-model-item :label="$t('participate.as')">
                     <upload :value.sync="form.differentTaxpayerFiles"></upload>
                 </a-form-model-item>
             </div>
@@ -120,21 +120,20 @@
                 <a-form-model-item :label="$t('formab.au')">
                     <upload :value.sync="form.unitIntroductionFiles"></upload>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formab.aw')">
+                <a-form-model-item :label="$t('participate.aw')">
                     <upload :value.sync="form.idcardFiles"></upload>
                 </a-form-model-item>
             </div>
-
             <div v-show="stepCurrent === 5">
                 <a-form-model-item>
-                    <div>{{ $t("formab.bu") }}</div>
+                    <div>{{ $t("participate.bu") }}</div>
                     <a-radio-group v-model="form.know">
-                        <a-radio :value="true">{{ $t("formab.bv") }}</a-radio>
-                        <a-radio :value="false">{{ $t("formab.bw") }}</a-radio>
+                        <a-radio :value="true">{{ $t("participate.bv") }}</a-radio>
+                        <a-radio :value="false">{{ $t("participate.bw") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item
-                    :label="$t('formab.bx')"
+                    :label="$t('participate.bx')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
@@ -144,7 +143,7 @@
                     <upload :value.sync="form.businessRegistrationFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
-                    :label="$t('formab.by')"
+                    :label="$t('participate.by')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
@@ -154,7 +153,7 @@
                     <upload :value.sync="form.certificateBureauFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
-                    :label="$t('formab.bz')"
+                    :label="$t('participate.bz')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
@@ -164,7 +163,7 @@
                     <upload :value.sync="form.salesTaxOpenFiles"></upload>
                 </a-form-model-item>
                 <a-form-model-item
-                    :label="$t('formab.ca')"
+                    :label="$t('participate.ca')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',

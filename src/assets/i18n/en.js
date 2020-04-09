@@ -1,5 +1,5 @@
-import formaa from "./aa/zh";
-import formab from "./ab/zh";
+import mission from "./MISSION/zh";
+import participate from "./PARTICIPATE/zh";
 import formba from "./ba/zh";
 import formbb from "./bb/zh";
 import formbc from "./bc/zh";
@@ -114,20 +114,6 @@ const zhData = {
         companyName: "企業名稱",
         liaisonName: "聯絡人名稱"
     },
-    formaa,
-    formab,
-    formba,
-    formbb,
-    formbc,
-    formbe,
-    formbf,
-    formbd,
-    miecf,
-    mif,
-    plpex,
-    iiicf,
-    mfe,
-    gmbpf,
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
         b: "原密碼",
@@ -179,7 +165,7 @@ const zhData = {
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
-        showForm: "申請紀錄",
+        showForm: "查看申請表",
         question: "調查問卷",
         writeQuestion: "填寫問卷",
         showQuestion: "查看問卷",
@@ -199,13 +185,15 @@ const zhData = {
         withdraw: "已取消",
         others: "添加機構",
         certify: "認證本機構",
-        upErr: "您所上傳的圖片不獲批，請重新提交"
+        upErr: "您所上傳的圖片不獲批，請重新提交",
+        verified: "已認證",
+        verifing: "認證中",
+        unverified: "未認證",
+        verifiedFail: "認證失敗"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"
     },
-    reportba,
-    reportbb,
     login: {
         title: "管理員登錄",
         account: "帳號",
@@ -230,7 +218,23 @@ const zhData = {
         getCode: "獲取驗證碼",
         set: "確認重置",
         return: "返回"
-    }
+    },
+    miecf,
+    mif,
+    plpex,
+    iiicf,
+    mfe,
+    gmbpf,
+    mission,
+    participate,
+    formba,
+    formbb,
+    formbc,
+    formbe,
+    formbf,
+    formbd,
+    reportba,
+    reportbb
 };
 
 export default zhData;

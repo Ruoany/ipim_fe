@@ -3,14 +3,12 @@ import App from "./App.vue";
 import Antd, { message } from "ant-design-vue";
 import router from "./router";
 import store from "./store";
-import VueI18n from "vue-i18n";
-import lanData from "@/assets/i18n/index";
+import i18n from "@/assets/i18n/index";
 import moment from "moment";
 import Crypto from "@/common/crypto";
 import "ant-design-vue/dist/antd.less";
 import "@/assets/icon/iconfont.css";
 
-Vue.use(VueI18n);
 Vue.use(Antd);
 
 Vue.config.productionTip = false;
@@ -27,11 +25,6 @@ router.beforeEach((to, from, next) => {
         }
     }
     next();
-});
-
-const i18n = new VueI18n({
-    locale: sessionStorage.getItem("language") ? sessionStorage.getItem("language") : "zh",
-    messages: lanData
 });
 
 new Vue({

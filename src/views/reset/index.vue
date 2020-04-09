@@ -41,9 +41,13 @@
                             </a-input>
                         </a-col>
                         <a-col :span="8" :offset="2">
-                            <a-button block @click="getCode" size="large">{{
-                                $t("login.getCode")
-                            }}</a-button>
+                            <a-button
+                                block
+                                @click="getCode"
+                                size="large"
+                                :disabled="buttonDisabled"
+                                >{{ buttonText }}</a-button
+                            >
                         </a-col>
                     </a-row>
                 </a-form-model-item>
@@ -93,6 +97,8 @@
 export default {
     data() {
         return {
+            buttonText: this.$t("login.getCode"),
+            buttonDisabled: false,
             rules: {
                 username: [
                     {
@@ -149,14 +155,27 @@ export default {
         };
     },
     methods: {
+        Interval() {
+            let s = 30;
+            const inter = setInterval(() => {
+                s--;
+                this.buttonDisabled = true;
+                this.buttonText = `${s} s`;
+                if (s === 0) {
+                    clearInterval(inter);
+                    this.buttonDisabled = false;
+                    this.buttonText = this.$t("login.getCode");
+                }
+            }, 1000);
+        },
         lanChange(key) {
             sessionStorage.setItem("language", key);
         },
         getCode: function() {
             this.$refs.reset.validateField(["username"], async valid => {
-                console.log("aaaa", valid);
                 if (!valid) {
                     console.log("上述四", this.form.username);
+                    this.Interval();
                 }
             });
         },
