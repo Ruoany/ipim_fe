@@ -5,7 +5,7 @@
             <img
                 style="cursor:pointer;border-radius:6px;"
                 :src="scope"
-                @click="$router.push(`/show/detail?id=${activityId}`)"
+                @click="$emit('handleClick')"
             />
         </div>
         <div class="content flex">

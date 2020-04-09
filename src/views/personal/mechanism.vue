@@ -268,7 +268,7 @@ export default {
 <style lang="less" scoped>
 .img {
     width: 80px;
-    height: 80px;
+    max-height: 80px;
 }
 /deep/ .ant-descriptions-item > .ant-descriptions-item-label {
     width: 250px;

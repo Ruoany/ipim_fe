@@ -22,6 +22,8 @@
 
 <script>
 import defaultImage from "@/assets/image/nologo.jpg";
+import i18n from "@/assets/i18n/index";
+
 export default {
     props: { info: Object },
     data() {
@@ -31,16 +33,16 @@ export default {
         formatStutas: function(value) {
             switch (value) {
                 case "approving":
-                    return "審核中";
+                    return i18n.t("personal.verifing");
                     break;
                 case "passed":
-                    return "已認證";
+                    return i18n.t("personal.verified");
                     break;
                 case "rejected":
-                    return "認證失敗";
+                    return i18n.t("personal.verifiedFail");
                     break;
                 default:
-                    return "未認證";
+                    return i18n.t("personal.unverified");
                     break;
             }
         }

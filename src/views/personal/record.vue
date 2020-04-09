@@ -21,6 +21,9 @@
                 :title="item.activity.nameZh"
                 :address="item.activity.place"
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+                @handleClick="
+                    $router.push(`/show/detail?id=${item.activity.id}`)
+                "
             >
                 <a-tag slot="status" :color="item.status | formatStatus">{{
                     item.status | statusTextFilter
