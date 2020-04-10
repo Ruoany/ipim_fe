@@ -1,6 +1,7 @@
 <template>
     <a-upload-dragger
         name="file"
+        :beforeUpload="beforeUpload"
         :fileList="list"
         :action="upFiles"
         :remove="handleRemove"
@@ -20,7 +21,7 @@
 <script>
 import { upFiles } from "@/apis/files";
 export default {
-    props: { value: [Object, Array] },
+    props: { value: [Object, Array], type: String },
     data() {
         return { upFiles };
     },
@@ -37,6 +38,40 @@ export default {
             },
             set: function(value) {
                 return value;
+            }
+        },
+        fileType() {
+            const str = this.type ? this.type.toUpperCase() : "default";
+            switch (str) {
+                case "WORD":
+                    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                    break;
+                case "EXCEL":
+                    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    break;
+                case "PDF":
+                    return "application/pdf";
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        },
+        tipsType() {
+            const str = this.type ? this.type.toUpperCase() : "default";
+            switch (str) {
+                case "WORD":
+                    return ".docx";
+                    break;
+                case "EXCEL":
+                    return ".xlxs";
+                    break;
+                case "PDF":
+                    return ".pdf";
+                    break;
+                default:
+                    return null;
+                    break;
             }
         }
     },
@@ -61,6 +96,18 @@ export default {
         handleRemove({ uid }) {
             const arr = this.list.filter(item => item.uid !== uid);
             this.$emit("handleChange", arr);
+        },
+        beforeUpload(file) {
+            if (!this.type) {
+                return true;
+            }
+            const isType = file.type === this.fileType;
+            if (!isType) {
+                this.$message.error(
+                    `You can only upload ${this.tipsType} file!`
+                );
+            }
+            return isType;
         }
     }
 };

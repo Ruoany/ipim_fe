@@ -73,10 +73,41 @@
                 </a-radio-group>
             </a-form-model-item>
             <a-form-model-item
-                prop="shareholderComponents"
+                prop="institutionShareholderVOS"
                 :label="$t('personal.ac')"
             >
-                <a-textarea v-model="form.shareholderComponents"></a-textarea>
+                <div
+                    v-for="(item, index) in form.institutionShareholderVOS"
+                    :key="index"
+                    class="shareholder-wrapper"
+                >
+                    <a-input
+                        v-model="item.name"
+                        :placeholder="$t('personal.shareName')"
+                    ></a-input>
+                    <a-input
+                        v-model="item.percent"
+                        :placeholder="$t('personal.sharePer')"
+                    ></a-input>
+                    <a-button
+                        v-if="index == 0"
+                        shape="circle"
+                        icon="plus"
+                        type="primary"
+                        @click="
+                            form.institutionShareholderVOS.push({
+                                name: '',
+                                percent: ''
+                            })
+                        "
+                    ></a-button>
+                    <a-button
+                        v-else
+                        shape="circle"
+                        icon="minus"
+                        @click="form.institutionShareholderVOS.splice(index, 1)"
+                    ></a-button>
+                </div>
             </a-form-model-item>
             <a-form-model-item>
                 <a-button
@@ -155,7 +186,7 @@ export default {
                 dateOfEstablishment: [config],
                 business: [config],
                 deal: [config],
-                shareholderComponents: [config]
+                institutionShareholderVOS: [config]
             },
             form: {
                 adminId: this.$store.getters.currentUser,
@@ -170,7 +201,7 @@ export default {
                 dateOfEstablishment: null,
                 business: "",
                 deal: true,
-                shareholderComponents: ""
+                institutionShareholderVOS: [{ name: "", percent: "" }]
             },
             loading: false,
             spinning: false,
@@ -178,25 +209,6 @@ export default {
         };
     },
     methods: {
-        handleSubmit() {
-            this.$refs.form.validate(async valid => {
-                if (valid) {
-                    this.spinning = true;
-                    if (!this.institutionId) {
-                        this.createInstitution();
-                    } else {
-                        this.putInstitution();
-                    }
-                }
-            });
-        },
-        onSuccess: async function() {
-            const { data } = await User.current();
-            await this.$store.dispatch("setInfo", data);
-            this.spinning = false;
-            this.$message.success("操作成功");
-            this.$router.replace("/personal/info");
-        },
         beforeUpload(file) {
             const isJPG = file.type === "image/jpeg";
             if (!isJPG) {
@@ -222,6 +234,31 @@ export default {
                 this.loading = false;
             }
         },
+        async onSuccess() {
+            const { data } = await User.current();
+            await this.$store.dispatch("setInfo", data);
+            this.spinning = false;
+            this.$message.success("操作成功");
+            this.$router.replace("/personal/info");
+        },
+        async handleSubmit() {
+            this.$refs.form.validate(async valid => {
+                if (valid) {
+                    this.spinning = true;
+                    const { code, message } = await Institution.create(
+                        formatString(this.form)
+                    );
+                    if (code !== 200) {
+                        this.$message.error(message);
+                        return;
+                    }
+                    if (this.institutionId) {
+                        await this.$store.dispatch("removeCurrentInstitution");
+                    }
+                    this.onSuccess();
+                }
+            });
+        },
         async initData() {
             this.spinning = true;
             const data = await Institution.one(this.institutionId);
@@ -232,33 +269,11 @@ export default {
                 );
             }
             this.spinning = false;
-        },
-        async createInstitution() {
-            const { code, message } = await Institution.create(
-                formatString(this.form)
-            );
-            if (code !== 200) {
-                this.$message.error(message);
-                return;
-            }
-            this.onSuccess();
-        },
-        async putInstitution() {
-            const { code, message } = await Institution.update(
-                formatString(this.form)
-            );
-            if (code !== 200) {
-                this.$message.error(message);
-                return;
-            }
-            await this.$store.dispatch("removeCurrentInstitution");
-            this.onSuccess();
         }
     },
     mounted() {
-        let institutionId = this.$route.query.institutionId;
-        this.institutionId = institutionId;
-        if (institutionId) {
+        this.institutionId = this.$route.query.institutionId;
+        if (this.institutionId) {
             this.initData();
         }
     }
@@ -279,5 +294,14 @@ export default {
 /deep/.ant-descriptions-item > .ant-descriptions-item-content {
     color: #000;
     padding-left: 20px;
+}
+.shareholder-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    input {
+        width: 46%;
+    }
 }
 </style>
