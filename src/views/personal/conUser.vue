@@ -19,12 +19,21 @@
                 <a-list-item-meta>
                     <span slot="title">{{ item.nameZh }}</span>
                 </a-list-item-meta>
-                <a-button
-                    type="link"
-                    slot="actions"
-                    @click="showDrawer('update', item.id)"
-                    >{{ $t("util.upData") }}</a-button
-                >
+                <div slot="actions">
+                    <a-button
+                        type="link"
+                        @click="showDrawer('update', item.id)"
+                        >{{ $t("util.upData") }}</a-button
+                    >
+                    <a-popconfirm
+                        title="Are you sure delete this?"
+                        @confirm="handleDelete(item.id)"
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <a style="color:#ccc;">{{ $t("personal.delete") }}</a>
+                    </a-popconfirm>
+                </div>
             </a-list-item>
         </a-list>
         <pagination :page.sync="page" :total="total" :size="size" />
@@ -98,6 +107,14 @@ export default {
             this.type = type;
             this.id = id;
             this.infoVisible = true;
+        },
+        async handleDelete(institutionId) {
+            const { success, message } = await Liaison.delete(institutionId);
+            if (!success) {
+                this.$message.error(message);
+                return;
+            }
+            this.$message.success("刪除成功");
         }
     },
     mounted() {

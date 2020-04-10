@@ -8,23 +8,25 @@
                 @click="$emit('handleClick')"
             />
         </div>
-        <div class="content flex">
-            <div class="info">
+        <div class="info">
+            <div class="top flex">
                 <div class="title" :title="title">{{ title }}</div>
-                <div class="address" :title="address">
-                    <span>{{ $t("show.acAd") }}：</span>
-                    <span>{{ address }}</span>
-                </div>
-                <div class="date" :title="date">
-                    <span>{{ $t("show.acTime") }}：</span>
-                    <span>{{ date }}</span>
-                </div>
+                <slot name="status"></slot>
             </div>
-            <div class="status">
-                <div class="top">
-                    <slot name="status"></slot>
+            <div class="bottom flex">
+                <div>
+                    <div :title="address">
+                        <span>{{ $t("show.acAd") }}：</span>
+                        <span>{{ address }}</span>
+                    </div>
+                    <div :title="date">
+                        <span>{{ $t("show.acTime") }}：</span>
+                        <span>{{ date }}</span>
+                    </div>
                 </div>
-                <slot name="action"></slot>
+                <div class="right">
+                    <slot name="action"></slot>
+                </div>
             </div>
         </div>
     </div>
@@ -50,7 +52,7 @@ export default {
 }
 .cell-container {
     width: 100%;
-    padding: 20px 0;
+    padding: 30px 0;
     border-bottom: 1px solid #e6e6e6;
     .ad {
         position: relative;
@@ -85,18 +87,17 @@ export default {
             height: 100%;
         }
     }
-    .content {
+    .info {
+        padding-left: 20px;
         flex: 1;
-        height: 120px;
+        display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        .info {
-            padding-left: 20px;
-            height: 100%;
-            max-width: 65%;
-            display: flex;
-            flex-direction: column;
+        .top {
+            flex: 1;
             justify-content: space-between;
             .title {
+                max-width: 600px;
                 line-height: 32px;
                 height: 64px;
                 font-size: 24px;
@@ -107,42 +108,36 @@ export default {
                 overflow: hidden;
                 word-break: break-all;
             }
-        }
-        .status {
-            height: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: right;
-            .top {
-                line-height: 32px;
-                height: 64px;
+            .ant-tag {
+                margin-right: 0;
                 font-size: 16px;
-                .ant-tag {
-                    margin-right: 0;
-                    font-size: 16px;
-                    padding: 4px 12px;
-                    width: 80px;
-                    text-align: center;
-                }
+                height: 30px;
+                padding: 4px 12px;
+                width: 80px;
+                text-align: center;
             }
-            .button-wrapper {
-                width: 100%;
-                .ant-btn {
-                    padding: 0;
-                    :before {
-                        content: "|";
-                        color: #d9d9d9;
-                        padding: 0 8px;
+        }
+        .bottom {
+            justify-content: space-between;
+            align-items: flex-end;
+            .right {
+                .button-wrapper {
+                    width: 100%;
+                    .ant-btn {
+                        padding: 0;
+                        :before {
+                            content: "|";
+                            color: #d9d9d9;
+                            padding: 0 8px;
+                        }
                     }
-                }
-                button:nth-child(1),
-                div:nth-child(1) {
-                    :before {
-                        content: "" !important;
-                        color: #d9d9d9;
-                        padding: 0 8px;
+                    button:nth-child(1),
+                    div:nth-child(1) {
+                        :before {
+                            content: "" !important;
+                            color: #d9d9d9;
+                            padding: 0 8px;
+                        }
                     }
                 }
             }

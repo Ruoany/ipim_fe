@@ -164,7 +164,7 @@ const zhData = {
         meNameZh: "機構名稱（中文）",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
-        update: "修改申請",
+        update: "修改申請表",
         showForm: "查看申請表",
         question: "調查問卷",
         writeQuestion: "填寫問卷",
@@ -192,6 +192,8 @@ const zhData = {
         verifiedFail: "認證失敗",
         shareName: "股東名稱",
         sharePer: "股東股份",
+        report: "展後報告",
+        delete: "刪除",
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",
