@@ -2,15 +2,10 @@
     <div class="container">
         <a-empty v-if="liaisons.length === 0" class="empty" description="暫無數據"></a-empty>
         <a-card v-for="item in liaisons" :key="item.id" class="sp-card">
-            <div
-                class="sp-card-avatar"
-                :style="{
-                    backgroundColor: colors[Math.floor(Math.random() * 10)]
-                }"
-            >
+            <div class="sp-card-avatar">
                 {{ item.name | formatAvatar }}
             </div>
-            -->
+
             <div class="sp-card-content">
                 <div class="sp-card-content-title">
                     <span>{{ item.name }}</span>
@@ -78,14 +73,16 @@ export default {
             justify-content: space-between;
         }
         .sp-card-avatar {
-            font-size: 40px;
+            font-size: 30px;
             color: #fff;
             width: 80px;
             height: 80px;
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #e9e9e9;
+            color: #333;
         }
         .sp-card-content {
             width: 350px;
