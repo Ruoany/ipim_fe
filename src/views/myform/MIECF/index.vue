@@ -202,6 +202,15 @@
                     <a-form-model-item :label="$t('mif.cj')">
                         <upload :value.sync="form.applicantUnitFiles" />
                     </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.dz')">
+                        <a-textarea placeholder="Basic usage" :rows="4" :maxLength="150" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.ea')">
+                        <upload :value.sync="form.applicantUnitFiles" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.eb')">
+                        <upload :value.sync="form.applicantUnitFiles" />
+                    </a-form-model-item>
                 </div>
 
                 <a-form-model-item>
