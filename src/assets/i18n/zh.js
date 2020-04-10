@@ -78,7 +78,7 @@ const zhData = {
         lady: "女士",
         organizers: "主辦單位",
         helpers: "協辦單位",
-        method: "參展方式",
+        method: "申請參加活動",
         join: "參展",
         write: "填寫申請表",
         deadline: "截止報名",
@@ -190,6 +190,8 @@ const zhData = {
         verifing: "認證中",
         unverified: "未認證",
         verifiedFail: "認證失敗",
+        shareName: "股東名稱",
+        sharePer: "股東股份",
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",
