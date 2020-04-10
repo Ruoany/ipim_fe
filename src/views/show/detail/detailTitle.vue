@@ -1,6 +1,6 @@
 <template>
     <div class="hei-200 flex-justify-content-space-between">
-        <div class="flex">
+        <div class="flex flex-align-items-center">
             <img class="img" :src="scope" />
             <div style="padding-left:40px;" class="flex ju">
                 <div>
@@ -124,6 +124,7 @@ export default {
     font-size: 26px;
 }
 .ju {
+    max-width: 80%;
     flex-direction: column;
     justify-content: space-between;
 }

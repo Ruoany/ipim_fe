@@ -41,42 +41,34 @@ export default {
             }
         },
         fileType() {
-            const str = this.type ? this.type.toUpperCase() : "default";
+            const str = this.type ? this.type.toUpperCase() : undefined;
             switch (str) {
                 case "WORD":
-                    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                    return [
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "application/msword"
+                    ];
                     break;
                 case "EXCEL":
-                    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    return [
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "application/vnd.ms-excel"
+                    ];
                     break;
                 case "PDF":
-                    return "application/pdf";
+                    return ["application/pdf"];
                     break;
                 default:
-                    return null;
-                    break;
-            }
-        },
-        tipsType() {
-            const str = this.type ? this.type.toUpperCase() : "default";
-            switch (str) {
-                case "WORD":
-                    return ".docx";
-                    break;
-                case "EXCEL":
-                    return ".xlxs";
-                    break;
-                case "PDF":
-                    return ".pdf";
-                    break;
-                default:
-                    return null;
+                    return [];
                     break;
             }
         }
     },
     methods: {
-        handleChange({ fileList }) {
+        handleChange({ file, fileList }) {
+            if (!file.status) {
+                return false;
+            }
             const arr = fileList.map(item => {
                 if (item.status === "done") {
                     return {
@@ -101,11 +93,9 @@ export default {
             if (!this.type) {
                 return true;
             }
-            const isType = file.type === this.fileType;
+            const isType = this.fileType.includes(file.type);
             if (!isType) {
-                this.$message.error(
-                    `You can only upload ${this.tipsType} file!`
-                );
+                this.$message.error(`You can only upload ${this.type} file!`);
             }
             return isType;
         }

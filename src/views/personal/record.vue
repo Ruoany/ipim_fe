@@ -30,6 +30,14 @@
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
                     <a-button
+                        v-if="
+                            item.status === 'passed' &&
+                                item.activity.showStatus === 'END'
+                        "
+                        type="link"
+                        >{{ $t("personal.report") }}</a-button
+                    >
+                    <a-button
                         type="link"
                         @click="
                             FormNavigate(item.type, {

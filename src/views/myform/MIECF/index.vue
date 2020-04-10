@@ -1,115 +1,150 @@
 <template>
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('mif.ck')" />
-            <a-step :title="$t('mif.dc')" />
-            <a-step :title="$t('mif.aa')" />
-            <a-step :title="$t('mif.af')" />
-            <a-step :title="$t('mif.an')" />
-            <a-step :title="$t('mif.bb')" />
-            <a-step :title="$t('mif.cf')" />
+            <a-step :title="$t('miecf.ck')" />
+            <a-step :title="$t('miecf.dc')" />
+            <a-step :title="$t('miecf.aa')" />
+            <a-step :title="$t('miecf.af')" />
+            <a-step :title="$t('miecf.an')" />
+            <a-step :title="$t('miecf.bb')" />
+            <a-step :title="$t('miecf.cf')" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
-            <a-form-model class="form" ref="mif" :model="form" :rules="rules" v-bind="formatLayout">
+            <a-form-model
+                class="form"
+                ref="miecf"
+                :model="form"
+                :rules="rules"
+                v-bind="formatLayout"
+            >
                 <div v-show="stepCurrent === 0">
-                    <a-form-model-item :label="$t('mif.ck')">
+                    <a-form-model-item :label="$t('miecf.ck')">
                         <ul>
-                            <li>{{ $t("mif.cl") }}</li>
-                            <li>{{ $t("mif.cm") }}</li>
-                            <li>{{ $t("mif.cn") }}</li>
+                            <li>{{ $t("miecf.cl") }}</li>
+                            <li>{{ $t("miecf.cm") }}</li>
+                            <li>{{ $t("miecf.cn") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.co')">
+                    <a-form-model-item :label="$t('miecf.co')">
                         <ul>
-                            <li>{{ $t("mif.cp") }}</li>
-                            <li>{{ $t("mif.cq") }}</li>
-                            <li>{{ $t("mif.cr") }}</li>
+                            <li>{{ $t("miecf.cp") }}</li>
+                            <li>{{ $t("miecf.cq") }}</li>
+                            <li>{{ $t("miecf.cr") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.cs')">
+                    <a-form-model-item :label="$t('miecf.cs')">
                         <ul>
-                            <li>{{ $t("mif.ct") }}</li>
-                            <li>{{ $t("mif.cu") }}</li>
-                            <li>{{ $t("mif.cv") }}</li>
+                            <li>{{ $t("miecf.ct") }}</li>
+                            <li>{{ $t("miecf.cu") }}</li>
+                            <li>{{ $t("miecf.cv") }}</li>
                         </ul>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 1">
-                    <a-form-model-item :label="$t('mif.cw')">
+                    <a-form-model-item :label="$t('miecf.cw')">
                         <ul>
-                            <li>{{ $t("mif.cx") }}</li>
-                            <li>{{ $t("mif.cy") }}</li>
-                            <li>{{ $t("mif.cz") }}</li>
+                            <li>{{ $t("miecf.cx") }}</li>
+                            <li>{{ $t("miecf.cy") }}</li>
+                            <li>{{ $t("miecf.cz") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.da')">
+                    <a-form-model-item :label="$t('miecf.da')">
                         <ul>
-                            <li>{{ $t("mif.db") }}</li>
+                            <li>{{ $t("miecf.db") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.dc')">
+                    <a-form-model-item :label="$t('miecf.dc')">
                         <ul>
-                            <li>{{ $t("mif.dd") }}</li>
-                            <li>{{ $t("mif.de") }}</li>
-                            <li>{{ $t("mif.df") }}</li>
-                            <li>{{ $t("mif.dg") }}</li>
-                            <li>{{ $t("mif.dh") }}</li>
-                            <li>{{ $t("mif.di") }}</li>
+                            <li>{{ $t("miecf.dd") }}</li>
+                            <li>{{ $t("miecf.de") }}</li>
+                            <li>{{ $t("miecf.df") }}</li>
+                            <li>{{ $t("miecf.dg") }}</li>
+                            <li>{{ $t("miecf.dh") }}</li>
+                            <li>{{ $t("miecf.di") }}</li>
                         </ul>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item :label="$t('mif.ab')" required>
-                        <a-input :value="selectedActivity.activityName" :disabled="true" />
+                    <a-form-model-item :label="$t('miecf.ab')" required>
+                        <a-input
+                            :value="selectedActivity.activityName"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ac')" required>
-                        <a-input :value="selectedActivity.activityDate" :disabled="true" />
+                    <a-form-model-item :label="$t('miecf.ac')" required>
+                        <a-input
+                            :value="selectedActivity.activityDate"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ad')" required>
-                        <a-input :value="selectedActivity.activityPlace" :disabled="true" />
+                    <a-form-model-item :label="$t('miecf.ad')" required>
+                        <a-input
+                            :value="selectedActivity.activityPlace"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ae')" required>
-                        <a-input :value="selectedActivity.activityExpiry" :disabled="true" />
+                    <a-form-model-item :label="$t('miecf.ae')" required>
+                        <a-input
+                            :value="selectedActivity.activityExpiry"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
-                    <a-form-model-item :label="$t('mif.ag')" required>
-                        <a-input :value="currentInstitution.nameZh" :disabled="true" />
+                    <a-form-model-item :label="$t('miecf.ag')" required>
+                        <a-input
+                            :value="currentInstitution.nameZh"
+                            :disabled="true"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item prop="liaisonId" :label="$t('mif.ai')">
-                        <a-select v-model="form.liaisonId" showSearch optionFilterProp="label" :filterOption="true">
+                    <a-form-model-item prop="liaisonId" :label="$t('miecf.ai')">
+                        <a-select
+                            v-model="form.liaisonId"
+                            showSearch
+                            optionFilterProp="label"
+                            :filterOption="true"
+                        >
                             <a-select-option
                                 v-for="item in liaisonList"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }} {{ item.nameEnOrPt }}</a-select-option
+                                >{{ item.nameZh }}
+                                {{ item.nameEnOrPt }}</a-select-option
                             >
                         </a-select>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.aj')">
-                        <a-input v-model="selectedLiaison.abroadPhone" disabled />
+                    <a-form-model-item :label="$t('miecf.aj')">
+                        <a-input
+                            v-model="selectedLiaison.abroadPhone"
+                            disabled
+                        />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.dy')">
+                    <a-form-model-item :label="$t('miecf.dy')">
                         <a-input :value="selectedLiaison.phone" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ak')" required>
+                    <a-form-model-item :label="$t('miecf.ak')" required>
                         <a-input :value="selectedLiaison.fax" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.al')" required>
+                    <a-form-model-item :label="$t('miecf.al')" required>
                         <a-input :value="selectedLiaison.email" disabled />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.am')" required>
+                    <a-form-model-item :label="$t('miecf.am')" required>
                         <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 4">
-                    <a-form-model-item prop="method" :label="$t('mif.ao')">
+                    <a-form-model-item prop="method" :label="$t('miecf.ao')">
                         <a-radio-group v-model="form.method">
-                            <a-radio v-for="item in methods" :key="item.value" :value="item.value">{{
-                                $t(item.label)
+                            <a-radio
+                                v-for="item in methods"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-radio
+                            >
+                            <a-radio value="OTHER">{{
+                                $t("miecf.au")
                             }}</a-radio>
-                            <a-radio value="OTHER">{{ $t("mif.au") }}</a-radio>
                         </a-radio-group>
                         <a-input
                             class="inline-input"
@@ -117,60 +152,111 @@
                             :disabled="form.method !== 'OTHER'"
                         />
                     </a-form-model-item>
-                    <a-form-model-item prop="preference" :label="$t('mif.av')">
+                    <a-form-model-item
+                        prop="preference"
+                        :label="$t('miecf.av')"
+                    >
                         <a-radio-group v-model="form.preference">
-                            <a-radio style="line-height:30px" value="BARELY">{{ $t("mif.aw") }}</a-radio>
-                            <a-radio style="line-height:30px" value="STANDARD_BOOTH">{{ $t("mif.dx") }}</a-radio>
+                            <a-radio style="line-height:30px" value="BARELY">{{
+                                $t("miecf.aw")
+                            }}</a-radio>
+                            <a-radio
+                                style="line-height:30px"
+                                value="STANDARD_BOOTH"
+                                >{{ $t("miecf.dx") }}</a-radio
+                            >
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item prop="area">
                         <span slot="label">
-                            <span>{{ $t("mif.ax") }}</span>
-                            <span style="color:#ccc">({{ $t("mif.ay") }})</span>
+                            <span>{{ $t("miecf.ax") }}</span>
+                            <span style="color:#ccc"
+                                >({{ $t("miecf.ay") }})</span
+                            >
                         </span>
                         <a-input v-model="form.area" />
                     </a-form-model-item>
-                    <a-form-model-item prop="attendHistoryExhibition" :label="$t('mif.az')">
+                    <a-form-model-item
+                        prop="attendHistoryExhibition"
+                        :label="$t('miecf.az')"
+                    >
                         <a-radio-group v-model="form.attendHistoryExhibition">
-                            <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
-                            <a-radio :value="false">{{ $t("util.no") }}</a-radio>
+                            <a-radio :value="true">{{
+                                $t("util.yes")
+                            }}</a-radio>
+                            <a-radio :value="false">{{
+                                $t("util.no")
+                            }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ba')">
+                    <a-form-model-item :label="$t('miecf.ba')">
                         <a-input v-model="form.attendHistoryYear" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
-                    <a-form-model-item prop="exhibitionProducts" :label="$t('mif.bc')">
+                    <a-form-model-item
+                        prop="exhibitionProducts"
+                        :label="$t('miecf.bc')"
+                    >
                         <a-checkbox-group v-model="form.exhibitionProducts">
-                            <a-checkbox v-for="item in exhibitionProducts" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
-                            <a-input class="inline-input" v-model="form.otherProductSpecify" placeholder="others" />
+                            <a-checkbox
+                                v-for="item in exhibitionProducts"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherProductSpecify"
+                                placeholder="others"
+                            />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="businessMatchings" :label="$t('mif.bj')">
+                    <a-form-model-item
+                        prop="businessMatchings"
+                        :label="$t('miecf.bj')"
+                    >
                         <a-checkbox-group v-model="form.businessMatchings">
-                            <a-checkbox v-for="item in businessMatchings" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
-                            <a-input class="inline-input" v-model="form.otherMatchingSpecify" placeholder="others" />
+                            <a-checkbox
+                                v-for="item in businessMatchings"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
+                            <a-input
+                                class="inline-input"
+                                v-model="form.otherMatchingSpecify"
+                                placeholder="others"
+                            />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="targetMarkets" :label="$t('mif.br')">
+                    <a-form-model-item
+                        prop="targetMarkets"
+                        :label="$t('miecf.br')"
+                    >
                         <a-checkbox-group v-model="form.targetMarkets">
-                            <a-checkbox v-for="item in targetMarkets" :key="item.value" :value="item.value">{{
-                                $t(item.label)
-                            }}</a-checkbox>
+                            <a-checkbox
+                                v-for="item in targetMarkets"
+                                :key="item.value"
+                                :value="item.value"
+                                >{{ $t(item.label) }}</a-checkbox
+                            >
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.cd')">
+                    <a-form-model-item :label="$t('miecf.cd')">
                         <upload :value.sync="form.paymentRecordFiles" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
-                    <a-form-model-item :label="$t('mif.cg')" :required="form.method === 'GROUP_EXHIBITION'">
-                        <div class="company-item" v-for="(item, index) in form.groups" :key="index">
+                    <a-form-model-item
+                        :label="$t('miecf.cg')"
+                        :required="form.method === 'GROUP_EXHIBITION'"
+                    >
+                        <div
+                            class="company-item"
+                            v-for="(item, index) in form.groups"
+                            :key="index"
+                        >
                             <company
                                 :name.sync="item.enterpriseName"
                                 :liaison-name.sync="item.liaisonName"
@@ -196,22 +282,38 @@
                             </div>
                         </div>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ch')">
+                    <a-form-model-item :label="$t('miecf.dz')">
+                        <upload :value.sync="form.institutions" type="excel" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('miecf.ch')">
                         <upload :value.sync="form.letterFiles" />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.cj')">
+                    <a-form-model-item :label="$t('miecf.cj')">
                         <upload :value.sync="form.applicantUnitFiles" />
                     </a-form-model-item>
                 </div>
 
                 <a-form-model-item>
-                    <a-button type="primary" @click="stepCurrent--" style="margin-right:12px" v-if="stepCurrent > 0"
+                    <a-button
+                        type="primary"
+                        @click="stepCurrent--"
+                        style="margin-right:12px"
+                        v-if="stepCurrent > 0"
                         >上一步</a-button
                     >
-                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++">下一步</a-button>
-                    <a-button v-else :class="isSubmit ? 'none' : ''" type="primary" @click="handleSubmit">{{
-                        $t("mif.dk")
-                    }}</a-button>
+                    <a-button
+                        v-if="stepCurrent < 6"
+                        type="primary"
+                        @click="stepCurrent++"
+                        >下一步</a-button
+                    >
+                    <a-button
+                        v-else
+                        :class="isSubmit ? 'none' : ''"
+                        type="primary"
+                        @click="handleSubmit"
+                        >{{ $t("miecf.dk") }}</a-button
+                    >
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -247,6 +349,7 @@ export default {
                         liaisonTel: ""
                     }
                 ],
+                institutions: [],
                 letterFiles: [],
                 liaisonId: null,
                 method: "GENERAL_EXHIBITION",
@@ -273,7 +376,9 @@ export default {
                     email: "",
                     address: ""
                 };
-            const data = this.liaisonList.find(item => item.id === this.form.liaisonId);
+            const data = this.liaisonList.find(
+                item => item.id === this.form.liaisonId
+            );
             return data;
         },
         isSubmit: function() {
@@ -297,7 +402,9 @@ export default {
                     activityExpiry: data.activity.expiryTime
                 };
             } else {
-                this.form.activityId = this.$crypto.decryption(unescape(this.$route.query.a));
+                this.form.activityId = this.$crypto.decryption(
+                    unescape(this.$route.query.a)
+                );
                 const { data } = await Activity.one(this.form.activityId);
                 this.selectedActivity = {
                     activityName: data.nameZh,
@@ -326,7 +433,7 @@ export default {
             this.$router.back();
         },
         handleSubmit: function() {
-            this.$refs.mif.validate(async valid => {
+            this.$refs.miecf.validate(async valid => {
                 if (valid) {
                     if (!this.formId)
                         this.form = {
@@ -337,7 +444,9 @@ export default {
                     const { data } = await PMIECF.create(this.form);
                     data ? this.onSuccess() : "";
                 } else {
-                    this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
+                    this.$message.error(
+                        "表單存在必填項為空或者不合法字符，請檢查"
+                    );
                 }
             });
         }
