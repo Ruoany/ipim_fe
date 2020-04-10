@@ -109,12 +109,9 @@ export default {
             this.infoVisible = true;
         },
         async handleDelete(institutionId) {
-            const { success, message } = await Liaison.delete(institutionId);
-            if (!success) {
-                this.$message.error(message);
-                return;
-            }
-            this.$message.success("刪除成功");
+            const { message } = await Liaison.delete(institutionId);
+            this.$message.success(message);
+            this.initData();
         }
     },
     mounted() {
