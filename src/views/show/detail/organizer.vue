@@ -6,12 +6,12 @@
         <ul>
             <li v-for="item in organizers" :key="item.id">{{ item.name }}</li>
         </ul>
-        <div v-show="helpers" class="organizer-title">
+        <!-- <div v-show="helpers" class="organizer-title">
             {{ $t("show.helpers") }}
         </div>
         <ul>
             <li v-for="item in helpers" :key="item.id">{{ item.name }}</li>
-        </ul>
+        </ul> -->
     </div>
 </template>
 

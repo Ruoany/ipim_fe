@@ -6,58 +6,34 @@
         <a-dropdown class="login-dropdown-wrapper login-dropdown">
             <a class="ant-dropdown-link">語言</a>
             <a-menu slot="overlay">
-                <a-menu-item key="zh" @click="lanChange('zh')"
-                    >中文</a-menu-item
-                >
-                <a-menu-item key="en" @click="lanChange('en')"
-                    >English</a-menu-item
-                >
-                <a-menu-item key="pt" @click="lanChange('pt')"
-                    >Português</a-menu-item
-                >
+                <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
+                <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
+                <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-menu>
         </a-dropdown>
         <div class="content-wrapper">
             <div class="title">{{ $t("login.title") }}</div>
             <a-form-model ref="login" class="form" :model="form" :rules="rules">
                 <a-form-model-item prop="username">
-                    <a-input
-                        v-model="form.username"
-                        size="large"
-                        :placeholder="$t('login.account')"
-                    >
+                    <a-input v-model="form.username" size="large" :placeholder="$t('login.account')">
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="password">
-                    <a-input
-                        v-model="form.password"
-                        type="password"
-                        size="large"
-                        :placeholder="$t('login.password')"
-                    >
+                    <a-input v-model="form.password" type="password" size="large" :placeholder="$t('login.password')">
                         <a-icon slot="prefix" type="lock" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item>
-                    <a-button
-                        block
-                        :loading="loading"
-                        type="primary"
-                        size="large"
-                        @click="handleSubmit"
-                        >{{ $t("login.login") }}</a-button
-                    >
+                    <a-button block :loading="loading" type="primary" size="large" @click="handleSubmit">{{
+                        $t("login.login")
+                    }}</a-button>
                     <div class="register-wrapper">
                         <span>
                             {{ $t("login.nohave") }}
-                            <router-link to="/register" replace>{{
-                                $t("login.register")
-                            }}</router-link>
+                            <router-link to="/register" replace>{{ $t("login.register") }}</router-link>
                         </span>
-                        <router-link to="/reset" replace>{{
-                            $t("login.forget")
-                        }}</router-link>
+                        <router-link to="/reset" replace>{{ $t("login.forget") }}</router-link>
                     </div>
                 </a-form-model-item>
             </a-form-model>
