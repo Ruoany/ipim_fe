@@ -52,6 +52,9 @@
                         <a-icon slot="prefix" type="phone" />
                     </a-input>
                 </a-form-model-item>
+                <a-form-model-item prop="institutionName">
+                    <a-input v-model="form.institutionName" size="large" :placeholder="$t('login.insName')"> </a-input>
+                </a-form-model-item>
                 <a-form-model-item prop="receive" :label="$t('login.checkbox')">
                     <a-checkbox-group v-model="form.receives">
                         <a-checkbox value="EMAIL">{{ $t("login.email") }}</a-checkbox>
@@ -63,6 +66,7 @@
                         $t("login.tips")
                     }}</a-checkbox>
                 </a-form-model-item>
+
                 <a-form-model-item>
                     <a-button block type="primary" size="large" :disabled="!agree" @click="handleSubmit">{{
                         $t("login.register")
@@ -150,6 +154,13 @@ export default {
                                 callback();
                             }
                         }
+                    }
+                ],
+                institutionName: [
+                    {
+                        required: true,
+                        message: "Please input your institutionName",
+                        trigger: "blur"
                     }
                 ]
             },
