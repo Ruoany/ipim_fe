@@ -297,15 +297,11 @@
                         <upload :value.sync="form.applicantUnitFiles" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ea')">
-<<<<<<< HEAD
                         <a-textarea
-                            placeholder="Basic usage"
                             :rows="4"
                             :maxLength="150"
+                            v-model="form.companyProfile"
                         />
-=======
-                        <a-textarea :rows="4" :maxLength="150" v-model="form.companyProfile" />
->>>>>>> 166ef0d3cdc5c06df5494ca891f62ad357cae2c4
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.eb')">
                         <upload :value.sync="form.images" />
