@@ -256,7 +256,7 @@
                     :class="isSubmit ? 'none' : ''"
                     type="primary"
                     @click="subForm"
-                    >{{ $t("formaa.bt") }}</a-button
+                    >{{ $t("participate.cb") }}</a-button
                 >
             </a-form-model-item>
         </a-form-model>
