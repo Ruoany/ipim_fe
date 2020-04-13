@@ -206,13 +206,13 @@
                         <upload :value.sync="form.applicantUnitFiles" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ea')">
-                        <a-textarea placeholder="Basic usage" :rows="4" :maxLength="150" />
+                        <a-textarea :rows="4" :maxLength="150" v-model="form.companyProfile" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.eb')">
-                        <upload :value.sync="form.applicantUnitFiles" />
+                        <upload :value.sync="form.images" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ec')">
-                        <upload :value.sync="form.applicantUnitFiles" />
+                        <upload :value.sync="form.video" />
                     </a-form-model-item>
                 </div>
 
