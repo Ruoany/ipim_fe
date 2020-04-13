@@ -78,7 +78,13 @@
                     prop="liaisonId"
                     :label="$t('participate.ah')"
                 >
+                    <a-input
+                        v-if="isCheck"
+                        v-model="selectedLiaison.nameZh"
+                        disabled
+                    ></a-input>
                     <a-select
+                        v-else
                         v-model="form.liaisonId"
                         showSearch
                         optionFilterProp="label"
@@ -258,18 +264,20 @@ export default {
     computed: {
         ...mapGetters(["liaisonList", "currentUser", "currentInstitution"]),
         selectedLiaison: function() {
-            if (!this.form.liaisonId)
-                return {
-                    abroadPhone: "",
-                    phone: "",
-                    fax: "",
-                    email: "",
-                    address: ""
-                };
-            const data = this.liaisonList.find(
-                item => item.id === this.form.liaisonId
-            );
-            return data;
+            if (this.form.liaisonId) {
+                const data = this.liaisonList.find(
+                    item => item.id === this.form.liaisonId
+                );
+                return data ? data : this.form.liaison;
+            }
+            return {
+                nameZh: "",
+                abroadPhone: "",
+                phone: "",
+                fax: "",
+                email: "",
+                address: ""
+            };
         },
         isSubmit: function() {
             if (!this.form.status) {
@@ -277,6 +285,13 @@ export default {
             } else {
                 return this.form.status !== "rejected";
             }
+        },
+        isCheck: function() {
+            return (
+                this.form.status === "passed" ||
+                this.form.status === "withdraw" ||
+                this.form.status === "approving"
+            );
         }
     },
     methods: {

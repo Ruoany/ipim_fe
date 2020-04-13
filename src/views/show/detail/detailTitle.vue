@@ -34,7 +34,7 @@
                     {{ $t("show.method") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </a-button>
-                <a-button v-else size="large">{{
+                <a-button v-else size="large" class="btn">{{
                     $t("show.deadline")
                 }}</a-button>
             </a-dropdown>
@@ -118,13 +118,13 @@ export default {
     align-self: flex-end;
     .btn {
         margin: 0 10px;
+        width: 144px;
     }
 }
 .font-26 {
     font-size: 26px;
 }
 .ju {
-    max-width: 80%;
     flex-direction: column;
     justify-content: space-between;
 }
