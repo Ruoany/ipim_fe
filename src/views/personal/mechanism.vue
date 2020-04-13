@@ -58,7 +58,7 @@
                 prop="dateOfEstablishment"
                 :label="$t('personal.z')"
             >
-                <a-date-picker
+                <a-month-picker
                     v-model="form.dateOfEstablishment"
                     style="width:100%"
                 />
@@ -77,7 +77,7 @@
                 :label="$t('personal.ac')"
             >
                 <div
-                    v-for="(item, index) in form.institutionShareholderVOS"
+                    v-for="(item, index) in form.institutionShareholders"
                     :key="index"
                     class="shareholder-wrapper"
                 >
@@ -95,7 +95,7 @@
                         icon="plus"
                         type="primary"
                         @click="
-                            form.institutionShareholderVOS.push({
+                            form.institutionShareholders.push({
                                 name: '',
                                 percent: ''
                             })
@@ -105,7 +105,7 @@
                         v-else
                         shape="circle"
                         icon="minus"
-                        @click="form.institutionShareholderVOS.splice(index, 1)"
+                        @click="form.institutionShareholders.splice(index, 1)"
                     ></a-button>
                 </div>
             </a-form-model-item>
@@ -186,7 +186,7 @@ export default {
                 dateOfEstablishment: [config],
                 business: [config],
                 deal: [config],
-                institutionShareholderVOS: [config]
+                institutionShareholders: [config]
             },
             form: {
                 adminId: this.$store.getters.currentUser,
@@ -201,7 +201,7 @@ export default {
                 dateOfEstablishment: null,
                 business: "",
                 deal: true,
-                institutionShareholderVOS: [{ name: "", percent: "" }]
+                institutionShareholders: [{ name: "", percent: "" }]
             },
             loading: false,
             spinning: false,
@@ -261,11 +261,20 @@ export default {
         },
         async initData() {
             this.spinning = true;
-            const data = await Institution.one(this.institutionId);
-            this.form = data.data;
-            if (this.form.status !== "passed") {
+            const { data } = await Institution.one(this.institutionId);
+            this.form = data;
+            if (this.form.institutionShareholders.length === 0) {
+                this.form.institutionShareholders.push({
+                    name: "",
+                    percent: ""
+                });
+            }
+            if (
+                this.form.status !== "passed" &&
+                this.form.dateOfEstablishment
+            ) {
                 this.form.dateOfEstablishment = this.$moment(
-                    data.data.dateOfEstablishment
+                    data.dateOfEstablishment
                 );
             }
             this.spinning = false;

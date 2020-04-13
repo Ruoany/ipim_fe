@@ -344,7 +344,11 @@
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.eg')">
-                        <upload :value.sync="form.images" :disabled="isCheck" />
+                        <upload
+                            :value.sync="form.images"
+                            type="image"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.eh')">
                         <upload :value.sync="form.video" :disabled="isCheck" />

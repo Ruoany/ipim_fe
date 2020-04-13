@@ -59,6 +59,9 @@ export default {
                 case "PDF":
                     return ["application/pdf"];
                     break;
+                case "IMAGE":
+                    return ["image/png", "image/jpeg"];
+                    break;
                 default:
                     return [];
                     break;

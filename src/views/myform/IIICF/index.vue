@@ -296,7 +296,11 @@
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.dp')">
-                        <upload :value.sync="form.images" :disabled="isCheck" />
+                        <upload
+                            :value.sync="form.images"
+                            type="image"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.dq')">
                         <upload :value.sync="form.video" :disabled="isCheck" />
