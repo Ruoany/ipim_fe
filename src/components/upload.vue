@@ -1,6 +1,7 @@
 <template>
     <a-upload-dragger
         name="file"
+        :disabled="disabled"
         :beforeUpload="beforeUpload"
         :fileList="list"
         :action="upFiles"
@@ -21,7 +22,7 @@
 <script>
 import { upFiles } from "@/apis/files";
 export default {
-    props: { value: [Object, Array], type: String },
+    props: { value: [Object, Array], type: String, disabled: Boolean },
     data() {
         return { upFiles };
     },

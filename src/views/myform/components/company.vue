@@ -1,9 +1,25 @@
 <template>
     <div class="company-container">
-        <a-input v-model="nameC" :placeholder="$t('util.companyName')"></a-input>
-        <a-input v-model="liaisonNameC" :placeholder="$t('util.liaisonName')"></a-input>
-        <a-input v-model="phoneC" :placeholder="$t('index.tel')"></a-input>
-        <a-input v-model="emailC" :placeholder="$t('index.email')"></a-input>
+        <a-input
+            v-model="nameC"
+            :placeholder="$t('util.companyName')"
+            :disabled="disabled"
+        ></a-input>
+        <a-input
+            v-model="liaisonNameC"
+            :placeholder="$t('util.liaisonName')"
+            :disabled="disabled"
+        ></a-input>
+        <a-input
+            v-model="phoneC"
+            :placeholder="$t('index.tel')"
+            :disabled="disabled"
+        ></a-input>
+        <a-input
+            v-model="emailC"
+            :placeholder="$t('index.email')"
+            :disabled="disabled"
+        ></a-input>
     </div>
 </template>
 
@@ -13,7 +29,8 @@ export default {
         name: String,
         liaisonName: String,
         phone: [Number, String],
-        email: String
+        email: String,
+        disabled: Boolean
     },
     computed: {
         nameC: {

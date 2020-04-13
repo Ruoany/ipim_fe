@@ -138,7 +138,10 @@
                 </div>
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="method" :label="$t('mif.ao')">
-                        <a-radio-group v-model="form.method">
+                        <a-radio-group
+                            v-model="form.method"
+                            :disabled="isCheck"
+                        >
                             <a-radio
                                 v-for="item in methods"
                                 :key="item.value"
@@ -150,18 +153,21 @@
                         <a-input
                             class="inline-input"
                             v-model="form.otherExhibitMethod"
-                            :disabled="form.method !== 'OTHER'"
+                            :disabled="form.method !== 'OTHER' || isCheck"
                         />
                     </a-form-model-item>
                     <a-form-model-item prop="preference" :label="$t('mif.av')">
-                        <a-radio-group v-model="form.preference">
+                        <a-radio-group
+                            v-model="form.preference"
+                            :disabled="isCheck"
+                        >
                             <a-radio style="line-height:30px" value="BARELY">{{
                                 $t("mif.aw")
                             }}</a-radio>
                             <a-radio
                                 style="line-height:30px"
                                 value="STANDARD_BOOTH"
-                                >{{ $t("mif.dx") }}</a-radio
+                                >{{ $t("mif.ec") }}</a-radio
                             >
                         </a-radio-group>
                     </a-form-model-item>
@@ -170,13 +176,16 @@
                             <span>{{ $t("mif.ax") }}</span>
                             <span style="color:#ccc">({{ $t("mif.ay") }})</span>
                         </span>
-                        <a-input v-model="form.area" />
+                        <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item
                         prop="attendHistoryExhibition"
                         :label="$t('mif.az')"
                     >
-                        <a-radio-group v-model="form.attendHistoryExhibition">
+                        <a-radio-group
+                            v-model="form.attendHistoryExhibition"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="true">{{
                                 $t("util.yes")
                             }}</a-radio>
@@ -186,7 +195,10 @@
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.ba')">
-                        <a-input v-model="form.attendHistoryYear" />
+                        <a-input
+                            v-model="form.attendHistoryYear"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
@@ -194,7 +206,10 @@
                         prop="exhibitionProducts"
                         :label="$t('mif.bc')"
                     >
-                        <a-checkbox-group v-model="form.exhibitionProducts">
+                        <a-checkbox-group
+                            v-model="form.exhibitionProducts"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in exhibitionProducts"
                                 :key="item.value"
@@ -205,6 +220,7 @@
                                 class="inline-input"
                                 v-model="form.otherProductSpecify"
                                 placeholder="others"
+                                :disabled="isCheck"
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
@@ -212,7 +228,10 @@
                         prop="businessMatchings"
                         :label="$t('mif.bj')"
                     >
-                        <a-checkbox-group v-model="form.businessMatchings">
+                        <a-checkbox-group
+                            v-model="form.businessMatchings"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in businessMatchings"
                                 :key="item.value"
@@ -223,6 +242,7 @@
                                 class="inline-input"
                                 v-model="form.otherMatchingSpecify"
                                 placeholder="others"
+                                :disabled="isCheck"
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
@@ -230,7 +250,10 @@
                         prop="targetMarkets"
                         :label="$t('mif.br')"
                     >
-                        <a-checkbox-group v-model="form.targetMarkets">
+                        <a-checkbox-group
+                            v-model="form.targetMarkets"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in targetMarkets"
                                 :key="item.value"
@@ -240,7 +263,10 @@
                         </a-checkbox-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.cd')">
-                        <upload :value.sync="form.paymentRecordFiles" />
+                        <upload
+                            :value.sync="form.paymentRecordFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
@@ -258,6 +284,7 @@
                                 :liaison-name.sync="item.liaisonName"
                                 :phone.sync="item.liaisonTel"
                                 :email.sync="item.email"
+                                :disabled="isCheck"
                             />
                             <div class="button-wrapper">
                                 <a-button
@@ -266,6 +293,7 @@
                                     type="primary"
                                     shape="circle"
                                     icon="plus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(true)"
                                 ></a-button>
                                 <a-button
@@ -273,19 +301,44 @@
                                     title="減少一項"
                                     shape="circle"
                                     icon="minus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(false, index)"
                                 ></a-button>
                             </div>
                         </div>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.dz')">
-                        <upload :value.sync="form.institutions" type="excel" />
+                        <upload
+                            :value.sync="form.institutions"
+                            type="excel"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.ch')">
-                        <upload :value.sync="form.letterFiles" />
+                        <upload
+                            :value.sync="form.letterFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.cj')">
-                        <upload :value.sync="form.applicantUnitFiles" />
+                        <upload
+                            :value.sync="form.applicantUnitFiles"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.ef')">
+                        <a-textarea
+                            :rows="4"
+                            :maxLength="150"
+                            :disabled="isCheck"
+                            v-model="form.companyProfile"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.eg')">
+                        <upload :value.sync="form.images" :disabled="isCheck" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.eh')">
+                        <upload :value.sync="form.video" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
 
@@ -357,7 +410,10 @@ export default {
                 paymentRecordFiles: [],
                 preference: "BARELY",
                 remarks: "",
-                targetMarkets: []
+                targetMarkets: [],
+                companyProfile: "",
+                images: [],
+                video: []
             }
         };
     },

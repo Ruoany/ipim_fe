@@ -141,7 +141,10 @@
                         prop="preference"
                         :label="$t('iiicf.av')"
                     >
-                        <a-radio-group v-model="form.preference">
+                        <a-radio-group
+                            v-model="form.preference"
+                            :disabled="isCheck"
+                        >
                             <a-radio style="line-height:30px" value="BARELY">{{
                                 $t("iiicf.aw")
                             }}</a-radio>
@@ -159,13 +162,16 @@
                                 >({{ $t("iiicf.ay") }})</span
                             >
                         </span>
-                        <a-input v-model="form.area" />
+                        <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item
                         prop="attendHistoryExhibition"
                         :label="$t('iiicf.az')"
                     >
-                        <a-radio-group v-model="form.attendHistoryExhibition">
+                        <a-radio-group
+                            v-model="form.attendHistoryExhibition"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="true">{{
                                 $t("util.yes")
                             }}</a-radio>
@@ -175,7 +181,10 @@
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.ba')">
-                        <a-input v-model="form.attendHistoryYear" />
+                        <a-input
+                            v-model="form.attendHistoryYear"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
@@ -183,7 +192,10 @@
                         prop="businessMatchings"
                         :label="$t('iiicf.bj')"
                     >
-                        <a-checkbox-group v-model="form.businessMatchings">
+                        <a-checkbox-group
+                            v-model="form.businessMatchings"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in businessMatchings"
                                 :key="item.value"
@@ -194,6 +206,7 @@
                                 class="inline-input"
                                 v-model="form.otherMatchingSpecify"
                                 placeholder="others"
+                                :disabled="isCheck"
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
@@ -201,7 +214,10 @@
                         prop="targetMarkets"
                         :label="$t('iiicf.br')"
                     >
-                        <a-checkbox-group v-model="form.targetMarkets">
+                        <a-checkbox-group
+                            v-model="form.targetMarkets"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in targetMarkets"
                                 :key="item.value"
@@ -211,7 +227,10 @@
                         </a-checkbox-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.cd')">
-                        <upload :value.sync="form.paymentRecordFiles" />
+                        <upload
+                            :value.sync="form.paymentRecordFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
@@ -226,6 +245,7 @@
                                 :liaison-name.sync="item.liaisonName"
                                 :phone.sync="item.liaisonTel"
                                 :email.sync="item.email"
+                                :disabled="isCheck"
                             />
                             <div class="button-wrapper">
                                 <a-button
@@ -234,6 +254,7 @@
                                     type="primary"
                                     shape="circle"
                                     icon="plus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(true)"
                                 ></a-button>
                                 <a-button
@@ -241,19 +262,44 @@
                                     title="減少一項"
                                     shape="circle"
                                     icon="minus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(false, index)"
                                 ></a-button>
                             </div>
                         </div>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.dn')">
-                        <upload :value.sync="form.institutions" type="excel" />
+                        <upload
+                            :value.sync="form.institutions"
+                            type="excel"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.ch')">
-                        <upload :value.sync="form.letterFiles" />
+                        <upload
+                            :value.sync="form.letterFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('iiicf.cj')">
-                        <upload :value.sync="form.applicantUnitFiles" />
+                        <upload
+                            :value.sync="form.applicantUnitFiles"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.do')">
+                        <a-textarea
+                            :rows="4"
+                            :maxLength="150"
+                            :disabled="isCheck"
+                            v-model="form.companyProfile"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.dp')">
+                        <upload :value.sync="form.images" :disabled="isCheck" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.dq')">
+                        <upload :value.sync="form.video" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
 
@@ -323,7 +369,10 @@ export default {
                 paymentRecordFiles: [],
                 preference: "BARELY",
                 remarks: "",
-                targetMarkets: []
+                targetMarkets: [],
+                companyProfile: "",
+                images: [],
+                video: []
             }
         };
     },

@@ -70,7 +70,10 @@
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.af')">
-                    <a-input v-model="form.exhibitionProduct" />
+                    <a-input
+                        v-model="form.exhibitionProduct"
+                        :disabled="isCheck"
+                    />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 2">
@@ -121,36 +124,58 @@
                 <a-form-model-item :label="$t('participate.an')">
                     <upload
                         :value.sync="form.registrationOfBureauFiles"
+                        :disabled="isCheck"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ao')">
-                    <upload :value.sync="form.macaoShareholderFiles"></upload>
+                    <upload
+                        :value.sync="form.macaoShareholderFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ap')">
-                    <upload :value.sync="form.otherFiles"></upload>
+                    <upload
+                        :value.sync="form.otherFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.aq')">
-                    <upload :value.sync="form.taxpayerFiles"></upload>
+                    <upload
+                        :value.sync="form.taxpayerFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ar')">
-                    <upload :value.sync="form.shareholderSamesFiles"></upload>
+                    <upload
+                        :value.sync="form.shareholderSamesFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.as')">
-                    <upload :value.sync="form.differentTaxpayerFiles"></upload>
+                    <upload
+                        :value.sync="form.differentTaxpayerFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
                 <a-form-model-item :label="$t('participate.au')">
-                    <upload :value.sync="form.unitIntroductionFiles"></upload>
+                    <upload
+                        :value.sync="form.unitIntroductionFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.aw')">
-                    <upload :value.sync="form.idcardFiles"></upload>
+                    <upload
+                        :value.sync="form.idcardFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 5">
                 <a-form-model-item>
                     <div>{{ $t("participate.bu") }}</div>
-                    <a-radio-group v-model="form.know">
+                    <a-radio-group v-model="form.know" :disabled="isCheck">
                         <a-radio :value="true">{{
                             $t("participate.bv")
                         }}</a-radio>
@@ -169,6 +194,7 @@
                 >
                     <upload
                         :value.sync="form.businessRegistrationFiles"
+                        :disabled="isCheck"
                     ></upload>
                 </a-form-model-item>
                 <a-form-model-item
@@ -179,7 +205,10 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload :value.sync="form.certificateBureauFiles"></upload>
+                    <upload
+                        :value.sync="form.certificateBureauFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('participate.bz')"
@@ -189,7 +218,10 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload :value.sync="form.salesTaxOpenFiles"></upload>
+                    <upload
+                        :value.sync="form.salesTaxOpenFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('participate.ca')"
@@ -199,7 +231,10 @@
                         tigger: 'blur'
                     }"
                 >
-                    <upload :value.sync="form.salesTaxFiles"></upload>
+                    <upload
+                        :value.sync="form.salesTaxFiles"
+                        :disabled="isCheck"
+                    ></upload>
                 </a-form-model-item>
             </div>
             <a-form-model-item>

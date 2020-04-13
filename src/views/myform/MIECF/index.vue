@@ -68,34 +68,31 @@
                     <a-form-model-item :label="$t('miecf.ab')" required>
                         <a-input
                             :value="selectedActivity.activityName"
-                            :disabled="true"
+                            disabled
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ac')" required>
                         <a-input
                             :value="selectedActivity.activityDate"
-                            :disabled="true"
+                            disabled
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ad')" required>
                         <a-input
                             :value="selectedActivity.activityPlace"
-                            :disabled="true"
+                            disabled
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ae')" required>
                         <a-input
                             :value="selectedActivity.activityExpiry"
-                            :disabled="true"
+                            disabled
                         />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('miecf.ag')" required>
-                        <a-input
-                            :value="currentInstitution.nameZh"
-                            :disabled="true"
-                        />
+                        <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
                     <a-form-model-item prop="liaisonId" :label="$t('miecf.ai')">
                         <a-input
@@ -104,6 +101,7 @@
                             disabled
                         ></a-input>
                         <a-select
+                            v-else
                             v-model="form.liaisonId"
                             showSearch
                             optionFilterProp="label"
@@ -140,7 +138,10 @@
                 </div>
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="method" :label="$t('miecf.ao')">
-                        <a-radio-group v-model="form.method">
+                        <a-radio-group
+                            v-model="form.method"
+                            :disabled="isCheck"
+                        >
                             <a-radio
                                 v-for="item in methods"
                                 :key="item.value"
@@ -161,7 +162,10 @@
                         prop="preference"
                         :label="$t('miecf.av')"
                     >
-                        <a-radio-group v-model="form.preference">
+                        <a-radio-group
+                            v-model="form.preference"
+                            :disabled="isCheck"
+                        >
                             <a-radio style="line-height:30px" value="BARELY">{{
                                 $t("miecf.aw")
                             }}</a-radio>
@@ -179,13 +183,16 @@
                                 >({{ $t("miecf.ay") }})</span
                             >
                         </span>
-                        <a-input v-model="form.area" />
+                        <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item
                         prop="attendHistoryExhibition"
                         :label="$t('miecf.az')"
                     >
-                        <a-radio-group v-model="form.attendHistoryExhibition">
+                        <a-radio-group
+                            v-model="form.attendHistoryExhibition"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="true">{{
                                 $t("util.yes")
                             }}</a-radio>
@@ -195,7 +202,10 @@
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ba')">
-                        <a-input v-model="form.attendHistoryYear" />
+                        <a-input
+                            v-model="form.attendHistoryYear"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
@@ -203,7 +213,10 @@
                         prop="exhibitionProducts"
                         :label="$t('miecf.bc')"
                     >
-                        <a-checkbox-group v-model="form.exhibitionProducts">
+                        <a-checkbox-group
+                            v-model="form.exhibitionProducts"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in exhibitionProducts"
                                 :key="item.value"
@@ -214,6 +227,7 @@
                                 class="inline-input"
                                 v-model="form.otherProductSpecify"
                                 placeholder="others"
+                                :disabled="isCheck"
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
@@ -221,7 +235,10 @@
                         prop="businessMatchings"
                         :label="$t('miecf.bj')"
                     >
-                        <a-checkbox-group v-model="form.businessMatchings">
+                        <a-checkbox-group
+                            v-model="form.businessMatchings"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in businessMatchings"
                                 :key="item.value"
@@ -232,6 +249,7 @@
                                 class="inline-input"
                                 v-model="form.otherMatchingSpecify"
                                 placeholder="others"
+                                :disabled="isCheck"
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
@@ -239,7 +257,10 @@
                         prop="targetMarkets"
                         :label="$t('miecf.br')"
                     >
-                        <a-checkbox-group v-model="form.targetMarkets">
+                        <a-checkbox-group
+                            v-model="form.targetMarkets"
+                            :disabled="isCheck"
+                        >
                             <a-checkbox
                                 v-for="item in targetMarkets"
                                 :key="item.value"
@@ -249,7 +270,10 @@
                         </a-checkbox-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.cd')">
-                        <upload :value.sync="form.paymentRecordFiles" />
+                        <upload
+                            :value.sync="form.paymentRecordFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
@@ -267,6 +291,7 @@
                                 :liaison-name.sync="item.liaisonName"
                                 :phone.sync="item.liaisonTel"
                                 :email.sync="item.email"
+                                :disabled="isCheck"
                             />
                             <div class="button-wrapper">
                                 <a-button
@@ -275,6 +300,7 @@
                                     type="primary"
                                     shape="circle"
                                     icon="plus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(true)"
                                 ></a-button>
                                 <a-button
@@ -282,32 +308,44 @@
                                     title="減少一項"
                                     shape="circle"
                                     icon="minus"
+                                    :disabled="isCheck"
                                     @click="operaCompany(false, index)"
                                 ></a-button>
                             </div>
                         </div>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.dz')">
-                        <upload :value.sync="form.institutions" type="excel" />
+                        <upload
+                            :value.sync="form.institutions"
+                            type="excel"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ch')">
-                        <upload :value.sync="form.letterFiles" />
+                        <upload
+                            :value.sync="form.letterFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.cj')">
-                        <upload :value.sync="form.applicantUnitFiles" />
+                        <upload
+                            :value.sync="form.applicantUnitFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ea')">
                         <a-textarea
                             :rows="4"
                             :maxLength="150"
+                            :disabled="isCheck"
                             v-model="form.companyProfile"
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.eb')">
-                        <upload :value.sync="form.images" />
+                        <upload :value.sync="form.images" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.ec')">
-                        <upload :value.sync="form.video" />
+                        <upload :value.sync="form.video" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
 
@@ -379,7 +417,10 @@ export default {
                 paymentRecordFiles: [],
                 preference: "BARELY",
                 remarks: "",
-                targetMarkets: []
+                targetMarkets: [],
+                companyProfile: "",
+                images: [],
+                video: []
             }
         };
     },

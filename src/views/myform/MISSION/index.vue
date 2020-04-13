@@ -1,11 +1,11 @@
 <template>
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('formaa.bn')" />
-            <a-step :title="$t('formaa.aa')" />
-            <a-step :title="$t('formaa.an')" />
-            <a-step :title="$t('formaa.au')" />
-            <a-step :title="$t('formaa.bh')" />
+            <a-step :title="$t('mission.bn')" />
+            <a-step :title="$t('mission.aa')" />
+            <a-step :title="$t('mission.an')" />
+            <a-step :title="$t('mission.au')" />
+            <a-step :title="$t('mission.bh')" />
         </a-steps>
         <a-form-model
             class="form"
@@ -16,76 +16,87 @@
         >
             <div v-show="stepCurrent === 0">
                 <a-form-model-item>
-                    {{ $t("formaa.bn") }}
+                    {{ $t("mission.bn") }}
                     <ul>
-                        <li>{{ $t("formaa.bo") }}</li>
-                        <li>{{ $t("formaa.bp") }}</li>
-                        <li>{{ $t("formaa.bq") }}</li>
+                        <li>{{ $t("mission.bo") }}</li>
+                        <li>{{ $t("mission.bp") }}</li>
+                        <li>{{ $t("mission.bq") }}</li>
                     </ul>
-                    <div>{{ $t("formaa.br") }}</div>
-                    <div>{{ $t("formaa.bs") }}</div>
+                    <div>{{ $t("mission.br") }}</div>
+                    <div>{{ $t("mission.bs") }}</div>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 1">
-                <a-form-model-item prop="nameZh" :label="$t('formaa.ac')">
-                    <a-input v-model="form.nameZh" />
+                <a-form-model-item prop="nameZh" :label="$t('mission.ac')">
+                    <a-input v-model="form.nameZh" :disabled="isCheck" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.ad')">
-                    <a-radio-group v-model="form.gender">
+                    <a-radio-group v-model="form.gender" :disabled="isCheck">
                         <a-radio value="M">{{ $t("mission.ae") }}</a-radio>
                         <a-radio value="F">{{ $t("mission.af") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
-                <a-form-model-item prop="birthDate" :label="$t('formaa.ag')">
+                <a-form-model-item prop="birthDate" :label="$t('mission.ag')">
                     <a-date-picker
                         format="YYYY-MM-DD"
                         v-model="form.birthDate"
                         class="full"
+                        :disabled="isCheck"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.ah')">
-                    <a-input v-model="form.idCard" />
+                    <a-input v-model="form.idCard" :disabled="isCheck" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formaa.ai')">
+                <a-form-model-item :label="$t('mission.ai')">
                     <a-date-picker
                         v-model="form.idCardValidityDate"
                         class="full"
+                        :disabled="isCheck"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.aj')">
-                    <a-input v-model="form.exitNumber" />
+                    <a-input v-model="form.exitNumber" :disabled="isCheck" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formaa.ai')">
+                <a-form-model-item :label="$t('mission.ai')">
                     <a-date-picker
                         v-model="form.exitValidityDate"
                         class="full"
+                        :disabled="isCheck"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.ak')">
-                    <a-input v-model="form.passportNumber" />
+                    <a-input
+                        v-model="form.passportNumber"
+                        :disabled="isCheck"
+                    />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formaa.ai')">
+                <a-form-model-item :label="$t('mission.ai')">
                     <a-date-picker
                         v-model="form.passportValidityDate"
                         class="full"
+                        :disabled="isCheck"
                     />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.al')">
-                    <a-input v-model="form.otherCertificateName" />
+                    <a-input
+                        v-model="form.otherCertificateName"
+                        :disabled="isCheck"
+                    />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.am')">
-                    <a-input v-model="form.otherIDNumber" />
+                    <a-input v-model="form.otherIDNumber" :disabled="isCheck" />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formaa.ai')">
+                <a-form-model-item :label="$t('mission.ai')">
                     <a-date-picker
                         v-model="form.otherValidityDate"
                         class="full"
+                        :disabled="isCheck"
                     />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <p>{{ $t("formaa.an") }}</p>
-                <a-form-model-item prop="liaisonId" :label="$t('formaa.ac')">
+                <p>{{ $t("mission.an") }}</p>
+                <a-form-model-item prop="liaisonId" :label="$t('mission.ac')">
                     <a-input
                         v-if="isCheck"
                         v-model="selectedLiaison.nameZh"
@@ -110,92 +121,122 @@
                     </a-select>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.ap')">
-                    <a-input v-model="selectedLiaison.tel" :disabled="true" />
+                    <a-input v-model="selectedLiaison.tel" disabled />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.aq')">
-                    <a-input v-model="selectedLiaison.phone" :disabled="true" />
+                    <a-input v-model="selectedLiaison.phone" disabled />
                 </a-form-model-item>
-                <a-form-model-item :label="$t('formaa.ar')">
-                    <a-input
-                        v-model="selectedLiaison.abroadPhone"
-                        :disabled="true"
-                    />
+                <a-form-model-item :label="$t('mission.ar')">
+                    <a-input v-model="selectedLiaison.abroadPhone" disabled />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.as')">
-                    <a-input v-model="selectedLiaison.fax" :disabled="true" />
+                    <a-input v-model="selectedLiaison.fax" disabled />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.at')">
-                    <a-input v-model="selectedLiaison.email" :disabled="true" />
+                    <a-input v-model="selectedLiaison.email" disabled />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('formaa.aw')">
+                <a-form-item :label="$t('mission.aw')">
                     <a-checkbox
                         :checked="form.isAssociation"
                         @change="e => (form.isAssociation = e.target.checked)"
-                        >{{ $t("formaa.bu") }}</a-checkbox
+                        :disabled="isCheck"
+                        >{{ $t("mission.bu") }}</a-checkbox
                     >
                 </a-form-item>
                 <a-form-item :label="$t('mission.ax')">
-                    <a-input v-model="form.associationName" />
+                    <a-input
+                        v-model="form.associationName"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
                 <a-form-item :label="$t('mission.ay')">
-                    <a-input v-model="form.associationPosition" />
+                    <a-input
+                        v-model="form.associationPosition"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
                 <a-form-item :label="$t('mission.az')">
-                    <a-input v-model="form.associateIndustry" />
+                    <a-input
+                        v-model="form.associateIndustry"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
-                <a-form-item :label="$t('formaa.ba')">
+                <a-form-item :label="$t('mission.ba')">
                     <a-checkbox
                         :ckecked="form.isCompany"
                         @change="e => (form.isCompany = e.target.checked)"
-                        >{{ $t("formaa.bb") }}</a-checkbox
+                        :disabled="isCheck"
+                        >{{ $t("mission.bb") }}</a-checkbox
                     >
                 </a-form-item>
                 <a-form-item :label="$t('mission.bc')">
-                    <a-input v-model="form.companyName" />
+                    <a-input v-model="form.companyName" :disabled="isCheck" />
                 </a-form-item>
                 <a-form-item :label="$t('mission.bd')">
-                    <a-input v-model="form.companyAddress" />
+                    <a-input
+                        v-model="form.companyAddress"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
                 <a-form-item :label="$t('mission.ay')">
-                    <a-input v-model="form.companyPosition" />
+                    <a-input
+                        v-model="form.companyPosition"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
                 <a-form-item :label="$t('mission.az')">
-                    <a-input v-model="form.companyIndustry" />
+                    <a-input
+                        v-model="form.companyIndustry"
+                        :disabled="isCheck"
+                    />
                 </a-form-item>
-                <a-form-item :label="$t('formaa.be')">
+                <a-form-item :label="$t('mission.be')">
                     <a-checkbox
                         :checked="form.isOtherWay"
                         @change="e => (form.isOtherWay = e.target.checked)"
-                        >{{ $t("formaa.bf") }}</a-checkbox
+                        :disabled="isCheck"
+                        >{{ $t("mission.bf") }}</a-checkbox
                     >
                 </a-form-item>
                 <a-form-item :label="$t('mission.bg')">
-                    <a-input v-model="form.otherWayName" />
+                    <a-input v-model="form.otherWayName" :disabled="isCheck" />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 4">
-                <a-form-model-item :label="$t('formaa.bi')">
-                    <a-radio-group v-model="form.goWithGroup">
+                <a-form-model-item :label="$t('mission.bi')">
+                    <a-radio-group
+                        v-model="form.goWithGroup"
+                        :disabled="isCheck"
+                    >
                         <a-radio :value="true">{{ $t("mission.bj") }}</a-radio>
                         <a-radio :value="false">{{ $t("mission.bk") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.bl')">
-                    <a-radio-group v-model="form.backWithGroup">
+                    <a-radio-group
+                        v-model="form.backWithGroup"
+                        :disabled="isCheck"
+                    >
                         <a-radio :value="true">{{ $t("mission.bj") }}</a-radio>
                         <a-radio :value="false">{{ $t("mission.bk") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.bm')">
-                    <a-radio-group v-model="form.arrangement">
+                    <a-radio-group
+                        v-model="form.arrangement"
+                        :disabled="isCheck"
+                    >
                         <a-radio :value="true">{{ $t("mission.bj") }}</a-radio>
                         <a-radio :value="false">{{ $t("mission.bk") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('mission.be')">
-                    <a-input v-model="form.otherArrangement" />
+                    <a-input
+                        v-model="form.otherArrangement"
+                        :disabled="isCheck"
+                    />
                 </a-form-model-item>
             </div>
             <a-form-model-item>
