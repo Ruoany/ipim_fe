@@ -33,7 +33,7 @@
             }}</a-descriptions-item>
 
             <a-descriptions-item :label="$t('personal.ac')">{{
-                form.shareholderComponents
+                form.institutionShareholders | formatShareholders
             }}</a-descriptions-item>
             <a-descriptions-item :label="$t('personal.ab')">
                 {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
@@ -180,6 +180,17 @@ export default {
             }
         };
     },
+    filters: {
+        formatShareholders(value) {
+            return value
+                ? value
+                      .map(item => {
+                          return `${item.name}:${item.percent}%`;
+                      })
+                      .join(";")
+                : "尚未設定";
+        }
+    },
     methods: {
         async initData() {
             const data = await Institution.one(this.id);
@@ -226,5 +237,6 @@ export default {
 /deep/.ant-descriptions-item > .ant-descriptions-item-content {
     color: #000;
     padding-left: 20px;
+    max-width: 700px;
 }
 </style>

@@ -150,9 +150,8 @@
         <a-descriptions-item :label="$t('personal.aa')">{{
             form.business
         }}</a-descriptions-item>
-
         <a-descriptions-item :label="$t('personal.ac')">{{
-            form.shareholderComponents
+            form.institutionShareholders | formatShareholders
         }}</a-descriptions-item>
         <a-descriptions-item :label="$t('personal.ab')">
             {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
@@ -207,6 +206,17 @@ export default {
             spinning: false,
             institutionId: undefined
         };
+    },
+    filters: {
+        formatShareholders(value) {
+            return value
+                ? value
+                      .map(item => {
+                          return `${item.name}:${item.percent}%`;
+                      })
+                      .join(";")
+                : "尚未設定";
+        }
     },
     methods: {
         beforeUpload(file) {
@@ -303,6 +313,7 @@ export default {
 /deep/.ant-descriptions-item > .ant-descriptions-item-content {
     color: #000;
     padding-left: 20px;
+    max-width: 700px;
 }
 .shareholder-wrapper {
     display: flex;

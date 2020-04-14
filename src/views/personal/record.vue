@@ -11,7 +11,11 @@
             ></a-tab-pane>
         </a-tabs>
         <div class="list-content">
-            <a-empty v-if="list.length === 0" class="empty"></a-empty>
+            <a-empty
+                v-if="list.length === 0"
+                description="暫無數據"
+                class="empty"
+            ></a-empty>
             <cell
                 v-for="item in list"
                 :key="item.id"
