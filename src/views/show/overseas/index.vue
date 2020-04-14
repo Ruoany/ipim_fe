@@ -94,8 +94,8 @@ export default {
             width: 100%;
         }
         .list-content {
-            padding-top: 40px;
             min-height: 500px;
+            padding-top: 40px;
         }
     }
 }

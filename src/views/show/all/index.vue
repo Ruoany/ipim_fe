@@ -1,13 +1,7 @@
 <template>
     <div class="container">
-        <show-title :text="$t('index.allAc')"></show-title>
+        <show-title></show-title>
         <a-spin :spinning="loading" class="width-1280 content">
-            <a-icon
-                slot="indicator"
-                type="loading"
-                style="font-size: 24px"
-                spin
-            />
             <a-tabs v-model="status">
                 <a-tab-pane :tab="$t('index.allAc')" :key="null"></a-tab-pane>
                 <a-tab-pane :tab="$t('show.available')" :key="1"></a-tab-pane>
@@ -17,7 +11,9 @@
                 ></a-tab-pane>
                 <a-tab-pane :tab="$t('show.over')" key="END"></a-tab-pane>
             </a-tabs>
-            <show-list :list="list" class="list"></show-list>
+            <div class="list-content">
+                <show-list :list="list"></show-list>
+            </div>
             <pagination
                 :page.sync="page"
                 :total="total"
@@ -91,7 +87,7 @@ export default {
     .content {
         margin: auto;
         min-height: 750px;
-        padding: 30px 0;
+        padding-top: 30px;
     }
     /deep/.ant-tabs-bar {
         border-color: transparent;
@@ -101,8 +97,9 @@ export default {
         font-weight: bold;
         padding: 12px 0;
     }
-    .list {
+    .list-content {
         min-height: 500px;
+        padding-top: 40px;
     }
 }
 </style>

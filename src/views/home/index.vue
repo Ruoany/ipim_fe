@@ -9,7 +9,9 @@
             <div class="width-1280">
                 <h1 class="font-bold title">{{ $t("index.evCa") }}</h1>
                 <calendar></calendar>
-                <div class="flex-justify-content-space-between flex-align-items-center title">
+                <div
+                    class="flex-justify-content-space-between flex-align-items-center title"
+                >
                     <h1 class="font-bold">{{ $t("index.keAc") }}</h1>
                     <div
                         class="flex-align-items-center"
@@ -23,7 +25,7 @@
                         />
                     </div>
                 </div>
-                <div class="width-100 flex center">
+                <div class="width-100 flex">
                     <focus></focus>
                 </div>
             </div>

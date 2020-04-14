@@ -81,6 +81,7 @@ export default {
 .img-list {
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 }
 .empty {
     height: 500px;

@@ -160,6 +160,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Liaison from "@/apis/liaison";
 import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
@@ -168,7 +169,6 @@ import User from "@/apis/user";
 import { formatString } from "@/common/format";
 export default {
     components: { Upload },
-
     data() {
         let config = { required: true, message: "Please input" };
         return {
@@ -203,9 +203,11 @@ export default {
                 institutionShareholders: [{ name: "", percent: "" }]
             },
             loading: false,
-            spinning: false,
-            institutionId: undefined
+            spinning: false
         };
+    },
+    computed: {
+        ...mapGetters(["currentInstitution"])
     },
     filters: {
         formatShareholders(value) {
@@ -262,7 +264,7 @@ export default {
                         this.$message.error(message);
                         return;
                     }
-                    if (this.institutionId) {
+                    if (!this.$route.query.type) {
                         await this.$store.dispatch("removeCurrentInstitution");
                     }
                     this.onSuccess();
@@ -271,7 +273,7 @@ export default {
         },
         async initData() {
             this.spinning = true;
-            const { data } = await Institution.one(this.institutionId);
+            const { data } = await Institution.one(this.currentInstitution.id);
             this.form = data;
             if (this.form.institutionShareholders.length === 0) {
                 this.form.institutionShareholders.push({
@@ -291,8 +293,7 @@ export default {
         }
     },
     mounted() {
-        this.institutionId = this.$route.query.institutionId;
-        if (this.institutionId) {
+        if (!this.$route.query.type) {
             this.initData();
         }
     }

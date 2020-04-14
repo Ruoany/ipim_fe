@@ -1,7 +1,14 @@
 <template>
     <div>
-        <current-institution v-if="currentInstitution" :info="currentInstitution"></current-institution>
-        <a-button class="others" block @click="$router.push('/personal/mechanism')">
+        <current-institution
+            v-if="currentInstitution"
+            :info="currentInstitution"
+        ></current-institution>
+        <a-button
+            class="others"
+            block
+            @click="$router.push('/personal/mechanism?type=new')"
+        >
             <a-icon type="plus"></a-icon>
             <span>{{ $t("personal.others") }}</span>
         </a-button>
