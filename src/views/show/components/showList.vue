@@ -1,6 +1,10 @@
 <template>
     <div class="show-list-content flex flex-justify-content-space-between">
-        <a-empty v-if="list.length === 0" class="empty"></a-empty>
+        <a-empty
+            v-if="list.length === 0"
+            description="暫無數據"
+            class="empty"
+        ></a-empty>
         <show-cell
             v-for="item in list"
             :key="item.id"

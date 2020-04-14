@@ -178,6 +178,9 @@ export default {
     },
     methods: {
         initData: async function() {
+            if (!this.currentInstitution) {
+                return;
+            }
             this.loading = true;
             const { data } = await Participate.get({
                 institutionId: this.currentInstitution.id,
