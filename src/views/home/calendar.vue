@@ -1,11 +1,19 @@
 <template>
-    <div class="all flex-justify-content-space-between">
-        <div style="width:600px;">
-            <calendar class="list" @changeDate="date => (dayTime = date)"></calendar>
+    <div class="container flex-justify-content-space-between">
+        <div class="calendar">
+            <calendar
+                class="list"
+                @changeDate="date => (dayTime = date)"
+            ></calendar>
         </div>
         <a-spin :spinning="loading" class="flex list spin">
-            <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
-            <a-empty v-if="showList.length === 0"></a-empty>
+            <a-icon
+                slot="indicator"
+                type="loading"
+                style="font-size: 24px"
+                spin
+            />
+            <a-empty v-if="showList.length === 0" class="empty"></a-empty>
             <a-card
                 hoverable
                 v-else
@@ -21,13 +29,16 @@
                 :bordered="false"
             >
                 <div class="flex">
-                    <img class="img" :src="item.scope" />
+                    <div
+                        class="img"
+                        :style="{ backgroundImage: `url(${item.scope})` }"
+                    ></div>
                     <div class="flex-column flex-justify-content-space-between">
                         <div class="font-20">{{ item.nameZh }}</div>
                         <div class="red-color">
-                            {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
-                                $moment(item.endTime).format("YYYY.MM.DD")
-                            }}
+                            {{
+                                $moment(item.startTime).format("YYYY.MM.DD")
+                            }}-{{ $moment(item.endTime).format("YYYY.MM.DD") }}
                         </div>
                     </div>
                 </div>
@@ -75,60 +86,61 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.all {
-    .img {
-        width: 157px;
-        height: 98px;
-        object-fit: cover;
-        line-height: 0;
-    }
-    .font-20 {
-        font-size: 22px;
-        font-weight: bold;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2; //行数
-        -webkit-box-orient: vertical;
-    }
-
-    .list {
-        flex-direction: column;
-        justify-content: flex-start;
-        // flex: 1;
-        // width: 508px;
-        height: 510px;
-    }
-    .list::-webkit-scrollbar {
-        display: none;
-    }
-    .cell {
-        margin-bottom: 20px;
-        background: #fafafa;
-        border-radius: 3px;
-        // padding: 24px;
-        cursor: pointer;
-    }
-    .flex-column {
-        flex-direction: column;
-        padding-left: 28px;
-    }
-    .red-color {
-        color: #ed1c24;
-        font-size: 16px;
+.container {
+    .calendar {
+        width: 600px;
+        .list {
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 510px;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
     }
     .spin {
         height: 510px;
         width: calc(~"100% - 700px");
         overflow-y: scroll;
-        /deep/.ant-spin-container,
-        .ant-empty {
+        /deep/.ant-spin-container {
+            width: 100%;
+        }
+        .empty {
+            width: 100%;
             height: 100%;
         }
-        /deep/.ant-empty {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .cell {
+            margin-bottom: 20px;
+            background: #fafafa;
+            border-radius: 3px;
+            // padding: 24px;
+            cursor: pointer;
+            .flex-column {
+                width: 320px;
+                flex-direction: column;
+                padding-left: 28px;
+                box-sizing: border-box;
+                .font-20 {
+                    font-size: 22px;
+                    font-weight: bold;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; //行数
+                    -webkit-box-orient: vertical;
+                }
+                .red-color {
+                    color: #ed1c24;
+                    font-size: 16px;
+                }
+            }
+            .img {
+                width: 157px;
+                height: 98px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
         }
     }
     /deep/.ant-fullcalendar-column-header {
