@@ -1,10 +1,6 @@
 <template>
     <div class="flex img-list flex-align-items-center">
-        <a-empty
-            v-if="showList.length === 0"
-            description="暫無數據"
-            class="empty"
-        ></a-empty>
+        <a-empty v-if="showList.length === 0" description="暫無數據" class="empty"></a-empty>
         <show-cell
             v-for="item in showList"
             :key="item.id"
@@ -81,8 +77,11 @@ export default {
 .img-list {
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 }
 .empty {
     height: 500px;
+    // margin: auto;
+    width: 100%;
 }
 </style>

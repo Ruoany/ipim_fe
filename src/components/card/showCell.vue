@@ -6,9 +6,9 @@
         </div>
         <div class="padding-13 flex-justify-content-space-between">
             <div class="font-24">{{ name }}</div>
-            <div
-                class="font-red"
-            >{{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}</div>
+            <div class="font-red">
+                {{ $moment(startTime).format("YYYY.MM.DD") }}-{{ $moment(endTime).format("YYYY.MM.DD") }}
+            </div>
         </div>
     </a-card>
 </template>
@@ -47,6 +47,7 @@ export default {
         height: 240px;
         cursor: pointer;
         border-radius: 6px 6px 0px 0px;
+        object-fit: cover;
     }
     .font-24 {
         font-size: 24px;

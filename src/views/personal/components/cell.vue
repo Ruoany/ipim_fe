@@ -3,7 +3,7 @@
         <div class="ad">
             <div class="tag" :class="activityStatus"></div>
             <img
-                style="cursor:pointer;border-radius:6px;"
+                style="cursor:pointer;border-radius:6px;object-fit: cover;"
                 :src="scope"
                 @click="$emit('handleClick')"
             />

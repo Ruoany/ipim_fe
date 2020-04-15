@@ -1,18 +1,10 @@
 <template>
     <div class="all flex-justify-content-space-between">
         <div style="width:600px;">
-            <calendar
-                class="list"
-                @changeDate="date => (dayTime = date)"
-            ></calendar>
+            <calendar class="list" @changeDate="date => (dayTime = date)"></calendar>
         </div>
         <a-spin :spinning="loading" class="flex list spin">
-            <a-icon
-                slot="indicator"
-                type="loading"
-                style="font-size: 24px"
-                spin
-            />
+            <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
             <a-empty v-if="showList.length === 0"></a-empty>
             <a-card
                 hoverable
@@ -33,9 +25,9 @@
                     <div class="flex-column flex-justify-content-space-between">
                         <div class="font-20">{{ item.nameZh }}</div>
                         <div class="red-color">
-                            {{
-                                $moment(item.startTime).format("YYYY.MM.DD")
-                            }}-{{ $moment(item.endTime).format("YYYY.MM.DD") }}
+                            {{ $moment(item.startTime).format("YYYY.MM.DD") }}-{{
+                                $moment(item.endTime).format("YYYY.MM.DD")
+                            }}
                         </div>
                     </div>
                 </div>
@@ -87,7 +79,7 @@ export default {
     .img {
         width: 157px;
         height: 98px;
-
+        object-fit: cover;
         line-height: 0;
     }
     .font-20 {
