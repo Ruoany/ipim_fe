@@ -1,23 +1,30 @@
 <template>
     <div class="container">
         <div class="title">{{ $t("personal.question") }}</div>
-        <question-cell
-            v-for="(item, index) in question.questions"
-            :key="item.sequence"
-            :value.sync="answers[index]"
-            :type="item.type"
-            :title="item.title"
-            :q="item.questionItems"
-            :idx="item.sequence"
-        ></question-cell>
-        <a-button
-            v-show="!this.$route.query.questionnaireAnswerId"
-            type="primary"
-            size="large"
-            style="margin-top:30px"
-            @click="handleSubmit"
-            >{{ $t("personal.submit") }}</a-button
-        >
+        <a-empty
+            v-if="JSON.stringify(question) == '{}'"
+            class="empty"
+            description="暫無問卷"
+        ></a-empty>
+        <div v-else>
+            <question-cell
+                v-for="(item, index) in question.questions"
+                :key="item.sequence"
+                :value.sync="answers[index]"
+                :type="item.type"
+                :title="item.title"
+                :q="item.questionItems"
+                :idx="item.sequence"
+            ></question-cell>
+            <a-button
+                v-show="!this.$route.query.questionnaireAnswerId"
+                type="primary"
+                size="large"
+                style="margin-top:30px"
+                @click="handleSubmit"
+                >{{ $t("personal.submit") }}</a-button
+            >
+        </div>
     </div>
 </template>
 
@@ -44,10 +51,18 @@ export default {
             return obj;
         },
         initData: async function() {
-            const {
-                data: { content }
-            } = await QuestionNaire.get();
-            this.question = content[0];
+            if (this.query.questionnaireAnswerId) {
+                const { data } = await QuestionnaireAnswer.one(
+                    this.query.questionnaireAnswerId
+                );
+                this.question = data;
+            } else {
+                const { data } = await QuestionNaire.byActivity({
+                    activityId: this.query.activityId,
+                    method: this.query.method
+                });
+                this.question = data;
+            }
         },
         validator: function() {
             const promise = new Promise(resolve => {
@@ -113,6 +128,9 @@ export default {
     .title {
         font-size: 36px;
         font-weight: bold;
+    }
+    .empty {
+        height: 500px;
     }
 }
 </style>
