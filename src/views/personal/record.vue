@@ -67,7 +67,8 @@
                                 activityId: item.activity.id,
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
-                                    item.questionnaireAnswerId
+                                    item.questionnaireAnswerId,
+                                method: 'GENERAL_EXHIBITION'
                             })
                         "
                         >{{

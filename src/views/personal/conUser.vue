@@ -47,7 +47,7 @@
             <add-con-user
                 :visible.sync="infoVisible"
                 :selected-id="id"
-                :institution-id="institutionId"
+                :institution-id="currentInstitution.id"
                 @submit="onSuccess"
             ></add-con-user>
         </a-drawer>

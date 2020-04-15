@@ -62,10 +62,11 @@ export default {
     },
     methods: {
         Transform: function(o) {
-            Object.keys(o).map(item => {
-                o[item] = this.$crypto.decryption(unescape(o[item]));
+            const obj = JSON.parse(JSON.stringify(o));
+            Object.keys(obj).map(item => {
+                obj[item] = this.$crypto.decryption(unescape(obj[item]));
             });
-            return o;
+            return obj;
         },
         initData: async function() {
             const { data } = await ApplyPicture.one(this.query.applyPictureId);

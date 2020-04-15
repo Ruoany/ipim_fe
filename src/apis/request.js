@@ -24,8 +24,12 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
     response => {
-        response = response.data;
-        return response;
+        const { data } = response;
+        if (!data.success) {
+            message.error(data.message);
+            return false;
+        }
+        return data;
     },
     error => {
         const {

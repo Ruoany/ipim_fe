@@ -1,54 +1,113 @@
 <template>
-    <a-form-model ref="form" :model="form" :rules="rules" style="width:100%;">
-        <a-form-model-item prop="nameZh" :label="$t('util.nameZh')">
-            <a-input v-model="form.nameZh" />
-        </a-form-model-item>
-        <a-form-model-item prop="nameEnOrPt" :label="$t('util.nameEnAndPt')">
-            <a-input v-model="form.nameEnOrPt" />
-        </a-form-model-item>
-        <a-form-model-item prop="gender" :label="$t('util.sex')">
-            <a-radio-group v-model="form.gender">
-                <a-radio value="M">{{ $t("util.man") }}</a-radio>
-                <a-radio value="F">{{ $t("util.woman") }}</a-radio>
-            </a-radio-group>
-        </a-form-model-item>
-        <a-form-model-item prop="titleNameZh" :label="$t('personal.e')">
-            <a-input v-model="form.titleNameZh" />
-        </a-form-model-item>
-        <a-form-model-item prop="titleNameEnOrPt" :label="$t('personal.ai')">
-            <a-input v-model="form.titleNameEnOrPt" />
-        </a-form-model-item>
-        <a-form-model-item prop="tel" :label="$t('index.tel')">
-            <a-input v-model="form.tel" />
-        </a-form-model-item>
-        <a-form-model-item prop="abroadPhone" :label="$t('util.aphone')">
-            <a-input v-model="form.abroadPhone" />
-        </a-form-model-item>
-        <a-form-model-item prop="phone" :label="$t('util.bphone')">
-            <a-input v-model="form.phone" />
-        </a-form-model-item>
-        <a-form-model-item prop="email" :label="$t('index.email')">
-            <a-input v-model="form.email" />
-        </a-form-model-item>
-        <a-form-model-item prop="fax" :label="$t('index.fax')">
-            <a-input v-model="form.fax" />
-        </a-form-model-item>
-        <a-form-model-item prop="address" :label="$t('util.address')">
-            <a-textarea v-model="form.address" />
-        </a-form-model-item>
-        <a-form-model-item prop="incumbency" :label="$t('personal.f')">
-            <a-radio-group v-model="form.incumbency">
-                <a-radio :value="true">{{ $t("personal.g") }}</a-radio>
-                <a-radio :value="false">{{ $t("personal.h") }}</a-radio>
-            </a-radio-group>
-        </a-form-model-item>
+    <a-form-model ref="form" :model="form" :rules="rules" class="form">
+        <div class="flex flex-justify-content-space-between">
+            <a-form-model-item
+                prop="nameZh"
+                :label="$t('util.nameZh')"
+                class="inline"
+            >
+                <a-input v-model="form.nameZh" />
+            </a-form-model-item>
+            <a-form-model-item
+                prop="nameEnOrPt"
+                :label="$t('util.nameEnAndPt')"
+                class="inline"
+            >
+                <a-input v-model="form.nameEnOrPt" />
+            </a-form-model-item>
+        </div>
+        <div class="flex flex-justify-content-space-between">
+            <a-form-model-item
+                prop="titleNameZh"
+                :label="$t('personal.e')"
+                class="inline"
+            >
+                <a-input v-model="form.titleNameZh" />
+            </a-form-model-item>
+            <a-form-model-item
+                prop="titleNameEnOrPt"
+                :label="$t('personal.ai')"
+                class="inline"
+            >
+                <a-input v-model="form.titleNameEnOrPt" />
+            </a-form-model-item>
+        </div>
+        <div class="flex  flex-justify-content-space-between">
+            <a-form-model-item
+                prop="gender"
+                :label="$t('util.sex')"
+                class="inline"
+            >
+                <a-radio-group v-model="form.gender">
+                    <a-radio value="M">{{ $t("util.man") }}</a-radio>
+                    <a-radio value="F">{{ $t("util.woman") }}</a-radio>
+                </a-radio-group>
+            </a-form-model-item>
+            <a-form-model-item
+                prop="incumbency"
+                :label="$t('personal.f')"
+                class="inline"
+            >
+                <a-radio-group v-model="form.incumbency">
+                    <a-radio :value="true">{{ $t("personal.g") }}</a-radio>
+                    <a-radio :value="false">{{ $t("personal.h") }}</a-radio>
+                </a-radio-group>
+            </a-form-model-item>
+        </div>
+        <div class="flex  flex-justify-content-space-between">
+            <a-form-model-item
+                prop="tel"
+                :label="$t('index.tel')"
+                class="inline"
+            >
+                <a-input v-model="form.tel" />
+            </a-form-model-item>
+            <a-form-model-item
+                prop="abroadPhone"
+                :label="$t('util.aphone')"
+                class="inline"
+            >
+                <a-input v-model="form.abroadPhone" />
+            </a-form-model-item>
+        </div>
+        <div class="flex  flex-justify-content-space-between">
+            <a-form-model-item
+                prop="phone"
+                :label="$t('util.bphone')"
+                class="inline"
+            >
+                <a-input v-model="form.phone" />
+            </a-form-model-item>
+            <a-form-model-item
+                prop="email"
+                :label="$t('index.email')"
+                class="inline"
+            >
+                <a-input v-model="form.email" />
+            </a-form-model-item>
+        </div>
+        <div class="flex  flex-justify-content-space-between">
+            <a-form-model-item
+                prop="fax"
+                :label="$t('index.fax')"
+                class="inline"
+            >
+                <a-input v-model="form.fax" />
+            </a-form-model-item>
+            <a-form-model-item
+                prop="address"
+                :label="$t('util.address')"
+                class="inline"
+            >
+                <a-input v-model="form.address" />
+            </a-form-model-item>
+        </div>
         <div
             :style="{
                 width: '100%',
                 borderTop: '1px solid #e9e9e9',
                 padding: '10px 16px',
-                background: '#fff',
-                textAlign: 'right'
+                background: '#fff'
             }"
         >
             <a-button
@@ -141,7 +200,7 @@ export default {
                 email: "",
                 fax: "",
                 address: "",
-                incumbency: ""
+                incumbency: true
             }
         };
     },
@@ -181,4 +240,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.form {
+    width: 100%;
+    .inline {
+        width: 350px;
+    }
+}
+</style>
