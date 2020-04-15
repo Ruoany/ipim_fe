@@ -140,6 +140,7 @@
                 v-if="currentInstitution"
                 style="float:right;"
                 key="institution"
+                :disabled="!isChange"
             >
                 <span slot="title" class="flex center">
                     {{ currentInstitution.nameZh }}
@@ -169,7 +170,12 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentUser", "institutionList", "currentInstitution"])
+        ...mapGetters([
+            "currentUser",
+            "institutionList",
+            "currentInstitution",
+            "isChange"
+        ])
     },
     watch: {
         $route: {
@@ -227,22 +233,6 @@ export default {
             this.$router.push({ path, query: { form } });
         },
         changeCurrentInstitution: function(id) {
-            const d = this.$route.query.d
-                ? this.$crypto.decryption(unescape(this.$route.query.d))
-                : undefined;
-            const p = this.$route.query.participateId
-                ? this.$crypto.decryption(
-                      unescape(this.$route.query.participateId)
-                  )
-                : undefined;
-            if (p) {
-                this.$message.error("正在操作申請表相關內容，不允許切換機構");
-                return;
-            }
-            if (d) {
-                this.$message.error("修改表單期間不允許切換機構");
-                return;
-            }
             const o = this.institutionList.find(item => item.id === id);
             sessionStorage.setItem("institution", id);
             this.$store.dispatch("setCurrentInstitution", o);

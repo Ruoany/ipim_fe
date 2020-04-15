@@ -449,6 +449,7 @@ export default {
         initData: async function() {
             this.loading = true;
             if (this.formId) {
+                this.$store.dispatch("setChangeFalse");
                 const { data } = await PMFE.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
@@ -510,34 +511,38 @@ export default {
     mounted: function() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>
 
 <style lang="less" scoped>
 @import url("../css/form.less");
-
-.remark {
-    width: 100%;
-    display: inline-block;
-}
-.company-item {
-    width: 100%;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .button-wrapper {
-        width: 80px;
-        margin-left: 20px;
+.form-container {
+    .remark {
+        width: 100%;
+        display: inline-block;
     }
-}
-/deep/ .ant-checkbox-wrapper {
-    min-width: 150px;
-    height: 40px;
-    margin-left: 0;
-}
-.none {
-    display: none;
+    .company-item {
+        width: 100%;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .button-wrapper {
+            width: 80px;
+            margin-left: 20px;
+        }
+    }
+    /deep/ .ant-checkbox-wrapper {
+        min-width: 150px;
+        height: 40px;
+        margin-left: 0;
+    }
+    .none {
+        display: none;
+    }
 }
 </style>

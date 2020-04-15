@@ -347,8 +347,13 @@ export default {
     methods: {
         initData: async function() {
             if (this.formId) {
+                this.$store.dispatch("setChangeFalse");
                 const { data } = await PD.one(this.formId);
                 this.form = formatMoment(data);
+            } else {
+                this.form.activityId = this.$crypto.decryption(
+                    unescape(this.$route.query.a)
+                );
             }
         },
         handleLiaisonChange: function(value) {
@@ -378,11 +383,11 @@ export default {
         }
     },
     mounted: function() {
-        this.form.activityId = this.$crypto.decryption(
-            unescape(this.$route.query.a)
-        );
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>

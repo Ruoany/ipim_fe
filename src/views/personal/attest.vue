@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import User from "@/apis/user";
 import Upload from "@/components/upload";
 import Institution from "@/apis/institution";
@@ -167,7 +168,6 @@ export default {
                 legalPersonFiles: []
             },
             form: {},
-            id: null,
             rules: {
                 nature: [config],
                 businessRegistrationFiles: [config],
@@ -179,6 +179,9 @@ export default {
                 legalPersonFiles: [config]
             }
         };
+    },
+    computed: {
+        ...mapGetters(["currentInstitution"])
     },
     filters: {
         formatShareholders(value) {
@@ -193,19 +196,15 @@ export default {
     },
     methods: {
         async initData() {
-            const data = await Institution.one(this.id);
-            if (data.code === 200) {
-                this.form = data.data;
-            } else {
-                this.$message.error(data.message);
-            }
+            const { data } = await Institution.one(this.currentInstitution.id);
+            this.form = data ? data : {};
         },
         async certified() {
-            const data = await Institution.certified({
-                id: this.id,
+            const { data, code } = await Institution.certified({
+                id: this.currentInstitution.id,
                 ...this.formData
             });
-            if (data.code !== 200) {
+            if (code !== 200) {
                 this.$message.error(data.message);
                 return;
             }
@@ -217,8 +216,11 @@ export default {
         }
     },
     mounted() {
-        this.id = this.$route.query.institutionId;
+        this.$store.dispatch("setChangeFalse");
         this.initData();
+    },
+    destroyed() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>

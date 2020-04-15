@@ -116,8 +116,12 @@ export default {
         }
     },
     mounted: function() {
+        this.$store.dispatch("setChangeFalse");
         this.query = this.Transform(this.$route.query);
         this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>

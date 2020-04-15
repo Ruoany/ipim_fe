@@ -1,7 +1,8 @@
 export default {
     state: {
         info: undefined,
-        institution: undefined
+        institution: undefined,
+        isChange: true
     },
     getters: {
         info: state => state.info,
@@ -13,7 +14,8 @@ export default {
             }
             return [];
         },
-        currentInstitution: state => state.institution
+        currentInstitution: state => state.institution,
+        isChange: state => state.isChange
     },
     mutations: {
         SET_INFO_DATA: function(state, value) {
@@ -27,6 +29,12 @@ export default {
         },
         REMOVE_CURRENT_INSTITUTION: function(state) {
             state.institution = undefined;
+        },
+        SET_INSTITUTION_CHANGE_TRUE: function(state) {
+            state.isChange = true;
+        },
+        SET_INSTITUTION_CHANGE_FALSE: function(state) {
+            state.isChange = false;
         }
     },
     actions: {
@@ -59,6 +67,18 @@ export default {
         removeCurrentInstitution: function({ commit }) {
             return new Promise(async resolve => {
                 commit("REMOVE_CURRENT_INSTITUTION");
+                resolve();
+            });
+        },
+        setChangeTrue: function({ commit }) {
+            return new Promise(async resolve => {
+                commit("SET_INSTITUTION_CHANGE_TRUE");
+                resolve();
+            });
+        },
+        setChangeFalse: function({ commit }) {
+            return new Promise(async resolve => {
+                commit("SET_INSTITUTION_CHANGE_FALSE");
                 resolve();
             });
         },

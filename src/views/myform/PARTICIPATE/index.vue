@@ -332,8 +332,13 @@ export default {
     methods: {
         initData: async function() {
             if (this.formId) {
+                this.$store.dispatch("setChangeFalse");
                 const { data } = await PAA.one(this.formId);
                 this.form = data;
+            } else {
+                this.form.activityId = this.$crypto.decryption(
+                    unescape(this.$route.query.a)
+                );
             }
         },
         onSuccess: function() {
@@ -356,11 +361,11 @@ export default {
         }
     },
     mounted() {
-        this.form.activityId = this.$crypto.decryption(
-            unescape(this.$route.query.a)
-        );
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>

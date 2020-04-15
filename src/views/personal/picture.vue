@@ -119,8 +119,12 @@ export default {
         }
     },
     mounted: function() {
+        this.$store.dispatch("setChangeFalse");
         this.query = this.Transform(this.$route.query);
         if (this.query.applyPictureId) this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>

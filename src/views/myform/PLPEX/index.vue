@@ -467,6 +467,7 @@ export default {
         initData: async function() {
             this.loading = true;
             if (this.formId) {
+                this.$store.dispatch("setChangeFalse");
                 const { data } = await PPLPEX.one(this.formId);
                 this.form = data;
                 this.selectedActivity = {
@@ -528,6 +529,9 @@ export default {
     mounted: function() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+    },
+    destroyed: function() {
+        this.$store.dispatch("setChangeTrue");
     }
 };
 </script>
