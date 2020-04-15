@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import addConUser from "./components/addConUser";
 import Liaison from "@/apis/liaison";
 import Pagination from "@/components/pagination";
@@ -74,6 +75,9 @@ export default {
             total: 1
         };
     },
+    computed: {
+        ...mapGetters(["currentInstitution"])
+    },
     watch: {
         page: function() {
             this.initData();
@@ -90,7 +94,7 @@ export default {
         async initData() {
             this.loading = true;
             const data = await Liaison.get({
-                institutionId: this.institutionId,
+                institutionId: this.currentInstitution.id,
                 page: this.page,
                 size: this.size
             });
@@ -115,7 +119,6 @@ export default {
         }
     },
     mounted() {
-        this.institutionId = this.$route.query.institutionId;
         this.initData();
     }
 };

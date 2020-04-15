@@ -90,7 +90,7 @@ export default {
     },
     methods: {
         handleNavigate: function(url) {
-            this.$router.push(`${url}?institutionId=${this.info.id}`);
+            this.$router.push(url);
         }
     }
 };
