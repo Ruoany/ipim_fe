@@ -2,11 +2,7 @@
     <div class="current-institution-container">
         <div
             class="logo"
-            :style="
-                info.logo
-                    ? { backgroundImage: `url(${info.logo})` }
-                    : { backgroundImage: `url(${defaultImage})` }
-            "
+            :style="info.logo ? { backgroundImage: `url(${info.logo})` } : { backgroundImage: `url(${defaultImage})` }"
         ></div>
         <div class="content">
             <div class="top">
@@ -16,19 +12,11 @@
                 </div>
             </div>
             <div class="bottom">
-                <div
-                    v-if="info.status !== 'approving'"
-                    class="item"
-                    @click="handleNavigate('/personal/mechanism')"
-                >
+                <div v-if="info.status !== 'approving'" class="item" @click="handleNavigate('/personal/mechanism')">
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
                 </div>
-                <div
-                    v-else
-                    class="item item-disabled"
-                    title="認證中的機構不允許修改資料"
-                >
+                <div v-else class="item item-disabled" title="認證中的機構不允許修改資料">
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
                 </div>
@@ -36,20 +24,14 @@
                     <a-icon type="team" style="font-size:25px;" />
                     <span>{{ $t("personal.n") }}</span>
                 </div>
-                <div
-                    class="item"
-                    @click="handleNavigate('/personal/sub_account')"
-                >
+                <div class="item" @click="handleNavigate('/personal/sub_account')" v-if="roleBoolean">
                     <a-icon type="solution" style="font-size:25px;" />
                     <span>{{ $t("personal.x") }}</span>
                 </div>
-                <div class="right-button">
+                <div class="right-button" v-if="roleBoolean">
                     <a-button
                         @click="handleNavigate('/personal/attest')"
-                        v-if="
-                            info.status === 'uncertified' ||
-                                info.status === 'rejected'
-                        "
+                        v-if="info.status === 'uncertified' || info.status === 'rejected'"
                         ghost
                         type="danger"
                         >{{ $t("personal.certify") }}</a-button
@@ -65,6 +47,7 @@
 import defaultImage from "@/assets/image/nologo.jpg";
 import now_me from "@/assets/image/now_me.svg";
 import i18n from "@/assets/i18n/index";
+import { mapGetters } from "vuex";
 export default {
     props: { info: Object },
     filters: {
@@ -83,6 +66,12 @@ export default {
                     return i18n.t("personal.unverified");
                     break;
             }
+        }
+    },
+    computed: {
+        ...mapGetters(["currentUser"]),
+        roleBoolean() {
+            return this.info.adminId === this.currentUser;
         }
     },
     data() {

@@ -1,14 +1,13 @@
 <template>
     <div class="question-cell-container">
         <div class="question-cell-title">
-            {{ idx }}.{{ title
-            }}<span style="color:#ccc">（{{ formatQuestion }}）</span>
+            {{ idx }}.{{ title }}<span style="color:#ccc">（{{ formatQuestion }}）</span>
         </div>
         <div v-if="type === 'RADIO'">
             <div
                 v-for="item in q"
                 :key="item.id"
-                :class="init === item.id ? 'item-active' : 'item'"
+                :class="init == item.id ? 'item-active' : 'item'"
                 @click="() => (disabled ? '' : handleRadio(item.id))"
             >
                 {{ item.item }}
@@ -26,12 +25,7 @@
         </div>
         <div v-if="type === 'FILL'">
             <div v-if="disabled" class="disabled">{{ init }}</div>
-            <a-input
-                v-else
-                v-model="init"
-                size="large"
-                style="width:500px"
-            ></a-input>
+            <a-input v-else v-model="init" size="large" style="width:500px"></a-input>
         </div>
     </div>
 </template>

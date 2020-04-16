@@ -1,11 +1,7 @@
 <template>
     <div class="container">
         <div class="title">{{ $t("personal.question") }}</div>
-        <a-empty
-            v-if="JSON.stringify(question) == '{}'"
-            class="empty"
-            description="暫無問卷"
-        ></a-empty>
+        <a-empty v-if="JSON.stringify(question) == '{}'" class="empty" description="暫無問卷"></a-empty>
         <div v-else>
             <question-cell
                 v-for="(item, index) in question.questions"
@@ -52,10 +48,21 @@ export default {
         },
         initData: async function() {
             if (this.query.questionnaireAnswerId) {
-                const { data } = await QuestionnaireAnswer.one(
-                    this.query.questionnaireAnswerId
-                );
-                this.question = data;
+                const { data } = await QuestionnaireAnswer.one(this.query.questionnaireAnswerId);
+                // this.question = data;
+                this.question = data.questionnaire;
+                this.answers = data.answers.map(item => {
+                    let answerList = [];
+                    if (item.items) {
+                        answerList = item.items.map(answersItem => {
+                            return answersItem.id;
+                        });
+                    } else {
+                        answerList = item.answer;
+                    }
+
+                    return answerList;
+                });
             } else {
                 const { data } = await QuestionNaire.byActivity({
                     activityId: this.query.activityId,
@@ -111,7 +118,12 @@ export default {
                               };
                     })
                 };
-                console.log("--->", body);
+                const { code, message } = await QuestionnaireAnswer.create(body);
+                if (code !== 200) {
+                    this.$message.error(message);
+                    return;
+                }
+                this.$router.back();
             }
         }
     },

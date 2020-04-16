@@ -141,7 +141,7 @@ const zhData = {
         ad: "子賬號管理",
         ae: "新增子賬號",
         af: "綁定子賬號",
-        ag: "請輸入員工個人信息的ID號",
+        ag: "請輸入員工登錄時填寫的賬號",
         ah: "認證本機構",
         ai: "職位（英/葡文）",
         aj: "商業登記證明副本（三個月內有效）",
@@ -177,7 +177,7 @@ const zhData = {
         upload: "展會圖片",
         tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
         submit: "提交",
-        userId: "用戶ID",
+        userId: "電郵",
         meType: "機構性質",
         approving: "待審批",
         passed: "獲批",
@@ -193,7 +193,9 @@ const zhData = {
         shareName: "股東名稱",
         sharePer: "股東股份",
         report: "展後報告",
-        delete: "刪除"
+        delete: "刪除",
+        name: "名稱",
+        contal: "操作"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告"
