@@ -1,6 +1,11 @@
 <template>
     <div class="wrapper">
         <a-carousel autoplay>
+            <img
+                class="img-100"
+                src="http://api-exhibition.servier.iteratech.net/upload/2020/04/17/98d17b53aa3c45f19ff680d07158ab8d.png"
+                @click="go"
+            />
             <img class="img-100" src="http://rrd.me/gnPsX" />
             <img class="img-100" src="http://u6.gg/sQ5AW" />
             <img class="img-100" src="http://u6.gg/sQ5Bt" />
@@ -31,6 +36,11 @@ export default {
     components: {
         focus,
         calendar
+    },
+    methods: {
+        go() {
+            window.open("https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592");
+        }
     }
 };
 </script>
