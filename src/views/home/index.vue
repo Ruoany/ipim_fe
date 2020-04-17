@@ -3,7 +3,7 @@
         <a-carousel autoplay>
             <img
                 class="img-100"
-                src="http://api-exhibition.servier.iteratech.net/upload/2020/04/17/98d17b53aa3c45f19ff680d07158ab8d.png"
+                src="http://api-exhibition.servier.iteratech.net/upload/2020/04/17/e32417009e844eb2877a95ff0f1ca25d.png"
                 @click="go"
             />
             <img class="img-100" src="http://rrd.me/gnPsX" />
