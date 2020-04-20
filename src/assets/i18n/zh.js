@@ -44,7 +44,8 @@ const zhData = {
         gmbpf: "粵澳名優商品展",
         mif: "澳門國際貿易投資展覽會",
         plpex: "葡語國家產品及服務展",
-        logout: "退出登錄"
+        logout: "退出登錄",
+        downloadPersonal: "下載中心",
     },
     index: {
         evCa: "展會日曆",
@@ -53,7 +54,7 @@ const zhData = {
         address: "地址",
         email: "電郵",
         tel: "電話",
-        fax: "傳真"
+        fax: "傳真",
     },
     show: {
         available: "可報名的展會",
@@ -81,7 +82,7 @@ const zhData = {
         method: "申請參加活動",
         join: "參展",
         write: "填寫申請表",
-        deadline: "截止報名"
+        deadline: "截止報名",
     },
     util: {
         yes: "是",
@@ -112,7 +113,7 @@ const zhData = {
         nameZh: "姓名（中文）",
         nameEnAndPt: "姓名（英/葡文）",
         companyName: "企業名稱",
-        liaisonName: "聯絡人名稱"
+        liaisonName: "聯絡人名稱",
     },
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
@@ -195,10 +196,10 @@ const zhData = {
         report: "展後報告",
         delete: "刪除",
         name: "名稱",
-        contal: "操作"
+        contal: "操作",
     },
     report: {
-        aa: "填寫方式一：在綫填寫展會報告"
+        aa: "填寫方式一：在綫填寫展會報告",
     },
     login: {
         title: "管理員登錄",
@@ -224,7 +225,7 @@ const zhData = {
         getCode: "獲取驗證碼",
         set: "確認重置",
         return: "返回",
-        insName: "機構名稱"
+        insName: "機構名稱",
     },
     miecf,
     mif,
@@ -241,7 +242,10 @@ const zhData = {
     formbf,
     formbd,
     reportba,
-    reportbb
+    reportbb,
+    downloadPersonal: {
+        all: "全部",
+    },
 };
 
 export default zhData;

@@ -8,7 +8,7 @@ import report from "./report";
 const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location, onResolve, onReject) {
     if (onResolve || onReject) return routerPush.call(this, location, onResolve, onReject);
-    return routerPush.call(this, location).catch(error => error);
+    return routerPush.call(this, location).catch((error) => error);
 };
 
 Vue.use(VueRouter);
@@ -21,13 +21,13 @@ const router = new VueRouter({
             path: "/",
             meta: {
                 title: "首页",
-                key: "home"
+                key: "home",
             },
             component: () => import("@/views/layout/index"),
             children: [
                 {
                     path: "/",
-                    redirect: "/index"
+                    redirect: "/index",
                 },
                 {
                     path: "/index",
@@ -35,40 +35,49 @@ const router = new VueRouter({
                     meta: {
                         title: "首頁",
                         key: "home",
-                        case: "index"
-                    }
+                        case: "index",
+                    },
+                },
+                {
+                    path: "/download_personal",
+                    component: () => import("@/views/dowPer/index"),
+                    meta: {
+                        title: "下載中心",
+                        key: "download_personal",
+                        case: "download_personal",
+                    },
                 },
                 ...show,
                 ...personal,
                 ...myform,
-                ...report
-            ]
+                ...report,
+            ],
         },
         {
             path: "/login",
             meta: {
                 title: "登錄",
-                key: "login"
+                key: "login",
             },
-            component: () => import("@/views/login/index")
+            component: () => import("@/views/login/index"),
         },
         {
             path: "/register",
             meta: {
                 title: "註冊",
-                key: "register"
+                key: "register",
             },
-            component: () => import("@/views/register/index")
+            component: () => import("@/views/register/index"),
         },
         {
             path: "/reset",
             meta: {
                 title: "重置密碼",
-                key: "reset"
+                key: "reset",
             },
-            component: () => import("@/views/reset/index")
-        }
-    ]
+            component: () => import("@/views/reset/index"),
+        },
+    ],
 });
 
 router.afterEach(() => {
