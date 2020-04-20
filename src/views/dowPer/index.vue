@@ -27,7 +27,7 @@ import Pagination from "@/components/pagination";
 import CompanyDocument from "@/apis/companyDocument";
 import CommonConfig from "@/apis/commonConfig";
 import { mapGetters } from "vuex";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 
 export default {
     components: { Pagination },
