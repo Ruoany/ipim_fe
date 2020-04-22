@@ -96,7 +96,6 @@ export default {
             let x = new XMLHttpRequest();
             x.open("GET", url, true);
             x.responseType = "blob";
-            x.withCredentials = true;
             x.onload = (e) => {
                 let url = window.URL.createObjectURL(x.response);
                 let a = document.createElement("a");
