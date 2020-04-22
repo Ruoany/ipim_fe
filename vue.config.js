@@ -38,15 +38,15 @@ module.exports = {
         https: false,
         disableHostCheck: true,
         open: true,
-        // proxy: {
-        //     "/api": {
-        //         target: "http://api-exhibition.servier.iteratech.net",
-        //         // target: "http://192.168.101.53:9196", //联调地址
-        //         pathRewrite: {
-        //             "^/api": "",
-        //         },
-        //         changeOrigin: true,
-        //     },
-        // },
+        proxy: {
+            "/api": {
+                target: "http://api-exhibition.servier.iteratech.net",
+                // target: "http://192.168.101.53:9196", //联调地址
+                pathRewrite: {
+                    "^/api": "",
+                },
+                changeOrigin: true,
+            },
+        },
     },
 };

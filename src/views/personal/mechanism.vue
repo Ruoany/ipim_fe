@@ -32,19 +32,19 @@
             <a-form-model-item prop="registrationNumber" :label="$t('personal.u')">
                 <a-input v-model="form.registrationNumber"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="taxpayerNo" :label="$t('personal.y')">
+            <a-form-model-item :label="$t('personal.y')">
                 <a-input v-model="form.taxpayerNo"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="taxpayerName" :label="$t('personal.ay')">
+            <a-form-model-item :label="$t('personal.ay')">
                 <a-input v-model="form.taxpayerName"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="dateOfEstablishment" :label="$t('personal.z')">
+            <a-form-model-item :label="$t('personal.z')">
                 <a-month-picker v-model="form.dateOfEstablishment" style="width:100%" />
             </a-form-model-item>
-            <a-form-model-item prop="business" :label="$t('personal.aa')">
+            <a-form-model-item :label="$t('personal.aa')">
                 <a-textarea v-model="form.business"></a-textarea>
             </a-form-model-item>
-            <a-form-model-item prop="deal" :label="$t('personal.ab')">
+            <a-form-model-item :label="$t('personal.ab')">
                 <a-radio-group v-model="form.deal">
                     <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
                     <a-radio :value="false">{{ $t("util.no") }}</a-radio>
@@ -62,7 +62,7 @@
                         @click="
                             form.institutionShareholders.push({
                                 name: '',
-                                percent: ''
+                                percent: '',
                             })
                         "
                     ></a-button>
@@ -126,7 +126,7 @@ export default {
                 dateOfEstablishment: [config],
                 business: [config],
                 deal: [config],
-                institutionShareholders: [config]
+                institutionShareholders: [config],
             },
             form: {
                 adminId: this.$store.getters.currentUser,
@@ -141,28 +141,28 @@ export default {
                 dateOfEstablishment: null,
                 business: "",
                 deal: true,
-                institutionShareholders: [{ name: "", percent: "" }]
+                institutionShareholders: [{ name: "", percent: "" }],
             },
             loading: false,
-            spinning: false
+            spinning: false,
         };
     },
     computed: {
         ...mapGetters(["currentInstitution", "currentUser"]),
         roleBoolean() {
             return this.currentInstitution.adminId === this.currentUser;
-        }
+        },
     },
     filters: {
         formatShareholders(value) {
             return value
                 ? value
-                      .map(item => {
+                      .map((item) => {
                           return `${item.name}:${item.percent}%`;
                       })
                       .join(";")
                 : "尚未設定";
-        }
+        },
     },
     methods: {
         beforeUpload(file) {
@@ -198,7 +198,7 @@ export default {
             this.$router.replace("/personal/info");
         },
         async handleSubmit() {
-            this.$refs.form.validate(async valid => {
+            this.$refs.form.validate(async (valid) => {
                 if (valid) {
                     this.spinning = true;
                     const { code, message } = await Institution.create(formatString(this.form));
@@ -220,20 +220,20 @@ export default {
             if (this.form.institutionShareholders.length === 0) {
                 this.form.institutionShareholders.push({
                     name: "",
-                    percent: ""
+                    percent: "",
                 });
             }
             if (this.form.status !== "passed" && this.form.dateOfEstablishment) {
                 this.form.dateOfEstablishment = this.$moment(data.dateOfEstablishment);
             }
             this.spinning = false;
-        }
+        },
     },
     mounted() {
         if (!this.$route.query.type) {
             this.initData();
         }
-    }
+    },
 };
 </script>
 
