@@ -1,15 +1,15 @@
 import axios from "axios";
-export const Login = async params => {
+export const Login = async (params) => {
     const {
-        data: { data }
+        data: { data },
     } = await axios({
         url: "/api/swagger/login",
         params: {
             loginUrl: "http://127.0.0.1:9196/login",
             saveLogin: false,
-            ...params
+            ...params,
         },
-        method: "GET"
+        method: "GET",
     });
     return data;
 };

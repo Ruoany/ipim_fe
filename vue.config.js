@@ -4,11 +4,11 @@ module.exports = {
             less: {
                 modifyVars: {
                     "primary-color": "#ED1C24",
-                    "link-color": "#ED1C24"
+                    "link-color": "#ED1C24",
                 },
-                javascriptEnabled: true
-            }
-        }
+                javascriptEnabled: true,
+            },
+        },
     },
     lintOnSave: false,
     pages: {
@@ -17,8 +17,8 @@ module.exports = {
             template: "public/index.html",
             filename: "index.html",
             title: "澳門貿易投資促進局活動項目網上申請系統",
-            chunks: ["chunk-vendors", "chunk-common", "index"]
-        }
+            chunks: ["chunk-vendors", "chunk-common", "index"],
+        },
     },
     css: {
         loaderOptions: {
@@ -26,11 +26,11 @@ module.exports = {
                 modifyVars: {
                     "primary-color": "#EE1C24",
                     "link-color": "#EE1C24",
-                    "border-radius-base": "2px"
+                    "border-radius-base": "2px",
                 },
-                javascriptEnabled: true
-            }
-        }
+                javascriptEnabled: true,
+            },
+        },
     },
     devServer: {
         port: 8888, //端口号
@@ -43,10 +43,10 @@ module.exports = {
                 target: "http://api-exhibition.servier.iteratech.net",
                 // target: "http://192.168.101.53:9196", //联调地址
                 pathRewrite: {
-                    "^/api": ""
+                    "^/api": "",
                 },
-                changeOrigin: true
-            }
-        }
-    }
+                changeOrigin: true,
+            },
+        },
+    },
 };

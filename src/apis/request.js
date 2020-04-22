@@ -7,23 +7,23 @@ export const baseURL = process.env.NODE_ENV === "production" ? "/api" : "/api";
 
 const request = axios.create({
     baseURL, // api的base_url
-    timeout: 50000 // 设置默认的请求超时时间
+    timeout: 50000, // 设置默认的请求超时时间
 });
 
 // 请求拦截器
 request.interceptors.request.use(
-    config => {
+    (config) => {
         config.headers = {
-            Authorization: sessionStorage.getItem("token")
+            Authorization: sessionStorage.getItem("token"),
         };
         return config;
     },
-    error => {
+    (error) => {
         return Promise.reject(error);
     }
 );
 request.interceptors.response.use(
-    response => {
+    (response) => {
         const { data } = response;
         if (!data.success) {
             message.error(data.message);
@@ -31,9 +31,9 @@ request.interceptors.response.use(
         }
         return data;
     },
-    error => {
+    (error) => {
         const {
-            response: { data }
+            response: { data },
         } = error;
         message.error(data.message);
         if (data.code === 401) {

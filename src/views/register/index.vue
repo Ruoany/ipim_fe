@@ -6,41 +6,21 @@
         <a-dropdown class="login-dropdown-wrapper login-dropdown">
             <a class="ant-dropdown-link">語言</a>
             <a-menu slot="overlay">
-                <a-menu-item key="zh" @click="lanChange('zh')"
-                    >中文</a-menu-item
-                >
-                <a-menu-item key="en" @click="lanChange('en')"
-                    >English</a-menu-item
-                >
-                <a-menu-item key="pt" @click="lanChange('pt')"
-                    >Português</a-menu-item
-                >
+                <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
+                <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
+                <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
             </a-menu>
         </a-dropdown>
         <div class="content-wrapper">
             <div class="title">{{ $t("login.register") }}</div>
-            <a-form-model
-                ref="register"
-                class="form"
-                :model="form"
-                :rules="rules"
-            >
+            <a-form-model ref="register" class="form" :model="form" :rules="rules">
                 <a-form-model-item prop="account">
-                    <a-input
-                        v-model="form.account"
-                        size="large"
-                        :placeholder="$t('login.account')"
-                    >
+                    <a-input v-model="form.account" size="large" :placeholder="$t('login.account')">
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="pwd">
-                    <a-input
-                        v-model.trim="form.pwd"
-                        type="password"
-                        size="large"
-                        :placeholder="$t('login.password')"
-                    >
+                    <a-input v-model.trim="form.pwd" type="password" size="large" :placeholder="$t('login.password')">
                         <a-icon slot="prefix" type="lock" />
                     </a-input>
                 </a-form-model-item>
@@ -55,77 +35,48 @@
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="name">
-                    <a-input
-                        v-model="form.name"
-                        size="large"
-                        :placeholder="$t('login.name')"
-                    >
+                    <a-input v-model="form.name" size="large" :placeholder="$t('login.name')">
                         <a-icon slot="prefix" type="solution" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="phone">
-                    <a-input
-                        v-model.number="form.phone"
-                        size="large"
-                        :placeholder="$t('login.phone')"
-                    >
-                        <a-select
-                            slot="addonBefore"
-                            v-model="areaCode"
-                            style="width: 120px"
-                        >
+                    <a-input v-model.number="form.phone" size="large" :placeholder="$t('login.phone')">
+                        <a-select slot="addonBefore" v-model="areaCode" style="width: 140px">
                             <a-select-option value="+853">
-                                澳門(+853)
+                                中國澳門(+853)
                             </a-select-option>
                             <a-select-option value="+86">
-                                内地(+86)
+                                中國(+86)
                             </a-select-option>
                         </a-select>
                         <a-icon slot="prefix" type="phone" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="institutionName">
-                    <a-input
-                        v-model="form.institutionName"
-                        size="large"
-                        :placeholder="$t('login.insName')"
-                    >
+                    <a-input v-model="form.institutionName" size="large" :placeholder="$t('login.insName')">
                         <a-icon slot="prefix" type="snippets" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="receive" :label="$t('login.checkbox')">
                     <a-checkbox-group v-model="form.receives">
-                        <a-checkbox value="EMAIL">{{
-                            $t("login.email")
-                        }}</a-checkbox>
-                        <a-checkbox value="SMS">{{
-                            $t("login.message")
-                        }}</a-checkbox>
+                        <a-checkbox value="EMAIL">{{ $t("login.email") }}</a-checkbox>
+                        <a-checkbox value="SMS">{{ $t("login.message") }}</a-checkbox>
                     </a-checkbox-group>
                 </a-form-model-item>
                 <a-form-model-item prop="agree" class="item">
-                    <a-checkbox
-                        :checked="agree"
-                        @change="e => (agree = e.target.checked)"
-                        >{{ $t("login.tips") }}</a-checkbox
-                    >
+                    <a-checkbox :checked="agree" @change="(e) => (agree = e.target.checked)">{{
+                        $t("login.tips")
+                    }}</a-checkbox>
                 </a-form-model-item>
 
                 <a-form-model-item>
-                    <a-button
-                        block
-                        type="primary"
-                        size="large"
-                        :disabled="!agree"
-                        @click="handleSubmit"
-                        >{{ $t("login.register") }}</a-button
-                    >
+                    <a-button block type="primary" size="large" :disabled="!agree" @click="handleSubmit">{{
+                        $t("login.register")
+                    }}</a-button>
                     <div class="register-wrapper">
                         <span>
                             {{ $t("login.have") }}
-                            <router-link to="/login" replace>{{
-                                $t("login.login")
-                            }}</router-link>
+                            <router-link to="/login" replace>{{ $t("login.login") }}</router-link>
                         </span>
                     </div>
                 </a-form-model-item>
@@ -145,58 +96,56 @@ export default {
                     {
                         required: true,
                         message: "Please input the email address",
-                        trigger: "blur"
+                        trigger: "blur",
                     },
                     {
                         type: "email",
                         message: "Email address is incorrect",
-                        trigger: "blur"
-                    }
+                        trigger: "blur",
+                    },
                 ],
                 pwd: [
                     {
                         required: true,
                         message: "Please input the password",
-                        trigger: "blur"
+                        trigger: "blur",
                     },
                     {
                         pattern: /\w{6,20}/,
                         message: "Password format is incorrect",
-                        trigger: "blur"
-                    }
+                        trigger: "blur",
+                    },
                 ],
                 confirm: [
                     {
                         validator: (rule, value, callback) => {
                             if (value !== this.form.pwd) {
-                                callback(
-                                    "Confirm that the password does not match the password"
-                                );
+                                callback("Confirm that the password does not match the password");
                             } else {
                                 callback();
                             }
                         },
-                        trigger: "blur"
-                    }
+                        trigger: "blur",
+                    },
                 ],
                 name: [
                     {
                         required: true,
                         message: "Please input your name",
-                        trigger: "blur"
-                    }
+                        trigger: "blur",
+                    },
                 ],
                 phone: [
                     {
                         required: true,
                         message: "Please input your phone number",
-                        trigger: "blur"
+                        trigger: "blur",
                     },
                     {
                         pattern: /\d/,
                         message: "Phone number format is incorrect",
-                        trigger: "blur"
-                    }
+                        trigger: "blur",
+                    },
                 ],
                 receives: [
                     {
@@ -206,16 +155,16 @@ export default {
                             } else {
                                 callback();
                             }
-                        }
-                    }
+                        },
+                    },
                 ],
                 institutionName: [
                     {
                         required: true,
                         message: "Please input your institutionName",
-                        trigger: "blur"
-                    }
-                ]
+                        trigger: "blur",
+                    },
+                ],
             },
             form: {
                 account: "",
@@ -224,10 +173,10 @@ export default {
                 name: "",
                 phone: "",
                 type: "GENERAL",
-                receive: []
+                receive: [],
             },
             agree: false,
-            areaCode: "+853"
+            areaCode: "+853",
         };
     },
     methods: {
@@ -239,7 +188,7 @@ export default {
             this.$router.replace("/login");
         },
         handleSubmit: function() {
-            this.$refs.register.validate(async valid => {
+            this.$refs.register.validate(async (valid) => {
                 if (valid) {
                     let form = JSON.stringify(this.form);
                     form = JSON.parse(form);
@@ -252,8 +201,8 @@ export default {
                     this.onSuccess();
                 }
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
