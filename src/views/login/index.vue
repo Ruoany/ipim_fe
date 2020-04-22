@@ -52,24 +52,24 @@ export default {
                 username: [
                     {
                         required: true,
-                        message: "Please input the email address"
+                        message: "Please input the email address",
                     },
                     {
                         type: "email",
-                        message: "Email format is incorrect"
-                    }
+                        message: "Email format is incorrect",
+                    },
                 ],
                 password: [
                     {
                         required: true,
-                        message: "Please input the passwrod"
-                    }
-                ]
+                        message: "Please input the passwrod",
+                    },
+                ],
             },
             form: {
                 username: "",
-                password: ""
-            }
+                password: "",
+            },
         };
     },
     methods: {
@@ -82,14 +82,14 @@ export default {
             this.$router.push("/");
         },
         handleSubmit: function() {
-            this.$refs.login.validate(async valid => {
+            this.$refs.login.validate(async (valid) => {
                 if (valid) {
                     this.loading = true;
                     const result = await Login(this.form);
                     const { code, message, data } = JSON.parse(result);
                     if (code !== 200) {
                         this.loading = false;
-                        this.$message.error(message);
+                        // this.$message.error(message);
                         return;
                     }
                     sessionStorage.setItem("token", data.token);
@@ -98,12 +98,12 @@ export default {
                     this.getUserInfo();
                 }
             });
-        }
+        },
     },
     mounted: function() {
         sessionStorage.clear();
         this.$store.dispatch("clear");
-    }
+    },
 };
 </script>
 

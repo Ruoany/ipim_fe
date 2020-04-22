@@ -28,12 +28,12 @@ export default {
     watch: {
         "$route.query": function(newValue) {
             this.getActiveById(newValue.id);
-        }
+        },
     },
     data() {
         return {
             id: null,
-            activeData: {}
+            activeData: {},
         };
     },
     methods: {
@@ -42,14 +42,14 @@ export default {
             if (data.code === 200) {
                 this.activeData = data.data;
             } else {
-                this.$message.error(data.message);
+                // this.$message.error(data.message);
             }
-        }
+        },
     },
     mounted() {
         this.id = this.$route.query.id;
         this.getActiveById(this.id);
-    }
+    },
 };
 </script>
 

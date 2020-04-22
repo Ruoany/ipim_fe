@@ -225,7 +225,7 @@ const zhData = {
         getCode: "獲取驗證碼",
         set: "確認重置",
         return: "返回",
-        insName: "機構名稱",
+        isAdmin: "是否為機構管理員",
     },
     miecf,
     mif,

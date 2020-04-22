@@ -185,7 +185,7 @@ export default {
                 if (data.code === 200) {
                     this.form.logo = data.data.url;
                 } else {
-                    this.$message.error(data.message);
+                    // this.$message.error(data.message);
                 }
                 this.loading = false;
             }

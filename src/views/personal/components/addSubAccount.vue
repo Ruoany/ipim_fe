@@ -16,24 +16,24 @@ import { mapGetters } from "vuex";
 export default {
     props: {
         formType: { type: String }, //create為新建，update為修改
-        initData: { type: Object }
+        initData: { type: Object },
     },
     watch: {
         initData: function(newValue) {
             this.formData = newValue;
-        }
+        },
     },
     data() {
         return {
             formData: {},
             rules: {
                 name: [{ required: true, message: "Please input", trigger: "change" }],
-                email: [{ required: true, message: "Please input", trigger: "change" }]
-            }
+                email: [{ required: true, message: "Please input", trigger: "change" }],
+            },
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution", "currentUser"])
+        ...mapGetters(["currentInstitution", "currentUser"]),
     },
     methods: {
         handleOk() {
@@ -45,16 +45,16 @@ export default {
         },
 
         createSub() {
-            this.$refs.myForm.validate(async valid => {
+            this.$refs.myForm.validate(async (valid) => {
                 if (valid) {
                     const { code, message } = await UserSubaccount.create({
                         ...this.formData,
                         institutionId: this.currentInstitution.id,
-                        parentId: this.currentUser
+                        parentId: this.currentUser,
                     });
                     this.$emit("update:confirmLoading", false);
                     if (code !== 200) {
-                        this.$message.error(message);
+                        // this.$message.error(message);
                         return;
                     }
                     this.$message.success("創建成功");
@@ -63,22 +63,22 @@ export default {
             });
         },
         updateSub() {
-            this.$refs.myForm.validate(async valid => {
+            this.$refs.myForm.validate(async (valid) => {
                 if (valid) {
                     const { code, message } = await UserSubaccount.update({
-                        ...this.formData
+                        ...this.formData,
                     });
                     this.$emit("update:confirmLoading", false);
                     if (code !== 200) {
-                        this.$message.error(message);
+                        // this.$message.error(message);
                         return;
                     }
                     this.$message.success("修改成功");
                     this.$emit("initTable");
                 }
             });
-        }
-    }
+        },
+    },
 };
 </script>
 

@@ -35,13 +35,13 @@ export default {
         return {
             query: {},
             question: {},
-            answers: []
+            answers: [],
         };
     },
     methods: {
         Transform: function(o) {
             const obj = JSON.parse(JSON.stringify(o));
-            Object.keys(obj).map(item => {
+            Object.keys(obj).map((item) => {
                 obj[item] = this.$crypto.decryption(unescape(obj[item]));
             });
             return obj;
@@ -51,10 +51,10 @@ export default {
                 const { data } = await QuestionnaireAnswer.one(this.query.questionnaireAnswerId);
                 // this.question = data;
                 this.question = data.questionnaire;
-                this.answers = data.answers.map(item => {
+                this.answers = data.answers.map((item) => {
                     let answerList = [];
                     if (item.items) {
-                        answerList = item.items.map(answersItem => {
+                        answerList = item.items.map((answersItem) => {
                             return answersItem.id;
                         });
                     } else {
@@ -66,19 +66,19 @@ export default {
             } else {
                 const { data } = await QuestionNaire.byActivity({
                     activityId: this.query.activityId,
-                    method: this.query.method
+                    method: this.query.method,
                 });
                 this.question = data;
             }
         },
         validator: function() {
-            const promise = new Promise(resolve => {
+            const promise = new Promise((resolve) => {
                 for (let item of this.answers) {
                     if (Array.isArray(item)) {
                         if (item.length === 0) {
                             this.$message.error({
                                 content: "請完成所有題目之後再提交",
-                                key: "error"
+                                key: "error",
                             });
                             resolve(false);
                         }
@@ -86,7 +86,7 @@ export default {
                     if (!item) {
                         this.$message.error({
                             content: "請完成所有題目之後再提交",
-                            key: "error"
+                            key: "error",
                         });
                         resolve(false);
                     }
@@ -106,26 +106,26 @@ export default {
                         return isText
                             ? {
                                   answer: item,
-                                  questionId: this.question.questions[index].id
+                                  questionId: this.question.questions[index].id,
                               }
                             : {
                                   items: Array.isArray(item)
-                                      ? item.map(val => {
+                                      ? item.map((val) => {
                                             return { id: val };
                                         })
                                       : [{ id: item }],
-                                  questionId: this.question.questions[index].id
+                                  questionId: this.question.questions[index].id,
                               };
-                    })
+                    }),
                 };
                 const { code, message } = await QuestionnaireAnswer.create(body);
                 if (code !== 200) {
-                    this.$message.error(message);
+                    // this.$message.error(message);
                     return;
                 }
                 this.$router.back();
             }
-        }
+        },
     },
     mounted: function() {
         this.$store.dispatch("setChangeFalse");
@@ -134,7 +134,7 @@ export default {
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");
-    }
+    },
 };
 </script>
 

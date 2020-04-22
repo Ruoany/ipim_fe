@@ -24,7 +24,11 @@
                 </template>
             </a-table-column>
         </a-table>
-        <pagination :page.sync="listQuery.page" :total="total" @handleChange="pages => (listQuery.page = pages - 1)" />
+        <pagination
+            :page.sync="listQuery.page"
+            :total="total"
+            @handleChange="(pages) => (listQuery.page = pages - 1)"
+        />
         <a-modal
             :title="$t('personal.af')"
             :visible="modalVisible"
@@ -61,18 +65,18 @@ export default {
             confirmLoading: false,
             listQuery: {
                 page: 0,
-                size: 10
+                size: 10,
             },
             total: 1,
             tableData: [],
             formType: "create",
             formData: {},
             modalLoading: false,
-            tableLoading: false
+            tableLoading: false,
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution"])
+        ...mapGetters(["currentInstitution"]),
     },
 
     methods: {
@@ -87,7 +91,7 @@ export default {
                 this.tableData = data.data.content;
                 this.tableLoading = false;
             } else {
-                this.$message.error(data.message);
+                // this.$message.error(data.message);
             }
         },
         //新建之後刷新table
@@ -104,7 +108,7 @@ export default {
         async deleteSub(id) {
             const { code, message } = await UserSubaccount.delete(id);
             if (code !== 200) {
-                this.$message.error(message);
+                // this.$message.error(message);
             } else {
                 this.$message.success("刪除成功");
                 this.initData();
@@ -128,11 +132,11 @@ export default {
             }
             this.formData = data.data;
             this.modalLoading = false;
-        }
+        },
     },
     mounted() {
         this.initData();
-    }
+    },
 };
 </script>
 
