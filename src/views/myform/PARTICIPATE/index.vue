@@ -1,6 +1,6 @@
 <template>
     <div class="form-container">
-        <a-steps v-model="stepCurrent" direction="vertical" size="small">
+        <a-steps :current="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('participate.ax')" />
             <a-step :title="$t('participate.aa')" />
             <a-step :title="$t('participate.ag')" />
@@ -58,48 +58,25 @@
                     <a-input disabled v-model="currentInstitution.nameZh" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ad')">
-                    <a-input
-                        disabled
-                        v-model="currentInstitution.siteRegistrationCode"
-                    />
+                    <a-input disabled v-model="currentInstitution.siteRegistrationCode" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ae')">
-                    <a-input
-                        disabled
-                        v-model="currentInstitution.registrationNumber"
-                    />
+                    <a-input disabled v-model="currentInstitution.registrationNumber" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.af')">
-                    <a-input
-                        v-model="form.exhibitionProduct"
-                        :disabled="isCheck"
-                    />
+                    <a-input v-model="form.exhibitionProduct" :disabled="isCheck" />
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <a-form-model-item
-                    prop="liaisonId"
-                    :label="$t('participate.ah')"
-                >
-                    <a-input
-                        v-if="isCheck"
-                        v-model="selectedLiaison.nameZh"
-                        disabled
-                    ></a-input>
-                    <a-select
-                        v-else
-                        v-model="form.liaisonId"
-                        showSearch
-                        optionFilterProp="label"
-                        :filterOption="true"
-                    >
+                <a-form-model-item prop="liaisonId" :label="$t('participate.ah')">
+                    <a-input v-if="isCheck" v-model="selectedLiaison.nameZh" disabled></a-input>
+                    <a-select v-else v-model="form.liaisonId" showSearch optionFilterProp="label" :filterOption="true">
                         <a-select-option
                             v-for="item in liaisonList"
                             :key="item.id"
                             :value="item.id"
                             :label="`${item.nameZh}${item.nameEnOrPt}`"
-                            >{{ item.nameZh }}
-                            {{ item.nameEnOrPt }}</a-select-option
+                            >{{ item.nameZh }} {{ item.nameEnOrPt }}</a-select-option
                         >
                     </a-select>
                 </a-form-model-item>
@@ -122,66 +99,38 @@
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-model-item :label="$t('participate.an')">
-                    <upload
-                        :value.sync="form.registrationOfBureauFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.registrationOfBureauFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ao')">
-                    <upload
-                        :value.sync="form.macaoShareholderFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.macaoShareholderFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ap')">
-                    <upload
-                        :value.sync="form.otherFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.otherFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.aq')">
-                    <upload
-                        :value.sync="form.taxpayerFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.taxpayerFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ar')">
-                    <upload
-                        :value.sync="form.shareholderSamesFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.shareholderSamesFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.as')">
-                    <upload
-                        :value.sync="form.differentTaxpayerFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.differentTaxpayerFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
                 <a-form-model-item :label="$t('participate.au')">
-                    <upload
-                        :value.sync="form.unitIntroductionFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.unitIntroductionFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.aw')">
-                    <upload
-                        :value.sync="form.idcardFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.idcardFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 5">
                 <a-form-model-item>
                     <div>{{ $t("participate.bu") }}</div>
                     <a-radio-group v-model="form.know" :disabled="isCheck">
-                        <a-radio :value="true">{{
-                            $t("participate.bv")
-                        }}</a-radio>
-                        <a-radio :value="false">{{
-                            $t("participate.bw")
-                        }}</a-radio>
+                        <a-radio :value="true">{{ $t("participate.bv") }}</a-radio>
+                        <a-radio :value="false">{{ $t("participate.bw") }}</a-radio>
                     </a-radio-group>
                 </a-form-model-item>
                 <a-form-model-item
@@ -189,75 +138,50 @@
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
-                        tigger: 'blur'
+                        tigger: 'blur',
                     }"
                 >
-                    <upload
-                        :value.sync="form.businessRegistrationFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.businessRegistrationFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('participate.by')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
-                        tigger: 'blur'
+                        tigger: 'blur',
                     }"
                 >
-                    <upload
-                        :value.sync="form.certificateBureauFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.certificateBureauFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('participate.bz')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
-                        tigger: 'blur'
+                        tigger: 'blur',
                     }"
                 >
-                    <upload
-                        :value.sync="form.salesTaxOpenFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.salesTaxOpenFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
                 <a-form-model-item
                     :label="$t('participate.ca')"
                     :rules="{
                         required: !form.know,
                         message: 'please upload file',
-                        tigger: 'blur'
+                        tigger: 'blur',
                     }"
                 >
-                    <upload
-                        :value.sync="form.salesTaxFiles"
-                        :disabled="isCheck"
-                    ></upload>
+                    <upload :value.sync="form.salesTaxFiles" :disabled="isCheck"></upload>
                 </a-form-model-item>
             </div>
             <a-form-model-item>
-                <a-button
-                    v-show="stepCurrent > 0"
-                    type="primary"
-                    @click="stepCurrent--"
-                    style="margin-right:12px"
+                <a-button v-show="stepCurrent > 0" type="primary" @click="stepCurrent--" style="margin-right:12px"
                     >上一步</a-button
                 >
-                <a-button
-                    v-show="stepCurrent < 5"
-                    type="primary"
-                    @click="stepCurrent++"
-                    >下一步</a-button
-                >
-                <a-button
-                    v-show="stepCurrent === 5"
-                    :class="isSubmit ? 'none' : ''"
-                    type="primary"
-                    @click="subForm"
-                    >{{ $t("participate.cb") }}</a-button
-                >
+                <a-button v-show="stepCurrent < 5" type="primary" @click="stepCurrent++">下一步</a-button>
+                <a-button v-show="stepCurrent === 5" :class="isSubmit ? 'none' : ''" type="primary" @click="subForm">{{
+                    $t("participate.cb")
+                }}</a-button>
             </a-form-model-item>
         </a-form-model>
     </div>
@@ -292,17 +216,15 @@ export default {
                 salesTaxOpenFiles: [],
                 shareholderSamesFiles: [],
                 taxpayerFiles: [],
-                unitIntroductionFiles: []
-            }
+                unitIntroductionFiles: [],
+            },
         };
     },
     computed: {
         ...mapGetters(["liaisonList", "currentUser", "currentInstitution"]),
         selectedLiaison: function() {
             if (this.form.liaisonId) {
-                const data = this.liaisonList.find(
-                    item => item.id === this.form.liaisonId
-                );
+                const data = this.liaisonList.find((item) => item.id === this.form.liaisonId);
                 return data ? data : this.form.liaison;
             }
             return {
@@ -311,7 +233,7 @@ export default {
                 phone: "",
                 fax: "",
                 email: "",
-                address: ""
+                address: "",
             };
         },
         isSubmit: function() {
@@ -322,12 +244,8 @@ export default {
             }
         },
         isCheck: function() {
-            return (
-                this.form.status === "passed" ||
-                this.form.status === "withdraw" ||
-                this.form.status === "approving"
-            );
-        }
+            return this.form.status === "passed" || this.form.status === "withdraw" || this.form.status === "approving";
+        },
     },
     methods: {
         initData: async function() {
@@ -336,9 +254,7 @@ export default {
                 const { data } = await PAA.one(this.formId);
                 this.form = data;
             } else {
-                this.form.activityId = this.$crypto.decryption(
-                    unescape(this.$route.query.a)
-                );
+                this.form.activityId = this.$crypto.decryption(unescape(this.$route.query.a));
             }
         },
         onSuccess: function() {
@@ -346,19 +262,19 @@ export default {
             this.$router.back();
         },
         subForm() {
-            this.$refs.PARTICIPATE.validate(async valid => {
+            this.$refs.PARTICIPATE.validate(async (valid) => {
                 if (valid) {
                     if (!this.formId)
                         this.form = {
                             ...this.form,
                             institutionId: this.currentInstitution.id,
-                            applicantId: this.currentUser
+                            applicantId: this.currentUser,
                         };
                     const { data } = await PAA.create(this.form);
                     data ? this.onSuccess() : "";
                 }
             });
-        }
+        },
     },
     mounted() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
@@ -366,7 +282,7 @@ export default {
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");
-    }
+    },
 };
 </script>
 

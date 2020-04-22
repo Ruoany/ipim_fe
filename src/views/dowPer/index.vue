@@ -11,9 +11,9 @@
                         <a-list-item-meta>
                             <a slot="title">{{ item.name }}</a>
                         </a-list-item-meta>
-                        <a :href="item.url" download>
-                            <a-icon type="download" />
-                        </a>
+                        <!-- <a :href="item.url" download> -->
+                        <a-icon type="download" @click="down(item.url)" />
+                        <!-- </a> -->
                     </a-list-item>
                 </a-list>
             </div>
@@ -37,13 +37,7 @@ export default {
     data() {
         return {
             loading: false,
-            documentList: [
-                {
-                    name: "测试",
-                    url:
-                        "http://api-exhibition.servier.iteratech.net/upload/2020/04/17/568702aa748649838af2ccaa1e97a2e7.png",
-                },
-            ],
+            documentList: [],
             tabList: [],
             listQuery: {
                 page: 0,
@@ -58,7 +52,7 @@ export default {
         async initData() {
             this.loading = true;
             await this.getTabList();
-            // await this.getDocumentList();
+            await this.getDocumentList();
             this.loading = false;
         },
         //獲取分類tab
@@ -97,6 +91,20 @@ export default {
                     name = item.namePt;
             }
             return name;
+        },
+        down(url) {
+            let x = new XMLHttpRequest();
+            x.open("GET", url, true);
+            x.responseType = "blob";
+            x.withCredentials = true;
+            x.onload = (e) => {
+                let url = window.URL.createObjectURL(x.response);
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = "";
+                a.click();
+            };
+            x.send();
         },
     },
     mounted() {

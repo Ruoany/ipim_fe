@@ -1,8 +1,8 @@
 <template>
     <div class="form-container">
-        <a-steps v-model="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('plpex.ck')" />
+        <a-steps :current="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('plpex.dc')" />
+            <a-step :title="$t('plpex.ck')" />
             <a-step :title="$t('plpex.aa')" />
             <a-step :title="$t('plpex.af')" />
             <a-step :title="$t('plpex.an')" />
@@ -10,14 +10,20 @@
             <a-step :title="$t('plpex.cf')" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
-            <a-form-model
-                class="form"
-                ref="plpex"
-                :model="form"
-                :rules="rules"
-                v-bind="formatLayout"
-            >
+            <a-form-model class="form" ref="plpex" :model="form" :rules="rules" v-bind="formatLayout">
                 <div v-show="stepCurrent === 0">
+                    <a-form-model-item :label="$t('plpex.dc')">
+                        <ul>
+                            <li>{{ $t("plpex.dd") }}</li>
+                            <li>{{ $t("plpex.de") }}</li>
+                            <li>{{ $t("plpex.df") }}</li>
+                            <li>{{ $t("plpex.dg") }}</li>
+                            <li>{{ $t("plpex.dh") }}</li>
+                            <li>{{ $t("plpex.di") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 1">
                     <a-form-model-item :label="$t('plpex.ck')">
                         <ul>
                             <li>{{ $t("plpex.cl") }}</li>
@@ -39,8 +45,6 @@
                             <li>{{ $t("plpex.cv") }}</li>
                         </ul>
                     </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 1">
                     <a-form-model-item :label="$t('plpex.cw')">
                         <ul>
                             <li>{{ $t("plpex.cx") }}</li>
@@ -53,56 +57,28 @@
                             <li>{{ $t("plpex.db") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('plpex.dc')">
-                        <ul>
-                            <li>{{ $t("plpex.dd") }}</li>
-                            <li>{{ $t("plpex.de") }}</li>
-                            <li>{{ $t("plpex.df") }}</li>
-                            <li>{{ $t("plpex.dg") }}</li>
-                            <li>{{ $t("plpex.dh") }}</li>
-                            <li>{{ $t("plpex.di") }}</li>
-                        </ul>
-                    </a-form-model-item>
                 </div>
+
                 <div v-show="stepCurrent === 2">
                     <a-form-model-item :label="$t('plpex.ab')" required>
-                        <a-input
-                            :value="selectedActivity.activityName"
-                            disabled
-                        />
+                        <a-input :value="selectedActivity.activityName" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ac')" required>
-                        <a-input
-                            :value="selectedActivity.activityDate"
-                            disabled
-                        />
+                        <a-input :value="selectedActivity.activityDate" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ad')" required>
-                        <a-input
-                            :value="selectedActivity.activityPlace"
-                            disabled
-                        />
+                        <a-input :value="selectedActivity.activityPlace" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ae')" required>
-                        <a-input
-                            :value="selectedActivity.activityExpiry"
-                            disabled
-                        />
+                        <a-input :value="selectedActivity.activityExpiry" disabled />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('plpex.ag')" :required="true">
-                        <a-input
-                            :value="currentInstitution.nameZh"
-                            :disabled="true"
-                        />
+                        <a-input :value="currentInstitution.nameZh" :disabled="true" />
                     </a-form-model-item>
                     <a-form-model-item prop="liaisonId" :label="$t('plpex.ai')">
-                        <a-input
-                            v-if="isCheck"
-                            v-model="selectedLiaison.nameZh"
-                            disabled
-                        ></a-input>
+                        <a-input v-if="isCheck" v-model="selectedLiaison.nameZh" disabled></a-input>
                         <a-select
                             v-else
                             v-model="form.liaisonId"
@@ -115,16 +91,12 @@
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }}
-                                {{ item.nameEnOrPt }}</a-select-option
+                                >{{ item.nameZh }} {{ item.nameEnOrPt }}</a-select-option
                             >
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.aj')">
-                        <a-input
-                            :value="selectedLiaison.abroadPhone"
-                            disabled
-                        />
+                        <a-input :value="selectedLiaison.abroadPhone" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ed')">
                         <a-input :value="selectedLiaison.phone" disabled />
@@ -141,19 +113,11 @@
                 </div>
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="method" :label="$t('plpex.ao')">
-                        <a-radio-group
-                            v-model="form.method"
-                            :disabled="isCheck"
-                        >
-                            <a-radio
-                                v-for="item in methods"
-                                :key="item.value"
-                                :value="item.value"
-                                >{{ $t(item.label) }}</a-radio
-                            >
-                            <a-radio value="OTHER">{{
-                                $t("plpex.au")
+                        <a-radio-group v-model="form.method" :disabled="isCheck">
+                            <a-radio v-for="item in methods" :key="item.value" :value="item.value">{{
+                                $t(item.label)
                             }}</a-radio>
+                            <a-radio value="OTHER">{{ $t("plpex.au") }}</a-radio>
                         </a-radio-group>
                         <a-input
                             class="inline-input"
@@ -161,71 +125,35 @@
                             :disabled="form.method !== 'OTHER' || isCheck"
                         />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="preference"
-                        :label="$t('plpex.av')"
-                    >
-                        <a-radio-group
-                            v-model="form.preference"
-                            :disabled="isCheck"
-                        >
-                            <a-radio style="line-height:30px" value="BARELY">{{
-                                $t("plpex.aw")
-                            }}</a-radio>
-                            <a-radio
-                                style="line-height:30px"
-                                value="STANDARD_BOOTH"
-                                >{{ $t("plpex.eb") }}</a-radio
-                            >
+                    <a-form-model-item prop="preference" :label="$t('plpex.av')">
+                        <a-radio-group v-model="form.preference" :disabled="isCheck">
+                            <a-radio style="line-height:30px" value="BARELY">{{ $t("plpex.aw") }}</a-radio>
+                            <a-radio style="line-height:30px" value="STANDARD_BOOTH">{{ $t("plpex.eb") }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item prop="area">
                         <span slot="label">
                             <span>{{ $t("plpex.ax") }}</span>
-                            <span style="color:#ccc"
-                                >({{ $t("plpex.ay") }})</span
-                            >
+                            <span style="color:#ccc">({{ $t("plpex.ay") }})</span>
                         </span>
                         <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="attendHistoryExhibition"
-                        :label="$t('plpex.az')"
-                    >
-                        <a-radio-group
-                            v-model="form.attendHistoryExhibition"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
-                                $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
-                                $t("util.no")
-                            }}</a-radio>
+                    <a-form-model-item prop="attendHistoryExhibition" :label="$t('plpex.az')">
+                        <a-radio-group v-model="form.attendHistoryExhibition" :disabled="isCheck">
+                            <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
+                            <a-radio :value="false">{{ $t("util.no") }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ba')">
-                        <a-input
-                            v-model="form.attendHistoryYear"
-                            :disabled="isCheck"
-                        />
+                        <a-input v-model="form.attendHistoryYear" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
-                    <a-form-model-item
-                        prop="exhibitionProducts"
-                        :label="$t('plpex.bc')"
-                    >
-                        <a-checkbox-group
-                            v-model="form.exhibitionProducts"
-                            :disabled="isCheck"
-                        >
-                            <a-checkbox
-                                v-for="item in exhibitionProducts"
-                                :key="item.value"
-                                :value="item.value"
-                                >{{ $t(item.label) }}</a-checkbox
-                            >
+                    <a-form-model-item prop="exhibitionProducts" :label="$t('plpex.bc')">
+                        <a-checkbox-group v-model="form.exhibitionProducts" :disabled="isCheck">
+                            <a-checkbox v-for="item in exhibitionProducts" :key="item.value" :value="item.value">{{
+                                $t(item.label)
+                            }}</a-checkbox>
                             <a-input
                                 class="inline-input"
                                 v-model="form.otherProductSpecify"
@@ -234,20 +162,11 @@
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="businessMatchings"
-                        :label="$t('plpex.bj')"
-                    >
-                        <a-checkbox-group
-                            v-model="form.businessMatchings"
-                            :disabled="isCheck"
-                        >
-                            <a-checkbox
-                                v-for="item in businessMatchings"
-                                :key="item.value"
-                                :value="item.value"
-                                >{{ $t(item.label) }}</a-checkbox
-                            >
+                    <a-form-model-item prop="businessMatchings" :label="$t('plpex.bj')">
+                        <a-checkbox-group v-model="form.businessMatchings" :disabled="isCheck">
+                            <a-checkbox v-for="item in businessMatchings" :key="item.value" :value="item.value">{{
+                                $t(item.label)
+                            }}</a-checkbox>
                             <a-input
                                 class="inline-input"
                                 v-model="form.otherMatchingSpecify"
@@ -256,39 +175,20 @@
                             />
                         </a-checkbox-group>
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="targetMarkets"
-                        :label="$t('plpex.br')"
-                    >
-                        <a-checkbox-group
-                            v-model="form.targetMarkets"
-                            :disabled="isCheck"
-                        >
-                            <a-checkbox
-                                v-for="item in targetMarkets"
-                                :key="item.value"
-                                :value="item.value"
-                                >{{ $t(item.label) }}</a-checkbox
-                            >
+                    <a-form-model-item prop="targetMarkets" :label="$t('plpex.br')">
+                        <a-checkbox-group v-model="form.targetMarkets" :disabled="isCheck">
+                            <a-checkbox v-for="item in targetMarkets" :key="item.value" :value="item.value">{{
+                                $t(item.label)
+                            }}</a-checkbox>
                         </a-checkbox-group>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.cd')">
-                        <upload
-                            :value.sync="form.paymentRecordFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.paymentRecordFiles" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
-                    <a-form-model-item
-                        :label="$t('plpex.cg')"
-                        :required="form.method === 'GROUP_EXHIBITION'"
-                    >
-                        <div
-                            class="company-item"
-                            v-for="(item, index) in form.groups"
-                            :key="index"
-                        >
+                    <a-form-model-item :label="$t('plpex.cg')" :required="form.method === 'GROUP_EXHIBITION'">
+                        <div class="company-item" v-for="(item, index) in form.groups" :key="index">
                             <company
                                 :name.sync="item.enterpriseName"
                                 :liaison-name.sync="item.liaisonName"
@@ -317,38 +217,19 @@
                         </div>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ee')">
-                        <upload
-                            :value.sync="form.institutions"
-                            type="excel"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.institutions" type="excel" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ch')">
-                        <upload
-                            :value.sync="form.letterFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.letterFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.cj')">
-                        <upload
-                            :value.sync="form.applicantUnitFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.applicantUnitFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ef')">
-                        <a-textarea
-                            :rows="4"
-                            :maxLength="150"
-                            :disabled="isCheck"
-                            v-model="form.companyProfile"
-                        />
+                        <a-textarea :rows="4" :maxLength="150" :disabled="isCheck" v-model="form.companyProfile" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.eg')">
-                        <upload
-                            :value.sync="form.images"
-                            type="image"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.images" type="image" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.eh')">
                         <upload :value.sync="form.video" :disabled="isCheck" />
@@ -356,26 +237,15 @@
                 </div>
 
                 <a-form-model-item>
-                    <a-button
-                        type="primary"
-                        v-if="stepCurrent > 0"
-                        @click="stepCurrent--"
-                        style="margin-right:12px"
+                    <a-button type="primary" v-if="stepCurrent > 0" @click="stepCurrent--" style="margin-right:12px"
                         >上一步</a-button
                     >
-                    <a-button
-                        v-if="stepCurrent < 6"
-                        type="primary"
-                        @click="stepCurrent++"
-                        >下一步</a-button
+                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++" :disabled="timeNext > 0"
+                        >{{ timeNext > 0 ? `(${timeNext}S)` : "" }}下一步</a-button
                     >
-                    <a-button
-                        v-else
-                        :class="isSubmit ? 'none' : ''"
-                        type="primary"
-                        @click="handleSubmit"
-                        >{{ $t("plpex.dk") }}</a-button
-                    >
+                    <a-button v-else :class="isSubmit ? 'none' : ''" type="primary" @click="handleSubmit">{{
+                        $t("plpex.dk")
+                    }}</a-button>
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -408,8 +278,8 @@ export default {
                         email: "",
                         enterpriseName: "",
                         liaisonName: "",
-                        liaisonTel: ""
-                    }
+                        liaisonTel: "",
+                    },
                 ],
                 institutions: [],
                 letterFiles: [],
@@ -426,17 +296,15 @@ export default {
                 targetMarkets: [],
                 companyProfile: "",
                 images: [],
-                video: []
-            }
+                video: [],
+            },
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution", "liaisonList", "currentUser"]),
+        ...mapGetters(["currentInstitution", "liaisonList", "currentUser", "timeNext"]),
         selectedLiaison: function() {
             if (this.form.liaisonId) {
-                const data = this.liaisonList.find(
-                    item => item.id === this.form.liaisonId
-                );
+                const data = this.liaisonList.find((item) => item.id === this.form.liaisonId);
                 return data ? data : this.form.liaison;
             }
             return {
@@ -445,7 +313,7 @@ export default {
                 phone: "",
                 fax: "",
                 email: "",
-                address: ""
+                address: "",
             };
         },
         isSubmit: function() {
@@ -456,12 +324,8 @@ export default {
             }
         },
         isCheck: function() {
-            return (
-                this.form.status === "passed" ||
-                this.form.status === "withdraw" ||
-                this.form.status === "approving"
-            );
-        }
+            return this.form.status === "passed" || this.form.status === "withdraw" || this.form.status === "approving";
+        },
     },
     methods: {
         initData: async function() {
@@ -474,18 +338,16 @@ export default {
                     activityName: data.activity.nameZh,
                     activityDate: `${data.activity.startTime} - ${data.activity.endTime}`,
                     activityPlace: data.activity.place,
-                    activityExpiry: data.activity.expiryTime
+                    activityExpiry: data.activity.expiryTime,
                 };
             } else {
-                this.form.activityId = this.$crypto.decryption(
-                    unescape(this.$route.query.a)
-                );
+                this.form.activityId = this.$crypto.decryption(unescape(this.$route.query.a));
                 const { data } = await Activity.one(this.form.activityId);
                 this.selectedActivity = {
                     activityName: data.nameZh,
                     activityDate: `${data.startTime} - ${data.endTime}`,
                     activityPlace: data.place,
-                    activityExpiry: data.expiryTime
+                    activityExpiry: data.expiryTime,
                 };
             }
             this.loading = false;
@@ -496,7 +358,7 @@ export default {
                     email: "",
                     enterpriseName: "",
                     liaisonName: "",
-                    liaisonTel: ""
+                    liaisonTel: "",
                 };
                 this.form.groups.push(body);
             } else {
@@ -508,31 +370,30 @@ export default {
             this.$router.back();
         },
         handleSubmit: function() {
-            this.$refs.plpex.validate(async valid => {
+            this.$refs.plpex.validate(async (valid) => {
                 if (valid) {
                     if (!this.formId)
                         this.form = {
                             ...this.form,
                             institutionId: this.currentInstitution.id,
-                            applicantId: this.currentUser
+                            applicantId: this.currentUser,
                         };
                     const { data } = await PPLPEX.create(this.form);
                     data ? this.onSuccess() : "";
                 } else {
-                    this.$message.error(
-                        "表單存在必填項為空或者不合法字符，請檢查"
-                    );
+                    this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
                 }
             });
-        }
+        },
     },
     mounted: function() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+        this.$store.dispatch("setTimeNext");
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");
-    }
+    },
 };
 </script>
 

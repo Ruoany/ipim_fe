@@ -2,28 +2,28 @@ import axios from "axios";
 import { message } from "ant-design-vue";
 import router from "@/router/index";
 
-export const baseURL = process.env.NODE_ENV === "production" ? "/api" : "/api";
+export const baseURL = process.env.NODE_ENV === "production" ? "/api" : "http://api-exhibition.servier.iteratech.net";
 // export const baseURL = process.env.NODE_ENV === "production" ? "http://192.168.101.53:9196" : "/api";
 
 const request = axios.create({
     baseURL, // api的base_url
-    timeout: 50000 // 设置默认的请求超时时间
+    timeout: 50000, // 设置默认的请求超时时间
 });
 
 // 请求拦截器
 request.interceptors.request.use(
-    config => {
+    (config) => {
         config.headers = {
-            Authorization: sessionStorage.getItem("token")
+            Authorization: sessionStorage.getItem("token"),
         };
         return config;
     },
-    error => {
+    (error) => {
         return Promise.reject(error);
     }
 );
 request.interceptors.response.use(
-    response => {
+    (response) => {
         const { data } = response;
         if (!data.success) {
             message.error(data.message);
@@ -31,9 +31,9 @@ request.interceptors.response.use(
         }
         return data;
     },
-    error => {
+    (error) => {
         const {
-            response: { data }
+            response: { data },
         } = error;
         message.error(data.message);
         if (data.code === 401) {
