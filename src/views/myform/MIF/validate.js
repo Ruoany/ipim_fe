@@ -4,7 +4,7 @@ const methods = [
     { value: "GENERAL_EXHIBITION", label: "mif.ap" },
     { value: "GROUP_EXHIBITION", label: "mif.aq" },
     { value: "SME_PARTICIPATION", label: "mif.ar" },
-    { value: "SME_PARTICIPATION_MACAO", label: "mif.as" }
+    { value: "SME_PARTICIPATION_MACAO", label: "mif.as" },
     // { value: "AREA", label: "mif.at" }
 ];
 const exhibitionProducts = [
@@ -23,7 +23,7 @@ const exhibitionProducts = [
     { value: "ENVIRONMENTAL_PROTECTION", label: "mif.dy" },
     { value: "ACCESSORIES", label: "mif.dz" },
     { value: "E_COMMERCE", label: "mif.ea" },
-    { value: "CRAFTS_AND_ACCESSORIES", label: "mif.eb" }
+    { value: "CRAFTS_AND_ACCESSORIES", label: "mif.eb" },
 ];
 const businessMatchings = [
     { value: "GOVERNMENT_PUBLIC", label: "mif.bk" },
@@ -31,7 +31,7 @@ const businessMatchings = [
     { value: "BUILDING", label: "mif.bm" },
     { value: "GENERAL_OFFICE", label: "mif.bn" },
     { value: "EDUCATION", label: "mif.bo" },
-    { value: "CONSTRUCTION", label: "mif.bp" }
+    { value: "CONSTRUCTION", label: "mif.bp" },
 ];
 const targetMarkets = [
     { value: "MACAO", label: "mif.bs" },
@@ -44,7 +44,7 @@ const targetMarkets = [
     { value: "OTHER_ASIA_AREA", label: "mif.bz" },
     { value: "EUROPE", label: "mif.ca" },
     { value: "OTHER_COUNTRIES", label: "mif.cb" },
-    { value: "WORLDWIDE_COVERAGE", label: "mif.cc" }
+    { value: "WORLDWIDE_COVERAGE", label: "mif.cc" },
 ];
 export default {
     loading: false,
@@ -57,26 +57,26 @@ export default {
             config,
             {
                 validator: (rule, value, callback) => {
-                    if (value > 450) callback("面積不能大於450");
+                    // if (value > 450) callback("面積不能大於450");
                     callback();
-                }
-            }
+                },
+            },
         ],
         attendHistoryExhibition: [config_select],
         exhibitionProducts: [config_select],
         businessMatchings: [config_select],
-        targetMarkets: [config_select]
+        targetMarkets: [config_select],
     },
     selectedActivity: {},
     formatLayout: {
         labelCol: { span: 24 },
-        wrapperCol: { span: 24 }
+        wrapperCol: { span: 24 },
     },
     specialLayout: {
-        wrapperCol: { span: 16, offset: 4 }
+        wrapperCol: { span: 16, offset: 4 },
     },
     methods,
     exhibitionProducts,
     businessMatchings,
-    targetMarkets
+    targetMarkets,
 };

@@ -134,7 +134,7 @@
                     <a-form-model-item prop="area">
                         <span slot="label">
                             <span>{{ $t("gmbpf.ax") }}</span>
-                            <span style="color:#ccc">({{ $t("gmbpf.ay") }})</span>
+                            <!-- <span style="color:#ccc">({{ $t("gmbpf.ay") }})</span> -->
                         </span>
                         <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>

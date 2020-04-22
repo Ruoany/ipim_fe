@@ -122,7 +122,7 @@
                     <a-form-model-item prop="area">
                         <span slot="label">
                             <span>{{ $t("iiicf.ax") }}</span>
-                            <span style="color:#ccc">({{ $t("iiicf.ay") }})</span>
+                            <!-- <span style="color:#ccc">({{ $t("iiicf.ay") }})</span> -->
                         </span>
                         <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>

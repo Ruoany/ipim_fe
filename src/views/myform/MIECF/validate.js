@@ -5,7 +5,7 @@ const methods = [
     { value: "GROUP_EXHIBITION", label: "miecf.aq" },
     { value: "SME_PARTICIPATION", label: "miecf.ar" },
     { value: "DISTINGUISHED_EXHIBITOR", label: "miecf.as" },
-    { value: "AREA", label: "miecf.at" }
+    { value: "AREA", label: "miecf.at" },
 ];
 const exhibitionProducts = [
     { value: "ENERGY_EFFICIENCY", label: "miecf.dl" },
@@ -18,7 +18,7 @@ const exhibitionProducts = [
     { value: "ENVIRONMENTAL_PRODUCTS_AND_SERVICES", label: "miecf.dt" },
     { value: "SOIL_REMEDIATION", label: "miecf.du" },
     { value: "ENVIRONMENTAL_MONITORING", label: "miecf.dv" },
-    { value: "ECO_CITY_INTEGRATION_PLAN", label: "miecf.dw" }
+    { value: "ECO_CITY_INTEGRATION_PLAN", label: "miecf.dw" },
 ];
 const businessMatchings = [
     { value: "GOVERNMENT_PUBLIC", label: "miecf.bk" },
@@ -26,7 +26,7 @@ const businessMatchings = [
     { value: "BUILDING", label: "miecf.bm" },
     { value: "GENERAL_OFFICE", label: "miecf.bn" },
     { value: "EDUCATION", label: "miecf.bo" },
-    { value: "CONSTRUCTION", label: "miecf.bp" }
+    { value: "CONSTRUCTION", label: "miecf.bp" },
 ];
 const targetMarkets = [
     { value: "MACAO", label: "miecf.bs" },
@@ -39,7 +39,7 @@ const targetMarkets = [
     { value: "OTHER_ASIA_AREA", label: "miecf.bz" },
     { value: "EUROPE", label: "miecf.ca" },
     { value: "OTHER_COUNTRIES", label: "miecf.cb" },
-    { value: "WORLDWIDE_COVERAGE", label: "miecf.cc" }
+    { value: "WORLDWIDE_COVERAGE", label: "miecf.cc" },
 ];
 export default {
     loading: false,
@@ -52,26 +52,26 @@ export default {
             config,
             {
                 validator: (rule, value, callback) => {
-                    if (value > 450) callback("面積不能大於450");
+                    // if (value > 450) callback("面積不能大於450");
                     callback();
-                }
-            }
+                },
+            },
         ],
         attendHistoryExhibition: [config_select],
         exhibitionProducts: [config_select],
         businessMatchings: [config_select],
-        targetMarkets: [config_select]
+        targetMarkets: [config_select],
     },
     selectedActivity: {},
     formatLayout: {
         labelCol: { span: 24 },
-        wrapperCol: { span: 24 }
+        wrapperCol: { span: 24 },
     },
     specialLayout: {
-        wrapperCol: { span: 16, offset: 4 }
+        wrapperCol: { span: 16, offset: 4 },
     },
     methods,
     exhibitionProducts,
     businessMatchings,
-    targetMarkets
+    targetMarkets,
 };

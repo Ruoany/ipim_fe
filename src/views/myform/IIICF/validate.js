@@ -6,7 +6,7 @@ const businessMatchings = [
     { value: "BUILDING", label: "iiicf.bm" },
     { value: "GENERAL_OFFICE", label: "iiicf.bn" },
     { value: "EDUCATION", label: "iiicf.bo" },
-    { value: "CONSTRUCTION", label: "iiicf.bp" }
+    { value: "CONSTRUCTION", label: "iiicf.bp" },
 ];
 const targetMarkets = [
     { value: "MACAO", label: "iiicf.bs" },
@@ -19,7 +19,7 @@ const targetMarkets = [
     { value: "OTHER_ASIA_AREA", label: "iiicf.bz" },
     { value: "EUROPE", label: "iiicf.ca" },
     { value: "OTHER_COUNTRIES", label: "iiicf.cb" },
-    { value: "WORLDWIDE_COVERAGE", label: "iiicf.cc" }
+    { value: "WORLDWIDE_COVERAGE", label: "iiicf.cc" },
 ];
 
 export default {
@@ -32,23 +32,23 @@ export default {
             config,
             {
                 validator: (rule, value, callback) => {
-                    if (value > 450) callback("面積不能大於450");
+                    // if (value > 450)callback("面積不能大於450");
                     callback();
-                }
-            }
+                },
+            },
         ],
         attendHistoryExhibition: [config_select],
         businessMatchings: [config_select],
-        targetMarkets: [config_select]
+        targetMarkets: [config_select],
     },
     selectedActivity: {},
     formatLayout: {
         labelCol: { span: 24 },
-        wrapperCol: { span: 24 }
+        wrapperCol: { span: 24 },
     },
     specialLayout: {
-        wrapperCol: { span: 16, offset: 4 }
+        wrapperCol: { span: 16, offset: 4 },
     },
     businessMatchings,
-    targetMarkets
+    targetMarkets,
 };
