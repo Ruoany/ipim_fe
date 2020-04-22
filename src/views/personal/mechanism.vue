@@ -150,7 +150,7 @@ export default {
     computed: {
         ...mapGetters(["currentInstitution", "currentUser"]),
         roleBoolean() {
-            return this.currentInstitution.adminId === this.currentUser;
+            return this.$route.query.type === "new" || this.currentInstitution.adminId === this.currentUser;
         },
     },
     filters: {
