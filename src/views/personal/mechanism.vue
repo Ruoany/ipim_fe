@@ -151,7 +151,6 @@ export default {
         ...mapGetters(["currentInstitution", "currentUser"]),
         roleBoolean() {
             return this.$route.query.type === "new" || this.currentInstitution.adminId === this.currentUser;
-            // let roleB = true
         },
     },
     filters: {
