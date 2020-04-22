@@ -3,9 +3,9 @@
         <a-steps :current="stepCurrent" direction="vertical" size="small" disabled>
             <a-step :title="$t('iiicf.dc')" />
             <a-step :title="$t('iiicf.ck')" />
-
-            <a-step :title="$t('iiicf.aa')" />
             <a-step :title="$t('iiicf.af')" />
+            <a-step :title="$t('iiicf.aa')" />
+
             <a-step :title="$t('iiicf.an')" />
             <a-step :title="$t('iiicf.bb')" />
             <a-step :title="$t('iiicf.cf')" />
@@ -59,22 +59,7 @@
                         </ul>
                     </a-form-model-item>
                 </div>
-
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item :label="$t('iiicf.ab')" required>
-                        <a-input :value="selectedActivity.activityName" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ac')" required>
-                        <a-input :value="selectedActivity.activityDate" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ad')" required>
-                        <a-input :value="selectedActivity.activityPlace" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('iiicf.ae')" required>
-                        <a-input :value="selectedActivity.activityExpiry" disabled />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('iiicf.ag')" required>
                         <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
@@ -112,6 +97,21 @@
                         <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
+                <div v-show="stepCurrent === 3">
+                    <a-form-model-item :label="$t('iiicf.ab')" required>
+                        <a-input :value="selectedActivity.activityName" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.ac')" required>
+                        <a-input :value="selectedActivity.activityDate" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.ad')" required>
+                        <a-input :value="selectedActivity.activityPlace" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('iiicf.ae')" required>
+                        <a-input :value="selectedActivity.activityExpiry" disabled />
+                    </a-form-model-item>
+                </div>
+
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="preference" :label="$t('iiicf.av')">
                         <a-radio-group v-model="form.preference" :disabled="isCheck">

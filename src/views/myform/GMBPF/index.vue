@@ -1,10 +1,10 @@
 <template>
     <div class="form-container">
         <a-steps :current="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('gmbpf.ck')" />
             <a-step :title="$t('gmbpf.dc')" />
-            <a-step :title="$t('gmbpf.aa')" />
+            <a-step :title="$t('gmbpf.ck')" />
             <a-step :title="$t('gmbpf.af')" />
+            <a-step :title="$t('gmbpf.aa')" />
             <a-step :title="$t('gmbpf.an')" />
             <a-step :title="$t('gmbpf.bb')" />
             <a-step :title="$t('gmbpf.cf')" />
@@ -12,6 +12,18 @@
         <a-spin :spinning="loading" class="form">
             <a-form-model class="form" ref="gmbpf" :model="form" :rules="rules" v-bind="formatLayout">
                 <div v-show="stepCurrent === 0">
+                    <a-form-model-item :label="$t('gmbpf.dc')">
+                        <ul>
+                            <li>{{ $t("gmbpf.dd") }}</li>
+                            <li>{{ $t("gmbpf.de") }}</li>
+                            <li>{{ $t("gmbpf.df") }}</li>
+                            <li>{{ $t("gmbpf.dg") }}</li>
+                            <li>{{ $t("gmbpf.dh") }}</li>
+                            <li>{{ $t("gmbpf.di") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 1">
                     <a-form-model-item :label="$t('gmbpf.ck')">
                         <ul>
                             <li>{{ $t("gmbpf.cl") }}</li>
@@ -33,8 +45,6 @@
                             <li>{{ $t("gmbpf.cv") }}</li>
                         </ul>
                     </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 1">
                     <a-form-model-item :label="$t('gmbpf.cw')">
                         <ul>
                             <li>{{ $t("gmbpf.cx") }}</li>
@@ -47,32 +57,8 @@
                             <li>{{ $t("gmbpf.db") }}</li>
                         </ul>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('gmbpf.dc')">
-                        <ul>
-                            <li>{{ $t("gmbpf.dd") }}</li>
-                            <li>{{ $t("gmbpf.de") }}</li>
-                            <li>{{ $t("gmbpf.df") }}</li>
-                            <li>{{ $t("gmbpf.dg") }}</li>
-                            <li>{{ $t("gmbpf.dh") }}</li>
-                            <li>{{ $t("gmbpf.di") }}</li>
-                        </ul>
-                    </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item :label="$t('gmbpf.ab')" required>
-                        <a-input :value="selectedActivity.activityName" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('gmbpf.ac')" required>
-                        <a-input :value="selectedActivity.activityDate" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('gmbpf.ad')" required>
-                        <a-input :value="selectedActivity.activityPlace" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('gmbpf.ae')" required>
-                        <a-input :value="selectedActivity.activityExpiry" disabled />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('gmbpf.ag')" required>
                         <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
@@ -110,6 +96,21 @@
                         <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
+                <div v-show="stepCurrent === 3">
+                    <a-form-model-item :label="$t('gmbpf.ab')" required>
+                        <a-input :value="selectedActivity.activityName" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('gmbpf.ac')" required>
+                        <a-input :value="selectedActivity.activityDate" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('gmbpf.ad')" required>
+                        <a-input :value="selectedActivity.activityPlace" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('gmbpf.ae')" required>
+                        <a-input :value="selectedActivity.activityExpiry" disabled />
+                    </a-form-model-item>
+                </div>
+
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="method" :label="$t('gmbpf.ao')">
                         <a-radio-group v-model="form.method" :disabled="isCheck">
@@ -239,7 +240,9 @@
                     <a-button type="primary" @click="stepCurrent--" style="margin-right:12px" v-if="stepCurrent > 0"
                         >上一步</a-button
                     >
-                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++">下一步</a-button>
+                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++" :disabled="timeNext > 0"
+                        >{{ timeNext > 0 ? `(${timeNext}S)` : "" }}下一步</a-button
+                    >
                     <a-button v-else :class="isSubmit ? 'none' : ''" type="primary" @click="handleSubmit">{{
                         $t("gmbpf.dk")
                     }}</a-button>
@@ -298,7 +301,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution", "liaisonList", "currentForm", "currentUser"]),
+        ...mapGetters(["currentInstitution", "liaisonList", "currentForm", "currentUser", "timeNext"]),
         selectedLiaison: function() {
             if (this.form.liaisonId) {
                 const data = this.liaisonList.find((item) => item.id === this.form.liaisonId);
@@ -386,6 +389,7 @@ export default {
     mounted: function() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         this.initData();
+        this.$store.dispatch("setTimeNext");
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");

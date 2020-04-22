@@ -3,8 +3,8 @@
         <a-steps :current="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('mfe.dc')" />
             <a-step :title="$t('mfe.ck')" />
-            <a-step :title="$t('mfe.aa')" />
             <a-step :title="$t('mfe.af')" />
+            <a-step :title="$t('mfe.aa')" />
             <a-step :title="$t('mfe.an')" />
             <a-step :title="$t('mfe.bb')" />
             <a-step :title="$t('mfe.cf')" />
@@ -58,22 +58,7 @@
                         </ul>
                     </a-form-model-item>
                 </div>
-
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item :label="$t('mfe.ab')" required>
-                        <a-input :value="selectedActivity.activityName" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mfe.ac')" required>
-                        <a-input :value="selectedActivity.activityDate" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mfe.ad')" required>
-                        <a-input :value="selectedActivity.activityPlace" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mfe.ae')" required>
-                        <a-input :value="selectedActivity.activityExpiry" disabled />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('mfe.ag')" required>
                         <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
@@ -111,6 +96,22 @@
                         <a-input :value="selectedLiaison.address" disabled />
                     </a-form-model-item>
                 </div>
+
+                <div v-show="stepCurrent === 3">
+                    <a-form-model-item :label="$t('mfe.ab')" required>
+                        <a-input :value="selectedActivity.activityName" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mfe.ac')" required>
+                        <a-input :value="selectedActivity.activityDate" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mfe.ad')" required>
+                        <a-input :value="selectedActivity.activityPlace" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mfe.ae')" required>
+                        <a-input :value="selectedActivity.activityExpiry" disabled />
+                    </a-form-model-item>
+                </div>
+
                 <div v-show="stepCurrent === 4">
                     <a-form-model-item prop="method" :label="$t('mfe.ao')">
                         <a-radio-group v-model="form.method" :disabled="isCheck">
