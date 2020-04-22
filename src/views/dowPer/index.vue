@@ -43,6 +43,7 @@ export default {
                 page: 0,
                 size: 20,
                 categoryId: null,
+                clientShow: true,
             },
             total: 1,
         };
