@@ -1,30 +1,19 @@
 <template>
     <a-tabs class="all" type="card">
         <a-tab-pane :tab="$t('show.info')" key="1">
-            <info :info="cardData.content"></info>
+            <info :info="infoLan(cardData)"></info>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.coPe')" key="2">
-            <co-pe
-                :liaisons="cardData.liaisons ? cardData.liaisons : []"
-            ></co-pe>
+            <co-pe :liaisons="cardData.liaisons ? cardData.liaisons : []"></co-pe>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.organizer')" key="3">
-            <organizer
-                :organizers="cardData.organizers"
-                :helpers="cardData.helpers"
-            ></organizer>
+            <organizer :organizers="cardData.organizers" :helpers="cardData.helpers"></organizer>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.shop')" key="4">
-            <shop
-                :institutions="
-                    cardData.institutions ? cardData.institutions : []
-                "
-            ></shop>
+            <shop :institutions="cardData.institutions ? cardData.institutions : []"></shop>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.photo')" key="5">
-            <photo
-                :pictures="cardData.pictures ? cardData.pictures : []"
-            ></photo>
+            <photo :pictures="cardData.pictures ? cardData.pictures : []"></photo>
         </a-tab-pane>
     </a-tabs>
 </template>
@@ -37,9 +26,26 @@ import photo from "./photo";
 import info from "./info";
 export default {
     props: {
-        cardData: Object
+        cardData: Object,
     },
-    components: { coPe, organizer, shop, photo, info }
+    components: { coPe, organizer, shop, photo, info },
+    methods: {
+        infoLan(item) {
+            let lan = this.lan;
+            let content = null;
+            switch (lan) {
+                case "zh":
+                    content = item.contentZh;
+                    break;
+                case "en":
+                    content = item.contentEn;
+                    break;
+                case "pt":
+                    content = item.contentPt;
+            }
+            return content;
+        },
+    },
 };
 </script>
 
