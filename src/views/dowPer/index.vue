@@ -61,8 +61,6 @@ export default {
             const { data, code, message } = await CommonConfig.getByName("document");
             if (code === 200) {
                 this.tabList = data;
-            } else {
-                this.$message.error(message);
             }
         },
         async getDocumentList() {
@@ -73,8 +71,6 @@ export default {
             if (code === 200) {
                 this.documentList = data.content;
                 this.total = data.totalElements;
-            } else {
-                this.$message.error(message);
             }
             this.loading = false;
         },
