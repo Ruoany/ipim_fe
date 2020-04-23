@@ -69,9 +69,9 @@
                     $t("menu.ci")
                 }}</a-menu-item>
             </a-sub-menu>
-            <a-sub-menu>
-                <span slot="title" @click="$router.push('/download_personal')">{{ $t("menu.downloadPersonal") }}</span>
-            </a-sub-menu>
+            <a-menu-item @click="$router.push('/download_personal')" key="download_personal">
+                <span>{{ $t("menu.downloadPersonal") }}</span>
+            </a-menu-item>
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
