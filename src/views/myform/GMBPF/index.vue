@@ -7,7 +7,7 @@
             <a-step :title="$t('gmbpf.aa')" />
             <a-step :title="$t('gmbpf.an')" />
             <a-step :title="$t('gmbpf.bb')" />
-            <a-step :title="$t('gmbpf.cf')" />
+            <a-step :title="$t('gmbpf.cf')" v-if="form.method === 'GROUP_EXHIBITION'" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
             <a-form-model class="form" ref="gmbpf" :model="form" :rules="rules" v-bind="formatLayout">
@@ -186,7 +186,7 @@
                         <upload :value.sync="form.paymentRecordFiles" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 6">
+                <div v-show="stepCurrent === 6 && form.method === 'GROUP_EXHIBITION'">
                     <a-form-model-item :label="$t('gmbpf.cg')" :required="form.method === 'GROUP_EXHIBITION'">
                         <div class="company-item" v-for="(item, index) in form.groups" :key="index">
                             <company
@@ -240,7 +240,11 @@
                     <a-button type="primary" @click="stepCurrent--" style="margin-right:12px" v-if="stepCurrent > 0"
                         >上一步</a-button
                     >
-                    <a-button v-if="stepCurrent < 6" type="primary" @click="stepCurrent++" :disabled="timeNext > 0"
+                    <a-button
+                        v-if="stepCurrent < stepSum"
+                        type="primary"
+                        @click="stepCurrent++"
+                        :disabled="timeNext > 0"
                         >{{ timeNext > 0 ? `(${timeNext}S)` : "" }}下一步</a-button
                     >
                     <a-button v-else :class="isSubmit ? 'none' : ''" type="primary" @click="handleSubmit">{{
@@ -325,6 +329,9 @@ export default {
         },
         isCheck: function() {
             return this.form.status === "passed" || this.form.status === "withdraw" || this.form.status === "approving";
+        },
+        stepSum: function() {
+            return this.form.method === "GROUP_EXHIBITION" ? 6 : 5;
         },
     },
     methods: {
