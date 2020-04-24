@@ -1,15 +1,4 @@
 module.exports = {
-    css: {
-        loaderOptions: {
-            less: {
-                modifyVars: {
-                    "primary-color": "#ED1C24",
-                    "link-color": "#ED1C24",
-                },
-                javascriptEnabled: true,
-            },
-        },
-    },
     lintOnSave: false,
     pages: {
         index: {
