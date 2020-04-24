@@ -8,12 +8,17 @@
             <a-step :title="$t('formbc.ax')" />
             <a-step :title="$t('formbc.bi')" />
         </a-steps>
-        <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
+        <a-form
+            class="form"
+            :form="form"
+            @submit="handleSubmit"
+            v-bind="formatLayout"
+        >
             <div v-show="stepCurrent === 0">
                 <a-form-item :label="$t('formbc.ac')">
                     <a-radio-group v-decorator>
                         <a-radio value="a">{{ $t("formbc.ad") }}</a-radio>
-                        <a-radio value="a">{{ $t("formbc.ae") }}</a-radio>
+                        <a-radio value="b">{{ $t("formbc.ae") }}</a-radio>
                     </a-radio-group>
                 </a-form-item>
                 <a-form-item :label="$t('formbc.af')">
@@ -53,7 +58,12 @@
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-item :label="$t('formbc.as')">
-                    <a-input v-decorator />
+                    <div class="special">
+                        <a-input v-decorator />
+                        <a-button style="margin-left:10px;">{{
+                            $t("formbc.br")
+                        }}</a-button>
+                    </div>
                 </a-form-item>
                 <a-form-item :label="$t('formbc.at')">
                     <a-input v-decorator />
@@ -110,7 +120,7 @@
                     </a-input>
                 </a-form-item>
                 <a-form-item :label="$t('formbc.bh')">
-                    <a-input v-decorator>
+                    <a-input v-decorator disabled>
                         <span slot="suffix">MOP</span>
                     </a-input>
                 </a-form-item>
@@ -150,13 +160,20 @@
                     type="primary"
                     @click="stepCurrent--"
                     style="margin-right:12px"
-                >上一步</a-button>
-                <a-button v-show="stepCurrent < 5" type="primary" @click="stepCurrent++">下一步</a-button>
+                    >上一步</a-button
+                >
+                <a-button
+                    v-show="stepCurrent < 5"
+                    type="primary"
+                    @click="stepCurrent++"
+                    >下一步</a-button
+                >
                 <a-button
                     v-show="stepCurrent === 5"
                     type="primary"
                     html-type="submit"
-                >{{ $t("formbc.bq") }}</a-button>
+                    >{{ $t("formbc.bq") }}</a-button
+                >
             </a-form-item>
         </a-form>
     </div>
@@ -196,4 +213,9 @@ export default {
 
 <style lang="less" scoped>
 @import url("../css/form.less");
+.special {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 </style>

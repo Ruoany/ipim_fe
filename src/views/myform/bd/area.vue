@@ -20,7 +20,7 @@
                         <a-checkbox value="E">{{ $t("formbd.aw") }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="E">{{ $t("formbd.av") }}</a-checkbox>
+                        <a-checkbox value="F">{{ $t("formbd.av") }}</a-checkbox>
                     </a-col>
                 </a-row>
             </a-checkbox-group>
@@ -34,9 +34,14 @@
         <a-form-item :label="$t('formbd.ba')">
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-date-picker style="width:100%" :placeholder="$t('formbd.bb')" />
+                    <a-date-picker
+                        style="width:100%"
+                        :placeholder="$t('formbd.bb')"
+                    />
                 </a-col>
-                <a-col :span="13"><a-input :placeholder="$t('formbd.bc')"/></a-col>
+                <a-col :span="13"
+                    ><a-input :placeholder="$t('formbd.bc')"
+                /></a-col>
                 <a-col :span="1">
                     <a-icon type="plus" class="cur" />
                 </a-col>
@@ -143,10 +148,12 @@
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                <p class="ant-upload-text">
+                    Click or drag file to this area to upload
+                </p>
                 <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
-                    files
+                    Support for a single or bulk upload. Strictly prohibit from
+                    uploading company data or other band files
                 </p>
             </a-upload-dragger>
         </a-form-item>
@@ -160,10 +167,12 @@
                 <p class="ant-upload-drag-icon">
                     <a-icon type="inbox" />
                 </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                <p class="ant-upload-text">
+                    Click or drag file to this area to upload
+                </p>
                 <p class="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
-                    files
+                    Support for a single or bulk upload. Strictly prohibit from
+                    uploading company data or other band files
                 </p>
             </a-upload-dragger>
         </a-form-item>

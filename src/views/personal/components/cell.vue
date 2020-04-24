@@ -23,6 +23,10 @@
                         <span>{{ $t("show.acTime") }}：</span>
                         <span>{{ date }}</span>
                     </div>
+                    <div :title="code">
+                        <span>{{ $t("show.code") }}：</span>
+                        <span>{{ code }}</span>
+                    </div>
                 </div>
                 <div class="right">
                     <slot name="action"></slot>
@@ -41,7 +45,8 @@ export default {
         activityStatus: { type: String, required: true },
         title: { type: String, default: "無題目" },
         address: { type: String, default: "無地址" },
-        date: { type: String, default: "1970-01-01" }
+        date: { type: String, default: "1970-01-01" },
+        code: { type: String, default: "無" }
     }
 };
 </script>
@@ -57,7 +62,7 @@ export default {
     .ad {
         position: relative;
         width: 200px;
-        height: 120px;
+        height: 140px;
         box-sizing: border-box;
         .UNPUBLISH {
             background-image: url(../../../assets/image/unopen.svg);

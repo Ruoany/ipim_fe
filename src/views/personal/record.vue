@@ -25,6 +25,7 @@
                 :title="item.activity.nameZh"
                 :address="item.activity.place"
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+                :code="item.code"
                 @handleClick="
                     $router.push(`/show/detail?id=${item.activity.id}`)
                 "

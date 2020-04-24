@@ -23,6 +23,7 @@
                 <a-form-model-item prop="username">
                     <a-input
                         v-model="form.username"
+                        @keyup.enter="handleSubmit"
                         size="large"
                         :placeholder="$t('login.account')"
                     >
@@ -32,6 +33,7 @@
                 <a-form-model-item prop="password">
                     <a-input
                         v-model="form.password"
+                        @keyup.enter="handleSubmit"
                         type="password"
                         size="large"
                         :placeholder="$t('login.password')"

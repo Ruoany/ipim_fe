@@ -4,14 +4,20 @@
             <div class="h-back-left">
                 <img :src="logoImg" class="img" />
                 <div>
-                    <div class="font-36">澳門會展網</div>
+                    <div class="font-36">
+                        澳門貿易投資促進局活動項目網上申請系統
+                    </div>
                     <div class="font-16">https://www.ipim.gov.mo</div>
                 </div>
             </div>
             <div class="h-back-right">
                 <div>
                     <i class="iconfont icondizhi"></i>
-                    <span>{{ $t("index.address") }}：澳门友谊大马路918号世贸中心一至四楼</span>
+                    <span
+                        >{{
+                            $t("index.address")
+                        }}：澳门友谊大马路918号世贸中心一至四楼</span
+                    >
                 </div>
                 <div>
                     <i class="iconfont iconyouxiang" style="font-size:18px"></i>
@@ -95,7 +101,7 @@ export default {
         margin-right: 20px;
     }
     .font-36 {
-        font-size: 36px;
+        font-size: 28px;
     }
     .font-16 {
         font-size: 16px;
