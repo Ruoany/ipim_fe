@@ -18,6 +18,7 @@
                 :page.sync="page"
                 :total="total"
                 :size="size"
+                @handleChange="handleChange"
             ></pagination>
         </a-spin>
     </div>
@@ -49,23 +50,20 @@ export default {
                 this.page = 0;
                 if (newValue === 1) {
                     this.participate = true;
-                    this.getActivePage(null);
+                    this.getActivePage();
                 } else {
                     this.participate = null;
-                    this.getActivePage(newValue);
+                    this.getActivePage();
                 }
             }
-        },
-        page: function() {
-            this.getActivePage(this.status);
         }
     },
     methods: {
-        async getActivePage(status) {
-            status =
-                status === null
+        async getActivePage() {
+            const status =
+                this.status === null || this.status === 1
                     ? ["NOTSTART", "PROGRESS", "END", "CANCEL"]
-                    : status;
+                    : this.status;
             this.loading = true;
             const body = {
                 size: this.size,
@@ -77,6 +75,10 @@ export default {
             this.list = data.content;
             this.total = data.totalElements;
             this.loading = false;
+        },
+        async handleChange(page) {
+            this.page = page;
+            this.getActivePage();
         }
     }
 };

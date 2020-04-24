@@ -2,8 +2,15 @@
     <div class="width-1280 container">
         <a-spin :spinning="loading" class="width-1280 content">
             <a-tabs v-model="listQuery.categoryId" @change="getDocumentList">
-                <a-tab-pane :tab="$t('downloadPersonal.all')" :key="null"></a-tab-pane>
-                <a-tab-pane v-for="item in tabList" :key="item.id" :tab="lanTab(item)"></a-tab-pane>
+                <a-tab-pane
+                    :tab="$t('downloadPersonal.all')"
+                    :key="null"
+                ></a-tab-pane>
+                <a-tab-pane
+                    v-for="item in tabList"
+                    :key="item.id"
+                    :tab="lanTab(item)"
+                ></a-tab-pane>
             </a-tabs>
             <div class="list-content">
                 <a-list itemLayout="horizontal" :dataSource="documentList">
@@ -12,12 +19,19 @@
                             <a slot="title">{{ item.name }}</a>
                         </a-list-item-meta>
                         <!-- <a :href="item.url" download> -->
-                        <a-icon type="download" @click="down(item.url, item.name)" />
+                        <a-icon
+                            type="download"
+                            @click="down(item.url, item.name)"
+                        />
                         <!-- </a> -->
                     </a-list-item>
                 </a-list>
             </div>
-            <pagination :page.sync="listQuery.page" :total="total" :size="listQuery.size"></pagination>
+            <pagination
+                :page.sync="listQuery.page"
+                :total="total"
+                :size="listQuery.size"
+            ></pagination>
         </a-spin>
     </div>
 </template>
@@ -32,7 +46,7 @@ import { mapGetters } from "vuex";
 export default {
     components: { Pagination },
     computed: {
-        ...mapGetters(["lan"]),
+        ...mapGetters(["lan"])
     },
     data() {
         return {
@@ -43,9 +57,9 @@ export default {
                 page: 0,
                 size: 20,
                 categoryId: null,
-                clientShow: true,
+                clientShow: true
             },
-            total: 1,
+            total: 1
         };
     },
 
@@ -58,7 +72,9 @@ export default {
         },
         //獲取分類tab
         async getTabList() {
-            const { data, code, message } = await CommonConfig.getByName("document");
+            const { data, code, message } = await CommonConfig.getByName(
+                "document"
+            );
             if (code === 200) {
                 this.tabList = data;
             }
@@ -66,7 +82,7 @@ export default {
         async getDocumentList() {
             this.loading = true;
             const { data, code, message } = await CompanyDocument.get({
-                ...this.listQuery,
+                ...this.listQuery
             });
             if (code === 200) {
                 this.documentList = data.content;
@@ -93,7 +109,7 @@ export default {
             let x = new XMLHttpRequest();
             x.open("GET", url, true);
             x.responseType = "blob";
-            x.onload = (e) => {
+            x.onload = e => {
                 let url = window.URL.createObjectURL(x.response);
                 let a = document.createElement("a");
                 a.href = url;
@@ -101,11 +117,11 @@ export default {
                 a.click();
             };
             x.send();
-        },
+        }
     },
     mounted() {
         this.initData();
-    },
+    }
 };
 </script>
 <style lang="less" scoped>
