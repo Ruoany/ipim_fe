@@ -1,5 +1,5 @@
-const config = { required: true, message: "plese input" };
-const config_select = { required: true, message: "plese select" };
+const config = { required: true, message: "Please input" };
+const config_select = { required: true, message: "Please select" };
 const methods = [
     { value: "GENERAL_EXHIBITION", label: "gmbpf.ap" },
     { value: "GROUP_EXHIBITION", label: "gmbpf.aq" },

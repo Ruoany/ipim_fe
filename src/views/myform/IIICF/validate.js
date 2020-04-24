@@ -1,5 +1,5 @@
-const config = { required: true, message: "plese input" };
-const config_select = { required: true, message: "plese select" };
+const config = { required: true, message: "Please input" };
+const config_select = { required: true, message: "Please select" };
 const businessMatchings = [
     { value: "GOVERNMENT_PUBLIC", label: "iiicf.bk" },
     { value: "HOTEL", label: "iiicf.bl" },
