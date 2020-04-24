@@ -19,7 +19,10 @@
                             <a slot="title">{{ item.name }}</a>
                         </a-list-item-meta>
                         <!-- <a :href="item.url" download> -->
-                        <a-icon type="download" @click="down(item.url)" />
+                        <a-icon
+                            type="download"
+                            @click="down(item.url, item.name)"
+                        />
                         <!-- </a> -->
                     </a-list-item>
                 </a-list>
@@ -53,7 +56,8 @@ export default {
             listQuery: {
                 page: 0,
                 size: 20,
-                categoryId: null
+                categoryId: null,
+                clientShow: true
             },
             total: 1
         };
@@ -105,7 +109,7 @@ export default {
             }
             return name;
         },
-        down(url) {
+        down(url, name) {
             let x = new XMLHttpRequest();
             x.open("GET", url, true);
             x.responseType = "blob";
@@ -113,7 +117,7 @@ export default {
                 let url = window.URL.createObjectURL(x.response);
                 let a = document.createElement("a");
                 a.href = url;
-                a.download = "";
+                a.download = name;
                 a.click();
             };
             x.send();
