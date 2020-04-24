@@ -198,8 +198,20 @@ export default {
                         trigger: "blur"
                     },
                     {
-                        pattern: /\w{6,20}/,
-                        message: "Password format is incorrect",
+                        pattern: /^\w{6,20}$/,
+                        message:
+                            "Please enter 6-20 digits without Chinese and special characters",
+                        trigger: "blur"
+                    },
+                    {
+                        validator: (rule, value, callback) => {
+                            if (value === this.form.account) {
+                                callback(
+                                    "Password cannot be the same as account"
+                                );
+                            }
+                            callback();
+                        },
                         trigger: "blur"
                     }
                 ],

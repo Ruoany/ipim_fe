@@ -2,7 +2,7 @@ export default {
     state: {
         formId: null,
         liaisons: [],
-        time: 10,
+        time: 0,
     },
     getters: {
         liaisonList: (state) => state.liaisons,
@@ -18,9 +18,8 @@ export default {
         SET_TIMENEXT: function(state) {
             state.time = 10;
             let time = setInterval(() => {
-                if (state.time > 0) {
-                    state.time--;
-                } else {
+                state.time--;
+                if (state.time === 0) {
                     clearInterval(time);
                 }
             }, 1000);

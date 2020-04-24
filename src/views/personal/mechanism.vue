@@ -110,9 +110,11 @@
                 <a-button
                     :style="{ marginRight: '8px' }"
                     @click="$router.back()"
-                    >Cancel</a-button
+                    >{{ $t("util.cancel") }}</a-button
                 >
-                <a-button type="primary" @click="handleSubmit">ok</a-button>
+                <a-button type="primary" @click="handleSubmit">{{
+                    $t("util.save")
+                }}</a-button>
             </a-form-model-item>
         </a-form-model>
     </a-spin>

@@ -24,8 +24,8 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
     (response) => {
-        const { data } = response;
-        if (!data.success) {
+        const { data, config } = response;
+        if (!data.success && config.responseType !== "blob") {
             message.error(data.message);
             return false;
         }

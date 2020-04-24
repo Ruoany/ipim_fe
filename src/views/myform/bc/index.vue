@@ -7,6 +7,7 @@
             <a-step :title="$t('formbc.ar')" />
             <a-step :title="$t('formbc.ax')" />
             <a-step :title="$t('formbc.bi')" />
+            <a-step :title="$t('formbc.bs')" />
         </a-steps>
         <a-form
             class="form"
@@ -154,6 +155,59 @@
                     </div>
                 </a-form-item>
             </div>
+            <div v-show="stepCurrent === 6">
+                <a-form-item :label="$t('formbc.bt')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bu')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bv')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bw')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bx')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.by')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bz')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.ca')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.cb')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.cc')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.cd')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bt')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.ce')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.cf')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.cg')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.bw')"
+                    ><upload-file
+                /></a-form-item>
+                <a-form-item :label="$t('formbc.ch')"
+                    ><upload-file
+                /></a-form-item>
+            </div>
             <a-form-item>
                 <a-button
                     v-show="stepCurrent > 0"
@@ -163,13 +217,13 @@
                     >上一步</a-button
                 >
                 <a-button
-                    v-show="stepCurrent < 5"
+                    v-show="stepCurrent < 6"
                     type="primary"
                     @click="stepCurrent++"
                     >下一步</a-button
                 >
                 <a-button
-                    v-show="stepCurrent === 5"
+                    v-show="stepCurrent === 6"
                     type="primary"
                     html-type="submit"
                     >{{ $t("formbc.bq") }}</a-button
@@ -181,7 +235,9 @@
 
 <script>
 import validate from "./validate";
+import UploadFile from "@/components/upload";
 export default {
+    components: { UploadFile },
     data() {
         return {
             ...validate,

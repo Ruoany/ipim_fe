@@ -535,8 +535,8 @@ export default {
     },
     mounted: function() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
+        if (!this.formId) this.$store.dispatch("setTimeNext");
         this.initData();
-        this.$store.dispatch("setTimeNext");
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");

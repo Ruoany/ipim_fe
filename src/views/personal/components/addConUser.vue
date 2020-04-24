@@ -113,9 +113,11 @@
             <a-button
                 :style="{ marginRight: '8px' }"
                 @click="$emit('update:visible', false)"
-                >Cancel</a-button
+                >{{ $t("util.cancel") }}</a-button
             >
-            <a-button type="primary" @click="handleSubmit">ok</a-button>
+            <a-button type="primary" @click="handleSubmit">{{
+                $t("util.save")
+            }}</a-button>
         </div>
     </a-form-model>
 </template>

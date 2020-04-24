@@ -35,8 +35,8 @@
                         <a-popconfirm
                             title="Are you sure delete this?"
                             @confirm="deleteSub(record.id)"
-                            okText="Yes"
-                            cancelText="No"
+                            :okText="$t('util.yes')"
+                            :cancelText="$t('util.no')"
                         >
                             <a style="color:#ccc;">{{
                                 $t("personal.delete")
@@ -57,6 +57,8 @@
             @ok="handleOk"
             :confirmLoading="confirmLoading"
             @cancel="handleCancel"
+            :okText="$t('util.save')"
+            :cancelText="$t('util.cancel')"
             destroyOnClose
         >
             <a-spin :spinning="modalLoading">
