@@ -6,34 +6,58 @@
         <a-dropdown class="login-dropdown-wrapper login-dropdown">
             <a class="ant-dropdown-link">語言</a>
             <a-menu slot="overlay">
-                <a-menu-item key="zh" @click="lanChange('zh')">中文</a-menu-item>
-                <a-menu-item key="en" @click="lanChange('en')">English</a-menu-item>
-                <a-menu-item key="pt" @click="lanChange('pt')">Português</a-menu-item>
+                <a-menu-item key="zh" @click="lanChange('zh')"
+                    >中文</a-menu-item
+                >
+                <a-menu-item key="en" @click="lanChange('en')"
+                    >English</a-menu-item
+                >
+                <a-menu-item key="pt" @click="lanChange('pt')"
+                    >Português</a-menu-item
+                >
             </a-menu>
         </a-dropdown>
         <div class="content-wrapper">
             <div class="title">{{ $t("login.title") }}</div>
             <a-form-model ref="login" class="form" :model="form" :rules="rules">
                 <a-form-model-item prop="username">
-                    <a-input v-model="form.username" size="large" :placeholder="$t('login.account')">
+                    <a-input
+                        v-model="form.username"
+                        size="large"
+                        :placeholder="$t('login.account')"
+                    >
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item prop="password">
-                    <a-input v-model="form.password" type="password" size="large" :placeholder="$t('login.password')">
+                    <a-input
+                        v-model="form.password"
+                        type="password"
+                        size="large"
+                        :placeholder="$t('login.password')"
+                    >
                         <a-icon slot="prefix" type="lock" />
                     </a-input>
                 </a-form-model-item>
                 <a-form-model-item>
-                    <a-button block :loading="loading" type="primary" size="large" @click="handleSubmit">{{
-                        $t("login.login")
-                    }}</a-button>
+                    <a-button
+                        block
+                        :loading="loading"
+                        type="primary"
+                        size="large"
+                        @click="handleSubmit"
+                        >{{ $t("login.login") }}</a-button
+                    >
                     <div class="register-wrapper">
                         <span>
                             {{ $t("login.nohave") }}
-                            <router-link to="/register" replace>{{ $t("login.register") }}</router-link>
+                            <router-link to="/register" replace>{{
+                                $t("login.register")
+                            }}</router-link>
                         </span>
-                        <router-link to="/reset" replace>{{ $t("login.forget") }}</router-link>
+                        <router-link to="/reset" replace>{{
+                            $t("login.forget")
+                        }}</router-link>
                     </div>
                 </a-form-model-item>
             </a-form-model>
@@ -52,24 +76,24 @@ export default {
                 username: [
                     {
                         required: true,
-                        message: "Please input the email address",
+                        message: "Please input the email address"
                     },
                     {
                         type: "email",
-                        message: "Email format is incorrect",
-                    },
+                        message: "Email format is incorrect"
+                    }
                 ],
                 password: [
                     {
                         required: true,
-                        message: "Please input the passwrod",
-                    },
-                ],
+                        message: "Please input the passwrod"
+                    }
+                ]
             },
             form: {
                 username: "",
-                password: "",
-            },
+                password: ""
+            }
         };
     },
     methods: {
@@ -82,14 +106,14 @@ export default {
             this.$router.push("/");
         },
         handleSubmit: function() {
-            this.$refs.login.validate(async (valid) => {
+            this.$refs.login.validate(async valid => {
                 if (valid) {
                     this.loading = true;
                     const result = await Login(this.form);
                     const { code, message, data } = JSON.parse(result);
                     if (code !== 200) {
                         this.loading = false;
-                        // this.$message.error(message);
+                        this.$message.error(message);
                         return;
                     }
                     sessionStorage.setItem("token", data.token);
@@ -98,12 +122,12 @@ export default {
                     this.getUserInfo();
                 }
             });
-        },
+        }
     },
     mounted: function() {
         sessionStorage.clear();
         this.$store.dispatch("clear");
-    },
+    }
 };
 </script>
 
