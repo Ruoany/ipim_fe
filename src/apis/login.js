@@ -1,9 +1,10 @@
 import axios from "axios";
+import { baseURL } from "./request";
 export const Login = async (params) => {
     const {
         data: { data },
     } = await axios({
-        url: "/api/swagger/login",
+        url: `${baseURL}/swagger/login`,
         params: {
             loginUrl: "http://127.0.0.1:9196/login",
             saveLogin: false,
