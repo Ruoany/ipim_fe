@@ -4,9 +4,8 @@
             <div class="h-back-left">
                 <img :src="logoImg" class="img" />
                 <div>
-                    <div class="font-36">
-                        澳門貿易投資促進局活動項目網上申請系統
-                    </div>
+                    <div class="font-36">澳門貿易投資促進局</div>
+                    <div>活動項目網上申請系統</div>
                     <div class="font-16">https://www.ipim.gov.mo</div>
                 </div>
             </div>
@@ -102,6 +101,7 @@ export default {
     }
     .font-36 {
         font-size: 28px;
+        line-height: 30px;
     }
     .font-16 {
         font-size: 16px;

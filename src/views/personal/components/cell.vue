@@ -64,6 +64,8 @@ export default {
         width: 200px;
         height: 140px;
         box-sizing: border-box;
+        border: 1px solid #eee;
+        border-radius: 6px;
         .UNPUBLISH {
             background-image: url(../../../assets/image/unopen.svg);
         }
