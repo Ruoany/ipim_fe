@@ -14,7 +14,6 @@
                     $t("util.upPassword")
                 }}</a-button>
             </a-form-model-item>
-
             <a-form-model-item prop="phone" :label="$t('index.tel')">
                 <a-input v-model="info.phone" />
             </a-form-model-item>
@@ -157,13 +156,12 @@ export default {
             const { form, $refs } = this.$refs.up;
             $refs.pwd.validate(async valid => {
                 if (valid) {
-                    const { code, message } = await User.reset(form);
-                    if (code !== 200) {
-                        // this.$message.error(message);
-                        return;
+                    delete form.confirm;
+                    const { success, message } = await User.updatePwd(form);
+                    if (success) {
+                        this.upPasswordVisible = false;
+                        this.onSuccess(message);
                     }
-                    this.upPasswordVisible = false;
-                    this.onSuccess(message);
                 }
             });
         }

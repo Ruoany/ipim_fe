@@ -1,9 +1,13 @@
 <template>
-    <a-calendar :fullscreen="false" class="all" @select="calSelect">
-        <!-- :disabledDate="computedBadge" -->
-        <!-- <template slot="dateCellRender" slot-scope="value">
+    <a-calendar
+        :fullscreen="false"
+        class="all"
+        @select="calSelect"
+        @panelChange="panelSelect"
+    >
+        <template slot="dateCellRender" slot-scope="value">
             <div class="badge" :class="computedBadge(value)"></div>
-        </template> -->
+        </template>
     </a-calendar>
 </template>
 
@@ -12,9 +16,7 @@ export default {
     props: {
         dateSource: {
             type: Array,
-            default: () => {
-                return ["2020-03-29", "2020-04-05", "2020-04-15"];
-            }
+            default: () => []
         }
     },
     methods: {
@@ -22,12 +24,17 @@ export default {
         calSelect(date) {
             let upDate = this.$moment(date).format("YYYY-MM-DD");
             this.$emit("changeDate", upDate);
-        }
+        },
+        //日期面板发生改变
+        panelSelect(date) {
+            let upDate = this.$moment(date).format("YYYY-MM-DD");
+            this.$emit("changePanel", upDate);
+        },
         //判斷當天是否有展會
-        // computedBadge(date) {
-        //     const dateStr = this.$moment(date).format("YYYY-MM-DD");
-        //     return !this.dateSource.includes(dateStr);
-        // }
+        computedBadge(date) {
+            const dateStr = this.$moment(date).format("YYYY-MM-DD");
+            return this.dateSource.includes(dateStr) ? "isHas" : "";
+        }
     }
 };
 </script>

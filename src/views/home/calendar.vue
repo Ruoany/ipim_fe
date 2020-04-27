@@ -3,7 +3,9 @@
         <div class="calendar">
             <calendar
                 class="list"
+                :dateSource="badgeData"
                 @changeDate="date => (dayTime = date)"
+                @changePanel="panelChange"
             ></calendar>
         </div>
         <a-spin :spinning="loading" class="flex list spin">
@@ -55,6 +57,8 @@ export default {
     data() {
         return {
             showList: [],
+            badgeData: [],
+            current: "",
             loading: true
         };
     },
@@ -70,16 +74,31 @@ export default {
         }
     },
     methods: {
+        async getBageDate(dayTime) {
+            const str = dayTime.split("-");
+            const { data } = await Activity.disabled({
+                year: str[0],
+                month: str[1]
+            });
+            this.badgeData = data.map(item => item.split(" ")[0]);
+        },
         async getActiveList(dayTime) {
             this.loading = true;
+            const str = dayTime.split("-");
             const { data, code } = await Activity.all({
-                dayTime
+                dayTime,
+                manyStatus: ["NOTSTART", "PROGRESS", "END", "CANCEL"]
             });
             this.showList = data ? data : [];
             this.loading = false;
+        },
+        panelChange(date) {
+            this.dayTime = date;
+            this.getBageDate(date);
         }
     },
     mounted() {
+        this.getBageDate(this.dayTime);
         this.getActiveList(this.dayTime);
     }
 };

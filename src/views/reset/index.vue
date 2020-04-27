@@ -20,20 +20,20 @@
         <div class="content-wrapper">
             <div class="title">{{ $t("login.reset") }}</div>
             <a-form-model ref="reset" class="form" :model="form" :rules="rules">
-                <a-form-model-item prop="username">
+                <a-form-model-item prop="account">
                     <a-input
-                        v-model="form.username"
+                        v-model="form.account"
                         :placeholder="$t('login.account')"
                         size="large"
                     >
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
-                <a-form-model-item prop="code">
+                <a-form-model-item prop="captcha">
                     <a-row>
                         <a-col :span="14">
                             <a-input
-                                v-model="form.code"
+                                v-model="form.captcha"
                                 :placeholder="$t('login.code')"
                                 size="large"
                             >
@@ -94,13 +94,14 @@
 </template>
 
 <script>
+import User from "@/apis/user";
 export default {
     data() {
         return {
             buttonText: this.$t("login.getCode"),
             buttonDisabled: false,
             rules: {
-                username: [
+                account: [
                     {
                         required: true,
                         message: "Please input the email address",
@@ -112,7 +113,7 @@ export default {
                         trigger: "blur"
                     }
                 ],
-                code: [
+                captcha: [
                     {
                         required: true,
                         message: "Please input the code",
@@ -147,8 +148,8 @@ export default {
                 ]
             },
             form: {
-                username: "",
-                code: "",
+                account: "",
+                captcha: "",
                 password: "",
                 confirm: ""
             }
@@ -172,17 +173,24 @@ export default {
             sessionStorage.setItem("language", key);
         },
         getCode: function() {
-            this.$refs.reset.validateField(["username"], async valid => {
+            this.$refs.reset.validateField(["account"], async valid => {
                 if (!valid) {
-                    console.log("上述四", this.form.username);
                     this.Interval();
+                    const { success, message } = await User.send(
+                        this.form.account
+                    );
+                    if (success) {
+                        this.$message.success(message);
+                    }
                 }
             });
         },
         handleSubmit: function() {
             this.$refs.reset.validate(async valid => {
                 if (valid) {
-                    console.log("全部", this.form);
+                    delete this.form.confirm;
+                    const { data } = await User.reset(this.form);
+                    console.log("密码", data);
                 }
             });
         }

@@ -11,7 +11,9 @@
                 <div>
                     <div>{{ $t("show.acAd") }}：{{ place }}</div>
                     <div style="color:#EE1C24">
-                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{ endTime | formatTime }}
+                        {{ $t("show.acTime") }}：{{ startTime | formatTime }}-{{
+                            endTime | formatTime
+                        }}
                     </div>
                 </div>
             </div>
@@ -19,13 +21,22 @@
         <div class="end">
             <a-dropdown :disabled="!participate">
                 <a-menu slot="overlay" @click="navigateForm">
-                    <a-menu-item v-for="item in types" :key="item">{{ $t(FormMap[item]) }}</a-menu-item>
+                    <a-menu-item v-for="item in types" :key="item">{{
+                        $t(FormMap[item])
+                    }}</a-menu-item>
                 </a-menu>
-                <a-button v-if="participate" type="primary" size="large" class="btn">
+                <a-button
+                    v-if="participate"
+                    type="primary"
+                    size="large"
+                    class="btn"
+                >
                     {{ $t("show.method") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </a-button>
-                <a-button v-else size="large" class="btn">{{ $t("show.deadline") }}</a-button>
+                <a-button v-else size="large" class="btn">{{
+                    $t("show.deadline")
+                }}</a-button>
             </a-dropdown>
         </div>
     </div>
@@ -68,7 +79,8 @@ export default {
             if (!this.currentInstitution && sessionStorage.getItem("login")) {
                 this.$confirm({
                     title: null,
-                    content: "請先完善機構信息和聯絡人信息方可參展展會，是否要去往完善？",
+                    content:
+                        "請先完善機構信息和聯絡人信息方可參展展會，是否要去往完善？",
                     okText: "完善信息",
                     cancelText: "取消",
                     onOk: () => {
@@ -106,7 +118,7 @@ export default {
 .end {
     align-self: flex-end;
     .btn {
-        margin: 0 10px;
+        margin: 0;
         width: 144px;
     }
 }
@@ -114,6 +126,7 @@ export default {
     font-size: 26px;
 }
 .ju {
+    height: 100%;
     flex-direction: column;
     justify-content: space-between;
 }

@@ -14,11 +14,20 @@
             <div class="width-1280">
                 <h1 class="font-bold title">{{ $t("index.evCa") }}</h1>
                 <calendar></calendar>
-                <div class="flex-justify-content-space-between flex-align-items-center title">
+                <div
+                    class="flex-justify-content-space-between flex-align-items-center title"
+                >
                     <h1 class="font-bold">{{ $t("index.keAc") }}</h1>
-                    <div class="flex-align-items-center" @click="$router.push('/show/all')" style="cursor:pointer;">
+                    <div
+                        class="flex-align-items-center"
+                        @click="$router.push('/show/all')"
+                        style="cursor:pointer;"
+                    >
                         {{ $t("index.allAc") }}
-                        <img src="../../assets/image/more.svg" style="margin-left:10px;" />
+                        <img
+                            src="../../assets/image/more.svg"
+                            style="margin-left:10px;"
+                        />
                     </div>
                 </div>
                 <div class="width-100 flex ">
@@ -39,7 +48,9 @@ export default {
     },
     methods: {
         go() {
-            window.open("https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592");
+            window.open(
+                "https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592"
+            );
         }
     }
 };

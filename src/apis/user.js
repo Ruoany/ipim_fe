@@ -2,18 +2,11 @@ import general from "./general";
 import request from "./request";
 
 const m = general("user", {
-    current: async () => {
-        const result = await request({ url: "/user/current", method: "GET" });
-        return result;
-    },
-    register: async data => {
-        const result = await request({ url: "/user/register", method: "POST", data });
-        return result;
-    },
-    reset: async data => {
-        const result = await request({ url: "/user/pwdreset", method: "POST", data });
-        return result;
-    }
+    current: () => request({ url: "/user/current", method: "GET" }),
+    register: (data) => request({ url: "/user/register", method: "POST", data }),
+    updatePwd: (data) => request({ url: "/user/pwdreset", method: "POST", data }),
+    resetPwd: (data) => request({ url: "/user/forget", method: "POST", data }),
+    send: (account) => request.get(`/user/send/${account}`),
 });
 
 export default m;

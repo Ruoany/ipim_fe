@@ -15,7 +15,6 @@
 <script>
 export default {
     data() {
-        const config = { required: true, message: "Please input" };
         const confirmValid = (rule, value, callback) => {
             if (value && value !== this.form.pwd) {
                 callback("Two passwords that you enter is inconsistent!");
@@ -25,9 +24,23 @@ export default {
         };
         return {
             rules: {
-                old: [config],
-                pwd: [config],
-                confirm: [{ required: true, validator: confirmValid, trigger: "blur" }]
+                old: [{ required: true, message: "Please input" }],
+                pwd: [
+                    {
+                        required: true,
+                        message: "Please input the password",
+                        trigger: "blur"
+                    },
+                    {
+                        pattern: /^\w{6,20}$/,
+                        message:
+                            "Please enter 6-20 digits without Chinese and special characters",
+                        trigger: "blur"
+                    }
+                ],
+                confirm: [
+                    { required: true, validator: confirmValid, trigger: "blur" }
+                ]
             },
             form: {
                 id: this.$store.getters.currentUser,
