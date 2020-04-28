@@ -2,7 +2,7 @@
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('formbc.aa')" />
-            <a-step :title="$t('formbc.aj')" />
+            <!-- <a-step :title="$t('formbc.aj')" /> -->
             <a-step :title="$t('formbc.am')" />
             <a-step :title="$t('formbc.ar')" />
             <a-step :title="$t('formbc.ax')" />
@@ -35,15 +35,15 @@
                     <a-input v-decorator />
                 </a-form-item>
             </div>
-            <div v-show="stepCurrent === 1">
+            <!-- <div v-show="stepCurrent === 1">
                 <a-form-item :label="$t('formbc.ak')">
                     <a-input v-decorator />
                 </a-form-item>
                 <a-form-item :label="$t('formbc.al')">
                     <a-input v-decorator />
                 </a-form-item>
-            </div>
-            <div v-show="stepCurrent === 2">
+            </div> -->
+            <div v-show="stepCurrent === 1">
                 <a-form-item :label="$t('formbc.an')">
                     <a-input v-decorator />
                 </a-form-item>
@@ -57,7 +57,7 @@
                     <a-input v-decorator />
                 </a-form-item>
             </div>
-            <div v-show="stepCurrent === 3">
+            <div v-show="stepCurrent === 2">
                 <a-form-item :label="$t('formbc.as')">
                     <div class="special">
                         <a-input v-decorator />
@@ -79,7 +79,7 @@
                     <a-input v-decorator />
                 </a-form-item>
             </div>
-            <div v-show="stepCurrent === 4">
+            <div v-show="stepCurrent === 3">
                 <a-form-item :label="$t('formbc.az')">
                     <a-input v-decorator>
                         <span slot="suffix">MOP</span>
@@ -126,7 +126,7 @@
                     </a-input>
                 </a-form-item>
             </div>
-            <div v-show="stepCurrent === 5">
+            <div v-show="stepCurrent === 4">
                 <a-form-item>
                     <div>
                         <span>1.</span>
@@ -155,7 +155,7 @@
                     </div>
                 </a-form-item>
             </div>
-            <div v-show="stepCurrent === 6">
+            <div v-show="stepCurrent === 5">
                 <a-form-item :label="$t('formbc.bt')"
                     ><upload-file
                 /></a-form-item>
@@ -217,13 +217,13 @@
                     >上一步</a-button
                 >
                 <a-button
-                    v-show="stepCurrent < 6"
+                    v-show="stepCurrent < 5"
                     type="primary"
                     @click="stepCurrent++"
                     >下一步</a-button
                 >
                 <a-button
-                    v-show="stepCurrent === 6"
+                    v-show="stepCurrent === 5"
                     type="primary"
                     html-type="submit"
                     >{{ $t("formbc.bq") }}</a-button
