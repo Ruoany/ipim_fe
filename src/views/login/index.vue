@@ -20,9 +20,9 @@
         <div class="content-wrapper">
             <div class="title">{{ $t("login.title") }}</div>
             <a-form-model ref="login" class="form" :model="form" :rules="rules">
-                <a-form-model-item prop="username">
+                <a-form-model-item prop="account">
                     <a-input
-                        v-model="form.username"
+                        v-model="form.account"
                         @keyup.enter="handleSubmit"
                         size="large"
                         :placeholder="$t('login.account')"
@@ -30,9 +30,9 @@
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
-                <a-form-model-item prop="password">
+                <a-form-model-item prop="pwd">
                     <a-input
-                        v-model="form.password"
+                        v-model="form.pwd"
                         @keyup.enter="handleSubmit"
                         type="password"
                         size="large"
@@ -75,7 +75,7 @@ export default {
         return {
             loading: false,
             rules: {
-                username: [
+                account: [
                     {
                         required: true,
                         message: "Please input the email address"
@@ -85,7 +85,7 @@ export default {
                         message: "Email format is incorrect"
                     }
                 ],
-                password: [
+                pwd: [
                     {
                         required: true,
                         message: "Please input the passwrod"
@@ -93,8 +93,8 @@ export default {
                 ]
             },
             form: {
-                username: "",
-                password: ""
+                account: "",
+                pwd: ""
             }
         };
     },
@@ -111,8 +111,9 @@ export default {
             this.$refs.login.validate(async valid => {
                 if (valid) {
                     this.loading = true;
-                    const result = await Login(this.form);
-                    const { code, message, data } = JSON.parse(result);
+                    const {
+                        data: { code, data }
+                    } = await Login(this.form);
                     if (code !== 200) {
                         this.loading = false;
                         this.$message.error(message);
