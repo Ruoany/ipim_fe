@@ -2,7 +2,7 @@ import axios from "axios";
 import { message } from "ant-design-vue";
 import router from "@/router/index";
 
-export const baseURL = process.env.NODE_ENV === "production" ? "/api" : "http://api-exhibition.servier.iteratech.net";
+export const baseURL = process.env.NODE_ENV === "production" ? "/api" : "/api";
 // export const baseURL = process.env.NODE_ENV === "production" ? "http://192.168.101.53:9196" : "/api";
 
 const request = axios.create({
