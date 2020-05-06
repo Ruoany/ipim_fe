@@ -1,16 +1,36 @@
 <template>
     <div class="container">
         <a-descriptions :title="$t('personal.m')" :column="1">
-            <a-descriptions-item :label="$t('personal.logo')"><img :src="form.logo" class="img"/></a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.meNameZh')">{{ form.nameZh }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.meNameEn')">{{ form.nameEn }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.meNamePt')">{{ form.namePt }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.w')">{{ form.siteRegistrationCode }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.u')">{{ form.registrationNumber }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.y')">{{ form.taxpayerNo }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.ay')">{{ form.taxpayerName }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.z')">{{ form.dateOfEstablishment }}</a-descriptions-item>
-            <a-descriptions-item :label="$t('personal.aa')">{{ form.business }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.logo')"
+                ><img :src="form.logo" class="img"
+            /></a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameZh')">{{
+                form.nameZh
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNameEn')">{{
+                form.nameEn
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.meNamePt')">{{
+                form.namePt
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.w')">{{
+                form.siteRegistrationCode
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.u')">{{
+                form.registrationNumber
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.y')">{{
+                form.taxpayerNo
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.ay')">{{
+                form.taxpayerName
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.z')">{{
+                form.dateOfEstablishment
+            }}</a-descriptions-item>
+            <a-descriptions-item :label="$t('personal.aa')">{{
+                form.business
+            }}</a-descriptions-item>
 
             <a-descriptions-item :label="$t('personal.ac')">{{
                 form.institutionShareholders | formatShareholders
@@ -23,11 +43,21 @@
         <a-form-model :rules="rules" :model="formData">
             <a-form-model-item :label="$t('personal.ar')" prop="nature">
                 <a-select style="width: 100%" v-model="formData.nature">
-                    <a-select-option value="UNIVERSITY">{{ $t("personal.ax") }}</a-select-option>
-                    <a-select-option value="GOVERNMENT_ORGANS">{{ $t("personal.at") }}</a-select-option>
-                    <a-select-option value="ENTERPRISE">{{ $t("personal.au") }}</a-select-option>
-                    <a-select-option value="BUSINESS_OR_ASSOCIATION">{{ $t("personal.av") }}</a-select-option>
-                    <a-select-option value="OTHER">{{ $t("personal.aw") }}</a-select-option>
+                    <a-select-option value="UNIVERSITY">{{
+                        $t("personal.ax")
+                    }}</a-select-option>
+                    <a-select-option value="GOVERNMENT_ORGANS">{{
+                        $t("personal.at")
+                    }}</a-select-option>
+                    <a-select-option value="ENTERPRISE">{{
+                        $t("personal.au")
+                    }}</a-select-option>
+                    <a-select-option value="BUSINESS_OR_ASSOCIATION">{{
+                        $t("personal.av")
+                    }}</a-select-option>
+                    <a-select-option value="OTHER">{{
+                        $t("personal.aw")
+                    }}</a-select-option>
                 </a-select>
             </a-form-model-item>
             <a-form-model-item
@@ -35,49 +65,80 @@
                 v-if="formData.nature === 'ENTERPRISE'"
                 prop="businessRegistrationFiles"
             >
-                <upload :value.sync="formData.businessRegistrationFiles" decorator="businessRegistrationFiles"></upload>
+                <upload
+                    :value.sync="formData.businessRegistrationFiles"
+                    decorator="businessRegistrationFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ak')"
                 v-if="formData.nature === 'ENTERPRISE'"
                 prop="salesTaxOpenFiles"
             >
-                <upload :value.sync="formData.salesTaxOpenFiles" decorator="salesTaxOpenFiles"></upload>
+                <upload
+                    :value.sync="formData.salesTaxOpenFiles"
+                    decorator="salesTaxOpenFiles"
+                ></upload>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.al')" v-if="formData.nature === 'ENTERPRISE'" prop="salesTaxFiles">
-                <upload :value.sync="formData.salesTaxFiles" decorator="salesTaxFiles"></upload>
+            <a-form-model-item
+                :label="$t('personal.al')"
+                v-if="formData.nature === 'ENTERPRISE'"
+                prop="salesTaxFiles"
+            >
+                <upload
+                    :value.sync="formData.salesTaxFiles"
+                    decorator="salesTaxFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.am')"
                 v-if="formData.nature === 'ENTERPRISE'"
                 prop="shareholderSamesFiles"
             >
-                <upload :value.sync="formData.shareholderSamesFiles" decorator="shareholderSamesFiles"></upload>
+                <upload
+                    :value.sync="formData.shareholderSamesFiles"
+                    decorator="shareholderSamesFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.an')"
                 v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="groupEstablishmentFiles"
             >
-                <upload :value.sync="formData.groupEstablishmentFiles" decorator="groupEstablishmentFiles"></upload>
+                <upload
+                    :value.sync="formData.groupEstablishmentFiles"
+                    decorator="groupEstablishmentFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ao')"
                 v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="identificationBureauFiles"
             >
-                <upload :value.sync="formData.identificationBureauFiles" decorator="identificationBureauFiles"></upload>
+                <upload
+                    :value.sync="formData.identificationBureauFiles"
+                    decorator="identificationBureauFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ap')"
                 v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="legalPersonFiles"
             >
-                <upload :value.sync="formData.legalPersonFiles" decorator="legalPersonFiles"></upload>
+                <upload
+                    :value.sync="formData.legalPersonFiles"
+                    decorator="legalPersonFiles"
+                ></upload>
             </a-form-model-item>
             <a-form-model-item :model="formData">
-                <a-button :style="{ marginRight: '8px' }" @click="$router.back()">Cancel</a-button>
-                <a-button type="primary" @click="certified">ok</a-button>
+                <a-button
+                    :style="{ marginRight: '8px' }"
+                    @click="$router.back()"
+                    >{{ $t("util.cancel") }}</a-button
+                >
+                <a-button type="primary" @click="certified">{{
+                    $t("util.submit")
+                }}</a-button>
             </a-form-model-item>
         </a-form-model>
     </div>
@@ -94,7 +155,7 @@ export default {
         const config = {
             required: true,
             message: "please select",
-            trigger: "blur",
+            trigger: "blur"
         };
         return {
             nature: null,
@@ -106,7 +167,7 @@ export default {
                 shareholderSamesFiles: [],
                 groupEstablishmentFiles: [],
                 identificationBureauFiles: [],
-                legalPersonFiles: [],
+                legalPersonFiles: []
             },
             form: {},
             rules: {
@@ -117,23 +178,23 @@ export default {
                 shareholderSamesFiles: [config],
                 groupEstablishmentFiles: [config],
                 identificationBureauFiles: [config],
-                legalPersonFiles: [config],
-            },
+                legalPersonFiles: [config]
+            }
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution"]),
+        ...mapGetters(["currentInstitution"])
     },
     filters: {
         formatShareholders(value) {
             return value
                 ? value
-                      .map((item) => {
+                      .map(item => {
                           return `${item.name}:${item.percent}%`;
                       })
                       .join(";")
                 : "尚未設定";
-        },
+        }
     },
     methods: {
         async initData() {
@@ -143,7 +204,7 @@ export default {
         async certified() {
             const { data, code } = await Institution.certified({
                 id: this.currentInstitution.id,
-                ...this.formData,
+                ...this.formData
             });
             if (code !== 200) {
                 // this.$message.error(data.message);
@@ -154,7 +215,7 @@ export default {
             await this.$store.dispatch("setInfo", user);
             this.$message.success("Successful operation");
             this.$router.replace("/personal/info");
-        },
+        }
     },
     mounted() {
         this.$store.dispatch("setChangeFalse");
@@ -162,7 +223,7 @@ export default {
     },
     destroyed() {
         this.$store.dispatch("setChangeTrue");
-    },
+    }
 };
 </script>
 

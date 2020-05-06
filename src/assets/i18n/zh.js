@@ -107,6 +107,7 @@ const zhData = {
         disagree: "不同意",
         save: "保存",
         cancel: "取消",
+        submit: "確認",
         name: "姓名",
         password: "密碼",
         upPassword: "修改密碼",

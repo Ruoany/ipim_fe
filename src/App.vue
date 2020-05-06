@@ -44,9 +44,12 @@ export default {
 ::-webkit-scrollbar {
     display: none;
 }
-html,
 body {
-    font-family: 14px/1.5 Microsoft JhengHei, Microsoft Yahei;
+    font-family: "Microsoft JhengHei", "Microsoft Yahei" !important;
+    // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    //     "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica,
+    //     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    //     "Segoe UI Symbol";
     width: 100%;
     height: 100%;
     padding: 0;
