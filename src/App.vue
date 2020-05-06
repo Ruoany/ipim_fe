@@ -46,8 +46,7 @@ export default {
 }
 html,
 body {
-    font-family: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei,
-        Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+    font-family: 14px/1.5 Microsoft JhengHei, Microsoft Yahei;
     width: 100%;
     height: 100%;
     padding: 0;
