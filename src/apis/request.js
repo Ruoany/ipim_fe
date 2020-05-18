@@ -12,18 +12,18 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use(
-    (config) => {
+    config => {
         config.headers = {
             Authorization: sessionStorage.getItem("token"),
         };
         return config;
     },
-    (error) => {
+    error => {
         return Promise.reject(error);
     }
 );
 request.interceptors.response.use(
-    (response) => {
+    response => {
         const { data, config } = response;
         if (!data.success && config.responseType !== "blob") {
             message.error(data.message);
@@ -31,7 +31,7 @@ request.interceptors.response.use(
         }
         return data;
     },
-    (error) => {
+    error => {
         const {
             response: { data },
         } = error;

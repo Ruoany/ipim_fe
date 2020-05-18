@@ -111,18 +111,17 @@ export default {
             this.$refs.login.validate(async valid => {
                 if (valid) {
                     this.loading = true;
-                    const {
-                        data: { code, data }
-                    } = await Login(this.form);
-                    if (code !== 200) {
-                        this.loading = false;
+                    const { success, data, message } = await Login(this.form);
+                    if (!success) {
                         this.$message.error(message);
+                        this.loading = false;
                         return;
                     }
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("current", data.id);
                     sessionStorage.setItem("login", true);
                     this.getUserInfo();
+                    this.loading = false;
                 }
             });
         }
