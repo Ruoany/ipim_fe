@@ -2,13 +2,23 @@
     <div class="wrapper">
         <a-carousel autoplay>
             <img
-                class="img-100"
+                class="img-100 cursor"
                 src="http://api-exhibition.servier.iteratech.net/upload/2020/04/17/568702aa748649838af2ccaa1e97a2e7.png"
-                @click="go"
+                @click="
+                    handleClick(
+                        'https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592'
+                    )
+                "
             />
-            <img class="img-100" src="http://rrd.me/gnPsX" />
-            <img class="img-100" src="http://u6.gg/sQ5AW" />
-            <img class="img-100" src="http://u6.gg/sQ5Bt" />
+            <img
+                class="img-100"
+                v-for="img in imgs"
+                :key="img.id"
+                :class="img.url ? 'cursor' : ''"
+                :src="img.pic"
+                :alt="img.title"
+                @click="handleClick(img.url)"
+            />
         </a-carousel>
         <div class="flex center">
             <div class="width-1280">
@@ -41,17 +51,31 @@
 <script>
 import focus from "./focus";
 import calendar from "./calendar";
+import request from "@/apis/request";
 export default {
     components: {
         focus,
         calendar
     },
+    data() {
+        return {
+            imgs: []
+        };
+    },
     methods: {
-        go() {
-            window.open(
-                "https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592"
-            );
+        async initData() {
+            const { data } = await request.get("/banner");
+            this.imgs = data.content;
+        },
+        handleClick(url) {
+            if (!url) {
+                return;
+            }
+            window.open(url);
         }
+    },
+    async mounted() {
+        this.initData();
     }
 };
 </script>
@@ -68,6 +92,9 @@ export default {
         width: 100%;
         height: 500px;
         object-fit: cover;
+    }
+    .cursor {
+        cursor: pointer;
     }
     .title {
         padding: 50px 0;

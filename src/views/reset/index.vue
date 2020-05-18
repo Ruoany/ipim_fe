@@ -51,9 +51,9 @@
                         </a-col>
                     </a-row>
                 </a-form-model-item>
-                <a-form-model-item prop="password">
+                <a-form-model-item prop="pwd">
                     <a-input
-                        v-model="form.password"
+                        v-model="form.pwd"
                         type="password"
                         size="large"
                         :placeholder="$t('login.newPwd')"
@@ -125,7 +125,7 @@ export default {
                         trigger: "blur"
                     }
                 ],
-                password: [
+                pwd: [
                     {
                         required: true,
                         message: "Please input the passwrod",
@@ -135,7 +135,7 @@ export default {
                 confirm: [
                     {
                         validator: (rule, value, callback) => {
-                            if (value !== this.form.password) {
+                            if (value !== this.form.pwd) {
                                 callback(
                                     "Confirm that the password does not match the password"
                                 );
@@ -150,7 +150,7 @@ export default {
             form: {
                 account: "",
                 captcha: "",
-                password: "",
+                pwd: "",
                 confirm: ""
             }
         };
@@ -189,8 +189,11 @@ export default {
             this.$refs.reset.validate(async valid => {
                 if (valid) {
                     delete this.form.confirm;
-                    const { data } = await User.reset(this.form);
-                    console.log("密码", data);
+                    const { success, message } = await User.resetPwd(this.form);
+                    if (success) {
+                        this.$message.success(message);
+                        this.$router.push("/login");
+                    }
                 }
             });
         }

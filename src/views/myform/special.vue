@@ -1,13 +1,13 @@
 <template>
-    <div class="form-wrapper">
+    <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-ba v-if="form === 'ba'"></form-ba>
-                <form-bb v-if="form === 'bb'"></form-bb>
-                <form-bc v-if="form === 'bc'"></form-bc>
-                <form-bd v-if="form === 'bd'"></form-bd>
-                <form-be v-if="form === 'be'"></form-be>
-                <form-bf v-if="form === 'bf'"></form-bf>
+                <form-ba v-if="form === 'ba'" :list="activityList"></form-ba>
+                <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
+                <form-bc v-if="form === 'bc'" :list="activityList"></form-bc>
+                <form-bd v-if="form === 'bd'" :list="activityList"></form-bd>
+                <form-be v-if="form === 'be'" :list="activityList"></form-be>
+                <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -18,14 +18,19 @@
                         <li>{{ $t("util.step4") }}</li>
                         <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{ $t("util.download") }}</a-button>
+                    <a-button type="primary" size="large">{{
+                        $t("util.download")
+                    }}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
-    </div>
+    </a-spin>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import Liaison from "@/apis/liaison";
+import Activity from "@/apis/activity";
 import FormBa from "./ba/index";
 import FormBb from "./bb/index";
 import FormBc from "./bc/index";
@@ -42,19 +47,41 @@ export default {
         FormBe,
         FormBf
     },
+    computed: {
+        ...mapGetters(["liaisonList", "currentInstitution"])
+    },
     data() {
         return {
             form: "",
-            tabActive: "1"
+            tabActive: "1",
+            loading: false,
+            activityList: []
         };
     },
     watch: {
-        "$route.query.form": function(newValue) {
-            this.form = newValue;
+        "$route.query"(newValue) {
+            this.form = newValue.form;
+        }
+    },
+    methods: {
+        initData: async function() {
+            this.loading = true;
+            const { data } = await Liaison.get({
+                size: 1000,
+                institutionId: this.currentInstitution.id
+            });
+            await this.$store.dispatch("setLiaisons", data.content);
+            this.loading = false;
+        },
+        GetActivityList: async function() {
+            const { data } = await Activity.all({ activityScope: "ENCOURAGE" });
+            this.activityList = data ? data : [];
         }
     },
     mounted: function() {
         this.form = this.$route.query.form;
+        this.GetActivityList();
+        if (this.liaisonList.length === 0) this.initData();
     }
 };
 </script>
