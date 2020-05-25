@@ -2,15 +2,6 @@
     <div class="wrapper">
         <a-carousel autoplay>
             <img
-                class="img-100 cursor"
-                src="http://api-exhibition.servier.iteratech.net/upload/2020/04/17/568702aa748649838af2ccaa1e97a2e7.png"
-                @click="
-                    handleClick(
-                        'https://q.divosurvey.com/#/s/5e8e773aa8eac57076241592'
-                    )
-                "
-            />
-            <img
                 class="img-100"
                 v-for="img in imgs"
                 :key="img.id"
