@@ -5,7 +5,11 @@
             <a-tab-pane :tab="$t('personal.deal')" key="deal"></a-tab-pane>
         </a-tabs>
         <div class="list-content">
-            <a-empty v-if="list.length === 0" class="empty"></a-empty>
+            <a-empty
+                v-if="list.length === 0"
+                class="empty"
+                :description="$t('util.nodata')"
+            ></a-empty>
             <cell v-for="item in list" :key="item.id" />
         </div>
         <pagination :page.sync="page" :size="size" :total="total" />

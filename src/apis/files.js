@@ -1,10 +1,8 @@
 import request, { baseURL } from "./request";
 export const upFiles = `${baseURL}/upload1`;
-export const upload = async data => {
-    const result = await request({
+export const upload = data =>
+    request({
         url: "/upload1",
         method: "POST",
-        data
+        data,
     });
-    return result.data;
-};

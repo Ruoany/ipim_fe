@@ -1,6 +1,10 @@
 <template>
     <div class="flex img-list flex-align-items-center">
-        <a-empty v-if="showList.length === 0" description="暫無數據" class="empty"></a-empty>
+        <a-empty
+            v-if="showList.length === 0"
+            :description="$t('util.nodata')"
+            class="empty"
+        ></a-empty>
         <show-cell
             v-for="item in showList"
             :key="item.id"

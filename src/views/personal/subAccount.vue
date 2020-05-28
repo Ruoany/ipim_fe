@@ -51,12 +51,28 @@
             :total="total"
             @handleChange="pages => (listQuery.page = pages - 1)"
         />
-        <a-modal
+        <a-drawer
+            :title="$t('personal.af')"
+            :visible="modalVisible"
+            @close="modalVisible = false"
+            width="800px"
+            destroyOnClose
+        >
+            <add-sub-account
+                :visible.sync="modalVisible"
+                ref="addSubAccount"
+                :confirmLoading.sync="confirmLoading"
+                :formType="formType"
+                :initData="formData"
+                @init="initTable"
+            ></add-sub-account>
+        </a-drawer>
+        <!-- <a-drawer
             :title="$t('personal.af')"
             :visible="modalVisible"
             @ok="handleOk"
             :confirmLoading="confirmLoading"
-            @cancel="handleCancel"
+            @cancel="modalVisible = false"
             :okText="$t('util.save')"
             :cancelText="$t('util.cancel')"
             destroyOnClose
@@ -77,7 +93,7 @@
                     :initData="formData"
                 ></add-sub-account>
             </a-spin>
-        </a-modal>
+        </a-drawer> -->
     </div>
 </template>
 
@@ -109,9 +125,6 @@ export default {
     },
 
     methods: {
-        handleCancel(e) {
-            this.modalVisible = false;
-        },
         async initData() {
             this.tableLoading = true;
             const data = await UserSubaccount.get({

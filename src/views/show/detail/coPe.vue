@@ -1,6 +1,10 @@
 <template>
     <div class="container">
-        <a-empty v-if="liaisons.length === 0" class="empty" description="暫無數據"></a-empty>
+        <a-empty
+            v-if="liaisons.length === 0"
+            class="empty"
+            :description="$t('util.nodata')"
+        ></a-empty>
         <a-card v-for="item in liaisons" :key="item.id" class="sp-card">
             <div class="sp-card-avatar">
                 {{ item.name | formatAvatar }}

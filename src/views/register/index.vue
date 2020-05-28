@@ -316,12 +316,10 @@ export default {
                     } else {
                         formData = form;
                     }
-                    const { message, data } = await User.register(formData);
-                    if (!data) {
-                        this.$message.error(message);
-                        return;
+                    const { success, data } = await User.register(formData);
+                    if (success) {
+                        this.onSuccess();
                     }
-                    this.onSuccess();
                 }
             });
         }

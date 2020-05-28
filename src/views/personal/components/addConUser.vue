@@ -60,23 +60,86 @@
                 :label="$t('index.tel')"
                 class="inline"
             >
-                <a-input v-model="form.tel" />
+                <a-select
+                    v-model="form.telAreaCodeId"
+                    showSearch
+                    optionFilterProp="label"
+                    optionLabelProp="code"
+                    style="width:28%;"
+                    :dropdownMatchSelectWidth="false"
+                >
+                    <a-select-option
+                        v-for="item in codeList"
+                        :key="item.id"
+                        :value="item.id"
+                        :label="`${item.nameZh}${item.nameEn}${item.code}`"
+                        :code="item.code"
+                        >{{
+                            `${item.nameZh}--${item.nameEn}--${item.code}`
+                        }}</a-select-option
+                    >
+                </a-select>
+                <a-input v-model="form.tel" style="width:68%;margin-left:4%;" />
             </a-form-model-item>
             <a-form-model-item
-                prop="abroadPhone"
+                prop="phone"
                 :label="$t('util.aphone')"
                 class="inline"
             >
-                <a-input v-model="form.abroadPhone" />
+                <a-select
+                    v-model="form.inAreaCodeId"
+                    showSearch
+                    optionFilterProp="label"
+                    optionLabelProp="code"
+                    style="width:28%;"
+                    :dropdownMatchSelectWidth="false"
+                >
+                    <a-select-option
+                        v-for="item in codeList"
+                        :key="item.id"
+                        :value="item.id"
+                        :label="`${item.nameZh}${item.nameEn}${item.code}`"
+                        :code="item.code"
+                        >{{
+                            `${item.nameZh}--${item.nameEn}--${item.code}`
+                        }}</a-select-option
+                    >
+                </a-select>
+                <a-input
+                    v-model="form.phone"
+                    style="width:68%;margin-left:4%;"
+                />
             </a-form-model-item>
         </div>
         <div class="flex  flex-justify-content-space-between">
             <a-form-model-item
-                prop="phone"
+                prop="abroadPhone"
                 :label="$t('util.bphone')"
                 class="inline"
             >
-                <a-input v-model="form.phone" />
+                <a-select
+                    v-model="form.abroadAreaCodeId"
+                    showSearch
+                    optionFilterProp="label"
+                    optionLabelProp="code"
+                    style="width:28%;"
+                    :dropdownMatchSelectWidth="false"
+                >
+                    <a-select-option
+                        v-for="item in codeList"
+                        :key="item.id"
+                        :value="item.id"
+                        :label="`${item.nameZh}${item.nameEn}${item.code}`"
+                        :code="item.code"
+                        >{{
+                            `${item.nameZh}--${item.nameEn}--${item.code}`
+                        }}</a-select-option
+                    >
+                </a-select>
+                <a-input
+                    v-model="form.abroadPhone"
+                    style="width:68%;margin-left:4%;"
+                />
             </a-form-model-item>
             <a-form-model-item
                 prop="email"
@@ -123,7 +186,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import Liaison from "@/apis/liaison";
+
 export default {
     props: {
         selectedId: [Number, String],
@@ -177,7 +243,6 @@ export default {
                     }
                 ],
                 tel: [config],
-                abroadPhone: [config],
                 phone: [config],
                 email: [
                     config,
@@ -197,14 +262,20 @@ export default {
                 titleNameZh: "",
                 titleNameEnOrPt: "",
                 tel: "",
+                telAreaCodeId: 2,
                 abroadPhone: "",
+                abroadAreaCodeId: 2,
                 phone: "",
+                inAreaCodeId: 2,
                 email: "",
                 fax: "",
                 address: "",
                 incumbency: true
             }
         };
+    },
+    computed: {
+        ...mapGetters(["codeList"])
     },
     methods: {
         initData: async function() {

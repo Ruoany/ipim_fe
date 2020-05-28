@@ -2,7 +2,7 @@
     <a-empty
         v-if="pictures.length === 0"
         class="empty"
-        description="暫無數據"
+        :description="$t('util.nodata')"
     ></a-empty>
     <a-row v-else ref="img" type="flex" :gutter="10" v-viewer>
         <a-col :span="4" v-for="item in images" :key="item">

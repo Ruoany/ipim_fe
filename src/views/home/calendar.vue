@@ -15,7 +15,11 @@
                 style="font-size: 24px"
                 spin
             />
-            <a-empty v-if="showList.length === 0" class="empty"></a-empty>
+            <a-empty
+                v-if="showList.length === 0"
+                class="empty"
+                :description="$t('util.nodata')"
+            ></a-empty>
             <a-card
                 hoverable
                 v-else

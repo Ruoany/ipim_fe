@@ -72,9 +72,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 import addConUser from "./components/addConUser";
 import Liaison from "@/apis/liaison";
 import Pagination from "@/components/pagination";
+import AC from "@/apis/areaCode";
+
 export default {
     components: { addConUser, Pagination },
     data() {
@@ -92,7 +95,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution"])
+        ...mapGetters(["currentInstitution", "codeList"])
     },
     watch: {
         page: function() {
@@ -116,11 +119,16 @@ export default {
             });
             if (data.code === 200) {
                 this.liaisonList = data.data.content;
-                this.loading = false;
                 this.total = data.data.totalElements;
             }
+            this.loading = false;
         },
-        //展示抽屜
+        async getCodeList() {
+            if (this.codeList.length === 0) {
+                const { data } = await AC.all();
+                this.$store.dispatch("setCodeList", data);
+            }
+        },
         showDrawer(type, id) {
             this.type = type;
             this.id = id;
@@ -134,6 +142,7 @@ export default {
     },
     mounted() {
         this.initData();
+        this.getCodeList();
     }
 };
 </script>

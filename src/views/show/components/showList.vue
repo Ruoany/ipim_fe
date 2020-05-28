@@ -2,7 +2,7 @@
     <div class="show-list-content flex flex-justify-content-space-between">
         <a-empty
             v-if="list.length === 0"
-            description="暫無數據"
+            :description="$t('util.nodata')"
             class="empty"
         ></a-empty>
         <show-cell

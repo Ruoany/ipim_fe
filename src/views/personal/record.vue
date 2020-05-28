@@ -13,7 +13,7 @@
         <div class="list-content">
             <a-empty
                 v-if="list.length === 0"
-                description="暫無數據"
+                :description="$t('util.nodata')"
                 class="empty"
             ></a-empty>
             <cell

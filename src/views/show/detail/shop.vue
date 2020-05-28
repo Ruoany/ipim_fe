@@ -3,7 +3,7 @@
         <a-empty
             v-if="institutions.length === 0"
             class="empty"
-            description="暫無數據"
+            :description="$t('util.nodata')"
         ></a-empty>
         <a-card v-for="item in institutions" :key="item.id" class="sp-card">
             <div
