@@ -97,9 +97,6 @@
                             disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.dy')">
-                        <a-input :value="selectedLiaison.phone" disabled />
-                    </a-form-model-item>
                     <a-form-model-item :label="$t('mif.ak')" required>
                         <a-input :value="selectedLiaison.fax" disabled />
                     </a-form-model-item>
