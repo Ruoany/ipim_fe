@@ -1,13 +1,18 @@
 <template>
     <a-tabs class="all" type="card">
         <a-tab-pane :tab="$t('show.info')" key="1">
-            <info :info="infoLan(cardData)"></info>
+            <info :info="infoLan"></info>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.organizer')" key="3">
-            <organizer :organizers="cardData.organizers" :helpers="cardData.helpers"></organizer>
+            <organizer
+                :organizers="cardData.organizers"
+                :helpers="cardData.helpers"
+            ></organizer>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.coPe')" key="2">
-            <co-pe :liaisons="cardData.liaisons ? cardData.liaisons : []"></co-pe>
+            <co-pe
+                :liaisons="cardData.liaisons ? cardData.liaisons : []"
+            ></co-pe>
         </a-tab-pane>
 
         <a-tab-pane :tab="$t('show.money')" key="6"></a-tab-pane>
@@ -29,26 +34,25 @@ import photo from "./photo";
 import info from "./info";
 export default {
     props: {
-        cardData: Object,
+        cardData: Object
     },
     components: { coPe, organizer, shop, photo, info },
-    methods: {
-        infoLan(item) {
-            let lan = this.lan;
-            let content = null;
-            switch (lan) {
+    computed: {
+        infoLan() {
+            switch (sessionStorage.getItem("language")) {
                 case "zh":
-                    content = item.contentZh;
+                    return this.cardData.contentZh;
                     break;
                 case "en":
-                    content = item.contentEn;
+                    return this.cardData.contentEn;
                     break;
                 case "pt":
-                    content = item.contentPt;
+                    return this.cardData.contentPt;
+                default:
+                    return this.cardData.contentZh;
             }
-            return content;
-        },
-    },
+        }
+    }
 };
 </script>
 
