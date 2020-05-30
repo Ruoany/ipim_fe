@@ -92,10 +92,7 @@
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.aj')">
-                        <a-input
-                            v-model="selectedLiaison.abroadPhone"
-                            disabled
-                        />
+                        <a-input v-model="selectedLiaison.tel" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('miecf.dy')">
                         <a-input :value="selectedLiaison.phone" disabled />
@@ -445,7 +442,7 @@ export default {
             }
             return {
                 nameZh: "",
-                abroadPhone: "",
+                tel: "",
                 phone: "",
                 fax: "",
                 email: "",
