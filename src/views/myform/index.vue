@@ -108,10 +108,10 @@ export default {
                     result = await PP.download();
                     break;
                 case "PARTICIPATE":
-                    result = await PD.download();
+                    result = await PAA.download();
                     break;
                 case "MISSION":
-                    result = await PAA.download();
+                    result = await PD.download();
                     break;
             }
             const blob = new Blob([result], {
