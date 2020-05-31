@@ -1,21 +1,11 @@
 <template>
     <a-spin :spinning="loading" class="container">
         <a-tabs v-model="status">
-            <a-tab-pane
-                :tab="$t('personal.undeal')"
-                key="approving"
-            ></a-tab-pane>
-            <a-tab-pane
-                :tab="$t('personal.deal')"
-                key="unapproved"
-            ></a-tab-pane>
+            <a-tab-pane :tab="$t('personal.undeal')" key="approving"></a-tab-pane>
+            <a-tab-pane :tab="$t('personal.deal')" key="unapproved"></a-tab-pane>
         </a-tabs>
         <div class="list-content">
-            <a-empty
-                v-if="list.length === 0"
-                :description="$t('util.nodata')"
-                class="empty"
-            ></a-empty>
+            <a-empty v-if="list.length === 0" :description="$t('util.nodata')" class="empty"></a-empty>
             <cell
                 v-for="item in list"
                 :key="item.id"
@@ -26,18 +16,13 @@
                 :address="item.activity.place"
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
                 :code="item.code"
-                @handleClick="
-                    $router.push(`/show/detail?id=${item.activity.id}`)
-                "
+                @handleClick="$router.push(`/show/detail?id=${item.activity.id}`)"
             >
-                <a-tag slot="status" :color="item.status | formatStatus">{{
-                    item.status | statusTextFilter
-                }}</a-tag>
+                <a-tag slot="status" :color="item.status | formatStatus">{{ item.status | statusTextFilter }}</a-tag>
                 <div slot="action" class="button-wrapper">
                     <a-button
                         v-if="
-                            item.status === 'passed' &&
-                                item.activity.showStatus === 'END'
+                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         >{{ $t("personal.report") }}</a-button
@@ -47,19 +32,14 @@
                         @click="
                             FormNavigate(item.type, {
                                 a: item.activityId,
-                                d: item.id
+                                d: item.id,
                             })
                         "
-                        >{{
-                            item.status === "rejected"
-                                ? $t("personal.update")
-                                : $t("personal.showForm")
-                        }}</a-button
+                        >{{ item.status === "rejected" ? $t("personal.update") : $t("personal.showForm") }}</a-button
                     >
                     <a-button
                         v-if="
-                            item.status === 'passed' &&
-                                item.activity.showStatus === 'END'
+                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         @click="
@@ -67,21 +47,17 @@
                                 participateId: item.id,
                                 activityId: item.activity.id,
                                 institutionId: item.institution.id,
-                                questionnaireAnswerId:
-                                    item.questionnaireAnswerId,
-                                method: 'GENERAL_EXHIBITION'
+                                questionnaireAnswerId: item.questionnaireAnswerId,
+                                method: 'GENERAL_EXHIBITION',
                             })
                         "
                         >{{
-                            item.questionnaireAnswerId
-                                ? $t("personal.showQuestion")
-                                : $t("personal.writeQuestion")
+                            item.questionnaireAnswerId ? $t("personal.showQuestion") : $t("personal.writeQuestion")
                         }}</a-button
                     >
                     <a-button
                         v-if="
-                            item.status === 'passed' &&
-                                item.activity.showStatus === 'END'
+                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         :disabled="item.applyPictureStatus === 'approving'"
@@ -91,12 +67,10 @@
                                 activityId: item.activity.id,
                                 liaisonId: item.liaisonId,
                                 institutionId: item.institution.id,
-                                applyPictureId: item.applyPictureId
+                                applyPictureId: item.applyPictureId,
                             })
                         "
-                        >{{
-                            item.applyPictureStatus | pictureTextFilter
-                        }}</a-button
+                        >{{ item.applyPictureStatus | pictureTextFilter }}</a-button
                     >
                 </div>
             </cell>
@@ -120,11 +94,11 @@ export default {
             page: 0,
             size: 5,
             total: 1,
-            list: []
+            list: [],
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution"])
+        ...mapGetters(["currentInstitution"]),
     },
     watch: {
         status: function() {
@@ -133,7 +107,7 @@ export default {
         },
         page: function() {
             this.initData();
-        }
+        },
     },
     filters: {
         formatStatus: function(value) {
@@ -149,6 +123,9 @@ export default {
                     break;
                 case "withdraw":
                     return "red";
+                    break;
+                case "finish":
+                    return "green";
                     break;
             }
         },
@@ -166,6 +143,9 @@ export default {
                 case "withdraw":
                     return i18n.t("personal.withdraw");
                     break;
+                case "finish":
+                    return i18n.t("personal.finish");
+                    break;
             }
         },
         pictureTextFilter: function(value) {
@@ -180,7 +160,7 @@ export default {
                     return i18n.t("personal.uploadPic");
                     break;
             }
-        }
+        },
     },
     methods: {
         initData: async function() {
@@ -192,14 +172,14 @@ export default {
                 institutionId: this.currentInstitution.id,
                 page: this.page,
                 size: this.size,
-                approved: this.status === "unapproved"
+                approved: this.status === "unapproved",
             });
             this.list = data ? data.content : [];
             this.total = data ? data.totalElements : 0;
             this.loading = false;
         },
         Transform: function(o) {
-            Object.keys(o).map(item => {
+            Object.keys(o).map((item) => {
                 if (o[item]) {
                     o[item] = escape(this.$crypto.encryption(o[item]));
                 } else {
@@ -211,21 +191,21 @@ export default {
         FormNavigate: function(form, o) {
             const query = {
                 form,
-                ...this.Transform(o)
+                ...this.Transform(o),
             };
             this.$router.push({
                 path: "/myform/index",
-                query
+                query,
             });
         },
         NavigateTo: function(path, o) {
             const query = this.Transform(o);
             this.$router.push({ path, query });
-        }
+        },
     },
     mounted: function() {
         this.initData();
-    }
+    },
 };
 </script>
 

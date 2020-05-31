@@ -1,12 +1,29 @@
 <template>
-    <a-spin v-if="form.status !== 'passed' && roleBoolean" :spinning="spinning">
+    <a-descriptions
+        v-if="form.status === 'approving' || form.status === 'passed' || currentInstitution.adminId !== currentUser"
+        :title="$t('personal.m')"
+        :column="1"
+    >
+        <a-descriptions-item :label="$t('personal.logo')"><img :src="form.logo" class="img"/></a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.meNameZh')">{{ form.nameZh }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.meNameEn')">{{ form.nameEn }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.meNamePt')">{{ form.namePt }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.w')">{{ form.siteRegistrationCode }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.u')">{{ form.registrationNumber }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.y')">{{ form.taxpayerNo }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.ay')">{{ form.taxpayerName }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.z')">{{ form.dateOfEstablishment }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.aa')">{{ form.business }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.ac')">{{
+            form.institutionShareholders | formatShareholders
+        }}</a-descriptions-item>
+        <a-descriptions-item :label="$t('personal.ab')">
+            {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
+        </a-descriptions-item>
+    </a-descriptions>
+    <a-spin v-else :spinning="spinning">
         <h1>{{ $t("personal.s") }}</h1>
-        <a-form-model
-            ref="form"
-            :model="form"
-            :rules="rules"
-            style="width:100%;"
-        >
+        <a-form-model ref="form" :model="form" :rules="rules" style="width:100%;">
             <a-form-model-item prop="logo" :label="$t('personal.logo')">
                 <a-upload
                     name="file"
@@ -16,12 +33,7 @@
                     :beforeUpload="beforeUpload"
                     @change="imgChange"
                 >
-                    <img
-                        v-if="form.logo"
-                        :src="form.logo"
-                        alt="avatar"
-                        class="img"
-                    />
+                    <img v-if="form.logo" :src="form.logo" alt="avatar" class="img" />
                     <div v-else>
                         <a-icon :type="loading ? 'loading' : 'plus'" />
                     </div>
@@ -36,16 +48,10 @@
             <a-form-model-item prop="namePt" :label="$t('personal.meNamePt')">
                 <a-input v-model="form.namePt"></a-input>
             </a-form-model-item>
-            <a-form-model-item
-                prop="siteRegistrationCode"
-                :label="$t('personal.w')"
-            >
+            <a-form-model-item prop="siteRegistrationCode" :label="$t('personal.w')">
                 <a-input v-model="form.siteRegistrationCode"></a-input>
             </a-form-model-item>
-            <a-form-model-item
-                prop="registrationNumber"
-                :label="$t('personal.u')"
-            >
+            <a-form-model-item prop="registrationNumber" :label="$t('personal.u')">
                 <a-input v-model="form.registrationNumber"></a-input>
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.y')">
@@ -55,10 +61,7 @@
                 <a-input v-model="form.taxpayerName"></a-input>
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.z')">
-                <a-month-picker
-                    v-model="form.dateOfEstablishment"
-                    style="width:100%"
-                />
+                <a-month-picker v-model="form.dateOfEstablishment" style="width:100%" />
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.aa')">
                 <a-textarea v-model="form.business"></a-textarea>
@@ -69,23 +72,10 @@
                     <a-radio :value="false">{{ $t("util.no") }}</a-radio>
                 </a-radio-group>
             </a-form-model-item>
-            <a-form-model-item
-                prop="institutionShareholderVOS"
-                :label="$t('personal.ac')"
-            >
-                <div
-                    v-for="(item, index) in form.institutionShareholders"
-                    :key="index"
-                    class="shareholder-wrapper"
-                >
-                    <a-input
-                        v-model="item.name"
-                        :placeholder="$t('personal.shareName')"
-                    ></a-input>
-                    <a-input
-                        v-model="item.percent"
-                        :placeholder="$t('personal.sharePer')"
-                    ></a-input>
+            <a-form-model-item prop="institutionShareholderVOS" :label="$t('personal.ac')">
+                <div v-for="(item, index) in form.institutionShareholders" :key="index" class="shareholder-wrapper">
+                    <a-input v-model="item.name" :placeholder="$t('personal.shareName')"></a-input>
+                    <a-input v-model="item.percent" :placeholder="$t('personal.sharePer')"></a-input>
                     <a-button
                         v-if="index == 0"
                         shape="circle"
@@ -94,7 +84,7 @@
                         @click="
                             form.institutionShareholders.push({
                                 name: '',
-                                percent: ''
+                                percent: '',
                             })
                         "
                     ></a-button>
@@ -107,55 +97,11 @@
                 </div>
             </a-form-model-item>
             <a-form-model-item>
-                <a-button
-                    :style="{ marginRight: '8px' }"
-                    @click="$router.back()"
-                    >{{ $t("util.cancel") }}</a-button
-                >
-                <a-button type="primary" @click="handleSubmit">{{
-                    $t("util.save")
-                }}</a-button>
+                <a-button :style="{ marginRight: '8px' }" @click="$router.back()">{{ $t("util.cancel") }}</a-button>
+                <a-button type="primary" @click="handleSubmit">{{ $t("util.save") }}</a-button>
             </a-form-model-item>
         </a-form-model>
     </a-spin>
-    <a-descriptions v-else :title="$t('personal.m')" :column="1">
-        <a-descriptions-item :label="$t('personal.logo')"
-            ><img :src="form.logo" class="img"
-        /></a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.meNameZh')">{{
-            form.nameZh
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.meNameEn')">{{
-            form.nameEn
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.meNamePt')">{{
-            form.namePt
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.w')">{{
-            form.siteRegistrationCode
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.u')">{{
-            form.registrationNumber
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.y')">{{
-            form.taxpayerNo
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.ay')">{{
-            form.taxpayerName
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.z')">{{
-            form.dateOfEstablishment
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.aa')">{{
-            form.business
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.ac')">{{
-            form.institutionShareholders | formatShareholders
-        }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.ab')">
-            {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
-        </a-descriptions-item>
-    </a-descriptions>
 </template>
 
 <script>
@@ -183,7 +129,7 @@ export default {
                 dateOfEstablishment: [config],
                 business: [config],
                 deal: [config],
-                institutionShareholders: [config]
+                institutionShareholders: [config],
             },
             form: {
                 adminId: this.$store.getters.currentUser,
@@ -198,31 +144,25 @@ export default {
                 dateOfEstablishment: null,
                 business: "",
                 deal: true,
-                institutionShareholders: [{ name: "", percent: "" }]
+                institutionShareholders: [{ name: "", percent: "" }],
             },
             loading: false,
-            spinning: false
+            spinning: false,
         };
     },
     computed: {
         ...mapGetters(["currentInstitution", "currentUser"]),
-        roleBoolean() {
-            return (
-                this.$route.query.type === "new" ||
-                this.currentInstitution.adminId === this.currentUser
-            );
-        }
     },
     filters: {
         formatShareholders(value) {
             return value
                 ? value
-                      .map(item => {
+                      .map((item) => {
                           return `${item.name}:${item.percent}%`;
                       })
                       .join(";")
                 : "尚未設定";
-        }
+        },
     },
     methods: {
         beforeUpload(file) {
@@ -258,12 +198,10 @@ export default {
             this.$router.replace("/personal/info");
         },
         async handleSubmit() {
-            this.$refs.form.validate(async valid => {
+            this.$refs.form.validate(async (valid) => {
                 if (valid) {
                     this.spinning = true;
-                    const { code, message } = await Institution.create(
-                        formatString(this.form)
-                    );
+                    const { code, message } = await Institution.create(formatString(this.form));
                     if (code !== 200) {
                         this.$message.error(message);
                         return;
@@ -282,25 +220,20 @@ export default {
             if (this.form.institutionShareholders.length === 0) {
                 this.form.institutionShareholders.push({
                     name: "",
-                    percent: ""
+                    percent: "",
                 });
             }
-            if (
-                this.form.status !== "passed" &&
-                this.form.dateOfEstablishment
-            ) {
-                this.form.dateOfEstablishment = this.$moment(
-                    data.dateOfEstablishment
-                );
+            if (this.form.status !== "passed" && this.form.dateOfEstablishment) {
+                this.form.dateOfEstablishment = this.$moment(data.dateOfEstablishment);
             }
             this.spinning = false;
-        }
+        },
     },
     mounted() {
         if (!this.$route.query.type) {
             this.initData();
         }
-    }
+    },
 };
 </script>
 

@@ -206,6 +206,7 @@ const zhData = {
         delete: "刪除",
         name: "名稱",
         contal: "操作",
+        finish: "已完成",
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",

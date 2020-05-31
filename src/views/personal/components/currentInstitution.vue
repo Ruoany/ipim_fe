@@ -12,14 +12,14 @@
                 </div>
             </div>
             <div class="bottom">
-                <div v-if="info.status !== 'approving'" class="item" @click="handleNavigate('/personal/mechanism')">
+                <div class="item" @click="handleNavigate('/personal/mechanism')">
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
                 </div>
-                <div v-else class="item item-disabled" title="認證中的機構不允許修改資料">
+                <!-- <div v-else class="item item-disabled" title="認證中的機構不允許修改資料">
                     <a-icon type="bars" style="font-size:25px;" />
                     <span>{{ $t("personal.s") }}</span>
-                </div>
+                </div> -->
                 <div class="item" @click="handleNavigate('/personal/con_user')">
                     <a-icon type="team" style="font-size:25px;" />
                     <span>{{ $t("personal.n") }}</span>
@@ -66,13 +66,13 @@ export default {
                     return i18n.t("personal.unverified");
                     break;
             }
-        }
+        },
     },
     computed: {
         ...mapGetters(["currentUser"]),
         roleBoolean() {
             return this.info.adminId === this.currentUser;
-        }
+        },
     },
     data() {
         return { now_me, defaultImage };
@@ -80,8 +80,8 @@ export default {
     methods: {
         handleNavigate: function(url) {
             this.$router.push(url);
-        }
-    }
+        },
+    },
 };
 </script>
 

@@ -12,11 +12,7 @@
             <div class="h-back-right">
                 <div>
                     <i class="iconfont icondizhi"></i>
-                    <span
-                        >{{
-                            $t("index.address")
-                        }}：澳門友誼大馬路918號世貿中心一至四樓</span
-                    >
+                    <span>{{ $t("index.address") }}：澳門友誼大馬路918號世貿中心一至四樓</span>
                 </div>
                 <div>
                     <i class="iconfont iconyouxiang" style="font-size:18px"></i>
@@ -33,7 +29,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © copyright 2020 IPIM. All rights reserved. （声明）
+            © copyright 2020 IPIM. All rights reserved. （聲明）
         </div>
     </div>
 </template>
@@ -43,9 +39,9 @@ import logoImg from "@/assets/image/logo.png";
 export default {
     data() {
         return {
-            logoImg
+            logoImg,
         };
-    }
+    },
 };
 </script>
 
