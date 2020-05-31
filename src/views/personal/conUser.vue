@@ -135,8 +135,7 @@ export default {
             this.infoVisible = true;
         },
         async handleDelete(institutionId) {
-            const { message } = await Liaison.delete(institutionId);
-            this.$message.success(message);
+            await Liaison.delete(institutionId);
             this.initData();
         }
     },
