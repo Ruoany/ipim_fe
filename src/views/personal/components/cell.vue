@@ -14,7 +14,7 @@
                 <slot name="status"></slot>
             </div>
             <div class="bottom flex">
-                <div>
+                <div class="left">
                     <div :title="address">
                         <span>{{ $t("show.acAd") }}：</span>
                         <span>{{ address }}</span>
@@ -127,6 +127,9 @@ export default {
         .bottom {
             justify-content: space-between;
             align-items: flex-end;
+            .left {
+                max-width: 450px;
+            }
             .right {
                 .button-wrapper {
                     width: 100%;

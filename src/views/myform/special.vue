@@ -4,7 +4,10 @@
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
                 <form-ba v-if="form === 'ba'" :list="activityList"></form-ba>
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
-                <form-bc v-if="form === 'bc'" :list="activityList"></form-bc>
+                <form-enterprise
+                    v-if="form === 'ENTERPRISE'"
+                    :list="activityList"
+                ></form-enterprise>
                 <form-bd v-if="form === 'bd'" :list="activityList"></form-bd>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
@@ -33,7 +36,7 @@ import Liaison from "@/apis/liaison";
 import Activity from "@/apis/activity";
 import FormBa from "./ba/index";
 import FormBb from "./bb/index";
-import FormBc from "./bc/index";
+import FormEnterprise from "./ENTERPRISE/index";
 import FormBd from "./bd/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
@@ -43,7 +46,7 @@ export default {
         FormBa,
         FormBb,
         FormBd,
-        FormBc,
+        FormEnterprise,
         FormBe,
         FormBf
     },

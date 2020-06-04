@@ -1,6 +1,6 @@
 <template>
     <div class="h-back">
-        <div class="h-back-content width-1280">
+        <div class="h-back-content">
             <div class="h-back-left">
                 <img :src="logoImg" class="img" />
                 <div>
@@ -12,7 +12,11 @@
             <div class="h-back-right">
                 <div>
                     <i class="iconfont icondizhi"></i>
-                    <span>{{ $t("index.address") }}：澳門友誼大馬路918號世貿中心一至四樓</span>
+                    <span
+                        >{{
+                            $t("index.address")
+                        }}：澳門友誼大馬路918號世貿中心一至四樓</span
+                    >
                 </div>
                 <div>
                     <i class="iconfont iconyouxiang" style="font-size:18px"></i>
@@ -39,9 +43,9 @@ import logoImg from "@/assets/image/logo.png";
 export default {
     data() {
         return {
-            logoImg,
+            logoImg
         };
-    },
+    }
 };
 </script>
 

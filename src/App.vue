@@ -29,8 +29,7 @@ export default {
             if (isLogin) {
                 const { data } = await User.current();
                 if (data) {
-                    console.log("獲取用戶信息", data);
-                    await this.$store.dispatch("setInfo", data);
+                    this.$store.dispatch("setInfo", data);
                 }
             }
             this.Authorization = true;

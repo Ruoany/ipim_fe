@@ -63,6 +63,15 @@
                         <a-icon slot="prefix" type="solution" />
                     </a-input>
                 </a-form-model-item>
+                <a-form-model-item>
+                    <a-input
+                        v-model="form.institutionName"
+                        size="large"
+                        :placeholder="$t('personal.meNameZh')"
+                    >
+                        <a-icon slot="prefix" type="copyright" />
+                    </a-input>
+                </a-form-model-item>
                 <a-form-model-item prop="phone">
                     <a-input
                         v-model.number="form.phone"
@@ -70,67 +79,34 @@
                         :placeholder="$t('login.phone')"
                     >
                         <a-select
+                            v-model="form.inAreaCodeId"
                             slot="addonBefore"
-                            v-model="areaCode"
-                            style="width: 140px"
+                            showSearch
+                            optionFilterProp="label"
+                            optionLabelProp="code"
+                            style="width:80px;"
+                            :dropdownMatchSelectWidth="false"
                         >
-                            <a-select-option value="+853">
-                                中國澳門(+853)
-                            </a-select-option>
-                            <a-select-option value="+86">
-                                中國(+86)
-                            </a-select-option>
+                            <a-select-option
+                                v-for="item in codeList"
+                                :key="item.id"
+                                :value="item.id"
+                                :label="
+                                    `${item.nameZh}${item.nameEn}${item.code}`
+                                "
+                                :code="item.code"
+                                >{{
+                                    `${item.nameZh}--${item.nameEn}--${item.code}`
+                                }}</a-select-option
+                            >
                         </a-select>
                         <a-icon slot="prefix" type="phone" />
                     </a-input>
                 </a-form-model-item>
-                <a-form-model-item :label="$t('login.isAdmin')">
-                    <a-radio-group v-model="role">
-                        <a-radio :value="0">{{ $t("util.no") }}</a-radio>
-                        <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
-                    </a-radio-group>
-                </a-form-model-item>
-
-                <a-form-model-item prop="institutionName" v-if="role === 1">
-                    <a-input
-                        v-model="form.institutionName"
-                        size="large"
-                        :placeholder="$t('personal.meNameZh')"
-                    >
-                    </a-input>
-                </a-form-model-item>
-                <a-form-model-item prop="institutionNameEn" v-if="role === 1">
-                    <a-input
-                        v-model="form.institutionNameEn"
-                        size="large"
-                        :placeholder="$t('personal.meNameEn')"
-                    ></a-input>
-                </a-form-model-item>
-                <a-form-model-item prop="institutionNamePt" v-if="role === 1">
-                    <a-input
-                        v-model="form.institutionNamePt"
-                        size="large"
-                        :placeholder="$t('personal.meNamePt')"
-                    ></a-input>
-                </a-form-model-item>
                 <a-form-model-item
-                    prop="siteRegistrationCode"
-                    v-if="role === 1"
+                    prop="receives"
+                    :label="$t('login.checkbox')"
                 >
-                    <a-input
-                        v-model="form.siteRegistrationCode"
-                        size="large"
-                        :placeholder="$t('personal.w')"
-                    ></a-input>
-                </a-form-model-item>
-                <a-form-model-item prop="registrationNumber" v-if="role === 1">
-                    <a-input
-                        v-model="form.registrationNumber"
-                        size="large"
-                        :placeholder="$t('personal.u')"
-                    ></a-input>
-                </a-form-model-item>
-                <a-form-model-item prop="receive" :label="$t('login.checkbox')">
                     <a-checkbox-group v-model="form.receives">
                         <a-checkbox value="EMAIL">{{
                             $t("login.email")
@@ -172,11 +148,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import User from "@/apis/user";
+import AreaCode from "@/apis/areaCode";
 
 export default {
     data() {
-        let config = { required: true, message: "Please input" };
         return {
             rules: {
                 account: [
@@ -258,12 +236,7 @@ export default {
                             }
                         }
                     }
-                ],
-                institutionName: [config]
-                // institutionNameEn: [config],
-                // institutionNamePt: [config],
-                // siteRegistrationCode: [config],
-                // registrationNumber: [config],
+                ]
             },
             form: {
                 account: "",
@@ -272,56 +245,43 @@ export default {
                 name: "",
                 phone: "",
                 type: "GENERAL",
-                receive: []
+                receives: [],
+                inAreaCodeId: 2,
+                institutionName: ""
             },
-            agree: false,
-            areaCode: "+853",
-            role: 0
+            agree: false
         };
     },
+    computed: {
+        ...mapGetters(["codeList"])
+    },
     methods: {
+        async getCodeList() {
+            const { data } = await AreaCode.all();
+            this.$store.dispatch("setCodeList", data);
+        },
         lanChange(key) {
             sessionStorage.setItem("language", key);
         },
-        onSuccess: function() {
+        onSuccess() {
             this.$message.success("註冊成功，請登錄");
             this.$router.replace("/login");
         },
-        handleSubmit: function() {
+        handleSubmit() {
             this.$refs.register.validate(async valid => {
                 if (valid) {
-                    let form = JSON.stringify(this.form);
-                    form = JSON.parse(form);
-                    form.phone = `${this.areaCode}${this.form.phone}`;
-                    let formData = {};
-                    if (this.role === 0) {
-                        const {
-                            phone,
-                            account,
-                            pwd,
-                            confirm,
-                            name,
-                            type,
-                            receives
-                        } = form;
-                        formData = {
-                            phone,
-                            account,
-                            pwd,
-                            confirm,
-                            name,
-                            type,
-                            receives
-                        };
-                    } else {
-                        formData = form;
-                    }
-                    const { success, data } = await User.register(formData);
-                    if (success) {
-                        this.onSuccess();
-                    }
+                    console.log(">>>>>>", this.form);
+                    // const { success, data } = await User.register(this.form);
+                    // if (success) {
+                    //     this.onSuccess();
+                    // }
                 }
             });
+        }
+    },
+    mounted() {
+        if (this.codeList.length === 0) {
+            this.getCodeList();
         }
     }
 };

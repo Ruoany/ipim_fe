@@ -1,31 +1,42 @@
 <template>
     <div class="question-cell-container">
         <div class="question-cell-title">
-            {{ idx }}.{{ title }}<span style="color:#ccc">（{{ formatQuestion }}）</span>
+            {{ idx }}.{{ title
+            }}<span style="color:#ccc">（{{ formatQuestion }}）</span>
         </div>
         <div v-if="type === 'RADIO'">
-            <div
+            <a-radio
                 v-for="item in q"
                 :key="item.id"
-                :class="init == item.id ? 'item-active' : 'item'"
-                @click="() => (disabled ? '' : handleRadio(item.id))"
+                :checked="init == item.id"
+                :value="item.id"
+                :disabled="disabled"
+                @change="handleRadio"
+                style="display:block;line-height:50px;margin:0;"
             >
                 {{ item.item }}
-            </div>
+            </a-radio>
         </div>
         <div v-if="type === 'CHECKBOX'">
-            <div
+            <a-checkbox
                 v-for="item in q"
                 :key="item.id"
-                :class="init.includes(item.id) ? 'item-active' : 'item'"
-                @click="() => (disabled ? '' : handleCheckbox(item.id))"
+                :value="item.id"
+                :disabled="disabled"
+                :checked="init && init.includes(item.id)"
+                @change="handleCheckbox"
+                style="display:block;line-height:50px;margin:0;"
             >
                 {{ item.item }}
-            </div>
+            </a-checkbox>
         </div>
         <div v-if="type === 'FILL'">
-            <div v-if="disabled" class="disabled">{{ init }}</div>
-            <a-input v-else v-model="init" size="large" style="width:500px"></a-input>
+            <a-input
+                v-model="init"
+                :disabled="disabled"
+                size="large"
+                style="width:500px"
+            ></a-input>
         </div>
     </div>
 </template>
@@ -66,10 +77,10 @@ export default {
         }
     },
     methods: {
-        handleRadio: function(value) {
-            this.init = value;
+        handleRadio: function(event) {
+            this.init = event.target.value;
         },
-        handleCheckbox: function(value) {
+        handleCheckbox: function({ target: { value } }) {
             const isHave = this.init.includes(value);
             if (isHave) {
                 this.init = this.init.filter(item => item !== value);
@@ -78,7 +89,7 @@ export default {
             }
         }
     },
-    created: function() {
+    mounted: function() {
         if (this.value) {
             this.init = this.value;
             this.disabled = true;

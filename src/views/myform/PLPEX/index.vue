@@ -3,8 +3,8 @@
         <a-steps :current="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('plpex.dc')" />
             <a-step :title="$t('plpex.ck')" />
-            <a-step :title="$t('plpex.af')" />
             <a-step :title="$t('plpex.aa')" />
+            <a-step :title="$t('plpex.af')" />
             <a-step :title="$t('plpex.an')" />
             <a-step :title="$t('plpex.bb')" />
             <a-step :title="$t('plpex.cf')" />
@@ -65,6 +65,32 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
+                    <a-form-model-item :label="$t('plpex.ab')" required>
+                        <a-input
+                            :value="selectedActivity.activityName"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ac')" required>
+                        <a-input
+                            :value="selectedActivity.activityDate"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ad')" required>
+                        <a-input
+                            :value="selectedActivity.activityPlace"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('plpex.ae')" required>
+                        <a-input
+                            :value="selectedActivity.activityExpiry"
+                            disabled
+                        />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('plpex.ag')" :required="true">
                         <a-input
                             :value="currentInstitution.nameZh"
@@ -108,32 +134,6 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.am')" required>
                         <a-input :value="selectedLiaison.address" disabled />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
-                    <a-form-model-item :label="$t('plpex.ab')" required>
-                        <a-input
-                            :value="selectedActivity.activityName"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('plpex.ac')" required>
-                        <a-input
-                            :value="selectedActivity.activityDate"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('plpex.ad')" required>
-                        <a-input
-                            :value="selectedActivity.activityPlace"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('plpex.ae')" required>
-                        <a-input
-                            :value="selectedActivity.activityExpiry"
-                            disabled
-                        />
                     </a-form-model-item>
                 </div>
 
@@ -314,7 +314,7 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('plpex.ee')">
                         <upload
-                            :value.sync="form.institutions"
+                            :value.sync="form.exhibitor"
                             type="excel"
                             :disabled="isCheck"
                         />
@@ -410,7 +410,7 @@ export default {
                         liaisonTel: ""
                     }
                 ],
-                institutions: [],
+                exhibitor: [],
                 letterFiles: [],
                 liaisonId: null,
                 method: "GENERAL_EXHIBITION",

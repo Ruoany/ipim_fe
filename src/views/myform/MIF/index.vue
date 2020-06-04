@@ -3,8 +3,8 @@
         <a-steps :current="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('mif.dc')" />
             <a-step :title="$t('mif.ck')" />
-            <a-step :title="$t('mif.af')" />
             <a-step :title="$t('mif.aa')" />
+            <a-step :title="$t('mif.af')" />
             <a-step :title="$t('mif.an')" />
             <a-step :title="$t('mif.bb')" />
             <a-step :title="$t('mif.cf')" />
@@ -65,6 +65,32 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
+                    <a-form-model-item :label="$t('mif.ab')" required>
+                        <a-input
+                            :value="selectedActivity.activityName"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.ac')" required>
+                        <a-input
+                            :value="selectedActivity.activityDate"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.ad')" required>
+                        <a-input
+                            :value="selectedActivity.activityPlace"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('mif.ae')" required>
+                        <a-input
+                            :value="selectedActivity.activityExpiry"
+                            disabled
+                        />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 3">
                     <a-form-model-item :label="$t('mif.ag')" required>
                         <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
@@ -105,32 +131,6 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.am')" required>
                         <a-input :value="selectedLiaison.address" disabled />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
-                    <a-form-model-item :label="$t('mif.ab')" required>
-                        <a-input
-                            :value="selectedActivity.activityName"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ac')" required>
-                        <a-input
-                            :value="selectedActivity.activityDate"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ad')" required>
-                        <a-input
-                            :value="selectedActivity.activityPlace"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('mif.ae')" required>
-                        <a-input
-                            :value="selectedActivity.activityExpiry"
-                            disabled
-                        />
                     </a-form-model-item>
                 </div>
 
@@ -307,7 +307,7 @@
                     </a-form-model-item>
                     <a-form-model-item :label="$t('mif.ee')">
                         <upload
-                            :value.sync="form.institutions"
+                            :value.sync="form.exhibitor"
                             type="excel"
                             :disabled="isCheck"
                         />
@@ -403,7 +403,7 @@ export default {
                         liaisonTel: ""
                     }
                 ],
-                institutions: [],
+                exhibitor: [],
                 letterFiles: [],
                 liaisonId: null,
                 method: "GENERAL_EXHIBITION",

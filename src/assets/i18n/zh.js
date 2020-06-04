@@ -2,7 +2,7 @@ import mission from "./MISSION/zh";
 import participate from "./PARTICIPATE/zh";
 import formba from "./ba/zh";
 import formbb from "./bb/zh";
-import formbc from "./bc/zh";
+import enterprise from "./ENTERPRISE/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
 import formbd from "./bd/zh";
@@ -102,7 +102,7 @@ const zhData = {
         step3: "第三步：以手寫的方式填寫表格",
         step4: "第四步：表格蓋章",
         step5: "第五步：把表格正本遞交給貿促局工作人員",
-        download: "下載附件",
+        download: "下載表格",
         agree: "同意",
         disagree: "不同意",
         save: "保存",
@@ -171,9 +171,7 @@ const zhData = {
         ay: "納稅人名稱",
         az: "機構認證",
         logo: "機構LOGO",
-        meNameZh: "機構名稱（中文）",
-        meNameEn: "機構名稱（英文）",
-        meNamePt: "機構名稱（葡文）",
+        meNameZh: "機構名稱",
         update: "修改申請表",
         showForm: "查看申請表",
         question: "調查問卷",
@@ -247,7 +245,7 @@ const zhData = {
     participate,
     formba,
     formbb,
-    formbc,
+    enterprise,
     formbe,
     formbf,
     formbd,
