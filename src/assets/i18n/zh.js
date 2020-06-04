@@ -172,6 +172,8 @@ const zhData = {
         az: "機構認證",
         logo: "機構LOGO",
         meNameZh: "機構名稱",
+        meNameEn: "機構名稱（英文）",
+        meNamePt: "機構名稱（葡文）",
         update: "修改申請表",
         showForm: "查看申請表",
         question: "調查問卷",

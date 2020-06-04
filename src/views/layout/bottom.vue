@@ -53,9 +53,11 @@ export default {
 .h-back {
     background: #000000;
     width: 100%;
+    min-width: 1226px;
     align-items: center;
     color: #ffffff;
     .h-back-content {
+        width: 1226px;
         padding: 20px 0;
         margin: auto;
         display: flex;
@@ -93,6 +95,7 @@ export default {
         min-width: 1226px;
         text-align: center;
         font-size: 12px;
+        line-height: 32px;
     }
     .img {
         width: 60px;

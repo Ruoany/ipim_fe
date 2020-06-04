@@ -79,7 +79,7 @@
                         :placeholder="$t('login.phone')"
                     >
                         <a-select
-                            v-model="form.inAreaCodeId"
+                            v-model="form.phoneAreaCodeId"
                             slot="addonBefore"
                             showSearch
                             optionFilterProp="label"
@@ -246,7 +246,7 @@ export default {
                 phone: "",
                 type: "GENERAL",
                 receives: [],
-                inAreaCodeId: 2,
+                phoneAreaCodeId: 2,
                 institutionName: ""
             },
             agree: false
@@ -270,11 +270,11 @@ export default {
         handleSubmit() {
             this.$refs.register.validate(async valid => {
                 if (valid) {
-                    console.log(">>>>>>", this.form);
-                    // const { success, data } = await User.register(this.form);
-                    // if (success) {
-                    //     this.onSuccess();
-                    // }
+                    // console.log(">>>>>>", this.form);
+                    const { success, data } = await User.register(this.form);
+                    if (success) {
+                        this.onSuccess();
+                    }
                 }
             });
         }

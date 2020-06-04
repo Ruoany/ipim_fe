@@ -151,5 +151,12 @@ export default {
     h4 {
         margin: 0;
     }
+    .flex-justify-content-space-between {
+        align-items: center;
+        margin-bottom: 20px;
+        h1 {
+            margin: 0;
+        }
+    }
 }
 </style>
