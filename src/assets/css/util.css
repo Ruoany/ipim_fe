@@ -1,0 +1,65 @@
+.flex {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.flex-align-items-center {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.flex-justify-content-space-between {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+}
+
+.fliter-item {
+    width: 200px;
+    margin: 0 10px 10px 0px;
+}
+
+.b-back {
+    background: #ffffff;
+    padding: 20px;
+}
+
+.from-item {
+    width: 300px;
+}
+
+.width-1280 {
+    width: 1226px;
+    /* display: flex;
+    display: -webkit-flex;
+    justify-content: center; */
+    box-sizing: border-box;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.center {
+    justify-content: center;
+}
+
+.font-bold {
+    font-weight: bold;
+
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+
+}
+
+.form-text {
+    /* color: #3e3e3e; */
+    font-size: 14px;
+    padding-bottom: 40px;
+
+}
