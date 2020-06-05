@@ -493,7 +493,8 @@ export default {
             "liaisonList",
             "timeNext",
             "currentInstitution",
-            "currentUser"
+            "currentUser",
+            "encourageDis"
         ]),
         selectedLiaison: function() {
             if (this.form.liaisonId) {
@@ -550,13 +551,23 @@ export default {
                 this.form.institutionId = this.currentInstitution.id;
             }
         },
+        //判斷機構是否已是認證機構
+        isCertified: function() {
+            this.$warning({
+                title: "提示",
+                content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
+                onOk: () => {
+                    this.$router.push("/personal/info");
+                }
+            });
+        },
         handleSubmit: function(e) {
             this.$refs.enterprise.validate(async valid => {
                 if (valid) {
                     const { data } = await EE.create(this.form);
                     if (data) {
                         this.$message.success("申請成功");
-                        this.$router.replace("/");
+                        this.$router.replace("/personal/funding");
                     }
                 } else {
                     this.$message.error(
@@ -570,6 +581,10 @@ export default {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         if (!this.formId) this.$store.dispatch("setTimeNext");
         this.initData();
+        this.$nextTick(() => {
+            //判斷是否是未認證機構
+            if (this.encourageDis) this.isCertified();
+        });
     },
     destroyed: function() {
         this.$store.dispatch("setChangeTrue");

@@ -69,11 +69,10 @@ export default {
     methods: {
         initData: async function() {
             this.loading = true;
-            const { data } = await Liaison.get({
-                size: 1000,
+            const { data } = await Liaison.all({
                 institutionId: this.currentInstitution.id
             });
-            await this.$store.dispatch("setLiaisons", data.content);
+            await this.$store.dispatch("setLiaisons", data);
             this.loading = false;
         },
         GetActivityList: async function() {

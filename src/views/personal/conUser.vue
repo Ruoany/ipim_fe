@@ -9,11 +9,7 @@
                 >{{ $t("personal.j") }}</a-button
             >
         </div>
-        <a-table
-            :dataSource="liaisonList"
-            :pagination="false"
-            :loading="loading"
-        >
+        <a-table :dataSource="list" :pagination="false" :loading="loading">
             <a-table-column
                 :title="$t('personal.name')"
                 key="nameZh"
@@ -84,7 +80,7 @@ export default {
         return {
             infoVisible: false,
             confirmLoading: false,
-            liaisonList: [],
+            list: [],
             loading: false,
             type: "add",
             id: null,
@@ -95,7 +91,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["currentInstitution", "codeList"])
+        ...mapGetters(["currentInstitution", "codeList", "liaisonList"])
     },
     watch: {
         page: function() {
@@ -118,7 +114,7 @@ export default {
                 size: this.size
             });
             if (data.code === 200) {
-                this.liaisonList = data.data.content;
+                this.list = data.data.content;
                 this.total = data.data.totalElements;
             }
             this.loading = false;
@@ -134,8 +130,8 @@ export default {
             this.id = id;
             this.infoVisible = true;
         },
-        async handleDelete(institutionId) {
-            await Liaison.delete(institutionId);
+        async handleDelete(liaisonId) {
+            await Liaison.delete(liaisonId);
             this.initData();
         }
     },

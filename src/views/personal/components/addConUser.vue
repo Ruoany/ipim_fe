@@ -277,7 +277,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["codeList"])
+        ...mapGetters(["codeList", "liaisonList"])
     },
     methods: {
         initData: async function() {

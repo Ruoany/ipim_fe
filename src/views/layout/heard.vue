@@ -57,7 +57,7 @@
                     >{{ $t("menu.bb") }}</a-menu-item
                 >
             </a-sub-menu>
-            <a-sub-menu>
+            <a-sub-menu :disabled="encourageDis">
                 <span slot="title" class="flex center">
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
@@ -188,7 +188,8 @@ export default {
             "currentUser",
             "institutionList",
             "currentInstitution",
-            "isChange"
+            "isChange",
+            "encourageDis"
         ])
     },
     watch: {
