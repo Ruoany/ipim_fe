@@ -2,7 +2,10 @@
     <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-ba v-if="form === 'ba'" :list="activityList"></form-ba>
+                <form-attend
+                    v-if="form === 'ATTEND'"
+                    :list="activityList"
+                ></form-attend>
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
                 <form-enterprise
                     v-if="form === 'ENTERPRISE'"
@@ -32,9 +35,10 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 import Liaison from "@/apis/liaison";
 import Activity from "@/apis/activity";
-import FormBa from "./ba/index";
+import FormAttend from "./ATTEND/index";
 import FormBb from "./bb/index";
 import FormEnterprise from "./ENTERPRISE/index";
 import FormBd from "./bd/index";
@@ -43,7 +47,7 @@ import FormBf from "./bf/index";
 
 export default {
     components: {
-        FormBa,
+        FormAttend,
         FormBb,
         FormBd,
         FormEnterprise,
@@ -83,7 +87,7 @@ export default {
     mounted: function() {
         this.form = this.$route.query.form;
         this.GetActivityList();
-        if (this.liaisonList.length === 0) this.initData();
+        this.initData();
     }
 };
 </script>

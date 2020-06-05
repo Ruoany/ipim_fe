@@ -126,7 +126,7 @@ export default {
     },
     mounted: function() {
         this.form = this.$route.query.form;
-        if (this.liaisonList.length === 0) this.initData();
+        this.initData();
     }
 };
 </script>
