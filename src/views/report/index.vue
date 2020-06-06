@@ -4,6 +4,7 @@
             <a-tab-pane :tab="$t('report.aa')" key="1" style="padding:30px 0;">
                 <report-ba v-if="reportType === 'ba'"></report-ba>
                 <report-bb v-if="reportType === 'bb'"></report-bb>
+                <report-bc v-if="reportType === 'bc'"></report-bc>
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -12,8 +13,9 @@
 <script>
 import reportBa from "./ba/index";
 import reportBb from "./bb/index";
+import reportBc from "./bc/index";
 export default {
-    components: { reportBa, reportBb },
+    components: { reportBa, reportBb, reportBc },
     data() {
         return {
             reportType: null,
@@ -22,7 +24,7 @@ export default {
     },
     methods: {},
     mounted() {
-        this.reportType = this.$route.query.reportType;
+        this.reportType = 'bc'; //this.$route.query.reportType;
     }
 };
 </script>

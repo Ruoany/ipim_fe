@@ -2,6 +2,7 @@ const config = { rules: [{ required: true, message: "plese input" }] };
 const config_select = { rules: [{ required: true, message: "plese select" }] };
 
 export default {
+    type: ["type", config_select],
     name: ["name", config],
     files: ["files", config_select],
     contactName: ["contactName", config],

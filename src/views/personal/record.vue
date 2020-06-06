@@ -34,13 +34,18 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
-                    <!-- <a-button
+                    <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
+                        @click="
+                            NavigateTo('/report/index', {
+                                reportType:item.recordType
+                            })
+                        "
                         >{{ $t("personal.report") }}</a-button
-                    > -->
+                    >
                     <a-button
                         type="link"
                         @click="
