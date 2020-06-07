@@ -1,6 +1,5 @@
 export default {
   rules: {
-    name: [{ required: true, message: "plese input" }],
     advertCost: [{ required: true, message: "plese input" }],
     photoFiles: [{ required: true }],
   },

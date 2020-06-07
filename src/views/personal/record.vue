@@ -42,8 +42,8 @@
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType:'ba',
-                                reportId: 22 || '',
+                                reportType:'bd',
+                                reportId: '',
                             })
                         "
                         >{{ $t("personal.report") }}</a-button

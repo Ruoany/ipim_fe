@@ -1,11 +1,27 @@
 <template>
     <div class="all">
-        <a-form-model-item :label="$t('reportbd.parInformation')">
-            <div class="flex-justify-content-space-between">
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.personCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.macaoPersionCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.overseasPersionCount')"></a-input></a-col>
-            </div>
+        <a-form-model-item :label="$t('reportbd.officeNameZh')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.officeNameEn')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.activeUrl')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.ej')">
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("reportbd.ek") }}</a-radio>
+                <a-radio :value="2">{{ $t("reportbd.el") }}</a-radio>
+                <a-radio :value="3">{{ $t("reportbd.em") }}</a-radio>
+                <a-radio :value="4">{{ $t("reportbd.en") }}</a-radio>
+                <a-radio :value="5">{{ $t("reportbd.eo") }}</a-radio>
+            </a-radio-group>
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.activeTime')">
+            <a-range-picker class="full" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.activeSummary')">
             <upload
                 type="image"
                 :multiple="true"
@@ -26,7 +42,7 @@ export default {
     components: { Upload },
     data() {
         return {
-            form: { activeSummary: []}
+            form: { activeSummary: [] }
         };
     },
     methods: {
@@ -36,7 +52,6 @@ export default {
         nextClick(){
             this.$emit('next', this.form)
         },
-        handleChange() {},
         //上傳的文件
         uploadChange(info) {
             const status = info.file.status;

@@ -1,11 +1,47 @@
 <template>
     <div class="all">
-        <a-form-model-item :label="$t('reportbd.parInformation')">
-            <div class="flex-justify-content-space-between">
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.personCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.macaoPersionCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.overseasPersionCount')"></a-input></a-col>
-            </div>
+        <a-form-model-item :label="$t('reportbd.officeNameZh')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.officeNameEn')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.appliType')">
+            <a-radio-group name="radioGroup" :defaultValue="1">
+                <a-radio :value="1">{{ $t("reportbd.ed") }}</a-radio>
+                <a-radio :value="2">{{ $t("reportbd.ee") }}</a-radio>
+                <a-radio :value="3">{{ $t("reportbd.ef") }}</a-radio>
+                <a-radio :value="4"
+                    >{{ $t("util.other") }}({{
+                        $t("reportbd.dm")
+                    }})</a-radio
+                >
+            </a-radio-group>
+            <a-input class="full" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('util.country')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('util.city')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.address')">
+            <a-input />
+        </a-form-model-item>
+
+        <a-form-model-item :label="$t('reportbd.tel')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.fax')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.email')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.url')">
+            <a-input />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.text14')">
             <upload
                 type="image"
                 :multiple="true"
