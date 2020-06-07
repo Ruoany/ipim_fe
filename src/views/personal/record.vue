@@ -41,7 +41,8 @@
                         type="link"
                         @click="
                             NavigateTo('/report/index', {
-                                reportType:item.recordType
+                                id: item.id,
+                                reportType:'ba'
                             })
                         "
                         >{{ $t("personal.report") }}</a-button
@@ -211,6 +212,7 @@ export default {
             this.loading = false;
         },
         Transform: function(o) {
+        console.log(111, o);
             Object.keys(o).map(item => {
                 if (o[item]) {
                     o[item] = escape(this.$crypto.encryption(o[item]));

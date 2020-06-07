@@ -1,14 +1,26 @@
-const config = { rules: [{ required: true, message: "plese input" }] };
-const config_select = { rules: [{ required: true, message: "plese select" }] };
-
 export default {
-    type: ["type", config_select],
-    name: ["name", config],
-    files: ["files", config_select],
-    contactName: ["contactName", config],
-    contactPosition: ["contactPosition", config],
-    phone: ["phone", config],
-    fax: ["fax", config],
-    email: ["email", config],
-    contactAddress: ["contactAddress", config]
+  rules: {
+    name: [{ required: true, message: "plese input" }],
+    advertCost: [{ required: true, message: "plese input" }],
+    photoFiles: [{ required: true }],
+  },
 };
+
+
+// advertCost: 0,
+//   advice: "",
+//   applyTime: "",
+//   createAt: "",
+//   encourageEnterpriseId: 0,
+//   exhibitRent: 0,
+//   id: 0,
+//   leafletCost: 0,
+//   logTitle: "",
+//   makeCost: 0,
+//   photoFiles: [],
+//   stateAgree: false,
+//   status: "",
+//   tasks: [],
+//   totalAmount: 0,
+//   trafficCost: 0,
+//   updateAt: ""

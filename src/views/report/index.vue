@@ -4,7 +4,7 @@
             <a-tab-pane :tab="$t('report.aa')" key="1" style="padding:30px 0;">
                 <report-ba v-if="reportType === 'ba'"></report-ba>
                 <report-bb v-if="reportType === 'bb'"></report-bb>
-                <report-bc v-if="reportType === 'bc'"></report-bc>
+                <report-bd v-if="reportType === 'bd'"></report-bd>
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -13,9 +13,9 @@
 <script>
 import reportBa from "./ba/index";
 import reportBb from "./bb/index";
-import reportBc from "./bc/index";
+import reportBd from "./bd/index";
 export default {
-    components: { reportBa, reportBb, reportBc },
+    components: { reportBa, reportBb, reportBd },
     data() {
         return {
             reportType: null,
@@ -24,7 +24,7 @@ export default {
     },
     methods: {},
     mounted() {
-        this.reportType = 'bc'; //this.$route.query.reportType;
+        this.reportType = this.$crypto.decryption(unescape(this.$route.query.reportType));
     }
 };
 </script>
