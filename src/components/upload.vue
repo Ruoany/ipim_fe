@@ -2,6 +2,7 @@
     <a-upload-dragger
         name="file"
         :disabled="disabled"
+        :multiple="multiple"
         :beforeUpload="beforeUpload"
         :fileList="list"
         :action="upFiles"
@@ -22,7 +23,7 @@
 <script>
 import { upFiles } from "@/apis/files";
 export default {
-    props: { value: [Object, Array], type: String, disabled: Boolean },
+    props: { value: [Object, Array], type: String, disabled: Boolean, multiple: Boolean },
     data() {
         return { upFiles };
     },
@@ -49,22 +50,17 @@ export default {
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                         "application/msword"
                     ];
-                    break;
                 case "EXCEL":
                     return [
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                         "application/vnd.ms-excel"
                     ];
-                    break;
                 case "PDF":
                     return ["application/pdf"];
-                    break;
                 case "IMAGE":
                     return ["image/png", "image/jpeg"];
-                    break;
                 default:
                     return [];
-                    break;
             }
         }
     },
@@ -83,8 +79,6 @@ export default {
                 }
                 return {
                     ...item,
-                    url:
-                        "http://api-exhibition.servier.iteratech.net/upload/2020/03/31/a04816b91d2d45bfb7e3f4a1771b9fb8.xlw"
                 };
             });
             this.$emit("update:value", arr);

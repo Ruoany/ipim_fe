@@ -42,7 +42,8 @@
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType:'ba'
+                                reportType:'ba',
+                                reportId: 22 || '',
                             })
                         "
                         >{{ $t("personal.report") }}</a-button
@@ -212,7 +213,6 @@ export default {
             this.loading = false;
         },
         Transform: function(o) {
-        console.log(111, o);
             Object.keys(o).map(item => {
                 if (o[item]) {
                     o[item] = escape(this.$crypto.encryption(o[item]));

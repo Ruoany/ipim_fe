@@ -70,25 +70,18 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="step===3">
-                    <a-form-model-item :label="$t('reportba.bj')" required >
+                    <a-form-model-item :label="$t('reportba.bj')" prop="photoFiles" required >
                         <div class="form-content">
                             <ul>
                                 <li>{{ $t("reportba.bm") }}</li>
                             </ul>
                         </div>
-                        <a-upload-dragger 
-                            name="file" 
-                            multiple  
-                            :action="upFiles"
-                            :beforeUpload="beforeUpload" 
-                            @change="uploadChange"
-                        >
-                            <p class="ant-upload-drag-icon">
-                                <a-icon type="inbox" />
-                            </p>
-                            <p class="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p class="ant-upload-hint">Support for a single or bulk upload.</p>
-                        </a-upload-dragger>
+                        <upload
+                            type="image"
+                            :multiple="true"
+                            :value.sync="form.photoFiles"
+                            @handleChange="uploadChange"
+                        ></upload>
                     </a-form-model-item>
                 </div>
                 <div v-show="step===4">
@@ -134,13 +127,14 @@ import { mapGetters } from "vuex";
 import validate from "./validate";
 import Report from "@/apis/report";
 import { upFiles } from "@/apis/files";
+import Upload from "@/components/upload";
 export default {
-    components: { },
+    components: { Upload },
     data() {
         return {
             upFiles,
             step: 0,
-            recordId: '',
+            reportId: '',
             loading: false,
             liaison: {},
             selectedActivity: {},
@@ -169,11 +163,10 @@ export default {
         ]),
     },
     methods: {
-        initData: async function(recordId) {
+        initData: async function(recordId, reportId) {
             this.loading = true;
-            try {
-                const { data } = await Report.getEncourageEnterpriseById(recordId);
-                this.form.encourageEnterpriseId = recordId;
+            const { data, code } = await Report.getEncourageEnterpriseById(recordId);
+            if(code === 200) {
                 this.liaison = data.liaison
                 this.selectedActivity = {
                     activityName: data.activity.nameZh,
@@ -181,13 +174,15 @@ export default {
                     activityPlace: data.activity.place,
                     activityExpiry: data.activity.expiryTime
                 };
-                // const res = await Report.getEncourageEnterpriseReportById(recordId);
-                // this.form = res.data
-            } catch (error) {
-                this.$message.error(error.message)
-            } finally {
-                this.loading = false;
             }
+            if(reportId) {
+                const res = await Report.getEncourageEnterpriseReportById(reportId);
+                if(res.code === 200) {
+                    this.form = res.data
+                }
+            }
+            this.form.encourageEnterpriseId = recordId;
+            this.loading = false;
         },
         handleSubmit: async function() {
             if(this.form.photoFiles.length < 4){
@@ -195,36 +190,34 @@ export default {
                 return 
             }
             this.$refs.miecf.validate(async valid  => {
-                 if (valid) {
-                    await Report.addEncourageEnterpriseReport(this.form)
+                if (valid) {
+                    this.loading = true
+                    let res
+                    if(this.reportId) {
+                        res = await Report.updateEncourageEnterpriseReport(this.form)
+                    } else {
+                        res = await Report.addEncourageEnterpriseReport(this.form)
+                    }
+                    this.loading = false
+                    if(res.code === 200) {
+                        this.$router.go(-1)
+                    }
                 } else {
                     this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
                 }
             });
         },
-        beforeUpload(file) {
-            const isJPG = file.type === "image/jpeg";
-            if (!isJPG) {
-                this.$message.error("You can only upload JPG file!");
-            }
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            if (!isLt2M) {
-                this.$message.error("Image must smaller than 2MB!");
-            }
-            return isJPG && isLt2M;
-        },
         //上傳的文件
         uploadChange(info) {
-            console.log("輸出->", info);
             const status = info.file.status;
             if (status === 'done') {
                 let data = info.file.response;
                 if (data.code === 200) {
                     this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.photoFiles.push({ 
+                    this.form.photoFiles.push({
                         oriname: info.file.name,
                         uid: info.file.uid,
-                        url: data.data.url
+                        url: data.data.url,
                     })
                 }
             } else if (status === 'error') {
@@ -234,7 +227,11 @@ export default {
     },
     mounted(){
         const recordId = this.$crypto.decryption(unescape(this.$route.query.id));
-        this.initData(recordId)
+        const reportId = this.$route.query.reportId 
+            ? this.$crypto.decryption(unescape(this.$route.query.reportId))
+            : ''
+        this.reportId = reportId
+        this.initData(recordId, reportId)
     }
 };
 </script>
