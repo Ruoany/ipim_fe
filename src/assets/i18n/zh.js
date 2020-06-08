@@ -5,7 +5,7 @@ import formbb from "./bb/zh";
 import enterprise from "./ENTERPRISE/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
-import formbd from "./bd/zh";
+import convention from "./CONVENTION/zh";
 import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
@@ -249,7 +249,7 @@ const zhData = {
     enterprise,
     formbe,
     formbf,
-    formbd,
+    convention,
     downloadPersonal: {
         all: "全部",
     },

@@ -80,7 +80,7 @@
                 >
                 <a-menu-item
                     key="special4"
-                    @click="formNavigate('/myform/special', 'bd')"
+                    @click="formNavigate('/myform/special', 'CONVENTION')"
                     >{{ $t("menu.cd") }}</a-menu-item
                 >
                 <a-menu-item

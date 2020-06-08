@@ -11,7 +11,10 @@
                     v-if="form === 'ENTERPRISE'"
                     :list="activityList"
                 ></form-enterprise>
-                <form-bd v-if="form === 'bd'" :list="activityList"></form-bd>
+                <form-convention
+                    v-if="form === 'CONVENTION'"
+                    :list="activityList"
+                ></form-convention>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
             </a-tab-pane>
@@ -41,7 +44,7 @@ import Activity from "@/apis/activity";
 import FormAttend from "./ATTEND/index";
 import FormBb from "./bb/index";
 import FormEnterprise from "./ENTERPRISE/index";
-import FormBd from "./bd/index";
+import FormConvention from "./CONVENTION/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
 
@@ -49,7 +52,7 @@ export default {
     components: {
         FormAttend,
         FormBb,
-        FormBd,
+        FormConvention,
         FormEnterprise,
         FormBe,
         FormBf

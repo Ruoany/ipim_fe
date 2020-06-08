@@ -400,4 +400,7 @@ export default {
 
 <style lang="less" scoped>
 @import url("../css/form.less");
+.none {
+    display: none;
+}
 </style>
