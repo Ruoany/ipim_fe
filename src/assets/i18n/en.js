@@ -1,17 +1,20 @@
 import mission from "./MISSION/zh";
 import participate from "./PARTICIPATE/zh";
-import formba from "./ba/zh";
+import attend from "./ATTEND/zh";
 import formbb from "./bb/zh";
 import enterprise from "./ENTERPRISE/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
-import formbd from "./bd/zh";
+import convention from "./CONVENTION/zh";
 import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
+<<<<<<< HEAD
 import reportba from "./ba/zh_re";
 import reportbb from "./bb/zh_re";
 import reportbd from "./bd/zh-re";
+=======
+>>>>>>> origin/uworks
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -227,15 +230,19 @@ const zhData = {
     gmbpf,
     mission,
     participate,
-    formba,
+    attend,
     formbb,
     enterprise,
     formbe,
     formbf,
+<<<<<<< HEAD
     formbd,
     reportba,
     reportbb,
     reportbd
+=======
+    convention,
+>>>>>>> origin/uworks
 };
 
 export default zhData;

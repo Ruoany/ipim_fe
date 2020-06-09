@@ -1,10 +1,6 @@
 <template>
     <div class="personal-container">
-        <a-menu
-            :selectedKeys="[menuItem]"
-            style="width: 206px;min-height:610px"
-            mode="inline"
-        >
+        <a-menu :selectedKeys="[menuItem]" class="menu" mode="inline">
             <a-menu-item key="mine" @click="navigateTo('/mine')">{{
                 $t("menu.perInfo")
             }}</a-menu-item>
@@ -54,13 +50,17 @@ export default {
 <style lang="less" scoped>
 .personal-container {
     width: 1226px;
+
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    .menu {
+        width: 206px;
+    }
     .personal-content {
         padding: 20px 40px;
-        min-height: 742px;
+        min-height: calc(~"100vh - 242px");
         width: 100%;
         border-left: 1px solid #e6e6e6;
     }

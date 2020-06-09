@@ -38,9 +38,6 @@
                     >{{ $t("menu.plpex") }}</a-menu-item
                 >
             </a-sub-menu>
-            <!-- <a-menu-item key="host" @click="handleNavigate('/show/host')">{{
-                $t("menu.signUp")
-            }}</a-menu-item>-->
             <a-sub-menu>
                 <span slot="title" class="flex center">
                     {{ $t("menu.delegation") }}
@@ -57,14 +54,18 @@
                     >{{ $t("menu.bb") }}</a-menu-item
                 >
             </a-sub-menu>
-            <a-sub-menu>
-                <span slot="title" class="flex center">
+            <a-sub-menu :disabled="encourageDis">
+                <span
+                    slot="title"
+                    class="flex center"
+                    :title="encourageDis ? $t('menu.tips') : ''"
+                >
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>
                 <a-menu-item
                     key="special1"
-                    @click="formNavigate('/myform/special', 'ba')"
+                    @click="formNavigate('/myform/special', 'ATTEND')"
                     >{{ $t("menu.ca") }}</a-menu-item
                 >
                 <a-menu-item
@@ -79,17 +80,9 @@
                 >
                 <a-menu-item
                     key="special4"
-                    @click="formNavigate('/myform/special', 'bd')"
+                    @click="formNavigate('/myform/special', 'CONVENTION')"
                     >{{ $t("menu.cd") }}</a-menu-item
                 >
-                <!-- <a-menu-item
-                    key="special5"
-                    @click="formNavigate('/myform/special', 'be')"
-                >{{ $t("menu.ce") }}</a-menu-item>
-                <a-menu-item
-                    key="special6"
-                    @click="formNavigate('/myform/special', 'bf')"
-                >{{ $t("menu.cf") }}</a-menu-item> -->
                 <a-menu-item
                     key="special7"
                     @click="formNavigate('/myform/special', '')"
@@ -188,7 +181,8 @@ export default {
             "currentUser",
             "institutionList",
             "currentInstitution",
-            "isChange"
+            "isChange",
+            "encourageDis"
         ])
     },
     watch: {

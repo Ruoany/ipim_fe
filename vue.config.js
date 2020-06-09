@@ -16,6 +16,7 @@ module.exports = {
                     "primary-color": "#EE1C24",
                     "link-color": "#EE1C24",
                     "border-radius-base": "2px",
+                    "disabled-color": "#666",
                 },
                 javascriptEnabled: true,
             },

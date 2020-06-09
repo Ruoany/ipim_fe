@@ -207,10 +207,13 @@ export default {
     computed: {
         ...mapGetters(["currentInstitution", "currentUser"]),
         role() {
-            return (
-                this.$route.query.type === "new" ||
-                this.currentInstitution.adminId === this.currentUser
-            );
+            if (this.currentInstitution) {
+                return (
+                    this.$route.query.type === "new" ||
+                    this.currentInstitution.adminId === this.currentUser
+                );
+            }
+            return true;
         }
     },
     filters: {
@@ -226,9 +229,10 @@ export default {
     },
     methods: {
         beforeUpload(file) {
-            const isJPG = file.type === "image/jpeg";
+            const isJPG =
+                file.type === "image/jpeg" || file.type === "image/png";
             if (!isJPG) {
-                this.$message.error("You can only upload JPG file!");
+                this.$message.error("You can only upload JPG and PNG file!");
             }
             const isLt2M = file.size / 1024 / 1024 < 2;
             if (!isLt2M) {
@@ -252,7 +256,7 @@ export default {
         },
         async onSuccess() {
             const { data } = await User.current();
-            await this.$store.dispatch("setInfo", data);
+            this.$store.dispatch("setInfo", data);
             this.spinning = false;
             this.$message.success("操作成功");
             this.$router.replace("/personal/info");
@@ -265,11 +269,10 @@ export default {
                         formatString(this.form)
                     );
                     if (code !== 200) {
-                        this.$message.error(message);
                         return;
                     }
                     if (!this.$route.query.type) {
-                        await this.$store.dispatch("removeCurrentInstitution");
+                        this.$store.dispatch("removeCurrentInstitution");
                     }
                     this.onSuccess();
                 }
