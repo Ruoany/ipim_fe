@@ -1,38 +1,38 @@
 <template>
     <div class="all">
-        <a-form-model-item :label="$t('reportbd.officeNameZh')">
-            <a-input />
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.officeNameEn')">
-            <a-input />
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.activeUrl')">
-            <a-input />
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.ej')">
-            <a-radio-group name="radioGroup" :defaultValue="1">
-                <a-radio :value="1">{{ $t("reportbd.ek") }}</a-radio>
-                <a-radio :value="2">{{ $t("reportbd.el") }}</a-radio>
-                <a-radio :value="3">{{ $t("reportbd.em") }}</a-radio>
-                <a-radio :value="4">{{ $t("reportbd.en") }}</a-radio>
-                <a-radio :value="5">{{ $t("reportbd.eo") }}</a-radio>
+        <a-form-item :label="$t('reportbd.officeNameZh')">
+            <a-input :model="activity.nameZh" disabled />
+        </a-form-item>
+        <a-form-item :label="$t('reportbd.officeNameEn')">
+            <a-input :model="activity.nameEn" disabled />
+        </a-form-item>
+        <a-form-item :label="$t('reportbd.activeUrl')">
+            <a-input :model="activity.website" disabled />
+        </a-form-item>
+        <a-form-item :label="$t('reportbd.ej')">
+            <a-radio-group name="radioGroup" :model="activity.trades" disabled>
+                <a-radio value="GENERAL_MEET">{{ $t("reportbd.ek") }}</a-radio>
+                <a-radio value="INT_MEET">{{ $t("reportbd.el") }}</a-radio>
+                <a-radio value="GENERAL_EXHIBIT">{{ $t("reportbd.em") }}</a-radio>
+                <a-radio value="SPECIALTY_EXHIBIT">{{ $t("reportbd.en") }}</a-radio>
+                <a-radio value="MEET_EXHIBIT">{{ $t("reportbd.eo") }}</a-radio>
             </a-radio-group>
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.activeTime')">
-            <a-range-picker class="full" />
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.activeSummary')">
+        </a-form-item>
+        <a-form-item :label="$t('reportbd.activeTime')">
+            <a-input :model="activity.date" disabled />
+        </a-form-item>
+        <a-form-model-item :label="$t('reportbd.activeSummary')" props="activeSummary">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.activeSummary"
+                :value.sync="form.attachments"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-model-item>
-        <a-form-model-item>
+        <a-form-item>
             <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
             <a-button type="primary" @click="nextClick">下一步</a-button>
-        </a-form-model-item>
+        </a-form-item>
     </div>
 </template>
 
@@ -40,9 +40,10 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
+    props: ["activity", 'attachments'],
     data() {
         return {
-            form: { activeSummary: [] }
+            form: { attachments: [] }
         };
     },
     methods: {
@@ -50,26 +51,16 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
+            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'activeSummary'}))
             this.$emit('next', this.form)
         },
-        //上傳的文件
+        // 更改上傳的文件
         uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.activeSummary.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                    this.$emit('change', this.form);
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+            this.form.attachments = info
         },
+    },
+    mounted(){
+        this.form.attachments = this.attachments.filter(i => i.type === 'activeSummary')
     }
 };
 </script>

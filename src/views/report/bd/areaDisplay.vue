@@ -1,9 +1,5 @@
 <template>
-    <a-form-model
-        ref="areaform"
-        :model="form"
-        class="all"
-    >
+    <div class="all">
         <a-form-model-item
             :label="$t('reportbd.fq')"
             prop="exSpace"
@@ -133,7 +129,7 @@
             <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
             <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
-    </a-form-model>
+    </div>
 </template>
 
 <script>
@@ -206,7 +202,6 @@ export default {
         addDomain() {
             this.form.exMeetingRooms.push({ key: Date.now(), date: '', rooms: '' });
         },
-        handleChange() {}
     }
 };
 </script>

@@ -1,15 +1,19 @@
 <template>
-    <div class="all">
-        <a-form-model-item :label="$t('reportbd.parInformation')">
-            <div class="flex-justify-content-space-between">
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.personCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.macaoPersionCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.overseasPersionCount')"></a-input></a-col>
-            </div>
+    <div class="all"> 
+         <a-form-model-item :label="$t('reportbd.personCount')" props="totalParticipants">
+            <a-input :model="form.totalParticipants"></a-input>
+        </a-form-model-item>
+         <a-form-model-item :label="$t('reportbd.macaoPersionCount')" props="totalMacaoParticipants">
+            <a-input :model="form.totalMacaoParticipants"></a-input>
+        </a-form-model-item>
+         <a-form-model-item :label="$t('reportbd.overseasPersionCount')" props="totalOverseasParticipants">
+            <a-input :model="form.totalOverseasParticipants"></a-input>
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.parInformation')" props="participant">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.activeSummary"
+                :value.sync="form.attachments"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-model-item>
@@ -24,9 +28,15 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
+    props:['attachments'],
     data() {
         return {
-            form: { activeSummary: []}
+            form: {
+                totalParticipants: "",
+                totalMacaoParticipants: "",
+                totalOverseasParticipants: "",
+                attachments: []
+            }
         };
     },
     methods: {
@@ -34,27 +44,17 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
+            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'participant'}))
             this.$emit('next', this.form)
         },
         handleChange() {},
-        //上傳的文件
+        // 更改上傳的文件
         uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.activeSummary.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                    this.$emit('change', this.form);
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+            this.form.attachments = info
         },
+    },
+    mounted(){
+        this.form.attachments = this.attachments.filter(i => i.type === 'participant')
     }
 };
 </script>

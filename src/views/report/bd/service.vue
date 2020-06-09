@@ -1,9 +1,5 @@
 <template>
-    <a-form-model
-        ref="serviceform"
-        :model="form"
-        class="all"
-    >
+    <div class="all">
         <a-form-model-item
             v-for="(room, index) in form.serviceProviders"
             :key="room.key"
@@ -68,25 +64,156 @@
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.gf')">
-            <a-button type="dashed" style="width: 60%" @click="addGovSupports">
-                <a-icon type="plus" /> {{$t("reportbd.gk")}}
-            </a-button>
+            <a-row>
+                <a-col>{{$t('reportbd.go')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="invoicesFiles"
+                        :value.sync="form.invoicesFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gp')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="checklistFiles"
+                        :value.sync="form.checklistFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gq')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="operatingFiles"
+                        :value.sync="form.operatingFiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gr')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="profiles"
+                        :value.sync="form.profiles"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gs')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="plans"
+                        :value.sync="form.plans"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gt')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="certifies"
+                        :value.sync="form.certifies"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gu')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="guestlList"
+                        :value.sync="form.guestlList"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gv')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="delegations"
+                        :value.sync="form.delegations"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gw')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="activities"
+                        :value.sync="form.activities"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gx')}}</a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="materials"
+                        :value.sync="form.materials"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>{{$t('reportbd.gy')}}<a-input style="width:400px" :placeholder="$t('reportbd.specify')" /></a-col>
+                <a-col>
+                    <upload
+                        type="image"
+                        name="others"
+                        :value.sync="form.others"
+                        @handleChange="uploadChange"
+                    ></upload>
+                </a-col>
+            </a-row>
         </a-form-model-item>
 
         <a-form-model-item>
             <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
             <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
-    </a-form-model>
+    </div>
 </template>
 
 <script>
+import Upload from "@/components/upload";
 export default {
+    components: { Upload },
     data() {
         return {
             form: {
-                serviceProviders: [{ key: Date.now(), date: "", rooms: "" }],
-                govSupports: []
+                serviceProviders: [{ key: Date.now(), description: "", amount: "" }],
+                govSupports: [],
+                invoicesFiles: [],
+                checklistFiles: [],
+                operatingFiles: [],
+                profiles: [],
+                plans: [],
+                certifies: [],
+                guestlList: [],
+                delegations: [],
+                activities: [],
+                materials: [],
+                others: []
             },
         };
     },
@@ -95,7 +222,12 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
-            this.$emit('next', this.form)
+            const {serviceProviders, govSupports, ...others} = this.form
+            const attachments = Object.keys(others).map(k => {
+                return others[k].map(i => ({...i, type: k}))
+            }).flat()
+            const form = { serviceProviders, govSupports, attachments }
+            this.$emit('next', form)
         },
         removeDomain(item) {
             let index = this.form.serviceProviders.indexOf(item);
@@ -115,7 +247,10 @@ export default {
         addGovSupports() {
             this.form.govSupports.push({ key: Date.now(), date: '', rooms: '' });
         },
-        handleChange() {}
+        // 更改上傳的文件
+        uploadChange(info, type) {
+            this.form[type] = info
+        },
     }
 };
 </script>

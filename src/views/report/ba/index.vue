@@ -1,6 +1,6 @@
 <template>
     <div class="form-container">
-        <a-steps v-model="step" direction="vertical" size="small">
+        <a-steps :current="step" direction="vertical" size="small">
             <a-step :title="$t('formba.aa')" />
             <a-step :title="$t('reportba.ae')" />
             <a-step :title="$t('reportba.am')" />
