@@ -1,46 +1,58 @@
 <template>
     <div class="all">
-        <a-form-item :label="$t('formbd.ax')">
-            <div style="font-size:10px;">({{ $t("formbd.ao") }})</div>
+        <a-form-item :label="$t('convention.ax')">
+            <div style="font-size:10px;">({{ $t("convention.ao") }})</div>
             <a-checkbox-group @change="onChange">
                 <a-row>
                     <a-col :span="24">
-                        <a-checkbox value="A">{{ $t("formbd.ap") }}</a-checkbox>
+                        <a-checkbox value="A">{{
+                            $t("convention.ap")
+                        }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="B">{{ $t("formbd.aq") }}</a-checkbox>
+                        <a-checkbox value="B">{{
+                            $t("convention.aq")
+                        }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="C">{{ $t("formbd.as") }}</a-checkbox>
+                        <a-checkbox value="C">{{
+                            $t("convention.as")
+                        }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="D">{{ $t("formbd.ay") }}</a-checkbox>
+                        <a-checkbox value="D">{{
+                            $t("convention.ay")
+                        }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="E">{{ $t("formbd.aw") }}</a-checkbox>
+                        <a-checkbox value="E">{{
+                            $t("convention.aw")
+                        }}</a-checkbox>
                     </a-col>
                     <a-col :span="24">
-                        <a-checkbox value="F">{{ $t("formbd.av") }}</a-checkbox>
+                        <a-checkbox value="F">{{
+                            $t("convention.av")
+                        }}</a-checkbox>
                     </a-col>
                 </a-row>
             </a-checkbox-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.az')">
+        <a-form-item :label="$t('convention.az')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.ba')">
+        <a-form-item :label="$t('convention.ba')">
             <a-row :gutter="10">
                 <a-col :span="9">
                     <a-date-picker
                         style="width:100%"
-                        :placeholder="$t('formbd.bb')"
+                        :placeholder="$t('convention.bb')"
                     />
                 </a-col>
                 <a-col :span="13"
-                    ><a-input :placeholder="$t('formbd.bc')"
+                    ><a-input :placeholder="$t('convention.bc')"
                 /></a-col>
                 <a-col :span="1">
                     <a-icon type="plus" class="cur" />
@@ -50,95 +62,95 @@
                 </a-col>
             </a-row>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bf')">
+        <a-form-item :label="$t('convention.bf')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bk')">
+        <a-form-item :label="$t('convention.bk')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bq')">
+        <a-form-item :label="$t('convention.bq')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.br')">
+        <a-form-item :label="$t('convention.br')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bt')">
+        <a-form-item :label="$t('convention.bt')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bw')">
+        <a-form-item :label="$t('convention.bw')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bs')">
+        <a-form-item :label="$t('convention.bs')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.by')">
+        <a-form-item :label="$t('convention.by')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bz')">
+        <a-form-item :label="$t('convention.bz')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.df')">
+        <a-form-item :label="$t('convention.df')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.bw')">
+        <a-form-item :label="$t('convention.bw')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.cj')">
+        <a-form-item :label="$t('convention.cj')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
-        <a-form-item :label="$t('formbd.dg')">
+        <a-form-item :label="$t('convention.dg')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
         </a-form-item>
 
-        <a-form-item :label="$t('formbd.cl')">
+        <a-form-item :label="$t('convention.cl')">
             <a-radio-group name="radioGroup" :defaultValue="1">
                 <a-radio :value="1">{{ $t("util.yes") }}</a-radio>
                 <a-radio :value="2">{{ $t("util.no") }}</a-radio>
             </a-radio-group>
 
-            <a-input :placeholder="$t('formbd.cn')" />
-            <a-input :placeholder="$t('formbd.co')" />
+            <a-input :placeholder="$t('convention.cn')" />
+            <a-input :placeholder="$t('convention.co')" />
         </a-form-item>
-        <a-form-item :label="$t('formbd.cq')">
+        <a-form-item :label="$t('convention.cq')">
             <a-upload-dragger
                 name="file"
                 :multiple="true"
@@ -157,7 +169,7 @@
                 </p>
             </a-upload-dragger>
         </a-form-item>
-        <a-form-item :label="$t('formbd.dh')">
+        <a-form-item :label="$t('convention.dh')">
             <a-upload-dragger
                 name="file"
                 :multiple="true"

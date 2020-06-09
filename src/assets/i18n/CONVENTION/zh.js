@@ -156,5 +156,6 @@ export default {
     fax: "傳真",
     email: "電郵地址",
     submit: "提交",
-    address: "地址"
+    address: "地址",
+    tips: "若設有商號名稱並與官方名稱不同，請於官方名稱旁填上商號名稱並加上括號",
 };

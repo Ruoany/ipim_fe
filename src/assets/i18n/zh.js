@@ -1,16 +1,14 @@
 import mission from "./MISSION/zh";
 import participate from "./PARTICIPATE/zh";
-import formba from "./ba/zh";
+import attend from "./ATTEND/zh";
 import formbb from "./bb/zh";
 import enterprise from "./ENTERPRISE/zh";
 import formbe from "./be/zh";
 import formbf from "./bf/zh";
-import formbd from "./bd/zh";
+import convention from "./CONVENTION/zh";
 import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
-import reportba from "./ba/zh_re";
-import reportbb from "./bb/zh_re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -48,6 +46,7 @@ const zhData = {
         plpex: "葡語國家產品及服務展",
         logout: "退出登錄",
         downloadPersonal: "下載中心",
+        tips: "未認證機構不能申報，請前往個人中心認證機構",
     },
     index: {
         evCa: "展會日曆",
@@ -172,6 +171,8 @@ const zhData = {
         az: "機構認證",
         logo: "機構LOGO",
         meNameZh: "機構名稱",
+        meNameEn: "機構名稱（英文）",
+        meNamePt: "機構名稱（葡文）",
         update: "修改申請表",
         showForm: "查看申請表",
         question: "調查問卷",
@@ -243,14 +244,12 @@ const zhData = {
     gmbpf,
     mission,
     participate,
-    formba,
+    attend,
     formbb,
     enterprise,
     formbe,
     formbf,
-    formbd,
-    reportba,
-    reportbb,
+    convention,
     downloadPersonal: {
         all: "全部",
     },
