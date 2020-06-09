@@ -2,13 +2,19 @@
     <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-ba v-if="form === 'ba'" :list="activityList"></form-ba>
+                <form-attend
+                    v-if="form === 'ATTEND'"
+                    :list="activityList"
+                ></form-attend>
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
                 <form-enterprise
                     v-if="form === 'ENTERPRISE'"
                     :list="activityList"
                 ></form-enterprise>
-                <form-bd v-if="form === 'bd'" :list="activityList"></form-bd>
+                <form-convention
+                    v-if="form === 'CONVENTION'"
+                    :list="activityList"
+                ></form-convention>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
             </a-tab-pane>
@@ -32,20 +38,21 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 import Liaison from "@/apis/liaison";
 import Activity from "@/apis/activity";
-import FormBa from "./ba/index";
+import FormAttend from "./ATTEND/index";
 import FormBb from "./bb/index";
 import FormEnterprise from "./ENTERPRISE/index";
-import FormBd from "./bd/index";
+import FormConvention from "./CONVENTION/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
 
 export default {
     components: {
-        FormBa,
+        FormAttend,
         FormBb,
-        FormBd,
+        FormConvention,
         FormEnterprise,
         FormBe,
         FormBf
@@ -69,11 +76,10 @@ export default {
     methods: {
         initData: async function() {
             this.loading = true;
-            const { data } = await Liaison.get({
-                size: 1000,
+            const { data } = await Liaison.all({
                 institutionId: this.currentInstitution.id
             });
-            await this.$store.dispatch("setLiaisons", data.content);
+            await this.$store.dispatch("setLiaisons", data);
             this.loading = false;
         },
         GetActivityList: async function() {
@@ -84,7 +90,7 @@ export default {
     mounted: function() {
         this.form = this.$route.query.form;
         this.GetActivityList();
-        if (this.liaisonList.length === 0) this.initData();
+        this.initData();
     }
 };
 </script>

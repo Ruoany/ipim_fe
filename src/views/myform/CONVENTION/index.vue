@@ -1,12 +1,12 @@
 <template>
     <div class="form-container">
         <a-steps v-model="step" direction="vertical" size="small">
-            <a-step :title="$t('formbd.note')" />
-            <a-step :title="$t('formbd.aa')" />
-            <a-step :title="$t('formbd.contact')" />
-            <a-step :title="$t('formbd.ab')" />
-            <a-step :title="$t('formbd.ac')" />
-            <a-step :title="$t('formbd.am')" />
+            <a-step :title="$t('convention.note')" />
+            <a-step :title="$t('convention.aa')" />
+            <a-step :title="$t('convention.contact')" />
+            <a-step :title="$t('convention.ab')" />
+            <a-step :title="$t('convention.ac')" />
+            <a-step :title="$t('convention.am')" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
             <a-form-model
@@ -15,44 +15,80 @@
                 @submit="handleSubmit"
                 v-bind="formItemLayout"
             >
-                <Note v-show="step === 0"></Note>
+                <div v-show="step === 0">
+                    <p>{{ $t("convention.text1") }}</p>
+                    <p>{{ $t("convention.text2") }}</p>
+                    <p>
+                        {{ $t("convention.text3") }}
+                        <ul>
+                            <li>{{ $t("convention.text4") }}</li>
+                            <li>{{ $t("convention.tel") }}(853)8798 9292</li>
+                            <li>
+                                {{ $t("convention.email") }}cesp@ipim.gov.mo
+                            </li>
+                        </ul>
+                    </p>
+
+                    <p>{{ $t("convention.text5") }}</p>
+                    <p>{{ $t("convention.text6") }}</p>
+                    <p>{{ $t("convention.text7") }}</p>
+                </div>
                 <div v-show="step === 1">
-                    <a-form-model-item :label="$t('formbd.officeNameZh')">
-                        <a-input />
+                    <a-form-model-item :label="$t('convention.officeNameZh')">
+                        <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
 
-                    <a-form-model-item :label="$t('formbd.officeNameEn')">
+                    <a-form-model-item :label="$t('convention.officeNameEn')">
+                        <a-input :value="currentInstitution.nameEn" disabled />
+                        <p>{{$t('convention.tips')}}</p>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('convention.officeBankName')">
+                        <a-radio-group name="radioGroup" :defaultValue="1">
+                            <a-radio :value="1">{{
+                                $t("convention.eb")
+                            }}</a-radio>
+                            <a-radio :value="2">{{
+                                $t("convention.ec")
+                            }}</a-radio>
+                        </a-radio-group>
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.officeBankName')">
+                    <a-form-model-item :label="$t('convention.comType')">
                         <a-radio-group name="radioGroup" :defaultValue="1">
-                            <a-radio :value="1">{{ $t("formbd.eb") }}</a-radio>
-                            <a-radio :value="2">{{ $t("formbd.ec") }}</a-radio>
-                        </a-radio-group>
-                        <a-input class="full" />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.comType')">
-                        <a-radio-group name="radioGroup" :defaultValue="1">
-                            <a-radio :value="1">{{ $t("formbd.dw") }}</a-radio>
-                            <a-radio :value="2">{{ $t("formbd.dy") }}</a-radio>
-                            <a-radio :value="3">{{ $t("formbd.dz") }}</a-radio>
-                            <a-radio :value="4">{{ $t("formbd.ea") }}</a-radio>
+                            <a-radio :value="1">{{
+                                $t("convention.dw")
+                            }}</a-radio>
+                            <a-radio :value="2">{{
+                                $t("convention.dy")
+                            }}</a-radio>
+                            <a-radio :value="3">{{
+                                $t("convention.dz")
+                            }}</a-radio>
+                            <a-radio :value="4">{{
+                                $t("convention.ea")
+                            }}</a-radio>
                             <a-radio
                                 >{{ $t("util.other") }}({{
-                                    $t("formbd.dm")
+                                    $t("convention.dm")
                                 }})</a-radio
                             >
                         </a-radio-group>
                         <a-input class="full" />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.appliType')">
+                    <a-form-model-item :label="$t('convention.appliType')">
                         <a-radio-group name="radioGroup" :defaultValue="1">
-                            <a-radio :value="1">{{ $t("formbd.ed") }}</a-radio>
-                            <a-radio :value="2">{{ $t("formbd.ee") }}</a-radio>
-                            <a-radio :value="3">{{ $t("formbd.ef") }}</a-radio>
+                            <a-radio :value="1">{{
+                                $t("convention.ed")
+                            }}</a-radio>
+                            <a-radio :value="2">{{
+                                $t("convention.ee")
+                            }}</a-radio>
+                            <a-radio :value="3">{{
+                                $t("convention.ef")
+                            }}</a-radio>
                             <a-radio :value="4"
                                 >{{ $t("util.other") }}({{
-                                    $t("formbd.dm")
+                                    $t("convention.dm")
                                 }})</a-radio
                             >
                         </a-radio-group>
@@ -64,28 +100,28 @@
                     <a-form-model-item :label="$t('util.city')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.address')">
+                    <a-form-model-item :label="$t('convention.address')">
                         <a-input />
                     </a-form-model-item>
 
-                    <a-form-model-item :label="$t('formbd.tel')">
+                    <a-form-model-item :label="$t('convention.tel')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.fax')">
+                    <a-form-model-item :label="$t('convention.fax')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.email')">
+                    <a-form-model-item :label="$t('convention.email')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.url')">
+                    <a-form-model-item :label="$t('convention.url')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.text14')">
+                    <a-form-model-item :label="$t('convention.text14')">
                         <upload />
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 2">
-                    <a-form-model-item :label="$t('formbd.conPerson1')">
+                    <a-form-model-item :label="$t('convention.conPerson1')">
                         <a-select
                             v-model="form.liaisonId1"
                             showSearch
@@ -102,19 +138,19 @@
                             >
                         </a-select>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.job')">
+                    <a-form-model-item :label="$t('convention.job')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.tel')">
+                    <a-form-model-item :label="$t('convention.tel')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.phone')">
+                    <a-form-model-item :label="$t('convention.phone')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.email')">
+                    <a-form-model-item :label="$t('convention.email')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.conPerson2')">
+                    <a-form-model-item :label="$t('convention.conPerson2')">
                         <a-select
                             v-model="form.liaisonId2"
                             showSearch
@@ -131,38 +167,48 @@
                             >
                         </a-select>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.job')">
+                    <a-form-model-item :label="$t('convention.job')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.tel')">
+                    <a-form-model-item :label="$t('convention.tel')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.phone')">
+                    <a-form-model-item :label="$t('convention.phone')">
                         <a-input />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.email')">
+                    <a-form-model-item :label="$t('convention.email')">
                         <a-input />
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 3">
-                    <a-form-model-item :label="$t('formbd.officeNameZh')">
+                    <a-form-model-item :label="$t('convention.officeNameZh')">
                         <a-input />
                     </a-form-model-item>
 
-                    <a-form-model-item :label="$t('formbd.ej')">
+                    <a-form-model-item :label="$t('convention.ej')">
                         <a-radio-group name="radioGroup" :defaultValue="1">
-                            <a-radio :value="1">{{ $t("formbd.ek") }}</a-radio>
-                            <a-radio :value="2">{{ $t("formbd.el") }}</a-radio>
-                            <a-radio :value="3">{{ $t("formbd.em") }}</a-radio>
-                            <a-radio :value="4">{{ $t("formbd.en") }}</a-radio>
-                            <a-radio :value="5">{{ $t("formbd.eo") }}</a-radio>
+                            <a-radio :value="1">{{
+                                $t("convention.ek")
+                            }}</a-radio>
+                            <a-radio :value="2">{{
+                                $t("convention.el")
+                            }}</a-radio>
+                            <a-radio :value="3">{{
+                                $t("convention.em")
+                            }}</a-radio>
+                            <a-radio :value="4">{{
+                                $t("convention.en")
+                            }}</a-radio>
+                            <a-radio :value="5">{{
+                                $t("convention.eo")
+                            }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('formbd.activeUrl')">
+                    <a-form-model-item :label="$t('convention.activeUrl')">
                         <a-input />
                     </a-form-model-item>
 
-                    <a-form-model-item :label="$t('formbd.meetingCycle')">
+                    <a-form-model-item :label="$t('convention.meetingCycle')">
                         <a-input />
                     </a-form-model-item>
                 </div>
@@ -181,7 +227,7 @@
                         >下一步</a-button
                     >
                     <a-button v-show="step === 5" type="primary">{{
-                        $t("formbd.submit")
+                        $t("convention.submit")
                     }}</a-button>
                 </a-form-model-item>
             </a-form-model>
@@ -195,13 +241,12 @@ import Upload from "@/components/upload";
 import meetingForm from "./meeting";
 import areaForm from "./area";
 import showForm from "./show";
-import Note from "./note";
 import validate from "./validate";
 export default {
     props: { list: Array },
-    components: { meetingForm, showForm, areaForm, Note, Upload },
+    components: { meetingForm, showForm, areaForm, Upload },
     computed: {
-        ...mapGetters(["liaisonList"])
+        ...mapGetters(["liaisonList", "currentInstitution"])
     },
     data() {
         return {
@@ -222,4 +267,8 @@ export default {
 
 <style lang="less" scoped>
 @import url("../css/form.less");
+p {
+    line-height: 30px;
+    font-size: 15px;
+}
 </style>

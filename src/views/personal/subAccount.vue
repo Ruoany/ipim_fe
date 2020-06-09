@@ -67,41 +67,15 @@
                 @init="initTable"
             ></add-sub-account>
         </a-drawer>
-        <!-- <a-drawer
-            :title="$t('personal.af')"
-            :visible="modalVisible"
-            @ok="handleOk"
-            :confirmLoading="confirmLoading"
-            @cancel="modalVisible = false"
-            :okText="$t('util.save')"
-            :cancelText="$t('util.cancel')"
-            destroyOnClose
-        >
-            <a-spin :spinning="modalLoading">
-                <a-icon
-                    slot="indicator"
-                    type="loading"
-                    style="font-size: 24px"
-                    spin
-                />
-
-                <add-sub-account
-                    @initTable="initTable"
-                    ref="addSubAccount"
-                    :confirmLoading.sync="confirmLoading"
-                    :formType="formType"
-                    :initData="formData"
-                ></add-sub-account>
-            </a-spin>
-        </a-drawer> -->
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import addSubAccount from "./components/addSubAccount";
 import UserSubaccount from "@/apis/userSubaccount";
 import Pagination from "@/components/pagination";
-import { mapGetters } from "vuex";
 export default {
     components: { addSubAccount, Pagination },
     data() {
@@ -184,4 +158,19 @@ export default {
     }
 };
 </script>
+
+<style lang="less" scoped>
+.container {
+    h4 {
+        margin: 0;
+    }
+    .flex-justify-content-space-between {
+        align-items: center;
+        margin-bottom: 20px;
+        h1 {
+            margin: 0;
+        }
+    }
+}
+</style>
 

@@ -17,6 +17,12 @@ export default {
         },
         currentInstitution: state => state.institution,
         isChange: state => state.isChange,
+        encourageDis: state => {
+            if (state.institution && state.institution.status === "passed") {
+                return false;
+            }
+            return true;
+        },
     },
     mutations: {
         SET_INFO_DATA: function(state, value) {
