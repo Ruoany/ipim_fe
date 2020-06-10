@@ -42,7 +42,7 @@
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType:'ba',
+                                reportType:'bb',
                                 reportId: item.report ? item.report.id : '',
                             })
                         "

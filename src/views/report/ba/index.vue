@@ -124,13 +124,11 @@
 import { mapGetters } from "vuex";
 import validate from "./validate";
 import Report from "@/apis/report";
-import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
     data() {
         return {
-            upFiles,
             step: 0,
             reportId: '',
             loading: false,

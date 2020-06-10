@@ -68,7 +68,7 @@ export default {
         };
     },
     methods: {
-         initData: async function(recordId, reportId) {
+        initData: async function(recordId, reportId) {
             this.loading = true;
             const { data, code } = await Report.getEncourageConventionById(recordId);
             if(code === 200) {
@@ -92,7 +92,7 @@ export default {
             this.form.encourageConventionId = recordId;
             this.loading = false;
         },
-       async  handleSubmit() {
+        async  handleSubmit() {
             // this.$refs.miecf.validate(async valid  => {
                 
                 // if (valid) {
@@ -103,6 +103,8 @@ export default {
                     } else {
                         res = await Report.addEncourageConventionReport(this.form)
                     }
+                    console.log(111, this.form);
+                    
                     this.loading = false
                     if(res.code === 200) {
                         this.$router.go(-1)
