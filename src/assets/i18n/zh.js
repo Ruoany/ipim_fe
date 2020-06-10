@@ -9,12 +9,8 @@ import convention from "./CONVENTION/zh";
 import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
-<<<<<<< HEAD
 import reportba from "./ba/zh_re";
 import reportbb from "./bb/zh_re";
-import reportbd from "./bd/zh-re";
-=======
->>>>>>> origin/uworks
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -254,14 +250,11 @@ const zhData = {
     enterprise,
     formbe,
     formbf,
-<<<<<<< HEAD
     formbd,
     reportba,
     reportbb,
     reportbd,
-=======
     convention,
->>>>>>> origin/uworks
     downloadPersonal: {
         all: "全部",
     },
