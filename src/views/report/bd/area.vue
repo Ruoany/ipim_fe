@@ -13,7 +13,7 @@
             >
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-date-picker style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker format="YYYY-MM-DD" style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
                 </a-col>
                 <a-col :span="13" >
                     <a-input-number :min="0" v-model.number="room.rooms" style="width:100%" :placeholder="$t('reportbd.bc')" />
@@ -44,7 +44,7 @@
                     {{ $t("reportbd.et") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-date-picker :model="form.conventionDinings[0].date" style="width:100%" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker format="YYYY-MM-DD" v-model="form.conventionDinings[0].date" style="width:100%" :placeholder="$t('reportbd.bb')" />
                 </a-col>
             </a-row>
             <a-row>
@@ -230,8 +230,11 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
-            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'meetingRooms'}))
-            this.$emit('next', this.form)
+            const form = this.form
+            form.attachments = form.attachments.map(i => ({ ...i, type: 'meetingRooms' }))
+            form.meetingRooms = form.meetingRooms.map(i => ({ ...i, date: i.date.valueOf()}))
+            form.conventionDinings = form.conventionDinings.map(i => ({ ...i, date: i.date.valueOf()}))
+            this.$emit('next', form)
         },
         removeDomain(item) {
             let index = this.form.meetingRooms.indexOf(item);

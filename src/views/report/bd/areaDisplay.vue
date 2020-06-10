@@ -31,7 +31,7 @@
             >
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-date-picker style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker style="width:100%" format="YYYY-MM-DD" v-model="room.date" :placeholder="$t('reportbd.bb')" />
                 </a-col>
                 <a-col :span="13" >
                     <a-input-number :min="0" v-model.number="room.rooms" style="width:100%" :placeholder="$t('reportbd.bc')" />
@@ -191,7 +191,9 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
-            this.$emit('next', this.form)
+            const form = this.form
+            form.exMeetingRooms = form.exMeetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
+            this.$emit('next', form)
         },
         removeDomain(item) {
             let index = this.form.exMeetingRooms.indexOf(item);

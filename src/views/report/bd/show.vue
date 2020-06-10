@@ -1,13 +1,13 @@
 <template>
     <div class="all"> 
          <a-form-model-item :label="$t('reportbd.exhibitorsCount')" props="exTotalExhibitors">
-            <a-input :model="form.exTotalExhibitors"></a-input>
+            <a-input-number v-model.number="form.exTotalExhibitors" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.allParticipants')" props="exTotalMacaoParticipants">
-            <a-input :model="form.exTotalMacaoParticipants"></a-input>
+            <a-input-number v-model.number="form.exTotalMacaoParticipants" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.overseasParticipants')" props="exTotalOverseasParticipants">
-            <a-input :model="form.exTotalOverseasParticipants"></a-input>
+            <a-input-number v-model.number="form.exTotalOverseasParticipants" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.actualParticipation')" props="exParticipation">
             <upload
@@ -24,10 +24,10 @@
             :prop="'activityJoins.' + index"
             >
            <div class="flex-justify-content-space-between">
-                <a-input :model="item.exhibitorsBooth" style="width:24%;" :placeholder="$t('reportbd.ep')"></a-input>
-                <a-input :model="item.exhibitors" style="width:24%;" :placeholder="$t('reportbd.eq')"></a-input>
-                <a-input :model="item.professionalBuyer" style="width:24%;" :placeholder="$t('reportbd.er')"></a-input>
-                <a-input :model="item.watchingThePublic" style="width:24%;" :placeholder="$t('reportbd.ex')"></a-input>
+                <a-input-number v-model.number="item.exhibitorsBooth" style="width:24%;" :placeholder="$t('reportbd.ep')"/>
+                <a-input-number v-model.number="item.exhibitors" style="width:24%;" :placeholder="$t('reportbd.eq')"/>
+                <a-input-number v-model.number="item.professionalBuyer" style="width:24%;" :placeholder="$t('reportbd.er')"/>
+                <a-input-number v-model.number="item.watchingThePublic" style="width:24%;" :placeholder="$t('reportbd.ex')"/>
             </div>
         </a-form-model-item>
         <a-form-model-item>

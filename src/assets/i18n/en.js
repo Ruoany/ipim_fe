@@ -11,6 +11,7 @@ import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
 import reportba from "./ba/zh_re";
 import reportbb from "./bb/zh_re";
+import reportbd from "./CONVENTION/zh-re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -233,6 +234,7 @@ const zhData = {
     formbf,
     reportba,
     reportbb,
+    reportbd,
     convention,
 };
 
