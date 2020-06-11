@@ -12,6 +12,11 @@ const m = general("report", {
     addEncourageConventionReport:(data) => request({ url: `/encourage-convention-report`, method: "POST", data}),
     updateEncourageConventionReport:(data) => request({ url: `/encourage-convention-report`, method: "PUT", data}),
 
+    getEncourageAttendById: (id) => request({ url: `/encourage-attend/${id}`, method: "GET" }),
+    getEncourageAttendReportById: (id) => request({ url: `/encourage-attend-report/${id}`, method: "GET" }),
+    addEncourageAttendReport:(data) => request({ url: `/encourage-attend-report`, method: "POST", data}),
+    updateEncourageAttendReport:(data) => request({ url: `/encourage-attend-report`, method: "PUT", data}),
+
 });
 
 export default m;
