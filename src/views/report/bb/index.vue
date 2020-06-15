@@ -24,7 +24,7 @@
                     <a-form-item :label="$t('reportbb.ae')">
                         <a-input :value="institutionName" disabled />
                     </a-form-item>
-                <a-form-item :label="$t('reportba.aj')">
+                    <a-form-item :label="$t('reportba.aj')">
                         <a-input :value="liaison.nameZh" disabled />
                     </a-form-item>
                     <a-form-item :label="$t('util.aphone')">
@@ -44,48 +44,48 @@
                     </a-form-item>
                 </div>
                 <div v-show="step===2">
-                    <div>
-                        <a-row>{{ $t("reportba.an") }}</a-row>
-                        <a-form-model-item :label="$t('reportba.ao')" prop="exhibitRent" required>
-                            <a-input-number v-model.number="form.exhibitRent" :min="0" style="width: 100%"/>
-                            <a-radio-group name="radioGroup" :default-value="1">
-                                <a-radio :value="1">{{$t('reportba.ap')}}</a-radio>
-                                <a-radio :value="2">{{$t('reportba.aq')}}</a-radio>
-                            </a-radio-group>
-                        </a-form-model-item>
-                    </div>
-                    <div>
-                        <a-row>{{ $t("reportba.ar") }}</a-row>
-                        <a-form-model-item :label="$t('reportba.ao')" prop="exhibitRent" required>
-                            <a-input-number v-model.number="form.exhibitRent" :min="0" style="width: 100%"/>
-                            <a-radio-group name="radioGroup" :default-value="1">
-                                <a-radio :value="1">{{$t('reportba.ap')}}</a-radio>
-                                <a-radio :value="2">{{$t('reportba.aq')}}</a-radio>
-                            </a-radio-group>
-                        </a-form-model-item>
-                    </div>
+                    <a-row>{{ $t("reportba.an") }}</a-row>
+                    <a-form-model-item :label="$t('reportba.ao')" prop="exhibitRent" required>
+                        <a-input-number v-model.number="form.exhibitRent" :min="0" style="width: 100%"/>
+                        <div>{{$t('reportbb.dd')}}</div>
+                        <upload
+                            type="image"
+                            :value.sync="form.exhibitRentFiles"
+                            @handleChange="v=>uploadChange(v, 'exhibitRentFiles')"
+                        />
+                    </a-form-model-item>
+                    <a-row>{{ $t("reportba.ar") }}</a-row>
+                    <a-form-model-item :label="$t('reportba.ao')" prop="makeCost" required>
+                        <a-input-number v-model.number="form.makeCost" :min="0" style="width: 100%"/>
+                        <div>{{$t('reportbb.dd')}}</div>
+                        <upload
+                            type="image"
+                            :value.sync="form.makeCostFiles"
+                            @handleChange="v=>uploadChange(v, 'makeCostFiles')"
+                        />
+                    </a-form-model-item>
                 </div>
                 <div v-show="step === 3">
-                    <a-form-model-item :label="$t('reportbb.ay')" prop="photoFiles" required >
+                    <a-form-model-item :label="$t('reportbb.ay')" prop="summaryFiles" required >
                         <upload
                             type="WORD"
-                            :value.sync="form.photoFiles"
-                            @handleChange="uploadChange"
+                            :value.sync="form.summaryFiles"
+                            @handleChange="v=>uploadChange(v, 'summaryFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.az')" prop="photoFiles" required >
+                    <a-form-model-item :label="$t('reportbb.az')" prop="accountFiles" required >
                         <upload
                             type="WORD"
-                            :value.sync="form.photoFiles"
-                            @handleChange="uploadChange"
+                            :value.sync="form.accountFiles"
+                            @handleChange="v=>uploadChange(v, 'accountFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.bd')" prop="photoFiles" required >
+                    <a-form-model-item :label="$t('reportbb.bd')" prop="cardFiles" required >
                         <upload
                             type="image"
                             :multiple="true"
-                            :value.sync="form.photoFiles"
-                            @handleChange="uploadChange"
+                            :value.sync="form.cardFiles"
+                            @handleChange="v=>uploadChange(v, 'cardFiles')"
                         />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('reportbb.bc')" prop="photoFiles" required >
@@ -93,17 +93,17 @@
                             type="image"
                             :multiple="true"
                             :value.sync="form.photoFiles"
-                            @handleChange="uploadChange"
+                            @handleChange="v=>uploadChange(v, 'photoFiles')"
                         />
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 4">
-                    <a-form-model-item :label="$t('reportbb.be')">
+                    <a-form-model-item :label="$t('reportbb.be')" prop="receive" required>
                         <ul>
                             <li>{{ $t("reportbb.bh") }}</li>
                             <li>{{ $t("reportbb.bi") }}</li>
                         </ul>
-                        <a-radio-group>
+                        <a-radio-group v-model="form.receive">
                             <a-radio :value="1">{{ $t("reportbb.bx") }}</a-radio>
                             <a-radio :value="2">{{ $t("reportbb.bt") }}</a-radio>
                         </a-radio-group>
@@ -112,70 +112,47 @@
                 <div v-show="step === 5">
                     <a-form-model-item>
                         <p>{{$t('reportbb.bv')}}</p>
-                        <a-radio-group>
-                            <a-radio :value="1">{{$t("reportbb.bn")}} <a-input-number v-model.number="form.exhibitRent" :min="0" /> {{$t("reportbb.bw")}}</a-radio>
-                            <a-radio :value="2">{{$t("reportbb.bo")}}</a-radio>
-                        </a-radio-group>
-                    </a-form-model-item>
-                    <a-form-model-item>
-                        <p>{{$t('reportbb.by')}}</p>
-                        <a-radio-group>
-                            <a-radio :value="1">{{$t("reportbb.cb")}}</a-radio>
-                            <a-radio :value="2">{{$t("reportbb.cc")}}</a-radio>
-                            <a-radio :value="3">{{$t("reportbb.cd")}}</a-radio>
-                            <a-radio :value="4">{{$t("reportbb.ce")}}</a-radio>
-                            <a-radio :value="5">{{$t("reportbb.cf")}}</a-radio>
-                        </a-radio-group>
+                        <div>{{$t("reportbb.bn")}}<a-input-number v-model.number="form.totalCustomers" :min="0" />{{$t("reportbb.bw")}}</div>
+                        <div>{{$t("reportbb.bo")}}</div>
                     </a-form-model-item>
                     <a-form-model-item
-                        v-for="(room, index) in form.meetingRooms"
+                        v-for="(room, index) in form.customers"
                         :key="room.key"
-                        :prop="'meetingRooms.' + index + '.rooms'"
+                        :prop="'customers.' + index + '.rooms'"
                         >
-                        <p v-if="index === 0">{{$t('reportbb.bz')}}</p>
+                        <p v-if="index === 0">{{$t('reportbb.by')}}</p>
                         <a-row :gutter="10">
                             <a-col :span="4">{{$t('reportbb.cj') + (index + 1)}}</a-col>
-                            <a-col :span="12"><a-input v-model="form.exhibitRent" /></a-col>
+                            <a-col :span="12"><a-input v-model="room.name" /></a-col>
                         </a-row>
                         <a-row :gutter="10">
                             <a-col :span="4">{{$t('reportbb.ck')}}</a-col>
                             <a-col :span="12">
-                                <a-radio-group>
-                                    <a-radio :value="1">{{$t("reportbb.cl")}}</a-radio>
-                                    <a-radio :value="2">{{$t("reportbb.cm")}}</a-radio>
-                                    <a-radio :value="3">{{$t("reportbb.cn")}}</a-radio>
-                                    <a-radio :value="4">{{$t("reportbb.co")}}</a-radio>
+                                <a-radio-group v-model="room.region">
+                                    <a-radio value="CHINA">{{$t("reportbb.cl")}}</a-radio>
+                                    <a-radio value="HONGKONG">{{$t("reportbb.cm")}}</a-radio>
+                                    <a-radio value="PORTUGUESE">{{$t("reportbb.cn")}}</a-radio>
+                                    <a-radio value="OTHER">{{$t("reportbb.co")}}</a-radio>
                                 </a-radio-group>
                             </a-col>
                         </a-row>
                         <a-row :gutter="10">
                             <a-col :span="4">{{$t('reportbb.cp')}}</a-col>
                             <a-col :span="12">
-                                <a-radio-group>
-                                    <a-radio :value="1">{{$t("reportbb.cq")}}</a-radio>
-                                    <a-radio :value="2">{{$t("reportbb.cr")}}</a-radio>
-                                    <a-radio :value="3">{{$t("reportbb.cs")}}</a-radio>
+                                <a-radio-group v-model="room.status">
+                                    <a-radio value="DISCUSSION">{{$t("reportbb.cq")}}</a-radio>
+                                    <a-radio value="INTENTION">{{$t("reportbb.cr")}}</a-radio>
+                                    <a-radio value="READY_SIGN">{{$t("reportbb.cs")}}</a-radio>
                                 </a-radio-group>
                             </a-col>
                         </a-row>
                         <a-row :gutter="10">
                             <a-col :span="4">{{$t('reportbb.ct')}}</a-col>
-                            <a-col :span="12">
-                                <a-input v-model="form.exhibitRent" />
-                            </a-col>
+                            <a-col :span="12"><a-input v-model="room.cooperationWay" /></a-col>
                         </a-row>
                         <a-row :gutter="10">
                             <a-col :span="4">{{$t('reportbb.cu')}}</a-col>
-                            <a-col :span="12">
-                                <a-radio-group>
-                                    <a-radio :value="1">{{$t("reportbb.cv")}}</a-radio>
-                                    <a-radio :value="2">{{$t("reportbb.cw")}}</a-radio>
-                                    <a-radio :value="3">{{$t("reportbb.cx")}}</a-radio>
-                                    <a-radio :value="1">{{$t("reportbb.cy")}}</a-radio>
-                                    <a-radio :value="2">{{$t("reportbb.cz")}}</a-radio>
-                                    <a-radio :value="3">{{$t("reportbb.da")}}</a-radio>
-                                </a-radio-group>
-                            </a-col>
+                            <a-col :span="12"><a-input v-model="room.amount" /></a-col>
                         </a-row>
                     </a-form-model-item>
                     <a-row>
@@ -187,32 +164,21 @@
                         </a-button>
                     </a-row>
                     <a-form-model-item>
-                        <p>{{$t('reportbb.ca')}}</p>
-                        <a-radio-group>
-                            <a-radio :value="2">{{$t("reportbb.cg")}}</a-radio>
-                            <a-radio :value="1">{{$t("reportbb.ch")}} <a-input v-model="form.exhibitRent" style="width:200px" /></a-radio>
-                            <a-radio :value="2">{{$t("reportbb.ci")}} <a-input v-model="form.exhibitRent" style="width:200px" /></a-radio>
-                        </a-radio-group>
+                        <p>{{$t('reportbb.bz')}}</p>
+                        <a-textarea v-model="form.opinion" />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.bf')">
-                        <a-textarea></a-textarea>
+                    <a-form-model-item prop="againAttend">
+                        <p>{{$t('reportbb.ca')}}</p>
+                        <a-input v-model="form.againAttend" />
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 6">
-                    <a-form-item :label="$t('reportbb.bj')">
-                        <a-radio-group>
-                            <a-radio :value="1">{{ $t("reportbb.db") }}</a-radio>
-                            <a-radio :value="2">{{ $t("reportbb.dc") }}</a-radio>
-                        </a-radio-group>
-                        <a-input :placeholder="$t('reportbb.bm')"></a-input>
-                    </a-form-item>
-                    <a-form-item :label="$t('reportbb.bk')">
-                        <a-radio-group>
-                            <a-radio :value="1">{{ $t("reportbb.db") }}</a-radio>
-                            <a-radio :value="2">{{ $t("reportbb.dc") }}</a-radio>
-                        </a-radio-group>
-                        <a-input :placeholder="$t('reportbb.bm')"></a-input>
-                    </a-form-item>
+                    <a-form-model-item :label="$t('reportbb.bj')" prop="otherSupport">
+                        <a-input :placeholder="$t('reportbb.bm')" v-model="form.otherSupport"></a-input>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('reportbb.bk')" prop="chargeExplain">
+                        <a-input :placeholder="$t('reportbb.bm')" v-model="form.chargeExplain"></a-input>
+                    </a-form-model-item>
                     <a-form-item :label="$t('reportbb.bl')"></a-form-item>
                 </div>
                 <a-form-model-item>
@@ -237,7 +203,6 @@
 
 <script>
 import Report from "@/apis/report";
-import validate from "./validate";
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
@@ -254,9 +219,19 @@ export default {
             liaison: {},
             selectedActivity: {},
             form: {
-                meetingRooms: [{key: Date.now(), value: ''}]
+                customers: [{key: Date.now(), amount: '', cooperationWay: '', name: '', region: '', status: ''}],
+                summaryFiles: [],
+                accountFiles: [],
+                cardFiles: [],
+                photoFiles: [],
+                opinion: "",
+                totalCustomers: 0,
+                againAttend: "",
+                exhibitRent: 0,
+                exhibitRentFiles: [],
+                makeCost: 0,
+                makeCostFiles: []
             },
-            ...validate
         };
     },
     methods: {
@@ -279,18 +254,23 @@ export default {
                     this.form = res.data
                 }
             }
-            this.form.encourageConventionId = recordId;
+            this.form.encourageAttendId = recordId;
             this.loading = false;
         },
         handleSubmit: async function() {
+            const { cardFiles, photoFiles } = this.form
+            if(cardFiles.length < 5 || photoFiles < 5){
+                this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
+                return 
+            }
             this.$refs.miecf.validate(async valid  => {
                 if (valid) {
                     this.loading = true
                     let res
                     if(this.reportId) {
-                        res = await Report.updateEncourageEnterpriseReport(this.form)
+                        res = await Report.updateEncourageAttendReport(this.form)
                     } else {
-                        res = await Report.addEncourageEnterpriseReport(this.form)
+                        res = await Report.addEncourageAttendReport(this.form)
                     }
                     this.loading = false
                     if(res.code === 200) {
@@ -311,21 +291,8 @@ export default {
             this.form.meetingRooms.push({ key: Date.now(), value: '' });
         },
         //上傳的文件
-        uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.photoFiles.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+        uploadChange(info, type) {
+            this.form[type] = info
         },
     },
     mounted(){
