@@ -11,6 +11,7 @@ import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
 import reportba from "./ba/zh_re";
 import reportbb from "./bb/zh_re";
+import reportbd from "./CONVENTION/zh-re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
@@ -28,7 +29,6 @@ const zhData = {
         cb: "非牟利社團組織代表團參與境外展會",
         cc: "企業參與本地/境外展會",
         cd: "會議及展覽資助計劃",
-        ce: "會展專業人才培訓支援計劃",
         cf: "會展及商務旅遊展支持計劃",
         ce: "電子商務推廣（應用 B2C 平台）鼓勵措施",
         ci: "電子商務推廣鼓勵措施申請表格",
@@ -250,7 +250,6 @@ const zhData = {
     enterprise,
     formbe,
     formbf,
-    formbd,
     reportba,
     reportbb,
     reportbd,

@@ -1,9 +1,5 @@
 <template>
-    <a-form-model
-        ref="areaform"
-        :model="form"
-        class="all"
-    >
+    <div class="all">
         <a-form-model-item
             v-for="(room, index) in form.meetingRooms"
             :key="room.key"
@@ -17,7 +13,7 @@
             >
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-date-picker style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker format="YYYY-MM-DD" style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
                 </a-col>
                 <a-col :span="13" >
                     <a-input-number :min="0" v-model.number="room.rooms" style="width:100%" :placeholder="$t('reportbd.bc')" />
@@ -35,14 +31,20 @@
                     />
                 </a-col>
             </a-row>
+            <upload
+                type="image"
+                :multiple="true"
+                :value.sync="form.attachments"
+                @handleChange="uploadChange"
+            ></upload>
         </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.be')" props="conventionDining">
+        <a-form-model-item :label="$t('reportbd.be')" props="conventionDinings">
             <a-row>
                 <a-col :span="5" >
                     {{ $t("reportbd.et") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-date-picker :model="form.conventionDining.date" style="width:100%" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker format="YYYY-MM-DD" v-model="form.conventionDinings[0].date" style="width:100%" :placeholder="$t('reportbd.bb')" />
                 </a-col>
             </a-row>
             <a-row>
@@ -50,7 +52,7 @@
                     {{ $t("reportbd.eu") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDining.attendees" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].attendees" />
                 </a-col>
             </a-row>
             <a-row>
@@ -58,7 +60,7 @@
                     {{ $t("reportbd.ey") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDining.totalPrice" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].totalPrice" />
                 </a-col>
             </a-row>
             <a-row>
@@ -66,7 +68,7 @@
                     {{ $t("reportbd.ez") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDining.averagePrice" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].averagePrice" />
                 </a-col>
             </a-row>
             <a-row>
@@ -74,7 +76,7 @@
                     {{ $t("reportbd.ev") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input v-model="form.conventionDining.venue" />
+                    <a-input v-model="form.conventionDinings[0].venue" />
                 </a-col>
             </a-row>
         </a-form-model-item>
@@ -156,22 +158,26 @@
             <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
             <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
-    </a-form-model>
+    </div>
 </template>
 
 <script>
+import Upload from "@/components/upload";
 export default {
+    components: { Upload },
+    props:['attachments'],
     data() {
         return {
             form: {
-                conventionDining: {
+                conventionDinings: [{
                     attendees: "",
                     averagePrice: "",
                     date: "",
                     totalPrice: "",
                     venue: ""
-                },
+                }],
                 meetingRooms: [{ key: Date.now(), date: "", rooms: "" }],
+                attachments: [],
                 totalSpeakers: "",
                 speakers: [{
                     region: "GUANGDONG",
@@ -217,7 +223,6 @@ export default {
                 greenChannelCost: "",
                 welcomeActivitiesCost: "",
             },
-            upLabel: { span: 16, offset: 4 }
         };
     },
     methods:{
@@ -225,7 +230,11 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
-            this.$emit('next', this.form)
+            const form = this.form
+            form.attachments = form.attachments.map(i => ({ ...i, type: 'meetingRooms' }))
+            form.meetingRooms = form.meetingRooms.map(i => ({ ...i, date: i.date.valueOf()}))
+            form.conventionDinings = form.conventionDinings.map(i => ({ ...i, date: i.date.valueOf()}))
+            this.$emit('next', form)
         },
         removeDomain(item) {
             let index = this.form.meetingRooms.indexOf(item);
@@ -236,7 +245,13 @@ export default {
         addDomain() {
             this.form.meetingRooms.push({ key: Date.now(), date: '', rooms: '' });
         },
-        handleChange() {}
+        // 更改上傳的文件
+        uploadChange(info) {
+            this.form.attachments = info
+        },
+    },
+    mounted(){
+        this.form.attachments = this.attachments.filter(i => i.type === 'meetingRooms')
     }
 };
 </script>

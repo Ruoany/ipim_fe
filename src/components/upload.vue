@@ -23,7 +23,7 @@
 <script>
 import { upFiles } from "@/apis/files";
 export default {
-    props: { value: [Object, Array], type: String, disabled: Boolean, multiple: Boolean },
+    props: { value: [Object, Array], type: String, disabled: Boolean, multiple: Boolean, name: String },
     data() {
         return { upFiles };
     },
@@ -85,7 +85,7 @@ export default {
         },
         handleRemove({ uid }) {
             const arr = this.list.filter(item => item.uid !== uid);
-            this.$emit("handleChange", arr);
+            this.$emit("handleChange", arr, this.name);
         },
         beforeUpload(file) {
             if (!this.type) {

@@ -1,40 +1,33 @@
 <template>
-    <div class="all">
-        <a-form-model-item :label="$t('reportbd.actualParticipation')">
-            <div class="flex-justify-content-space-between">
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.exhibitorsCount')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.allParticipants')"></a-input></a-col>
-                <a-col :span="7"><a-input :placeholder="$t('reportbd.overseasParticipants')"></a-input></a-col>
-            </div>
+    <div class="all"> 
+         <a-form-model-item :label="$t('reportbd.exhibitorsCount')" props="exTotalExhibitors">
+            <a-input-number v-model.number="form.exTotalExhibitors" style="width: 100%" />
+        </a-form-model-item>
+         <a-form-model-item :label="$t('reportbd.allParticipants')" props="exTotalMacaoParticipants">
+            <a-input-number v-model.number="form.exTotalMacaoParticipants" style="width: 100%" />
+        </a-form-model-item>
+         <a-form-model-item :label="$t('reportbd.overseasParticipants')" props="exTotalOverseasParticipants">
+            <a-input-number v-model.number="form.exTotalOverseasParticipants" style="width: 100%" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('reportbd.actualParticipation')" props="exParticipation">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.photoFiles"
+                :value.sync="form.attachments"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.aj')">
-            <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ep')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.eq')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.er')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ex')"></a-input>
-            </div>
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.ai')">
-            <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ep')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.eq')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.er')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ex')"></a-input>
-            </div>
-        </a-form-model-item>
-        <a-form-model-item :label="$t('reportbd.ak')">
-            <div class="flex-justify-content-space-between">
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ep')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.eq')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.er')"></a-input>
-                <a-input style="width:24%;" :placeholder="$t('reportbd.ex')"></a-input>
+        <a-form-model-item
+            v-for="(item, index) in form.activityJoins"
+            :key="item.key"
+            :label="index === 0 ? $t('reportbd.aj') : index === 1 ? $t('reportbd.ai') : $t('reportbd.ak')"
+            :prop="'activityJoins.' + index"
+            >
+           <div class="flex-justify-content-space-between">
+                <a-input-number v-model.number="item.exhibitorsBooth" style="width:24%;" :placeholder="$t('reportbd.ep')"/>
+                <a-input-number v-model.number="item.exhibitors" style="width:24%;" :placeholder="$t('reportbd.eq')"/>
+                <a-input-number v-model.number="item.professionalBuyer" style="width:24%;" :placeholder="$t('reportbd.er')"/>
+                <a-input-number v-model.number="item.watchingThePublic" style="width:24%;" :placeholder="$t('reportbd.ex')"/>
             </div>
         </a-form-model-item>
         <a-form-model-item>
@@ -48,10 +41,33 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
+    props:['attachments'],
     data() {
         return {
             form: { 
-                photoFiles:[]
+                exTotalExhibitors: "",
+                exTotalMacaoParticipants: "",
+                exTotalOverseasParticipants: "",
+                attachments:[],
+                activityJoins: [{
+                    type: "MACAO",
+                    exhibitorsBooth: "",
+                    exhibitors: "",
+                    professionalBuyer: "",
+                    watchingThePublic: "",
+                },{
+                    type: "OVERSEAS",
+                    exhibitorsBooth: "",
+                    exhibitors: "",
+                    professionalBuyer: "",
+                    watchingThePublic: "",
+                },{
+                    type: "TOTAL",
+                    exhibitorsBooth: "",
+                    exhibitors: "",
+                    professionalBuyer: "",
+                    watchingThePublic: "",
+                }]
             },
             openTime: [
                 {
@@ -62,36 +78,20 @@ export default {
         };
     },
     methods: {
-        addOpenTime() {
-            this.openTime = this.openTime.concat({ time: null, houser: null });
-        },
-        removeOpenTime(index) {
-            this.openTime.splice(index, 1);
-        },
         preClick() {
             this.$emit('pre')
         },
         nextClick(){
+            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'exParticipation'}))
             this.$emit('next', this.form)
         },
-        //上傳的文件
+        // 更改上傳的文件
         uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.photoFiles.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                    this.$emit('change', this.form);
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+            this.form.attachments = info
         },
+    },
+    mounted(){
+        this.form.attachments = this.attachments.filter(i => i.type === 'exParticipation')
     }
 };
 </script>

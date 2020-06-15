@@ -3,8 +3,8 @@
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('report.aa')" key="1" style="padding:30px 0;">
                 <report-ba v-if="reportType === 'ba'"></report-ba>
-                <report-bb v-if="reportType === 'bb'"></report-bb>
-                <report-bd v-if="reportType === 'bd'"></report-bd>
+                <report-bb v-else-if="reportType === 'bb'"></report-bb>
+                <report-bd v-else-if="reportType === 'bd'"></report-bd>
             </a-tab-pane>
         </a-tabs>
     </div>

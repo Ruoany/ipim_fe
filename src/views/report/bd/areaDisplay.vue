@@ -1,9 +1,5 @@
 <template>
-    <a-form-model
-        ref="areaform"
-        :model="form"
-        class="all"
-    >
+    <div class="all">
         <a-form-model-item
             :label="$t('reportbd.fq')"
             prop="exSpace"
@@ -35,7 +31,7 @@
             >
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-date-picker style="width:100%" v-model="room.date" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker style="width:100%" format="YYYY-MM-DD" v-model="room.date" :placeholder="$t('reportbd.bb')" />
                 </a-col>
                 <a-col :span="13" >
                     <a-input-number :min="0" v-model.number="room.rooms" style="width:100%" :placeholder="$t('reportbd.bc')" />
@@ -133,7 +129,7 @@
             <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
             <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
-    </a-form-model>
+    </div>
 </template>
 
 <script>
@@ -195,7 +191,9 @@ export default {
             this.$emit('pre')
         },
         nextClick(){
-            this.$emit('next', this.form)
+            const form = this.form
+            form.exMeetingRooms = form.exMeetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
+            this.$emit('next', form)
         },
         removeDomain(item) {
             let index = this.form.exMeetingRooms.indexOf(item);
@@ -206,7 +204,6 @@ export default {
         addDomain() {
             this.form.exMeetingRooms.push({ key: Date.now(), date: '', rooms: '' });
         },
-        handleChange() {}
     }
 };
 </script>

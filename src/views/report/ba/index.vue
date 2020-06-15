@@ -1,7 +1,7 @@
 <template>
     <div class="form-container">
-        <a-steps v-model="step" direction="vertical" size="small">
-            <a-step :title="$t('formba.aa')" />
+        <a-steps :current="step" direction="vertical" size="small">
+            <a-step :title="$t('enterprise.aa')" />
             <a-step :title="$t('reportba.ae')" />
             <a-step :title="$t('reportba.am')" />
             <a-step :title="$t('reportba.bj')" />
@@ -11,11 +11,9 @@
         <a-spin :spinning="loading" class="form">
             <a-form-model :model="form" :rules="rules" ref="miecf" v-bind="formatLayout">
                 <div v-show="step===0">
-                    <a-form-model-item>
+                     <a-form-model-item :label="$t('enterprise.aa')">
                         <ul>
-                            <li>{{ $t("reportba.ab") }}</li>
-                            <li>{{ $t("reportba.ac") }}</li>
-                            <li>{{ $t("reportba.ad") }}</li>
+                            <li>{{ $t("enterprise.cn") }}</li>
                         </ul>
                     </a-form-model-item>
                 </div>
@@ -126,13 +124,11 @@
 import { mapGetters } from "vuex";
 import validate from "./validate";
 import Report from "@/apis/report";
-import { upFiles } from "@/apis/files";
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
     data() {
         return {
-            upFiles,
             step: 0,
             reportId: '',
             loading: false,

@@ -85,12 +85,12 @@
                 >
                 <a-menu-item
                     key="special7"
-                    @click="formNavigate('/myform/special', '')"
+                    @click="formNavigate('/myform/special', 'be')"
                     >{{ $t("menu.ce") }}</a-menu-item
                 >
                 <a-menu-item
                     key="special8"
-                    @click="formNavigate('/myform/special', '')"
+                    @click="formNavigate('/myform/special', 'bf')"
                     >{{ $t("menu.ci") }}</a-menu-item
                 >
             </a-sub-menu>

@@ -1,208 +1,102 @@
 <template>
     <div class="form-container">
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
-            <a-step :title="$t('formbf.ck')" />
-            <a-step :title="$t('formbf.ad')" />
-            <a-step :title="$t('formbf.an')" />
-            <a-step :title="$t('formbf.au')" />
-            <a-step :title="$t('formbf.bf')" />
-            <a-step :title="$t('formbf.bi')" />
-            <a-step :title="$t('formbf.bn')" />
+            <a-step :title="$t('formbe.aa')" />
+            <a-step :title="$t('formbe.ae')" />
+            <a-step :title="$t('formbe.ak')" />
+            <a-step :title="$t('formbe.ar')" />
+            <a-step :title="$t('formbe.bt')" />
+            <a-step :title="$t('formbe.az')" />
+            <a-step :title="$t('formbe.be')" />
         </a-steps>
         <a-form class="form" :form="form" @submit="handleSubmit" v-bind="formatLayout">
             <div v-show="stepCurrent === 0">
                 <a-form-item>
                     <ul>
-                        <li>{{ $t("formbf.aa") }}</li>
-                        <li>{{ $t("formbf.ab") }}</li>
-                        <li>{{ $t("formbf.ac") }}</li>
+                        <li>{{ $t("formbe.ab") }}</li>
+                        <li>{{ $t("formbe.ac") }}</li>
+                        <li>{{ $t("formbe.ad") }}</li>
                     </ul>
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 1">
-                <a-form-item :label="$t('formbf.ae')">
+                <a-form-item :label="$t('formbe.af')">
+                </a-form-item>
+                <a-form-item :label="$t('formbe.af1')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('formbf.af')">
+                <a-form-item :label="$t('formbe.af2')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('formbf.ag')">
-                    <a-radio-group v-decorator>
-                        <a-radio value="a">{{ $t("formbf.cl") }}</a-radio>
-                        <a-radio value="b">{{ $t("formbf.cm") }}</a-radio>
-                        <a-radio value="c">{{ $t("formbf.cn") }}</a-radio>
-                    </a-radio-group>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ah')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ai')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.aj')">
-                    <a-range-picker v-decorator style="width:100%;" />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ak')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.al')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.am')">
+                <a-form-item :label="$t('formbe.af3')">
                     <a-input v-decorator />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 2">
-                <a-form-item :label="$t('formbf.ao')">
+                <a-form-item :label="$t('formbe.al')">
                     <a-select v-decorator></a-select>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.ap')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.am')">
+                    <a-input v-decorator></a-input>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.aq')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.an')">
+                    <a-input v-decorator type="number"></a-input>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.ar')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.ao')">
+                    <a-input v-decorator type="number"></a-input>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.as')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.ap')">
+                    <a-input v-decorator></a-input>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.at')">
-                    <a-select v-decorator></a-select>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ap')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.aq')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ar')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.as')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.aq')">
+                    <upload />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 3">
-                <a-form-item :label="$t('formbf.av')">
+                <a-form-item :label="$t('formbe.as')">
                     <a-input v-decorator />
                 </a-form-item>
-                <a-form-item :label="$t('formbf.aw')">
-                    <a-radio-group v-decorator>
-                        <a-radio value="a">{{ $t("formbf.co") }}</a-radio>
-                        <a-radio value="b">{{ $t("formbf.cp") }}</a-radio>
-                    </a-radio-group>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ax')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ay')">
-                    <a-radio-group v-decorator>
-                        <a-radio value="a">{{ $t("formbf.cq") }}</a-radio>
-                        <a-radio value="b">{{ $t("formbf.cr") }}</a-radio>
-                    </a-radio-group>
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.az')">
-                    <a-radio-group v-decorator>
-                        <a-radio value="a">{{ $t("formbf.ct") }}</a-radio>
-                        <a-radio value="b">{{ $t("formbf.cu") }}</a-radio>
-                        <a-radio value="c">{{ $t("formbf.cv") }}</a-radio>
-                    </a-radio-group>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.cs')">
-                    <a-checkbox-group v-decorator>
-                        <a-checkbox value="a">{{ $t("formbf.cw") }}</a-checkbox>
-                        <a-checkbox value="b">{{ $t("formbf.cx") }}</a-checkbox>
-                        <a-checkbox value="c">{{ $t("formbf.cy") }}</a-checkbox>
-                        <a-checkbox value="e">{{ $t("formbf.cz") }}</a-checkbox>
-                        <a-checkbox value="f">{{ $t("formbf.da") }}</a-checkbox>
-                        <a-checkbox value="g">{{ $t("formbf.db") }}</a-checkbox>
-                        <a-checkbox value="h">{{ $t("formbf.dc") }}</a-checkbox>
-                        <a-checkbox value="i">{{ $t("formbf.dd") }}</a-checkbox>
-                        <a-checkbox value="j">{{ $t("formbf.de") }}</a-checkbox>
-                    </a-checkbox-group>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.ba')">
-                    <a-date-picker v-decorator style="width:100%" />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.df')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.bb')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.bc')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.bd')">
-                    <a-input v-decorator />
-                </a-form-item>
-                <a-form-item :label="$t('formbf.be')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.at')">
+                    <a-textarea v-decorator :rows="4" />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 4">
-                <a-form-item :label="$t('formbf.bg')">
-                    <a-input v-decorator />
+                <a-form-item :label="$t('formbe.bu')">
                 </a-form-item>
-                <a-form-item :label="$t('formbf.bh')">
-                    <a-textarea v-decorator :rows="4" />
+                <a-form-item>
+                    <ul>
+                        <li>{{ $t("formbe.bu1") }}</li>
+                        <li>{{ $t("formbe.bu2") }}</li>
+                        <li>{{ $t("formbe.bu3") }}</li>
+                        <li>{{ $t("formbe.bu4") }}</li>
+                        <li>{{ $t("formbe.bu5") }}</li>
+                        <li>{{ $t("formbe.bu6") }}</li>
+                        <li>{{ $t("formbe.bu7") }}</li>
+                        <li>{{ $t("formbe.bu8") }}</li>
+                    </ul>
+                </a-form-item>
+                <a-form-item :label="$t('formbe.bd')">
+                    <upload />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 5">
-                <a-form-item>
-                    <ul>
-                        <li>{{ $t("formbf.bj") }}</li>
-                        <li>{{ $t("formbf.bk") }}</li>
-                        <li>{{ $t("formbf.bl") }}</li>
-                        <li>{{ $t("formbf.bm") }}</li>
-                    </ul>
+                <a-form-item :label="$t('formbe.ba')">
+                    <a-input v-decorator />
+                </a-form-item>
+                <a-form-item :label="$t('formbe.bb')">
+                    <a-input v-decorator />
                 </a-form-item>
             </div>
             <div v-show="stepCurrent === 6">
-                <a-form-item :label="$t('formbf.bo')">
-                    <ul>
-                        <li>{{ $t("formbf.bp") }}</li>
-                        <li>{{ $t("formbf.bq") }}</li>
-                        <li>{{ $t("formbf.br") }}</li>
-                    </ul>
+                <a-form-item :wrapper-col="formatLayout.wrapperCol">
+                    <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
+                        <span>{{ $t("formbe.bh") }}</span>
+                    </a-checkbox>
                 </a-form-item>
-                <a-form-item :label="$t('formbf.bs')">
-                    <ul>
-                        <li>{{ $t("formbf.bt") }}</li>
-                        <li>{{ $t("formbf.bu") }}</li>
-                        <li>{{ $t("formbf.bv") }}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.bw')">
-                    <ul>
-                        <li>{{ $t("formbf.bx") }}</li>
-                        <li>{{ $t("formbf.by") }}</li>
-                    </ul>
-                </a-form-item>
-                <a-form-item :label="$t('formbf.bz')">
-                    <ul>
-                        <li>{{ $t("formbf.ca") }}</li>
-                        <li>{{ $t("formbf.cb") }}</li>
-                        <li style="list-style:none;">
-                            <ul>
-                                <li>{{ $t("formbf.cc") }}</li>
-                                <li>{{ $t("formbf.cd") }}</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </a-form-item>
-                <a-form-item>
-                    <div class="form-item-title">
-                        <p>{{ $t("formbf.cf") }}</p>
-                    </div>
-                    <a-radio-group v-decorator>
-                        <a-radio value="a">{{ $t("formbf.cg") }}</a-radio>
-                        <a-radio value="b">{{ $t("formbf.ch") }}</a-radio>
-                    </a-radio-group>
-                    <a-textarea v-decorator :rows="4" />
+                <a-form-item :wrapper-col="formatLayout.wrapperCol">
+                    <a-checkbox v-decorator="['agreement2', { valuePropName: 'checked' }]">
+                        <span>{{ $t("formbe.bi") }}</span>
+                    </a-checkbox>
                 </a-form-item>
             </div>
             <a-form-item>
@@ -217,7 +111,7 @@
                     v-show="stepCurrent === 6"
                     type="primary"
                     html-type="submit"
-                >{{ $t("formbc.bq") }}</a-button>
+                >{{ $t("formbe.bv") }}</a-button>
             </a-form-item>
         </a-form>
     </div>
@@ -225,7 +119,9 @@
 
 <script>
 import validate from "./validate";
+import Upload from "@/components/upload";
 export default {
+    components: { Upload },
     data() {
         return {
             ...validate,
@@ -250,15 +146,11 @@ export default {
         }
     },
     created: function() {
-        this.form = this.$form.createForm(this, { name: "FORMBF" });
+        this.form = this.$form.createForm(this, { name: "FORMBE" });
     }
 };
 </script>
 
 <style lang="less" scoped>
 @import url("../css/form.less");
-.remark {
-    width: 100%;
-    display: inline-block;
-}
 </style>
