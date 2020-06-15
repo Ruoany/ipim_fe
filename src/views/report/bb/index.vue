@@ -10,7 +10,7 @@
             <a-step :title="$t('reportbb.bq')" />
         </a-steps>
         <a-spin :spinning="loading" class="form">
-            <a-form-model ref="miecf" :rules="rules" :model="form"  v-bind="formatLayout">
+            <a-form-model ref="miecf" :model="form"  v-bind="formatLayout">
                 <div v-show="step === 0">
                     <a-form-item>
                         <ul>
@@ -179,7 +179,12 @@
                     <a-form-model-item :label="$t('reportbb.bk')" prop="chargeExplain">
                         <a-input :placeholder="$t('reportbb.bm')" v-model="form.chargeExplain"></a-input>
                     </a-form-model-item>
-                    <a-form-item :label="$t('reportbb.bl')"></a-form-item>
+                    <a-form-item :label="$t('reportbb.bl')">
+                        <a-radio-group v-model="form.stateAgree">
+                            <a-radio :value="true">{{ $t("reportbb.de") }}</a-radio>
+                            <a-radio :value="false">{{ $t("reportbb.df") }}</a-radio>
+                        </a-radio-group>
+                    </a-form-item>
                 </div>
                 <a-form-model-item>
                     <a-button type="primary" @click="step--" v-if="step >0">上一步</a-button>
@@ -230,7 +235,8 @@ export default {
                 exhibitRent: 0,
                 exhibitRentFiles: [],
                 makeCost: 0,
-                makeCostFiles: []
+                makeCostFiles: [],
+                stateAgree: false,
             },
         };
     },
@@ -267,10 +273,14 @@ export default {
                 if (valid) {
                     this.loading = true
                     let res
+                    const form = this.form
+                    if(form.customers.length === 1 && !form.customers[0].region){
+                        form.customers = []
+                    }
                     if(this.reportId) {
-                        res = await Report.updateEncourageAttendReport(this.form)
+                        res = await Report.updateEncourageAttendReport(form)
                     } else {
-                        res = await Report.addEncourageAttendReport(this.form)
+                        res = await Report.addEncourageAttendReport(form)
                     }
                     this.loading = false
                     if(res.code === 200) {
