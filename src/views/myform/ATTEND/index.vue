@@ -63,7 +63,7 @@
                 </div>
                 <div v-show="stepCurrent === 2">
                     <a-form-model-item
-                        prop="activityId"
+                        prop="liaisonId"
                         :label="$t('attend.ak')"
                     >
                         <a-select v-model="form.liaisonId" :disabled="isCheck">
@@ -347,7 +347,7 @@ export default {
         }
     },
     methods: {
-        initData: async function() {
+        async initData() {
             if (this.formId) {
                 this.$store.dispatch("setChangeFalse");
                 const { data } = await EA.one(this.formId);
@@ -358,7 +358,7 @@ export default {
             }
         },
         //判斷機構是否已是認證機構
-        isCertified: function() {
+        isCertified() {
             this.$warning({
                 title: "提示",
                 content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
@@ -367,7 +367,7 @@ export default {
                 }
             });
         },
-        handleSubmit: function(e) {
+        handleSubmit() {
             this.$refs.attend.validate(async valid => {
                 if (valid) {
                     const { data } = await EA.create(this.form);

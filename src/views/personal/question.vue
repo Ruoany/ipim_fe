@@ -70,11 +70,18 @@ export default {
                     return answerList;
                 });
             } else {
-                const { data } = await QuestionNaire.byActivity({
-                    activityId: this.query.activityId,
-                    method: this.query.method
-                });
-                this.question = data;
+                if (this.query.type) {
+                    const { data } = await QuestionNaire.encourage({
+                        type: this.query.type
+                    });
+                    this.question = data;
+                } else {
+                    const { data } = await QuestionNaire.byActivity({
+                        activityId: this.query.activityId,
+                        method: this.query.method
+                    });
+                    this.question = data;
+                }
             }
         },
         validator: function() {
