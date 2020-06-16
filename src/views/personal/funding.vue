@@ -75,7 +75,9 @@
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
-                                method: 'GENERAL_EXHIBITION'
+                                method: item.method,
+                                type: item.type,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{
@@ -98,7 +100,8 @@
                                 activityId: item.activity.id,
                                 liaisonId: item.liaisonId,
                                 institutionId: item.institution.id,
-                                applyPictureId: item.applyPictureId
+                                applyPictureId: item.applyPictureId,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{

@@ -76,7 +76,7 @@
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
-                                method: 'GENERAL_EXHIBITION'
+                                method: item.method
                             })
                         "
                         >{{
