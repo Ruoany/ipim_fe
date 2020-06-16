@@ -36,13 +36,13 @@
                 <div slot="action" class="button-wrapper">
                     <a-button
                         v-if="
-                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END' && item.type === 'ATTEND'
+                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType: 'bb',
+                                reportType: item.type,
                                 reportId: item.report ? item.report.id : '',
                             })
                         "

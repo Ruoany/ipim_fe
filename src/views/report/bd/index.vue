@@ -62,13 +62,14 @@ export default {
             institution: {},
             liaison: {},
             activity: {},
+            update: false,
             form: {
                 attachments: [],
             }
         };
     },
     methods: {
-        initData: async function(recordId, reportId) {
+        initData: async function(recordId) {
             this.loading = true;
             const { data, code } = await Report.getEncourageConventionById(recordId);
             if(code === 200) {
@@ -83,11 +84,10 @@ export default {
                     date: `${data.activity.startTime} - ${data.activity.endTime}`,
                 };
             }
-            if(reportId) {
-                const res = await Report.getEncourageConventionReportById(reportId);
-                if(res.code === 200) {
-                    this.form = res.data
-                }
+            const res = await Report.getEncourageConventionReportById(recordId);
+            if(res.code === 200 && !!res.data.id) {
+                this.form = res.data
+                this.update = true
             }
             this.form.encourageConventionId = recordId;
             this.loading = false;
@@ -98,7 +98,7 @@ export default {
                 // if (valid) {
                     this.loading = true
                     let res
-                    if(this.reportId) {
+                    if(this.update) {
                         res = await Report.updateEncourageConventionReport(this.form)
                     } else {
                         res = await Report.addEncourageConventionReport(this.form)
@@ -145,11 +145,7 @@ export default {
     },
     mounted(){
         const recordId = this.$crypto.decryption(unescape(this.$route.query.id));
-        const reportId = this.$route.query.reportId 
-            ? this.$crypto.decryption(unescape(this.$route.query.reportId))
-            : ''
-        this.reportId = reportId
-        this.initData(recordId, reportId)
+        this.initData(recordId)
     }
 };
 </script>

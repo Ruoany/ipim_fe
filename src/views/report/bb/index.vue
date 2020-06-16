@@ -31,7 +31,7 @@
                         <a-input :value="liaison.phone" disabled />
                     </a-form-item>
                     <a-form-item :label="$t('index.email')">
-                        <a-input :model="liaison.email" disabled />
+                        <a-input :value="liaison.email" disabled />
                     </a-form-item>
                     <a-form-item :label="$t('reportbb.ag')">
                         <a-input :value="selectedActivity.activityName" disabled  />
@@ -104,8 +104,8 @@
                             <li>{{ $t("reportbb.bi") }}</li>
                         </ul>
                         <a-radio-group v-model="form.receive">
-                            <a-radio :value="1">{{ $t("reportbb.bx") }}</a-radio>
-                            <a-radio :value="2">{{ $t("reportbb.bt") }}</a-radio>
+                            <a-radio value="CHEQUE">{{ $t("reportbb.bx") }}</a-radio>
+                            <a-radio value="TRANSFER">{{ $t("reportbb.bt") }}</a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                 </div>
@@ -219,10 +219,10 @@ export default {
             },
             step: 0,
             loading: false,
-            reportId: '',
             institutionName: '',
             liaison: {},
             selectedActivity: {},
+            update: false,
             form: {
                 customers: [{key: Date.now(), amount: '', cooperationWay: '', name: '', region: '', status: ''}],
                 summaryFiles: [],
@@ -237,11 +237,12 @@ export default {
                 makeCost: 0,
                 makeCostFiles: [],
                 stateAgree: false,
+                receive: ''
             },
         };
     },
     methods: {
-        initData: async function(recordId, reportId) {
+        initData: async function(recordId) {
             this.loading = true;
             const { data, code } = await Report.getEncourageAttendById(recordId);
             if(code === 200) {
@@ -254,21 +255,20 @@ export default {
                 };
                 this.liaison = data.liaison
             }
-            if(reportId) {
-                const res = await Report.getEncourageAttendReportById(reportId);
-                if(res.code === 200) {
-                    this.form = res.data
-                }
+            const res = await Report.getEncourageAttendReportById(recordId);
+            if(res.code === 200 && !!res.data.id) {
+                this.form = res.data
+                this.update = true
             }
             this.form.encourageAttendId = recordId;
             this.loading = false;
         },
         handleSubmit: async function() {
-            const { cardFiles, photoFiles } = this.form
-            if(cardFiles.length < 5 || photoFiles < 5){
-                this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
-                return 
-            }
+            // const { cardFiles, photoFiles } = this.form
+            // if(cardFiles.length < 5 || photoFiles < 5){
+            //     this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
+            //     return 
+            // }
             this.$refs.miecf.validate(async valid  => {
                 if (valid) {
                     this.loading = true
@@ -277,7 +277,7 @@ export default {
                     if(form.customers.length === 1 && !form.customers[0].region){
                         form.customers = []
                     }
-                    if(this.reportId) {
+                    if(this.update) {
                         res = await Report.updateEncourageAttendReport(form)
                     } else {
                         res = await Report.addEncourageAttendReport(form)
@@ -307,11 +307,7 @@ export default {
     },
     mounted(){
         const recordId = this.$crypto.decryption(unescape(this.$route.query.id));
-        const reportId = this.$route.query.reportId 
-            ? this.$crypto.decryption(unescape(this.$route.query.reportId))
-            : ''
-        this.reportId = reportId
-        this.initData(recordId, reportId)
+        this.initData(recordId)
     }
 };
 </script>

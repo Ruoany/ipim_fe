@@ -44,7 +44,7 @@
                         <a-input :value="liaison.phone" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('reportba.al')">
-                       <a-input />
+                       <a-input :value="selectedActivity.productServe" disabled/>
                     </a-form-model-item>
                 </div>
                 <div v-show="step===2">
@@ -130,10 +130,10 @@ export default {
     data() {
         return {
             step: 0,
-            reportId: '',
             loading: false,
             liaison: {},
             selectedActivity: {},
+            update: false,
             formatLayout: {
                 labelCol: { span: 24 },
                 wrapperCol: { span: 24 }
@@ -159,7 +159,7 @@ export default {
         ]),
     },
     methods: {
-        initData: async function(recordId, reportId) {
+        initData: async function(recordId) {
             this.loading = true;
             const { data, code } = await Report.getEncourageEnterpriseById(recordId);
             if(code === 200) {
@@ -168,14 +168,14 @@ export default {
                     activityName: data.activity.nameZh,
                     activityDate: `${data.activity.startTime} - ${data.activity.endTime}`,
                     activityPlace: data.activity.place,
-                    activityExpiry: data.activity.expiryTime
+                    activityExpiry: data.activity.expiryTime,
+                    productServe: data.productServe,
                 };
             }
-            if(reportId) {
-                const res = await Report.getEncourageEnterpriseReportById(reportId);
-                if(res.code === 200) {
-                    this.form = res.data
-                }
+            const res = await Report.getEncourageEnterpriseReportById(recordId);
+            if(res.code === 200 && !!res.data.id) {
+                this.form = res.data
+                this.update = true
             }
             this.form.encourageEnterpriseId = recordId;
             this.loading = false;
@@ -189,7 +189,7 @@ export default {
                 if (valid) {
                     this.loading = true
                     let res
-                    if(this.reportId) {
+                    if(this.update) {
                         res = await Report.updateEncourageEnterpriseReport(this.form)
                     } else {
                         res = await Report.addEncourageEnterpriseReport(this.form)
@@ -223,11 +223,7 @@ export default {
     },
     mounted(){
         const recordId = this.$crypto.decryption(unescape(this.$route.query.id));
-        const reportId = this.$route.query.reportId 
-            ? this.$crypto.decryption(unescape(this.$route.query.reportId))
-            : ''
-        this.reportId = reportId
-        this.initData(recordId, reportId)
+        this.initData(recordId)
     }
 };
 </script>

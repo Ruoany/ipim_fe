@@ -34,7 +34,7 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
-                    <a-button
+                    <!-- <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
@@ -47,7 +47,7 @@
                             })
                         "
                         >{{ $t("personal.report") }}</a-button
-                    >
+                    > -->
                     <a-button
                         type="link"
                         @click="
