@@ -1,24 +1,24 @@
 <template>
     <div class="all"> 
          <a-form-model-item :label="$t('reportbd.exhibitorsCount')" props="exTotalExhibitors">
-            <a-input-number v-model.number="form.exTotalExhibitors" style="width: 100%" />
+            <a-input-number v-model.number="editData.exTotalExhibitors" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.allParticipants')" props="exTotalMacaoParticipants">
-            <a-input-number v-model.number="form.exTotalMacaoParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.exTotalMacaoParticipants" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.overseasParticipants')" props="exTotalOverseasParticipants">
-            <a-input-number v-model.number="form.exTotalOverseasParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.exTotalOverseasParticipants" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.actualParticipation')" props="exParticipation">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.attachments"
+                :value.sync="editData.attachments_exParticipation"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-model-item>
         <a-form-model-item
-            v-for="(item, index) in form.activityJoins"
+            v-for="(item, index) in editData.activityJoins"
             :key="item.key"
             :label="index === 0 ? $t('reportbd.aj') : index === 1 ? $t('reportbd.ai') : $t('reportbd.ak')"
             :prop="'activityJoins.' + index"
@@ -30,10 +30,6 @@
                 <a-input-number v-model.number="item.watchingThePublic" style="width:24%;" :placeholder="$t('reportbd.ex')"/>
             </div>
         </a-form-model-item>
-        <a-form-model-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
-        </a-form-model-item>
     </div>
 </template>
 
@@ -41,57 +37,12 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
-    props:['attachments'],
-    data() {
-        return {
-            form: { 
-                exTotalExhibitors: "",
-                exTotalMacaoParticipants: "",
-                exTotalOverseasParticipants: "",
-                attachments:[],
-                activityJoins: [{
-                    type: "MACAO",
-                    exhibitorsBooth: "",
-                    exhibitors: "",
-                    professionalBuyer: "",
-                    watchingThePublic: "",
-                },{
-                    type: "OVERSEAS",
-                    exhibitorsBooth: "",
-                    exhibitors: "",
-                    professionalBuyer: "",
-                    watchingThePublic: "",
-                },{
-                    type: "TOTAL",
-                    exhibitorsBooth: "",
-                    exhibitors: "",
-                    professionalBuyer: "",
-                    watchingThePublic: "",
-                }]
-            },
-            openTime: [
-                {
-                    time: null,
-                    houser: null
-                }
-            ]
-        };
-    },
+    props:['editData'],
     methods: {
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'exParticipation'}))
-            this.$emit('next', this.form)
-        },
         // 更改上傳的文件
         uploadChange(info) {
-            this.form.attachments = info
+            this.editData.attachments = info
         },
-    },
-    mounted(){
-        this.form.attachments = this.attachments.filter(i => i.type === 'exParticipation')
     }
 };
 </script>

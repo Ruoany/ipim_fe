@@ -1,77 +1,41 @@
 <template>
     <div class="all">
         <a-form-item :label="$t('reportbd.conPerson1')">
-            <a-input :model="liaison.nameZh" disabled />
+            <a-input :value="liaison.nameZh" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.job')">
-            <a-input :model="liaison.titleNameZh" disabled />
+            <a-input :value="liaison.titleNameZh" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.tel')">
-            <a-input :model="liaison.tel" disabled />
+            <a-input :value="liaison.tel" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.phone')">
-            <a-input :model="liaison.abroadPhone" disabled />
+            <a-input :value="liaison.phone" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.email')">
-            <a-input :model="liaison.email" disabled />
+            <a-input :value="liaison.email" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.conPerson2')">
-            <a-input />
+            <a-input :value="liaisonSub.nameZh" disabled />
         </a-form-item>
-        <!-- <a-form-item :label="$t('reportbd.conPerson2')">
-            <a-select
-                v-model="form.liaisonId2"
-                showSearch
-                optionFilterProp="label"
-                :filterOption="true"
-            >
-                <a-select-option
-                    v-for="item in liaisonList"
-                    :key="item.id"
-                    :value="item.id"
-                    :label="`${item.nameZh}${item.nameEnOrPt}`"
-                    >{{ item.nameZh }}
-                    {{ item.nameEnOrPt }}</a-select-option
-                >
-            </a-select>
-        </a-form-item> -->
         <a-form-item :label="$t('reportbd.job')">
-            <a-input />
+            <a-input :value="liaisonSub.titleNameZh" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.tel')">
-            <a-input />
+            <a-input :value="liaisonSub.tel" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.phone')">
-            <a-input />
+            <a-input :value="liaisonSub.phone" disabled />
         </a-form-item>
         <a-form-item :label="$t('reportbd.email')">
-            <a-input />
-        </a-form-item>
-        <a-form-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
+            <a-input :value="liaisonSub.email" disabled />
         </a-form-item>
     </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
 export default {
-    // computed: {
-    //     ...mapGetters(["liaisonList"])
-    // },
-    props:['liaison'],
-    data() {
-        return {};
-    },
-    methods: {
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            this.$emit('next')
-        },
-    }
+    props:['liaison', 'liaisonSub'],
 };
 </script>
 

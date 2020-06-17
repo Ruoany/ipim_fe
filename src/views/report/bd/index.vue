@@ -14,26 +14,35 @@
         </a-steps>
         <a-spin :spinning="loading" class="form">
             <a-form-model class="form" ref="miecf" :form="form" v-bind="formItemLayout">
-                <note v-show="step === 0" @next="step++"></note>
-                <step1 v-show="step === 1" @pre="step--" @next="handleNext" @upload="uploadChange" :attachments="form.attachments" :institution="institution"></step1>
-                <step2 v-show="step === 2" @pre="step--" @next="handleNext" :liaison="liaison"></step2>
-                <step3 v-show="step === 3" @pre="step--" @next="handleNext" :attachments="form.attachments" :activity="activity"></step3>
-                <meeting-form v-show="step === 4" @pre="step--" @next="handleNext" :attachments="form.attachments" @upload="uploadChange"></meeting-form>
-                <show-form v-show="step === 5" @pre="step--" @next="handleNext" :attachments="form.attachments"></show-form>
-                <area-form v-show="step === 6" @pre="step--" @next="handleNext" :attachments="form.attachments"></area-form>
-                <area-display v-show="step === 7" @pre="step--" @next="handleNext"></area-display>
-                <service v-show="step === 8" @pre="step--" @next="handleNext" :attachments="form.attachments"></service>
+                <note v-show="step === 0" ></note>
+                <step1 v-show="step === 1" :institution="institution"></step1>
+                <step2 v-show="step === 2" :liaison="liaison" :liaisonSub="liaisonSub"></step2>
+                <step3 v-show="step === 3" :activity="activity" :editData="form"></step3>
+                <meeting-form v-show="step === 4" :editData="form"></meeting-form>
+                <show-form v-show="step === 5" :editData="form"></show-form>
+                <area-form v-show="step === 6" :editData="form"></area-form>
+                <area-display v-show="step === 7" :editData="form"></area-display>
+                <service v-show="step === 8" :editData="form"></service>
                 <div v-show="step === 9">
                     <a-form-model-item>
-                        {{$t('reportbd.gl')}}
-                        <a-input style="width:100px" :placeholder="$t('reportbd.gm')"/>
                         {{$t('reportbd.gn')}}
                     </a-form-model-item>
-                    <a-form-model-item>
-                        <a-button type="primary" @click="step--" style="margin-right:12px">上一步</a-button>
-                        <a-button type="primary" @click="handleSubmit">{{$t("reportbd.submit")}}</a-button>
-                    </a-form-model-item>
                 </div>
+                <a-form-model-item>
+                    <a-button type="primary" @click="step--" v-if="step >0">上一步</a-button>
+                    <a-button
+                        type="primary"
+                        style="margin-left:12px"
+                        @click="step++"
+                        v-if="step < 9"
+                    >下一步</a-button>
+                    <a-button
+                        type="primary"
+                        @click="handleSubmit"
+                        style="margin-left:12px"
+                        v-if="step === 9"
+                    >提交</a-button>
+                </a-form-model-item>
             </a-form-model>
         </a-spin>
     </div>
@@ -61,10 +70,97 @@ export default {
             step: 0,
             institution: {},
             liaison: {},
+            liaisonSub: {},
             activity: {},
             update: false,
             form: {
-                attachments: [],
+                attachments_activeSummary: [],
+                attachments_participant: [],
+                attachments_exParticipation: [],
+                attachments_meetingRooms: [],
+                attachments_invoicesFiles: [],
+                attachments_checklistFiles: [],
+                attachments_operatingFiles: [],
+                attachments_profiles: [],
+                attachments_plans: [],
+                attachments_certifies: [],
+                attachments_guestlList: [],
+                attachments_delegations: [],
+                attachments_activities: [],
+                attachments_materials: [],
+                attachments_others: [],
+                conventionDinings: [{ attendees: "", averagePrice: "", date: "", totalPrice: "", venue: "" }],
+                meetingRooms: [{ key: Date.now(), date: "", rooms: "" }],
+                totalSpeakers: "",
+                speakers: [
+                    { region: "GUANGDONG", total: "", totalRoomings: "", totalTransportations: "" },
+                    { region: "ASIAN", total: "", totalRoomings: "", totalTransportations: "" },
+                    { region: "OTHER", total: "", totalRoomings: "", totalTransportations: "" }
+                ],
+                headsOfDelegations: [
+                    { region: "GUANGDONG", total: "", totalRoomings: "", totalTransportations: ""},
+                    { region: "ASIAN", total: "", totalRoomings: "", totalTransportations: ""},
+                    { region: "OTHER", total: "", totalRoomings: "", totalTransportations: ""}
+                ],
+                totalDelegations: "",
+                totalNoDelegations: "",
+                totalHeadsOfDelegation: "",
+                promotionMarketingCost: "",
+                translationCost: "",
+                transportationCost: "",
+                pcocost: "",
+                openingCeremonyCost: "",
+                venueRental: "",
+                greenChannelCost: "",
+                welcomeActivitiesCost: "",
+                totalExhibitors: "",
+                totalMacaoParticipants: "",
+                totalOverseasParticipants: "",
+                exTotalExhibitors: "",
+                exTotalMacaoParticipants: "",
+                exTotalOverseasParticipants: "",
+                activityJoins: [
+                    { type: "MACAO", exhibitorsBooth: "", exhibitors: "", professionalBuyer: "", watchingThePublic: "" },
+                    { type: "OVERSEAS", exhibitorsBooth: "", exhibitors: "", professionalBuyer: "", watchingThePublic: "" },
+                    { type: "TOTAL", exhibitorsBooth: "", exhibitors: "", professionalBuyer: "", watchingThePublic: "" }
+                ],
+                exVenueRental: "",
+                exSpaceRented: "",
+                exMeetingRooms: [{ key: Date.now(), date: "", rooms: "" }],
+                exMeetingHotels: [
+                    {level: "STAR5",rooms: "",specify: "" },
+                    {level: "STAR4",rooms: "",specify: "" },
+                    {level: "STAR3",rooms: "",specify: "" },
+                    {level: "OTHER",rooms: "",specify: "" }
+                ],
+                totalQualifiedBuyers: "",
+                qualifiedBuyers: [
+                    {region: "GUANGDONG",total: "",totalRoomings: "",totalTransportations: "" },
+                    {region: "ASIAN",total: "",totalRoomings: "",totalTransportations: "" },
+                    {region: "OTHER",total: "",totalRoomings: "",totalTransportations: "" }
+                ],
+                exTotalRooms: "",
+                hardwareCost: "",
+                exPromotionMarketingCost: "",
+                exTranslationCost: "",
+                exTransportationCost: "",
+                logisticsCost: "",
+                exOpeningCeremonyCost: "",
+                exGreenChannelCost: "",
+                exWelcomeActivitiesCost: "",
+                serviceProviders: [{ key: Date.now(), description: "", amount: "" }],
+                govSupports: [],
+                invoicesFiles: [],
+                checklistFiles: [],
+                operatingFiles: [],
+                profiles: [],
+                plans: [],
+                certifies: [],
+                guestlList: [],
+                delegations: [],
+                activities: [],
+                materials: [],
+                others: []
             }
         };
     },
@@ -75,44 +171,62 @@ export default {
             if(code === 200) {
                 this.institution = {
                     ...data.institution, 
+                    address: data.address,
+                    city: data.city,
+                    country: data.country,
+                    email: data.email,
+                    fax: data.fax,
+                    phone: data.phone,
+                    website: data.web,
+                    relatedFiles: data.relatedFiles,
                     applicantType: data.applicantType,
                     applicantTypeDescription: data.applicantTypeDescription,
                 }
                 this.liaison = data.liaison
+                this.liaisonSub = data.liaisonSub
                 this.activity = {
                     ...data.activity,
+                    conventionType: data.conventionType,
                     date: `${data.activity.startTime} - ${data.activity.endTime}`,
                 };
             }
             const res = await Report.getEncourageConventionReportById(recordId);
             if(res.code === 200 && res.data) {
-                this.form = res.data
+                const from = res.data
+                if(from.attachments && !!from.attachments.length) {
+                    from.attachments.forEach(i => {
+                        from[i.type] ? from[i.type].push(i) : (from[i.type] = [i])
+                    })
+                    from.attachments = []
+                }
+                this.form = from
                 this.update = true
             }
             this.form.encourageConventionId = recordId;
             this.loading = false;
         },
         async  handleSubmit() {
-            // this.$refs.miecf.validate(async valid  => {
-                
-                // if (valid) {
-                    this.loading = true
-                    let res
-                    if(this.update) {
-                        res = await Report.updateEncourageConventionReport(this.form)
-                    } else {
-                        res = await Report.addEncourageConventionReport(this.form)
-                    }
-                    console.log(111, this.form);
-                    
-                    this.loading = false
-                    if(res.code === 200) {
-                        this.$router.go(-1)
-                    }
-            //     } else {
-            //         this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
-            //     }
-            // });
+            const form = this.form
+            form.exMeetingRooms = form.exMeetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
+            form.attachments = []
+            const fileKeys = Object.keys(form).filter(i => i.startsWith('attachments_'))
+            fileKeys.forEach(i => {
+                form[i] = form[i].map(j => ({...j, type: i}))
+                form.attachments.push(...form[i])
+                delete form[i]
+            })
+            this.loading = true
+            let res
+            if(this.update) {
+                res = await Report.updateEncourageConventionReport(form)
+            } else {
+                res = await Report.addEncourageConventionReport(form)
+            }
+            
+            this.loading = false
+            if(res.code === 200) {
+                this.$router.go(-1)
+            }
         },
         handleNext(subForm){
             this.step ++
