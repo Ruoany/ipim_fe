@@ -35,13 +35,20 @@
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
                     <a-button type="link" @click="ExportPDF(item.code, item.type)">导出PDF</a-button>
-                 <!-- <a-button
+                    <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
+                        @click="
+                            NavigateTo('/report/index', {
+                                id: item.id,
+                                reportType: item.type,
+                                reportId: item.report ? item.report.id : '',
+                            })
+                        "
                         >{{ $t("personal.report") }}</a-button
-                    > -->
+                    >
                     <a-button
                         type="link"
                         @click="
@@ -69,7 +76,9 @@
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
-                                method: 'GENERAL_EXHIBITION'
+                                method: item.method,
+                                type: item.type,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{
@@ -92,7 +101,8 @@
                                 activityId: item.activity.id,
                                 liaisonId: item.liaisonId,
                                 institutionId: item.institution.id,
-                                applyPictureId: item.applyPictureId
+                                applyPictureId: item.applyPictureId,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{
