@@ -28,7 +28,7 @@
                     <a-form-model-item :label="$t('attend.af')">
                         <a-input
                             :value="
-                                `${currentInstitution.nameZh}/${currentInstitution.namePt}/${currentInstitution.nameEn}`
+                                `${currentInstitution.nameZh} ${currentInstitution.namePt} ${currentInstitution.nameEn}`
                             "
                             disabled
                         />
@@ -167,13 +167,17 @@
                         <a-input v-model="form.area" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.ay')">
-                        <a-input v-model="form.money" :disabled="isCheck" />
+                        <a-input v-model="form.money" :disabled="isCheck">
+                            <span slot="suffix">MOP</span>
+                        </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.az')">
                         <a-input
                             v-model="form.boothProductionFee"
                             :disabled="isCheck"
-                        />
+                        >
+                            <span slot="suffix">MOP</span>
+                        </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.ba')">
                         <upload
@@ -362,6 +366,7 @@ export default {
             this.$warning({
                 title: "提示",
                 content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
+                okText: "知道了",
                 onOk: () => {
                     this.$router.push("/personal/info");
                 }

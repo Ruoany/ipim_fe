@@ -55,11 +55,16 @@
                 >
             </a-sub-menu>
             <a-sub-menu :disabled="encourageDis">
-                <span
-                    slot="title"
-                    class="flex center"
-                    :title="encourageDis ? $t('menu.tips') : ''"
-                >
+                <a-tooltip v-if="encourageDis" slot="title" placement="bottom">
+                    <template slot="title">
+                        <span>{{ $t("menu.tips") }}</span>
+                    </template>
+                    <span class="flex center">
+                        {{ $t("menu.finEnc") }}
+                        <i class="iconfont iconjiantouarrow486 selected"></i>
+                    </span>
+                </a-tooltip>
+                <span v-else slot="title" class="flex center">
                     {{ $t("menu.finEnc") }}
                     <i class="iconfont iconjiantouarrow486 selected"></i>
                 </span>

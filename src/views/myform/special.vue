@@ -27,9 +27,13 @@
                         <li>{{ $t("util.step4") }}</li>
                         <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{
-                        $t("util.download")
-                    }}</a-button>
+                    <a-button
+                        type="primary"
+                        size="large"
+                        @click="downloadExcel"
+                        :loading="download"
+                        >{{ $t("util.download") }}</a-button
+                    >
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -47,6 +51,9 @@ import FormEnterprise from "./ENTERPRISE/index";
 import FormConvention from "./CONVENTION/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
+import EA from "@/apis/encourageAttend";
+import EE from "@/apis/encourageEnterprise";
+import EC from "@/apis/encourageConvention";
 
 export default {
     components: {
@@ -58,13 +65,14 @@ export default {
         FormBf
     },
     computed: {
-        ...mapGetters(["liaisonList", "currentInstitution"])
+        ...mapGetters(["currentInstitution"])
     },
     data() {
         return {
             form: "",
             tabActive: "1",
             loading: false,
+            download: false,
             activityList: []
         };
     },
@@ -85,6 +93,35 @@ export default {
         GetActivityList: async function() {
             const { data } = await Activity.all({ activityScope: "ENCOURAGE" });
             this.activityList = data ? data : [];
+        },
+        downloadExcel: async function() {
+            this.download = true;
+            let result = {};
+            let type = "";
+            switch (this.form) {
+                case "ATTEND": {
+                    result = await EA.download();
+                    type = "application/msword";
+                    break;
+                }
+                case "ENTERPRISE": {
+                    result = await EE.download();
+                    type = "application/msword";
+                    break;
+                }
+                case "CONVENTION": {
+                    result = await EC.download();
+                    type = "application/pdf";
+                    break;
+                }
+            }
+            const blob = new Blob([result], { type });
+            const a = document.createElement("a");
+            a.download = this.form;
+            a.target = "blank";
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            this.download = false;
         }
     },
     mounted: function() {

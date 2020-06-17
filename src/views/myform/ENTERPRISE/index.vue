@@ -337,6 +337,12 @@
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.cc')">
+                        <upload-file
+                            :value.sync="form.companyProfile"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.cd')">
                         <upload-file
                             :value.sync="form.exhibitData"
@@ -484,7 +490,8 @@ export default {
                 noOwing: [],
                 identityForm: [],
                 taxationBills: [],
-                noSubmit: []
+                noSubmit: [],
+                companyProfile: []
             }
         };
     },
@@ -556,6 +563,7 @@ export default {
             this.$warning({
                 title: "提示",
                 content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
+                okText: "知道了",
                 onOk: () => {
                     this.$router.push("/personal/info");
                 }

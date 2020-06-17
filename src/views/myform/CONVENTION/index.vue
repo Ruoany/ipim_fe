@@ -186,11 +186,13 @@
                             }}</a-radio>
 						</a-radio-group>
 					</a-form-model-item>
-					<ul>
-						<li>{{ $t("convention.fa") }}</li>
-						<li>{{ $t("convention.fb") }}</li>
-						<li>{{ $t("convention.fc") }}</li>
-					</ul>
+					<a-form-model-item>
+                        <ul>
+                            <li>{{ $t("convention.fa") }}</li>
+                            <li>{{ $t("convention.fb") }}</li>
+                            <li>{{ $t("convention.fc") }}</li>
+					    </ul>
+                    </a-form-model-item>
 				</div>
 				<div v-show="stepCurrent === 4">
 					<div v-show="form.conventionType === 'GENERAL_MEET' || form.conventionType === 'INT_MEET' || form.conventionType === 'MEET_EXHIBIT'">
@@ -995,6 +997,7 @@ export default {
             this.$warning({
                 title: "提示",
                 content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
+                okText: "知道了",
                 onOk: () => {
                     this.$router.push("/personal/info");
                 }
