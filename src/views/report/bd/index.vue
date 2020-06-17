@@ -85,7 +85,7 @@ export default {
                 };
             }
             const res = await Report.getEncourageConventionReportById(recordId);
-            if(res.code === 200 && !!res.data.id) {
+            if(res.code === 200 && res.data) {
                 this.form = res.data
                 this.update = true
             }
