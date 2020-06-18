@@ -91,7 +91,10 @@ export default {
             this.loading = false;
         },
         GetActivityList: async function() {
-            const { data } = await Activity.all({ activityScope: "ENCOURAGE" });
+            const { data } = await Activity.all({
+                activityScope: "ENCOURAGE",
+                status: "PUBLISH"
+            });
             this.activityList = data ? data : [];
         },
         downloadExcel: async function() {

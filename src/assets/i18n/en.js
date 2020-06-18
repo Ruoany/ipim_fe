@@ -13,7 +13,7 @@ import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
 
-const zhData = {
+const enData = {
     menu: {
         signUp: "參與本局主辦之展會",
         aa: "個別形式參展",
