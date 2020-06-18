@@ -227,8 +227,8 @@
 							<div v-for="(item,index) in form.meetingDates" :key='index' class="item">
 								<a-date-picker v-model="item.date" valueFormat="YYYY-MM-DD" style="width:70%;" :disabled="isCheck"/>
 								<a-input style='width:20%;' v-model="item.hours" :placeholder="$t('convention.ee')" :disabled="isCheck" />
-								<a-button v-if="index === 0" type='primary' icon="plus" shape="circle" @click="form.meeting.push({date:'',hours:''})" :disabled="isCheck"></a-button>
-								<a-button v-else icon="minus" shape="circle" @click="form.meeting.splice(index,1)" :disabled="isCheck"></a-button>
+								<a-button v-if="index === 0" type='primary' icon="plus" shape="circle" @click="form.meetingDates.push({date:'',hours:''})" :disabled="isCheck"></a-button>
+								<a-button v-else icon="minus" shape="circle" @click="form.meetingDates.splice(index,1)" :disabled="isCheck"></a-button>
 							</div>
 						</a-form-model-item>
 						<a-form-model-item :label="$t('convention.func')">
