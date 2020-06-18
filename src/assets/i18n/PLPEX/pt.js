@@ -1,17 +1,17 @@
-import mission from "./MISSION/zh";
-import participate from "./PARTICIPATE/zh";
-import attend from "./ATTEND/zh";
-import formbb from "./bb/zh";
-import enterprise from "./ENTERPRISE/zh";
-import formbe from "./be/zh";
-import formbf from "./bf/zh";
-import convention from "./CONVENTION/zh";
-import miecf from "./MIECF/zh";
-import mif from "./MIF/zh";
-import plpex from "./PLPEX/zh";
-import iiicf from "./IIICF/zh";
-import mfe from "./MFE/zh";
-import gmbpf from "./GMBPF/zh";
+import mission from "./MISSION/pt";
+import participate from "./PARTICIPATE/pt";
+import attend from "./ATTEND/pt";
+import formbb from "./bb/pt";
+import enterprise from "./ENTERPRISE/pt";
+import formbe from "./be/pt";
+import formbf from "./bf/pt";
+import convention from "./CONVENTION/pt";
+import miecf from "./MIECF/pt";
+import mif from "./MIF/pt";
+import plpex from "./PLPEX/pt";
+import iiicf from "./IIICF/pt";
+import mfe from "./MFE/pt";
+import gmbpf from "./GMBPF/pt";
 
 const zhData = {
     menu: {
@@ -22,18 +22,20 @@ const zhData = {
         ba: "參展",
         bb: "參加代表團",
         finEnc: "支持及鼓勵措施",
-        ca: "非牟利社團赴境外展會設立展位",
+        ca: "非牟利社團赴境外展會設置展位",
         cb: "非牟利社團組織代表團參與境外展會",
         cc: "企業參與本地/境外展會",
         cd: "會議及展覽資助計劃",
         ce: "會展專業人才培訓支援計劃",
         cf: "會展及商務旅遊展支持計劃",
+        ce: "電子商務推廣（應用 B2C 平台）鼓勵措施",
+        ci: "電子商務推廣鼓勵措施申請表格",
         plan: "會議及展覽資助計劃",
         lan: "語言",
         personal: "個人中心",
         perInfo: "個人信息",
         inIn: "機構信息",
-        exEr: "參會/參團記錄",
+        exEr: "申請記錄",
         funding: "資助與財務鼓勵",
         acSe: "賬號設置",
         miecf: "澳門國際環保合作發展論壇及展覽",
@@ -43,6 +45,8 @@ const zhData = {
         mif: "澳門國際貿易投資展覽會",
         plpex: "葡語國家產品及服務展",
         logout: "退出登錄",
+        downloadPersonal: "下載中心",
+        tips: "請先完成機構認證",
     },
     index: {
         evCa: "展會日曆",
@@ -63,8 +67,8 @@ const zhData = {
         ofWe: "官方網站",
         acAd: "展會地址",
         acTime: "展會日期",
-        info: "展會信息",
-        coPe: "展會聯絡人",
+        info: "展會簡介",
+        coPe: "聯絡資料",
         organizer: "主辦/協辦單位",
         shop: "展會商戶",
         photo: "展會相冊",
@@ -76,10 +80,13 @@ const zhData = {
         lady: "女士",
         organizers: "主辦單位",
         helpers: "協辦單位",
-        method: "參展方式",
+        method: "申請參加活動",
         join: "參展",
         write: "填寫申請表",
         deadline: "截止報名",
+        money: "參展費用",
+        new: "新聞中心",
+        code: "申請碼",
     },
     util: {
         yes: "是",
@@ -94,23 +101,27 @@ const zhData = {
         step3: "第三步：以手寫的方式填寫表格",
         step4: "第四步：表格蓋章",
         step5: "第五步：把表格正本遞交給貿促局工作人員",
-        download: "下載附件",
+        download: "下載表格",
         agree: "同意",
         disagree: "不同意",
         save: "保存",
+        cancel: "取消",
+        submit: "確認",
         name: "姓名",
         password: "密碼",
         upPassword: "修改密碼",
         SMS: "短訊",
         sex: "性別",
-        aphone: "本澳流动电话",
-        bphone: "國內流動電話",
+        aphone: "流動電話",
+        bphone: "電話2",
         address: "通訊地址",
         upData: "修改",
         nameZh: "姓名（中文）",
         nameEnAndPt: "姓名（英/葡文）",
         companyName: "企業名稱",
         liaisonName: "聯絡人名稱",
+        nodata: "暫無數據",
+        noquetions: "暫無問卷",
     },
     personal: {
         a: "選擇以電郵 / 手機短訊接收本局消息？",
@@ -139,12 +150,12 @@ const zhData = {
         ad: "子賬號管理",
         ae: "新增子賬號",
         af: "綁定子賬號",
-        ag: "請輸入員工個人信息的ID號",
+        ag: "請輸入員工登錄時填寫的賬號",
         ah: "認證本機構",
         ai: "職位（英/葡文）",
         aj: "商業登記證明副本（三個月內有效）",
         ak: "營業稅-最初開業M/1或更改申請表M/1副本",
-        al: "萱業稅-徵稅憑單M/8副本(最近一年)註1",
+        al: "營業稅-徵稅憑單M/8副本(最近一年)註1",
         am: "50%股東為澳門居民/全資澳門企業擁有之證明",
         an: "團體設立之澳門政府公報副本",
         ao: "身份證明局發出之登記證明書副本",
@@ -159,10 +170,10 @@ const zhData = {
         ay: "納稅人名稱",
         az: "機構認證",
         logo: "機構LOGO",
-        meNameZh: "機構名稱（中文）",
+        meNameZh: "機構名稱",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
-        update: "修改申請",
+        update: "修改申請表",
         showForm: "查看申請表",
         question: "調查問卷",
         writeQuestion: "填寫問卷",
@@ -175,7 +186,7 @@ const zhData = {
         upload: "展會圖片",
         tips1: "您可上傳最多4張格式為jpg、jpeg、png的展會圖片，每張圖片大小不超過5M",
         submit: "提交",
-        userId: "用戶ID",
+        userId: "電郵",
         meType: "機構性質",
         approving: "待審批",
         passed: "獲批",
@@ -188,6 +199,13 @@ const zhData = {
         verifing: "認證中",
         unverified: "未認證",
         verifiedFail: "認證失敗",
+        shareName: "股東名稱",
+        sharePer: "股東股份",
+        report: "展後報告",
+        delete: "刪除",
+        name: "名稱",
+        contal: "操作",
+        finish: "已完成",
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",
@@ -216,6 +234,7 @@ const zhData = {
         getCode: "獲取驗證碼",
         set: "確認重置",
         return: "返回",
+        isAdmin: "是否為機構管理員",
     },
     miecf,
     mif,
@@ -231,6 +250,9 @@ const zhData = {
     formbe,
     formbf,
     convention,
+    downloadPersonal: {
+        all: "全部",
+    },
 };
 
-export default enData;
+export default ptData;

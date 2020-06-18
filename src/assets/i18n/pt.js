@@ -233,4 +233,4 @@ const zhData = {
     convention,
 };
 
-export default enData;
+export default zhData;
