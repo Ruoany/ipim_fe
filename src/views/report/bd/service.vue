@@ -1,7 +1,7 @@
 <template>
     <div class="all">
         <a-form-model-item
-            v-for="(room, index) in form.serviceProviders"
+            v-for="(room, index) in editData.serviceProviders"
             :key="room.key"
             :label="index === 0 ? $t('reportbd.ge') : ''"
             :prop="'serviceProviders.' + index + '.rooms'"
@@ -28,8 +28,8 @@
                     <a-icon 
                         type="minus"
                         class="cur"
-                        v-if="form.serviceProviders.length > 1"
-                        :disabled="form.serviceProviders.length === 1"
+                        v-if="editData.serviceProviders.length > 1"
+                        :disabled="editData.serviceProviders.length === 1"
                         @click="removeDomain(room)"
                     />
                 </a-col>
@@ -39,7 +39,7 @@
         <a-form-model-item :label="$t('reportbd.cl')">
             <a-row 
             :gutter="10" 
-            v-for="(item, index) in form.govSupports"
+            v-for="(item, index) in editData.govSupports"
             :key="item.key"
             :prop="'govSupports.' + index + '.rooms'">
                 <a-col :span="6">
@@ -69,8 +69,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="invoicesFiles"
-                        :value.sync="form.invoicesFiles"
+                        :value.sync="editData.attachments_invoicesFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -80,8 +79,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="checklistFiles"
-                        :value.sync="form.checklistFiles"
+                        :value.sync="editData.attachments_checklistFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -91,8 +89,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="operatingFiles"
-                        :value.sync="form.operatingFiles"
+                        :value.sync="editData.attachments_operatingFiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -102,8 +99,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="profiles"
-                        :value.sync="form.profiles"
+                        :value.sync="editData.attachments_profiles"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -113,8 +109,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="plans"
-                        :value.sync="form.plans"
+                        :value.sync="editData.attachments_plans"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -124,8 +119,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="certifies"
-                        :value.sync="form.certifies"
+                        :value.sync="editData.attachments_certifies"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -135,8 +129,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="guestlList"
-                        :value.sync="form.guestlList"
+                        :value.sync="editData.attachments_guestlList"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -146,8 +139,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="delegations"
-                        :value.sync="form.delegations"
+                        :value.sync="editData.attachments_delegations"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -157,8 +149,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="activities"
-                        :value.sync="form.activities"
+                        :value.sync="editData.attachments_activities"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -168,8 +159,7 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="materials"
-                        :value.sync="form.materials"
+                        :value.sync="editData.attachments_materials"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
@@ -179,17 +169,11 @@
                 <a-col>
                     <upload
                         type="image"
-                        name="others"
-                        :value.sync="form.others"
+                        :value.sync="editData.attachments_others"
                         @handleChange="uploadChange"
                     ></upload>
                 </a-col>
             </a-row>
-        </a-form-model-item>
-
-        <a-form-model-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
     </div>
 </template>
@@ -198,58 +182,29 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
-    data() {
-        return {
-            form: {
-                serviceProviders: [{ key: Date.now(), description: "", amount: "" }],
-                govSupports: [],
-                invoicesFiles: [],
-                checklistFiles: [],
-                operatingFiles: [],
-                profiles: [],
-                plans: [],
-                certifies: [],
-                guestlList: [],
-                delegations: [],
-                activities: [],
-                materials: [],
-                others: []
-            },
-        };
-    },
+    props:['editData'],
     methods:{
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            const {serviceProviders, govSupports, ...others} = this.form
-            const attachments = Object.keys(others).map(k => {
-                return others[k].map(i => ({...i, type: k}))
-            }).flat()
-            const form = { serviceProviders, govSupports, attachments }
-            this.$emit('next', form)
-        },
         removeDomain(item) {
-            let index = this.form.serviceProviders.indexOf(item);
+            let index = this.editData.serviceProviders.indexOf(item);
             if (index !== -1) {
-                this.form.serviceProviders.splice(index, 1);
+                this.editData.serviceProviders.splice(index, 1);
             }
         },
         addDomain() {
-            this.form.serviceProviders.push({ key: Date.now(), date: '', rooms: '' });
+            this.editData.serviceProviders.push({ key: Date.now(), date: '', rooms: '' });
         },
         removeGovSupports(item) {
-            let index = this.form.govSupports.indexOf(item);
+            let index = this.editData.govSupports.indexOf(item);
             if (index !== -1) {
-                this.form.govSupports.splice(index, 1);
+                this.editData.govSupports.splice(index, 1);
             }
         },
         addGovSupports() {
-            this.form.govSupports.push({ key: Date.now(), date: '', rooms: '' });
+            this.editData.govSupports.push({ key: Date.now(), date: '', rooms: '' });
         },
         // 更改上傳的文件
         uploadChange(info, type) {
-            this.form[type] = info
+            this.editData[type] = info
         },
     }
 };

@@ -16,19 +16,11 @@
             <div>{{ $t("reportbd.text6") }}</div>
             <div>{{ $t("reportbd.text7") }}</div>
         </a-form-item>
-        <a-form-item>
-            <a-button type="primary" @click="handleClick">下一步</a-button>
-        </a-form-item>
     </div>
 </template>
 
 <script>
 export default {
-    methods:{
-        handleClick(){
-            this.$emit('next')
-        }
-    }
 };
 </script>
 

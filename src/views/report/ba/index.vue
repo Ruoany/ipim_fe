@@ -63,8 +63,8 @@
                     <a-form-model-item :label="$t('enterprise.bp')" prop="advertCost" required>
                         <a-input-number v-model.number="form.advertCost" :min="0" style="width: 100%" />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.bq')" prop="totalAmount" required>
-                        <a-input-number v-model.number="form.totalAmount" :min="0" style="width: 100%" />
+                    <a-form-model-item :label="$t('enterprise.bq')" prop="totalAmount">
+                        <a-input-number :value="totalAmount" style="width: 100%" disabled/>
                     </a-form-model-item>
                 </div>
                 <div v-show="step===3">
@@ -147,16 +147,18 @@ export default {
                 makeCost: 0,
                 photoFiles: [],
                 stateAgree: true,
-                totalAmount: 0,
                 trafficCost: 0,
             },
             ...validate
         };
     },
-     computed: {
+    computed: {
         ...mapGetters([
             "currentInstitution",
         ]),
+        totalAmount(){
+            return this.form.exhibitRent + this.form.makeCost + this.form.leafletCost + this.form.trafficCost + this.form.advertCost
+        },
     },
     methods: {
         initData: async function(recordId) {
@@ -189,10 +191,11 @@ export default {
                 if (valid) {
                     this.loading = true
                     let res
+                    const form = { ...this.form, totalAmount: this.totalAmount }
                     if(this.update) {
-                        res = await Report.updateEncourageEnterpriseReport(this.form)
+                        res = await Report.updateEncourageEnterpriseReport(form)
                     } else {
-                        res = await Report.addEncourageEnterpriseReport(this.form)
+                        res = await Report.addEncourageEnterpriseReport(form)
                     }
                     this.loading = false
                     if(res.code === 200) {

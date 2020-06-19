@@ -1,7 +1,7 @@
 <template>
     <div class="all">
         <a-form-model-item
-            v-for="(room, index) in form.meetingRooms"
+            v-for="(room, index) in editData.meetingRooms"
             :key="room.key"
             :label="index === 0 ? $t('reportbd.ba') : ''"
             :prop="'meetingRooms.' + index + '.rooms'"
@@ -25,16 +25,18 @@
                     <a-icon 
                         type="minus"
                         class="cur"
-                        v-if="form.meetingRooms.length > 1"
-                        :disabled="form.meetingRooms.length === 1"
+                        v-if="editData.meetingRooms.length > 1"
+                        :disabled="editData.meetingRooms.length === 1"
                         @click="removeDomain(room)"
                     />
                 </a-col>
             </a-row>
+        </a-form-model-item>
+        <a-form-model-item props="attachments_meetingRooms">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.attachments"
+                :value.sync="editData.attachments_meetingRooms"
                 @handleChange="uploadChange"
             ></upload>
         </a-form-model-item>
@@ -44,7 +46,7 @@
                     {{ $t("reportbd.et") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-date-picker format="YYYY-MM-DD" v-model="form.conventionDinings[0].date" style="width:100%" :placeholder="$t('reportbd.bb')" />
+                    <a-date-picker format="YYYY-MM-DD" v-model="editData.conventionDinings[0].date" style="width:100%" :placeholder="$t('reportbd.bb')" />
                 </a-col>
             </a-row>
             <a-row>
@@ -52,7 +54,7 @@
                     {{ $t("reportbd.eu") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].attendees" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="editData.conventionDinings[0].attendees" />
                 </a-col>
             </a-row>
             <a-row>
@@ -60,7 +62,7 @@
                     {{ $t("reportbd.ey") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].totalPrice" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="editData.conventionDinings[0].totalPrice" />
                 </a-col>
             </a-row>
             <a-row>
@@ -68,7 +70,7 @@
                     {{ $t("reportbd.ez") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input-number :min="0" style="width:100%" v-model.number="form.conventionDinings[0].averagePrice" />
+                    <a-input-number :min="0" style="width:100%" v-model.number="editData.conventionDinings[0].averagePrice" />
                 </a-col>
             </a-row>
             <a-row>
@@ -76,16 +78,16 @@
                     {{ $t("reportbd.ev") }}
                 </a-col>
                 <a-col :span="19">
-                    <a-input v-model="form.conventionDinings[0].venue" />
+                    <a-input v-model="editData.conventionDinings[0].venue" />
                 </a-col>
             </a-row>
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.az')" props="totalSpeakers">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.totalSpeakers" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.totalSpeakers" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.fa')" props="speakers">
             <a-row 
-                v-for="(speaker, index) in form.speakers"
+                v-for="(speaker, index) in editData.speakers"
                 :gutter="10" 
                 :key="speaker.region"
             >
@@ -99,17 +101,17 @@
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.fe')" props="totalDelegations">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.totalDelegations" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.totalDelegations"  />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.ff')" props="totalNoDelegations">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.totalNoDelegations" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.totalNoDelegations" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.fg')" props="totalHeadsOfDelegation">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.totalHeadsOfDelegation" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.totalHeadsOfDelegation" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.fh')" props="headsOfDelegations">
             <a-row 
-                v-for="(speaker, index) in form.headsOfDelegations"
+                v-for="(speaker, index) in editData.headsOfDelegations"
                 :gutter="10" 
                 :key="speaker.region"
             >
@@ -123,40 +125,35 @@
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.fi')" props="promotionMarketingCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.promotionMarketingCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.promotionMarketingCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fj')" props="translationCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.translationCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.translationCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fk')" props="transportationCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.transportationCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.transportationCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fl')" props="pcocost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.pcocost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.pcocost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fm')" props="openingCeremonyCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.openingCeremonyCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.openingCeremonyCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fn')" props="venueRental">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.venueRental" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.venueRental" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fo')" props="greenChannelCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.greenChannelCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.greenChannelCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fp')" props="welcomeActivitiesCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.welcomeActivitiesCost" />
-        </a-form-model-item>
-
-        <a-form-model-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.welcomeActivitiesCost" />
         </a-form-model-item>
     </div>
 </template>
@@ -165,93 +162,21 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
-    props:['attachments'],
-    data() {
-        return {
-            form: {
-                conventionDinings: [{
-                    attendees: "",
-                    averagePrice: "",
-                    date: "",
-                    totalPrice: "",
-                    venue: ""
-                }],
-                meetingRooms: [{ key: Date.now(), date: "", rooms: "" }],
-                attachments: [],
-                totalSpeakers: "",
-                speakers: [{
-                    region: "GUANGDONG",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "ASIAN",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "OTHER",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                }],
-                headsOfDelegations: [{
-                    region: "GUANGDONG",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "ASIAN",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "OTHER",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                }],
-                totalDelegations: "",
-                totalNoDelegations: "",
-                totalHeadsOfDelegation: "",
-                promotionMarketingCost: "",
-                translationCost: "",
-                transportationCost: "",
-                pcocost: "",
-                openingCeremonyCost: "",
-                venueRental: "",
-                greenChannelCost: "",
-                welcomeActivitiesCost: "",
-            },
-        };
-    },
+    props:['editData'],
     methods:{
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            const form = this.form
-            form.attachments = form.attachments.map(i => ({ ...i, type: 'meetingRooms' }))
-            form.meetingRooms = form.meetingRooms.map(i => ({ ...i, date: i.date.valueOf()}))
-            form.conventionDinings = form.conventionDinings.map(i => ({ ...i, date: i.date.valueOf()}))
-            this.$emit('next', form)
-        },
         removeDomain(item) {
-            let index = this.form.meetingRooms.indexOf(item);
+            let index = this.editData.meetingRooms.indexOf(item);
             if (index !== -1) {
-                this.form.meetingRooms.splice(index, 1);
+                this.editData.meetingRooms.splice(index, 1);
             }
         },
         addDomain() {
-            this.form.meetingRooms.push({ key: Date.now(), date: '', rooms: '' });
+            this.editData.meetingRooms.push({ key: Date.now(), date: '', rooms: '' });
         },
         // 更改上傳的文件
         uploadChange(info) {
-            this.form.attachments = info
+            this.editData.attachments = info
         },
-    },
-    mounted(){
-        this.form.attachments = this.attachments.filter(i => i.type === 'meetingRooms')
     }
 };
 </script>
