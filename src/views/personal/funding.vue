@@ -245,8 +245,8 @@ export default {
             this.$router.push({ path, query });
         },
         ExportPDF: async function(code, type) {
-            if('ENTERPRISE' != type && 'CONVENTION' != type){
-                alert("提示: 目前仅支持033、034申请类型！");
+            if('ENTERPRISE' != type && 'CONVENTION' != type && 'ATTEND' != type){
+                alert("提示: 目前仅支持031, 033、034申请类型！");
                 return;
             }
 
