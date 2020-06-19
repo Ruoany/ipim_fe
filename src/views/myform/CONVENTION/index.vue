@@ -490,12 +490,12 @@
                                 class="item"
                             >
                                 <a-date-picker
-                                    v-model="form.date"
+                                    v-model="form.secondDate"
                                     valueFormat="YYYY-MM-DD"
                                     :disabled="isCheck"
                                 />
                                 <a-input
-                                    v-model="form.venue"
+                                    v-model="form.secondVenue"
                                     :placeholder="$t('convention.fd')"
                                     :disabled="isCheck"
                                 />
@@ -1973,7 +1973,9 @@ export default {
                         date: "",
                         rooms: ""
                     }
-                ]
+                ],
+				secondDate:"",
+				secondVenue:""
             }
         };
     },
