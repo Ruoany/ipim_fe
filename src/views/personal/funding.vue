@@ -34,7 +34,7 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
-                    <a-button type="link" @click="ExportPDF(item.code, item.type)">导出PDF</a-button>
+                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
