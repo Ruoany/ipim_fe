@@ -245,7 +245,7 @@
                     v-show="stepCurrent < 5"
                     type="primary"
                     :disabled="timeNext > 0"
-                    @click="stepCurrent++"
+                    @click="handleNext"
                 >
                     {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}</a-button
                 >
@@ -371,6 +371,12 @@ export default {
                     this.$router.push("/personal/info");
                 }
             });
+        },
+        //点击下一步
+        handleNext() {
+            this.stepCurrent++;
+            //滚回到顶部
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
         },
         handleSubmit() {
             this.$refs.attend.validate(async valid => {

@@ -425,7 +425,7 @@
                         v-show="stepCurrent < 8"
                         type="primary"
                         :disabled="timeNext > 0"
-                        @click="stepCurrent++"
+                        @click="handleNext"
                     >
                         {{
                             timeNext > 0 ? `(${timeNext}S)` : "下一步"
@@ -545,7 +545,7 @@ export default {
         }
     },
     methods: {
-        initData: async function() {
+        async initData() {
             if (this.formId) {
                 this.$store.dispatch("setChangeFalse");
                 const { data } = await EE.one(this.formId);
@@ -556,7 +556,7 @@ export default {
             }
         },
         //判斷機構是否已是認證機構
-        isCertified: function() {
+        isCertified() {
             this.$warning({
                 title: "提示",
                 content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
@@ -566,7 +566,13 @@ export default {
                 }
             });
         },
-        handleSubmit: function(e) {
+        //点击下一步
+        handleNext() {
+            this.stepCurrent++;
+            //滚回到顶部
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        },
+        handleSubmit(e) {
             this.$refs.enterprise.validate(async valid => {
                 if (valid) {
                     const { data } = await EE.create(this.form);
@@ -582,7 +588,7 @@ export default {
             });
         }
     },
-    mounted: function() {
+    mounted() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         if (!this.formId) this.$store.dispatch("setTimeNext");
         this.initData();
@@ -591,7 +597,7 @@ export default {
             if (this.encourageDis) this.isCertified();
         });
     },
-    destroyed: function() {
+    destroyed() {
         this.$store.dispatch("setChangeTrue");
     }
 };
