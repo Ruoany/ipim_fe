@@ -1,11 +1,13 @@
 <template>
-    <div id="app">
+    <a-config-provider id="app" :locale="locale">
         <router-view v-if="Authorization" />
         <a-back-top />
-    </div>
+    </a-config-provider>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import User from "@/apis/user";
 export default {
     provide: function() {
@@ -22,6 +24,9 @@ export default {
         return {
             Authorization: false
         };
+    },
+    computed: {
+        ...mapGetters(["locale"])
     },
     mounted: function() {
         this.$nextTick(async () => {
