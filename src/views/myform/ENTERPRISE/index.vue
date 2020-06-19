@@ -59,19 +59,16 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item
-                        prop="taxpayer"
-                        :label="$t('enterprise.aq')"
-                    >
-                        <a-input v-model="form.taxpayer" :disabled="isCheck" />
-                    </a-form-model-item>
-                    <a-form-model-item
-                        prop="taxpayerCode"
-                        :label="$t('enterprise.ar')"
-                    >
+                    <a-form-model-item :label="$t('enterprise.aq')">
                         <a-input
-                            v-model="form.taxpayerCode"
-                            :disabled="isCheck"
+                            v-model="currentInstitution.taxpayerName"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ar')">
+                        <a-input
+                            v-model="currentInstitution.taxpayerNo"
+                            disabled
                         />
                     </a-form-model-item>
                     <a-form-model-item
