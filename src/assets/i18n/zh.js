@@ -211,7 +211,7 @@ const zhData = {
         aa: "填寫方式一：在綫填寫展會報告",
     },
     login: {
-        title: "管理員登錄",
+        title: "帳戶登錄",
         account: "帳號",
         password: "密碼",
         confirm: "確認密碼",
