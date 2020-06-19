@@ -12,6 +12,7 @@ export default {
         fax: [config],
         email: [config],
         web: [config],
+        activityId: [config_select],
         liaisonId: [config_select],
     },
     formItemLayout: {

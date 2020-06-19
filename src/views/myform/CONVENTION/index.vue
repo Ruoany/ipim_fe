@@ -237,7 +237,10 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
-                    <a-form-model-item :label="$t('convention.officeNameZh')">
+                    <a-form-model-item
+                        prop="activityId"
+                        :label="$t('convention.officeNameZh')"
+                    >
                         <a-select v-model="form.activityId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in list"
@@ -377,7 +380,7 @@
                                 <a-input
                                     style="width:20%;"
                                     v-model="item.hours"
-                                    :placeholder="$t('convention.ee')"
+                                    :placeholder="$t('convention.gf')"
                                     :disabled="isCheck"
                                 />
                                 <a-button
@@ -417,7 +420,7 @@
                                 <a-input
                                     style="width:20%;"
                                     v-model="item.hours"
-                                    :placeholder="$t('convention.ee')"
+                                    :placeholder="$t('convention.gf')"
                                     :disabled="isCheck"
                                 />
                                 <a-button
