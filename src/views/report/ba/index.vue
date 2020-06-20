@@ -207,21 +207,8 @@ export default {
             });
         },
         //上傳的文件
-        uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.photoFiles.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+        uploadChange(list) {
+            this.form.photoFiles = list
         },
     },
     mounted(){

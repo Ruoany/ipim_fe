@@ -31,7 +31,7 @@
           <a-input :value="currentInstitution.namePt" disabled />
         </a-form-item>
         <a-form-item :label="$t('formbf.aq')">
-          <a-input :value="currentInstitution.street" disabled />
+          <a-input :value="currentInstitution.streetZh" disabled />
         </a-form-item>
         <a-form-item :label="$t('formbf.bw')">
           <a-input :value="currentInstitution.siteRegistrationCode" disabled />
