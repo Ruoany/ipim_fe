@@ -1826,9 +1826,9 @@ export default {
                 buildPrice: "",
                 exhibitionPrice: "",
                 apartPrice: "",
-                buildTotalPrice: this.$t("convention.cg"),
-                exhibitionTotalPrice: this.$t("convention.cg"),
-                apartTotalPrice: this.$t("convention.cg"),
+                buildTotalPrice: "",
+                exhibitionTotalPrice: "",
+                apartTotalPrice: "",
                 exAccommodationSupport: false,
                 exMeetingRooms: [
                     {

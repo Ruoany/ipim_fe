@@ -172,7 +172,13 @@
                         <a-input v-model="form.advertCost" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bq')">
-                        <a-input v-model="form.totalAmount" disabled></a-input>
+                        <a-input
+                            v-model="form.totalAmount"
+                            :placeholder="$t('enterprise.cp')"
+                            disabled
+                        >
+                            <span slot="suffix">MOP</span>
+                        </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.br')">
                         <a-radio-group v-model="form.haveGovernment" :disabled="isCheck">
@@ -337,7 +343,7 @@ export default {
                 trafficCost: "",
                 leafletCost: "",
                 advertCost: "",
-                totalAmount: this.$t("enterprise.cp"),
+                totalAmount: "",
                 liaisonOtherAddress: "",
                 haveGovernment: false,
                 stateAgree: true,
