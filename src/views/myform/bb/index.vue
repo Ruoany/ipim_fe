@@ -223,65 +223,112 @@
                     <a-checkbox :checked="form.haveTranOther" ref="haveTranOther" @change="onCheckboxChange('haveTranOther')">
                         {{ $t('formbb.ca') }}
                     </a-checkbox>
-                    <a-input :value.sync="form.tranOtherNote" style="width: 30%" :disabled="!form.haveTranOther"/>
-                </a-form-model-item>
-                <a-form-model-item v-show="form.haveAirTicket" :label="$t('formbb.bx')+$t('formbb.cc')">
-                    <a-input :value.sync="form.airTicketNum" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item v-show="form.haveAirTicket" :label="$t('formbb.bx')+$t('formbb.cd')">
-                    <a-input :value.sync="form.airTicketFee" :disabled="isCheck"/>
+                    <a-input v-model="form.tranOtherNote" style="width: 30%" :disabled="!form.haveTranOther"/>
                 </a-form-model-item>
                 
-                <a-form-model-item v-show="form.haveBoatTicket" :label="$t('formbb.by')+$t('formbb.cc')">
-                    <a-input :value.sync="form.boatTicketNum" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item v-show="form.haveBoatTicket" :label="$t('formbb.by')+$t('formbb.cd')">
-                    <a-input :value.sync="form.boatTicketFee" :disabled="isCheck"/>
-                </a-form-model-item>
-
-                <a-form-model-item v-show="form.haveRailTicket" :label="$t('formbb.bz')+$t('formbb.cc')">
-                    <a-input :value.sync="form.railTicketNum" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item v-show="form.haveRailTicket" :label="$t('formbb.bz')+$t('formbb.cd')">
-                    <a-input :value.sync="form.railTicketFee" :disabled="isCheck"/>
-                </a-form-model-item>
-
-                <a-form-model-item v-show="form.haveTranOther" :label="$t('formbb.ca')+$t('formbb.cc')">
-                    <a-input :value.sync="form.tranOtherNum" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item v-show="form.haveTranOther" :label="$t('formbb.ca')+$t('formbb.cd')">
-                    <a-input :value.sync="form.tranOtherFee" :disabled="isCheck"/>
-                </a-form-model-item>
-
-                <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cl')">
-                    <a-input :value.sync="form.hotelName1" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cc')">
-                    <a-input :value.sync="form.hotelNum1" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cd')">
-                    <a-input :value.sync="form.hotelFee1" :disabled="isCheck"/>
-                </a-form-model-item>
+                <a-row  v-if="form.haveAirTicket" type="flex">
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.bx')+$t('formbb.cc')">
+                            <a-input v-model="form.airTicketNum" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.bx')+$t('formbb.cd')">
+                            <a-input v-model="form.airTicketFee" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
                 
-                <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cl')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelName2" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cc')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelNum2" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cd')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelFee2" :disabled="isCheck"/>
-                </a-form-model-item>
+                <a-row v-if="form.haveBoatTicket" type="flex">
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.by')+$t('formbb.cc')">
+                            <a-input v-model="form.boatTicketNum" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.by')+$t('formbb.cd')">
+                            <a-input v-model="form.boatTicketFee" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
                 
-                <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cl')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelName3" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cc')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelNum3" :disabled="isCheck"/>
-                </a-form-model-item>
-                <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cd')+$t('formbb.cm')">
-                    <a-input :value.sync="form.hotelFee3" :disabled="isCheck"/>
-                </a-form-model-item>
+                <a-row v-if="form.haveRailTicket" type="flex">
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.bz')+$t('formbb.cc')">
+                            <a-input v-model="form.railTicketNum" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.bz')+$t('formbb.cd')">
+                            <a-input v-model="form.railTicketFee" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
+                
+                <a-row v-if="form.haveTranOther" type="flex">
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.ca')+$t('formbb.cc')">
+                            <a-input v-model="form.tranOtherNum" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="12">
+                        <a-form-model-item :label="$t('formbb.ca')+$t('formbb.cd')">
+                            <a-input v-model="form.tranOtherFee" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
+                
+                <a-row type="flex">
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cl')">
+                            <a-input v-model="form.hotelName1" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cc')">
+                            <a-input v-model="form.hotelNum1" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cf')+$t('formbb.cd')">
+                            <a-input v-model="form.hotelFee1" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
+                <a-row type="flex">
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cl')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelName2" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cc')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelNum2" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.cg')+$t('formbb.cd')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelFee2" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
+                <a-row type="flex">
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cl')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelName3" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cc')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelNum3" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                    <a-col :span="8">
+                        <a-form-model-item :label="$t('formbb.ch')+$t('formbb.cd')+$t('formbb.cm')">
+                            <a-input v-model="form.hotelFee3" :disabled="isCheck"/>
+                        </a-form-model-item>
+                    </a-col>
+                </a-row>
                 <a-form-model-item >
                     <a-checkbox :checked="form.haveTransportationCost" ref="haveTransportationCost" @change="onCheckboxChange('haveTransportationCost')">
                         {{ $t('formbb.cn') + $t('formbb.cj') }}
@@ -464,7 +511,6 @@ export default {
         },
         onCheckboxChange(n) {
             this.$set(this.form, n, !this.form[n]);
-            // this.form[n] = !this.form[n]
         },
         onAttendTypeChange(e) {
             this.form.isAttendExhibition = e.target.value == "a";
