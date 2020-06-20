@@ -9,12 +9,7 @@
             <a-step :title="$t('attend.be')" disabled />
         </a-steps>
         <a-spin :spinning="loading" class="form">
-            <a-form-model
-                ref="attend"
-                :model="form"
-                :rules="rules"
-                v-bind="formatLayout"
-            >
+            <a-form-model ref="attend" :model="form" :rules="rules" v-bind="formatLayout">
                 <div v-show="stepCurrent === 0">
                     <a-form-item>
                         <ul>
@@ -28,60 +23,37 @@
                     <a-form-model-item :label="$t('attend.af')">
                         <a-input
                             :value="
-                                `${currentInstitution.nameZh} ${currentInstitution.namePt} ${currentInstitution.nameEn}`
+                                `${currentInstitution.nameZh} ${currentInstitution.namePt?currentInstitution.namePt:''} ${currentInstitution.nameEn?currentInstitution.nameEn:''}`
                             "
                             disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="newspapers"
-                        :label="$t('attend.ag')"
-                    >
-                        <upload
-                            :value.sync="form.newspapers"
-                            :disabled="isCheck"
-                        />
+                    <a-form-model-item prop="newspapers" :label="$t('attend.ag')">
+                        <upload :value.sync="form.newspapers" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="registration"
-                        :label="$t('attend.ah')"
-                    >
-                        <upload
-                            :value.sync="form.registration"
-                            :disabled="isCheck"
-                        />
+                    <a-form-model-item prop="registration" :label="$t('attend.ah')">
+                        <upload :value.sync="form.registration" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="identification"
-                        :label="$t('attend.ai')"
-                    >
-                        <upload
-                            :value.sync="form.identification"
-                            :disabled="isCheck"
-                        />
+                    <a-form-model-item prop="identification" :label="$t('attend.ai')">
+                        <upload :value.sync="form.identification" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item
-                        prop="liaisonId"
-                        :label="$t('attend.ak')"
-                    >
+                    <a-form-model-item prop="liaisonId" :label="$t('attend.ak')">
                         <a-select v-model="form.liaisonId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in liaisonList"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }}
-                                {{ item.nameEnOrPt }}</a-select-option
                             >
+                                {{ item.nameZh }}
+                                {{ item.nameEnOrPt }}
+                            </a-select-option>
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.al')">
-                        <a-input
-                            :value="selectedLiaison.titleNameZh"
-                            disabled
-                        />
+                        <a-input :value="selectedLiaison.titleNameZh" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.am')">
                         <a-input :value="selectedLiaison.phone" disabled />
@@ -97,18 +69,14 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
-                    <a-form-model-item
-                        prop="activityId"
-                        :label="$t('attend.ar')"
-                    >
+                    <a-form-model-item prop="activityId" :label="$t('attend.ar')">
                         <a-select v-model="form.activityId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in list"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="item.nameZh"
-                                >{{ item.nameZh }}</a-select-option
-                            >
+                            >{{ item.nameZh }}</a-select-option>
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.as')">
@@ -122,39 +90,24 @@
                             disabled
                         />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="activityIntroduction"
-                        :label="$t('attend.au')"
-                    >
+                    <a-form-model-item prop="activityIntroduction" :label="$t('attend.au')">
                         <a-textarea
                             v-model="form.activityIntroduction"
                             :auto-size="{ minRows: 4, maxRows: 4 }"
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="activityFiles"
-                        :label="$t('attend.bm')"
-                    >
-                        <upload
-                            :value.sync="form.activityFiles"
-                            :disabled="isCheck"
-                        />
+                    <a-form-model-item prop="activityFiles" :label="$t('attend.bm')">
+                        <upload :value.sync="form.activityFiles" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="objective"
-                        :label="$t('attend.av')"
-                    >
+                    <a-form-model-item prop="objective" :label="$t('attend.av')">
                         <a-textarea
                             v-model="form.objective"
                             :auto-size="{ minRows: 4, maxRows: 4 }"
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="expectedResults"
-                        :label="$t('attend.aw')"
-                    >
+                    <a-form-model-item prop="expectedResults" :label="$t('attend.aw')">
                         <a-textarea
                             v-model="form.expectedResults"
                             :auto-size="{ minRows: 4, maxRows: 4 }"
@@ -172,18 +125,12 @@
                         </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.az')">
-                        <a-input
-                            v-model="form.boothProductionFee"
-                            :disabled="isCheck"
-                        >
+                        <a-input v-model="form.boothProductionFee" :disabled="isCheck">
                             <span slot="suffix">MOP</span>
                         </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.ba')">
-                        <upload
-                            :value.sync="form.budgets"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.budgets" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bb')">
                         <upload :value.sync="form.rents" :disabled="isCheck" />
@@ -197,38 +144,34 @@
                 </div>
                 <div v-show="stepCurrent === 5">
                     <a-form-model-item :label="$t('attend.bf')">
-                        <a-radio-group
-                            v-model="form.haveReceive"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.haveReceive" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("attend.bh")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("attend.bi")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
-                        <a-input
-                            v-model="form.receiveStatement"
-                            :placeholder="$t('attend.bj')"
-                        />
+                        <a-input v-model="form.receiveStatement" :placeholder="$t('attend.bj')" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bg')">
-                        <a-radio-group
-                            v-model="form.haveCharge"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.haveCharge" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("attend.bh")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("attend.bi")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
-                        <a-input
-                            v-model="form.chargeStatement"
-                            :placeholder="$t('attend.bj')"
-                        />
+                        <a-input v-model="form.chargeStatement" :placeholder="$t('attend.bj')" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bk')" />
                 </div>
@@ -239,23 +182,19 @@
                     type="primary"
                     @click="stepCurrent--"
                     style="margin-right:12px"
-                    >上一步</a-button
-                >
+                >上一步</a-button>
                 <a-button
                     v-show="stepCurrent < 5"
                     type="primary"
                     :disabled="timeNext > 0"
                     @click="handleNext"
-                >
-                    {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}</a-button
-                >
+                >{{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}</a-button>
                 <a-button
                     v-show="stepCurrent === 5"
                     type="primary"
                     :class="isSubmit ? 'none' : ''"
                     @click="handleSubmit"
-                    >{{ $t("attend.bo") }}</a-button
-                >
+                >{{ $t("attend.bo") }}</a-button>
             </a-form-model-item>
         </a-spin>
     </div>
