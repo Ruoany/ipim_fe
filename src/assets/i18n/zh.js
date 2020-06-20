@@ -25,7 +25,7 @@ const zhData = {
         ba: "參展",
         bb: "參加代表團",
         finEnc: "支持及鼓勵措施",
-        ca: "非牟利社團赴境外展會設立展位",
+        ca: "非牟利社團赴境外展會設置展位",
         cb: "非牟利社團組織代表團參與境外展會",
         cc: "企業參與本地/境外展會",
         cd: "會議及展覽資助計劃",
@@ -48,7 +48,7 @@ const zhData = {
         plpex: "葡語國家產品及服務展",
         logout: "退出登錄",
         downloadPersonal: "下載中心",
-        tips: "未認證機構不能申報，請前往個人中心認證機構",
+        tips: "請先完成機構認證",
     },
     index: {
         evCa: "展會日曆",
@@ -213,7 +213,7 @@ const zhData = {
         aa: "填寫方式一：在綫填寫展會報告",
     },
     login: {
-        title: "管理員登錄",
+        title: "帳戶登錄",
         account: "帳號",
         password: "密碼",
         confirm: "確認密碼",
