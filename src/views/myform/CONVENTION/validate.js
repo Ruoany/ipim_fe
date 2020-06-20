@@ -1,5 +1,5 @@
-const config = { required: true, message: "plese input" };
-const config_select = { required: true, message: "plese select" };
+const config = { required: true, message: "please input" };
+const config_select = { required: true, message: "please select" };
 
 export default {
     loading: false,
@@ -12,6 +12,7 @@ export default {
         fax: [config],
         email: [config],
         web: [config],
+        activityId: [config_select],
         liaisonId: [config_select],
     },
     formItemLayout: {

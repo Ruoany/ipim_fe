@@ -30,10 +30,10 @@
             <a-form-model-item prop="nameZh" :label="$t('personal.meNameZh')">
                 <a-input v-model="form.nameZh"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="nameEn" :label="$t('personal.meNameEn')">
+            <a-form-model-item :label="$t('personal.meNameEn')">
                 <a-input v-model="form.nameEn"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="namePt" :label="$t('personal.meNamePt')">
+            <a-form-model-item :label="$t('personal.meNamePt')">
                 <a-input v-model="form.namePt"></a-input>
             </a-form-model-item>
             <a-form-model-item
@@ -174,8 +174,6 @@ export default {
             upFiles,
             rules: {
                 nameZh: [config],
-                nameEn: [config],
-                namePt: [config],
                 siteRegistrationCode: [config],
                 registrationNumber: [config],
                 taxpayerNo: [config],
