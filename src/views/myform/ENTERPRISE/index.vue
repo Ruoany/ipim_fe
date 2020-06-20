@@ -157,26 +157,22 @@
                     </ul>
                     <p>{{ $t("enterprise.bk") }}</p>
                     <a-form-model-item :label="$t('enterprise.bl')">
-                        <a-input v-model="form.exhibitRent" :disabled="isCheck"></a-input>
+                        <a-input v-model="form.exhibitRent" type="number" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bm')">
-                        <a-input v-model="form.makeCost" :disabled="isCheck"></a-input>
+                        <a-input v-model="form.makeCost" type="number" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bn')">
-                        <a-input v-model="form.trafficCost" :disabled="isCheck"></a-input>
+                        <a-input v-model="form.trafficCost" type="number" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bo')">
-                        <a-input v-model="form.leafletCost" :disabled="isCheck"></a-input>
+                        <a-input v-model="form.leafletCost" type="number" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bp')">
-                        <a-input v-model="form.advertCost" :disabled="isCheck"></a-input>
+                        <a-input v-model="form.advertCost" type="number" :disabled="isCheck"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bq')">
-                        <a-input
-                            v-model="form.totalAmount"
-                            :placeholder="$t('enterprise.cp')"
-                            disabled
-                        >
+                        <a-input :value="totalAmount" :placeholder="$t('enterprise.cp')" disabled>
                             <span slot="suffix">MOP</span>
                         </a-input>
                     </a-form-model-item>
@@ -338,12 +334,12 @@ export default {
                 taxpayerCode: "",
                 taxpayerType: "",
                 productServe: "",
-                exhibitRent: "",
-                makeCost: "",
-                trafficCost: "",
-                leafletCost: "",
-                advertCost: "",
-                totalAmount: "",
+                exhibitRent: null,
+                makeCost: null,
+                trafficCost: null,
+                leafletCost: null,
+                advertCost: null,
+                totalAmount: 0,
                 liaisonOtherAddress: "",
                 haveGovernment: false,
                 stateAgree: true,
@@ -369,6 +365,16 @@ export default {
             "currentUser",
             "encourageDis"
         ]),
+        totalAmount: function() {
+            const total =
+                parseInt(this.form.exhibitRent) +
+                parseInt(this.form.makeCost) +
+                parseInt(this.form.trafficCost) +
+                parseInt(this.form.leafletCost) +
+                parseInt(this.form.advertCost);
+            this.form.totalAmount = total;
+            return total ? total : 0;
+        },
         selectedLiaison: function() {
             if (this.form.liaisonId) {
                 const data = this.liaisonList.find(
