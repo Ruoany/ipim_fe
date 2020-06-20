@@ -3,7 +3,7 @@ const config_select = [{ required: true, message: "plese select" }];
 
 export default {
     loading: false,
-    stepCurrent: 6,
+    stepCurrent: 0,
     rules: {
         activityId: config_select,
         institutionId: config_select,

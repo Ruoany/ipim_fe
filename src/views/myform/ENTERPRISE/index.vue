@@ -366,14 +366,19 @@ export default {
             "encourageDis"
         ]),
         totalAmount: function() {
-            const total =
-                parseInt(this.form.exhibitRent) +
-                parseInt(this.form.makeCost) +
-                parseInt(this.form.trafficCost) +
-                parseInt(this.form.leafletCost) +
-                parseInt(this.form.advertCost);
-            this.form.totalAmount = total;
-            return total ? total : 0;
+            const a = this.form.exhibitRent
+                ? parseInt(this.form.exhibitRent)
+                : 0;
+            const b = this.form.makeCost ? parseInt(this.form.makeCost) : 0;
+            const c = this.form.trafficCost
+                ? parseInt(this.form.trafficCost)
+                : 0;
+            const e = this.form.leafletCost
+                ? parseInt(this.form.leafletCost)
+                : 0;
+            const f = this.form.advertCost ? parseInt(this.form.advertCost) : 0;
+            this.form.totalAmount = a + b + c + e + f;
+            return this.form.totalAmount;
         },
         selectedLiaison: function() {
             if (this.form.liaisonId) {
