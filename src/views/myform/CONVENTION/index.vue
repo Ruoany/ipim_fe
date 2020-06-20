@@ -46,136 +46,109 @@
                         <a-input :value="currentInstitution.nameEn" disabled />
                         <p>{{ $t("convention.tips") }}</p>
                     </a-form-model-item>
-                    <a-form-model-item
-                        required
-                        :label="$t('convention.officeBankName')"
-                    >
-                        <a-radio-group
-                            v-model="form.sameName"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                    <a-form-model-item required :label="$t('convention.officeBankName')">
+                        <a-radio-group v-model="form.sameName" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("convention.eb")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("convention.ec")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item v-if="!form.sameName">
-                        <a-input
-                            v-model="form.descriptionDifferentNames"
-                            :disabled="isCheck"
-                        />
+                        <a-input v-model="form.descriptionDifferentNames" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        required
-                        :label="$t('convention.comType')"
-                    >
-                        <a-radio-group
-                            v-model="form.institutionType"
-                            :disabled="isCheck"
-                        >
-                            <a-radio value="INDIVIDUAL">{{
+                    <a-form-model-item required :label="$t('convention.comType')">
+                        <a-radio-group v-model="form.institutionType" :disabled="isCheck">
+                            <a-radio value="INDIVIDUAL">
+                                {{
                                 $t("convention.dw")
-                            }}</a-radio>
-                            <a-radio value="INDIVIDUAL_BUSINESS_OWNER">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="INDIVIDUAL_BUSINESS_OWNER">
+                                {{
                                 $t("convention.dy")
-                            }}</a-radio>
-                            <a-radio value="LIMITED_COMPANY">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="LIMITED_COMPANY">
+                                {{
                                 $t("convention.dz")
-                            }}</a-radio>
-                            <a-radio value="GROUP">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="GROUP">
+                                {{
                                 $t("convention.ea")
-                            }}</a-radio>
-                            <a-radio value="OTHER"
-                                >{{ $t("util.other") }}({{
-                                    $t("convention.dm")
-                                }})</a-radio
-                            >
+                                }}
+                            </a-radio>
+                            <a-radio value="OTHER">
+                                {{ $t("util.other") }}({{
+                                $t("convention.dm")
+                                }})
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item v-if="form.institutionType === 'OTHER'">
-                        <a-input
-                            v-model="form.enterpriseTypeDescription"
-                            :disabled="isCheck"
-                        />
+                        <a-input v-model="form.enterpriseTypeDescription" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        required
-                        :label="$t('convention.appliType')"
-                    >
-                        <a-radio-group
-                            v-model="form.applicantType"
-                            :disabled="isCheck"
-                        >
-                            <a-radio value="ALL">{{
+                    <a-form-model-item required :label="$t('convention.appliType')">
+                        <a-radio-group v-model="form.applicantType" :disabled="isCheck">
+                            <a-radio value="ALL">
+                                {{
                                 $t("convention.ed")
-                            }}</a-radio>
-                            <a-radio value="ORGANIZER">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="ORGANIZER">
+                                {{
                                 $t("convention.ee")
-                            }}</a-radio>
-                            <a-radio value="LOCAL_BRANCH">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="LOCAL_BRANCH">
+                                {{
                                 $t("convention.ef")
-                            }}</a-radio>
-                            <a-radio value="OTHER"
-                                >{{ $t("util.other") }}({{
-                                    $t("convention.dm")
-                                }})</a-radio
-                            >
+                                }}
+                            </a-radio>
+                            <a-radio value="OTHER">
+                                {{ $t("util.other") }}({{
+                                $t("convention.dm")
+                                }})
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item v-if="form.applicantType === 'OTHER'">
-                        <a-input
-                            v-model="form.applicantTypeDescription"
-                            :disabled="isCheck"
-                        />
+                        <a-input v-model="form.applicantTypeDescription" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="country"
-                        :label="$t('util.country')"
-                    >
+                    <a-form-model-item prop="country" :label="$t('util.country')">
                         <a-input v-model="form.country" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="city" :label="$t('util.city')">
                         <a-input v-model="form.city" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="address"
-                        :label="$t('convention.address')"
-                    >
+                    <a-form-model-item prop="address" :label="$t('convention.address')">
                         <a-input v-model="form.address" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="phone"
-                        :label="$t('convention.tel')"
-                    >
+                    <a-form-model-item prop="phone" :label="$t('convention.tel')">
                         <a-input v-model="form.phone" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="fax" :label="$t('convention.fax')">
                         <a-input v-model="form.fax" :disabled="isCheck" />
                     </a-form-model-item>
-                    <a-form-model-item
-                        prop="email"
-                        :label="$t('convention.email')"
-                    >
+                    <a-form-model-item prop="email" :label="$t('convention.email')">
                         <a-input v-model="form.email" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="web" :label="$t('convention.url')">
                         <a-input v-model="form.web" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.text14')">
-                        <upload
-                            :value.sync="form.relatedFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.relatedFiles" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item
-                        prop="liaisonId"
-                        :label="$t('convention.conPerson1')"
-                    >
+                    <a-form-model-item prop="liaisonId" :label="$t('convention.conPerson1')">
                         <a-select
                             v-model="form.liaisonId"
                             showSearch
@@ -188,9 +161,10 @@
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }}
-                                {{ item.nameEnOrPt }}</a-select-option
                             >
+                                {{ item.nameZh }}
+                                {{ item.nameEnOrPt }}
+                            </a-select-option>
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.job')">
@@ -218,9 +192,10 @@
                                 :key="item.id"
                                 :value="item.id"
                                 :label="`${item.nameZh}${item.nameEnOrPt}`"
-                                >{{ item.nameZh }}
-                                {{ item.nameEnOrPt }}</a-select-option
                             >
+                                {{ item.nameZh }}
+                                {{ item.nameEnOrPt }}
+                            </a-select-option>
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.job')">
@@ -237,18 +212,14 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 3">
-                    <a-form-model-item
-                        prop="activityId"
-                        :label="$t('convention.officeNameZh')"
-                    >
+                    <a-form-model-item prop="activityId" :label="$t('convention.officeNameZh')">
                         <a-select v-model="form.activityId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in list"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="item.nameZh"
-                                >{{ item.nameZh }}</a-select-option
-                            >
+                            >{{ item.nameZh }}</a-select-option>
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.officeNameEn')">
@@ -258,25 +229,32 @@
                         <a-input :value="selectedActive.website" disabled />
                     </a-form-model-item>
                     <a-form-model-item required :label="$t('convention.ej')">
-                        <a-radio-group
-                            v-model="form.conventionType"
-                            :disabled="isCheck"
-                        >
-                            <a-radio value="GENERAL_MEET">{{
+                        <a-radio-group v-model="form.conventionType" :disabled="isCheck">
+                            <a-radio value="GENERAL_MEET">
+                                {{
                                 $t("convention.ek")
-                            }}</a-radio>
-                            <a-radio value="INT_MEET">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="INT_MEET">
+                                {{
                                 $t("convention.el")
-                            }}</a-radio>
-                            <a-radio value="GENERAL_EXHIBIT">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="GENERAL_EXHIBIT">
+                                {{
                                 $t("convention.em")
-                            }}</a-radio>
-                            <a-radio value="SPECIALTY_EXHIBIT">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="SPECIALTY_EXHIBIT">
+                                {{
                                 $t("convention.en")
-                            }}</a-radio>
-                            <a-radio value="MEET_EXHIBIT">{{
+                                }}
+                            </a-radio>
+                            <a-radio value="MEET_EXHIBIT">
+                                {{
                                 $t("convention.eo")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <a-form-model-item>
@@ -314,41 +292,34 @@
                                 />
                             </div>
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingAddress')"
-                        >
-                            <a-input
-                                v-model="form.meetingPlace"
-                                :disabled="isCheck"
-                            />
+                        <a-form-model-item :label="$t('convention.meetingAddress')">
+                            <a-input v-model="form.meetingPlace" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.fy')">
-                            <a-input
-                                v-model="form.meetingArea"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingArea" :disabled="isCheck" />
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingCycle')"
-                        >
-                            <a-radio-group
-                                v-model="form.meetingCycle"
-                                :disabled="isCheck"
-                            >
-                                <a-radio value="BIENNIAL">{{
+                        <a-form-model-item :label="$t('convention.meetingCycle')">
+                            <a-radio-group v-model="form.meetingCycle" :disabled="isCheck">
+                                <a-radio value="BIENNIAL">
+                                    {{
                                     $t("convention.di")
-                                }}</a-radio>
-                                <a-radio value="ANNUAL">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="ANNUAL">
+                                    {{
                                     $t("convention.dj")
-                                }}</a-radio>
-                                <a-radio value="QUARTERLY">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="QUARTERLY">
+                                    {{
                                     $t("convention.dl")
-                                }}</a-radio>
-                                <a-radio value="OTHER"
-                                    >{{ $t("util.other") }}({{
-                                        $t("convention.dm")
-                                    }})</a-radio
-                                >
+                                    }}
+                                </a-radio>
+                                <a-radio value="OTHER">
+                                    {{ $t("util.other") }}({{
+                                    $t("convention.dm")
+                                    }})
+                                </a-radio>
                             </a-radio-group>
                         </a-form-model-item>
                         <a-form-model-item v-if="form.meetingCycle === 'OTHER'">
@@ -358,14 +329,10 @@
                                 :disabled="isCheck"
                             />
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingTime')"
-                        >
+                        <a-form-model-item :label="$t('convention.meetingTime')">
                             <a-input v-model="form.hours" :disabled="isCheck" />
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingAllDay')"
-                        >
+                        <a-form-model-item :label="$t('convention.meetingAllDay')">
                             <div
                                 v-for="(item, index) in form.meetingDates"
                                 :key="index"
@@ -445,22 +412,23 @@
                                 ></a-button>
                             </div>
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingArea')"
-                        >
-                            <a-radio-group
-                                v-model="form.meetingHistory"
-                                :disabled="isCheck"
-                            >
-                                <a-radio value="TWO_EDITIONS">{{
+                        <a-form-model-item :label="$t('convention.meetingArea')">
+                            <a-radio-group v-model="form.meetingHistory" :disabled="isCheck">
+                                <a-radio value="TWO_EDITIONS">
+                                    {{
                                     $t("convention.eg")
-                                }}</a-radio>
-                                <a-radio value="SECOND_EDITION">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="SECOND_EDITION">
+                                    {{
                                     $t("convention.eh")
-                                }}</a-radio>
-                                <a-radio value="FIRST_EDITION">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="FIRST_EDITION">
+                                    {{
                                     $t("convention.ei")
-                                }}</a-radio>
+                                    }}
+                                </a-radio>
                             </a-radio-group>
                             <div v-if="form.meetingHistory === 'TWO_EDITIONS'">
                                 <div
@@ -480,15 +448,9 @@
                                         :disabled="isCheck"
                                     />
                                 </div>
-                                <upload
-                                    :value.sync="form.historyFiles"
-                                    :disabled="isCheck"
-                                />
+                                <upload :value.sync="form.historyFiles" :disabled="isCheck" />
                             </div>
-                            <div
-                                v-if="form.meetingHistory === 'SECOND_EDITION'"
-                                class="item"
-                            >
+                            <div v-if="form.meetingHistory === 'SECOND_EDITION'" class="item">
                                 <a-date-picker
                                     v-model="form.secondDate"
                                     valueFormat="YYYY-MM-DD"
@@ -501,9 +463,7 @@
                                 />
                             </div>
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.parInformation')"
-                        >
+                        <a-form-model-item :label="$t('convention.parInformation')">
                             <div class="item">
                                 <a-input
                                     v-model="form.totalAttendees"
@@ -521,10 +481,7 @@
                                     :disabled="isCheck"
                                 />
                             </div>
-                            <upload
-                                :value.sync="form.attendeeFiles"
-                                :disabled="isCheck"
-                            />
+                            <upload :value.sync="form.attendeeFiles" :disabled="isCheck" />
                         </a-form-model-item>
                     </div>
                     <div
@@ -554,11 +511,7 @@
                             </div>
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.ae')">
-                            <div
-                                v-for="(item, index) in form.openTimes"
-                                :key="index"
-                                class="item"
-                            >
+                            <div v-for="(item, index) in form.openTimes" :key="index" class="item">
                                 <div class="item sp">
                                     <a-date-picker
                                         class="full"
@@ -605,46 +558,38 @@
                             </div>
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.af')">
-                            <a-input
-                                v-model="form.exhibitionReservedVenue"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exhibitionReservedVenue" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.ag')">
-                            <a-input
-                                v-model="form.confirmedExhibitionSpace"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.confirmedExhibitionSpace" :disabled="isCheck" />
                             <p>{{ $t("convention.ew") }}</p>
                         </a-form-model-item>
-                        <a-form-model-item
-                            :label="$t('convention.meetingCycle')"
-                        >
-                            <a-radio-group
-                                v-model="form.activityCycle"
-                                :disabled="isCheck"
-                            >
-                                <a-radio value="BIENNIAL">{{
+                        <a-form-model-item :label="$t('convention.meetingCycle')">
+                            <a-radio-group v-model="form.activityCycle" :disabled="isCheck">
+                                <a-radio value="BIENNIAL">
+                                    {{
                                     $t("convention.di")
-                                }}</a-radio>
-                                <a-radio value="ANNUAL">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="ANNUAL">
+                                    {{
                                     $t("convention.dj")
-                                }}</a-radio>
-                                <a-radio value="QUARTERLY">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="QUARTERLY">
+                                    {{
                                     $t("convention.dl")
-                                }}</a-radio>
-                                <a-radio value="OTHER">{{
+                                    }}
+                                </a-radio>
+                                <a-radio value="OTHER">
+                                    {{
                                     $t("convention.fh")
-                                }}</a-radio>
+                                    }}
+                                </a-radio>
                             </a-radio-group>
                         </a-form-model-item>
-                        <a-form-model-item
-                            v-if="form.activityCycle === 'OTHER'"
-                        >
-                            <a-input
-                                v-model="form.activityCycleDescription"
-                                :disabled="isCheck"
-                            />
+                        <a-form-model-item v-if="form.activityCycle === 'OTHER'">
+                            <a-input v-model="form.activityCycleDescription" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.aj')">
                             <div class="item">
@@ -726,10 +671,7 @@
                             />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.ge')">
-                            <upload
-                                :value.sync="form.overSeasBuyerFiles"
-                                :disabled="isCheck"
-                            />
+                            <upload :value.sync="form.overSeasBuyerFiles" :disabled="isCheck" />
                         </a-form-model-item>
                     </div>
                 </div>
@@ -742,40 +684,32 @@
                         <upload :value.sync="form.videos" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.as')">
-                        <upload
-                            :value.sync="form.platforms"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.platforms" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.ay')">
-                        <upload
-                            :value.sync="form.governments"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.governments" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.aw')">
                         <upload :value.sync="form.ipims" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.av')">
-                        <upload
-                            :value.sync="form.facilitations"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.facilitations" :disabled="isCheck" />
                     </a-form-model-item>
                     <!-- 財務支持-會議 -->
                     <h3>{{ $t("convention.ga") }}</h3>
                     <p>{{ $t("convention.au") }}</p>
                     <a-form-model-item :label="$t('convention.az')">
-                        <a-radio-group
-                            v-model="form.accommodationSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.accommodationSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <div v-if="form.accommodationSupport">
@@ -826,10 +760,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar5Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar5Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -838,10 +769,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar5Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar5Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -850,10 +778,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar4Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar4Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -862,10 +787,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar4Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar4Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -874,10 +796,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar3Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar3Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -886,10 +805,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingStar3Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingStar3Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -898,10 +814,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingOtherRooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingOtherRooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -910,36 +823,28 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.meetingOtherName"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingOtherName" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.fn')">
-                            <a-input
-                                v-model="form.meetingTotalRooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.meetingTotalRooms" :disabled="isCheck" />
                         </a-form-model-item>
                     </div>
                     <p>{{ $t("convention.be") }}</p>
                     <a-form-model-item :label="$t('convention.bf')">
-                        <a-radio-group
-                            v-model="form.packageSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.packageSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
-                    <a-form-model-item
-                        v-if="form.packageSupport"
-                        :label="$t('convention.fo')"
-                    >
+                    <a-form-model-item v-if="form.packageSupport" :label="$t('convention.fo')">
                         <div
                             v-for="(item, index) in form.conventionDinings"
                             :key="index"
@@ -987,70 +892,61 @@
                     </a-form-model-item>
                     <p>{{ $t("convention.bj") }}</p>
                     <a-form-model-item :label="$t('convention.bk')">
-                        <a-radio-group
-                            v-model="form.supportForKeynote"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.supportForKeynote" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <div v-if="form.supportForKeynote">
                         <a-form-model-item :label="$t('convention.bl')">
-                            <a-input
-                                v-model="form.totalSpeakers"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.totalSpeakers" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.bm')">
-                            <a-input
-                                v-model="form.totalHeadsOfDelegation"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.totalHeadsOfDelegation" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.bn')">
-                            <a-input
-                                v-model="form.totalDelegations"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.totalDelegations" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.bo')">
-                            <a-input
-                                v-model="form.totalNoDelegations"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.totalNoDelegations" :disabled="isCheck" />
                         </a-form-model-item>
                     </div>
                     <p>{{ $t("convention.bp") }}</p>
                     <a-form-model-item :label="$t('convention.bq')">
-                        <a-radio-group
-                            v-model="form.promotionMarketingSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.promotionMarketingSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fp") }}</p>
                     <a-form-model-item :label="$t('convention.fq')">
-                        <a-radio-group
-                            v-model="form.interpretingTranslation"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.interpretingTranslation" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.bx") }}</p>
@@ -1059,104 +955,116 @@
                             v-model="form.localTransportationSupport"
                             :disabled="isCheck"
                         >
-                            <a-radio :value="true">{{
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fr") }}</p>
                     <a-form-model-item :label="$t('convention.bt')">
-                        <a-radio-group
-                            v-model="form.pcosupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.pcosupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>
                         {{ $t("convention.bu")
-                        }}<span>{{ $t("convention.ci") }}</span>
+                        }}
+                        <span>{{ $t("convention.ci") }}</span>
                     </p>
                     <a-form-model-item :label="$t('convention.bw')">
-                        <a-radio-group
-                            v-model="form.ceremonySupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.ceremonySupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>
                         {{ $t("convention.bv")
-                        }}<span>{{ $t("convention.ci") }}</span>
+                        }}
+                        <span>{{ $t("convention.ci") }}</span>
                     </p>
                     <a-form-model-item :label="$t('convention.bs')">
-                        <a-radio-group
-                            v-model="form.venueRentalSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.venueRentalSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fs") }}</p>
                     <a-form-model-item :label="$t('convention.bq')">
-                        <a-radio-group
-                            v-model="form.greenChannelSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.greenChannelSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.ft") }}</p>
                     <a-form-model-item :label="$t('convention.bz')">
-                        <a-radio-group
-                            v-model="form.performanceSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.performanceSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <!-- 財務支持-展覽 -->
                     <h3>{{ $t("convention.fi") }}</h3>
                     <p>{{ $t("convention.bv") }}</p>
                     <a-form-model-item :label="$t('convention.bs')">
-                        <a-radio-group
-                            v-model="form.exVenueRentalSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exVenueRentalSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <div v-if="form.exVenueRentalSupport">
@@ -1189,12 +1097,14 @@
                                     :placeholder="$t('convention.cf')"
                                     :disabled="isCheck"
                                 />
-                                <a-input
-                                    v-model="form.buildTotalPrice"
-                                    :placeholder="$t('convention.cg')"
-                                    :disabled="isCheck"
-                                />
                             </div>
+                            <a-input
+                                v-model="form.buildTotalPrice"
+                                :placeholder="$t('convention.cg')"
+                                disabled
+                            >
+                                <span slot="suffix">MOP</span>
+                            </a-input>
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.gc')">
                             <div class="item">
@@ -1225,12 +1135,14 @@
                                     :placeholder="$t('convention.cf')"
                                     :disabled="isCheck"
                                 />
-                                <a-input
-                                    v-model="form.exhibitionTotalPrice"
-                                    :placeholder="$t('convention.cg')"
-                                    :disabled="isCheck"
-                                />
                             </div>
+                            <a-input
+                                v-model="form.exhibitionTotalPrice"
+                                :placeholder="$t('convention.cg')"
+                                disabled
+                            >
+                                <span slot="suffix">MOP</span>
+                            </a-input>
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.gd')">
                             <div class="item">
@@ -1261,26 +1173,29 @@
                                     :placeholder="$t('convention.cf')"
                                     :disabled="isCheck"
                                 />
-                                <a-input
-                                    v-model="form.apartTotalPrice"
-                                    :placeholder="$t('convention.cg')"
-                                    :disabled="isCheck"
-                                />
                             </div>
+                            <a-input
+                                v-model="form.apartTotalPrice"
+                                :placeholder="$t('convention.cg')"
+                                disabled
+                            >
+                                <span slot="suffix">MOP</span>
+                            </a-input>
                         </a-form-model-item>
                     </div>
                     <p>{{ $t("convention.au") }}</p>
                     <a-form-model-item :label="$t('convention.az')">
-                        <a-radio-group
-                            v-model="form.exAccommodationSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exAccommodationSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <div v-if="form.exAccommodationSupport">
@@ -1333,10 +1248,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar5Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar5Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1345,10 +1257,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar5Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar5Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1357,10 +1266,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar4Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar4Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1369,10 +1275,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar4Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar4Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1381,10 +1284,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar3Rooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar3Rooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1393,10 +1293,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingStar3Name"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingStar3Name" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1405,10 +1302,7 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingOtherRooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingOtherRooms" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item
                             :label="
@@ -1417,72 +1311,70 @@
                                 )}`
                             "
                         >
-                            <a-input
-                                v-model="form.exMeetingOtherName"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingOtherName" :disabled="isCheck" />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('convention.fn')">
-                            <a-input
-                                v-model="form.exMeetingTotalRooms"
-                                :disabled="isCheck"
-                            />
+                            <a-input v-model="form.exMeetingTotalRooms" :disabled="isCheck" />
                         </a-form-model-item>
                     </div>
                     <p>{{ $t("convention.fv") }}</p>
                     <a-form-model-item :label="$t('convention.df')">
-                        <a-radio-group
-                            v-model="form.exhardwareSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exhardwareSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.bu") }}</p>
                     <a-form-model-item :label="$t('convention.bw')">
-                        <a-radio-group
-                            v-model="form.exCeremonySupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exCeremonySupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fw") }}</p>
                     <a-form-model-item :label="$t('convention.cj')">
-                        <a-radio-group
-                            v-model="form.exQualifiedBuyersSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exQualifiedBuyersSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fx") }}</p>
                     <a-form-model-item :label="$t('convention.dg')">
-                        <a-radio-group
-                            v-model="form.exLogisticsSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exLogisticsSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.bp") }}</p>
@@ -1491,12 +1383,16 @@
                             v-model="form.exPromotionMarketingSupport"
                             :disabled="isCheck"
                         >
-                            <a-radio :value="true">{{
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.bx") }}</p>
@@ -1505,55 +1401,62 @@
                             v-model="form.exLocalTransportationSupport"
                             :disabled="isCheck"
                         >
-                            <a-radio :value="true">{{
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.fs") }}</p>
                     <a-form-model-item :label="$t('convention.by')">
-                        <a-radio-group
-                            v-model="form.exGreenChannelSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exGreenChannelSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <p>{{ $t("convention.ft") }}</p>
                     <a-form-model-item :label="$t('convention.bz')">
-                        <a-radio-group
-                            v-model="form.exPerformanceSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.exPerformanceSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 6">
                     <a-form-model-item :label="$t('convention.cl')">
-                        <a-radio-group
-                            v-model="form.otherGovernmentSupport"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
+                        <a-radio-group v-model="form.otherGovernmentSupport" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
                                 $t("util.yes")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
                                 $t("util.no")
-                            }}</a-radio>
+                                }}
+                            </a-radio>
                         </a-radio-group>
                         <div v-if="form.otherGovernmentSupport">
                             <div
@@ -1604,83 +1507,44 @@
                 <div v-show="stepCurrent === 7">
                     <p>{{ $t("convention.cq") }}</p>
                     <a-form-model-item :label="$t('convention.cr')">
-                        <upload
-                            :value.sync="form.individualFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.individualFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.cx')">
-                        <upload
-                            :value.sync="form.legalEntityFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.legalEntityFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.ct')">
-                        <upload
-                            :value.sync="form.nonProfitOrganisationFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.nonProfitOrganisationFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <p>{{ $t("convention.dh") }}</p>
                     <a-form-model-item :label="$t('convention.cu')">
-                        <upload
-                            :value.sync="form.contractFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.contractFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.cv')">
-                        <upload
-                            :value.sync="form.receiptFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.receiptFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.cw')">
-                        <upload
-                            :value.sync="form.dmcFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.dmcFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.cy')">
-                        <upload
-                            :value.sync="form.natureAndHistoryFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.natureAndHistoryFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.cz')">
-                        <upload
-                            :value.sync="form.detailedProgrammeFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.detailedProgrammeFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.da')">
-                        <upload
-                            :value.sync="form.relatedDocumentsFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.relatedDocumentsFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.db')">
-                        <upload
-                            :value.sync="form.keynoteSpeakersFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.keynoteSpeakersFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.dc')">
-                        <upload
-                            :value.sync="form.delegatesFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.delegatesFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.dd')">
-                        <upload
-                            :value.sync="form.businessCardFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.businessCardFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('convention.de')">
-                        <upload
-                            :value.sync="form.otherDocumentsFiles"
-                            :disabled="isCheck"
-                        />
+                        <upload :value.sync="form.otherDocumentsFiles" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <a-form-model-item>
@@ -1689,8 +1553,7 @@
                         type="primary"
                         @click="stepCurrent--"
                         style="margin-right:12px"
-                        >上一步</a-button
-                    >
+                    >上一步</a-button>
                     <a-button
                         v-show="stepCurrent < 7"
                         type="primary"
@@ -1698,16 +1561,15 @@
                         @click="handleNext"
                     >
                         {{
-                            timeNext > 0 ? `(${timeNext}S)` : "下一步"
-                        }}</a-button
-                    >
+                        timeNext > 0 ? `(${timeNext}S)` : "下一步"
+                        }}
+                    </a-button>
                     <a-button
                         v-show="stepCurrent === 7"
                         type="primary"
                         :class="isSubmit ? 'none' : ''"
                         @click="handleSubmit"
-                        >{{ $t("attend.bo") }}</a-button
-                    >
+                    >{{ $t("attend.bo") }}</a-button>
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -1964,9 +1826,9 @@ export default {
                 buildPrice: "",
                 exhibitionPrice: "",
                 apartPrice: "",
-                buildTotalPrice: "",
-                exhibitionTotalPrice: "",
-                apartTotalPrice: "",
+                buildTotalPrice: this.$t("convention.cg"),
+                exhibitionTotalPrice: this.$t("convention.cg"),
+                apartTotalPrice: this.$t("convention.cg"),
                 exAccommodationSupport: false,
                 exMeetingRooms: [
                     {
@@ -1974,8 +1836,8 @@ export default {
                         rooms: ""
                     }
                 ],
-				secondDate:"",
-				secondVenue:""
+                secondDate: "",
+                secondVenue: ""
             }
         };
     },
