@@ -2,19 +2,10 @@
     <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-attend
-                    v-if="form === 'ATTEND'"
-                    :list="activityList"
-                ></form-attend>
+                <form-attend v-if="form === 'ATTEND'" :list="activityList"></form-attend>
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
-                <form-enterprise
-                    v-if="form === 'ENTERPRISE'"
-                    :list="activityList"
-                ></form-enterprise>
-                <form-convention
-                    v-if="form === 'CONVENTION'"
-                    :list="activityList"
-                ></form-convention>
+                <form-enterprise v-if="form === 'ENTERPRISE'" :list="activityList"></form-enterprise>
+                <form-convention v-if="form === 'CONVENTION'" :list="activityList"></form-convention>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
             </a-tab-pane>
@@ -27,9 +18,12 @@
                         <li>{{ $t("util.step4") }}</li>
                         <li>{{ $t("util.step5") }}</li>
                     </ul>
-                    <a-button type="primary" size="large">{{
-                        $t("util.download")
-                    }}</a-button>
+                    <a-button
+                        type="primary"
+                        size="large"
+                        @click="downloadExcel"
+                        :loading="download"
+                    >{{ $t("util.download") }}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -47,6 +41,9 @@ import FormEnterprise from "./ENTERPRISE/index";
 import FormConvention from "./CONVENTION/index";
 import FormBe from "./be/index";
 import FormBf from "./bf/index";
+import EA from "@/apis/encourageAttend";
+import EE from "@/apis/encourageEnterprise";
+import EC from "@/apis/encourageConvention";
 
 export default {
     components: {
@@ -58,13 +55,14 @@ export default {
         FormBf
     },
     computed: {
-        ...mapGetters(["liaisonList", "currentInstitution"])
+        ...mapGetters(["currentInstitution"])
     },
     data() {
         return {
             form: "",
             tabActive: "1",
             loading: false,
+            download: false,
             activityList: []
         };
     },
@@ -83,8 +81,42 @@ export default {
             this.loading = false;
         },
         GetActivityList: async function() {
-            const { data } = await Activity.all({ activityScope: "ENCOURAGE" });
+            const { data } = await Activity.all({
+                activityScope: "ENCOURAGE",
+                status: "PUBLISH"
+            });
             this.activityList = data ? data : [];
+        },
+        downloadExcel: async function() {
+            this.download = true;
+            let result = {};
+            let type = "";
+            switch (this.form) {
+                case "ATTEND": {
+                    result = await EA.download();
+                    type =
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                    break;
+                }
+                case "ENTERPRISE": {
+                    result = await EE.download();
+                    type =
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                    break;
+                }
+                case "CONVENTION": {
+                    result = await EC.download();
+                    type = "application/pdf";
+                    break;
+                }
+            }
+            const blob = new Blob([result], { type });
+            const a = document.createElement("a");
+            a.download = this.form;
+            a.target = "blank";
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            this.download = false;
         }
     },
     mounted: function() {

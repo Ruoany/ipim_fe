@@ -9,14 +9,11 @@ import convention from "./CONVENTION/zh";
 import miecf from "./MIECF/zh";
 import mif from "./MIF/zh";
 import plpex from "./PLPEX/zh";
-import reportba from "./ba/zh_re";
-import reportbb from "./bb/zh_re";
-import reportbd from "./CONVENTION/zh-re";
 import iiicf from "./IIICF/zh";
 import mfe from "./MFE/zh";
 import gmbpf from "./GMBPF/zh";
 
-const enData = {
+const zhData = {
     menu: {
         signUp: "參與本局主辦之展會",
         aa: "個別形式參展",
@@ -212,6 +209,7 @@ const enData = {
         message: "短訊",
         tips:
             "本人確定並同意澳門貿易投資促進局（“貿促局”）可將有關收集之商業資料（不涉及個人資料部分）編入其全部或任何“貿促局”資料庫內作為直接推廣、商業配對或本澳會展業界聯絡之用",
+        register: "註冊",
         reset: "重置密碼",
         newPwd: "新密碼",
         code: "驗證碼",
@@ -232,10 +230,7 @@ const enData = {
     enterprise,
     formbe,
     formbf,
-    reportba,
-    reportbb,
-    reportbd,
     convention,
 };
 
-export default enData;
+export default zhData;

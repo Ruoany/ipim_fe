@@ -2,15 +2,14 @@
     <div class="container">
         <div class="title">{{ $t("personal.upload") }}</div>
         <div class="sub-title">{{ $t("personal.tips1") }}</div>
-        <div v-show="status === 'rejected'" class="error-title">
-            {{ $t("personal.upErr") }}
-        </div>
+        <div v-show="status === 'rejected'" class="error-title">{{ $t("personal.upErr") }}</div>
         <div class="picture-list-content">
             <a-upload
                 :action="upFiles"
                 listType="picture-card"
                 :fileList="images"
                 :beforeUpload="beforeUpload"
+                :showUploadList="{showPreviewIcon: true, showRemoveIcon: status !== 'passed'}"
                 @preview="handlePreview"
                 @change="handleChange"
             >
@@ -26,16 +25,9 @@
                 size="large"
                 :disabled="images.length === 0"
                 @click="handleSubmit"
-                >{{ $t("personal.submit") }}</a-button
-            >
+            >{{ $t("personal.submit") }}</a-button>
         </div>
-        <a-modal
-            width="900px"
-            :visible="modal"
-            title="Prewview"
-            :footer="null"
-            @cancel="modal = false"
-        >
+        <a-modal width="900px" :visible="modal" title="圖片預覽" :footer="null" @cancel="modal = false">
             <img alt="example" style="width: 100%" :src="selectedUrl" />
         </a-modal>
     </div>
