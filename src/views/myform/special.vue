@@ -2,19 +2,10 @@
     <a-spin :spinning="loading" class="form-wrapper">
         <a-tabs v-model="tabActive">
             <a-tab-pane :tab="$t('show.aa')" key="1" style="padding:30px 0;">
-                <form-attend
-                    v-if="form === 'ATTEND'"
-                    :list="activityList"
-                ></form-attend>
+                <form-attend v-if="form === 'ATTEND'" :list="activityList"></form-attend>
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
-                <form-enterprise
-                    v-if="form === 'ENTERPRISE'"
-                    :list="activityList"
-                ></form-enterprise>
-                <form-convention
-                    v-if="form === 'CONVENTION'"
-                    :list="activityList"
-                ></form-convention>
+                <form-enterprise v-if="form === 'ENTERPRISE'" :list="activityList"></form-enterprise>
+                <form-convention v-if="form === 'CONVENTION'" :list="activityList"></form-convention>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
             </a-tab-pane>
@@ -32,8 +23,7 @@
                         size="large"
                         @click="downloadExcel"
                         :loading="download"
-                        >{{ $t("util.download") }}</a-button
-                    >
+                    >{{ $t("util.download") }}</a-button>
                 </div>
             </a-tab-pane>
         </a-tabs>
@@ -104,12 +94,14 @@ export default {
             switch (this.form) {
                 case "ATTEND": {
                     result = await EA.download();
-                    type = "application/msword";
+                    type =
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                     break;
                 }
                 case "ENTERPRISE": {
                     result = await EE.download();
-                    type = "application/msword";
+                    type =
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                     break;
                 }
                 case "CONVENTION": {
