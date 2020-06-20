@@ -182,7 +182,7 @@ export default {
             this.form.encourageEnterpriseId = recordId;
             this.loading = false;
         },
-        handleSubmit: async function() {
+        handleSubmit: function() {
             if(this.form.photoFiles.length < 4){
                 this.$message.error("請以附件形式提交至少4張展會及展位相片");
                 return 

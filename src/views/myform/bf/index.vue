@@ -150,7 +150,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import validate from './validate';
-import B2C from "@/apis/encourageB2C";
+import B2C from "@/apis/encourageB2B";
 import Upload from '@/components/upload';
 export default {
   components: { Upload },
