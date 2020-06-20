@@ -265,20 +265,34 @@
                         <upload-file :value.sync="form.quotationSheet" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ch')">
-                        <upload-file :value.sync="form.noSubmit" :disabled="isCheck" />
+                        <!-- <upload-file :value.sync="form.noSubmit" :disabled="isCheck" /> -->
+                        <a-radio-group v-model="form.noSubmit" :disabled="isCheck">
+                            <a-radio :value="true">
+                                {{
+                                $t("util.agree")
+                                }}
+                            </a-radio>
+                            <a-radio :value="false">
+                                {{
+                                $t("util.disagree")
+                                }}
+                            </a-radio>
+                        </a-radio-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="registerFiles" :label="$t('enterprise.ci')">
-                        <upload-file :value.sync="form.registerFiles" :disabled="isCheck" />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.cj')">
-                        <upload-file :value.sync="form.noOwing" :disabled="isCheck" />
-                    </a-form-model-item>
-                    <a-form-model-item prop="identityForm" :label="$t('enterprise.ck')">
-                        <upload-file :value.sync="form.identityForm" :disabled="isCheck" />
-                    </a-form-model-item>
-                    <a-form-model-item prop="taxationBills" :label="$t('enterprise.cl')">
-                        <upload-file :value.sync="form.taxationBills" :disabled="isCheck" />
-                    </a-form-model-item>
+                    <div v-if="!form.noSubmit">
+                        <a-form-model-item prop="registerFiles" :label="$t('enterprise.ci')">
+                            <upload-file :value.sync="form.registerFiles" :disabled="isCheck" />
+                        </a-form-model-item>
+                        <a-form-model-item :label="$t('enterprise.cj')">
+                            <upload-file :value.sync="form.noOwing" :disabled="isCheck" />
+                        </a-form-model-item>
+                        <a-form-model-item prop="identityForm" :label="$t('enterprise.ck')">
+                            <upload-file :value.sync="form.identityForm" :disabled="isCheck" />
+                        </a-form-model-item>
+                        <a-form-model-item prop="taxationBills" :label="$t('enterprise.cl')">
+                            <upload-file :value.sync="form.taxationBills" :disabled="isCheck" />
+                        </a-form-model-item>
+                    </div>
                 </div>
                 <a-form-model-item>
                     <a-button
@@ -352,7 +366,7 @@ export default {
                 noOwing: [],
                 identityForm: [],
                 taxationBills: [],
-                noSubmit: [],
+                noSubmit: true,
                 companyProfile: []
             }
         };
