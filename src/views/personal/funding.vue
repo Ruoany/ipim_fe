@@ -245,10 +245,10 @@ export default {
             this.$router.push({ path, query });
         },
         ExportPDF: async function(code, type) {
-            if('ENTERPRISE' != type && 'MISSION' != type && 'CONVENTION' != type && 'ATTEND' != type){
-                alert("提示: 目前暂时支持031, 032, 033、034申请类型！");
-                return;
-            }
+            // if('ENTERPRISE' != type && 'MISSION' != type && 'CONVENTION' != type && 'ATTEND' != type){
+            //     alert("提示: 目前暂时支持031, 032, 033、034申请类型！");
+            //     return;
+            // }
 
             this.loading = true;
             const { data } = await PDFDown.get({
