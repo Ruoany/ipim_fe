@@ -21,7 +21,7 @@ export default {
             state.codes = value;
         },
         SET_TIMENEXT: function(state) {
-            state.time = 10;
+            state.time = 1;
             let time = setInterval(() => {
                 state.time--;
                 if (state.time === 0) {
