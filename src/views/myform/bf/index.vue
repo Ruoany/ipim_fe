@@ -9,7 +9,7 @@
       <a-step :title="$t('formbf.az')" />
       <a-step :title="$t('formbf.be')" />
     </a-steps>
-    <a-form-model class="form" ref="enterprise" :form="form" v-bind="formatLayout">
+    <a-form-model class="form" ref="miecf" :rules="rules" :model="form" v-bind="formatLayout">
       <div v-show="stepCurrent === 0">
         <a-form-item>
           <ul>
@@ -79,58 +79,103 @@
         <a-form-item :label="$t('formbf.aq')">
           <a-input :value="selectedLiaison.address" disabled />
         </a-form-item>
+
+        <a-form-model-item
+          v-for="(room, index) in form.chiefShareHolders"
+          :key="room.key"
+          :label="index === 0 ? $t('formbf.cd') : ''"
+          :prop="'chiefShareHolders.' + index + '.rooms'"
+        >
+          <a-row :gutter="10">
+            <a-col :span="6">
+              <a-input :model="room.name" :placeholder="$t('formbf.al')" />
+            </a-col>
+            <a-col :span="8">
+              <a-input :model="room.taxCodeOrID" :placeholder="$t('formbf.ce')" />
+            </a-col>
+            <a-col :span="4">
+              <a-input-number
+                :min="0"
+                v-model.number="room.holdingPercent"
+                style="width:100%"
+                :placeholder="$t('formbf.cf')"
+              />
+            </a-col>
+            <a-col :span="4">
+              <a-input v-model="room.jobTitle" :placeholder="$t('formbf.cg')" />
+            </a-col>
+            <a-col :span="1">
+              <a-icon type="plus" class="cur" @click="addDomain()" />
+            </a-col>
+            <a-col :span="1">
+              <a-icon
+                type="minus"
+                class="cur"
+                v-if="form.chiefShareHolders.length > 1"
+                :disabled="form.chiefShareHolders.length === 1"
+                @click="removeDomain(room)"
+              />
+            </a-col>
+          </a-row>
+        </a-form-model-item>
+
+        <a-form-model-item :label="$t('formbf.cc')">
+          <a-input-number v-model.number="form.macaoResiHoldPercent" :min="0" :max="100" style="width:100%" />
+        </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 3">
-        <a-form-item :label="$t('formbf.as')">
-          <a-input v-decorator />
-        </a-form-item>
-        <a-form-item :label="$t('formbf.at')">
-          <a-textarea v-decorator :rows="4" />
-        </a-form-item>
+        <a-form-model-item :label="$t('formbf.as')" prop="ecPlatformNmae">
+          <a-input v-model="form.ecPlatformNmae" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.at')" prop="ecProductInfo">
+          <a-textarea v-model="form.ecProductInfo" :rows="4" />
+        </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 4">
-        <a-form-item :label="$t('formbf.bu')"> </a-form-item>
+        <a-form-model-item :label="$t('formbf.bu1')">
+          <upload :value.sync="form.registerFiles" :disabled="isCheck" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bu2')">
+          <upload :value.sync="form.identityForms" :disabled="isCheck" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bu3')">
+          <upload :value.sync="form.identityFiles" :disabled="isCheck" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bu4')">
+          <upload :value.sync="form.taxationBills" :disabled="isCheck" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bu6')">
+          <upload :value.sync="form.certs" :disabled="isCheck" />
+        </a-form-model-item>
         <a-form-item>
-          <ul>
-            <li>{{ $t('formbf.bu1') }}</li>
-            <li>{{ $t('formbf.bu2') }}</li>
-            <li>{{ $t('formbf.bu3') }}</li>
-            <li>{{ $t('formbf.bu4') }}</li>
-            <li>{{ $t('formbf.bu5') }}</li>
-            <li>{{ $t('formbf.bu6') }}</li>
-            <li>{{ $t('formbf.bu7') }}</li>
-            <li>{{ $t('formbf.bu8') }}</li>
-          </ul>
-        </a-form-item>
-        <a-form-item :label="$t('formbf.bd')">
-          <upload />
+          {{ $t('formbf.bu8') }}
         </a-form-item>
       </div>
       <div v-show="stepCurrent === 5">
-        <a-form-item :label="$t('formbf.ba')">
-          <a-input v-decorator />
-        </a-form-item>
-        <a-form-item :label="$t('formbf.bb')">
-          <a-input v-decorator />
-        </a-form-item>
-        <a-form-item :label="$t('formbe.bc')">
-          <a-input v-decorator />
-        </a-form-item>
-        <a-form-item :label="$t('formbe.bc1')">
-          <a-input disabled />
-        </a-form-item>
+        <a-form-model-item :label="$t('formbf.ba')" prop="costMember">
+          <a-input-number v-model.number="form.costMember" :min="0" style="width: 100%" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bb')" prop="costVAS">
+          <a-input-number v-model.number="form.costVAS" :min="0" style="width: 100%" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bc')" prop="costSiteConstruction">
+          <a-input-number v-model.number="form.costSiteConstruction" :min="0" style="width: 100%" />
+        </a-form-model-item>
+        <a-form-model-item :label="$t('formbf.bc1')">
+          <a-input-number :value="totalAmount" disabled :min="0" style="width: 100%" />
+        </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 6">
-        <a-form-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox v-decorator="['agreement', { valuePropName: 'checked' }]">
+        <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
+          <a-checkbox :model="form.agreement">
             <span>{{ $t('formbf.bh') }}</span>
           </a-checkbox>
-        </a-form-item>
-        <a-form-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox v-decorator="['agreement2', { valuePropName: 'checked' }]">
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
+          <a-checkbox v-model="form.agreement2">
             <span>{{ $t('formbf.bi') }}</span>
           </a-checkbox>
-        </a-form-item>
+        </a-form-model-item>
       </div>
       <a-form-item>
         <a-button v-show="stepCurrent > 0" type="primary" @click="stepCurrent--" style="margin-right:12px"
@@ -150,12 +195,45 @@
 <script>
 import { mapGetters } from 'vuex';
 import validate from './validate';
-import B2C from "@/apis/encourageB2B";
+import B2B from '@/apis/encourageB2B';
 import Upload from '@/components/upload';
 export default {
   components: { Upload },
+  data() {
+    return {
+      ...validate,
+      stepCurrent: 0,
+      formatLayout: {
+        labelCol: { span: 24 },
+        wrapperCol: { span: 24 },
+      },
+      specialLayout: {
+        wrapperCol: { span: 16, offset: 4 },
+      },
+      form: {
+        agreement: false,
+        agreement2: false,
+        costMember: '',
+        costVAS: '',
+        costSiteConstruction: '',
+        applicantId: '',
+        institutionId: '',
+        ecPlatformNmae: '',
+        ecProductInfo: '',
+        registerFiles: [],
+        identityForms: [],
+        identityFiles: [],
+        taxationBills: [],
+        certs: [],
+        chiefShareHolders: [{ key: Date.now(), name: '', taxCodeOrID: '', jobTitle: '', holdingPercent: '' }],
+      },
+    };
+  },
   computed: {
     ...mapGetters(['liaisonList', 'currentInstitution', 'timeNext', 'encourageDis']),
+    totalAmount() {
+      return this.form.costMember + this.form.costVAS + this.form.costSiteConstruction;
+    },
     selectedLiaison: function() {
       if (this.form.liaisonId) {
         const data = this.liaisonList.find((item) => item.id === this.form.liaisonId);
@@ -191,38 +269,51 @@ export default {
       return this.form.status === 'passed' || this.form.status === 'withdraw' || this.form.status === 'approving';
     },
   },
-  data() {
-    return {
-      ...validate,
-      stepCurrent: 0,
-      formatLayout: {
-        labelCol: { span: 24 },
-        wrapperCol: { span: 24 },
-      },
-      specialLayout: {
-        wrapperCol: { span: 16, offset: 4 },
-      },
-      form: {
-          institutionId: ""
-      },
-    };
-  },
   methods: {
     initData: async function() {
       if (this.formId) {
         this.$store.dispatch('setChangeFalse');
-        const { data } = await B2C.one(this.formId);
+        const { data } = await B2B.one(this.formId);
         this.form = data;
       } else {
+        this.form.applicantId = this.currentUser;
         this.form.institutionId = this.currentInstitution.id;
       }
     },
-    handleSubmit: function(e) {
-      e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('--->', values);
+    handleSubmit: async function() {
+      if (!this.form.agreement && !this.form.agreement2) {
+        this.$message.error('請勾選以上申明條件');
+        return;
+      }
+      this.$refs.miecf.validate(async (valid) => {
+        if (valid) {
+          let res;
+          const form = { ...this.form, totalAmount: this.totalAmount };
+          form.chiefShareHolders = form.chiefShareHolders.filter((i) => i.name != '');
+          if (this.update) {
+            res = await B2B.update(form);
+          } else {
+            res = await B2B.create(form);
+          }
+          if (res.code === 200) {
+            this.$router.push('personal/funding');
+          }
         }
+      });
+    },
+    removeDomain(item) {
+      let index = this.form.chiefShareHolders.indexOf(item);
+      if (index !== -1) {
+        this.form.chiefShareHolders.splice(index, 1);
+      }
+    },
+    addDomain() {
+      this.form.chiefShareHolders.push({
+        key: Date.now(),
+        name: '',
+        taxCodeOrID: '',
+        jobTitle: '',
+        holdingPercent: '',
       });
     },
   },

@@ -298,7 +298,7 @@ export default {
             res = await B2C.create(form);
           }
           if (res.code === 200) {
-            this.$router.go(-1);
+            this.$router.push('personal/funding');
           }
         }
       });
