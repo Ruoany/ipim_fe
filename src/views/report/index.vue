@@ -5,6 +5,7 @@
                 <report-ba v-if="reportType === 'ba'"></report-ba>
                 <report-bb v-else-if="reportType === 'bb'"></report-bb>
                 <report-bd v-else-if="reportType === 'bd'"></report-bd>
+                <report-ms v-else-if="reportType === 'ms'"></report-ms>
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -14,8 +15,9 @@
 import reportBa from "./ba/index";
 import reportBb from "./bb/index";
 import reportBd from "./bd/index";
+import reportMs from "./ms/index";
 export default {
-    components: { reportBa, reportBb, reportBd },
+    components: { reportBa, reportBb, reportBd, reportMs },
     data() {
         return {
             reportType: null,
@@ -25,7 +27,11 @@ export default {
     methods: {},
     mounted() {
         const reportType = this.$crypto.decryption(unescape(this.$route.query.reportType));
-        this.reportType = reportType === 'ATTEND' ? 'bb' : reportType === 'ENTERPRISE' ? 'ba': reportType === "CONVENTION" ? 'bd' : ''
+        this.reportType = reportType === 'ATTEND' 
+        ? 'bb' : reportType === 'ENTERPRISE' 
+        ? 'ba' : reportType === "CONVENTION" 
+        ? 'bd' : reportType === "MISSION" 
+        ? 'ms' : ''
     }
 };
 </script>
