@@ -44,7 +44,7 @@
                         <a-input :value="liaison.phone" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('reportba.al')">
-                       <a-input />
+                       <a-input :value="selectedActivity.productServe" disabled/>
                     </a-form-model-item>
                 </div>
                 <div v-show="step===2">
@@ -63,8 +63,8 @@
                     <a-form-model-item :label="$t('enterprise.bp')" prop="advertCost" required>
                         <a-input-number v-model.number="form.advertCost" :min="0" style="width: 100%" />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.bq')" prop="totalAmount" required>
-                        <a-input-number v-model.number="form.totalAmount" :min="0" style="width: 100%" />
+                    <a-form-model-item :label="$t('enterprise.bq')" prop="totalAmount">
+                        <a-input-number :value="totalAmount" style="width: 100%" disabled/>
                     </a-form-model-item>
                 </div>
                 <div v-show="step===3">
@@ -130,10 +130,10 @@ export default {
     data() {
         return {
             step: 0,
-            reportId: '',
             loading: false,
             liaison: {},
             selectedActivity: {},
+            update: false,
             formatLayout: {
                 labelCol: { span: 24 },
                 wrapperCol: { span: 24 }
@@ -147,19 +147,21 @@ export default {
                 makeCost: 0,
                 photoFiles: [],
                 stateAgree: true,
-                totalAmount: 0,
                 trafficCost: 0,
             },
             ...validate
         };
     },
-     computed: {
+    computed: {
         ...mapGetters([
             "currentInstitution",
         ]),
+        totalAmount(){
+            return this.form.exhibitRent + this.form.makeCost + this.form.leafletCost + this.form.trafficCost + this.form.advertCost
+        },
     },
     methods: {
-        initData: async function(recordId, reportId) {
+        initData: async function(recordId) {
             this.loading = true;
             const { data, code } = await Report.getEncourageEnterpriseById(recordId);
             if(code === 200) {
@@ -168,19 +170,19 @@ export default {
                     activityName: data.activity.nameZh,
                     activityDate: `${data.activity.startTime} - ${data.activity.endTime}`,
                     activityPlace: data.activity.place,
-                    activityExpiry: data.activity.expiryTime
+                    activityExpiry: data.activity.expiryTime,
+                    productServe: data.productServe,
                 };
             }
-            if(reportId) {
-                const res = await Report.getEncourageEnterpriseReportById(reportId);
-                if(res.code === 200) {
-                    this.form = res.data
-                }
+            const res = await Report.getEncourageEnterpriseReportById(recordId);
+            if(res.code === 200 && res.data) {
+                this.form = res.data
+                this.update = true
             }
             this.form.encourageEnterpriseId = recordId;
             this.loading = false;
         },
-        handleSubmit: async function() {
+        handleSubmit: function() {
             if(this.form.photoFiles.length < 4){
                 this.$message.error("請以附件形式提交至少4張展會及展位相片");
                 return 
@@ -189,10 +191,11 @@ export default {
                 if (valid) {
                     this.loading = true
                     let res
-                    if(this.reportId) {
-                        res = await Report.updateEncourageEnterpriseReport(this.form)
+                    const form = { ...this.form, totalAmount: this.totalAmount }
+                    if(this.update) {
+                        res = await Report.updateEncourageEnterpriseReport(form)
                     } else {
-                        res = await Report.addEncourageEnterpriseReport(this.form)
+                        res = await Report.addEncourageEnterpriseReport(form)
                     }
                     this.loading = false
                     if(res.code === 200) {
@@ -204,30 +207,13 @@ export default {
             });
         },
         //上傳的文件
-        uploadChange(info) {
-            const status = info.file.status;
-            if (status === 'done') {
-                let data = info.file.response;
-                if (data.code === 200) {
-                    this.$message.success(`${info.file.name} file uploaded successfully.`);
-                    this.form.photoFiles.push({
-                        oriname: info.file.name,
-                        uid: info.file.uid,
-                        url: data.data.url,
-                    })
-                }
-            } else if (status === 'error') {
-                this.$message.error(`${info.file.name} file upload failed.`);
-            }
+        uploadChange(list) {
+            this.form.photoFiles = list
         },
     },
     mounted(){
         const recordId = this.$crypto.decryption(unescape(this.$route.query.id));
-        const reportId = this.$route.query.reportId 
-            ? this.$crypto.decryption(unescape(this.$route.query.reportId))
-            : ''
-        this.reportId = reportId
-        this.initData(recordId, reportId)
+        this.initData(recordId)
     }
 };
 </script>

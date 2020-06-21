@@ -34,7 +34,7 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
-                    <a-button
+                    <!-- <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
@@ -42,12 +42,12 @@
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType:'bb',
+                                reportType:'ba',
                                 reportId: item.report ? item.report.id : '',
                             })
                         "
                         >{{ $t("personal.report") }}</a-button
-                    >
+                    > -->
                     <a-button
                         type="link"
                         @click="
@@ -148,51 +148,38 @@ export default {
             switch (value) {
                 case "approving":
                     return "blue";
-                    break;
                 case "passed":
                     return "green";
-                    break;
                 case "rejected":
                     return "orange";
-                    break;
                 case "withdraw":
                     return "red";
-                    break;
                 case "finish":
                     return "green";
-                    break;
             }
         },
         statusTextFilter: function(value) {
             switch (value) {
                 case "approving":
                     return i18n.t("personal.approving");
-                    break;
                 case "passed":
                     return i18n.t("personal.passed");
-                    break;
                 case "rejected":
                     return i18n.t("personal.rejected");
-                    break;
                 case "withdraw":
                     return i18n.t("personal.withdraw");
-                    break;
                 case "finish":
                     return i18n.t("personal.finish");
-                    break;
             }
         },
         pictureTextFilter: function(value) {
             switch (value) {
                 case "approving":
                     return i18n.t("personal.uploading");
-                    break;
                 case "passed":
                     return i18n.t("personal.showPic");
-                    break;
                 default:
                     return i18n.t("personal.uploadPic");
-                    break;
             }
         }
     },

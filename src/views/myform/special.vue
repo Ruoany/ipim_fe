@@ -8,6 +8,7 @@
                 <form-convention v-if="form === 'CONVENTION'" :list="activityList"></form-convention>
                 <form-be v-if="form === 'be'" :list="activityList"></form-be>
                 <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
+                <form-ecb2c v-if="form === 'ecb2c'" :list="activityList"></form-ecb2c>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
@@ -40,6 +41,7 @@ import FormBb from "./bb/index";
 import FormEnterprise from "./ENTERPRISE/index";
 import FormConvention from "./CONVENTION/index";
 import FormBe from "./be/index";
+import FormECB2C from "./ecb2c/index";
 import FormBf from "./bf/index";
 import EA from "@/apis/encourageAttend";
 import EE from "@/apis/encourageEnterprise";
@@ -51,6 +53,7 @@ export default {
         FormBb,
         FormConvention,
         FormEnterprise,
+        FormECB2C,
         FormBe,
         FormBf
     },

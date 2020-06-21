@@ -24,7 +24,8 @@ export default {
     },
     methods: {},
     mounted() {
-        this.reportType = this.$crypto.decryption(unescape(this.$route.query.reportType));
+        const reportType = this.$crypto.decryption(unescape(this.$route.query.reportType));
+        this.reportType = reportType === 'ATTEND' ? 'bb' : reportType === 'ENTERPRISE' ? 'ba': reportType === "CONVENTION" ? 'bd' : ''
     }
 };
 </script>

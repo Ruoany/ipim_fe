@@ -29,13 +29,13 @@
                         />
                     </a-form-model-item>
                     <a-form-model-item prop="newspapers" :label="$t('attend.ag')">
-                        <upload :files.sync="form.newspapers" :disabled="isCheck" />
+                        <upload :value.sync="form.newspapers" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="registration" :label="$t('attend.ah')">
-                        <upload :files.sync="form.registration" :disabled="isCheck" />
+                        <upload :value.sync="form.registration" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="identification" :label="$t('attend.ai')">
-                        <upload :files.sync="form.identification" :disabled="isCheck" />
+                        <upload :value.sync="form.identification" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
@@ -98,7 +98,7 @@
                         />
                     </a-form-model-item>
                     <a-form-model-item prop="activityFiles" :label="$t('attend.bm')">
-                        <upload :files.sync="form.activityFiles" :disabled="isCheck" />
+                        <upload :value.sync="form.activityFiles" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item prop="objective" :label="$t('attend.av')">
                         <a-textarea
@@ -130,16 +130,16 @@
                         </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.ba')">
-                        <upload :files.sync="form.budgets" :disabled="isCheck" />
+                        <upload :value.sync="form.budgets" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bb')">
-                        <upload :files.sync="form.rents" :disabled="isCheck" />
+                        <upload :value.sync="form.rents" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bc')">
-                        <upload :files.sync="form.agents" :disabled="isCheck" />
+                        <upload :value.sync="form.agents" :disabled="isCheck" />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('attend.bd')">
-                        <upload :files.sync="form.booths" :disabled="isCheck" />
+                        <upload :value.sync="form.booths" :disabled="isCheck" />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">

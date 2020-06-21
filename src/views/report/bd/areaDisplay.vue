@@ -11,15 +11,15 @@
             >
             <a-row :gutter="10">
                 <a-col :span="9">
-                    <a-input-number style="width:100%" :min="0" v-model.number="form.exVenueRental" :placeholder="$t('reportbd.fr')" />
+                    <a-input-number style="width:100%" :min="0" v-model.number="editData.exVenueRental" :placeholder="$t('reportbd.fr')" />
                 </a-col>
                 <a-col :span="13" >
-                    <a-input-number style="width:100%" :min="0" v-model.number="form.exSpaceRented" :placeholder="$t('reportbd.fs')" />
+                    <a-input-number style="width:100%" :min="0" v-model.number="editData.exSpaceRented" :placeholder="$t('reportbd.fs')" />
                 </a-col>
             </a-row>
         </a-form-model-item>
         <a-form-model-item
-            v-for="(room, index) in form.exMeetingRooms"
+            v-for="(room, index) in editData.exMeetingRooms"
             :key="room.key"
             :label="index === 0 ? $t('reportbd.ba') : ''"
             :prop="'exMeetingRooms.' + index + '.rooms'"
@@ -43,8 +43,8 @@
                     <a-icon 
                         type="minus"
                         class="cur"
-                        v-if="form.exMeetingRooms.length > 1"
-                        :disabled="form.exMeetingRooms.length === 1"
+                        v-if="editData.exMeetingRooms.length > 1"
+                        :disabled="editData.exMeetingRooms.length === 1"
                         @click="removeDomain(room)"
                     />
                 </a-col>
@@ -52,7 +52,7 @@
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.fh')" props="exMeetingHotels">
             <a-row 
-                v-for="(hotel, index) in form.exMeetingHotels"
+                v-for="(hotel, index) in editData.exMeetingHotels"
                 :gutter="10" 
                 :key="hotel.level"
             >
@@ -71,16 +71,16 @@
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.bd')" props="exTotalRooms">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exTotalRooms" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exTotalRooms" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.ga')" props="totalQualifiedBuyers">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.totalQualifiedBuyers" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.totalQualifiedBuyers" />
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.gb')" props="qualifiedBuyers">
             <a-row 
-                v-for="(speaker, index) in form.qualifiedBuyers"
+                v-for="(speaker, index) in editData.qualifiedBuyers"
                 :gutter="10" 
                 :key="speaker.region"
             >
@@ -94,115 +94,55 @@
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fz')" props="hardwareCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.hardwareCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.hardwareCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fm')" props="exOpeningCeremonyCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exOpeningCeremonyCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exOpeningCeremonyCost" />
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.fi')" props="exPromotionMarketingCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exPromotionMarketingCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exPromotionMarketingCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fj')" props="exTranslationCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exTranslationCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exTranslationCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fk')" props="exTransportationCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exTransportationCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exTransportationCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.gc')" props="logisticsCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.logisticsCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.logisticsCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fo')" props="exGreenChannelCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exGreenChannelCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exGreenChannelCost" />
         </a-form-model-item>
         
         <a-form-model-item :label="$t('reportbd.fp')" props="exWelcomeActivitiesCost">
-            <a-input-number :min="0" style="width:100%" v-model.number="form.exWelcomeActivitiesCost" />
+            <a-input-number :min="0" style="width:100%" v-model.number="editData.exWelcomeActivitiesCost" />
         </a-form-model-item>
 
-        <a-form-model-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
-        </a-form-model-item>
     </div>
 </template>
 
 <script>
 export default {
+    props:['editData'],
     data() {
-        return {
-            form: {
-                exVenueRental: "",
-                exSpaceRented: "",
-                exMeetingRooms: [{ key: Date.now(), date: "", rooms: "" }],
-                exMeetingHotels: [{
-                    level: "STAR5",
-                    rooms: "",
-                    specify: ""
-                },{
-                    level: "STAR4",
-                    rooms: "",
-                    specify: ""
-                },{
-                    level: "STAR3",
-                    rooms: "",
-                    specify: ""
-                },{
-                    level: "OTHER",
-                    rooms: "",
-                    specify: ""
-                }],
-                totalQualifiedBuyers: "",
-                qualifiedBuyers: [{
-                    region: "GUANGDONG",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "ASIAN",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                },{
-                    region: "OTHER",
-                    total: "",
-                    totalRoomings: "",
-                    totalTransportations: ""
-                }],
-                exTotalRooms: "",
-                hardwareCost: "",
-                exPromotionMarketingCost: "",
-                exTranslationCost: "",
-                exTransportationCost: "",
-                logisticsCost: "",
-                exOpeningCeremonyCost: "",
-                exGreenChannelCost: "",
-                exWelcomeActivitiesCost: "",
-            },
-        };
+        return {};
     },
     methods:{
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            const form = this.form
-            form.exMeetingRooms = form.exMeetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
-            this.$emit('next', form)
-        },
         removeDomain(item) {
-            let index = this.form.exMeetingRooms.indexOf(item);
+            let index = this.editData.exMeetingRooms.indexOf(item);
             if (index !== -1) {
-                this.form.exMeetingRooms.splice(index, 1);
+                this.editData.exMeetingRooms.splice(index, 1);
             }
         },
         addDomain() {
-            this.form.exMeetingRooms.push({ key: Date.now(), date: '', rooms: '' });
+            this.editData.exMeetingRooms.push({ key: Date.now(), date: '', rooms: '' });
         },
     }
 };

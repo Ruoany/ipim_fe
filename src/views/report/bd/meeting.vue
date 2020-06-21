@@ -1,25 +1,21 @@
 <template>
     <div class="all"> 
-         <a-form-model-item :label="$t('reportbd.personCount')" props="totalParticipants">
-            <a-input-number v-model.number="form.totalParticipants" style="width: 100%" />
+         <a-form-model-item :label="$t('reportbd.personCount')" props="totalExhibitors">
+            <a-input-number v-model.number="editData.totalExhibitors" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.macaoPersionCount')" props="totalMacaoParticipants">
-            <a-input-number v-model.number="form.totalMacaoParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.totalMacaoParticipants" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.overseasPersionCount')" props="totalOverseasParticipants">
-            <a-input-number v-model.number="form.totalOverseasParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.totalOverseasParticipants" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.parInformation')" props="participant">
             <upload
                 type="image"
                 :multiple="true"
-                :value.sync="form.attachments"
+                :value.sync="editData.attachments_participant"
                 @handleChange="uploadChange"
             ></upload>
-        </a-form-model-item>
-        <a-form-model-item>
-            <a-button type="primary" @click="preClick" style="margin-right:12px">上一步</a-button>
-            <a-button type="primary" @click="nextClick">下一步</a-button>
         </a-form-model-item>
     </div>
 </template>
@@ -28,34 +24,13 @@
 import Upload from "@/components/upload";
 export default {
     components: { Upload },
-    props:['attachments'],
-    data() {
-        return {
-            form: {
-                totalParticipants: "",
-                totalMacaoParticipants: "",
-                totalOverseasParticipants: "",
-                attachments: []
-            }
-        };
-    },
+    props:['editData'],
     methods: {
-        preClick() {
-            this.$emit('pre')
-        },
-        nextClick(){
-            this.form.attachments = this.form.attachments.map(i => ({...i, type: 'participant'}))
-            this.$emit('next', this.form)
-        },
-        handleChange() {},
         // 更改上傳的文件
         uploadChange(info) {
-            this.form.attachments = info
+            this.editData.attachments = info
         },
     },
-    mounted(){
-        this.form.attachments = this.attachments.filter(i => i.type === 'participant')
-    }
 };
 </script>
 

@@ -34,13 +34,21 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
-                    <!-- <a-button
+                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
+                    <a-button
                         v-if="
                             (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
+                        @click="
+                            NavigateTo('/report/index', {
+                                id: item.id,
+                                reportType: item.type,
+                                reportId: item.report ? item.report.id : '',
+                            })
+                        "
                         >{{ $t("personal.report") }}</a-button
-                    > -->
+                    >
                     <a-button
                         type="link"
                         @click="
@@ -104,7 +112,9 @@
                 </div>
             </cell>
         </div>
+        <div>
         <pagination :page.sync="page" :size="size" :total="total" />
+        </div>
     </a-spin>
 </template>
 
@@ -115,6 +125,7 @@ import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Encourage from "@/apis/encourage";
 import i18n from "@/assets/i18n/index";
+import PDFDown from "@/apis/PDFDown";
 
 export default {
     components: { Cell, Pagination },
@@ -232,6 +243,29 @@ export default {
         NavigateTo: function(path, o) {
             const query = this.Transform(o);
             this.$router.push({ path, query });
+        },
+        ExportPDF: async function(code, type) {
+            // if('ENTERPRISE' != type && 'MISSION' != type && 'CONVENTION' != type && 'ATTEND' != type){
+            //     alert("提示: 目前暂时支持031, 032, 033、034申请类型！");
+            //     return;
+            // }
+
+            this.loading = true;
+            const { data } = await PDFDown.get({
+                applyCode: code,
+                encourageType: type
+            });
+            this.pdfFileName = data ? data.pdfFileName : null;
+            this.loading = false;
+
+            if(null != this.pdfFileName)
+                this.DownloadPDF(this.pdfFileName);
+            else {
+                alert('提示: 服务端数据不匹配！')
+            }
+        },
+        DownloadPDF: function(pdfName){
+            window.open('/api/export_pdf/' + pdfName);
         }
     },
     mounted: function() {
