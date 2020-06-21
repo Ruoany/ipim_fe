@@ -169,12 +169,12 @@
       </div>
       <div v-show="stepCurrent === 6">
         <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox :model="form.agreement">
+          <a-checkbox v-model="form.stateKnow">
             <span>{{ $t('formbe.bh') }}</span>
           </a-checkbox>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox v-model="form.agreement2">
+          <a-checkbox v-model="form.stateAgree">
             <span>{{ $t('formbe.bi') }}</span>
           </a-checkbox>
         </a-form-model-item>
@@ -212,8 +212,8 @@ export default {
         wrapperCol: { span: 16, offset: 4 },
       },
       form: {
-        agreement: false,
-        agreement2: false,
+        stateKnow: false,
+        stateAgree: false,
         costTechAnnual: '',
         costVAS: '',
         applicantId: '',
@@ -283,7 +283,7 @@ export default {
       }
     },
     handleSubmit: async function() {
-      if (!this.form.agreement && !this.form.agreement2) {
+      if (!this.form.stateKnow && !this.form.stateAgree) {
         this.$message.error('請勾選以上申明條件');
         return;
       }
