@@ -12,7 +12,7 @@
         </a-tabs>
         <div class="list-content">
             <a-empty
-                v-if="list.length === 0"
+                v-if="list.length === 0 && otherList.length === 0"
                 :description="$t('util.nodata')"
                 class="empty"
             ></a-empty>
@@ -230,51 +230,38 @@ export default {
             switch (value) {
                 case "approving":
                     return "blue";
-                    break;
                 case "passed":
                     return "green";
-                    break;
                 case "rejected":
                     return "orange";
-                    break;
                 case "withdraw":
                     return "red";
-                    break;
                 case "finish":
                     return "green";
-                    break;
             }
         },
         statusTextFilter: function(value) {
             switch (value) {
                 case "approving":
                     return i18n.t("personal.approving");
-                    break;
                 case "passed":
                     return i18n.t("personal.passed");
-                    break;
                 case "rejected":
                     return i18n.t("personal.rejected");
-                    break;
                 case "withdraw":
                     return i18n.t("personal.withdraw");
-                    break;
                 case "finish":
                     return i18n.t("personal.finish");
-                    break;
             }
         },
         pictureTextFilter: function(value) {
             switch (value) {
                 case "approving":
                     return i18n.t("personal.uploading");
-                    break;
                 case "passed":
                     return i18n.t("personal.showPic");
-                    break;
                 default:
                     return i18n.t("personal.uploadPic");
-                    break;
             }
         }
     },
