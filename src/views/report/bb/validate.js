@@ -1,5 +1,5 @@
-const config = { rules: [{ required: true, message: "plese input" }] };
-const config_select = { rules: [{ required: true, message: "plese select" }] };
+const config = { rules: [{ required: true, message: "please input" }] };
+const config_select = { rules: [{ required: true, message: "please select" }] };
 
 export default {
     name: ["name", config],
@@ -9,5 +9,5 @@ export default {
     phone: ["phone", config],
     fax: ["fax", config],
     email: ["email", config],
-    contactAddress: ["contactAddress", config]
+    contactAddress: ["contactAddress", config],
 };
