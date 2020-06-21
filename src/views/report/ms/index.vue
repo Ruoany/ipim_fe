@@ -44,6 +44,9 @@
                     </a-form-item>
                 </div>
                 <div v-show="step===2">
+                    <a-form-model-item :label="$t('formbb.ba')">
+                        <a-input disabled/>
+                    </a-form-model-item>
                     <a-form-model-item :label="$t('formbb.bb')">
                         <a-checkbox disabled :checked="missionData.haveAirTicket" ref="haveAirTicket" @change="onCheckboxChange('haveAirTicket')">
                             {{ $t('formbb.bx') }}
