@@ -207,7 +207,9 @@ export default {
         },
         async  handleSubmit() {
             const form = this.form
+            form.meetingRooms = form.meetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
             form.exMeetingRooms = form.exMeetingRooms.map(i => ({ ...i, date: i.date.valueOf() }))
+            form.conventionDinings = form.conventionDinings.map(i => ({ ...i, date: i.date.valueOf() }))
             form.attachments = []
             const fileKeys = Object.keys(form).filter(i => i.startsWith('attachments_'))
             fileKeys.forEach(i => {

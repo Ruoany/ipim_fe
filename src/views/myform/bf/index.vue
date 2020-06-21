@@ -88,10 +88,10 @@
         >
           <a-row :gutter="10">
             <a-col :span="6">
-              <a-input :model="room.name" :placeholder="$t('formbf.al')" />
+              <a-input v-model="room.name" :placeholder="$t('formbf.al')" />
             </a-col>
             <a-col :span="8">
-              <a-input :model="room.taxCodeOrID" :placeholder="$t('formbf.ce')" />
+              <a-input v-model="room.taxCodeOrID" :placeholder="$t('formbf.ce')" />
             </a-col>
             <a-col :span="4">
               <a-input-number
@@ -133,19 +133,19 @@
       </div>
       <div v-show="stepCurrent === 4">
         <a-form-model-item :label="$t('formbf.bu1')">
-          <upload :value.sync="form.registerFiles" :disabled="isCheck" />
+          <upload :value.sync="form.registerFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'registerFiles')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbf.bu2')">
-          <upload :value.sync="form.identityForms" :disabled="isCheck" />
+          <upload :value.sync="form.identityForms" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'identityForms')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbf.bu3')">
-          <upload :value.sync="form.identityFiles" :disabled="isCheck" />
+          <upload :value.sync="form.identityFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'identityFiles')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbf.bu4')">
-          <upload :value.sync="form.taxationBills" :disabled="isCheck" />
+          <upload :value.sync="form.taxationBills" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'taxationBills')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbf.bu6')">
-          <upload :value.sync="form.certs" :disabled="isCheck" />
+          <upload :value.sync="form.certs" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'certs')" />
         </a-form-model-item>
         <a-form-item>
           {{ $t('formbf.bu8') }}
@@ -296,10 +296,14 @@ export default {
             res = await B2B.create(form);
           }
           if (res.code === 200) {
-            this.$router.push('personal/funding');
+            this.$router.replace('/index');
           }
         }
       });
+    },
+    //上傳的文件
+    uploadChange(info, type) {
+        this.form[type] = info
     },
     removeDomain(item) {
       let index = this.form.chiefShareHolders.indexOf(item);

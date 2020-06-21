@@ -87,10 +87,10 @@
         >
           <a-row :gutter="10">
             <a-col :span="6">
-              <a-input :model="room.name" :placeholder="$t('formbe.al')" />
+              <a-input v-model="room.name" :placeholder="$t('formbe.al')" />
             </a-col>
             <a-col :span="8">
-              <a-input :model="room.taxCodeOrID" :placeholder="$t('formbe.ce')" />
+              <a-input v-model="room.taxCodeOrID" :placeholder="$t('formbe.ce')" />
             </a-col>
             <a-col :span="4">
               <a-input-number
@@ -132,25 +132,25 @@
       </div>
       <div v-show="stepCurrent === 4">
         <a-form-model-item :label="$t('formbe.bu1')">
-          <upload :value.sync="form.registerFiles" :disabled="isCheck" />
+          <upload :value.sync="form.registerFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'registerFiles')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu2')">
-          <upload :value.sync="form.identityForms" :disabled="isCheck" />
+          <upload :value.sync="form.identityForms" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'identityForms')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu3')">
-          <upload :value.sync="form.identityFiles" :disabled="isCheck" />
+          <upload :value.sync="form.identityFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'identityFiles')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu4')">
-          <upload :value.sync="form.taxationBills" :disabled="isCheck" />
+          <upload :value.sync="form.taxationBills" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'taxationBills')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu5')">
-          <upload :value.sync="form.productInfoFiles" :disabled="isCheck" />
+          <upload :value.sync="form.productInfoFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'productInfoFiles')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu6')">
-          <upload :value.sync="form.certs" :disabled="isCheck" />
+          <upload :value.sync="form.certs" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'certs')" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bu7')">
-          <upload :value.sync="form.companyProfileFiles" :disabled="isCheck" />
+          <upload :value.sync="form.companyProfileFiles" :disabled="isCheck" @handleChange="v=>uploadChange(v, 'companyProfileFiles')" />
         </a-form-model-item>
         <a-form-item>
           {{ $t('formbe.bu8') }}
@@ -298,10 +298,14 @@ export default {
             res = await B2C.create(form);
           }
           if (res.code === 200) {
-            this.$router.push('personal/funding');
+            this.$router.replace('/index');
           }
         }
       });
+    },
+    //上傳的文件
+    uploadChange(info, type) {
+        this.form[type] = info
     },
     removeDomain(item) {
       let index = this.form.chiefShareHolders.indexOf(item);
