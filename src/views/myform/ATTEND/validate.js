@@ -1,5 +1,5 @@
-const config = [{ required: true, message: "plese input" }];
-const config_select = [{ required: true, message: "plese select" }];
+const config = [{ required: true, message: "please input" }];
+const config_select = [{ required: true, message: "please select" }];
 
 export default {
     loading: false,
