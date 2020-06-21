@@ -1,12 +1,12 @@
 export default {
-  rules: {
-    advertCost: [{ required: true, message: "plese input" }],
-    photoFiles: [{ required: true }],
-    applyTime: [{ required: true, message: "plese select" }],
-    exhibitRent: [{ required: true, message: "plese input" }],
-    leafletCost: [{ required: true, message: "plese input" }],
-    makeCost: [{ required: true, message: "plese input" }],
-    trafficCost: [{ required: true, message: "plese input" }],
-    stateAgree: [{ required: true, message: "plese select" }],
-  },
+    rules: {
+        advertCost: [{ required: true, message: "please input" }],
+        photoFiles: [{ required: true }],
+        applyTime: [{ required: true, message: "please select" }],
+        exhibitRent: [{ required: true, message: "please input" }],
+        leafletCost: [{ required: true, message: "please input" }],
+        makeCost: [{ required: true, message: "please input" }],
+        trafficCost: [{ required: true, message: "please input" }],
+        stateAgree: [{ required: true, message: "please select" }],
+    },
 };

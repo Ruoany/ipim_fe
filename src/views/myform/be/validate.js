@@ -1,9 +1,9 @@
 export default {
-  rules: {
-    ecPlatformNmae: [{ required: true, message: "plese input" }],
-    costTechAnnual: [{ required: true, message: "plese input" }],
-    ecProductInfo: [{ required: true, message: "plese input" }],
-    costVAS: [{ required: true, message: "plese input" }],
-    liaisonId: [{ required: true, message: "plese select" }],
-  },
+    rules: {
+        ecPlatformNmae: [{ required: true, message: "please input" }],
+        costTechAnnual: [{ required: true, message: "please input" }],
+        ecProductInfo: [{ required: true, message: "please input" }],
+        costVAS: [{ required: true, message: "please input" }],
+        liaisonId: [{ required: true, message: "please select" }],
+    },
 };
