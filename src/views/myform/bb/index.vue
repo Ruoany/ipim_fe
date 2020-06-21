@@ -384,7 +384,7 @@
                 >
                     {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}</a-button>
                 <a-button
-                    v-show="stepCurrent === 6"
+                    v-show="stepCurrent === 6 && !isCheck"
                     type="primary"
                     html-type="submit"
                 >{{ $t("formbb.bv") }}</a-button>
