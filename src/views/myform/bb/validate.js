@@ -1,5 +1,5 @@
-const config = [{ required: true, message: "plese input" }];
-const config_select = [{ required: true, message: "plese select" }];
+const config = [{ required: true, message: "please input" }];
+const config_select = [{ required: true, message: "please select" }];
 
 export default {
     formatLayout: {
@@ -32,5 +32,9 @@ export default {
         railTicketFee: config,
         tranOtherNum: config,
         tranOtherFee: config,
+    },
+    formatLayout: {
+        labelCol: { span: 24 },
+        wrapperCol: { span: 24 },
     },
 };
