@@ -290,7 +290,7 @@ export default {
       this.$refs.miecf.validate(async (valid) => {
         if (valid) {
           let res;
-          const form = { ...this.form, totalAmount: this.totalAmount };
+          const form = { ...this.form, totalAmount: this.totalAmount, liaison: this.selectedLiaison};
           form.chiefShareHolders = form.chiefShareHolders.filter((i) => i.name != '');
           if (this.update) {
             res = await B2C.update(form);
