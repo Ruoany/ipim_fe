@@ -3,10 +3,12 @@
         <div class="ad">
             <div class="tag" :class="activityStatus"></div>
             <img
+                v-if="scope"
                 style="cursor:pointer;border-radius:6px;object-fit: cover;"
                 :src="scope"
                 @click="$emit('handleClick')"
             />
+            <div v-else class="default"/>
         </div>
         <div class="info">
             <div class="top flex">
@@ -52,6 +54,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.default {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url(../../../assets/image/logo.svg);
+}
 .flex {
     display: flex;
 }

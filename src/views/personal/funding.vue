@@ -111,6 +111,82 @@
                     >
                 </div>
             </cell>
+            <cell
+                v-for="item in otherList"
+                :key="item.id"
+                scope=""
+                :status="item.status"
+                activity-status="PROGRESS"
+                :title="item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
+                :date="item.applyTime"
+                :code="item.code"
+                @handleClick="
+                    $router.push(`/show/detail?id=${item.activity.id}`)
+                "
+            >
+                <a-tag slot="status" :color="item.status | formatStatus">{{
+                    item.status | statusTextFilter
+                }}</a-tag>
+                <div slot="action" class="button-wrapper">
+                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
+                    <a-button
+                        type="link"
+                        @click="
+                            FormNavigate(item.type, {
+                                d: item.id
+                            })
+                        "
+                        >{{
+                            item.status === "rejected"
+                                ? $t("personal.update")
+                                : $t("personal.showForm")
+                        }}</a-button
+                    >
+                    <a-button
+                        v-if="
+                            (item.status === 'passed' ||
+                                item.status === 'finish')
+                        "
+                        type="link"
+                        @click="
+                            NavigateTo('/personal/question', {
+                                participateId: item.id,
+                                institutionId: item.institution.id,
+                                questionnaireAnswerId:
+                                    item.questionnaireAnswerId,
+                                method: item.method,
+                                type: item.type,
+                                participateScope: item.activityScope
+                            })
+                        "
+                        >{{
+                            item.questionnaireAnswerId
+                                ? $t("personal.showQuestion")
+                                : $t("personal.writeQuestion")
+                        }}</a-button
+                    >
+                    <a-button
+                        v-if="
+                            (item.status === 'passed' ||
+                                item.status === 'finish')
+                        "
+                        type="link"
+                        :disabled="item.applyPictureStatus === 'approving'"
+                        @click="
+                            NavigateTo('/personal/picture', {
+                                participateId: item.id,
+                                liaisonId: item.liaisonId,
+                                institutionId: item.institution.id,
+                                applyPictureId: item.applyPictureId,
+                                participateScope: item.activityScope
+                            })
+                        "
+                        >{{
+                            item.applyPictureStatus | pictureTextFilter
+                        }}</a-button
+                    >
+                </div>
+            </cell>
         </div>
         <div>
         <pagination :page.sync="page" :size="size" :total="total" />
@@ -136,7 +212,8 @@ export default {
             page: 0,
             size: 5,
             total: 1,
-            list: []
+            list: [],
+            otherList: []
         };
     },
     computed: {
@@ -216,8 +293,22 @@ export default {
                 size: this.size,
                 approved: this.status === "unapproved"
             });
-            this.list = data ? data.content : [];
-            this.total = data ? data.totalElements : 0;
+            const tempList = []
+            const tempOtherList = []
+            let total = 0
+            if(data) {
+                data.content.forEach(i => {
+                    if(i.activity) {
+                        tempList.push(i)
+                    } else {
+                        tempOtherList.push(i)
+                    }
+                })
+                total = data.totalElements
+            }
+            this.list = tempList;
+            this.otherList = tempOtherList;
+            this.total = total;
             this.loading = false;
         },
         Transform: function(o) {
