@@ -231,6 +231,8 @@ export default {
             return o;
         },
         FormNavigate: function(form, o) {
+            // 參數MISSION轉為bb
+            form = form == "MISSION" ? "bb" : form;
             const query = {
                 form,
                 ...this.Transform(o)

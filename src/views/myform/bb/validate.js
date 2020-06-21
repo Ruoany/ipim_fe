@@ -2,6 +2,13 @@ const config = [{ required: true, message: "plese input" }];
 const config_select = [{ required: true, message: "plese select" }];
 
 export default {
+    formatLayout: {
+        labelCol: { span: 24 },
+        wrapperCol: { span: 24 },
+    },
+    form: {},
+    name: ["name", config],
+    files: ["files", config_select],
     loading: false,
     stepCurrent: 0,
     rules: {
@@ -25,9 +32,5 @@ export default {
         railTicketFee: config,
         tranOtherNum: config,
         tranOtherFee: config,
-    },
-    formatLayout: {
-        labelCol: { span: 24 },
-        wrapperCol: { span: 24 },
     },
 };

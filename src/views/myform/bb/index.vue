@@ -90,7 +90,11 @@
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-model-item :label="$t('formbb.bj')">
-                    <a-radio-group v-model="attendType" @change="onAttendTypeChange">
+                    <a-radio-group 
+                        v-model="attendType" 
+                        @change="onAttendTypeChange"
+                        :disabled="isCheck"
+                    >
                         <a-radio value="a">{{ $t("formbb.bk") }}</a-radio>
                         <a-radio value="b">{{ $t("formbb.bl") }}</a-radio>
                     </a-radio-group>
@@ -207,23 +211,23 @@
             </div>
             <div v-show="stepCurrent === 5">
                 <a-form-model-item :label="$t('formbb.ba')">
-                    <a-input v-decorator />
+                    <a-input   :disabled="isCheck"/>
                     <div>{{ $t('formbb.bw') }}</div>
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formbb.bb')">
-                    <a-checkbox :checked="form.haveAirTicket" ref="haveAirTicket" @change="onCheckboxChange('haveAirTicket')">
+                    <a-checkbox :disabled="isCheck" :checked="form.haveAirTicket" ref="haveAirTicket" @change="onCheckboxChange('haveAirTicket')">
                         {{ $t('formbb.bx') }}
                     </a-checkbox>
-                    <a-checkbox :checked="form.haveBoatTicket" ref="haveBoatTicket" @change="onCheckboxChange('haveBoatTicket')">
+                    <a-checkbox :disabled="isCheck" :checked="form.haveBoatTicket" ref="haveBoatTicket" @change="onCheckboxChange('haveBoatTicket')">
                         {{ $t('formbb.by') }}
                     </a-checkbox>
-                    <a-checkbox :checked="form.haveRailTicket" ref="haveRailTicket" @change="onCheckboxChange('haveRailTicket')">
+                    <a-checkbox :disabled="isCheck" :checked="form.haveRailTicket" ref="haveRailTicket" @change="onCheckboxChange('haveRailTicket')">
                         {{ $t('formbb.bz') }}
                     </a-checkbox>
-                    <a-checkbox :checked="form.haveTranOther" ref="haveTranOther" @change="onCheckboxChange('haveTranOther')">
+                    <a-checkbox :disabled="isCheck" :checked="form.haveTranOther" ref="haveTranOther" @change="onCheckboxChange('haveTranOther')">
                         {{ $t('formbb.ca') }}
                     </a-checkbox>
-                    <a-input v-model="form.tranOtherNote" style="width: 30%" :disabled="!form.haveTranOther"/>
+                    <a-input v-model="form.tranOtherNote" style="width: 30%" :disabled="isCheck||!form.haveTranOther"/>
                 </a-form-model-item>
                 
                 <a-row  v-if="form.haveAirTicket" type="flex">
@@ -330,12 +334,12 @@
                     </a-col>
                 </a-row>
                 <a-form-model-item >
-                    <a-checkbox :checked="form.haveTransportationCost" ref="haveTransportationCost" @change="onCheckboxChange('haveTransportationCost')">
+                    <a-checkbox :disabled="isCheck" :checked="form.haveTransportationCost" ref="haveTransportationCost" @change="onCheckboxChange('haveTransportationCost')">
                         {{ $t('formbb.cn') + $t('formbb.cj') }}
                     </a-checkbox>
                 </a-form-model-item>
                 <a-form-model-item >
-                    <a-checkbox :checked="form.haveAccommodationCost" ref="haveAccommodationCost" @change="onCheckboxChange('haveAccommodationCost')">
+                    <a-checkbox :disabled="isCheck"  :checked="form.haveAccommodationCost" ref="haveAccommodationCost" @change="onCheckboxChange('haveAccommodationCost')">
                         {{ $t('formbb.cn') + $t('formbb.cj') }}
                     </a-checkbox>
                 </a-form-model-item>
@@ -351,16 +355,16 @@
                         <a-radio :value="false">{{ $t("util.no") }}</a-radio>
                     </a-radio-group>
                     <div>{{ $t("formbb.bi") }}</div>
-                    <a-textarea v-model="form.receiveStatement" v-decorator :rows="4" />
+                    <a-textarea :disabled="isCheck" v-model="form.receiveStatement"  :rows="4" />
                 </a-form-model-item>
                 <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
                     <div>{{ $t("formbb.bg") }}</div>
-                    <a-radio-group v-model="form.haveCharge" v-decorator>
+                    <a-radio-group v-model="form.haveCharge"  :disabled="isCheck">
                         <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
                         <a-radio :value="false">{{ $t("util.no") }}</a-radio>
                     </a-radio-group>
                     <div>{{ $t("formbb.bi") }}</div>
-                    <a-textarea v-model="form.chargeStatement" v-decorator :rows="4" />
+                    <a-textarea :disabled="isCheck" v-model="form.chargeStatement"  :rows="4" />
                 </a-form-model-item>
                 <a-form-model-item :label="$t('formbb.bh')" :wrapper-col="formatLayout.wrapperCol">
                 </a-form-model-item>
@@ -380,7 +384,7 @@
                 >
                     {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}</a-button>
                 <a-button
-                    v-show="stepCurrent === 6"
+                    v-show="stepCurrent === 6 && !isCheck"
                     type="primary"
                     html-type="submit"
                 >{{ $t("formbb.bv") }}</a-button>
