@@ -504,7 +504,6 @@ export default {
     },
     methods: {
         async initData() {
-            console.log('this.formId', this.formId);
             if (this.formId) {
                 this.$store.dispatch("setChangeFalse");
                 const { data } = await EA.one(this.formId);
