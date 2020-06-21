@@ -120,9 +120,6 @@
                 :title="item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
                 :date="item.applyTime"
                 :code="item.code"
-                @handleClick="
-                    $router.push(`/show/detail?id=${item.activity.id}`)
-                "
             >
                 <a-tag slot="status" :color="item.status | formatStatus">{{
                     item.status | statusTextFilter

@@ -6,8 +6,8 @@
                 <form-bb v-if="form === 'bb'" :list="activityList"></form-bb>
                 <form-enterprise v-if="form === 'ENTERPRISE'" :list="activityList"></form-enterprise>
                 <form-convention v-if="form === 'CONVENTION'" :list="activityList"></form-convention>
-                <form-be v-if="form === 'be'" :list="activityList"></form-be>
-                <form-bf v-if="form === 'bf'" :list="activityList"></form-bf>
+                <form-be v-if="form === 'ECB2C'" :list="activityList"></form-be>
+                <form-bf v-if="form === 'ECB2B'" :list="activityList"></form-bf>
                 <form-ecb2c v-if="form === 'ecb2c'" :list="activityList"></form-ecb2c>
             </a-tab-pane>
             <a-tab-pane :tab="$t('show.ab')" key="2">
