@@ -54,8 +54,12 @@
                     >{{ $t("menu.bb") }}</a-menu-item
                 >
             </a-sub-menu>
-            <a-sub-menu :disabled="encourageDis">
-                <a-tooltip v-if="encourageDis" slot="title" placement="bottom">
+            <a-sub-menu>
+                <span slot="title" class="flex center">
+                    {{ $t("menu.finEnc") }}
+                    <i class="iconfont iconjiantouarrow486 selected"></i>
+                </span>
+                <!-- <a-tooltip v-if="encourageDis" slot="title" placement="bottom">
                     <template slot="title">
                         <span>{{ $t("menu.tips") }}</span>
                     </template>
@@ -63,41 +67,50 @@
                         {{ $t("menu.finEnc") }}
                         <i class="iconfont iconjiantouarrow486 selected"></i>
                     </span>
-                </a-tooltip>
-                <span v-else slot="title" class="flex center">
-                    {{ $t("menu.finEnc") }}
-                    <i class="iconfont iconjiantouarrow486 selected"></i>
-                </span>
-                <a-menu-item
-                    key="special1"
-                    @click="formNavigate('/myform/special', 'ATTEND')"
-                    >{{ $t("menu.ca") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="special2"
-                    @click="formNavigate('/myform/special', 'bb')"
-                    >{{ $t("menu.cb") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="special3"
-                    @click="formNavigate('/myform/special', 'ENTERPRISE')"
-                    >{{ $t("menu.cc") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="special4"
-                    @click="formNavigate('/myform/special', 'CONVENTION')"
-                    >{{ $t("menu.cd") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="special7"
-                    @click="formNavigate('/myform/special', 'be')"
-                    >{{ $t("menu.ce") }}</a-menu-item
-                >
-                <a-menu-item
-                    key="special8"
-                    @click="formNavigate('/myform/special', 'bf')"
-                    >{{ $t("menu.ci") }}</a-menu-item
-                >
+                </a-tooltip> -->
+                <a-menu-item-group>
+                    <span style="color:red;" slot="title">
+                        <a-icon type="warning" />
+                        {{ encourageDis ? $t("menu.tips") : "" }}
+                    </span>
+                    <a-menu-item
+                        key="special1"
+                        @click="formNavigate('/myform/special', 'ATTEND')"
+                        :disabled="encourageDis"
+                    >
+                        {{ $t("menu.ca") }}
+                    </a-menu-item>
+                    <a-menu-item
+                        key="special2"
+                        @click="formNavigate('/myform/special', 'bb')"
+                        :disabled="encourageDis"
+                        >{{ $t("menu.cb") }}
+                    </a-menu-item>
+                    <a-menu-item
+                        key="special3"
+                        @click="formNavigate('/myform/special', 'ENTERPRISE')"
+                        :disabled="encourageDis"
+                        >{{ $t("menu.cc") }}
+                    </a-menu-item>
+                    <a-menu-item
+                        key="special4"
+                        @click="formNavigate('/myform/special', 'CONVENTION')"
+                        :disabled="encourageDis"
+                        >{{ $t("menu.cd") }}
+                    </a-menu-item>
+                    <a-menu-item
+                        key="special7"
+                        @click="formNavigate('/myform/special', 'be')"
+                        :disabled="encourageDis"
+                        >{{ $t("menu.ce") }}
+                    </a-menu-item>
+                    <a-menu-item
+                        key="special8"
+                        @click="formNavigate('/myform/special', 'bf')"
+                        :disabled="encourageDis"
+                        >{{ $t("menu.ci") }}
+                    </a-menu-item>
+                </a-menu-item-group>
             </a-sub-menu>
             <a-menu-item
                 @click="$router.push('/download_personal')"
