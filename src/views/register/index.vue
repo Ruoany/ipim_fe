@@ -262,15 +262,15 @@ export default {
         },
         lanChange(key) {
             sessionStorage.setItem("language", key);
+            this.$store.dispatch("setLan", key);
         },
         onSuccess() {
-            this.$message.success("註冊成功，請登錄");
+            this.$message.success("註冊成功");
             this.$router.replace("/login");
         },
         handleSubmit() {
             this.$refs.register.validate(async valid => {
                 if (valid) {
-                    // console.log(">>>>>>", this.form);
                     const { success, data } = await User.register(this.form);
                     if (success) {
                         this.onSuccess();

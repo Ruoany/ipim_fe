@@ -30,7 +30,8 @@ module.exports = {
         open: true,
         proxy: {
             "/api": {
-                target: "http://fe.exhibition.iteratech.net/api/",
+                target1: "http://fe.exhibition.iteratech.net/api/",
+                target: "http://api-exhibition.servier.iteratech.net",
                 pathRewrite: {
                     "^/api": "",
                 },
