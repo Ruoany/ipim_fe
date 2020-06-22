@@ -85,7 +85,7 @@
                                 : $t("personal.writeQuestion")
                         }}</a-button
                     >
-                    <a-button
+                    <!-- <a-button
                         v-if="
                             (item.status === 'passed' ||
                                 item.status === 'finish') &&
@@ -105,7 +105,7 @@
                         >{{
                             item.applyPictureStatus | pictureTextFilter
                         }}</a-button
-                    >
+                    > -->
                 </div>
             </cell>
         </div>
