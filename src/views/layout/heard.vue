@@ -70,7 +70,7 @@
                 </a-tooltip> -->
                 <a-menu-item-group>
                     <span style="color:red;" slot="title">
-                        <a-icon type="warning" />
+                        <a-icon v-if="encourageDis" type="warning" />
                         {{ encourageDis ? $t("menu.tips") : "" }}
                     </span>
                     <a-menu-item
