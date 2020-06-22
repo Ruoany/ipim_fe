@@ -178,33 +178,33 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 3">
-                    <a-form-model-item :label="$t('reportbb.ay')" prop="summaryFiles" required >
+                    <a-form-model-item :label="$t('reportbb.ay')" prop="summaryFiles"  >
                         <upload
                             type="WORD"
                             :value.sync="form.summaryFiles"
                             @handleChange="v=>uploadChange(v, 'summaryFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.az')" prop="accountFiles" required >
+                    <a-form-model-item :label="$t('reportbb.az')" prop="accountFiles"  >
                         <upload
                             type="WORD"
                             :value.sync="form.accountFiles"
                             @handleChange="v=>uploadChange(v, 'accountFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.dg')" prop="scheduleFiles" required >
+                    <a-form-model-item :label="$t('reportbb.dg')" prop="scheduleFiles"  >
                         <upload
                             :value.sync="form.scheduleFiles"
                             @handleChange="v=>uploadChange(v, 'scheduleFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.dh')" prop="nameListFiles" required >
+                    <a-form-model-item :label="$t('reportbb.dh')" prop="nameListFiles"  >
                         <upload
                             :value.sync="form.nameListFiles"
                             @handleChange="v=>uploadChange(v, 'nameListFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.bd')" prop="cardFiles" required >
+                    <a-form-model-item :label="$t('reportbb.bd')" prop="cardFiles"  >
                         <upload
                             type="image"
                             :multiple="true"
@@ -212,7 +212,7 @@
                             @handleChange="v=>uploadChange(v, 'cardFiles')"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('reportbb.bc')" prop="photoFiles" required >
+                    <a-form-model-item :label="$t('reportbb.bc')" prop="photoFiles"  >
                         <upload
                             type="image"
                             :multiple="true"
@@ -236,7 +236,7 @@
                 <div v-show="step === 5">
                     <a-form-model-item>
                         <p>{{$t('reportbb.bv')}}</p>
-                        <div>{{$t("reportbb.bn")}}<a-input-number v-model.number="form.totalCustomers" :min="0" />{{$t("reportbb.bw")}}</div>
+                        <div>{{$t("reportbb.bn")}}<a-input-number v-model.number="totalCustomers" :min="0" />{{$t("reportbb.bw")}}</div>
                         <div>{{$t("reportbb.bo")}}</div>
                     </a-form-model-item>
                     <a-form-model-item
@@ -289,19 +289,38 @@
                     </a-row>
                     <a-form-model-item>
                         <p>{{$t('reportbb.bz')}}</p>
-                        <a-textarea v-model="form.opinion" />
+                        <a-radio-group v-model="form.opinionEffect">
+                            <a-radio value="VSAT">{{$t("reportbb.cb")}}</a-radio>
+                            <a-radio value="SAT">{{$t("reportbb.cc")}}</a-radio>
+                            <a-radio value="NOR">{{$t("reportbb.cd")}}</a-radio>
+                            <a-radio value="UNSAT">{{$t("reportbb.ce")}}</a-radio>
+                            <a-radio value="VUNSAT">{{$t("reportbb.cf")}}</a-radio>
+                        </a-radio-group>
                     </a-form-model-item>
-                    <a-form-model-item prop="againMission">
+                    <a-form-model-item>
                         <p>{{$t('reportbb.ca')}}</p>
-                        <a-input v-model="form.againMission" />
+                        <a-radio-group v-model="form.choiceOpinionAttendAgain">
+                            <a-radio :value="0">{{$t("reportbb.cg")}}</a-radio>
+                            <a-radio :value="1">{{$t("reportbb.ch")}}</a-radio>
+                            <a-radio :value="2">{{$t("reportbb.ci")}}</a-radio>
+                        </a-radio-group>
+                        <a-input v-show="[1,2].indexOf(form.choiceOpinionAttendAgain)>-1" v-model="form.opinionAttendAgain" placeholder="原因"/>
                     </a-form-model-item>
                 </div>
                 <div v-show="step === 6">
                     <a-form-model-item :label="$t('reportbb.bj')" prop="otherSupport">
-                        <a-input :placeholder="$t('reportbb.bm')" v-model="form.otherSupport"></a-input>
+                        <a-radio-group v-model="form.haveOtherSupport">
+                            <a-radio :value="true">{{$t("reportbb.db")}}</a-radio>
+                            <a-radio :value="false">{{$t("reportbb.dc")}}</a-radio>
+                        </a-radio-group>
+                        <a-input v-if="form.haveOtherSupport" :placeholder="$t('reportbb.bm')" v-model="form.otherSupport"></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('reportbb.bk')" prop="chargeExplain">
-                        <a-input :placeholder="$t('reportbb.bm')" v-model="form.chargeExplain"></a-input>
+                        <a-radio-group v-model="form.haveChargeExplain">
+                            <a-radio :value="true">{{$t("reportbb.db")}}</a-radio>
+                            <a-radio :value="false">{{$t("reportbb.dc")}}</a-radio>
+                        </a-radio-group>
+                        <a-input v-if="form.haveChargeExplain" :placeholder="$t('reportbb.bm')" v-model="form.chargeExplain"></a-input>
                     </a-form-model-item>
                     <a-form-item :label="$t('reportbb.bl')">
                         <a-radio-group v-model="form.stateAgree">
@@ -362,9 +381,31 @@ export default {
                 makeCost: 0,
                 makeCostFiles: [],
                 stateAgree: false,
-                receive: ''
+                receive: '',
             },
         };
+    },
+    computed: {
+        totalCustomers: {
+            get() {
+                return this.form.customers.length;
+            },
+            set(val) {
+                if (val > this.form.customers.length) {
+                    for (let i = this.form.customers.length; i<val; i++) {
+                        setTimeout(()=>{
+                            this.addGovSupports();
+                        }, 100)
+                    }
+                } else {
+                    for (let i = this.form.customers.length; i>val; i--) {
+                        setTimeout(()=>{
+                            this.removeGovSupports();
+                        }, 100)
+                    }
+                }
+            }
+        }
     },
     methods: {
         initData: async function(recordId) {
@@ -418,13 +459,13 @@ export default {
             });
         },
         removeGovSupports() {
-            const len = this.form.meetingRooms.length
+            const len = this.form.customers.length
             if (len > 1) {
-                this.form.meetingRooms.splice(len - 1, 1);
+                this.form.customers.splice(len - 1, 1);
             }
         },
         addGovSupports() {
-            this.form.meetingRooms.push({ key: Date.now(), value: '' });
+            this.form.customers.push({key: Date.now(), amount: '', cooperationWay: '', name: '', region: '', status: ''});
         },
         //上傳的文件
         uploadChange(info, type) {
