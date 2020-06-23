@@ -264,11 +264,15 @@ export default {
             this.loading = false;
         },
         handleSubmit: async function() {
-            // const { cardFiles, photoFiles } = this.form
-            // if(cardFiles.length < 5 || photoFiles < 5){
-            //     this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
-            //     return 
-            // }
+            const { cardFiles, photoFiles } = this.form
+            if(cardFiles.length < 5){
+                this.$message.error("請上傳不少於5張當地參與展會代表名片");
+                return 
+            }
+            if(photoFiles < 5){
+                this.$message.error("請上傳不少於5張活動照片");
+                return 
+            }
             this.$refs.miecf.validate(async valid  => {
                 if (valid) {
                     this.loading = true

@@ -12,22 +12,22 @@
         </a-tabs>
         <div class="list-content">
             <a-empty
-                v-if="list.length === 0 && otherList.length === 0"
+                v-if="list.length === 0"
                 :description="$t('util.nodata')"
                 class="empty"
             ></a-empty>
             <cell
                 v-for="item in list"
                 :key="item.id"
-                :scope="item.activity.scope"
+                :scope="item.activity ? item.activity.scope : ''"
                 :status="item.status"
-                :activity-status="item.activity.showStatus"
-                :title="item.activity.nameZh"
-                :address="item.activity.place"
-                :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+                :activity-status="item.activity ? item.activity.showStatus : 'PROGRESS'"
+                :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
+                :address="item.activity ? item.activity.place : '無地址'"
+                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.applyTime"
                 :code="item.code"
                 @handleClick="
-                    $router.push(`/show/detail?id=${item.activity.id}`)
+                    item.activity && $router.push(`/show/detail?id=${item.activity.id}`)
                 "
             >
                 <a-tag slot="status" :color="item.status | formatStatus">{{
@@ -37,7 +37,7 @@
                     <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
-                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
+                            item.activity && (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         @click="
@@ -63,16 +63,14 @@
                         }}</a-button
                     >
                     <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish') &&
-                                item.activity.showStatus === 'END'
+                        v-if="(item.status === 'passed' || item.status === 'finish') && 
+                            (item.activity  ? item.activity.showStatus === 'END' : true)
                         "
                         type="link"
                         @click="
                             NavigateTo('/personal/question', {
                                 participateId: item.id,
-                                activityId: item.activity.id,
+                                activityId: item.activity ? item.activity.id : '',
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
@@ -88,90 +86,15 @@
                         }}</a-button
                     >
                     <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish') &&
-                                item.activity.showStatus === 'END'
+                        v-if="(item.status === 'passed' || item.status === 'finish') && 
+                            (item.activity  ? item.activity.showStatus === 'END' : true)
                         "
                         type="link"
                         :disabled="item.applyPictureStatus === 'approving'"
                         @click="
                             NavigateTo('/personal/picture', {
                                 participateId: item.id,
-                                activityId: item.activity.id,
-                                liaisonId: item.liaisonId,
-                                institutionId: item.institution.id,
-                                applyPictureId: item.applyPictureId,
-                                participateScope: item.activityScope
-                            })
-                        "
-                        >{{
-                            item.applyPictureStatus | pictureTextFilter
-                        }}</a-button
-                    >
-                </div>
-            </cell>
-            <cell
-                v-for="item in otherList"
-                :key="item.id"
-                scope=""
-                :status="item.status"
-                activity-status="PROGRESS"
-                :title="item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
-                :date="item.applyTime"
-                :code="item.code"
-            >
-                <a-tag slot="status" :color="item.status | formatStatus">{{
-                    item.status | statusTextFilter
-                }}</a-tag>
-                <div slot="action" class="button-wrapper">
-                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
-                    <a-button
-                        type="link"
-                        @click="
-                            FormNavigate(item.type, {
-                                d: item.id
-                            })
-                        "
-                        >{{
-                            item.status === "rejected"
-                                ? $t("personal.update")
-                                : $t("personal.showForm")
-                        }}</a-button
-                    >
-                    <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish')
-                        "
-                        type="link"
-                        @click="
-                            NavigateTo('/personal/question', {
-                                participateId: item.id,
-                                institutionId: item.institution.id,
-                                questionnaireAnswerId:
-                                    item.questionnaireAnswerId,
-                                method: item.method,
-                                type: item.type,
-                                participateScope: item.activityScope
-                            })
-                        "
-                        >{{
-                            item.questionnaireAnswerId
-                                ? $t("personal.showQuestion")
-                                : $t("personal.writeQuestion")
-                        }}</a-button
-                    >
-                    <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish')
-                        "
-                        type="link"
-                        :disabled="item.applyPictureStatus === 'approving'"
-                        @click="
-                            NavigateTo('/personal/picture', {
-                                participateId: item.id,
+                                activityId: item.activity ? item.activity.id : '',
                                 liaisonId: item.liaisonId,
                                 institutionId: item.institution.id,
                                 applyPictureId: item.applyPictureId,
@@ -210,7 +133,6 @@ export default {
             size: 5,
             total: 1,
             list: [],
-            otherList: []
         };
     },
     computed: {
@@ -277,22 +199,8 @@ export default {
                 size: this.size,
                 approved: this.status === "unapproved"
             });
-            const tempList = []
-            const tempOtherList = []
-            let total = 0
-            if(data) {
-                data.content.forEach(i => {
-                    if(i.activity) {
-                        tempList.push(i)
-                    } else {
-                        tempOtherList.push(i)
-                    }
-                })
-                total = data.totalElements
-            }
-            this.list = tempList;
-            this.otherList = tempOtherList;
-            this.total = total;
+            this.list = data ? data.content : [];
+            this.total = data ? data.totalElements : 0;
             this.loading = false;
         },
         Transform: function(o) {
