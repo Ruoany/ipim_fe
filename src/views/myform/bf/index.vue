@@ -96,6 +96,7 @@
             <a-col :span="4">
               <a-input-number
                 :min="0"
+                :max="100"
                 v-model.number="room.holdingPercent"
                 style="width:100%"
                 :placeholder="$t('formbf.cf')"
@@ -162,7 +163,7 @@
           <a-input-number v-model.number="form.costSiteConstruction" :min="0" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbf.bc1')">
-          <a-input-number :value="totalAmount" disabled :min="0" style="width: 100%" />
+          <a-input-number :value="totalAmount" disabled style="width: 100%" />
         </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 6">
