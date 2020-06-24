@@ -3,11 +3,11 @@
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('enterprise.aa')" disabled />
             <a-step :title="$t('enterprise.ab')" disabled />
-            <a-step :title="$t('enterprise.ac')" disabled />
             <a-step :title="$t('enterprise.ad')" disabled />
-            <a-step :title="$t('enterprise.ae')" disabled />
+            <a-step :title="$t('enterprise.ac')" disabled />
             <a-step :title="$t('enterprise.af')" disabled />
             <a-step :title="$t('enterprise.ah')" disabled />
+            <a-step :title="$t('enterprise.ae')" disabled />
             <a-step :title="$t('enterprise.ai')" disabled />
             <a-step :title="$t('enterprise.aj')" disabled />
         </a-steps>
@@ -27,7 +27,10 @@
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 1">
-                    <a-form-model-item prop="institutionId" :label="$t('enterprise.ak')">
+                    <a-form-model-item
+                        prop="institutionId"
+                        :label="$t('enterprise.ak')"
+                    >
                         <a-input :value="currentInstitution.nameZh" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.al')">
@@ -37,39 +40,29 @@
                         <a-input :value="currentInstitution.namePt" disabled />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.an')">
-                        <a-input :value="currentInstitution.siteRegistrationCode" disabled />
+                        <a-input
+                            :value="currentInstitution.siteRegistrationCode"
+                            disabled
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ao')">
-                        <a-input :value="currentInstitution.registrationNumber" disabled />
+                        <a-input
+                            :value="currentInstitution.registrationNumber"
+                            disabled
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ap')">
-                        <a-input :value="currentInstitution.streetZh" disabled />
+                        <a-input
+                            :value="currentInstitution.streetZh"
+                            disabled
+                        />
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 2">
-                    <a-form-model-item :label="$t('enterprise.aq')">
-                        <a-input v-model="currentInstitution.taxpayerName" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ar')">
-                        <a-input v-model="currentInstitution.taxpayerNo" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item prop="taxpayerType" :label="$t('enterprise.as')">
-                        <a-radio-group v-model="form.taxpayerType" :disabled="isCheck">
-                            <a-radio value="INDIVIDUAL_BUSINESS">
-                                {{
-                                $t("enterprise.at")
-                                }}
-                            </a-radio>
-                            <a-radio value="LIMITED_COMPANY">
-                                {{
-                                $t("enterprise.au")
-                                }}
-                            </a-radio>
-                        </a-radio-group>
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
-                    <a-form-model-item prop="liaisonId" :label="$t('enterprise.av')">
+                    <a-form-model-item
+                        prop="liaisonId"
+                        :label="$t('enterprise.av')"
+                    >
                         <a-select v-model="form.liaisonId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in liaisonList"
@@ -83,46 +76,79 @@
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.aw')">
-                        <a-input :value="selectedLiaison.titleNameZh" disabled></a-input>
+                        <a-input
+                            :value="selectedLiaison.titleNameZh"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ax')">
-                        <a-input :value="selectedLiaison.phone" disabled></a-input>
+                        <a-input
+                            :value="selectedLiaison.phone"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ay')">
-                        <a-input :value="selectedLiaison.email" disabled></a-input>
+                        <a-input
+                            :value="selectedLiaison.email"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="`${$t('enterprise.az')}1`">
-                        <a-input :value="selectedLiaison.address" disabled></a-input>
+                        <a-input
+                            :value="selectedLiaison.address"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="`${$t('enterprise.az')}2`">
-                        <a-input v-model="form.liaisonOtherAddress" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.liaisonOtherAddress"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 4">
-                    <a-form-model-item prop="receive" :label="$t('enterprise.ae')">
-                        <a-radio-group v-model="form.receive" :disabled="isCheck">
-                            <a-radio value="CHEQUE">
-                                {{
-                                $t("enterprise.ba")
-                                }}
+                <div v-show="stepCurrent === 3">
+                    <a-form-model-item :label="$t('enterprise.aq')">
+                        <a-input
+                            v-model="currentInstitution.taxpayerName"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ar')">
+                        <a-input
+                            v-model="currentInstitution.taxpayerNo"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="taxpayerType"
+                        :label="$t('enterprise.as')"
+                    >
+                        <a-radio-group
+                            v-model="form.taxpayerType"
+                            :disabled="isCheck"
+                        >
+                            <a-radio value="INDIVIDUAL_BUSINESS">
+                                {{ $t("enterprise.at") }}
                             </a-radio>
-                            <a-radio value="TRANSFER">
-                                {{
-                                $t("enterprise.bb")
-                                }}
+                            <a-radio value="LIMITED_COMPANY">
+                                {{ $t("enterprise.au") }}
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 5">
-                    <a-form-model-item prop="activityId" :label="$t('enterprise.bc')">
+                <div v-show="stepCurrent === 4">
+                    <a-form-model-item
+                        prop="activityId"
+                        :label="$t('enterprise.bc')"
+                    >
                         <a-select v-model="form.activityId" :disabled="isCheck">
                             <a-select-option
                                 v-for="item in list"
                                 :key="item.id"
                                 :value="item.id"
                                 :label="item.nameZh"
-                            >{{ item.nameZh }}</a-select-option>
+                                >{{ item.nameZh }}</a-select-option
+                            >
                         </a-select>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bd')">
@@ -133,23 +159,39 @@
                                 style="width:48%;"
                             ></a-input>
                             <span style="width:4%;text-align:center;">~</span>
-                            <a-input :value="selectedActivity.endTime" disabled style="width:48%;"></a-input>
+                            <a-input
+                                :value="selectedActivity.endTime"
+                                disabled
+                                style="width:48%;"
+                            ></a-input>
                         </div>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.be')">
-                        <a-input :value="selectedActivity.place" disabled></a-input>
+                        <a-input
+                            :value="selectedActivity.place"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bf')">
-                        <a-input :value="selectedActivity.organizerStrs" disabled></a-input>
+                        <a-input
+                            :value="selectedActivity.organizerStrs"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.cm')">
-                        <a-input :value="selectedActivity.helperStrs" disabled></a-input>
+                        <a-input
+                            :value="selectedActivity.helperStrs"
+                            disabled
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bg')">
-                        <a-input v-model="form.productServe" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.productServe"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 6">
+                <div v-show="stepCurrent === 5">
                     <p>{{ $t("enterprise.bh") }}</p>
                     <ul>
                         <li>{{ $t("enterprise.bi") }}</li>
@@ -157,36 +199,59 @@
                     </ul>
                     <p>{{ $t("enterprise.bk") }}</p>
                     <a-form-model-item :label="$t('enterprise.bl')">
-                        <a-input v-model="form.exhibitRent" type="number" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.exhibitRent"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bm')">
-                        <a-input v-model="form.makeCost" type="number" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.makeCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bn')">
-                        <a-input v-model="form.trafficCost" type="number" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.trafficCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bo')">
-                        <a-input v-model="form.leafletCost" type="number" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.leafletCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bp')">
-                        <a-input v-model="form.advertCost" type="number" :disabled="isCheck"></a-input>
+                        <a-input
+                            v-model="form.advertCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.bq')">
-                        <a-input :value="totalAmount" :placeholder="$t('enterprise.cp')" disabled>
+                        <a-input
+                            :value="totalAmount"
+                            :placeholder="$t('enterprise.cp')"
+                            disabled
+                        >
                             <span slot="suffix">MOP</span>
                         </a-input>
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.br')">
-                        <a-radio-group v-model="form.haveGovernment" :disabled="isCheck">
+                        <a-radio-group
+                            v-model="form.haveGovernment"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="false">
-                                {{
-                                $t("enterprise.bs")
-                                }}
+                                {{ $t("enterprise.bs") }}
                             </a-radio>
                             <a-radio :value="true">
-                                {{
-                                $t("enterprise.bt")
-                                }}
+                                {{ $t("enterprise.bt") }}
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
@@ -220,10 +285,34 @@
                             style="margin-bottom:10px;"
                         >
                             <div class="goverments-title">
-                                <a-input v-model="item.name" :disabled="isCheck"></a-input>
-                                <a-input v-model="item.supportContent" :disabled="isCheck"></a-input>
+                                <a-input
+                                    v-model="item.name"
+                                    :disabled="isCheck"
+                                ></a-input>
+                                <a-input
+                                    v-model="item.supportContent"
+                                    :disabled="isCheck"
+                                ></a-input>
                             </div>
                         </div>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 6">
+                    <a-form-model-item
+                        prop="receive"
+                        :label="$t('enterprise.ae')"
+                    >
+                        <a-radio-group
+                            v-model="form.receive"
+                            :disabled="isCheck"
+                        >
+                            <a-radio value="CHEQUE">
+                                {{ $t("enterprise.ba") }}
+                            </a-radio>
+                            <a-radio value="TRANSFER">
+                                {{ $t("enterprise.bb") }}
+                            </a-radio>
+                        </a-radio-group>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 7">
@@ -231,66 +320,115 @@
                     <p>{{ $t("enterprise.bx") }}</p>
                     <p>{{ $t("enterprise.by") }}</p>
                     <a-form-model-item>
-                        <a-radio-group v-model="form.stateAgree" :disabled="isCheck">
+                        <a-radio-group
+                            v-model="form.stateAgree"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="true">
-                                {{
-                                $t("enterprise.bz")
-                                }}
+                                {{ $t("enterprise.bz") }}
                             </a-radio>
                             <a-radio :value="false">
-                                {{
-                                $t("enterprise.ca")
-                                }}
+                                {{ $t("enterprise.ca") }}
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 8">
-                    <a-form-model-item prop="identityFiles" :label="$t('enterprise.cb')">
-                        <upload-file :value.sync="form.identityFiles" :disabled="isCheck" />
+                    <a-form-model-item
+                        prop="identityFiles"
+                        :label="$t('enterprise.cb')"
+                    >
+                        <upload-file
+                            :value.sync="form.identityFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.cc')">
-                        <upload-file :value.sync="form.companyProfile" :disabled="isCheck" />
+                        <upload-file
+                            :value.sync="form.companyProfile"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.cd')">
-                        <upload-file :value.sync="form.exhibitData" :disabled="isCheck" />
+                        <upload-file
+                            :value.sync="form.exhibitData"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item prop="incomeFiles" :label="$t('enterprise.ce')">
-                        <upload-file :value.sync="form.incomeFiles" :disabled="isCheck" />
+                    <a-form-model-item
+                        prop="incomeFiles"
+                        :label="$t('enterprise.ce')"
+                    >
+                        <upload-file
+                            :value.sync="form.incomeFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item prop="depositFiles" :label="$t('enterprise.cf')">
-                        <upload-file :value.sync="form.depositFiles" :disabled="isCheck" />
+                    <a-form-model-item
+                        prop="depositFiles"
+                        :label="$t('enterprise.cf')"
+                    >
+                        <upload-file
+                            :value.sync="form.depositFiles"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
-                    <a-form-model-item prop="quotationSheet" :label="$t('enterprise.cg')">
-                        <upload-file :value.sync="form.quotationSheet" :disabled="isCheck" />
+                    <a-form-model-item
+                        prop="quotationSheet"
+                        :label="$t('enterprise.cg')"
+                    >
+                        <upload-file
+                            :value.sync="form.quotationSheet"
+                            :disabled="isCheck"
+                        />
                     </a-form-model-item>
                     <a-form-model-item :label="$t('enterprise.ch')">
                         <!-- <upload-file :value.sync="form.noSubmit" :disabled="isCheck" /> -->
-                        <a-radio-group v-model="form.noSubmit" :disabled="isCheck">
+                        <a-radio-group
+                            v-model="form.noSubmit"
+                            :disabled="isCheck"
+                        >
                             <a-radio :value="true">
-                                {{
-                                $t("util.agree")
-                                }}
+                                {{ $t("util.agree") }}
                             </a-radio>
                             <a-radio :value="false">
-                                {{
-                                $t("util.disagree")
-                                }}
+                                {{ $t("util.disagree") }}
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                     <div v-if="!form.noSubmit">
-                        <a-form-model-item prop="registerFiles" :label="$t('enterprise.ci')">
-                            <upload-file :value.sync="form.registerFiles" :disabled="isCheck" />
+                        <a-form-model-item
+                            prop="registerFiles"
+                            :label="$t('enterprise.ci')"
+                        >
+                            <upload-file
+                                :value.sync="form.registerFiles"
+                                :disabled="isCheck"
+                            />
                         </a-form-model-item>
                         <a-form-model-item :label="$t('enterprise.cj')">
-                            <upload-file :value.sync="form.noOwing" :disabled="isCheck" />
+                            <upload-file
+                                :value.sync="form.noOwing"
+                                :disabled="isCheck"
+                            />
                         </a-form-model-item>
-                        <a-form-model-item prop="identityForm" :label="$t('enterprise.ck')">
-                            <upload-file :value.sync="form.identityForm" :disabled="isCheck" />
+                        <a-form-model-item
+                            prop="identityForm"
+                            :label="$t('enterprise.ck')"
+                        >
+                            <upload-file
+                                :value.sync="form.identityForm"
+                                :disabled="isCheck"
+                            />
                         </a-form-model-item>
-                        <a-form-model-item prop="taxationBills" :label="$t('enterprise.cl')">
-                            <upload-file :value.sync="form.taxationBills" :disabled="isCheck" />
+                        <a-form-model-item
+                            prop="taxationBills"
+                            :label="$t('enterprise.cl')"
+                        >
+                            <upload-file
+                                :value.sync="form.taxationBills"
+                                :disabled="isCheck"
+                            />
                         </a-form-model-item>
                     </div>
                 </div>
@@ -300,23 +438,23 @@
                         type="primary"
                         @click="stepCurrent--"
                         style="margin-right:12px"
-                    >上一步</a-button>
+                        >上一步</a-button
+                    >
                     <a-button
                         v-show="stepCurrent < 8"
                         type="primary"
                         :disabled="timeNext > 0"
                         @click="handleNext"
                     >
-                        {{
-                        timeNext > 0 ? `(${timeNext}S)` : "下一步"
-                        }}
+                        {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}
                     </a-button>
                     <a-button
                         v-show="stepCurrent === 8"
                         type="primary"
                         :class="isSubmit ? 'none' : ''"
                         @click="handleSubmit"
-                    >{{ $t("enterprise.co") }}</a-button>
+                        >{{ $t("enterprise.co") }}</a-button
+                    >
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
