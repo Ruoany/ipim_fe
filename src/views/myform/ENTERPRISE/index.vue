@@ -95,11 +95,27 @@
                     </a-form-model-item>
                     <a-form-model-item :label="`${$t('enterprise.az')}1`">
                         <a-input
-                            :value="selectedLiaison.address"
+                            :value="currentInstitution.streetZh"
                             disabled
                         ></a-input>
                     </a-form-model-item>
-                    <a-form-model-item :label="`${$t('enterprise.az')}2`">
+                    <a-form-model-item :label="$t('enterprise.cq')">
+                        <a-radio-group
+                            v-model="form.addressSame"
+                            :disabled="isCheck"
+                        >
+                            <a-radio :value="true">{{
+                                $t("util.yes")
+                            }}</a-radio>
+                            <a-radio :value="false">{{
+                                $t("util.no")
+                            }}</a-radio>
+                        </a-radio-group>
+                    </a-form-model-item>
+                    <a-form-model-item
+                        v-if="!form.addressSame"
+                        :label="$t('enterprise.cr')"
+                    >
                         <a-input
                             v-model="form.liaisonOtherAddress"
                             :disabled="isCheck"
@@ -314,6 +330,24 @@
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
+                    <a-form-model-item
+                        v-if="form.receive === 'TRANSFER'"
+                        :label="$t('enterprise.cs')"
+                    >
+                        <upload-file
+                            :value.sync="form.bankRecordFiles"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item
+                        v-if="form.receive === 'TRANSFER'"
+                        :label="$t('enterprise.ct')"
+                    >
+                        <upload-file
+                            :value.sync="form.bankAuthorizeFiles"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 7">
                     <p>{{ $t("enterprise.bw") }}</p>
@@ -505,7 +539,10 @@ export default {
                 identityForm: [],
                 taxationBills: [],
                 noSubmit: true,
-                companyProfile: []
+                companyProfile: [],
+                addressSame: true,
+                bankRecordFiles: [],
+                bankAuthorizeFiles: []
             }
         };
     },
