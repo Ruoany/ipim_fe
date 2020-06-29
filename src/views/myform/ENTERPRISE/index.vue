@@ -93,30 +93,25 @@
                             disabled
                         ></a-input>
                     </a-form-model-item>
-                    <a-form-model-item :label="`${$t('enterprise.az')}1`">
-                        <a-input
-                            :value="currentInstitution.streetZh"
-                            disabled
-                        ></a-input>
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.cq')">
+                    <a-form-model-item :label="$t('enterprise.az')">
                         <a-radio-group
                             v-model="form.addressSame"
                             :disabled="isCheck"
                         >
                             <a-radio :value="true">{{
-                                $t("util.yes")
+                                $t("enterprise.cq")
                             }}</a-radio>
                             <a-radio :value="false">{{
-                                $t("util.no")
+                                $t("util.other")
                             }}</a-radio>
                         </a-radio-group>
-                    </a-form-model-item>
-                    <a-form-model-item
-                        v-if="!form.addressSame"
-                        :label="$t('enterprise.cr')"
-                    >
                         <a-input
+                            v-if="form.addressSame"
+                            :value="currentInstitution.streetZh"
+                            disabled
+                        ></a-input>
+                         <a-input
+                            v-else
                             v-model="form.liaisonOtherAddress"
                             :disabled="isCheck"
                         ></a-input>
