@@ -49,18 +49,18 @@
                     <a-input style="width:100%" v-model="item.description" :placeholder="$t('reportbd.co')" />
                 </a-col>
                 <a-col :span="1">
+                    <a-icon type="plus" class="cur" @click="addGovSupports()" />
+                </a-col>
+                <a-col :span="1">
                     <a-icon 
                         type="minus"
                         class="cur"
+                        v-if="editData.govSupports.length > 1"
+                        :disabled="editData.govSupports.length === 1"
                         @click="removeGovSupports(item)"
                     />
                 </a-col>
             </a-row>
-        </a-form-model-item>
-        <a-form-model-item>
-            <a-button type="dashed" style="width: 60%" @click="addGovSupports">
-                <a-icon type="plus" /> {{$t("reportbd.gk")}}
-            </a-button>
         </a-form-model-item>
 
         <a-form-model-item :label="$t('reportbd.gf')">

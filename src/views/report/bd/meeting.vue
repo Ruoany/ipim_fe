@@ -1,13 +1,13 @@
 <template>
     <div class="all"> 
          <a-form-model-item :label="$t('reportbd.personCount')" props="totalExhibitors">
-            <a-input-number v-model.number="editData.totalExhibitors" style="width: 100%" />
+            <a-input-number v-model.number="editData.totalExhibitors" :min="0" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.macaoPersionCount')" props="totalMacaoParticipants">
-            <a-input-number v-model.number="editData.totalMacaoParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.totalMacaoParticipants" :min="0" style="width: 100%" />
         </a-form-model-item>
          <a-form-model-item :label="$t('reportbd.overseasPersionCount')" props="totalOverseasParticipants">
-            <a-input-number v-model.number="editData.totalOverseasParticipants" style="width: 100%" />
+            <a-input-number v-model.number="editData.totalOverseasParticipants" :min="0" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('reportbd.parInformation')" props="participant">
             <upload

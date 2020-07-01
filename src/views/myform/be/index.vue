@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <a-steps v-model="stepCurrent" direction="vertical" size="small">
+    <a-steps :current="stepCurrent" direction="vertical" size="small">
       <a-step :title="$t('formbe.aa')" />
       <a-step :title="$t('formbe.ae')" />
       <a-step :title="$t('formbe.ak')" />
@@ -95,6 +95,7 @@
             <a-col :span="4">
               <a-input-number
                 :min="0"
+                :max="100"
                 v-model.number="room.holdingPercent"
                 style="width:100%"
                 :placeholder="$t('formbe.cf')"
@@ -119,7 +120,7 @@
         </a-form-model-item>
 
         <a-form-model-item :label="$t('formbe.cc')">
-          <a-input-number v-model.number="form.macaoResiHoldPercent" :min="0" style="width:100%" />
+          <a-input-number v-model.number="form.macaoResiHoldPercent" :min="0" :max="100" style="width:100%" />
         </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 3">
@@ -164,7 +165,7 @@
           <a-input-number v-model.number="form.costVAS" :min="0" style="width: 100%" />
         </a-form-model-item>
         <a-form-model-item :label="$t('formbe.bc1')">
-          <a-input-number :value="totalAmount" disabled :min="0" style="width: 100%" />
+          <a-input-number :value="totalAmount" disabled style="width: 100%" />
         </a-form-model-item>
       </div>
       <div v-show="stepCurrent === 6">
@@ -300,6 +301,8 @@ export default {
           if (res.code === 200) {
             this.$router.replace('/index');
           }
+        } else {
+          this.$message.error("表單存在必填項為空或者不合法字符，請檢查");
         }
       });
     },
