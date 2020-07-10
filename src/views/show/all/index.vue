@@ -69,6 +69,7 @@ export default {
                 size: this.size,
                 page: this.page,
                 manyStatus: status,
+                manyScope: ["LOCAL", "OUTLANDS"],
                 participate: this.participate
             };
             const { data } = await Activity.get(body);

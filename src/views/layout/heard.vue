@@ -62,104 +62,38 @@
                 <a-menu-item
                     key="special1"
                     @click="formNavigate('/myform/special', 'ATTEND')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.ca") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.ca") }}</span>
+                    <span> {{ $t("menu.ca") }}</span>
                 </a-menu-item>
                 <a-menu-item
                     key="special2"
                     @click="formNavigate('/myform/special', 'bb')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.cb") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.cb") }}</span>
+                    <span> {{ $t("menu.cb") }}</span>
                 </a-menu-item>
                 <a-menu-item
                     key="special3"
                     @click="formNavigate('/myform/special', 'ENTERPRISE')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.cc") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.cc") }}</span>
+                    <span> {{ $t("menu.cc") }}</span>
                 </a-menu-item>
                 <a-menu-item
                     key="special4"
                     @click="formNavigate('/myform/special', 'CONVENTION')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.cd") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.cd") }}</span>
+                    <span> {{ $t("menu.cd") }}</span>
                 </a-menu-item>
                 <a-menu-item
                     key="special7"
                     @click="formNavigate('/myform/special', 'ECB2C')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.ce") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.ce") }}</span>
+                    <span> {{ $t("menu.ce") }}</span>
                 </a-menu-item>
                 <a-menu-item
                     key="special8"
                     @click="formNavigate('/myform/special', 'ECB2B')"
-                    :disabled="encourageDis"
                 >
-                    <a-tooltip
-                        v-if="encourageDis"
-                        placement="right"
-                        :title="$t('menu.tips')"
-                    >
-                        <template>
-                            <a-icon type="warning" style="color:red;"></a-icon>
-                            <span> {{ $t("menu.ci") }}</span>
-                        </template>
-                    </a-tooltip>
-                    <span v-else> {{ $t("menu.ci") }}</span>
+                    <span> {{ $t("menu.ci") }}</span>
                 </a-menu-item>
             </a-sub-menu>
             <a-menu-item

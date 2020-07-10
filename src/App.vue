@@ -49,7 +49,8 @@ export default {
     display: none;
 }
 body {
-    font-family: "Microsoft JhengHei", "Microsoft Yahei" !important;
+    font-family: "Microsoft JhengHei", "Microsoft Yahei", Helvetica Neue,
+        Verdana, Arial, LiHei Pro Medium, Helvetica, sans-serif;
     // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     //     "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica,
     //     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",

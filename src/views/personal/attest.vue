@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+        <a-button
+            class="update"
+            type="primary"
+            @click="$router.push('/personal/mechanism')"
+            >修改機構信息</a-button
+        >
         <a-descriptions :title="$t('personal.m')" :column="1">
             <a-descriptions-item :label="$t('personal.logo')"
                 ><img :src="form.logo" class="img"
@@ -228,19 +234,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.img {
-    width: 80px;
-    max-height: 80px;
-}
-/deep/ .ant-descriptions-item > .ant-descriptions-item-label {
-    width: 250px;
-    text-align: right;
-    white-space: pre-wrap;
-    color: #aaa;
-}
-/deep/.ant-descriptions-item > .ant-descriptions-item-content {
-    color: #000;
-    padding-left: 20px;
-    max-width: 700px;
+.container {
+    position: relative;
+    .update {
+        position: absolute;
+        right: 0;
+    }
+    .img {
+        width: 80px;
+        max-height: 80px;
+    }
+    /deep/ .ant-descriptions-item > .ant-descriptions-item-label {
+        width: 250px;
+        text-align: right;
+        white-space: pre-wrap;
+        color: #aaa;
+    }
+    /deep/.ant-descriptions-item > .ant-descriptions-item-content {
+        color: #000;
+        padding-left: 20px;
+        max-width: 700px;
+    }
 }
 </style>

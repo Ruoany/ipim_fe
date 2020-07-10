@@ -110,7 +110,7 @@
                             :value="currentInstitution.streetZh"
                             disabled
                         ></a-input>
-                         <a-input
+                        <a-input
                             v-else
                             v-model="form.liaisonOtherAddress"
                             :disabled="isCheck"
@@ -623,8 +623,10 @@ export default {
         isCertified() {
             this.$warning({
                 title: "提示",
-                content: "當前機構尚未認證，請點擊‘知道了’前往機構認證",
-                okText: "知道了",
+                content: "填寫本申請表前，需先進行機構認證！",
+                okText: "去認證",
+                maskClosable: false,
+                keyboard: false,
                 onOk: () => {
                     this.$router.push("/personal/info");
                 }
