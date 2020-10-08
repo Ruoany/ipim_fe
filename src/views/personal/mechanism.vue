@@ -86,6 +86,7 @@
                         v-model="item.percent"
                         :placeholder="$t('personal.sharePer')"
                     ></a-input>
+                    
                     <a-button
                         v-if="index == 0"
                         shape="circle"
@@ -106,6 +107,189 @@
                     ></a-button>
                 </div>
             </a-form-model-item>
+             
+           <a-form-model-item :label="$t('personal.country')">
+                 
+                <a-select allowClear={true}  style="width: 328px" size="small"  v-model="form.countryZh"  >
+                    
+                    <a-select-option  v-for="item in country" :key="item.merName" @click="info3(item.id)" :label="item.merName">
+                            {{item.merName}}
+                    </a-select-option>
+                          
+                </a-select>
+
+                                      
+                 <a-select allowClear={true}  style="width: 275px;margin-left: 26px"  size="small" v-model="form.provinceZh" >
+                    <a-select-option   v-for="item in province" :key="item.name"  @click="info4(item.id)" :label="item.name">
+                            {{item.name}}
+                    </a-select-option>
+                </a-select>
+                
+               
+                 <a-select  allowClear={true} style="width: 316px;margin-left: 24px" size="small" v-model="form.cityZh" >
+                    <a-select-option  v-for="item in city" :key="item.sname" :label="item.sname">
+                            {{item.sname}}
+                    </a-select-option>
+                </a-select>
+                
+
+            </a-form-model-item>
+             
+              <a-form-model-item :label="$t('personal.street')">
+                <a-input v-model="form.streetZh" style="width:968px;height:30px"></a-input>
+            </a-form-model-item>
+
+        
+             <a-Row>
+              <a-Col span="12">
+            <a-form-model-item :label="$t('personal.concact')">
+                 <a-select  style="width: 228px" v-model="form.telAreaCode" optionLabelProp="code" placeholder="區號" optionLabelProp="code" >
+                     <a-select-option
+                                v-for="item in AreaCode"
+                                :key="item.id"
+                                :value="item.code"
+                                :code="item.code"
+                                
+                                >{{
+                                    `${item.nameZh}-${item.nameEn}-${item.code}`
+                                }}</a-select-option
+                            >
+                </a-select>
+                <a-input v-model="form.tel" style="width:226px;height:32px;margin-left:6px" ></a-input>
+            </a-form-model-item>
+            </a-Col>
+            
+              
+                <a-Col span="12">
+             <a-form-model-item :label="$t('personal.fax')"> 
+                 <a-select  style="width: 228px" v-model="form.faxAreaCode" optionLabelProp="code" placeholder="區號"  >
+                   <a-select-option
+                                v-for="item in AreaCode"
+                                :key="item.id"
+                                :value="item.code"
+                               :code="item.code"
+                                >{{
+                                    `${item.nameZh}-${item.nameEn}-${item.code}`
+                                }}</a-select-option
+                            >
+                </a-select>
+                <a-input v-model="form.fax" style="width:226px;height:32px;margin-left:6px" ></a-input>
+            </a-form-model-item>
+                </a-Col>
+            </a-Row>
+             
+          
+          <a-form-model-item :label="$t('personal.industryNumber')">
+                <a-input v-model="form.industryNumber" style="width:968px;height:30px"></a-input>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.ba')">
+                 <a-select placeholder="Please select" mode="multiple"   style="width: 968px" v-model="form.scopes">
+                    <a-select-option :value="item" v-for="item in industry" :key="item"   >
+                            {{item}}
+                    </a-select-option>
+                </a-select>
+            </a-form-model-item>
+
+           <!-- 主要市場 -->
+            <a-form-model-item :label="$t('personal.bb')">
+                <a-checkbox-group v-model="form.targetMarkets">
+                     <a-checkbox value="MAINLAND_CHINA">中国内地</a-checkbox>
+                    <a-checkbox value="MACAO">中國澳門</a-checkbox>
+                    <a-checkbox value="HONGKONG">中國香港</a-checkbox>
+                    <a-checkbox value="THE_UNITED_STATES">美國</a-checkbox>
+                    <a-checkbox value="PORTUGUESE_SPEAKING_COUNTRIES_REGIONS">葡語國家</a-checkbox>
+                     <a-checkbox value="ASIA_AREA">亞洲</a-checkbox>
+                    <a-checkbox value="EUROPE">歐洲</a-checkbox>
+                    <a-checkbox value="AFRICA">非洲</a-checkbox>
+                    <a-checkbox value="SOUTH_AMERICA">南美洲</a-checkbox>
+                    <a-checkbox value="NORTH_AMERICA">北美洲</a-checkbox>
+                    <a-checkbox value="OTHER">其他</a-checkbox>
+
+
+
+
+                </a-checkbox-group>
+            </a-form-model-item>
+
+             <a-form-model-item prop="nature" :label="$t('personal.ar')">
+                 <a-select  style="width: 968px" v-model="form.nature" defaultValue="OTHER">
+                    <a-select-option value="OTHER">
+                            政府機構
+                    </a-select-option>
+                    <a-select-option value="ENTERPRISE">
+                            大學/研究機構
+                    </a-select-option>
+                    <a-select-option value="BUSINESS_OR_ASSOCIATION">
+                            商/協會
+                    </a-select-option>
+                    <a-select-option value="UNIVERSITY">
+                            企業
+                    </a-select-option>
+                    <a-select-option value="GOVERNMENT_ORGANS">
+                            其他
+                    </a-select-option>
+                   
+                </a-select>
+            </a-form-model-item>
+             
+             <a-form-model-item :label="$t('personal.idNumber')">
+                <a-input v-model="form.idnumber"></a-input>
+            </a-form-model-item>
+            <a-form-model-item :label="$t('personal.chargeName')">
+                <a-input v-model="form.chargeName"></a-input>
+            </a-form-model-item>
+
+             <a-form-model-item :label="$t('personal.an')">
+                    <upload
+                        :value.sync="form.groupEstablishmentFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.ao')">
+                    <upload
+                        :value.sync="form.identificationBureauFiles"
+                       
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.ap')">
+                    <upload
+                        :value.sync="form.legalPersonFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.aj')">
+                    <upload
+                        :value.sync="form.businessRegistrationFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.ak')">
+                    <upload
+                        :value.sync="form.salesTaxOpenFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.al')">
+                    <upload
+                        :value.sync="form.salesTaxFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+            <a-form-model-item :label="$t('personal.am')">
+                    <upload
+                        :value.sync="form.shareholderSamesFiles"
+                        
+                    ></upload>
+            </a-form-model-item>
+
+
             <a-form-model-item>
                 <a-button
                     :style="{ marginRight: '8px' }"
@@ -146,15 +330,90 @@
         <a-descriptions-item :label="$t('personal.z')">{{
             form.dateOfEstablishment
         }}</a-descriptions-item>
-        <a-descriptions-item :label="$t('personal.aa')">{{
+        <!-- <a-descriptions-item :label="$t('personal.aa')">{{
             form.business
-        }}</a-descriptions-item>
+        }}</a-descriptions-item> -->
         <a-descriptions-item :label="$t('personal.ac')">{{
             form.institutionShareholders | formatShareholders
         }}</a-descriptions-item>
         <a-descriptions-item :label="$t('personal.ab')">
             {{ form.deal === true ? $t("util.yes") : $t("util.no") }}
         </a-descriptions-item>
+
+        <!-- <a-descriptions-item :label="$t('personal.ar')">{{
+            form.nature
+        }}</a-descriptions-item> -->
+
+          <a-descriptions-item :label="$t('personal.country')">{{
+            form.countryZh
+        }}</a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.province')">{{
+            form.provinceZh
+        }}</a-descriptions-item>
+
+         <a-descriptions-item :label="$t('personal.city')">{{
+            form.cityZh
+        }}</a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.street')">{{
+            form.streetZh
+        }}</a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.concact')">{{
+            form.tel
+        }}</a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.fax')">{{
+            form.fax
+        }}</a-descriptions-item>
+
+      
+        <a-descriptions-item :label="$t('personal.idNumber')" v-if="form.nature = 'BUSINESS_OR_ASSOCIATION' ">{{
+            form.idnumber
+        }}</a-descriptions-item>
+
+          <a-descriptions-item :label="$t('personal.chargeName')" v-if="form.nature = 'BUSINESS_OR_ASSOCIATION' ">{{
+            form.chargeName
+        }}</a-descriptions-item>
+       
+        <a-descriptions-item :label="$t('personal.an')" v-if="form.nature = 'BUSINESS_OR_ASSOCIATION' ">
+       
+            <a-icon type="download" @click="down1(form.groupEstablishmentFiles[0].url,form.groupEstablishmentFiles[0].oriname)"/>
+
+        </a-descriptions-item>
+        
+
+         <a-descriptions-item :label="$t('personal.ao')" v-if="form.nature = 'BUSINESS_OR_ASSOCIATION' ">
+            <a-icon type="download" @click="down2(form.identificationBureauFiles[0].url,form.identificationBureauFiles[0].oriname)"/>
+        </a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.ap')" v-if="form.nature = 'BUSINESS_OR_ASSOCIATION' ">
+             <a-icon type="download" @click="down3(form.legalPersonFiles[0].url,form.legalPersonFiles[0].oriname)"/>
+        </a-descriptions-item>
+
+         <a-descriptions-item :label="$t('personal.aj')" v-if="form.nature = 'ENTERPRISE' ">
+           <a-icon type="download" @click="down1(form.businessRegistrationFiles[0].url,form.businessRegistrationFiles[0].oriname)" /> 
+        </a-descriptions-item>
+
+        <a-descriptions-item :label="$t('personal.ak')" v-if="form.nature = 'ENTERPRISE' ">
+           
+            <a-icon type="download" @click="down1(form.salesTaxOpenFiles[0].url,form.salesTaxOpenFiles[0].oriname)" /> 
+    </a-descriptions-item>
+
+         <a-descriptions-item :label="$t('personal.al')" v-if="form.nature = 'ENTERPRISE' ">
+           
+            <a-icon type="download" @click="down1( form.salesTaxFiles[0].url, form.salesTaxFiles[0].oriname)" /> 
+        </a-descriptions-item>
+
+         <a-descriptions-item :label="$t('personal.am')" v-if="form.nature = 'ENTERPRISE' ">
+    
+            <a-icon type="download" @click="down1(form.shareholderSamesFiles[0].url,form.shareholderSamesFiles[0].oriname)" /> 
+        </a-descriptions-item>
+
+
+
+
     </a-descriptions>
 </template>
 
@@ -166,11 +425,16 @@ import Upload from "@/components/upload";
 import Institution from "@/apis/institution";
 import User from "@/apis/user";
 import { formatString } from "@/common/format";
+
+
 export default {
     components: { Upload },
     data() {
         let config = { required: true, message: "Please input" };
         return {
+            targetMarkets:[],
+            
+            countrys: ['中國'],
             upFiles,
             rules: {
                 nameZh: [config],
@@ -181,14 +445,49 @@ export default {
                 dateOfEstablishment: [config],
                 business: [config],
                 deal: [config],
-                institutionShareholders: [config]
+                institutionShareholders: [config],
+                nature:[config],
             },
+            // nature: [],
+            country:[],
+            industry:[],
+            AreaCode:[],
+            province:[],
+            city: [],
             form: {
                 adminId: this.$store.getters.currentUser,
                 logo: "",
                 nameZh: "",
                 nameEn: "",
                 namePt: "",
+                nature: [],
+
+                countryZh:[],
+                provinceZh: [],
+                cityZh: [],
+                // merName:"",
+                // name:"",
+                // sname:"",
+
+                streetZh: "",
+                telAreaCode: [],
+                faxAreaCode: [],
+                
+                
+                scopes: [],
+                targetMarkets: [],
+                tel: "",
+                industryNumber: "",
+                fax: "",
+                idnumber: "",
+                chargeName: "",
+                identificationBureauFiles: [],
+                groupEstablishmentFiles: [],
+                legalPersonFiles: [],
+                // businessRegistrationFiles: "",
+                salesTaxOpenFiles: [],
+                salesTaxFiles: [],
+                shareholderSamesFiles: [],
                 siteRegistrationCode: "",
                 registrationNumber: "",
                 taxpayerNo: "",
@@ -199,7 +498,9 @@ export default {
                 institutionShareholders: [{ name: "", percent: "" }]
             },
             loading: false,
-            spinning: false
+            spinning: false,
+            appData:[],
+            citys:[]
         };
     },
     computed: {
@@ -226,6 +527,15 @@ export default {
         }
     },
     methods: {
+        change(){
+            
+            for(var i = 0; i<this.appData.length; i++ ) {
+                if(this.appData[i].name == this.form.provinceZh){
+                    this.citys = this.appData[i].city
+                }
+                
+            }
+        },
         beforeUpload(file) {
             const isJPG =
                 file.type === "image/jpeg" || file.type === "image/png";
@@ -263,9 +573,11 @@ export default {
             this.$refs.form.validate(async valid => {
                 if (valid) {
                     this.spinning = true;
+                    console.log(this.form,"123123123");
                     const { code, message } = await Institution.create(
                         formatString(this.form)
                     );
+                    console.log(message,"==============================");
                     if (code !== 200) {
                         return;
                     }
@@ -279,6 +591,10 @@ export default {
         async initData() {
             this.spinning = true;
             const { data } = await Institution.one(this.currentInstitution.id);
+
+              
+               console.log("123456",data);
+
             this.form = data;
             if (this.form.institutionShareholders.length === 0) {
                 this.form.institutionShareholders.push({
@@ -294,13 +610,122 @@ export default {
                     data.dateOfEstablishment
                 );
             }
+            // console.log("-----------", this.form)
             this.spinning = false;
-        }
+        },
+
+        async  info () {
+              const { data } = await Institution.info();
+              console.log("=================",data);
+              this.country = data;
+             
+            //       for(var i = 0; i<this.country.length;i++){
+            //           if(this.country[i].level == 0){
+            //               this.form.country[i] = this.country[i];
+            //           }
+            //       }
+              
+          
+            //   console.log("===1",this.form.country);
+          },
+
+
+        //  async getPronvice() {
+        //         const { data } = 
+        //   },
+
+
+          async  info1 () {
+              const { data } = await Institution.info1();
+              
+              this.industry = data;
+              console.log("121212",this.industry);
+          },
+
+         async getCode () {
+           const { data } = await Institution.info2();
+           this.AreaCode = data;
+           
     },
+
+    async  info3 (id) {
+              const { data } = await Institution.info3(id);
+             
+              this.province = data;
+
+              
+              
+              
+          },
+
+    async  info4 (id) {
+              const { data } = await Institution.info4(id);
+              console.log("=================1",data);
+              this.city = data;
+              console.log("===1",this.city);
+
+              
+              
+          },
+
+
+
+         down1(url, name) {
+             console.log("11111",url);
+            let x = new XMLHttpRequest();
+            x.open("GET", url, true);
+            x.responseType = "blob";
+            x.onload = e => {
+                let url = window.URL.createObjectURL(x.response);
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = name;
+                a.click();
+            };
+            x.send();
+        },
+        down2(url, name) {
+            let x = new XMLHttpRequest();
+            x.open("GET", url, true);
+            x.responseType = "blob";
+            x.onload = e => {
+                let url = window.URL.createObjectURL(x.response);
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = name;
+                a.click();
+            };
+            x.send();
+        },
+        down3(url, name) {
+            let x = new XMLHttpRequest();
+            x.open("GET", url, true);
+            x.responseType = "blob";
+            x.onload = e => {
+                let url = window.URL.createObjectURL(x.response);
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = name;
+                a.click();
+            };
+            x.send();
+        },
+    },
+
+
     mounted() {
         if (!this.$route.query.type) {
             this.initData();
         }
+       
+        this.appData = require('@/json/country.json');
+
+        this.getCode();
+    },
+    created() {
+        this.info();
+        this.info1();
+        
     }
 };
 </script>

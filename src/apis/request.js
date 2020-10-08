@@ -16,9 +16,11 @@ request.interceptors.request.use(
         config.headers = {
             Authorization: sessionStorage.getItem("token"),
         };
+        console.info('return config');
         return config;
     },
     error => {
+        console.info('return error');
         return Promise.reject(error);
     }
 );
@@ -27,8 +29,13 @@ request.interceptors.response.use(
         const { data, config } = response;
         if (!data.success && config.responseType !== "blob") {
             message.error(data.message);
+            console.info('return');
+            console.info(config);
             return false;
         }
+        console.info('return data');
+        console.info(data);
+        console.info(config);
         return data;
     },
     error => {
@@ -40,6 +47,7 @@ request.interceptors.response.use(
             sessionStorage.removeItem("login");
             router.push("/login");
         }
+        console.info('return error');
         return false;
     }
 );

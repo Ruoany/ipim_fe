@@ -7,12 +7,19 @@
             <a-menu-item key="info" @click="navigateTo('/info')">{{
                 $t("menu.inIn")
             }}</a-menu-item>
+
             <a-menu-item key="record" @click="navigateTo('/record')">{{
                 $t("menu.exEr")
             }}</a-menu-item>
-            <a-menu-item key="funding" @click="navigateTo('/funding')">{{
+            <a-menu-item key="register" @click="navigateTo('/register')">{{
+                $t("menu.acRe")
+                }}</a-menu-item>
+
+
+
+            <!-- <a-menu-item key="funding" @click="navigateTo('/funding')">{{
                 $t("menu.funding")
-            }}</a-menu-item>
+            }}</a-menu-item> -->
             <!-- <a-menu-item key="setting" @click="navigateTo('/setting')">{{ $t("menu.acSe") }}</a-menu-item> -->
         </a-menu>
         <div class="personal-content">
@@ -29,7 +36,7 @@ export default {
         $route: {
             immediate: true,
             handler: function(newValue) {
-                this.menuItem = newValue.meta.key;
+                 this.menuItem = newValue.meta.key;
             }
         }
     },

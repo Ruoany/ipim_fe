@@ -41,6 +41,26 @@
                         <a-icon slot="prefix" type="lock" />
                     </a-input>
                 </a-form-model-item>
+                
+                <a-form-model-item prop="code">
+              
+                     
+                     <div style="">
+                           <a-input
+                        v-model="form.code"
+                        @keyup.enter="handleSubmit"
+                        size="large"
+                        placeholder="請輸入你的驗證碼"
+                    ></a-input>
+                        </div>
+                    <div @click="refreshCode" style="">
+              <!--验证码组件-->
+					<img src="http://ops.inplexmacau.com/api/captcha.jpg" />
+                 <!-- <s-identify :identifyCode="identifyCode"></s-identify> -->
+                    </div>
+                 
+                </a-form-model-item>
+
                 <a-form-model-item>
                     <a-button
                         block
@@ -70,9 +90,14 @@
 <script>
 import { Login } from "@/apis/login";
 import User from "@/apis/user";
+import SIdentify  from '@/components/sidentify'
 export default {
+    components: { SIdentify },
     data() {
         return {
+        identifyCodes: "1234567890",
+        identifyCode: "",
+     
             loading: false,
             rules: {
                 account: [
@@ -90,15 +115,40 @@ export default {
                         required: true,
                         message: "Please input the passwrod"
                     }
+                ],
+                code: [
+                    {
+                        required: true,
+                        message: "Please input the captcha"
+                    }
                 ]
             },
             form: {
                 account: "",
-                pwd: ""
+                pwd: "",
+                code: ""
             }
         };
     },
     methods: {
+        //验证码
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+  },
+        
+  refreshCode() {
+	    window.location.reload();
+      //this.identifyCode = "";
+      //this.makeCode(this.identifyCodes, 4);
+  },
+ makeCode(o, l) {
+     for (let i = 0; i < l; i++) {
+         this.identifyCode += this.identifyCodes[
+           this.randomNum(0, this.identifyCodes.length)
+         ];
+     }
+     console.log(this.identifyCode);
+ },
         lanChange(key) {
             sessionStorage.setItem("language", key);
         },
@@ -108,6 +158,8 @@ export default {
             this.$router.push("/");
         },
         handleSubmit: function() {
+           
+
             this.$refs.login.validate(async valid => {
                 if (valid) {
                     this.loading = true;
@@ -129,11 +181,25 @@ export default {
     mounted: function() {
         sessionStorage.clear();
         this.$store.dispatch("clear");
+        this.identifyCode = "";
+        this.makeCode(this.identifyCodes, 4);
+    },
+    created(){
+        //this.refreshCode()
     }
 };
 </script>
 
 <style lang="less" scoped>
+
+//  .code{
+//      width:124px;
+//      height:31px;
+//      border:1px solid rgba(186,186,186,1);
+//  }
+//  .login-code{
+//       cursor: pointer;
+//  }
 .container {
     position: relative;
     width: 100%;

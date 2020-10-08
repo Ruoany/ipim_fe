@@ -7,6 +7,8 @@ const m = general("user", {
     updatePwd: (data) => request({ url: "/user/pwdreset", method: "POST", data }),
     resetPwd: (data) => request({ url: "/user/forget", method: "POST", data }),
     send: (account) => request.get(`/user/send/${account}`),
+    send1: (account) => request.get(`/user/regsend/${account}`),
+
 });
 
 export default m;

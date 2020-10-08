@@ -137,10 +137,15 @@
                     >{{ $t("menu.exEr") }}</a-menu-item
                 >
                 <a-menu-item
+                        key="register"
+                        @click="personalNavigate('/register')"
+                >{{ $t("menu.acRe") }}</a-menu-item
+                >
+                <!-- <a-menu-item
                     key="funding"
                     @click="personalNavigate('/funding')"
                     >{{ $t("menu.funding") }}</a-menu-item
-                >
+                > -->
                 <a-menu-item key="logout" @click="logout">{{
                     $t("menu.logout")
                 }}</a-menu-item>

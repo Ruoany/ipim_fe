@@ -35,6 +35,7 @@ const zhData = {
         personal: "個人中心",
         perInfo: "個人信息",
         inIn: "機構信息",
+        acRe: "展會登記",
         exEr: "申請記錄",
         funding: "資助與財務鼓勵",
         acSe: "賬號設置",
@@ -193,6 +194,7 @@ const zhData = {
         rejected: "不獲批",
         withdraw: "已取消",
         others: "添加機構",
+        addAc: "添加展會",
         certify: "認證本機構",
         upErr: "您所上傳的圖片不獲批，請重新提交",
         verified: "已認證",
@@ -227,7 +229,7 @@ const zhData = {
         message: "短訊",
         tips:
             "本人確定並同意澳門貿易投資促進局（“貿促局”）可將有關收集之商業資料（不涉及個人資料部分）編入其全部或任何“貿促局”資料庫內作為直接推廣、商業配對或本澳會展業界聯絡之用",
-        register: "註冊",
+
         reset: "重置密碼",
         newPwd: "新密碼",
         code: "驗證碼",

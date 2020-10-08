@@ -16,6 +16,7 @@
                 :description="$t('util.nodata')"
                 class="empty"
             ></a-empty>
+            
             <cell
                 v-for="item in list"
                 :key="item.id"
@@ -27,32 +28,117 @@
                 :date="`${item.activity.startTime} - ${item.activity.endTime}`"
                 :code="item.code"
                 @handleClick="
-                    $router.push(`/show/detail?id=${item.activity.id}`)
+                    item.activity && $router.push(`/show/detail?id=${item.activity.id}`)
                 "
             >
-                <a-tag slot="status" :color="item.status | formatStatus">{{
+            <!-- 申请 -->
+                <!-- <div v-if="item.applyfortype === 'APPLY'"> -->
+                    <a-tag slot="status" :color="item.status | formatStatus">{{
+                        item.status | statusTextFilter
+                    }}</a-tag>
+                    <div slot="action" class="button-wrapper" v-if="item.applyfortype === 'APPLY'">
+                        <!-- <a-button
+                            v-if="
+                                (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
+                            "
+                            type="link"
+                            @click="
+                                NavigateTo('/report/index', {
+                                    id: item.id,
+                                    reportType:'ba',
+                                    reportId: item.report ? item.report.id : '',
+                                })
+                            "
+                            >{{ $t("personal.report") }}</a-button
+                        > -->
+                        <!-- 修改申請表 || 查看  当前可显示-->
+                        <a-button
+                            type="link"
+                            @click="
+                                FormNavigate(item.type, {
+                                    a: item.activityId,
+                                    d: item.id
+                                })
+                            "
+                            >{{
+                                item.status === "rejected"
+                                    ? $t("personal.update")
+                                    : $t("personal.showForm")
+                            }}</a-button
+                        >
+                        <!-- 查看問卷 当前返回的数据中 status 在item.activity.status-->
+                        <a-button
+                            v-if="
+                                (item.status === 'passed' ||
+                                    item.status === 'finish') &&
+                                    item.activity.showStatus === 'END'
+                            "
+                            type="link"
+                            @click="
+                                NavigateTo('/personal/question', {
+                                    participateId: item.id,
+                                    activityId: item.activity.id,
+                                    institutionId: item.institution.id,
+                                    questionnaireAnswerId:
+                                        item.questionnaireAnswerId,
+                                    method: item.method
+                                })
+                            "
+                            >{{
+                                item.questionnaireAnswerId
+                                    ? $t("personal.showQuestion")
+                                    : $t("personal.writeQuestion")
+                            }}</a-button
+                        >
+                        <!-- <a-button
+                            v-if="
+                                (item.status === 'passed' ||
+                                    item.status === 'finish') &&
+                                    item.activity.showStatus === 'END'
+                            "
+                            type="link"
+                            :disabled="item.applyPictureStatus === 'approving'"
+                            @click="
+                                NavigateTo('/personal/picture', {
+                                    participateId: item.id,
+                                    activityId: item.activity.id,
+                                    liaisonId: item.liaisonId,
+                                    institutionId: item.institution.id,
+                                    applyPictureId: item.applyPictureId
+                                })
+                            "
+                            >{{
+                                item.applyPictureStatus | pictureTextFilter
+                            }}</a-button
+                        > -->
+                    </div>
+                <!-- </div> -->
+                
+                <!-- 从这里区分APPLY和AID -->
+                
+                <!-- <a-tag slot="status" :color="item.status | formatStatus">{{
                     item.status | statusTextFilter
-                }}</a-tag>
-                <div slot="action" class="button-wrapper">
-                    <!-- <a-button
+                }}</a-tag> -->
+                <div slot="action" class="button-wrapper" v-if="item.applyfortype === 'AID'">
+                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
+                    <a-button
                         v-if="
-                            (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
+                            item.activity && (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
                         "
                         type="link"
                         @click="
                             NavigateTo('/report/index', {
                                 id: item.id,
-                                reportType:'ba',
+                                reportType: item.type,
                                 reportId: item.report ? item.report.id : '',
                             })
                         "
                         >{{ $t("personal.report") }}</a-button
-                    > -->
+                    >
                     <a-button
                         type="link"
                         @click="
-                            FormNavigate(item.type, {
-                                a: item.activityId,
+                            FormNavigateAID(item.type, {
                                 d: item.id
                             })
                         "
@@ -63,20 +149,20 @@
                         }}</a-button
                     >
                     <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish') &&
-                                item.activity.showStatus === 'END'
+                        v-if="(item.status === 'passed' || item.status === 'finish') && 
+                            (item.activity  ? item.activity.showStatus === 'END' : true)
                         "
                         type="link"
                         @click="
                             NavigateTo('/personal/question', {
                                 participateId: item.id,
-                                activityId: item.activity.id,
+                                activityId: item.activity ? item.activity.id : '',
                                 institutionId: item.institution.id,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
-                                method: item.method
+                                method: item.method,
+                                type: item.type,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{
@@ -85,28 +171,28 @@
                                 : $t("personal.writeQuestion")
                         }}</a-button
                     >
-                    <!-- <a-button
-                        v-if="
-                            (item.status === 'passed' ||
-                                item.status === 'finish') &&
-                                item.activity.showStatus === 'END'
+                    <a-button
+                        v-if="(item.status === 'passed' || item.status === 'finish') && 
+                            (item.activity  ? item.activity.showStatus === 'END' : true)
                         "
                         type="link"
                         :disabled="item.applyPictureStatus === 'approving'"
                         @click="
                             NavigateTo('/personal/picture', {
                                 participateId: item.id,
-                                activityId: item.activity.id,
+                                activityId: item.activity ? item.activity.id : '',
                                 liaisonId: item.liaisonId,
                                 institutionId: item.institution.id,
-                                applyPictureId: item.applyPictureId
+                                applyPictureId: item.applyPictureId,
+                                participateScope: item.activityScope
                             })
                         "
                         >{{
                             item.applyPictureStatus | pictureTextFilter
                         }}</a-button
-                    > -->
+                    >
                 </div>
+              
             </cell>
         </div>
         <pagination :page.sync="page" :size="size" :total="total" />
@@ -119,6 +205,7 @@ import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Participate from "@/apis/participate";
 import i18n from "@/assets/i18n/index";
+import PDFDown from "@/apis/PDFDown";
 export default {
     components: { Cell, Pagination },
     data() {
@@ -195,9 +282,16 @@ export default {
                 size: this.size,
                 approved: this.status === "unapproved"
             });
-            this.list = data ? data.content : [];
+            
+            this.list = data ? data.content.filter(obj => {
+                return obj.activity !== null;
+            }) : [];
+            // let filterData = data.content.filter(obj => obj.activity != null);
+            // this.$set(this.list,0, filterData);
             this.total = data ? data.totalElements : 0;
             this.loading = false;
+            console.info(this.list);
+            console.info(data);
         },
         Transform: function(o) {
             Object.keys(o).map(item => {
@@ -219,9 +313,44 @@ export default {
                 query
             });
         },
+        FormNavigateAID: function(form, o) {
+            // 參數MISSION轉為bb
+            form = form == "MISSION" ? "bb" : form;
+            const query = {
+                form,
+                ...this.Transform(o)
+            };
+            this.$router.push({
+                path: "/myform/special",
+                query
+            });
+        },
         NavigateTo: function(path, o) {
             const query = this.Transform(o);
             this.$router.push({ path, query });
+        },
+        ExportPDF: async function(code, type) {
+            // if('ENTERPRISE' != type && 'MISSION' != type && 'CONVENTION' != type && 'ATTEND' != type){
+            //     alert("提示: 目前暂时支持031, 032, 033、034申请类型！");
+            //     return;
+            // }
+        
+            this.loading = true;
+            const { data } = await PDFDown.get({
+                applyCode: code,
+                encourageType: type
+            });
+            this.pdfFileName = data ? data.pdfFileName : null;
+            this.loading = false;
+        
+            if(null != this.pdfFileName)
+                this.DownloadPDF(this.pdfFileName);
+            else {
+                alert('提示: 服务端数据不匹配！')
+            }
+        },
+        DownloadPDF: function(pdfName){
+            window.open('/api/export_pdf/' + pdfName);
         }
     },
     mounted: function() {

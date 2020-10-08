@@ -26,6 +26,17 @@ const router = [
                 },
             },
             {
+                path: `${parentRoute}/register`,
+                component: () => import("@/views/personal/register"),
+                meta: {
+                    key: "register",
+                    title: "展會登記",
+                    case: "personal",
+                },
+            },
+
+
+            {
                 path: `${parentRoute}/funding`,
                 component: () => import("@/views/personal/funding"),
                 meta: {
@@ -55,10 +66,23 @@ const router = [
                 path: `${parentRoute}/mechanism`,
                 component: () => import("@/views/personal/mechanism"),
                 meta: {
-                    key: "info",
+                    key: "mechanism",
                     case: "personal",
                 },
             },
+
+            {
+                path: `${parentRoute}/addActivity`,
+                component: () => import("@/views/personal/addActivity"),
+                meta: {
+                    key: "addActivity",
+                    case: "personal",
+                },
+            },
+
+
+
+
             {
                 path: `${parentRoute}/sub_account`,
                 component: () => import("@/views/personal/subAccount"),

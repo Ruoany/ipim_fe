@@ -30,8 +30,10 @@ module.exports = {
         open: true,
         proxy: {
             "/api": {
-                target1: "http://fe.exhibition.iteratech.net/api/",
-                target: "http://api-exhibition.servier.iteratech.net",
+                target2: "http://fe.exhibition.iteratech.net/api/",
+                target1: "http://api-exhibition.servier.iteratech.net",
+                target3: "http://api.inplexmacau.com",//正式环境
+                target: "http://127.0.0.1:9196",//本机开发环境
                 pathRewrite: {
                     "^/api": "",
                 },

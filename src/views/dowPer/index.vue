@@ -89,6 +89,7 @@ export default {
                 this.total = data.totalElements;
             }
             this.loading = false;
+            console.log("1212",data);
         },
         lanTab(item) {
             let lan = this.lan;

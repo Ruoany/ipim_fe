@@ -170,12 +170,12 @@
       </div>
       <div v-show="stepCurrent === 6">
         <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox v-model="form.stateKnow">
+          <a-checkbox v-model="form.stateKnow" :disabled="isSelect1" @click="isSelect2 = !isSelect2">
             <span>{{ $t('formbe.bh') }}</span>
           </a-checkbox>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="formatLayout.wrapperCol">
-          <a-checkbox v-model="form.stateAgree">
+          <a-checkbox v-model="form.stateAgree" :disabled="isSelect2" @click="isSelect1 = !isSelect1">
             <span>{{ $t('formbe.bi') }}</span>
           </a-checkbox>
         </a-form-model-item>
@@ -204,6 +204,10 @@ export default {
   data() {
     return {
       ...validate,
+
+      isSelect1:false,
+      isSelect2:false,
+
       stepCurrent: 0,
       formatLayout: {
         labelCol: { span: 24 },

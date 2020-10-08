@@ -54,6 +54,24 @@
                     <a-form-model-item :label="$t('enterprise.bm')" prop="makeCost" required>
                         <a-input-number v-model.number="form.makeCost" :min="0" style="width: 100%" />
                     </a-form-model-item>
+
+
+
+                     <a-form-model-item :label="$t('enterprise.cv')" prop="catalogueCost" required>
+                        <a-input-number v-model.number="form.catalogueCost" :min="0" style="width: 100%" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.cw')" prop="websiteCost" required>
+                        <a-input-number v-model.number="form.websiteCost" :min="0" style="width: 100%" />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.cx')" prop="productFreight" required>
+                        <a-input-number v-model.number="form.productFreight" :min="0" style="width: 100%" />
+                    </a-form-model-item>
+                     
+
+
+
+
+
                     <a-form-model-item :label="$t('enterprise.bn')" prop="trafficCost" required>
                         <a-input-number v-model.number="form.trafficCost" :min="0" style="width: 100%" />
                     </a-form-model-item>
@@ -148,6 +166,9 @@ export default {
                 photoFiles: [],
                 stateAgree: true,
                 trafficCost: 0,
+                catalogueCost: 0,
+                websiteCost: 0,
+                productFreight: 0,
             },
             ...validate
         };
@@ -157,7 +178,9 @@ export default {
             "currentInstitution",
         ]),
         totalAmount(){
-            return this.form.exhibitRent + this.form.makeCost + this.form.leafletCost + this.form.trafficCost + this.form.advertCost
+            return this.form.exhibitRent + this.form.makeCost + this.form.leafletCost 
+            + this.form.trafficCost + this.form.advertCost
+            +this.form.catalogueCost + this.form.websiteCost + this.form.productFreight
         },
     },
     methods: {

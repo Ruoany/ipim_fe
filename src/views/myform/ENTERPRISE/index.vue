@@ -152,7 +152,7 @@
                         prop="activityId"
                         :label="$t('enterprise.bc')"
                     >
-                        <a-select v-model="form.activityId" :disabled="isCheck">
+                        <a-select v-model="form.activityId" :disabled="isCheck" style="width:720px">
                             <a-select-option
                                 v-for="item in list"
                                 :key="item.id"
@@ -162,6 +162,15 @@
                             >
                         </a-select>
                     </a-form-model-item>
+                    
+
+                     <a-button
+                        type="primary"
+                        @click="change"
+                        style="float:left;margin-left:810px;margin-top:-60px"
+                        >新建</a-button
+                    >
+
                     <a-form-model-item :label="$t('enterprise.bd')">
                         <div class="goverments-title">
                             <a-input
@@ -195,7 +204,9 @@
                             disabled
                         ></a-input>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.bg')">
+                    <a-form-model-item
+                      prop="productServe"
+                     :label="$t('enterprise.bg')">
                         <a-input
                             v-model="form.productServe"
                             :disabled="isCheck"
@@ -223,6 +234,33 @@
                             :disabled="isCheck"
                         ></a-input>
                     </a-form-model-item>
+                     
+
+                     <a-form-model-item :label="$t('enterprise.cv')">
+                        <a-input
+                            v-model="form.catalogueCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
+                    </a-form-model-item>
+
+                    <a-form-model-item :label="$t('enterprise.cw')">
+                        <a-input
+                            v-model="form.websiteCost"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
+                    </a-form-model-item>
+
+                    <a-form-model-item :label="$t('enterprise.cx')">
+                        <a-input
+                            v-model="form.productFreight"
+                            type="number"
+                            :disabled="isCheck"
+                        ></a-input>
+                    </a-form-model-item>
+
+                    
                     <a-form-model-item :label="$t('enterprise.bn')">
                         <a-input
                             v-model="form.trafficCost"
@@ -411,6 +449,19 @@
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
+
+                      <a-form-model-item
+                        prop="productServeFiles"
+                        :label="$t('enterprise.cu')"
+                    >
+                        <upload-file
+                            :value.sync="form.productServeFiles"
+                            :disabled="isCheck"
+                        />
+                    </a-form-model-item>
+
+
+
                     <a-form-model-item :label="$t('enterprise.ch')">
                         <!-- <upload-file :value.sync="form.noSubmit" :disabled="isCheck" /> -->
                         <a-radio-group
@@ -515,6 +566,7 @@ export default {
                 taxpayerCode: "",
                 taxpayerType: "",
                 productServe: "",
+                productServeFiles: "",
                 exhibitRent: null,
                 makeCost: null,
                 trafficCost: null,
@@ -537,7 +589,10 @@ export default {
                 companyProfile: [],
                 addressSame: true,
                 bankRecordFiles: [],
-                bankAuthorizeFiles: []
+                bankAuthorizeFiles: [],
+                catalogueCost: null,
+                websiteCost: null,
+                productFreight: null
             }
         };
     },
@@ -560,8 +615,24 @@ export default {
             const e = this.form.leafletCost
                 ? parseInt(this.form.leafletCost)
                 : 0;
-            const f = this.form.advertCost ? parseInt(this.form.advertCost) : 0;
-            this.form.totalAmount = a + b + c + e + f;
+            const f = this.form.advertCost 
+                ? parseInt(this.form.advertCost) 
+                : 0;
+
+            const g = this.form.catalogueCost 
+                ? parseInt(this.form.catalogueCost) 
+                : 0;
+
+            const h = this.form.websiteCost 
+                ? parseInt(this.form.websiteCost) 
+                : 0;
+
+            const i = this.form.productFreight 
+                ? parseInt(this.form.productFreight) 
+                : 0;
+
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.form.totalAmount = a + b + c + e + f + g + h + i;
             return this.form.totalAmount;
         },
         selectedLiaison: function() {
@@ -609,6 +680,9 @@ export default {
         }
     },
     methods: {
+        change() {
+             this.$router.push("/personal/addActivity?type=new");
+        },
         async initData() {
             if (this.formId) {
                 this.$store.dispatch("setChangeFalse");
@@ -642,6 +716,7 @@ export default {
             this.$refs.enterprise.validate(async valid => {
                 if (valid) {
                     const { data } = await EE.create(this.form);
+                    console.log(this.form);
                     if (data) {
                         this.$message.success("申請成功");
                         this.$router.replace("/personal/funding");

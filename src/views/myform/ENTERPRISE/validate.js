@@ -19,6 +19,8 @@ export default {
         registerFiles: config_select,
         identityForm: config_select,
         taxationBills: config_select,
+        productServe: config_select,
+        productServeFiles: config_select,
     },
     formatLayout: {
         labelCol: { span: 24 },

@@ -467,16 +467,7 @@
                         </a-form-model-item>
                     </a-col>
                 </a-row>
-                <a-form-model-item>
-                    <a-checkbox
-                        :disabled="isCheck"
-                        :checked="form.haveTransportationCost"
-                        ref="haveTransportationCost"
-                        @change="onCheckboxChange('haveTransportationCost')"
-                    >
-                        {{ $t("formbb.cn") + $t("formbb.cj") }}
-                    </a-checkbox>
-                </a-form-model-item>
+                
                 <a-form-model-item>
                     <a-checkbox
                         :disabled="isCheck"

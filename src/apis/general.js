@@ -1,7 +1,19 @@
 import request from "./request";
 import qs from "qs";
 const func = (modules, o = {}) => {
-    const modulesUrl = `/${modules}`;
+    /* const   modulesUrl='';
+   /* if(modules==='participate'){
+         modulesUrl=`/${modules}/search`;
+     }
+     else if(modules==='deleteSelfActivity'){
+         modulesUrl='';
+     }
+     else{
+         modulesUrl=`/activity/deleteself`;
+     }
+     */
+
+    const modulesUrl = modules === 'participate' ? `/${modules}/search` : `/${modules}`;
     const otherModules = o;
     return {
         ...otherModules,

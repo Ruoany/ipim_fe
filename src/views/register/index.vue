@@ -34,6 +34,34 @@
                         <a-icon slot="prefix" type="user" />
                     </a-input>
                 </a-form-model-item>
+
+                  <a-form-model-item prop="captcha">
+                    <a-row>
+                        <a-col :span="14">
+                            <a-input
+                                v-model="form.captcha"
+                                :placeholder="$t('login.code')"
+                                size="large"
+                            >
+                                <a-icon slot="prefix" type="code" />
+                            </a-input>
+                        </a-col>
+                        <a-col :span="8" :offset="2">
+                            <a-button
+                                block
+                                @click="getCode"
+                                size="large"
+                                :disabled="buttonDisabled"
+                                >{{ buttonText }}</a-button
+                            >
+                        </a-col>
+                    </a-row>
+                </a-form-model-item>
+
+
+
+
+
                 <a-form-model-item prop="pwd">
                     <a-input
                         v-model.trim="form.pwd"
@@ -102,7 +130,8 @@
                         </a-select>
                         <a-icon slot="prefix" type="phone" />
                     </a-input>
-                </a-form-model-item>
+                </a-form-model-item>  
+
                 <a-form-model-item
                     prop="receives"
                     :label="$t('login.checkbox')"
@@ -123,7 +152,6 @@
                         >{{ $t("login.tips") }}</a-checkbox
                     >
                 </a-form-model-item>
-
                 <a-form-model-item>
                     <a-button
                         block
@@ -156,6 +184,8 @@ import AreaCode from "@/apis/areaCode";
 export default {
     data() {
         return {
+               buttonText: this.$t("login.getCode"),
+            buttonDisabled: false,
             rules: {
                 account: [
                     {
@@ -166,6 +196,18 @@ export default {
                     {
                         type: "email",
                         message: "Email address is incorrect",
+                        trigger: "blur"
+                    }
+                ],
+                 captcha: [
+                    {
+                        required: true,
+                        message: "Please input the code",
+                        trigger: "blur"
+                    },
+                    {
+                        pattern: /\d{6}/,
+                        message: "Please enter 6 digits",
                         trigger: "blur"
                     }
                 ],
@@ -240,6 +282,7 @@ export default {
             },
             form: {
                 account: "",
+                
                 pwd: "",
                 confirm: "",
                 name: "",
@@ -247,7 +290,8 @@ export default {
                 type: "GENERAL",
                 receives: [],
                 phoneAreaCodeId: 2,
-                institutionName: ""
+                institutionName: "",
+                captcha: ""
             },
             agree: false
         };
@@ -256,6 +300,32 @@ export default {
         ...mapGetters(["codeList"])
     },
     methods: {
+          Interval() {
+            let s = 30;
+            const inter = setInterval(() => {
+                s--;
+                this.buttonDisabled = true;
+                this.buttonText = `${s} s`;
+                if (s === 0) {
+                    clearInterval(inter);
+                    this.buttonDisabled = false;
+                    this.buttonText = this.$t("login.getCode");
+                }
+            }, 1000);
+        },
+         getCode: function() {
+            this.$refs.register.validateField(["account"], async valid => {
+                if (!valid) {
+                    this.Interval();
+                    const { success, message } = await User.send1(
+                        this.form.account
+                    );
+                    if (success) {
+                        this.$message.success(message);
+                    }
+                }
+            });
+        },
         async getCodeList() {
             const { data } = await AreaCode.all();
             this.$store.dispatch("setCodeList", data);
@@ -271,6 +341,7 @@ export default {
         handleSubmit() {
             this.$refs.register.validate(async valid => {
                 if (valid) {
+                    // eslint-disable-next-line no-unused-vars
                     const { success, data } = await User.register(this.form);
                     if (success) {
                         this.onSuccess();

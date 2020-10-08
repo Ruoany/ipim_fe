@@ -24,6 +24,9 @@ export default {
     min-height: 100vh;
     width: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .main {
         padding-top: 50px;
         width: 100%;
