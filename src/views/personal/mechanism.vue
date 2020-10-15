@@ -108,7 +108,7 @@
                 </div>
             </a-form-model-item>
              
-           <a-form-model-item :label="$t('personal.country')">
+           <a-form-model-item prop="country" :label="$t('personal.country')">
                  
                 <a-select allowClear={true}  style="width: 328px" size="small"  v-model="form.countryZh"  >
                     
@@ -142,7 +142,7 @@
         
              <a-Row>
               <a-Col span="12">
-            <a-form-model-item :label="$t('personal.concact')">
+            <a-form-model-item prop="tel" :label="$t('personal.concact')">
                  <a-select  style="width: 228px" v-model="form.telAreaCode" optionLabelProp="code" placeholder="區號" optionLabelProp="code" >
                      <a-select-option
                                 v-for="item in AreaCode"
@@ -161,7 +161,7 @@
             
               
                 <a-Col span="12">
-             <a-form-model-item :label="$t('personal.fax')"> 
+             <a-form-model-item prop="fax" :label="$t('personal.fax')"> 
                  <a-select  style="width: 228px" v-model="form.faxAreaCode" optionLabelProp="code" placeholder="區號"  >
                    <a-select-option
                                 v-for="item in AreaCode"
@@ -447,6 +447,9 @@ export default {
                 deal: [config],
                 institutionShareholders: [config],
                 nature:[config],
+                country:[config],
+                tel:[config],
+                fax:[config]
             },
             // nature: [],
             country:[],
