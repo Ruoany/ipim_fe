@@ -213,7 +213,7 @@
             </a-form-model-item>
 
              <a-form-model-item prop="nature" :label="$t('personal.ar')">
-                 <a-select  style="width: 968px" v-model="form.nature" defaultValue="OTHER">
+                 <a-select  style="width: 968px" v-model="form.nature">
                     <a-select-option value="OTHER">
                             政府機構
                     </a-select-option>
