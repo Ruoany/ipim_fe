@@ -46,20 +46,20 @@
             </a-descriptions-item>
         </a-descriptions>
         <h1>{{ $t("personal.az") }}</h1>
-        <a-form-model :rules="rules" :model="formData">
-            <a-form-model-item :label="$t('personal.ar')" prop="nature">
-                <a-select style="width: 100%" v-model="formData.nature">
-                    <a-select-option value="UNIVERSITY">{{
-                        $t("personal.ax")
-                    }}</a-select-option>
-                    <a-select-option value="GOVERNMENT_ORGANS">{{
-                        $t("personal.at")
-                    }}</a-select-option>
+        <a-form-model :rules="rules" :model="form">
+            <a-form-model-item :label="$t('personal.ar')" prop="nature" >
+                <a-select style="width: 100%" v-model="form.nature">
                     <a-select-option value="ENTERPRISE">{{
                         $t("personal.au")
                     }}</a-select-option>
                     <a-select-option value="BUSINESS_OR_ASSOCIATION">{{
                         $t("personal.av")
+                    }}</a-select-option>
+                    <a-select-option value="GOVERNMENT_ORGANS">{{
+                        $t("personal.at")
+                    }}</a-select-option>
+                    <a-select-option value="UNIVERSITY">{{
+                        $t("personal.ax")
                     }}</a-select-option>
                     <a-select-option value="OTHER">{{
                         $t("personal.aw")
@@ -68,75 +68,84 @@
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.aj')"
-                v-if="formData.nature === 'ENTERPRISE'"
-                prop="businessRegistrationFiles"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="shareholderSamesFiles"
             >
                 <upload
-                    :value.sync="formData.businessRegistrationFiles"
-                    decorator="businessRegistrationFiles"
+                    
+                    :multiple="true"
+                    :value.sync="form.shareholderSamesFiles"
+                    decorator="shareholderSamesFiles"
+                    @handleChange="v=>uploadChange(v, 'shareholderSamesFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ak')"
-                v-if="formData.nature === 'ENTERPRISE'"
-                prop="salesTaxOpenFiles"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="groupEstablishmentFiles"
             >
                 <upload
-                    :value.sync="formData.salesTaxOpenFiles"
-                    decorator="salesTaxOpenFiles"
+                    :multiple="true"
+                    :value.sync="form.groupEstablishmentFiles"
+                    decorator="groupEstablishmentFiles"
+                    @handleChange="v=>uploadChange(v, 'groupEstablishmentFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.al')"
-                v-if="formData.nature === 'ENTERPRISE'"
-                prop="salesTaxFiles"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="identificationBureauFiles"
             >
                 <upload
-                    :value.sync="formData.salesTaxFiles"
-                    decorator="salesTaxFiles"
+                    :multiple="true"
+                    :value.sync="form.identificationBureauFiles"
+                    decorator="identificationBureauFiles"
+                    @handleChange="v=>uploadChange(v, 'identificationBureauFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.am')"
-                v-if="formData.nature === 'ENTERPRISE'"
-                prop="shareholderSamesFiles"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="legalPersonFiles"
             >
                 <upload
-                    :value.sync="formData.shareholderSamesFiles"
-                    decorator="shareholderSamesFiles"
+                    :multiple="true"
+                    :value.sync="form.legalPersonFiles"
+                    decorator="legalPersonFiles"
+                   @handleChange="v=>uploadChange(v, 'legalPersonFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.an')"
-                v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="groupEstablishmentFiles"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
+                prop="salesTaxOpenFiles"
             >
                 <upload
-                    :value.sync="formData.groupEstablishmentFiles"
-                    decorator="groupEstablishmentFiles"
+                    :value.sync="form.salesTaxOpenFiles"
+                    decorator="salesTaxOpenFiles"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ao')"
-                v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="identificationBureauFiles"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
+                prop="salesTaxFiles"
             >
                 <upload
-                    :value.sync="formData.identificationBureauFiles"
-                    decorator="identificationBureauFiles"
+                    :value.sync="form.salesTaxFiles"
+                    decorator="salesTaxFiles"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ap')"
-                v-if="formData.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="legalPersonFiles"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
+                prop="businessRegistrationFiles"
             >
                 <upload
-                    :value.sync="formData.legalPersonFiles"
-                    decorator="legalPersonFiles"
+                    :value.sync="form.businessRegistrationFiles"
+                    decorator="businessRegistrationFiles"
                 ></upload>
             </a-form-model-item>
-            <a-form-model-item :model="formData">
+            <a-form-model-item :model="form">
                 <a-button
                     :style="{ marginRight: '8px' }"
                     @click="$router.back()"
@@ -221,7 +230,11 @@ export default {
             await this.$store.dispatch("setInfo", user);
             this.$message.success("操作成功");
             this.$router.replace("/personal/info");
-        }
+        },
+        //上傳的文件
+        uploadChange(info, type) {
+            this.form[type] = info
+        },
     },
     mounted() {
         this.$store.dispatch("setChangeFalse");

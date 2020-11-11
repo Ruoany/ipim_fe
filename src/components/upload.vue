@@ -63,7 +63,7 @@ export default {
         return false;
       }
       if (this.tempFileList[file.name]) {
-        this.$message.error(`${file.name} 圖片已存在!`);
+        this.$message.success(`${file.name} 文件已刪除!`);
         return false;
       }
 

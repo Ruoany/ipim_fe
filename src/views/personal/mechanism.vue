@@ -214,19 +214,19 @@
 
              <a-form-model-item prop="nature" :label="$t('personal.ar')">
                  <a-select  style="width: 968px" v-model="form.nature">
-                    <a-select-option value="OTHER">
-                            政府機構
-                    </a-select-option>
                     <a-select-option value="ENTERPRISE">
-                            大學/研究機構
+                            企業
                     </a-select-option>
                     <a-select-option value="BUSINESS_OR_ASSOCIATION">
                             商/協會
                     </a-select-option>
-                    <a-select-option value="UNIVERSITY">
-                            企業
-                    </a-select-option>
                     <a-select-option value="GOVERNMENT_ORGANS">
+                           政府機構
+                    </a-select-option>
+                    <a-select-option value="UNIVERSITY">
+                            大學/研究機構
+                    </a-select-option>
+                    <a-select-option value="OTHER">
                             其他
                     </a-select-option>
                    
@@ -242,50 +242,57 @@
 
              <a-form-model-item :label="$t('personal.an')">
                     <upload
-                        :value.sync="form.groupEstablishmentFiles"
-                        
+                        :value.sync="form.salesTaxOpenFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'salesTaxOpenFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.ao')">
                     <upload
-                        :value.sync="form.identificationBureauFiles"
-                       
+                        :value.sync="form.salesTaxFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'salesTaxFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.ap')">
                     <upload
-                        :value.sync="form.legalPersonFiles"
-                        
+                        :value.sync="form.businessRegistrationFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'businessRegistrationFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.aj')">
                     <upload
-                        :value.sync="form.businessRegistrationFiles"
-                        
+                        :value.sync="form.shareholderSamesFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'shareholderSamesFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.ak')">
                     <upload
-                        :value.sync="form.salesTaxOpenFiles"
-                        
+                        :value.sync="form.groupEstablishmentFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'groupEstablishmentFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.al')">
                     <upload
-                        :value.sync="form.salesTaxFiles"
-                        
+                        :value.sync="form.identificationBureauFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'identificationBureauFiles')"
                     ></upload>
             </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.am')">
                     <upload
-                        :value.sync="form.shareholderSamesFiles"
-                        
+                        :value.sync="form.legalPersonFiles"
+                        :multiple="true"
+                        @handleChange="v=>uploadChange(v, 'legalPersonFiles')"
                     ></upload>
             </a-form-model-item>
 
@@ -590,6 +597,11 @@ export default {
                     this.onSuccess();
                 }
             });
+        },
+
+        //上傳的文件
+        uploadChange(info, type) {
+            this.form[type] = info
         },
         async initData() {
             this.spinning = true;

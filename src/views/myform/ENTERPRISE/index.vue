@@ -144,6 +144,9 @@
                             <a-radio value="LIMITED_COMPANY">
                                 {{ $t("enterprise.au") }}
                             </a-radio>
+                            <a-radio value="ORGANIZATION">
+                                {{ $t("enterprise.cy") }}
+                            </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
                 </div>
@@ -291,7 +294,7 @@
                             <span slot="suffix">MOP</span>
                         </a-input>
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.br')">
+                    <!-- <a-form-model-item :label="$t('enterprise.br')">
                         <a-radio-group
                             v-model="form.haveGovernment"
                             :disabled="isCheck"
@@ -313,6 +316,7 @@
                                     type="primary"
                                     shape="circle"
                                     icon="plus"
+                                    
                                     @click="
                                         form.governments.push({
                                             name: '',
@@ -344,7 +348,7 @@
                                 ></a-input>
                             </div>
                         </div>
-                    </a-form-model-item>
+                    </a-form-model-item> -->
                 </div>
                 <div v-show="stepCurrent === 6">
                     <a-form-model-item
@@ -384,8 +388,6 @@
                 </div>
                 <div v-show="stepCurrent === 7">
                     <p>{{ $t("enterprise.bw") }}</p>
-                    <p>{{ $t("enterprise.bx") }}</p>
-                    <p>{{ $t("enterprise.by") }}</p>
                     <a-form-model-item>
                         <a-radio-group
                             v-model="form.stateAgree"
@@ -399,6 +401,64 @@
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
+                    <p>{{ $t("enterprise.bx") }}</p>
+                     <a-form-model-item>
+                        <a-radio-group
+                            v-model="form.haveGovernment"
+                            :disabled="isCheck"
+                        >
+                            <a-radio :value="false" @click="isShow = false">
+                                {{ $t("enterprise.bs") }}
+                            </a-radio>
+                            <a-radio :value="true" @click="isShow = true">
+                                {{ $t("enterprise.bt") }}
+                            </a-radio>
+                        </a-radio-group>
+                    </a-form-model-item>
+                    <a-form-model-item v-show="isShow">
+                        <div class="goverments-title">
+                            <span>{{ $t("enterprise.bu") }}</span>
+                            <span>{{ $t("enterprise.bv") }}</span>
+                            <div v-show="!isCheck" class="button-wrapper">
+                                <a-button
+                                    type="primary"
+                                    shape="circle"
+                                    icon="plus"
+                                    
+                                    @click="
+                                        form.governments.push({
+                                            name: '',
+                                            supporContent: ''
+                                        })
+                                    "
+                                ></a-button>
+                                <a-button
+                                    shape="circle"
+                                    icon="minus"
+                                    style="margin-left:10px;"
+                                    @click="form.governments.pop()"
+                                ></a-button>
+                            </div>
+                        </div>
+                        <div
+                            v-for="(item, index) in form.governments"
+                            :key="index"
+                            style="margin-bottom:10px;"
+                        >
+                            <div class="goverments-title">
+                                <a-input
+                                    v-model="item.name"
+                                    :disabled="isCheck"
+                                ></a-input>
+                                <a-input
+                                    v-model="item.supportContent"
+                                    :disabled="isCheck"
+                                ></a-input>
+                            </div>
+                        </div>
+                    </a-form-model-item>
+                    <p>{{ $t("enterprise.by") }}</p>
+                    
                 </div>
                 <div v-show="stepCurrent === 8">
                     <a-form-model-item
@@ -555,6 +615,7 @@ export default {
         return {
             ...validate,
             formId: "",
+            isShow:false,
             form: {
                 applicantId: "",
                 institutionId: "",

@@ -77,12 +77,12 @@
                 >
                     <span> {{ $t("menu.cc") }}</span>
                 </a-menu-item>
-                <a-menu-item
+                <!-- <a-menu-item
                     key="special4"
                     @click="formNavigate('/myform/special', 'CONVENTION')"
                 >
                     <span> {{ $t("menu.cd") }}</span>
-                </a-menu-item>
+                </a-menu-item> -->
                 <a-menu-item
                     key="special7"
                     @click="formNavigate('/myform/special', 'ECB2C')"
