@@ -102,6 +102,16 @@
             >
                 <span>{{ $t("menu.downloadPersonal") }}</span>
             </a-menu-item>
+
+
+            <a-menu-item
+                @click="$router.push('/help_center')"
+                key="help_center"
+            >
+                <span>{{ $t("menu.helpCenter") }}</span>
+            </a-menu-item>
+
+
             <a-sub-menu style="float:right;" key="lan">
                 <span slot="title">{{ $t("menu.lan") }}</span>
                 <a-menu-item key="zh" @click="lanChange('zh')"

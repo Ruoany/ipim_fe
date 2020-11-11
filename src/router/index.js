@@ -47,6 +47,24 @@ const router = new VueRouter({
                         case: "download_personal",
                     },
                 },
+                {
+                    path: "/help_center",
+                    component: () => import("@/views/helCen/index"),
+                    meta: {
+                        title: "幫助中心",
+                        key: "help_center",
+                        case: "help_center",
+                    },
+                },
+                {
+                    path: "/helCen_details",
+                    component: () => import("@/views/helCen/details"),
+                    meta: {
+                        title: "幫助中心詳情",
+                        key: "helCen_details",
+                        case: "helCen_details",
+                    },
+                },
                 ...show,
                 ...personal,
                 ...myform,

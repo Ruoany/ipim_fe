@@ -49,6 +49,7 @@ const zhData = {
         plpex: "葡語國家產品及服務展",
         logout: "退出登錄",
         downloadPersonal: "下載中心",
+        helpCenter:"幫助中心",
         tips: "請先完成機構認證",
     },
     index: {
@@ -274,6 +275,9 @@ const zhData = {
     convention,
     downloadPersonal: {
         all: "全部",
+    },
+    helpCenter: {
+        title: "幫助中心",
     },
 };
 
