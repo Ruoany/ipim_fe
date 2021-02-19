@@ -51,6 +51,24 @@
         <a-form-item :label="$t('formbf.cb')">
           <a-input :value="currentInstitution.registrationNumber" disabled />
         </a-form-item>
+
+         <a-form-model-item
+                        prop="taxpayerType"
+                        :label="$t('formbe.ch')"
+                    >
+                        <a-radio-group
+                            v-model="form.taxpayerType"
+                            :disabled="isCheck"
+                        >
+                            <a-radio value="INDIVIDUAL_BUSINESS" >
+                                {{ $t("formbe.ci") }}
+                            </a-radio>
+                            <a-radio value="LIMITED_COMPANY">
+                                {{ $t("formbe.cj") }}
+                            </a-radio>
+                        </a-radio-group>
+        </a-form-model-item>
+
       </div>
       <div v-show="stepCurrent === 2">
         <a-form-model-item prop="liaisonId" :label="$t('formbf.al')">
@@ -233,7 +251,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['liaisonList', 'currentInstitution', 'timeNext', 'encourageDis']),
+    ...mapGetters(['liaisonList', 'currentInstitution', 'timeNext', 'encourageDis' , "currentUser",]),
     totalAmount() {
       return this.form.costMember + this.form.costVAS + this.form.costSiteConstruction;
     },

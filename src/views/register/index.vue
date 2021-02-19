@@ -301,7 +301,7 @@ export default {
     },
     methods: {
           Interval() {
-            let s = 30;
+            let s = 80;
             const inter = setInterval(() => {
                 s--;
                 this.buttonDisabled = true;

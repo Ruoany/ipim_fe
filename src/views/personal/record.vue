@@ -20,12 +20,12 @@
             <cell
                 v-for="item in list"
                 :key="item.id"
-                :scope="item.activity.scope"
+                :scope="item.activity ? item.activity.scope : ''"
                 :status="item.status"
-                :activity-status="item.activity.showStatus"
-                :title="item.activity.nameZh"
-                :address="item.activity.place"
-                :date="`${item.activity.startTime} - ${item.activity.endTime}`"
+                :activity-status="item.activity ? item.activity.showStatus : 'PROGRESS'"
+                :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
+                :address="item.activity ? item.activity.place : '無地址'"
+                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.applyTime"
                 :code="item.code"
                 @handleClick="
                     item.activity && $router.push(`/show/detail?id=${item.activity.id}`)
@@ -66,12 +66,52 @@
                                     : $t("personal.showForm")
                             }}</a-button
                         >
+                       
+
+                       <!-- 上傳憑證-->
+                        <!-- <a-button
+                        v-if="item.status === 'obligation' && (item.type == 'PARTICIPATE' || item.type == 'MISSION')"
+                            type="link"
+                            @click="uploadCar()"
+                            >{{
+                                 $t("personal.upload1")
+                            }}</a-button
+                        >      -->
+
+                    <!-- <a-modal v-model="visible1" title="提示" @ok="handleOk1(item.type,item.id)" @cancel="handCancel1" width="900px" height="1200px">
+                        <p>請選擇需要上傳的憑證文件</p>
+                         <a-form-model>
+                             <a-form-model-item
+                               prop="payOrderFiles"
+                               >
+                               <upload 
+                               :multiple="true"
+                               :value.sync="form.payOrderFiles"
+                               />
+                             </a-form-model-item>
+                         </a-form-model>
+                        
+                        
+                    </a-modal>  -->
+
+
+                    <!-- 查看憑證-->
+                        <!-- <a-button
+                        v-if="item.status === 'passed' && (item.type == 'PARTICIPATE' || item.type == 'MISSION')"
+                            type="link"
+                            @click="downloadCar(item.type,item.id)"
+                            >{{
+                                 $t("personal.download1")
+                            }}</a-button
+                        >    -->
+
                         <!-- 查看問卷 当前返回的数据中 status 在item.activity.status-->
                         <a-button
                             v-if="
                                 (item.status === 'passed' ||
                                     item.status === 'finish') &&
-                                    item.activity.showStatus === 'END'
+                                    (item.activity.showStatus === 'END' ||
+                                    item.activity.showStatus === 'PUBLISH')
                             "
                             type="link"
                             @click="
@@ -81,7 +121,10 @@
                                     institutionId: item.institution.id,
                                     questionnaireAnswerId:
                                         item.questionnaireAnswerId,
-                                    method: item.method
+                                    method: item.method,
+                                    participateScope: item.activityScope,
+                                    
+
                                 })
                             "
                             >{{
@@ -120,6 +163,21 @@
                     item.status | statusTextFilter
                 }}</a-tag> -->
                 <div slot="action" class="button-wrapper" v-if="item.applyfortype === 'AID'">
+                        
+                    <a-button
+                        type="link"
+                        v-if="item.status === 'approving' && item.activity && item.type === 'ENTERPRISE' && item.tasks.length == 1"
+                        @click="cancel(item.id)"
+                        >{{  
+                            $t("personal.cancel")    
+                        }}
+                        
+                        </a-button>
+
+                    <a-modal v-model="visible" title="提示" @ok="handleOk" @cancel="handCancel">
+                        <p>確定要取消申請嗎</p>
+                    </a-modal>
+
                     <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
@@ -135,19 +193,25 @@
                         "
                         >{{ $t("personal.report") }}</a-button
                     >
-                    <a-button
+                    <a-button v-if="
+                            item.activity && (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END' && item.type === 'ENTERPRISE'"
+                        type="link" @click="ExportNavigateTo(item.code)">下載展會報告資料</a-button>
+
+
+                   <a-button
                         type="link"
+                        v-if="item.status != 'rejected'"
                         @click="
-                            FormNavigateAID(item.type, {
-                                d: item.id
+                            FormNavigateAID(item.type,item.status,{
+                                d: item.id,
+                                a: item.institutionId,
                             })
                         "
                         >{{
-                            item.status === "rejected"
+                             item.status === 'supplementinfo'
                                 ? $t("personal.update")
                                 : $t("personal.showForm")
-                        }}</a-button
-                    >
+                        }}</a-button>
                     <a-button
                         v-if="(item.status === 'passed' || item.status === 'finish') && 
                             (item.activity  ? item.activity.showStatus === 'END' : true)
@@ -158,11 +222,12 @@
                                 participateId: item.id,
                                 activityId: item.activity ? item.activity.id : '',
                                 institutionId: item.institution.id,
+                                participateScope: item.activityScope,
                                 questionnaireAnswerId:
                                     item.questionnaireAnswerId,
                                 method: item.method,
                                 type: item.type,
-                                participateScope: item.activityScope
+                                
                             })
                         "
                         >{{
@@ -204,8 +269,10 @@ import { mapGetters } from "vuex";
 import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Participate from "@/apis/participate";
+import Institution  from "@/apis/institution";
 import i18n from "@/assets/i18n/index";
 import PDFDown from "@/apis/PDFDown";
+// import Upload from "@/components/upload";
 export default {
     components: { Cell, Pagination },
     data() {
@@ -215,7 +282,16 @@ export default {
             page: 0,
             size: 5,
             total: 1,
-            list: []
+            list: [],
+            visible: false,
+            visible1: false,
+            // form: {
+            //     payOrderFiles: '',
+            //     id: '',
+            // }
+               
+                
+            
         };
     },
     computed: {
@@ -243,6 +319,10 @@ export default {
                     return "red";
                 case "finish":
                     return "green";
+                case "supplementinfo":
+                    return "orange";
+                case "obligation":
+                    return "yellow";
             }
         },
         statusTextFilter: function(value) {
@@ -257,6 +337,10 @@ export default {
                     return i18n.t("personal.withdraw");
                 case "finish":
                     return i18n.t("personal.finish");
+                case "supplementinfo":
+                    return i18n.t("personal.supplementinfo");
+                case "obligation":
+                    return i18n.t("personal.obligation");
             }
         },
         pictureTextFilter: function(value) {
@@ -282,16 +366,16 @@ export default {
                 size: this.size,
                 approved: this.status === "unapproved"
             });
+
             
-            this.list = data ? data.content.filter(obj => {
-                return obj.activity !== null;
-            }) : [];
+           this.list = data ? data.content : [];
+
+
             // let filterData = data.content.filter(obj => obj.activity != null);
             // this.$set(this.list,0, filterData);
             this.total = data ? data.totalElements : 0;
             this.loading = false;
-            console.info(this.list);
-            console.info(data);
+
         },
         Transform: function(o) {
             Object.keys(o).map(item => {
@@ -313,18 +397,54 @@ export default {
                 query
             });
         },
-        FormNavigateAID: function(form, o) {
+        FormNavigateAID: function(form, status, o, institutionId) {
             // 參數MISSION轉為bb
-            form = form == "MISSION" ? "bb" : form;
+            form = form == "EN_MISSION" ? "bb" : form;
             const query = {
                 form,
-                ...this.Transform(o)
+                ...this.Transform(o),
+                institutionId,
+                status
             };
             this.$router.push({
                 path: "/myform/special",
                 query
             });
         },
+
+
+        cancel(o) {
+            this.visible = true;
+            sessionStorage.setItem("exhibitionId",o)
+        },
+
+       async handleOk(){
+           this.visible = false;
+           const o = sessionStorage.getItem("exhibitionId");
+           const { data } = await Institution.cancel(o);
+             location.reload();
+        },
+        handCancel(){
+           this.visible = false;
+        },
+
+        // async handleOk1(type,id){
+        //    this.visible1 = false;
+        //    this.form.id = id;
+        //   if(type == 'PARTICIPATE'){
+        //       const {data} = await Institution.certificate_2(this.form);
+        //   }else if(type == 'MISSION'){
+        //       const {data} = await Institution.certificate_1(this.form);
+        //   }
+           
+
+
+        // },
+        // handCancel1(){
+        //    this.visible1 = false;
+        // },
+
+
         NavigateTo: function(path, o) {
             const query = this.Transform(o);
             this.$router.push({ path, query });
@@ -349,9 +469,45 @@ export default {
                 alert('提示: 服务端数据不匹配！')
             }
         },
+         ExportNavigateTo: async function(code) {
+        
+            this.loading = true;
+            const { data } = await PDFDown.get({
+                applyCode: code,
+                encourageType: 'REPORT'
+            });
+            this.pdfFileName = data ? data.pdfFileName : null;
+            this.loading = false;
+        
+            if(null != this.pdfFileName)
+              if(this.pdfFileName == 'Report'){
+                  alert('請填寫展會報告資料');
+              }else{
+                  this.DownloadPDF(this.pdfFileName);
+              }
+            else {
+                alert('提示: 服务端数据不匹配！')
+            }
+        },
         DownloadPDF: function(pdfName){
             window.open('/api/export_pdf/' + pdfName);
-        }
+        },
+    //     uploadCar(){
+    //         this.visible1 = true;
+    //     },
+    //    async downloadCar(type,id){
+    //        if(type == 'PARTICIPATE'){
+    //           const {data} = await Institution.downloadCar_1(id);
+    //           console.log();
+    //           window.open()
+    //       }else if(type == 'MISSION'){
+    //           const {data} = await Institution.downloadCar_2(id);
+    //       }
+            
+
+    //     }
+       
+
     },
     mounted: function() {
         this.initData();

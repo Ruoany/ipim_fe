@@ -24,7 +24,7 @@ import { upFiles } from '@/apis/files';
 export default {
   props: { value: [Object, Array], type: String, disabled: Boolean, multiple: Boolean, name: String },
   data() {
-    return { upFiles, tempFileList: {} };
+    return { upFiles, tempFileList: [] };
   },
   computed: {
     list: {
@@ -59,6 +59,13 @@ export default {
   },
   methods: {
     handleChange({ file, fileList }) {
+      console.log(file.status);
+      fileList = fileList.slice(-5);
+      var name = file.name;
+      var name2 = name.split('.'); 
+      var fileName = name2[0]+ new Date().getTime() + '.' +name2[1];
+      file.name = fileName;
+
       if (!file.status) {
         return false;
       }
@@ -81,7 +88,7 @@ export default {
 
       this.$emit('update:value', arr);
     },
-    handleRemove({ uid }) {
+    handleRemove({uid}){
       const arr = this.list.filter((item) => item.uid !== uid);
       this.$emit('handleChange', arr, this.name);
     },

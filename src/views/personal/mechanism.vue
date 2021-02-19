@@ -39,11 +39,20 @@
             <a-form-model-item
                 prop="siteRegistrationCode"
                 :label="$t('personal.w')"
+                
             >
-                <a-input v-model="form.siteRegistrationCode"></a-input>
+                <a-input v-model="form.siteRegistrationCode" @blur="repeat(form.siteRegistrationCode)"></a-input>
             </a-form-model-item>
+
+
+             <a-modal v-model="visible" title="提示" @ok="handleOk">
+                        <p>場地登記編號已存在</p>
+            </a-modal>
+
+
+
             <a-form-model-item
-                prop="registrationNumber"
+                :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? null : 'registrationNumber'"
                 :label="$t('personal.u')"
             >
                 <a-input v-model="form.registrationNumber"></a-input>
@@ -62,6 +71,14 @@
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.aa')">
                 <a-textarea v-model="form.business"></a-textarea>
+            </a-form-model-item>
+            <a-form-model-item :label="$t('personal.industryNumber')">
+                <!-- <a-input v-model="form.industryNumber" style="width:968px;height:30px"></a-input> -->
+                <a-select placeholder="Please select" mode="multiple"   style="width: 968px;" v-model="form.industryNumber">
+                    <a-select-option :value="item.code +'--'+item.name" v-for="item in industryNumbers" :key="item.code +'--'+item.name"   >
+                            {{ `${item.code}--${item.name}`  }}
+                    </a-select-option>
+                </a-select>
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.ab')">
                 <a-radio-group v-model="form.deal">
@@ -112,7 +129,7 @@
                  
                 <a-select allowClear={true}  style="width: 328px" size="small"  v-model="form.countryZh"  >
                     
-                    <a-select-option  v-for="item in country" :key="item.merName" @click="info3(item.id)" :label="item.merName">
+                    <a-select-option  v-for="item in country" :key="item.id" @click="info3(item.id)" :label="item.merName">
                             {{item.merName}}
                     </a-select-option>
                           
@@ -120,14 +137,14 @@
 
                                       
                  <a-select allowClear={true}  style="width: 275px;margin-left: 26px"  size="small" v-model="form.provinceZh" >
-                    <a-select-option   v-for="item in province" :key="item.name"  @click="info4(item.id)" :label="item.name">
+                    <a-select-option   v-for="item in province" :key="item.id"  @click="info4(item.id)" :label="item.name">
                             {{item.name}}
                     </a-select-option>
                 </a-select>
                 
                
                  <a-select  allowClear={true} style="width: 316px;margin-left: 24px" size="small" v-model="form.cityZh" >
-                    <a-select-option  v-for="item in city" :key="item.sname" :label="item.sname">
+                    <a-select-option  v-for="item in city" :key="item.id" :label="item.sname">
                             {{item.sname}}
                     </a-select-option>
                 </a-select>
@@ -179,13 +196,10 @@
             </a-Row>
              
           
-          <a-form-model-item :label="$t('personal.industryNumber')">
-                <a-input v-model="form.industryNumber" style="width:968px;height:30px"></a-input>
-            </a-form-model-item>
 
             <a-form-model-item :label="$t('personal.ba')">
                  <a-select placeholder="Please select" mode="multiple"   style="width: 968px" v-model="form.scopes">
-                    <a-select-option :value="item" v-for="item in industry" :key="item"   >
+                    <a-select-option :value="item" v-for="item in scope" :key="item"   >
                             {{item}}
                     </a-select-option>
                 </a-select>
@@ -233,14 +247,14 @@
                 </a-select>
             </a-form-model-item>
              
-             <a-form-model-item :label="$t('personal.idNumber')">
+             <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'idnumber' : null" :label="$t('personal.idNumber')">
                 <a-input v-model="form.idnumber"></a-input>
             </a-form-model-item>
             <a-form-model-item :label="$t('personal.chargeName')">
                 <a-input v-model="form.chargeName"></a-input>
             </a-form-model-item>
 
-             <a-form-model-item :label="$t('personal.an')">
+             <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxOpenFiles' : null"  :label="$t('personal.an')">
                     <upload
                         :value.sync="form.salesTaxOpenFiles"
                         :multiple="true"
@@ -248,7 +262,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.ao')">
+            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxFiles' : null" :label="$t('personal.ao')">
                     <upload
                         :value.sync="form.salesTaxFiles"
                         :multiple="true"
@@ -256,7 +270,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.ap')">
+            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'businessRegistrationFiles' : null" :label="$t('personal.ap')">
                     <upload
                         :value.sync="form.businessRegistrationFiles"
                         :multiple="true"
@@ -264,7 +278,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.aj')">
+            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'shareholderSamesFiles' : null" :label="$t('personal.aj')">
                     <upload
                         :value.sync="form.shareholderSamesFiles"
                         :multiple="true"
@@ -272,7 +286,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.ak')">
+            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'groupEstablishmentFiles' : null" :label="$t('personal.ak')">
                     <upload
                         :value.sync="form.groupEstablishmentFiles"
                         :multiple="true"
@@ -280,7 +294,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.al')">
+            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'identificationBureauFiles' : null" :label="$t('personal.al')">
                     <upload
                         :value.sync="form.identificationBureauFiles"
                         :multiple="true"
@@ -288,7 +302,7 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :label="$t('personal.am')">
+            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'legalPersonFiles' : null" :label="$t('personal.am')">
                     <upload
                         :value.sync="form.legalPersonFiles"
                         :multiple="true"
@@ -454,16 +468,26 @@ export default {
                 deal: [config],
                 institutionShareholders: [config],
                 nature:[config],
+                salesTaxOpenFiles:[config],
+                salesTaxFiles:[config],
+                businessRegistrationFiles:[config],
+                shareholderSamesFiles:[config],
+                groupEstablishmentFiles:[config],
+                identificationBureauFiles:[config],
+                legalPersonFiles:[config],
+                idnumber:[config],
                 // countrys:[config],
                 // tels:[config],
                 // faxs:[config]
             },
             // nature: [],
             // country:[],
-            industry:[],
+            scope:[],
+            industryNumbers:[],
             AreaCode:[],
             province:[],
             city: [],
+            visible: false,
             form: {
                 adminId: this.$store.getters.currentUser,
                 logo: "",
@@ -485,9 +509,9 @@ export default {
                 
                 
                 scopes: [],
-                targetMarkets: [],
+                targetMarkets:[],
                 tel: "",
-                industryNumber: "",
+                industryNumber:[],
                 fax: "",
                 idnumber: "",
                 chargeName: "",
@@ -579,15 +603,27 @@ export default {
             this.$message.success("操作成功");
             this.$router.replace("/personal/info");
         },
+
+       async repeat(number) {  
+            const { data } = await Institution.repeat(number);
+              if(data != 0  && data >0){
+                  this.visible = true;
+                  this.form.siteRegistrationCode = null;
+              }
+           
+        },
+
+        handleOk () {
+            this.visible = false;
+        },
+
         async handleSubmit() {
             this.$refs.form.validate(async valid => {
                 if (valid) {
                     this.spinning = true;
-                    console.log(this.form,"123123123");
                     const { code, message } = await Institution.create(
                         formatString(this.form)
                     );
-                    console.log(message,"==============================");
                     if (code !== 200) {
                         return;
                     }
@@ -625,36 +661,22 @@ export default {
                     data.dateOfEstablishment
                 );
             }
-            // console.log("-----------", this.form)
             this.spinning = false;
         },
 
         async  info () {
               const { data } = await Institution.info();
-              console.log("=================",data);
+
               this.country = data;
              
-            //       for(var i = 0; i<this.country.length;i++){
-            //           if(this.country[i].level == 0){
-            //               this.form.country[i] = this.country[i];
-            //           }
-            //       }
-              
-          
-            //   console.log("===1",this.form.country);
           },
 
-
-        //  async getPronvice() {
-        //         const { data } = 
-        //   },
 
 
           async  info1 () {
               const { data } = await Institution.info1();
               
-              this.industry = data;
-              console.log("121212",this.industry);
+              this.scope = data;
           },
 
          async getCode () {
@@ -663,24 +685,20 @@ export default {
            
     },
 
-    async  info3 (id) {
+         async  info3 (id) {
               const { data } = await Institution.info3(id);
              
               this.province = data;
-
-              
-              
-              
           },
 
-    async  info4 (id) {
+         async  info4 (id) {
               const { data } = await Institution.info4(id);
-              console.log("=================1",data);
               this.city = data;
-              console.log("===1",this.city);
+          },
 
-              
-              
+        async  info5 () {
+              const { data } = await Institution.info5();
+              this.industryNumbers = data;
           },
 
 
@@ -740,6 +758,7 @@ export default {
     created() {
         this.info();
         this.info1();
+        this.info5();
         
     }
 };

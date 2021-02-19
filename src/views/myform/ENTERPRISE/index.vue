@@ -20,138 +20,7 @@
                 v-bind="formatLayout"
             >
                 <div v-show="stepCurrent === 0">
-                    <a-form-model-item :label="$t('enterprise.aa')">
-                        <ul>
-                            <li>{{ $t("enterprise.cn") }}</li>
-                        </ul>
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 1">
-                    <a-form-model-item
-                        prop="institutionId"
-                        :label="$t('enterprise.ak')"
-                    >
-                        <a-input :value="currentInstitution.nameZh" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.al')">
-                        <a-input :value="currentInstitution.nameEn" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.am')">
-                        <a-input :value="currentInstitution.namePt" disabled />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.an')">
-                        <a-input
-                            :value="currentInstitution.siteRegistrationCode"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ao')">
-                        <a-input
-                            :value="currentInstitution.registrationNumber"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ap')">
-                        <a-input
-                            :value="currentInstitution.streetZh"
-                            disabled
-                        />
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 2">
-                    <a-form-model-item
-                        prop="liaisonId"
-                        :label="$t('enterprise.av')"
-                    >
-                        <a-select v-model="form.liaisonId" :disabled="isCheck">
-                            <a-select-option
-                                v-for="item in liaisonList"
-                                :key="item.id"
-                                :value="item.id"
-                                :label="`${item.nameZh}${item.nameEnOrPt}`"
-                            >
-                                {{ item.nameZh }}
-                                {{ item.nameEnOrPt }}
-                            </a-select-option>
-                        </a-select>
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.aw')">
-                        <a-input
-                            :value="selectedLiaison.titleNameZh"
-                            disabled
-                        ></a-input>
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ax')">
-                        <a-input
-                            :value="selectedLiaison.phone"
-                            disabled
-                        ></a-input>
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ay')">
-                        <a-input
-                            :value="selectedLiaison.email"
-                            disabled
-                        ></a-input>
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.az')">
-                        <a-radio-group
-                            v-model="form.addressSame"
-                            :disabled="isCheck"
-                        >
-                            <a-radio :value="true">{{
-                                $t("enterprise.cq")
-                            }}</a-radio>
-                            <a-radio :value="false">{{
-                                $t("util.other")
-                            }}</a-radio>
-                        </a-radio-group>
-                        <a-input
-                            v-if="form.addressSame"
-                            :value="currentInstitution.streetZh"
-                            disabled
-                        ></a-input>
-                        <a-input
-                            v-else
-                            v-model="form.liaisonOtherAddress"
-                            :disabled="isCheck"
-                        ></a-input>
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
-                    <a-form-model-item :label="$t('enterprise.aq')">
-                        <a-input
-                            v-model="currentInstitution.taxpayerName"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.ar')">
-                        <a-input
-                            v-model="currentInstitution.taxpayerNo"
-                            disabled
-                        />
-                    </a-form-model-item>
-                    <a-form-model-item
-                        prop="taxpayerType"
-                        :label="$t('enterprise.as')"
-                    >
-                        <a-radio-group
-                            v-model="form.taxpayerType"
-                            :disabled="isCheck"
-                        >
-                            <a-radio value="INDIVIDUAL_BUSINESS">
-                                {{ $t("enterprise.at") }}
-                            </a-radio>
-                            <a-radio value="LIMITED_COMPANY">
-                                {{ $t("enterprise.au") }}
-                            </a-radio>
-                            <a-radio value="ORGANIZATION">
-                                {{ $t("enterprise.cy") }}
-                            </a-radio>
-                        </a-radio-group>
-                    </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 4">
-                    <a-form-model-item
+                      <a-form-model-item
                         prop="activityId"
                         :label="$t('enterprise.bc')"
                     >
@@ -214,6 +83,137 @@
                             v-model="form.productServe"
                             :disabled="isCheck"
                         ></a-input>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 1">
+                     <a-form-model-item :label="$t('enterprise.aa')">
+                        <ul>
+                            <li>{{ $t("enterprise.cn") }}</li>
+                        </ul>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 2">
+                      <a-form-model-item
+                        prop="institutionId"
+                        :label="$t('enterprise.ak')"
+                    >
+                        <a-input :value="currentInstitution.nameZh" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.al')">
+                        <a-input :value="currentInstitution.nameEn" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.am')">
+                        <a-input :value="currentInstitution.namePt" disabled />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.an')">
+                        <a-input
+                            :value="currentInstitution.siteRegistrationCode"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ao')">
+                        <a-input
+                            :value="currentInstitution.registrationNumber"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ap')">
+                        <a-input
+                            :value="currentInstitution.streetZh"
+                            disabled
+                        />
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 3">
+                     <a-form-model-item
+                        prop="liaisonId"
+                        :label="$t('enterprise.av')"
+                    >
+                        <a-select v-model="form.liaisonId" :disabled="isCheck">
+                            <a-select-option
+                                v-for="item in liaisonList"
+                                :key="item.id"
+                                :value="item.id"
+                                :label="`${item.nameZh}${item.nameEnOrPt}`"
+                            >
+                                {{ item.nameZh }}
+                                {{ item.nameEnOrPt }}
+                            </a-select-option>
+                        </a-select>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.aw')">
+                        <a-input
+                            :value="selectedLiaison.titleNameZh"
+                            disabled
+                        ></a-input>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ax')">
+                        <a-input
+                            :value="selectedLiaison.phone"
+                            disabled
+                        ></a-input>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ay')">
+                        <a-input
+                            :value="selectedLiaison.email"
+                            disabled
+                        ></a-input>
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.az')">
+                        <a-radio-group
+                            v-model="form.addressSame"
+                            :disabled="isCheck"
+                        >
+                            <a-radio :value="true">{{
+                                $t("enterprise.cq")
+                            }}</a-radio>
+                            <a-radio :value="false">{{
+                                $t("util.other")
+                            }}</a-radio>
+                        </a-radio-group>
+                        <a-input
+                            v-if="form.addressSame"
+                            :value="currentInstitution.streetZh"
+                            disabled
+                        ></a-input>
+                        <a-input
+                            v-else
+                            v-model="form.liaisonOtherAddress"
+                            :disabled="isCheck"
+                        ></a-input>
+                    </a-form-model-item>
+                </div>
+                <div v-show="stepCurrent === 4">
+                      <a-form-model-item :label="$t('enterprise.aq')">
+                        <a-input
+                            v-model="currentInstitution.taxpayerName"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item :label="$t('enterprise.ar')">
+                        <a-input
+                            v-model="currentInstitution.taxpayerNo"
+                            disabled
+                        />
+                    </a-form-model-item>
+                    <a-form-model-item
+                        prop="taxpayerType"
+                        :label="$t('enterprise.as')"
+                    >
+                        <a-radio-group
+                            v-model="form.taxpayerType"
+                            :disabled="isCheck"
+                        >
+                            <a-radio value="INDIVIDUAL_BUSINESS">
+                                {{ $t("enterprise.at") }}
+                            </a-radio>
+                            <a-radio value="LIMITED_COMPANY">
+                                {{ $t("enterprise.au") }}
+                            </a-radio>
+                            <a-radio value="ORGANIZATION">
+                                {{ $t("enterprise.cy") }}
+                            </a-radio>
+                        </a-radio-group>
                     </a-form-model-item>
                 </div>
                 <div v-show="stepCurrent === 5">
@@ -595,6 +595,40 @@
                         @click="handleSubmit"
                         >{{ $t("enterprise.co") }}</a-button
                     >
+                    <a-modal v-model="visible" title="提示" @ok="handleOk">
+                        <p>請注意！網上完成填寫表格手續後，仍需在活動申請截步前，親臨澳門宋玉生廣場263號中土大廈19樓，遞交已簽署之表格正本作確認。</p>
+                    </a-modal>
+
+                    <a-modal v-model="visible1" title="提示" @ok="handleOk1">
+                        <p>貴司在2020年1月1日至2020年12月31日期間內，已參與申請2次財務鼓勵，本次為第3次，今年還有最後一次申請財務鼓勵的機會，請知悉！</p>
+                    </a-modal>
+
+                    <a-modal v-model="visible2" title="提示" @ok="handleOk2">
+                        <p>貴司在2020年1月1日至2020年12月31日期間內，已參與申請3次財務鼓勵，本次為今年最後一次財務鼓勵申請（明年可再次提交申請），請知悉！</p>
+                    </a-modal>
+
+                    <a-modal v-model="visible3" title="提示" @ok="handleOk3" @cancel="cancel">
+                        <p>貴司在2020年1月1日至2020年12月31日期間內，已參與申請4次財務鼓勵，今年已無申請財務鼓勵的機會（明年可再次提交申請），請知悉！</p>
+                    </a-modal>
+
+
+                    <a-modal v-model="visible4" title="提示" @ok="handleOk4" @cancel="cancel">
+                        <p>同時只能有一條處理中的記錄；</p>
+                    </a-modal>
+
+
+                    <a-modal v-model="visible5" title="提示" @ok="handleOk_" @cancel="cancel_">
+                        <p>補齊資料時間為工作日，請到工作日時再進行補齊資料</p>
+                    </a-modal>
+
+                    <a-modal v-model="visible6" title="提示" @ok="handleOk_" @cancel="cancel_">
+                        <p>當前日期為節假日，請另尋日期補齊資料</p>
+                    </a-modal>
+
+                    <a-modal v-model="visible7" title="提示" @ok="handleOk_" @cancel="cancel_">
+                        <p>已超過補齊資料時限，請自行查看</p>
+                    </a-modal>
+
                 </a-form-model-item>
             </a-form-model>
         </a-spin>
@@ -605,6 +639,7 @@
 import { mapGetters } from "vuex";
 
 import EE from "@/apis/encourageEnterprise";
+import Institution from "@/apis/institution";
 import validate from "./validate";
 import UploadFile from "@/components/upload";
 
@@ -614,8 +649,19 @@ export default {
     data() {
         return {
             ...validate,
+            id: "",
             formId: "",
             isShow:false,
+            visible: false,
+            visible1: false,
+            visible2: false,
+            visible3: false,
+            visible4: false,
+            visible5: false,
+            visible6: false,
+            visible7: false,
+            mice:"",
+            status:"",
             form: {
                 applicantId: "",
                 institutionId: "",
@@ -729,7 +775,7 @@ export default {
             if (!this.form.status) {
                 return false;
             } else {
-                return this.form.status !== "rejected";
+                return this.form.status !== "supplementinfo";
             }
         },
         isCheck: function() {
@@ -773,23 +819,115 @@ export default {
             //滚回到顶部
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         },
-        handleSubmit(e) {
-            this.$refs.enterprise.validate(async valid => {
+        async handleOk(e) {
+            this.visible = false;
+            const{ data } = await Institution.existed(this.form.institutionId);
+            if(data != 1){
+               this.$refs.enterprise.validate(async valid => {
                 if (valid) {
                     const { data } = await EE.create(this.form);
-                    console.log(this.form);
                     if (data) {
-                        this.$message.success("申請成功");
-                        this.$router.replace("/personal/funding");
-                    }
+                            this.$message.success("申請成功");
+                            this.$router.replace("/personal/funding");                           
+                        }
                 } else {
                     this.$message.error(
                         "表單存在必填項為空或者不合法字符，請檢查"
                     );
                 }
             });
-        }
+            }else{
+                this.visible4 = true;
+            }
     },
+        handleSubmit(e) {
+             this.visible = true;
+            
+        },
+
+       async judgment() {
+            const { data } = await Institution.count(this.form.institutionId);
+           if(data.applyNumber == 2){
+               
+             this.visible1 = true;
+             
+           }else if(data.applyNumber == 1){
+                
+               this.visible2 = true;
+                
+           }else if(data.applyNumber == 0){
+               this.visible3 = true;
+
+              }
+            
+
+        },
+
+        async repeat() {
+            
+            const{ data } = await Institution.existed(this.form.institutionId ,this.mice);
+            if(data === 1){
+                this.visible4 = true;
+            }else{
+                this.judgment();
+            }
+
+        },
+
+
+        handleOk1() {
+                this.visible1 = false;
+        },
+        handleOk2() {
+                this.visible2 = false;
+        },
+        handleOk3() {
+               this.$router.push("/");
+                this.visible3 = false;
+        },
+        handleOk4() {
+               this.$router.push("/");
+                this.visible4 = false;
+        },
+
+        cancel() {
+            this.$router.push("/");
+        },
+
+        handleOk_() {
+            this.$router.push("/personal/record");
+        },
+
+        cancel_() {
+            this.$router.push("/personal/record");
+        },
+
+       async legal_date() {
+            if(this.mice != null){
+               const{ data } = await Institution.legal_date(this.id);
+                if(data == "106001"){
+                   this.visible5 = true;
+                }  
+                else if(data == "106002"){
+                   this.visible6 = true;
+                }
+                else if(data == "106003"){
+                   this.visible7 = true;
+                }
+            }
+        }
+       
+    },
+
+        created() {
+
+         this.mice = this.$crypto.decryption(unescape(this.$route.query.a));
+         this.id = this.$crypto.decryption(unescape(this.$route.query.d));
+         console.log("3232323232",this.id);
+        
+       },
+
+
     mounted() {
         this.formId = this.$crypto.decryption(unescape(this.$route.query.d));
         if (!this.formId) this.$store.dispatch("setTimeNext");
@@ -797,7 +935,14 @@ export default {
         this.$nextTick(() => {
             //判斷是否是未認證機構
             if (this.encourageDis) this.isCertified();
+
+            this.repeat();
+             
+             this.legal_date();
+
         });
+         
+         
     },
     destroyed() {
         this.$store.dispatch("setChangeTrue");

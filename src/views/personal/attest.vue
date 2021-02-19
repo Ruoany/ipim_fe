@@ -67,82 +67,82 @@
                 </a-select>
             </a-form-model-item>
             <a-form-model-item
+                :label="$t('personal.an')"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="salesTaxOpenFiles"
+            >
+                <upload
+                    
+                    :multiple="true"
+                    :value.sync="form.salesTaxOpenFiles"
+                    decorator="salesTaxOpenFiles"
+                    @handleChange="v=>uploadChange(v, 'salesTaxOpenFiles')"
+                ></upload>
+            </a-form-model-item>
+            <a-form-model-item
+                :label="$t('personal.ao')"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="salesTaxFiles"
+            >
+                <upload
+                    :multiple="true"
+                    :value.sync="form.salesTaxFiles"
+                    decorator="salesTaxFiles"
+                    @handleChange="v=>uploadChange(v, 'salesTaxFiles')"
+                ></upload>
+            </a-form-model-item>
+            <a-form-model-item
+                :label="$t('personal.ap')"
+                v-if="form.nature === 'ENTERPRISE'"
+                prop="businessRegistrationFiles"
+            >
+                <upload
+                    :multiple="true"
+                    :value.sync="form.businessRegistrationFiles"
+                    decorator="businessRegistrationFiles"
+                    @handleChange="v=>uploadChange(v, 'businessRegistrationFiles')"
+                ></upload>
+            </a-form-model-item>
+            <a-form-model-item
                 :label="$t('personal.aj')"
                 v-if="form.nature === 'ENTERPRISE'"
                 prop="shareholderSamesFiles"
             >
                 <upload
-                    
                     :multiple="true"
                     :value.sync="form.shareholderSamesFiles"
                     decorator="shareholderSamesFiles"
-                    @handleChange="v=>uploadChange(v, 'shareholderSamesFiles')"
+                   @handleChange="v=>uploadChange(v, 'shareholderSamesFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.ak')"
-                v-if="form.nature === 'ENTERPRISE'"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="groupEstablishmentFiles"
             >
                 <upload
-                    :multiple="true"
                     :value.sync="form.groupEstablishmentFiles"
                     decorator="groupEstablishmentFiles"
-                    @handleChange="v=>uploadChange(v, 'groupEstablishmentFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.al')"
-                v-if="form.nature === 'ENTERPRISE'"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="identificationBureauFiles"
             >
                 <upload
-                    :multiple="true"
                     :value.sync="form.identificationBureauFiles"
                     decorator="identificationBureauFiles"
-                    @handleChange="v=>uploadChange(v, 'identificationBureauFiles')"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item
                 :label="$t('personal.am')"
-                v-if="form.nature === 'ENTERPRISE'"
+                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
                 prop="legalPersonFiles"
             >
                 <upload
-                    :multiple="true"
                     :value.sync="form.legalPersonFiles"
                     decorator="legalPersonFiles"
-                   @handleChange="v=>uploadChange(v, 'legalPersonFiles')"
-                ></upload>
-            </a-form-model-item>
-            <a-form-model-item
-                :label="$t('personal.an')"
-                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="salesTaxOpenFiles"
-            >
-                <upload
-                    :value.sync="form.salesTaxOpenFiles"
-                    decorator="salesTaxOpenFiles"
-                ></upload>
-            </a-form-model-item>
-            <a-form-model-item
-                :label="$t('personal.ao')"
-                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="salesTaxFiles"
-            >
-                <upload
-                    :value.sync="form.salesTaxFiles"
-                    decorator="salesTaxFiles"
-                ></upload>
-            </a-form-model-item>
-            <a-form-model-item
-                :label="$t('personal.ap')"
-                v-if="form.nature === 'BUSINESS_OR_ASSOCIATION'"
-                prop="businessRegistrationFiles"
-            >
-                <upload
-                    :value.sync="form.businessRegistrationFiles"
-                    decorator="businessRegistrationFiles"
                 ></upload>
             </a-form-model-item>
             <a-form-model-item :model="form">
@@ -173,9 +173,19 @@ export default {
             trigger: "blur"
         };
         return {
-            nature: null,
-            formData: {
-                nature: "",
+            // nature: null,
+            // formData: {
+            //     nature: [],
+            //     businessRegistrationFiles: [],
+            //     salesTaxOpenFiles: [],
+            //     salesTaxFiles: [],
+            //     shareholderSamesFiles: [],
+            //     groupEstablishmentFiles: [],
+            //     identificationBureauFiles: [],
+            //     legalPersonFiles: []
+            // },
+            form: {
+                nature: [],
                 businessRegistrationFiles: [],
                 salesTaxOpenFiles: [],
                 salesTaxFiles: [],
@@ -184,7 +194,6 @@ export default {
                 identificationBureauFiles: [],
                 legalPersonFiles: []
             },
-            form: {},
             rules: {
                 nature: [config],
                 businessRegistrationFiles: [config],
@@ -219,7 +228,7 @@ export default {
         async certified() {
             const { data, code } = await Institution.certified({
                 id: this.currentInstitution.id,
-                ...this.formData
+                ...this.form
             });
             if (code !== 200) {
                 // this.$message.error(data.message);

@@ -8,9 +8,14 @@
             style="width:100%;"
         >
             <a-form-model-item prop="nameZh" label="展會名稱">
-                <a-input v-model="form.nameZh"></a-input>
+                <a-input v-model="form.nameZh" @blur="repeat(form.nameZh)"></a-input>
             </a-form-model-item>
-            <a-form-model-item prop="startEndDate" label="展會舉行日期">
+
+             <a-modal v-model="visible" title="提示" @ok="handleOk">
+                        <p>展會名稱已存在</p>
+            </a-modal>
+
+            <a-form-model-item prop="startEndDate" label="展會舉行日期(注：展會在開始日期的前46天才可申請)">
                 <a-range-picker     v-model="form.startEndDate" style="width:1000px">
 
                 </a-range-picker>
@@ -126,7 +131,8 @@ export default {
                 price:[],
             },
             loading: false,
-            spinning: false
+            spinning: false,
+            visible: false
         };
     },
     computed: {
@@ -260,7 +266,20 @@ export default {
 
         isUpdate(){
             return this.$route.query.type==='update'
-        }
+        },
+
+         async repeat(name) {  
+            const { data } = await activity.repeat(name);
+              if(data != 0  && data >0){
+                  this.visible = true;
+                  this.form.nameZh = null;
+              }
+           
+        },
+
+        handleOk () {
+            this.visible = false;
+        },
     },
     mounted() {
        // this.form.startEndDate[0]=null;

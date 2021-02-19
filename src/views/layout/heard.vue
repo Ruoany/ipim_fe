@@ -1,6 +1,6 @@
 <template>
     <div class="container flex">
-        <div class="logo" @click="$router.push('/')"></div>
+        <div class="logo" @click="$router.push('/')" v-bind:title="message"></div>
         <a-menu :selectedKeys="menuItem" mode="horizontal" class="menu-wrapper">
             <a-sub-menu>
                 <span slot="title" class="flex center">
@@ -190,7 +190,8 @@ export default {
             current: null,
             showList: [],
             depList: [],
-            menuItem: []
+            menuItem: [],
+            message: "首頁"
         };
     },
     computed: {

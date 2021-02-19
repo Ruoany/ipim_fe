@@ -55,7 +55,8 @@
                         </div>
                     <div @click="refreshCode" style="">
               <!--验证码组件-->
-					<img src="http://ops.inplexmacau.com/api/captcha.jpg" />
+              <!-- <img src="http://localhost:9196/captcha.jpg" /> -->
+					<img src="http://fe.molarge.com/api/captcha.jpg" />
                  <!-- <s-identify :identifyCode="identifyCode"></s-identify> -->
                     </div>
                  

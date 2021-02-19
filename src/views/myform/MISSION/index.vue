@@ -165,7 +165,7 @@
                 </a-form-item>
                 <a-form-item :label="$t('mission.ba')">
                     <a-checkbox
-                        :ckecked="form.isCompany"
+                        :checked="form.isCompany"
                         @change="e => (form.isCompany = e.target.checked)"
                         :disabled="isCheck"
                         >{{ $t("mission.bb") }}</a-checkbox
@@ -192,7 +192,7 @@
                         :disabled="isCheck"
                     />
                 </a-form-item>
-                <a-form-item :label="$t('mission.be')">
+                <a-form-item :label="$t('mission.bv')">
                     <a-checkbox
                         :checked="form.isOtherWay"
                         @change="e => (form.isOtherWay = e.target.checked)"
@@ -200,7 +200,7 @@
                         >{{ $t("mission.bf") }}</a-checkbox
                     >
                 </a-form-item>
-                <a-form-item :label="$t('mission.bg')">
+                <a-form-item >
                     <a-input v-model="form.otherWayName" :disabled="isCheck" />
                 </a-form-item>
             </div>

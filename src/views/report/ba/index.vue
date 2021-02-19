@@ -19,8 +19,8 @@
                 </div>
                 <div v-show="step===1">
                     <a-form-model-item :label="$t('reportba.bp')">
-                        <a-radio-group :value="currentInstitution.institutionType" disabled>
-                            <a-radio value="INDIVIDUAL_BUSINESS_OWNER">{{ $t("reportba.as") }}</a-radio>
+                        <a-radio-group :value="taxpayerType" disabled>
+                            <a-radio value="INDIVIDUAL_BUSINESS">{{ $t("reportba.as") }}</a-radio>
                             <a-radio value="GROUP">{{ $t("reportba.at") }}</a-radio>
                             <a-radio value="LIMITED_COMPANY">{{ $t("reportba.au") }}</a-radio>
                         </a-radio-group>
@@ -195,7 +195,9 @@ export default {
                     activityPlace: data.activity.place,
                     activityExpiry: data.activity.expiryTime,
                     productServe: data.productServe,
+
                 };
+                this.taxpayerType = data.taxpayerType
             }
             const res = await Report.getEncourageEnterpriseReportById(recordId);
             if(res.code === 200 && res.data) {

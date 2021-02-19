@@ -14,7 +14,7 @@ const router = [
         meta: {
             title: "支持申請表",
             key: "special",
-            case: "form"
+            case: "form",
         },
         component: () => import("@/views/myform/special")
     }

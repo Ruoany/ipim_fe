@@ -38,6 +38,18 @@
                     item.status | statusTextFilter
                 }}</a-tag>
                 <div slot="action" class="button-wrapper">
+                    <a-button
+                        type="link"
+                        v-if="item.status === 'approving' && item.activity && item.type === 'ENTERPRISE' && item.tasks.length == 1"
+                        @click="cancel(item.id)"
+                        >{{  
+                            $t("personal.cancel")    
+                        }}</a-button>
+
+                    <a-modal v-model="visible" title="提示" @ok="handleOk" @cancel="handCancel">
+                        <p>確定要取消申請嗎</p>
+                    </a-modal>
+
                     <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
@@ -55,13 +67,14 @@
                     >
                     <a-button
                         type="link"
+                        v-if="item.status != 'rejected'"
                         @click="
                             FormNavigate(item.type, {
                                 d: item.id
                             })
                         "
                         >{{
-                            item.status === "rejected"
+                            item.status === 'supplementinfo'
                                 ? $t("personal.update")
                                 : $t("personal.showForm")
                         }}</a-button
@@ -124,6 +137,7 @@ import { mapGetters } from "vuex";
 import Cell from "./components/cell";
 import Pagination from "@/components/pagination";
 import Encourage from "@/apis/encourage";
+import Institution  from "@/apis/institution";
 import i18n from "@/assets/i18n/index";
 import PDFDown from "@/apis/PDFDown";
 
@@ -137,6 +151,7 @@ export default {
             size: 5,
             total: 1,
             list: [],
+            visible: false
         };
     },
     computed: {
@@ -164,6 +179,8 @@ export default {
                     return "red";
                 case "finish":
                     return "green";
+                case "supplementinfo":
+                    return "orange";
             }
         },
         statusTextFilter: function(value) {
@@ -178,6 +195,8 @@ export default {
                     return i18n.t("personal.withdraw");
                 case "finish":
                     return i18n.t("personal.finish");
+                case "supplementinfo":
+                    return i18n.t("personal.supplementinfo");
             }
         },
         pictureTextFilter: function(value) {
@@ -217,9 +236,27 @@ export default {
             });
             return o;
         },
+        
+
+        cancel(o) {
+            this.visible = true;
+            sessionStorage.setItem("exhibitionId",o)
+        },
+
+       async handleOk(){
+           this.visible = false;
+           const o = sessionStorage.getItem("exhibitionId");
+           const { data } = await Institution.cancel(o);
+             location.reload();
+        },
+        handCancel(){
+           this.visible = false;
+        },
+
+
         FormNavigate: function(form, o) {
             // 參數MISSION轉為bb
-            form = form == "MISSION" ? "bb" : form;
+           form = form == "EN_MISSION" ? "bb" : form;
             const query = {
                 form,
                 ...this.Transform(o)

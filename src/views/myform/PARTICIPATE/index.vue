@@ -122,40 +122,40 @@
             </div>
             <div v-show="stepCurrent === 3">
                 <a-form-model-item :label="$t('participate.an')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.registrationOfBureauFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ao')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.macaoShareholderFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ap')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.otherFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.aq')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.taxpayerFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.ar')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.shareholderSamesFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
                 <a-form-model-item :label="$t('participate.as')">
-                    <upload
+                    <!-- <upload
                         :value.sync="form.differentTaxpayerFiles"
                         :disabled="isCheck"
-                    ></upload>
+                    ></upload> -->
                 </a-form-model-item>
             </div>
             <div v-show="stepCurrent === 4">
