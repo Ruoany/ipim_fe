@@ -6,6 +6,27 @@
             :rules="rules"
             style="width:100%;"
         >
+            <a-form-model-item prop="pic" :label="$t('util.pic')">
+                <a-upload
+                    name="file"
+                    listType="picture-card"
+                    :showUploadList="false"
+                    :action="upFiles"
+                    :beforeUpload="beforeUpload"
+                    @change="imgChange"
+                >
+                    <img
+                        v-if="info.pic"
+                        :src="info.pic"
+                        alt="avatar"
+                        class="img"
+                    />
+                    <div v-else>
+                        <a-icon :type="loading ? 'loading' : 'plus'" />
+                    </div>
+                </a-upload>
+            </a-form-model-item>
+
             <a-form-model-item prop="name" :label="$t('util.name')">
                 <a-input v-model="info.name" />
             </a-form-model-item>
@@ -52,6 +73,7 @@
 <script>
 import { mapGetters } from "vuex";
 import upPassword from "./components/upPassword";
+import { upFiles } from "@/apis/files";
 import User from "@/apis/user";
 export default {
     components: { upPassword },
@@ -59,6 +81,8 @@ export default {
         return {
             upPasswordVisible: false,
             confirmLoading: false,
+            upFiles,
+            loading: false,
             rules: {
                 email: [
                     {
@@ -164,9 +188,41 @@ export default {
                     }
                 }
             });
-        }
+        },
+        beforeUpload(file) {
+            const isJPG =
+                file.type === "image/jpeg" || file.type === "image/png";
+            if (!isJPG) {
+                this.$message.error("You can only upload JPG and PNG file!");
+            }
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            if (!isLt2M) {
+                this.$message.error("Image must smaller than 2MB!");
+            }
+            if (isJPG && isLt2M) {
+                this.loading = true;
+            }
+            return isJPG && isLt2M;
+        },
+        imgChange(info) {
+            if (info.file.status === "done") {
+                let data = info.file.response;
+                if (data.code === 200) {
+                    this.info.pic = data.data.url;
+                } else {
+                    // this.$message.error(data.message);
+                }
+                this.loading = false;
+            }
+        },
     }
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+
+.img {
+    width: 80px;
+    max-height: 80px;
+}
+</style>

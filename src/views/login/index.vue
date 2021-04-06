@@ -55,6 +55,7 @@
                         </div>
                     <div @click="refreshCode" style="">
               <!--验证码组件-->
+              <!-- <img src="https://macaomice.ipim.gov.mo/api/captcha.jpg" /> -->
               <!-- <img src="http://localhost:9196/captcha.jpg" /> -->
 					<img src="http://fe.molarge.com/api/captcha.jpg" />
                  <!-- <s-identify :identifyCode="identifyCode"></s-identify> -->
@@ -93,6 +94,7 @@ import { Login } from "@/apis/login";
 import User from "@/apis/user";
 import SIdentify  from '@/components/sidentify'
 export default {
+    // eslint-disable-next-line vue/no-unused-components
     components: { SIdentify },
     data() {
         return {
@@ -138,7 +140,7 @@ export default {
   },
         
   refreshCode() {
-	    window.location.reload();
+    window.location.reload();
       //this.identifyCode = "";
       //this.makeCode(this.identifyCodes, 4);
   },

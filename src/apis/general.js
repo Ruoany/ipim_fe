@@ -43,6 +43,13 @@ const func = (modules, o = {}) => {
                 data
             });
         },
+        save: data => {
+            return request({
+                url: `${modulesUrl}/tosubmit`,
+                method: "POST",
+                data
+            });
+        },
         update: data => {
             return request({
                 url: modulesUrl,

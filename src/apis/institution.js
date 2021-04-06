@@ -66,30 +66,43 @@ const m = general("institution", {
         return request.get(`encourage-enterprise/feone?id=${id}`)
     },
 
-    certificate_1: data => {
+    // certificate_1: data => {
+    //     return request({
+    //         url: "participate-delegation/payorder",
+    //         method: "",
+    //         data
+    //     });
+    // },
+
+    // certificate_2: data => {
+    //     return request({
+    //         url: "participate-attend-abroad/payorder",
+    //         method: "PUT",
+    //         data
+    //     });
+    // },
+
+
+        certificate: data => {
         return request({
-            url: "participate-delegation/payorder",
-            method: "PUT",
+            url: "participate/accessory",
+            method: "POST",
             data
         });
     },
 
-    certificate_2: data => {
-        return request({
-            url: "participate-attend-abroad/payorder",
-            method: "PUT",
-            data
-        });
+    // downloadCar_1: (id) => {
+    //     return request.get(`participate-attend-abroad/findone?id=${id}`)
+    // },
+    
+    // downloadCar_2: (id) => {
+    //     return request.get(`participate-delegation/feone?id=${id}`)
+    // },
+    
+    downloadCar: (id) => {
+        return request.get(`participate/down/${id}`)
     },
 
-    downloadCar_1: (id) => {
-        return request.get(`participate-attend-abroad/findone?id=${id}`)
-    },
-    
-    downloadCar_2: (id) => {
-        return request.get(`participate-delegation/feone?id=${id}`)
-    },
-    
 
 
 });

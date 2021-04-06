@@ -162,8 +162,9 @@ const enData = {
         aw: "其他",
         ay: "納稅人名稱",
         az: "機構認證",
+        bd: "公司簡介",
         logo: "機構LOGO",
-        meNameZh: "機構名稱[M/1場所登記(營業稅檔案)或政府公報]",
+        meNameZh: "機構名稱",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
@@ -196,7 +197,8 @@ const enData = {
         verifiedFail: "認證失敗",
         upload1: "上傳憑證",
         obligation: "待付款",
-        download1: "下載憑證"
+        download1: "下載憑證",
+        tosubmit:"待提交"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",

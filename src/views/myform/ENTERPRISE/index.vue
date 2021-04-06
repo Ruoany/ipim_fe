@@ -3,9 +3,9 @@
         <a-steps v-model="stepCurrent" direction="vertical" size="small">
             <a-step :title="$t('enterprise.aa')" disabled />
             <a-step :title="$t('enterprise.ab')" disabled />
-            <a-step :title="$t('enterprise.ad')" disabled />
+            <!-- <a-step :title="$t('enterprise.ad')" disabled />
             <a-step :title="$t('enterprise.ac')" disabled />
-            <a-step :title="$t('enterprise.af')" disabled />
+            <a-step :title="$t('enterprise.af')" disabled /> -->
             <a-step :title="$t('enterprise.ah')" disabled />
             <a-step :title="$t('enterprise.ae')" disabled />
             <a-step :title="$t('enterprise.ai')" disabled />
@@ -20,8 +20,9 @@
                 v-bind="formatLayout"
             >
                 <div v-show="stepCurrent === 0">
+                     <!-- prop="activityId" -->
                       <a-form-model-item
-                        prop="activityId"
+                    
                         :label="$t('enterprise.bc')"
                     >
                         <a-select v-model="form.activityId" :disabled="isCheck" style="width:720px">
@@ -76,8 +77,9 @@
                             disabled
                         ></a-input>
                     </a-form-model-item>
+                     <!-- prop="productServe" -->
                     <a-form-model-item
-                      prop="productServe"
+                     
                      :label="$t('enterprise.bg')">
                         <a-input
                             v-model="form.productServe"
@@ -92,9 +94,12 @@
                         </ul>
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 2">
-                      <a-form-model-item
-                        prop="institutionId"
+
+
+                <!-- <div v-show="stepCurrent === 2"> -->
+                     <!-- prop="institutionId" -->
+                      <!-- <a-form-model-item
+                        
                         :label="$t('enterprise.ak')"
                     >
                         <a-input :value="currentInstitution.nameZh" disabled />
@@ -123,10 +128,13 @@
                             disabled
                         />
                     </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 3">
-                     <a-form-model-item
-                        prop="liaisonId"
+                </div> -->
+
+
+                <!-- <div v-show="stepCurrent === 3"> -->
+                     <!-- prop="liaisonId" -->
+                     <!-- <a-form-model-item
+                       
                         :label="$t('enterprise.av')"
                     >
                         <a-select v-model="form.liaisonId" :disabled="isCheck">
@@ -182,8 +190,9 @@
                             :disabled="isCheck"
                         ></a-input>
                     </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 4">
+                </div> -->
+
+                <!-- <div v-show="stepCurrent === 4">
                       <a-form-model-item :label="$t('enterprise.aq')">
                         <a-input
                             v-model="currentInstitution.taxpayerName"
@@ -195,9 +204,10 @@
                             v-model="currentInstitution.taxpayerNo"
                             disabled
                         />
-                    </a-form-model-item>
-                    <a-form-model-item
-                        prop="taxpayerType"
+                    </a-form-model-item> -->
+                    <!-- prop="taxpayerType" -->
+                    <!-- <a-form-model-item
+                        
                         :label="$t('enterprise.as')"
                     >
                         <a-radio-group
@@ -215,8 +225,8 @@
                             </a-radio>
                         </a-radio-group>
                     </a-form-model-item>
-                </div>
-                <div v-show="stepCurrent === 5">
+                </div> -->
+                <div v-show="stepCurrent === 2">
                     <p>{{ $t("enterprise.bh") }}</p>
                     <ul>
                         <li>{{ $t("enterprise.bi") }}</li>
@@ -350,9 +360,10 @@
                         </div>
                     </a-form-model-item> -->
                 </div>
-                <div v-show="stepCurrent === 6">
+                <div v-show="stepCurrent === 3">
+                     <!-- prop="receive" -->
                     <a-form-model-item
-                        prop="receive"
+                       
                         :label="$t('enterprise.ae')"
                     >
                         <a-radio-group
@@ -386,7 +397,7 @@
                         />
                     </a-form-model-item>
                 </div>
-                <div v-show="stepCurrent === 7">
+                <div v-show="stepCurrent === 4">
                     <p>{{ $t("enterprise.bw") }}</p>
                     <a-form-model-item>
                         <a-radio-group
@@ -460,9 +471,10 @@
                     <p>{{ $t("enterprise.by") }}</p>
                     
                 </div>
-                <div v-show="stepCurrent === 8">
+                <div v-show="stepCurrent === 5">
+                     <!-- prop="identityFiles" -->
                     <a-form-model-item
-                        prop="identityFiles"
+                       
                         :label="$t('enterprise.cb')"
                     >
                         <upload-file
@@ -470,20 +482,21 @@
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.cc')">
+                    <!-- <a-form-model-item :label="$t('enterprise.cc')">
                         <upload-file
                             :value.sync="form.companyProfile"
                             :disabled="isCheck"
                         />
-                    </a-form-model-item>
-                    <a-form-model-item :label="$t('enterprise.cd')">
+                    </a-form-model-item> -->
+                    <!-- <a-form-model-item :label="$t('enterprise.cd')">
                         <upload-file
                             :value.sync="form.exhibitData"
                             :disabled="isCheck"
                         />
-                    </a-form-model-item>
+                    </a-form-model-item> -->
+                     <!-- prop="incomeFiles" -->
                     <a-form-model-item
-                        prop="incomeFiles"
+                       
                         :label="$t('enterprise.ce')"
                     >
                         <upload-file
@@ -491,8 +504,9 @@
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
+                     <!-- prop="depositFiles" -->
                     <a-form-model-item
-                        prop="depositFiles"
+                       
                         :label="$t('enterprise.cf')"
                     >
                         <upload-file
@@ -500,8 +514,9 @@
                             :disabled="isCheck"
                         />
                     </a-form-model-item>
+                     <!-- prop="quotationSheet" -->
                     <a-form-model-item
-                        prop="quotationSheet"
+                       
                         :label="$t('enterprise.cg')"
                     >
                         <upload-file
@@ -510,8 +525,9 @@
                         />
                     </a-form-model-item>
 
+                    <!-- prop="productServeFiles" -->
                       <a-form-model-item
-                        prop="productServeFiles"
+                        
                         :label="$t('enterprise.cu')"
                     >
                         <upload-file
@@ -581,7 +597,7 @@
                         >上一步</a-button
                     >
                     <a-button
-                        v-show="stepCurrent < 8"
+                        v-show="stepCurrent < 5"
                         type="primary"
                         :disabled="timeNext > 0"
                         @click="handleNext"
@@ -589,14 +605,24 @@
                         {{ timeNext > 0 ? `(${timeNext}S)` : "下一步" }}
                     </a-button>
                     <a-button
-                        v-show="stepCurrent === 8"
+                        v-show="stepCurrent === 5"
+                        type="primary"
+                        :class="isSubmit ? 'none' : ''"
+                        @click="handleSubmit1"
+                        style="margin-right:12px"
+                        >{{ $t("enterprise.cz") }}</a-button
+                    >
+                    <a-button
+                        v-show="stepCurrent === 5"
                         type="primary"
                         :class="isSubmit ? 'none' : ''"
                         @click="handleSubmit"
                         >{{ $t("enterprise.co") }}</a-button
                     >
+                   
                     <a-modal v-model="visible" title="提示" @ok="handleOk">
-                        <p>請注意！網上完成填寫表格手續後，仍需在活動申請截步前，親臨澳門宋玉生廣場263號中土大廈19樓，遞交已簽署之表格正本作確認。</p>
+                        <p>請注意！網上完成填寫表格手續後，仍需在活動申請截步前，親臨澳門世貿中心 4 樓，遞交已簽署之表格正本作確認。</p>
+                        <!-- <p>請注意！網上完成填寫表格手續後，仍需在活動申請截步前，親臨澳門宋玉生廣場263號中土大廈19樓，遞交已簽署之表格正本作確認。</p> -->
                     </a-modal>
 
                     <a-modal v-model="visible1" title="提示" @ok="handleOk1">
@@ -668,12 +694,12 @@ export default {
                 liaisonId: "",
                 activityId: "",
                 governments: [{ name: "", supportContent: "" }],
-                receive: "",
+                receive: 'CHEQUE',
                 taxpayer: "",
                 taxpayerCode: "",
-                taxpayerType: "",
+                taxpayerType: 'INDIVIDUAL_BUSINESS',
                 productServe: "",
-                productServeFiles: "",
+                productServeFiles: [],
                 exhibitRent: null,
                 makeCost: null,
                 trafficCost: null,
@@ -771,13 +797,13 @@ export default {
                 helperStrs: ""
             };
         },
-        isSubmit: function() {
-            if (!this.form.status) {
-                return false;
-            } else {
-                return this.form.status !== "supplementinfo";
-            }
-        },
+        // isSubmit: function() {
+        //     if (!this.form.status) {
+        //         return false;
+        //     } else {
+        //         return this.form.status !== "supplementinfo";
+        //     }
+        // },
         isCheck: function() {
             return (
                 this.form.status === "passed" ||
@@ -823,11 +849,86 @@ export default {
             this.visible = false;
             const{ data } = await Institution.existed(this.form.institutionId);
             if(data != 1){
-               this.$refs.enterprise.validate(async valid => {
-                if (valid) {
-                    const { data } = await EE.create(this.form);
+            //    this.$refs.enterprise.validate(async valid => {
+                
+                if (this.form.activityId == '' ) {
+                     this.$message.error(
+                        "展會名稱存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.productServe == ''){
+                    this.$message.error(
+                        "產品/服務內容存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.institutionId == ''){
+                     this.$message.error(
+                        "商號名稱（中文）存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.liaisonId == ''){
+                    this.$message.error(
+                        "姓名存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.taxpayerType == ''){
+                    this.$message.error(
+                        "類型存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.receive == ''){
+                     this.$message.error(
+                        "接受資助方式存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.identityFiles == ''){
+                    this.$message.error(
+                        "個人企業主/具有50%控股權之澳門居民身份證明文件副本存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.incomeFiles == ''){
+                    this.$message.error(
+                        "所得補充稅M/1 A組或B組收益申報書副本存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.depositFiles ==''){
+                    this.$message.error(
+                        "最近一季社會保障基金供款資料副本(如果沒有社會保障金，請提供相關說明書)存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.quotationSheet ==''){
+                    this.$message.error(
+                        "申請項目報價單存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else if(this.form.productServeFiles == ''){
+                     this.$message.error(
+                        "參展產品/服務資料存在必填項為空或者不合法字符，請檢查"
+                    );
+                }
+                else {
+                  const { data } = await EE.create(this.form);
                     if (data) {
                             this.$message.success("申請成功");
+                            this.$router.replace("/personal/funding");                           
+                        }
+                }
+               
+            // });
+            }else{
+                this.visible4 = true;
+            }
+    },
+        handleSubmit(e) {
+             this.visible = true;
+            
+        },
+        handleSubmit1(e){
+            this.$refs.enterprise.validate(async valid => {
+                if (valid) {
+                    const { data } = await EE.save(this.form);
+                    if (data) {
+                            this.$message.success("保存成功");
                             this.$router.replace("/personal/funding");                           
                         }
                 } else {
@@ -836,13 +937,6 @@ export default {
                     );
                 }
             });
-            }else{
-                this.visible4 = true;
-            }
-    },
-        handleSubmit(e) {
-             this.visible = true;
-            
         },
 
        async judgment() {

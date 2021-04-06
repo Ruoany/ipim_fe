@@ -15,7 +15,9 @@
             ></co-pe>
         </a-tab-pane>
 
-        <a-tab-pane :tab="$t('show.money')" key="6"></a-tab-pane>
+        <a-tab-pane :tab="$t('show.money')" key="6">
+            <info :info="infoLan1"></info>
+        </a-tab-pane>
         <a-tab-pane :tab="$t('show.new')" key="7"></a-tab-pane>
         <!-- <a-tab-pane :tab="$t('show.shop')" key="4">
             <shop :institutions="cardData.institutions ? cardData.institutions : []"></shop>
@@ -32,11 +34,12 @@ import organizer from "./organizer";
 import shop from "./shop";
 import photo from "./photo";
 import info from "./info";
+import money from "./money"
 export default {
     props: {
         cardData: Object
     },
-    components: { coPe, organizer, shop, photo, info },
+    components: { coPe, organizer, shop, photo, info, money },
     computed: {
         infoLan() {
             switch (sessionStorage.getItem("language")) {
@@ -51,8 +54,23 @@ export default {
                 default:
                     return this.cardData.contentZh;
             }
+        },
+    infoLan1() {
+            switch (sessionStorage.getItem("language")) {
+                case "zh":
+                    return this.cardData.exhibitionCostExplain;
+                    break;
+                case "en":
+                    return this.cardData.exhibitionCostExplainEn;
+
+                    break;
+                case "pt":
+                    return this.cardData.exhibitionCostExplainPn;
+                default:
+                    return this.cardData.exhibitionCostExplain;
+            }
         }
-    }
+  },
 };
 </script>
 

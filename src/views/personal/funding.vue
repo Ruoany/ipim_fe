@@ -26,9 +26,9 @@
                 :scope="item.activity ? item.activity.scope : ''"
                 :status="item.status"
                 :activity-status="item.activity ? item.activity.showStatus : 'PROGRESS'"
-                :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
-                :address="item.activity ? item.activity.place : '無地址'"
-                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.applyTime"
+                 :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格': item.type === 'ENTERPRISE'? '': '電子商務推廣（應用 B2C 平台）鼓勵措施'"
+                :address="item.activity ? item.activity.place : item.type === 'ENTERPRISE'? '': '無地址'"
+                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.type === 'ENTERPRISE'? '': item.applyTime"
                 :code="item.code"
                 @handleClick="
                     item.activity && $router.push(`/show/detail?id=${item.activity.id}`)
@@ -50,7 +50,7 @@
                         <p>確定要取消申請嗎</p>
                     </a-modal>
 
-                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
+                    <a-button type="link" v-if="item.status != 'tosubmit'" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
                             item.activity && (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
@@ -74,7 +74,7 @@
                             })
                         "
                         >{{
-                            item.status === 'supplementinfo'
+                            item.status === 'supplementinfo' || item.status === 'tosubmit'
                                 ? $t("personal.update")
                                 : $t("personal.showForm")
                         }}</a-button
@@ -181,6 +181,8 @@ export default {
                     return "green";
                 case "supplementinfo":
                     return "orange";
+                case "tosubmit":
+                    return "green";
             }
         },
         statusTextFilter: function(value) {
@@ -197,6 +199,8 @@ export default {
                     return i18n.t("personal.finish");
                 case "supplementinfo":
                     return i18n.t("personal.supplementinfo");
+                case "tosubmit":
+                    return i18n.t("personal.tosubmit");
             }
         },
         pictureTextFilter: function(value) {

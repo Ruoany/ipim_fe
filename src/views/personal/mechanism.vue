@@ -27,16 +27,131 @@
                     </div>
                 </a-upload>
             </a-form-model-item>
+
+             <!-- 国家/地区 -->
+            <a-form-model-item  :label="$t('personal.country')">
+                 
+                <a-select allowClear={true}  style="width: 328px" size="small"  v-model="form.countryZh"  >
+                    
+                    <a-select-option  v-for="item in country" :key="item.id" @click="info3(item.id)" :label="item.merName">
+                            {{item.merName}}
+                    </a-select-option>
+                          
+                </a-select>
+
+                                      
+                 <a-select allowClear={true}  style="width: 275px;margin-left: 26px"  size="small" v-model="form.provinceZh" >
+                    <a-select-option   v-for="item in province" :key="item.id"  @click="info4(item.id)" :label="item.name">
+                            {{item.name}}
+                    </a-select-option>
+                </a-select>
+                
+               
+                 <a-select  allowClear={true} style="width: 316px;margin-left: 24px" size="small" v-model="form.cityZh" >
+                    <a-select-option  v-for="item in city" :key="item.id" :label="item.sname">
+                            {{item.sname}}
+                    </a-select-option>
+                </a-select>
+                
+
+            </a-form-model-item>
+
+             <!-- 负责人姓名 -->
+            <a-form-model-item :label="$t('personal.chargeName')">
+                <a-input v-model="form.chargeName"></a-input>
+            </a-form-model-item>
+
+         <!-- 联络电话++传真 -->
+         <a-Row>
+              <a-Col span="12">
+            <a-form-model-item :label="$t('personal.concact')">
+                 <a-select  style="width: 228px" v-model="form.telAreaCode" optionLabelProp="code" placeholder="區號" >
+                     <a-select-option
+                                v-for="item in AreaCode"
+                                :key="item.id"
+                                :value="item.code"
+                                :code="item.code"
+                                
+                                >{{
+                                    `${item.nameZh}-${item.nameEn}-${item.code}`
+                                }}</a-select-option
+                            >
+                </a-select>
+                <a-input v-model="form.tel" style="width:226px;height:32px;margin-left:6px" ></a-input>
+            </a-form-model-item>
+            </a-Col>
+            
+              
+                <a-Col span="12">
+             <a-form-model-item  :label="$t('personal.fax')"> 
+                 <a-select  style="width: 228px" v-model="form.faxAreaCode" optionLabelProp="code" placeholder="區號"  >
+                   <a-select-option
+                                v-for="item in AreaCode"
+                                :key="item.id"
+                                :value="item.code"
+                               :code="item.code"
+                                >{{
+                                    `${item.nameZh}-${item.nameEn}-${item.code}`
+                                }}</a-select-option
+                            >
+                </a-select>
+                <a-input v-model="form.fax" style="width:226px;height:32px;margin-left:6px" ></a-input>
+            </a-form-model-item>
+                </a-Col>
+            </a-Row>
+
+            <!-- 电邮地址 -->
+            <a-form-model-item :label="$t('personal.be')">
+                <a-input v-model="form.email"></a-input>
+            </a-form-model-item>
+
+            <!-- 通讯地址 -->
+            <a-form-model-item :label="$t('personal.street')">
+                <a-input v-model="form.streetZh" style="width:968px;height:30px"></a-input>
+            </a-form-model-item>
+
+ 
+            <!-- 机构性质 -->
+            <a-form-model-item prop="nature" :label="$t('personal.ar')" >
+                 <a-select  style="width: 968px" v-model="form.nature">
+                    <a-select-option value="ENTERPRISE">
+                            企業
+                    </a-select-option>
+                    <a-select-option value="BUSINESS_OR_ASSOCIATION">
+                            非牟利團體
+                    </a-select-option>
+                    <a-select-option value="NATURAL_PERSON">
+                            自然人
+                    </a-select-option>
+                    <a-select-option value="GOVERNMENT_ORGANS">
+                           政府機構
+                    </a-select-option>
+                    <a-select-option value="UNIVERSITY">
+                            大學/研究機構
+                    </a-select-option>
+                    <a-select-option value="OTHER">
+                            其他
+                    </a-select-option>
+                   
+                </a-select>
+            </a-form-model-item>
+
+            <!-- 机构名称 -->
             <a-form-model-item prop="nameZh" :label="$t('personal.meNameZh')">
                 <a-input v-model="form.nameZh"></a-input>
             </a-form-model-item>
+            <!-- 机构名称（英） -->
             <a-form-model-item :label="$t('personal.meNameEn')">
                 <a-input v-model="form.nameEn"></a-input>
             </a-form-model-item>
+            <!-- 机构名称（葡） -->
             <a-form-model-item :label="$t('personal.meNamePt')">
                 <a-input v-model="form.namePt"></a-input>
             </a-form-model-item>
+
+            <!-- 场地登记编号 -->
             <a-form-model-item
+            v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER' && this.form.nature != 'NATURAL_PERSON'"
                 prop="siteRegistrationCode"
                 :label="$t('personal.w')"
                 
@@ -50,29 +165,41 @@
             </a-modal>
 
 
-
+            <!-- 商业登记编号 -->
             <a-form-model-item
+            v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER' && this.form.nature != 'NATURAL_PERSON'"
                 :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? null : 'registrationNumber'"
                 :label="$t('personal.u')"
             >
                 <a-input v-model="form.registrationNumber"></a-input>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.y')">
+
+
+            <!-- 纳税人编号 -->
+            <a-form-model-item :label="$t('personal.y')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <a-input v-model="form.taxpayerNo"></a-input>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.ay')">
+
+            <!-- 纳税人名称 -->
+            <a-form-model-item :label="$t('personal.ay')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <a-input v-model="form.taxpayerName"></a-input>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.z')">
+
+            <!-- 成立日期 -->
+            <a-form-model-item :label="$t('personal.z')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <a-month-picker
                     v-model="form.dateOfEstablishment"
                     style="width:100%"
                 />
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.aa')">
+
+            <!-- 业务 -->
+            <a-form-model-item :label="$t('personal.aa')"  v-if="this.form.nature != 'ENTERPRISE' && this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <a-textarea v-model="form.business"></a-textarea>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.industryNumber')">
+
+            <!-- 行业编号 -->
+            <a-form-model-item :label="$t('personal.industryNumber')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <!-- <a-input v-model="form.industryNumber" style="width:968px;height:30px"></a-input> -->
                 <a-select placeholder="Please select" mode="multiple"   style="width: 968px;" v-model="form.industryNumber">
                     <a-select-option :value="item.code +'--'+item.name" v-for="item in industryNumbers" :key="item.code +'--'+item.name"   >
@@ -80,13 +207,10 @@
                     </a-select-option>
                 </a-select>
             </a-form-model-item>
-            <a-form-model-item :label="$t('personal.ab')">
-                <a-radio-group v-model="form.deal">
-                    <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
-                    <a-radio :value="false">{{ $t("util.no") }}</a-radio>
-                </a-radio-group>
-            </a-form-model-item>
+
+            <!-- 企业股东分配情况 -->
             <a-form-model-item
+            v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'"
                 prop="institutionShareholderVOS"
                 :label="$t('personal.ac')"
             >
@@ -124,80 +248,9 @@
                     ></a-button>
                 </div>
             </a-form-model-item>
-             
-           <a-form-model-item  :label="$t('personal.country')">
-                 
-                <a-select allowClear={true}  style="width: 328px" size="small"  v-model="form.countryZh"  >
-                    
-                    <a-select-option  v-for="item in country" :key="item.id" @click="info3(item.id)" :label="item.merName">
-                            {{item.merName}}
-                    </a-select-option>
-                          
-                </a-select>
 
-                                      
-                 <a-select allowClear={true}  style="width: 275px;margin-left: 26px"  size="small" v-model="form.provinceZh" >
-                    <a-select-option   v-for="item in province" :key="item.id"  @click="info4(item.id)" :label="item.name">
-                            {{item.name}}
-                    </a-select-option>
-                </a-select>
-                
-               
-                 <a-select  allowClear={true} style="width: 316px;margin-left: 24px" size="small" v-model="form.cityZh" >
-                    <a-select-option  v-for="item in city" :key="item.id" :label="item.sname">
-                            {{item.sname}}
-                    </a-select-option>
-                </a-select>
-                
-
-            </a-form-model-item>
-             
-              <a-form-model-item :label="$t('personal.street')">
-                <a-input v-model="form.streetZh" style="width:968px;height:30px"></a-input>
-            </a-form-model-item>
-
-        
-             <a-Row>
-              <a-Col span="12">
-            <a-form-model-item :label="$t('personal.concact')">
-                 <a-select  style="width: 228px" v-model="form.telAreaCode" optionLabelProp="code" placeholder="區號" >
-                     <a-select-option
-                                v-for="item in AreaCode"
-                                :key="item.id"
-                                :value="item.code"
-                                :code="item.code"
-                                
-                                >{{
-                                    `${item.nameZh}-${item.nameEn}-${item.code}`
-                                }}</a-select-option
-                            >
-                </a-select>
-                <a-input v-model="form.tel" style="width:226px;height:32px;margin-left:6px" ></a-input>
-            </a-form-model-item>
-            </a-Col>
-            
-              
-                <a-Col span="12">
-             <a-form-model-item  :label="$t('personal.fax')"> 
-                 <a-select  style="width: 228px" v-model="form.faxAreaCode" optionLabelProp="code" placeholder="區號"  >
-                   <a-select-option
-                                v-for="item in AreaCode"
-                                :key="item.id"
-                                :value="item.code"
-                               :code="item.code"
-                                >{{
-                                    `${item.nameZh}-${item.nameEn}-${item.code}`
-                                }}</a-select-option
-                            >
-                </a-select>
-                <a-input v-model="form.fax" style="width:226px;height:32px;margin-left:6px" ></a-input>
-            </a-form-model-item>
-                </a-Col>
-            </a-Row>
-             
-          
-
-            <a-form-model-item :label="$t('personal.ba')">
+            <!-- 业务范畴 -->
+            <a-form-model-item :label="$t('personal.ba')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                  <a-select placeholder="Please select" mode="multiple"   style="width: 968px" v-model="form.scopes">
                     <a-select-option :value="item" v-for="item in scope" :key="item"   >
                             {{item}}
@@ -205,8 +258,8 @@
                 </a-select>
             </a-form-model-item>
 
-           <!-- 主要市場 -->
-            <a-form-model-item :label="$t('personal.bb')">
+            <!-- 主要市場 -->
+            <a-form-model-item :label="$t('personal.bb')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
                 <a-checkbox-group v-model="form.targetMarkets">
                      <a-checkbox value="MAINLAND_CHINA">中国内地</a-checkbox>
                     <a-checkbox value="MACAO">中國澳門</a-checkbox>
@@ -219,42 +272,33 @@
                     <a-checkbox value="SOUTH_AMERICA">南美洲</a-checkbox>
                     <a-checkbox value="NORTH_AMERICA">北美洲</a-checkbox>
                     <a-checkbox value="OTHER">其他</a-checkbox>
-
-
-
-
                 </a-checkbox-group>
             </a-form-model-item>
 
-             <a-form-model-item prop="nature" :label="$t('personal.ar')">
-                 <a-select  style="width: 968px" v-model="form.nature">
-                    <a-select-option value="ENTERPRISE">
-                            企業
-                    </a-select-option>
-                    <a-select-option value="BUSINESS_OR_ASSOCIATION">
-                            商/協會
-                    </a-select-option>
-                    <a-select-option value="GOVERNMENT_ORGANS">
-                           政府機構
-                    </a-select-option>
-                    <a-select-option value="UNIVERSITY">
-                            大學/研究機構
-                    </a-select-option>
-                    <a-select-option value="OTHER">
-                            其他
-                    </a-select-option>
-                   
-                </a-select>
-            </a-form-model-item>
-             
-             <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'idnumber' : null" :label="$t('personal.idNumber')">
-                <a-input v-model="form.idnumber"></a-input>
-            </a-form-model-item>
-            <a-form-model-item :label="$t('personal.chargeName')">
-                <a-input v-model="form.chargeName"></a-input>
+
+            <!-- 公司簡介 -->
+            <a-form-model-item :label="$t('personal.bd')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
+                <a-textarea v-model="form.companyBrief"></a-textarea>
             </a-form-model-item>
 
-             <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxOpenFiles' : null"  :label="$t('personal.an')">
+
+            <!-- 是否同意选择 -->
+            <a-form-model-item :label="$t('personal.ab')" v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'">
+                <a-radio-group v-model="form.deal">
+                    <a-radio :value="true">{{ $t("util.yes") }}</a-radio>
+                    <a-radio :value="false">{{ $t("util.no") }}</a-radio>
+                </a-radio-group>
+                <p>備註:如已同意上項，則可豁免提交財政局發出之營業開業 M/1 或開業聲明書副本、 商業登記證明副本(三個月內有效)及營業稅 M/8 副本(最近一年)。</p>
+            </a-form-model-item>
+
+
+             <!--行業編號  -->
+             <a-form-model-item v-if="this.form.nature != 'ENTERPRISE' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'idnumber' : null" :label="$t('personal.idNumber')">
+                <a-input v-model="form.idnumber"></a-input>
+            </a-form-model-item>
+
+             <!-- 營業稅-最初開業M/1或更改申請表M/1副本 -->
+             <a-form-model-item v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxOpenFiles' : null"  :label="$t('personal.an')">
                     <upload
                         :value.sync="form.salesTaxOpenFiles"
                         :multiple="true"
@@ -262,7 +306,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxFiles' : null" :label="$t('personal.ao')">
+            <!--營業稅-徵稅憑單M/8副本(最近一年)註1 -->
+            <a-form-model-item v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' && this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'ENTERPRISE' ? 'salesTaxFiles' : null" :label="$t('personal.ao')">
                     <upload
                         :value.sync="form.salesTaxFiles"
                         :multiple="true"
@@ -270,7 +315,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'businessRegistrationFiles' : null" :label="$t('personal.ap')">
+            <!-- 商業登記證明副本（三個月內有效） -->
+            <a-form-model-item v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION'&& this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'ENTERPRISE' ? 'businessRegistrationFiles' : null" :label="$t('personal.ap')">
                     <upload
                         :value.sync="form.businessRegistrationFiles"
                         :multiple="true"
@@ -278,7 +324,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'ENTERPRISE' ? 'shareholderSamesFiles' : null" :label="$t('personal.aj')">
+            <!-- 50%股東為澳門居民/全資澳門企業擁有之證明  -->
+            <a-form-model-item v-if="this.form.nature != 'BUSINESS_OR_ASSOCIATION' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'ENTERPRISE' ? 'shareholderSamesFiles' : null" :label="$t('personal.aj')">
                     <upload
                         :value.sync="form.shareholderSamesFiles"
                         :multiple="true"
@@ -286,7 +333,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'groupEstablishmentFiles' : null" :label="$t('personal.ak')">
+            <!-- 團體設立之澳門政府公報副本 -->
+            <a-form-model-item v-if="this.form.nature != 'ENTERPRISE' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'groupEstablishmentFiles' : null" :label="$t('personal.ak')">
                     <upload
                         :value.sync="form.groupEstablishmentFiles"
                         :multiple="true"
@@ -294,7 +342,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'identificationBureauFiles' : null" :label="$t('personal.al')">
+             <!-- 身份證明局發出之登記證明書副本 -->
+            <a-form-model-item v-if="this.form.nature != 'ENTERPRISE'&& this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'identificationBureauFiles' : null" :label="$t('personal.al')">
                     <upload
                         :value.sync="form.identificationBureauFiles"
                         :multiple="true"
@@ -302,7 +351,8 @@
                     ></upload>
             </a-form-model-item>
 
-            <a-form-model-item :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'legalPersonFiles' : null" :label="$t('personal.am')">
+             <!-- 法人代表之身份證副本 -->
+            <a-form-model-item v-if="this.form.nature != 'ENTERPRISE' &&this.form.nature != 'GOVERNMENT_ORGANS' && this.form.nature != 'UNIVERSITY' && this.form.nature != 'OTHER'&& this.form.nature != 'NATURAL_PERSON'" :prop="this.form.nature == 'BUSINESS_OR_ASSOCIATION' ? 'legalPersonFiles' : null" :label="$t('personal.am')">
                     <upload
                         :value.sync="form.legalPersonFiles"
                         :multiple="true"

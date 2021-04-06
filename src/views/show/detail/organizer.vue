@@ -6,12 +6,37 @@
         <ul>
             <li v-for="item in organizers" :key="item.id">{{ item.name }}</li>
         </ul>
-        <!-- <div v-show="helpers" class="organizer-title">
-            {{ $t("show.helpers") }}
+
+        <div v-show="helpers" class="organizer-title">
+            <div v-for="item in helpers" :key="item.id">
+                <span v-if="item.activityHelperType=== 'A' " >{{ $t("show.helpers") }}</span>
+            </div>
         </div>
-        <ul>
-            <li v-for="item in helpers" :key="item.id">{{ item.name }}</li>
-        </ul> -->
+        <ul v-for="item in helpers" :key="item.id">  
+                <li  v-if="item.activityHelperType === 'A'">{{item.name}}</li>  
+        </ul>
+
+
+        <div v-show="helpers" class="organizer-title">
+            <div v-for="item in helpers" :key="item.id">
+                <span v-if="item.activityHelperType=== 'B' " >{{ $t("show.organizersh") }}</span>
+            </div>
+            
+        </div>
+        <ul v-for="item in helpers" :key="item.id">  
+                <li  v-if="item.activityHelperType === 'B'">{{item.name}}</li>  
+        </ul>
+
+
+        <div v-show="helpers" class="organizer-title">
+             <div v-for="item in helpers" :key="item.id">
+                <span v-if="item.activityHelperType=== 'C' " >{{ $t("show.SupportUnits") }}</span>
+            </div>
+            
+        </div>
+        <ul v-for="item in helpers" :key="item.id">  
+                <li  v-if="item.activityHelperType === 'C'">{{item.name}}</li>  
+        </ul>
     </div>
 </template>
 

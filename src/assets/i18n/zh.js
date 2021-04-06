@@ -84,6 +84,8 @@ const zhData = {
         lady: "女士",
         organizers: "主辦單位",
         helpers: "協辦單位",
+        organizersh: "承辦單位",
+        SupportUnits: "支持單位",
         method: "申請參加活動",
         join: "參展",
         write: "填寫申請表",
@@ -99,6 +101,7 @@ const zhData = {
         man: "男",
         woman: "女",
         country: "國家",
+        pic: "個人圖像",
         city: "城市",
         step1: "第一步：下載空白表格",
         step2: "第二步：打印空白表格",
@@ -173,8 +176,10 @@ const zhData = {
         aw: "其他",
         ay: "納稅人名稱",
         az: "機構認證",
+        bd: "公司簡介",
+        be: "電郵地址",
         logo: "機構LOGO",
-        meNameZh: "機構名稱[M/1場所登記(營業稅檔案)或政府公報]",
+        meNameZh: "機構名稱",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請表",
@@ -231,7 +236,11 @@ const zhData = {
         bc: "添加展會",
         upload1: "上傳憑證",
         obligation: "待付款",
-        download1: "下載憑證"
+        download1: "下載憑證",
+        tosubmit:"待提交",
+        alreadypaid: '已付款'
+
+
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",

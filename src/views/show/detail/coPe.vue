@@ -22,6 +22,10 @@
                     <span>{{ $t("index.email") }}：</span>
                     <span>{{ item.email }}</span>
                 </div>
+                <div class="sp-card-content-item">
+                    <span>{{ $t("index.fax") }}：</span>
+                    <span>{{ item.areaCodeOrFax }}</span>
+                </div>
             </div>
         </a-card>
     </div>

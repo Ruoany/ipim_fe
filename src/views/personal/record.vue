@@ -23,9 +23,9 @@
                 :scope="item.activity ? item.activity.scope : ''"
                 :status="item.status"
                 :activity-status="item.activity ? item.activity.showStatus : 'PROGRESS'"
-                :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格':'電子商務推廣（應用 B2C 平台）鼓勵措施'"
-                :address="item.activity ? item.activity.place : '無地址'"
-                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.applyTime"
+                :title="item.activity ? item.activity.nameZh : item.type === 'ECB2B'? '電子商務推廣鼓勵措施申請表格': item.type === 'ENTERPRISE'? '': '電子商務推廣（應用 B2C 平台）鼓勵措施'"
+                :address="item.activity ? item.activity.place : item.type === 'ENTERPRISE'? '': '無地址'"
+                :date="item.activity ? `${item.activity.startTime} - ${item.activity.endTime}` : item.type === 'ENTERPRISE'? '': item.applyTime"
                 :code="item.code"
                 @handleClick="
                     item.activity && $router.push(`/show/detail?id=${item.activity.id}`)
@@ -69,41 +69,47 @@
                        
 
                        <!-- 上傳憑證-->
-                        <!-- <a-button
+                        <a-button
                         v-if="item.status === 'obligation' && (item.type == 'PARTICIPATE' || item.type == 'MISSION')"
                             type="link"
                             @click="uploadCar()"
                             >{{
                                  $t("personal.upload1")
                             }}</a-button
-                        >      -->
+                        >     
 
-                    <!-- <a-modal v-model="visible1" title="提示" @ok="handleOk1(item.type,item.id)" @cancel="handCancel1" width="900px" height="1200px">
+                    <a-modal v-model="visible1" title="提示" @ok="handleOk1(item.type,item.id)" @cancel="handCancel1" width="900px" height="1200px">
                         <p>請選擇需要上傳的憑證文件</p>
                          <a-form-model>
                              <a-form-model-item
                                prop="payOrderFiles"
                                >
-                               <upload 
-                               :multiple="true"
-                               :value.sync="form.payOrderFiles"
-                               />
+                            <upload
+                                :value.sync="form.accessoryFiles"
+                                :multiple="true"
+                            ></upload>
                              </a-form-model-item>
                          </a-form-model>
-                        
-                        
-                    </a-modal>  -->
+                    </a-modal> 
 
 
                     <!-- 查看憑證-->
-                        <!-- <a-button
-                        v-if="item.status === 'passed' && (item.type == 'PARTICIPATE' || item.type == 'MISSION')"
+                        <a-button
+                        v-if="item.status === 'alreadypaid' && (item.type == 'PARTICIPATE' || item.type == 'MISSION')"
                             type="link"
                             @click="downloadCar(item.type,item.id)"
                             >{{
                                  $t("personal.download1")
-                            }}</a-button
-                        >    -->
+                            }}</a-button>   
+
+                    <a-modal v-model="visible2" title="提示"  @cancel="handCancel2" width="900px" height="1200px">
+                        <p>請選擇需要下載的憑證文件</p>
+                         <a-form-model>
+                               <ul v-for="item in certificate" :key="item.index">
+                                   <a :href='item.url' download="">{{item.oriname}}</a>
+                               </ul>
+                         </a-form-model>
+                    </a-modal> 
 
                         <!-- 查看問卷 当前返回的数据中 status 在item.activity.status-->
                         <a-button
@@ -178,7 +184,7 @@
                         <p>確定要取消申請嗎</p>
                     </a-modal>
 
-                    <a-button type="link" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
+                    <a-button type="link" v-if="item.status != 'tosubmit'" @click="ExportPDF(item.code, item.type)">下載資料</a-button>
                     <a-button
                         v-if="
                             item.activity && (item.status === 'passed' || item.status === 'finish') && item.activity.showStatus === 'END'
@@ -208,7 +214,7 @@
                             })
                         "
                         >{{
-                             item.status === 'supplementinfo'
+                             item.status === 'supplementinfo' || item.status === 'tosubmit'
                                 ? $t("personal.update")
                                 : $t("personal.showForm")
                         }}</a-button>
@@ -272,9 +278,9 @@ import Participate from "@/apis/participate";
 import Institution  from "@/apis/institution";
 import i18n from "@/assets/i18n/index";
 import PDFDown from "@/apis/PDFDown";
-// import Upload from "@/components/upload";
+import Upload from "@/components/upload";
 export default {
-    components: { Cell, Pagination },
+    components: { Cell, Pagination, Upload },
     data() {
         return {
             loading: false,
@@ -285,10 +291,12 @@ export default {
             list: [],
             visible: false,
             visible1: false,
-            // form: {
-            //     payOrderFiles: '',
-            //     id: '',
-            // }
+            visible2: false,
+            certificate: [],
+            form: {
+                accessoryFiles: '',
+                id: '',
+            }
                
                 
             
@@ -323,6 +331,10 @@ export default {
                     return "orange";
                 case "obligation":
                     return "yellow";
+                case "tosubmit":
+                    return "green";
+                case "alreadypaid":
+                    return "purple";
             }
         },
         statusTextFilter: function(value) {
@@ -341,6 +353,10 @@ export default {
                     return i18n.t("personal.supplementinfo");
                 case "obligation":
                     return i18n.t("personal.obligation");
+                case "tosubmit":
+                    return i18n.t("personal.tosubmit");
+                case "alreadypaid":
+                    return i18n.t("personal.alreadypaid");
             }
         },
         pictureTextFilter: function(value) {
@@ -369,6 +385,8 @@ export default {
 
             
            this.list = data ? data.content : [];
+
+           console.log("899898",this.list)
 
 
             // let filterData = data.content.filter(obj => obj.activity != null);
@@ -428,21 +446,40 @@ export default {
            this.visible = false;
         },
 
-        // async handleOk1(type,id){
-        //    this.visible1 = false;
-        //    this.form.id = id;
+        async handleOk1(type,id){
+           this.visible1 = false;
+           console.log("121221",id)
+           this.form.id = id;
         //   if(type == 'PARTICIPATE'){
         //       const {data} = await Institution.certificate_2(this.form);
         //   }else if(type == 'MISSION'){
         //       const {data} = await Institution.certificate_1(this.form);
         //   }
-           
+           console.log("32322",this.form.id)
+           const {data} = await Institution.certificate(this.form);
+           console.log(data)
 
+        },
+        handCancel1(){
+           this.visible1 = false;
+        },
 
-        // },
-        // handCancel1(){
-        //    this.visible1 = false;
-        // },
+        async handleOk2(type,id){
+           this.visible1 = false;
+           this.form.id = id;
+        //   if(type == 'PARTICIPATE'){
+        //       const {data} = await Institution.certificate_2(this.form);
+        //   }else if(type == 'MISSION'){
+        //       const {data} = await Institution.certificate_1(this.form);
+        //   }
+
+           const {data} = await Institution.certificate(this.form);
+           console.log(data)
+
+        },
+        handCancel2(){
+           this.visible2 = false;
+        },
 
 
         NavigateTo: function(path, o) {
@@ -492,21 +529,26 @@ export default {
         DownloadPDF: function(pdfName){
             window.open('/api/export_pdf/' + pdfName);
         },
-    //     uploadCar(){
-    //         this.visible1 = true;
-    //     },
-    //    async downloadCar(type,id){
-    //        if(type == 'PARTICIPATE'){
-    //           const {data} = await Institution.downloadCar_1(id);
-    //           console.log();
-    //           window.open()
-    //       }else if(type == 'MISSION'){
-    //           const {data} = await Institution.downloadCar_2(id);
-    //       }
-            
+        uploadCar(){
+            this.visible1 = true;
+        },
+       async downloadCar(type,id){
+        //    if(type == 'PARTICIPATE'){
+        //       const {data} = await Institution.downloadCar_1(id);
+        //       console.log(data);
+        //       window.open(data)
+        //   }else if(type == 'MISSION'){
+        //       const {data} = await Institution.downloadCar_2(id);
+        //       console.log(data)
+        //   }
+            // down(url, name)  
 
-    //     }
-       
+        const {data} = await Institution.downloadCar(id);
+
+        this.certificate = data;
+
+        this.visible2 = true;
+       }
 
     },
     mounted: function() {

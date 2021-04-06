@@ -12,11 +12,11 @@
                     @click="handleNavigate('/show/host', 'MIECF')"
                     >{{ $t("menu.miecf") }}</a-menu-item
                 >
-                <a-menu-item
+                <!-- <a-menu-item
                     key="iiicf"
                     @click="handleNavigate('/show/host', 'IIICF')"
                     >{{ $t("menu.iiicf") }}</a-menu-item
-                >
+                > -->
                 <a-menu-item
                     key="mfe"
                     @click="handleNavigate('/show/host', 'MFE')"

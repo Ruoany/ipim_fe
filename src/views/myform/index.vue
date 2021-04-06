@@ -13,7 +13,7 @@
                 <form-mfe v-if="form === 'MFE'"></form-mfe>
                 <form-gmbpf v-if="form === 'GMBPF'"></form-gmbpf>
             </a-tab-pane>
-            <a-tab-pane :tab="$t('show.ab')" key="2">
+            <!-- <a-tab-pane :tab="$t('show.ab')" key="2">
                 <div class="label-col">
                     <ul>
                         <li>{{ $t("util.step1") }}</li>
@@ -29,7 +29,7 @@
                         >{{ $t("util.download") }}</a-button
                     >
                 </div>
-            </a-tab-pane>
+            </a-tab-pane> -->
         </a-tabs>
     </a-spin>
 </template>

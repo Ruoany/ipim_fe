@@ -159,8 +159,9 @@ const zhData = {
         aw: "其他",
         ay: "納稅人名稱",
         az: "機構認證",
+        bd: "公司簡介",
         logo: "機構LOGO",
-        meNameZh: "機構名稱[M/1場所登記(營業稅檔案)或政府公報]",
+        meNameZh: "機構名稱",
         meNameEn: "機構名稱（英文）",
         meNamePt: "機構名稱（葡文）",
         update: "修改申請",
@@ -191,6 +192,7 @@ const zhData = {
         verifing: "認證中",
         unverified: "未認證",
         verifiedFail: "認證失敗",
+        tosubmit:"待提交"
     },
     report: {
         aa: "填寫方式一：在綫填寫展會報告",
@@ -212,7 +214,6 @@ const zhData = {
         message: "短訊",
         tips:
             "本人確定並同意澳門貿易投資促進局（“貿促局”）可將有關收集之商業資料（不涉及個人資料部分）編入其全部或任何“貿促局”資料庫內作為直接推廣、商業配對或本澳會展業界聯絡之用",
-        register: "註冊",
         reset: "重置密碼",
         newPwd: "新密碼",
         code: "驗證碼",

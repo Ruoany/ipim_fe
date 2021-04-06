@@ -14,8 +14,11 @@
                 :title="$t('personal.name')"
                 key="nameZh"
                 width="270px"
-                dataIndex="nameZh"
-            />
+            >
+                <template slot-scope="list">
+                    {{list.nameZh !== ''?list.nameZh:list.nameEnOrPt}}
+                </template>
+            </a-table-column>
             <a-table-column
                 :title="$t('personal.userId')"
                 key="email"

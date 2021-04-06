@@ -5,6 +5,7 @@ export default {
     stepCurrent: 0,
     rules: {
         nameZh: config,
+        nameEn: config,
         birthDate: config_select,
         liaisonId: config_select,
     },
