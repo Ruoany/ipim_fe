@@ -90,7 +90,7 @@ const zhData = {
         join: "參展",
         write: "填寫申請表",
         deadline: "截止報名",
-        money: "參展費用",
+        remarks: "備註",
         new: "新聞中心",
         code: "申請碼",
     },

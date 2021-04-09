@@ -15,7 +15,7 @@
             ></co-pe>
         </a-tab-pane>
 
-        <a-tab-pane :tab="$t('show.money')" key="6">
+        <a-tab-pane :tab="$t('show.remarks')" key="6">
             <info :info="infoLan1"></info>
         </a-tab-pane>
         <a-tab-pane :tab="$t('show.new')" key="7"></a-tab-pane>

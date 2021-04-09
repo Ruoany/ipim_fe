@@ -22,8 +22,9 @@
                         <li>{{ $t("mission.bp") }}</li>
                         <li>{{ $t("mission.bq") }}</li>
                         <li>{{ $t("mission.cb") }}</li>
+                        <li>{{ $t("mission.br") }}</li>
                     </ul>
-                    <div>{{ $t("mission.br") }}</div>
+                    <!-- <div>{{ $t("mission.br") }}</div> -->
                     <!-- <div>{{ $t("mission.bs") }}</div> -->
                 </a-form-model-item>
             </div>
